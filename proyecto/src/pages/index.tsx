@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { Top } from "../root/components/header/Top";
+import Empleado from "@/root/components/empleado/Empleado";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,6 +11,9 @@ export default function Home() {
       <header className = "bg-SecondaryGreen w-full h-auto">
         <Top />
       </header>
+      <div>
+        
+      </div>
     </main>
   );
 }
