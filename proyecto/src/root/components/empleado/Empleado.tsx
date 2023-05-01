@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface UserData {
   cedula: number;
@@ -25,6 +25,16 @@ function Empleado() {
     puesto: "",
     sueldo: 0,
   });
+
+
+  useEffect(() => {
+
+    fetch("/api/empleados")
+    .then((res) => res.json())
+    .then((data) => setData(data))
+
+  }, []) //data
+  
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -84,6 +94,27 @@ function Empleado() {
     <input type="number" name="sueldo" value={userData.sueldo} onChange={handleInputChange} placeholder="Sueldo" className="border rounded-md px-3 py-2" />
     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar</button>
   </form>
+  <div>
+  {
+    data.map((item) =>(
+      <div key={item.cedula} className="border-b-2 py-2">
+        <p className="font-bold">Nombre: {item.nombre}</p>
+        <p className="text-gray-600">Cedula: {item.cedula}</p>
+        <p className="text-gray-600">Departamento: {item.departamentoEmp}</p>
+        <p className="text-gray-600">Jefe: {item.jefe}</p>
+        <p>Habilitado: <input type="checkbox" checked={item.habilitado} /></p>
+
+        <button className="bg-green-500">Actualizar</button>
+
+
+      </div>
+    ))
+  }
+</div>
+
+
+
+
 </div>
 
 );
