@@ -77,9 +77,61 @@ function Empleado() {
     });
   };
 
+  const handleDelete = (cedula: number) => {
+    fetch(`/api/empleados/${cedula}/deshabilitar`, {
+      method: "PUT",
+    })
+      .then(() => {
+        setData((prevData) =>
+          prevData.map((item) =>
+            item.cedula === cedula ? { ...item, habilitado: false } : item
+          )
+        );
+      })
+      .catch((error) =>
+        console.error(`Error al deshabilitar el usuario ${cedula}:`, error)
+      );
+  };
+  
+
   return (
+
+    
+
+
 <div className="p-4">
-  <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+<div>
+<div className="flex items-center justify-center h-screen">
+  <div className="bg-white p-8 rounded-lg shadow-lg">
+    <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
+    <form>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-2" id="email">
+          Correo Electrónico
+        </label>
+        <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Correo Electrónico" />
+      </div>
+      <div className="mb-6">
+        <label className="block text-gray-700 font-bold mb-2" id="password">
+          Contraseña
+        </label>
+        <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Contraseña" />
+      </div>
+      <div className="flex items-center justify-between">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+          Iniciar Sesión
+        </button>
+        <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+          Olvidé mi Contraseña
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+   <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
     <input type="number" name="cedula" value={userData.cedula} onChange={handleInputChange} placeholder="Cédula" className="border rounded-md px-3 py-2" />
     <input type="password" name="contrasena" value={userData.contrasena} onChange={handleInputChange} placeholder="Contraseña" className="border rounded-md px-3 py-2" />
     <input type="email" name="correo" value={userData.correo} onChange={handleInputChange} placeholder="Correo" className="border rounded-md px-3 py-2" />
@@ -104,20 +156,16 @@ function Empleado() {
         <p className="text-gray-600">Jefe: {item.jefe}</p>
         <p>Habilitado: <input type="checkbox" checked={item.habilitado} /></p>
 
-        <button className="bg-green-500">Actualizar</button>
+        <button className="bg-red-600" onClick={()=>handleDelete(item.cedula)}>Eliminar</button>
 
 
       </div>
     ))
   }
 </div>
-
-
-
-
 </div>
 
-);
+ );
 }
 
 export default Empleado

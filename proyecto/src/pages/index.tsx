@@ -11,9 +11,9 @@ export default function Home() {
       <header className = "bg-SecondaryGreen w-full h-auto">
         <Top />
       </header>
-      <body>
-        
-      </body>
+      <div>
+       
+      </div>
     </main>
   );
 }
