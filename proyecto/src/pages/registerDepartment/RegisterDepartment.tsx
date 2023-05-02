@@ -81,16 +81,6 @@ function RegisterDepartment() {
     });
   };
 
-  const [myArray, setMyArray] = useState<string[]>([]);
-  const [newItem, setNewItem] = useState("");
-
-  const handleAddItem = () => {
-    if (newItem.trim() !== "") {
-      setMyArray([...myArray, newItem]);
-      setNewItem("");
-    }
-  };
-
   const handleAddName = () => {
     setNames([...names, name]);
     setName("");
@@ -198,20 +188,6 @@ function RegisterDepartment() {
             className="border rounded-md px-3 py-2"
           />
         )}
-        <ul>
-          {myArray.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-        <div>
-          <input
-            type="text"
-            name="skills"
-            value={userData.newItem}
-            onChange={(e) => setNewItem(e.target.value)}
-          />
-          <button onClick={handleAddItem}>Agregar</button>
-        </div>
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -219,13 +195,6 @@ function RegisterDepartment() {
           Guardar
         </button>
       </form>
-      <div>
-        {data.map((item) => (
-          <div key={item.name} className="border-b-2 py-2">
-            <p className="font-bold">Nombre: {item.name}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
