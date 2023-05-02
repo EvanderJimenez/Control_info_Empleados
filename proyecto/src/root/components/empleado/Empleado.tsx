@@ -150,6 +150,7 @@ function Empleado() {
       <div key={item.cedula} className="border-b-2 py-2">
         <p className="font-bold">Nombre: {item.nombre}</p>
         <p className="text-gray-600">Cedula: {item.cedula}</p>
+        <p className="text-gray-600">correo: {item.correo}</p>
         <p className="text-gray-600">Departamento: {item.departamentoEmp}</p>
         <p className="text-gray-600">Jefe: {item.jefe}</p>
         <p>Habilitado: <input type="checkbox" checked={item.habilitado} /></p>
