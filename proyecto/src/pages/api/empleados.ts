@@ -15,8 +15,8 @@ export default async function handler(
     console.log("Estoy ene el create")
     console.log("estoy en el email and password")
     console.log(req.query.email, req.body.password)
-    //getEmployeByEmailPass(req, res)
-     await createEmployee(req, res);
+    await getEmployeByEmailPass(req, res)
+    // await createEmployee(req, res);
   } else if(req.method === "DELETE") {
     console.log("Estoy en el delete")
     console.log("estoy en el delete")

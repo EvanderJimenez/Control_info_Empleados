@@ -36,7 +36,11 @@ function Register() {
     event.preventDefault();
 
     // Validar que los campos no estén vacíos antes de enviar la solicitud POST
-
+/*     if (!userData.cedula || !userData.contrasena || !userData.correo || userData.nombre ) {
+      console.error("Por favor, ingrese valores para todos los campos");
+      return;
+    } */
+    userData.habilitado = true
 
     console.log("Nuevo usuario:", userData);
 
@@ -69,7 +73,7 @@ function Register() {
     <div className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10">
       <div className="flex flex-col items-center justify-center p-2">
         <label >Nombre</label>
-        <input type="text" name="nombre" value={userData.nombre} onChange={handleInputChange} required className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red" id="name" />
+        <input type="text" name="nombre"  value={userData.nombre} onChange={handleInputChange} required className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red" id="name" />
       </div>
       <div className="flex flex-col items-center justify-center p-2">
         <label>Correo electrónico</label>

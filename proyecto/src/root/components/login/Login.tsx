@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import Register from "../register/Register";
+import ListEmployee from "../listEmployee/ListEmployee";
 
 interface Props {
   // Define aquí las props necesarias
@@ -55,7 +56,7 @@ function Login () {
 
   return (
     <div>
-      {isLoggedIn ? (<Register />) : (    <form className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
+      {isLoggedIn ? (<ListEmployee />) : (    <form className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
       <h2 className="m-7">Iniciar sesión</h2>
       <div className="flex flex-col items-center justify-center p-2">
         <label >Correo electrónico</label>
