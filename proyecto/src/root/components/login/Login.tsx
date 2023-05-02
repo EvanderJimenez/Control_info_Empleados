@@ -9,7 +9,8 @@ function Login () {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(null); //usar para props de otro componente
+  const [errorEmailPass, setErrorEmailPass] = useState<any>(null)
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -22,7 +23,6 @@ function Login () {
   };
 
   const handleIngresar = async () => {
-    // Validar que se hayan ingresado valores válidos para email y password antes de enviar la solicitud de inicio de sesión
     if (email && password) {
       try {
         console.log("Datos enviados:", { email, password })
@@ -38,23 +38,18 @@ function Login () {
       })
         });
 
-        // Verificar si la respuesta es exitosa
         if (response.ok) {
           const data = await response.json();
           setIsLoggedIn(true);
           setUserData(data);
           console.log(data);
         } else {
-          // Manejar el error
+          setErrorEmailPass(true)
           throw new Error('Error al iniciar sesión');
         }
       } catch (error) {
-        // Manejar el error
         console.error(error);
       }
-    } else {
-      // Mostrar un mensaje de error indicando que se deben ingresar valores válidos para email y password
-      console.error('Debes ingresar valores válidos para email y password');
     }
   };
 
@@ -87,6 +82,7 @@ function Login () {
         />
       </div>
       <button type="submit" className="bg-blue hover:bg-red text-white font-bold py-2 px-4 rounded mt-4">Ingresar</button>
+      {errorEmailPass ? <label>The employee does not exist</label> : null}
     </form>)}
     </div>
 

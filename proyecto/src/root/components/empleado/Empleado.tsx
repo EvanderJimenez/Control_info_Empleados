@@ -97,9 +97,6 @@ function Empleado() {
 
   return (
 
-    
-
-
 <div className="p-4">
 
 <div>
