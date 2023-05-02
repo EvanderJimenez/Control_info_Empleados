@@ -10,7 +10,11 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      mono: ['Menlo', 'Monaco', 'Consolas', 'monospace'],
+      mono: ["Menlo", "Monaco", "Consolas", "monospace"],
+    },
+    colors: {
+      red: "#e84443",
+      blue: "#454fce",
     },
     extend: {},
   },

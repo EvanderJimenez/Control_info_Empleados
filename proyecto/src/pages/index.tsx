@@ -1,19 +1,19 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { Top } from "../root/components/header/Top";
-import Empleado from "@/root/components/empleado/Empleado";
+import { MainForm } from "../root/components/mainForm/MainForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main className={` bg-PrimaryGreen flex min-h-screen flex-col items-center justify-between ${inter.className}`}>
-      <header className = "bg-SecondaryGreen w-full h-auto">
+    <main className={`bg-PrimaryGreen flex flex-col items-center justify-center h-screen`}>
+      <header className="bg-SecondaryGreen w-full h-20">
         <Top />
       </header>
-      <div>
-       
-      </div>
+      <section className="w-full h-full flex flex-col items-center justify-center">
+        <MainForm/>
+      </section>
     </main>
   );
 }
