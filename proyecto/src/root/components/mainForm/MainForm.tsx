@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Login } from "../login/Login";
-import { Register } from "../register/Register";
+import  Login  from "../login/Login";
+import Register from "../register/Register";
 
 export const MainForm = ({}) => {
   const [showComponent, setShowComponent] = useState(true);
