@@ -10,6 +10,7 @@ interface UserData {
   nombre: string;
   puesto: string;
   sueldo: number;
+  
 }
 
 function Empleado() {
