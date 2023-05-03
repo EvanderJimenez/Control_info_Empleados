@@ -1,8 +1,12 @@
-import { firestore } from "../../../dataBase/firebase/firebase";
+import { firestore} from "../../../dataBase/firebase/firebase";
 import {
   doc,
+  collection,
+  query,
+  where,
   updateDoc,
   DocumentData,
+  getDocs
 } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -10,29 +14,33 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<DocumentData>
 ) {
-  // obtener el identificador del empleado y los datos a actualizar del cuerpo de la solicitud
-  const { employeeId } = req.query;
   const { cedula, contrasena, correo, departamentoEmp, habilitado, jefe, nombre, puesto, sueldo } = req.body;
 
   try {
-    // actualizar el documento del empleado en Firestore con los nuevos datos
-    const employeeDoc = doc(firestore, "empleados", employeeId as string);
-    await updateDoc(employeeDoc, {
-      cedula,
-      contrasena,
-      correo,
-      departamentoEmp,
-      habilitado,
-      jefe,
-      nombre,
-      puesto,
-      sueldo
-    });
+    const employeesRef = collection(firestore, "empleados");
+    const q = query(employeesRef, where("cedula", "==", cedula));
+    const querySnapshot = await getDocs(q);
 
-    // enviar una respuesta de éxito con un estado HTTP 200 y un mensaje de confirmación
-    res.status(200).json({ message: "Empleado actualizado correctamente" });
+    if (querySnapshot.size > 0) {
+      const employeeDoc = doc(firestore, "empleados", querySnapshot.docs[0].id);
+      console.log("Cédula: " + cedula);
+      await updateDoc(employeeDoc, {
+        cedula,
+        contrasena,
+        correo,
+        departamentoEmp,
+        habilitado,
+        jefe,
+        nombre,
+        puesto,
+        sueldo
+      });
+
+      res.status(200).json({ message: "Empleado actualizado correctamente" });
+    } else {
+      res.status(404).json({ message: "Empleado no encontrado" });
+    }
   } catch (error) {
-    // enviar una respuesta de error con un estado HTTP 500 y un mensaje de error
     console.error(error);
     res.status(500).json({ message: "Error al actualizar el empleado" });
   }

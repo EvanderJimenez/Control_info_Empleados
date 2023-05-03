@@ -9,6 +9,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+
+  
+
   if (req.method === "GET") {
     await getEmployees(req, res);
   } else if (req.method === "POST") {
@@ -16,7 +19,9 @@ export default async function handler(
     await createEmployee(req, res);
   } else if (req.method === "PUT") {
     console.log(req.body.correo)
-    await deleteEmployee(req.body.correo, res);
+    console.log(req.body.cedula)
+    await upDateEmployee(req, res);
+    //await deleteEmployee(req.body.correo, res);
   } else {
     res.status(405).json({ message: "Método no permitido" });
   }
