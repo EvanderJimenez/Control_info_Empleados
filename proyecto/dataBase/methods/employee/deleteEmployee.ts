@@ -1,26 +1,37 @@
-import { firestore } from "../../../dataBase/firebase/firebase";
+import { firestore } from "../../firebase/firebase";
 import {
-  doc,
-  updateDoc,
+  collection,
+  query,
+  where,
+  getDocs,
   DocumentData,
+  QuerySnapshot,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<DocumentData>
+export default async function deleteEmployee(
+  correo: string,
+  res: NextApiResponse<any>
 ) {
-  const { cedula } = req.query;
 
-  console.log("cdedula: "+cedula)
+  const empleadosCollection = collection(firestore, "empleados");
+  const empleadosQuery = query(
+    empleadosCollection,
+    where("correo", "==", correo)
+  );
+  const empleadosSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    empleadosQuery
+  );
+  const empleadoDoc = empleadosSnapshot.docs[0];
 
-  try {
-    const employeeDoc = doc(firestore, "empleados", cedula as string);
-    await updateDoc(employeeDoc, { habilitado: false });
-
-    res.status(200).json({ message: "Empleado deshabilitado correctamente" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error al deshabilitar el empleado" });
+  if (!empleadoDoc) {
+    return res.status(404).json("Empleado no encontrado");
   }
+  await updateDoc(doc(firestore, "empleados", empleadoDoc.id), {
+    habilitado: false,
+  });
+
+  return res.status(200).json("Empleado deshabilitado");
 }

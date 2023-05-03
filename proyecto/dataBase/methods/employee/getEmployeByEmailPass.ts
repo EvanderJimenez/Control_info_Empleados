@@ -20,10 +20,7 @@ export default async function handler(
 ) {
   const { correo, contrasena } = req.body;
 
-  console.log("correo:" +correo)
-  console.log("Contrasena: "+contrasena)
 
-  // buscar empleado por correo y contraseña
   const empleadosCollection = collection(firestore, "empleados");
   const empleadosQuery = query(
     empleadosCollection,
@@ -35,12 +32,10 @@ export default async function handler(
   );
   const empleadoDoc = empleadosSnapshot.docs[0];
 
-  // verificar si se encontró un empleado
   if (!empleadoDoc) {
     return res.status(401).json("Credenciales inválidas");
   }
-
-  // retornar información del empleado encontrado
+  
   const empleadoData = empleadoDoc.data() as Empleado;
   return res.status(200).json(empleadoData);
 }

@@ -11,7 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<DocumentData[]>
 ) {
-  // obtener todos los documentos de la colección "empleados"
+  
   const empleadosCollection = collection(firestore, "empleados");
   const empleadosSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     empleadosCollection

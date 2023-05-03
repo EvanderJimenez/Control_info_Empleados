@@ -93,7 +93,6 @@ function Empleado() {
         console.error(`Error al deshabilitar el usuario ${cedula}:`, error)
       );
   };
-  
 
   return (
 
