@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import "../../../styles/listEmployee.module.css"
 import axios from 'axios';
 import Register from '../register/Register';
 
@@ -112,7 +111,7 @@ const ListEmployee = () => {
               <p className="mt-2">Jefe: {item.jefe}</p>
               <p className="mt-2">Habilitado: <input readOnly type="checkbox" checked={item.habilitado} /></p>
               <button
-                className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                className="mt-4 px-4 py-2 bg-red-500 bg-red text-white rounded hover:bg-red-600"
                 onClick={() => handleDelete(item.correo)}
               >
                 Eliminar
