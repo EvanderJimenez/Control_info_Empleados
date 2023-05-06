@@ -32,12 +32,12 @@ function Login() {
   };
 
   return (
-    <div>
+    <>
       {isLoggedIn ? (
         <ListEmployee />
       ) : (
-        <form className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
-          <h2 className="m-7">Iniciar sesión</h2>
+        <form className="bg-Secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
+          <h2 className="">Iniciar sesión</h2>
           <div className="flex flex-col items-center justify-center p-2">
             <label>Correo electrónico</label>
             <input
@@ -67,7 +67,7 @@ function Login() {
           </button>
         </form>
       )}
-    </div>
+   </>
   );
 }
 
