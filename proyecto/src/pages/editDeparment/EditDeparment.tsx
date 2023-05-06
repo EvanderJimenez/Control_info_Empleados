@@ -41,6 +41,39 @@ function EditDeparment() {
       // getOne(idDoc);
     }
   }, [idDoc]);
+  useEffect(() => {
+    fetch("/api/deparments")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []); //data
+
+  const handleUpdate = async (id: string) => {
+    try {
+      console.log("Datos enviados:", { id });
+      const response = await fetch("/api/deparments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.size);
+        console.log(data.id);
+        setUserData(data);
+        setActualiza(true);
+      } else {
+        throw new Error("Error al iniciar sesión");
+      }
+    } catch (error) {
+      console.error("Error al obtener los datos del empleado", error);
+    }
+  };
+
   return (
     <div className=" grid grid-cols-1 gap-4 scroll">
       {data.map((item) => (
