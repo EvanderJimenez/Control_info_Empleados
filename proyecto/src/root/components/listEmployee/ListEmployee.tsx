@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import "../../../styles/listEmployee.module.css"
 import axios from 'axios';
 import Register from '../register/Register';
+
+
 interface UserData {
   cedula: number;
   contrasena: string;
@@ -12,6 +14,7 @@ interface UserData {
   nombre: string;
   puesto: string;
   sueldo: number;
+
 
 }
 
@@ -131,4 +134,5 @@ const ListEmployee = () => {
 
 }
 
-export default ListEmployee
+
+export default ListEmployee;

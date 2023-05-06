@@ -12,12 +12,14 @@ interface UserData {
   sueldo: number;
 }
 
+
 interface RegisterProps {
   user: UserData;
   onCancel: () => void;
 }
 
 function Register(props: RegisterProps) {
+
 
   const [data, setData] = useState<UserData[]>([]);
 
@@ -51,12 +53,9 @@ function Register(props: RegisterProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Validar que los campos no estén vacíos antes de enviar la solicitud POST
-    /*     if (!userData.cedula || !userData.contrasena || !userData.correo || userData.nombre ) {
-          console.error("Por favor, ingrese valores para todos los campos");
-          return;
-        } */
+
     userData.habilitado = true
+
 
     console.log("Nuevo usuario:", userData);
 
@@ -180,7 +179,8 @@ function Register(props: RegisterProps) {
       }
     </div>
 
+
   );
-};
+}
 
 export default Register;
