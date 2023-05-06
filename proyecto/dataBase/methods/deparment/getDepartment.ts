@@ -16,9 +16,13 @@ export default async function handler(
   const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     departmentsCollection
   );
-  const departments: DocumentData[] = departmentsSnapshot.docs.map((doc) =>
-    doc.data()
-  );
+
+  const departments: DocumentData[] = departmentsSnapshot.docs.map((doc) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    };
+  });
 
   res.status(200).json(departments);
 }

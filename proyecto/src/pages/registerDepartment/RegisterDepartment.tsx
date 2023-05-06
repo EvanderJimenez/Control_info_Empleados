@@ -1,38 +1,29 @@
-import React, { useState, useEffect } from "react";
-interface depar {
+import React, { useState } from "react";
+
+interface Department {
   name: string;
   size: number;
   location: string;
   area: string;
   leader: string;
-  skills: [string];
-  mainDepartment: string;
+  skills: string;
+  mainDepartment: boolean;
   subDepartment: string;
 }
 
 function RegisterDepartment() {
-  const [isChecked, setIsChecked] = useState(false);
   const [isCheckedS, setIsCheckedS] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [name, setName] = useState("");
-  const [names, setNames] = useState([]);
-  const [data, setData] = useState<depar>([]);
-  const [userData, setUserData] = useState<depar>({
+  const [userData, setUserData] = useState<Department>({
     name: "",
     size: 0,
     location: "",
     area: "",
     leader: "",
     skills: "",
-    mainDepartment: "",
+    mainDepartment: false,
     subDepartment: "",
   });
 
-  useEffect(() => {
-    fetch("/api/")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []); //data
   const handleInputChangeD = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserData((prevUserData) => ({ ...prevUserData, [name]: value }));
@@ -40,8 +31,6 @@ function RegisterDepartment() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // Validar que los campos no estén vacíos antes de enviar la solicitud POST
     if (
       !userData.name ||
       !userData.size ||
@@ -64,44 +53,33 @@ function RegisterDepartment() {
       body: JSON.stringify(userData),
     })
       .then((res) => res.json())
-      .then((newUser) => setData([...data, newUser]))
+      .then((newUser) => {
+        console.log("Nuevo departamento creado:", newUser);
+        setUserData({
+          name: "",
+          size: 0,
+          location: "",
+          area: "",
+          leader: "",
+          skills: "",
+          mainDepartment: false,
+          subDepartment: "",
+        });
+      })
       .catch((error) =>
         console.error("Error al crear nuevo departamento:", error)
       );
-
-    setUserData({
-      name: "",
-      size: 0,
-      location: "",
-      area: "",
-      leader: "",
-      skills: "",
-      mainDepartment: "",
-      subDepartment: "",
-    });
   };
 
-  const handleAddName = () => {
-    setNames([...names, name]);
-    setName("");
-  };
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
   const handleCheckboxChangeS = () => {
     setIsCheckedS(!isCheckedS);
-  };
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
   };
 
   return (
     <div>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1"
       >
         <input
           type="text"
@@ -151,42 +129,47 @@ function RegisterDepartment() {
           placeholder="Habilidades"
           className="border rounded-md px-3 py-2"
         />
-        <label>
+        <label htmlFor="mainDepartment" className="flex items-center">
           <input
             type="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-          />
-          Departamento Principal
-        </label>
-        {isChecked && (
-          <input
-            type="text"
             name="mainDepartment"
-            value={userData.mainDepartment}
-            onChange={handleInputChangeD}
-            placeholder="Departamento principal"
-            className="border rounded-md px-3 py-2"
+            checked={userData.mainDepartment}
+            onChange={() =>
+              setUserData((prevUserData) => ({
+                ...prevUserData,
+                mainDepartment: !prevUserData.mainDepartment,
+              }))
+            }
+            className="form-checkbox h-4 w-4 text-blue-500"
           />
-        )}
-
-        <label>
-          <input
-            type="checkbox"
-            checked={isCheckedS}
-            onChange={handleCheckboxChangeS}
-          />
-          Sub Departamento
+          <span className="ml-2 text-gray-700">
+            {userData.mainDepartment
+              ? "Departamento Principal"
+              : "Departamento Secundario"}
+          </span>
         </label>
-        {isCheckedS && (
-          <input
-            type="text"
-            name="subDepartment"
-            value={userData.subDepartment}
-            onChange={handleInputChangeD}
-            placeholder="Departamento al que pertenece"
-            className="border rounded-md px-3 py-2"
-          />
+
+        {!userData.mainDepartment && (
+          <>
+            <label>
+              <input
+                type="checkbox"
+                checked={isCheckedS}
+                onChange={handleCheckboxChangeS}
+              />
+              Sub Departamento
+            </label>
+            {isCheckedS && (
+              <input
+                type="text"
+                name="subDepartment"
+                value={userData.subDepartment}
+                onChange={handleInputChangeD}
+                placeholder="Departamento al que pertenece"
+                className="border rounded-md px-3 py-2"
+              />
+            )}
+          </>
         )}
         <button
           type="submit"

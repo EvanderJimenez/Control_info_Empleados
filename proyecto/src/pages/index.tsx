@@ -2,8 +2,8 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import { Top } from "../root/components/header/Top";
 import Empleado from "@/root/components/empleado/Empleado";
-import RegisterDepartment from "./registerDepartment/RegisterDepartment";
 import EditDeparment from "./editDeparment/EditDeparment";
+import RegisterDepartment from "./registerDepartment/RegisterDepartment";
 
 const inter = Inter({ subsets: ["latin"] });
 
