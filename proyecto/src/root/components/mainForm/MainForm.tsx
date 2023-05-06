@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Login from "../login/Login";
 import Register from "../register/Register";
+import ListEmployee from "../listEmployee/ListEmployee";
+import Login from "../login/Login"
 
 export const MainForm = ({}) => {
   const [showComponent, setShowComponent] = useState(true);
@@ -15,7 +16,8 @@ export const MainForm = ({}) => {
         <a href="#" onClick={toggleComponent}>
           {showComponent ? "¿No estás registrado?, da clic aquí." : "¿Ya tienes una cuenta?, inicia sesión aquí."}
         </a>
-        {showComponent ? <Login /> : <Register />}
+        {showComponent ? <Login /> : <ListEmployee/>}
+        <div></div>
       </div>
     </div>
   );
