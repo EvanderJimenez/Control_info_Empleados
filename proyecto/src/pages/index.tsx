@@ -1,19 +1,17 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Top } from "../root/components/header/Top";
-import { MainForm } from "../root/components/mainForm/MainForm";
+import React, { useEffect } from "react";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ["latin"] });
+const InvoicePage: NextPage = () => {
+  const router = useRouter();
 
-export default function Home() {
+  useEffect(() => {
+    router.push("./home");
+  }, [router]);
+
   return (
-    <main className={`bg-PrimaryGreen flex flex-col items-center justify-center h-screen`}>
-      <header className="bg-SecondaryGreen w-full h-20">
-        <Top />
-      </header>
-      <section className="w-full h-full flex flex-col items-center justify-center">
-        <MainForm/>
-      </section>
-    </main>
+  <div className="bg-gray-900"></div>
   );
-}
+};
+
+export default InvoicePage;
