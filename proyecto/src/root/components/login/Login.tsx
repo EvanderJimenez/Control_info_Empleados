@@ -2,14 +2,11 @@ import { useState, ChangeEvent } from "react";
 import Register from "../register/Register";
 import ListEmployee from "../listEmployee/ListEmployee";
 
-interface Props {
-  // Define aquí las props necesarias
-}
-
 function Login () {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isRegistrando, setIsRegistrando] = useState<boolean>(false)
   const [userData, setUserData] = useState<any>(null); //usar para props de otro componente
   const [errorEmailPass, setErrorEmailPass] = useState<any>(null)
 
@@ -18,16 +15,27 @@ function Login () {
 
     if (name === "email") {
       setEmail(value);
+      console.log(isRegistrando)
     } else if (name === "password") {
       setPassword(value);
+      console.log(isRegistrando)
     }
   };
 
-  const handleIngresar = async () => {
+  const handleIngresar = async (e:any) => {
+
+    e.preventDefault()
+
+    let option = isRegistrando ? "register" : "login";
+
+    console.log(option)
+
+
     if (email && password) {
+
       try {
         console.log("Datos enviados:", { email, password })
-        // Enviar la solicitud de inicio de sesión
+
         const response = await fetch('/api/empleados',{
           method: "POST",
       headers: {
@@ -35,8 +43,10 @@ function Login () {
       },
       body: JSON.stringify({
         correo: email,
-        contrasena: password
-      })
+        contrasena: password,
+        option: option
+    })
+    
         });
 
         if (response.ok) {
@@ -56,8 +66,8 @@ function Login () {
 
   return (
     <div>
-      {!isLoggedIn ? (<ListEmployee />) : (    <form className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
-      <h2 className="m-7">Iniciar sesión</h2>
+      {isLoggedIn ? (<ListEmployee />) : ( <div> <form className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
+      <h2 className="m-7">{isRegistrando ? "Registrate" : "Iniciar sesión"}</h2>
       <div className="flex flex-col items-center justify-center p-2">
         <label >Correo electrónico</label>
         <input
@@ -82,9 +92,14 @@ function Login () {
           required
         />
       </div>
-      <button type="submit" className="bg-blue hover:bg-red text-white font-bold py-2 px-4 rounded mt-4">Ingresar</button>
+      <button type="submit" className="bg-blue hover:bg-red text-white font-bold py-2 px-4 rounded mt-4">{isRegistrando ? "Registrate" : "Iniciar sesión"}</button>
       {errorEmailPass ? <label>The employee does not exist</label> : null}
-    </form>)}
+    </form>
+    <button onClick={() => {setIsRegistrando(!isRegistrando)}}>{isRegistrando ? "Ya tienes cuenta? Inicia session" : "No tienes cuenta? Registrate"}</button>
+    </div>
+    )
+
+    }
     </div>
 
   );

@@ -162,20 +162,12 @@ function Register(props: RegisterProps) {
           <form onSubmit={handleSubmit} className=" grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10">
               <div className="flex flex-col items-center justify-center p-2">
-                <label >Nombre</label>
-                <input type="text" name="nombre" required value={userData.nombre} onChange={handleInputChange} className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red" id="name" />
-              </div>
-              <div className="flex flex-col items-center justify-center p-2">
                 <label>Correo electrónico</label>
                 <input type="email" name="correo" required value={userData.correo} onChange={handleInputChange} className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red" id="name" />
               </div>
               <div className="flex flex-col items-center  justify-center p-2">
                 <label>Contraseña</label>
                 <input type="password" name="contrasena" required value={userData.contrasena} onChange={handleInputChange} className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red" id="password" />
-              </div>
-              <div className="flex flex-col items-center justify-center p-2">
-                <label>Cédula</label>
-                <input type="number" name="cedula" required value={userData.cedula} onChange={handleInputChange} className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red" id="cedula" />
               </div>
               <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 {props.user ? "Actualizar" : "Guardar"}

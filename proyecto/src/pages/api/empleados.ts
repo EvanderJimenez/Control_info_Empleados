@@ -4,6 +4,8 @@ import createEmployee from "../../../dataBase/methods/employee/createEmployee";
 import deleteEmployee from "../../../dataBase/methods/employee/deleteEmployee";
 import upDateEmployee from "../../../dataBase/methods/employee/upDateEmploye";
 import getEmployeByEmailPass from "../../../dataBase/methods/employee/getEmployeByEmailPass";
+import authentication from "../../../dataBase/methods/employee/authentication";
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,9 +17,14 @@ export default async function handler(
   if (req.method === "GET") {
     await getEmployees(req, res);
   } else if (req.method === "POST") {
-    await getEmployeByEmailPass(req, res);
-    await createEmployee(req, res);
-  } else if (req.method === "PUT") {
+    if(req.body.option) {
+        await authentication(req, res);
+    } else {
+        await createEmployee(req, res);
+    }
+}
+
+   else if (req.method === "PUT") {
     console.log(req.body.correo)
     console.log(req.body.cedula)
     await upDateEmployee(req, res);
