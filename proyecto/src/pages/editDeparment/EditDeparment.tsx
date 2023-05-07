@@ -1,5 +1,6 @@
 import { setUserId } from "firebase/analytics";
 import React, { useState, useEffect } from "react";
+import Register from "../registerDepartment/register";
 interface UserData {
   id: string;
   name: string;
@@ -10,12 +11,14 @@ interface UserData {
   skills: string;
   mainDepartment: string;
   subDepartment: string;
+  nivel: string;
 }
 
 function EditDeparment() {
   const [data, setData] = useState<UserData[]>([]);
   const [actualiza, setActualiza] = useState<boolean | null>(null);
   const [idDoc, setidDoc] = useState("");
+  const [dataI, setDta] = useState<UserData[]>([]);
   const [userData, setUserData] = useState<UserData>({
     id: "",
     name: "",
@@ -26,6 +29,7 @@ function EditDeparment() {
     skills: "",
     mainDepartment: "",
     subDepartment: "",
+    nivel: "",
   });
   /* const getOne = async (idDoc)=>{
  try {
@@ -49,9 +53,9 @@ function EditDeparment() {
 
   const handleUpdate = async (id: string) => {
     try {
-      console.log("Datos enviados:", { id });
+      console.log(id);
       const response = await fetch("/api/deparments", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -62,41 +66,50 @@ function EditDeparment() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data.size);
-        console.log(data.id);
         setUserData(data);
         setActualiza(true);
+        setDta(data);
+        console.log(data);
+        <Register depar={userData} />;
       } else {
-        throw new Error("Error al iniciar sesión");
+        throw new Error("Error al adquirir la informacion");
       }
     } catch (error) {
-      console.error("Error al obtener los datos del empleado", error);
+      console.error("Error al obtener los datos del departamento", error);
     }
   };
 
   return (
     <div className=" grid grid-cols-1 gap-4 scroll">
-      {data.map((item) => (
-        <div
-          key={item.name}
-          className="p-6 border border-gray-300 rounded-lg bg-gradient-to-r from-gray-300 to-gray-200 text-center "
-        >
-          <p className="font-bold">Nombre del Departamento: {item.name}</p>
-          <p className="mt-2">Personas: {item.size}</p>
-          <p className="mt-2">Ubicacion: {item.location}</p>
-          {item.mainDepartment && (
-            <p>Departamento Principal: {item.mainDepartment}</p>
-          )}
-          {item.subDepartment && <p>SubDepartamento : {item.subDepartment}</p>}
-          <p className="mt-2">Jefe del Departamento: {item.leader}</p>
-          <button
-            className="mt-4 px-4 py-2 bg-green-500 bg-blue text-white rounded hover:bg-green-800"
-            //  onClick={() => handleUpdate(item.id)}
-          >
-            Actualizar
-          </button>
+      {userData ? (
+        <Register depar={userData} />
+      ) : (
+        <div>
+          {data.map((item) => (
+            <div
+              key={item.name}
+              className="p-6 border border-gray-300 rounded-lg bg-gradient-to-r from-gray-300 to-gray-200 text-center "
+            >
+              <p className="font-bold">Nombre del Departamento: {item.name}</p>
+              <p className="mt-2">Personas: {item.size}</p>
+              <p className="mt-2">Ubicacion: {item.location}</p>
+              {item.mainDepartment && (
+                <p>Departamento Principal: {item.mainDepartment}</p>
+              )}
+              {item.subDepartment && (
+                <p>SubDepartamento : {item.subDepartment}</p>
+              )}
+              <p className="mt-2">Jefe del Departamento: {item.leader}</p>
+              <button
+                className="mt-4 px-4 py-2 bg-green-500 bg-blue text-white rounded hover:bg-green-800"
+                onClick={() => handleUpdate(item.id)}
+              >
+                Actualizar
+              </button>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }

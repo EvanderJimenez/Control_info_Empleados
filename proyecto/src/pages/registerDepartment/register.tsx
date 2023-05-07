@@ -1,39 +1,40 @@
 import React, { useState } from "react";
 import RegisterDepartment from "./RegisterDepartment";
 
-interface UserData {
+interface DeparData {
+  id: string;
   name: string;
   size: number;
   location: string;
   area: string;
   leader: string;
   skills: string;
-  mainDepartment: boolean;
+  mainDepartment: string;
   subDepartment: string;
   nivel: string;
 }
 
 interface RegisterProps {
-  user: UserData;
-  onCancel: () => void;
+  depar: DeparData;
 }
 
 function Register(props: RegisterProps) {
-  const [data, setData] = useState<UserData[]>([]);
+  const [data, setData] = useState<DeparData[]>([]);
 
-  const [actualizar, setActualizar] = useState<boolean>(!!props.user);
-  const [userData, setUserData] = useState<UserData>(() => {
-    if (props.user) {
-      return props.user;
+  const [actualizar, setActualizar] = useState<boolean>(!!props.depar);
+  const [DeparData, setDeparData] = useState<DeparData>(() => {
+    if (props.depar) {
+      return props.depar;
     } else {
       return {
+        id: "",
         name: "",
         size: 0,
         location: "",
         area: "",
         leader: "",
         skills: "",
-        mainDepartment: false,
+        mainDepartment: "",
         subDepartment: "",
         nivel: "",
       };
@@ -47,34 +48,35 @@ function Register(props: RegisterProps) {
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setUserData((prevUserData) => ({ ...prevUserData, [name]: value }));
+    const { id, value } = event.target;
+    setDeparData((prevDeparData) => ({ ...prevDeparData, [id]: value }));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const handleUpdate = () => {
-      fetch(`/api/departments`, {
-        method: "PUT",
+      fetch("/api/departments", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(DeparData),
       })
         .then((res) => res.json())
-        .then((updatedUser) => {
+        .then((updateddepar) => {
           setData((prevData) => {
             const newData = [...prevData];
-            const userIndex = newData.findIndex(
-              (user) => user.name === updatedUser.name
+            const deparIndex = newData.findIndex(
+              (depar) => depar.id === updateddepar.id
             );
-            if (userIndex >= 0) {
-              newData[userIndex] = updatedUser;
+            console.log(newData);
+            if (deparIndex >= 0) {
+              newData[deparIndex] = updateddepar;
             }
             return newData;
+            console.log(newData);
           });
-          props.onCancel();
         })
         .catch((error) =>
           console.error("Error al actualizar departamento:", error)
@@ -84,7 +86,6 @@ function Register(props: RegisterProps) {
     if (actualizar) {
       handleUpdate();
     } else {
-      userData.mainDepartment = true;
       <RegisterDepartment />;
     }
   };
@@ -100,7 +101,7 @@ function Register(props: RegisterProps) {
             <input
               type="text"
               name="name"
-              value={userData.name}
+              value={DeparData.name}
               onChange={handleInputChange}
               placeholder="Nombre del Departamento"
               className="border rounded-md px-3 py-2"
@@ -108,7 +109,7 @@ function Register(props: RegisterProps) {
             <input
               type="number"
               name="size"
-              value={userData.size}
+              value={DeparData.size}
               onChange={handleInputChange}
               placeholder="Tamaño del Departamento"
               className="border rounded-md px-3 py-2"
@@ -116,7 +117,7 @@ function Register(props: RegisterProps) {
             <input
               type="text"
               name="location"
-              value={userData.location}
+              value={DeparData.location}
               onChange={handleInputChange}
               placeholder="Ubicacion del Departamento"
               className="border rounded-md px-3 py-2"
@@ -124,7 +125,7 @@ function Register(props: RegisterProps) {
             <input
               type="text"
               name="area"
-              value={userData.area}
+              value={DeparData.area}
               onChange={handleInputChange}
               placeholder="Area al que pertenece"
               className="border rounded-md px-3 py-2"
@@ -132,7 +133,7 @@ function Register(props: RegisterProps) {
             <input
               type="text"
               name="leader"
-              value={userData.leader}
+              value={DeparData.leader}
               onChange={handleInputChange}
               placeholder="Lider del departamento"
               className="border rounded-md px-3 py-2"
@@ -140,7 +141,7 @@ function Register(props: RegisterProps) {
             <input
               type="text"
               name="skills"
-              value={userData.skills}
+              value={DeparData.skills}
               onChange={handleInputChange}
               placeholder="Habilidades"
               className="border rounded-md px-3 py-2"
@@ -157,7 +158,7 @@ function Register(props: RegisterProps) {
               <input
                 type="text"
                 name="subDepartment"
-                value={userData.subDepartment}
+                value={DeparData.subDepartment}
                 onChange={handleInputChange}
                 placeholder="Departamento al que pertenece"
                 className="border rounded-md px-3 py-2"
@@ -167,7 +168,7 @@ function Register(props: RegisterProps) {
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-              {props.user ? "Actualizar" : "Guardar"}
+              {props.depar ? "Actualizar" : "Guardar"}
             </button>
           </div>
         </form>
