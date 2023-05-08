@@ -18,10 +18,9 @@ function Login() {
 
     if (name === "email") {
       setEmail(value);
-      console.log(isRegistrando);
     } else if (name === "password") {
       setPassword(value);
-      console.log(isRegistrando);
+
     }
   };
 
@@ -30,11 +29,9 @@ function Login() {
 
     let option = isRegistrando ? "register" : "login";
 
-    console.log(option);
 
     if (email && password) {
       try {
-        console.log("Datos enviados:", { email, password });
 
         const response = await fetch("/api/empleados", {
           method: "POST",
@@ -42,9 +39,9 @@ function Login() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            correo: email,
-            contrasena: password,
-            option: option,
+            email: email,
+            password: password,
+            option: "login",
           }),
         });
 
@@ -52,9 +49,10 @@ function Login() {
           const data = await response.json();
           setIsLoggedIn(true);
           setUserData(data);
+          
           const newPage = "/home/AdminMain";
           router.push(newPage);
-          console.log(data);
+
         } else {
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");

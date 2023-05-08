@@ -1,4 +1,5 @@
 import { firestore } from "../../../dataBase/firebase/firebase";
+import {Schedule} from "../../../src/root/components/listEmployee/ListEmployee"
 import {
   collection,
   addDoc,
@@ -13,27 +14,40 @@ export default async function handler(
 ) {
   
   const {
+    uid,
+    name,
+    firstSurname,
+    secondSurname,
     cedula,
-    contrasena,
-    correo,
-    departamentoEmp,
-    habilitado,
-    jefe,
-    nombre,
-    puesto,
-    sueldo,
+    phoneNumber,
+    photo,
+    jobPosition,
+    salary,
+    enabled,
+    idDepartment,
+    password,
+    email,
+    boss,
+    schedule
   } = req.body;
 
-  const newDocRef = await addDoc(collection(firestore, "empleados"), {
+  const newDocRef = await addDoc(collection(firestore, "employee"), {
+    uid,
+    name,
+    firstSurname,
+    secondSurname,
     cedula,
-    contrasena,
-    correo,
-    departamentoEmp,
-    habilitado,
-    jefe,
-    nombre,
-    puesto,
-    sueldo,
+    phoneNumber,
+    photo,
+    jobPosition,
+    salary,
+    enabled,
+    idDepartment,
+    password,
+    email,
+    boss,
+    schedule: schedule.map((s: Schedule) => ({ day: s.day, startTime: s.startTime, endTime: s.endTime })),
+
   });
 
   const newDoc = await getDoc(newDocRef);
