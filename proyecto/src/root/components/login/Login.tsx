@@ -78,7 +78,7 @@ function Login() {
               <label>Correo electrónico</label>
               <input
                 type="email"
-                className="bg-primary secondary-font border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red rounded-md py-2 px-4 w-full"
+                className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
                 id="email"
                 name="email"
                 value={email}
@@ -90,7 +90,7 @@ function Login() {
               <label>Contraseña</label>
               <input
                 type="password"
-                className="bg-primary secondary-font border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red rounded-md py-2 px-4 w-full"
+                className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
                 id="password"
                 name="password"
                 value={password}
