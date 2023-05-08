@@ -10,12 +10,12 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     await getDepartments(req, res);
-  } else if (req.method === "POST") {
+  } else if (req.method === "PUT") {
     await createDeparment(req, res);
   } else if (req.method === "DELETE") {
     console.log(req.body.name);
     await getDepar(req, res);
-  } else if (req.method === "PUT") {
+  } else if (req.method === "POST") {
     await upDateDeparments(req, res);
   } else {
     res.status(405).json({ message: "Método no permitido" });

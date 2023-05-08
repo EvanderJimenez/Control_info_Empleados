@@ -1,54 +1,47 @@
 import { firestore } from "../../../dataBase/firebase/firebase";
 import {
-  updateDoc,
+  doc,
+  collection,
   query,
   where,
+  updateDoc,
+  DocumentData,
   getDocs,
-  collection,
-  doc,
 } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<DocumentData>
 ) {
+  const {
+    name,
+    size,
+    location,
+    area,
+    leader,
+    skills,
+    mainDepartment,
+    subDepartment,
+    empleados,
+  } = req.body;
+
   try {
-    // obtener el nombre del departamento y los datos a actualizar del cuerpo de la solicitud
-    const { departmentName } = req.query;
-    const {
-      size,
-      location,
-      area,
-      leader,
-      skills,
-      mainDepartment,
-      subDepartment,
-      nivel,
-    } = req.body;
+    const employeesRef = collection(firestore, "deparments");
 
-    // realizar una consulta en Firestore para obtener el documento que corresponde al departamento con el nombre dado
-    const departmentsCollectionRef = collection(firestore, "deparments"); // fix typo
-    const departmentQuery = query(
-      departmentsCollectionRef,
-      where("name", "==", departmentName)
-    );
-    const departmentQuerySnapshot = await getDocs(departmentQuery);
+    const q = query(employeesRef, where("name", "==", name));
 
-    if (departmentQuerySnapshot.empty) {
-      // Si la consulta no devuelve ningún documento, significa que no existe ningún departamento con el nombre dado.
-      // En este caso, se debe enviar una respuesta de error.
-      res.status(404).json({
-        message: "No se encontró ningún departamento con el nombre dado.",
-      });
-    } else {
-      // Si la consulta devuelve un documento, se puede actualizar ese documento con los nuevos datos.
-      const departmentDoc = doc(
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.size > 0) {
+      const employeeDoc = doc(
         firestore,
-        "departments",
-        departmentQuerySnapshot.docs[0].id
+        "deparments",
+        querySnapshot.docs[0].id
       );
-      await updateDoc(departmentDoc, {
+
+      await updateDoc(employeeDoc, {
+        name,
         size,
         location,
         area,
@@ -56,18 +49,17 @@ export default async function handler(
         skills,
         mainDepartment,
         subDepartment,
-        nivel,
+        empleados,
       });
 
-      // enviar una respuesta de éxito con un estado HTTP 200 y un mensaje de confirmación
       res
         .status(200)
         .json({ message: "Departamento actualizado correctamente" });
+    } else {
+      res.status(404).json({ message: "Departamento no encontrado" });
     }
   } catch (error) {
-    // enviar una respuesta de error con un estado HTTP 500 y un mensaje de error
     console.error(error);
-    console.log(updateDoc);
     res.status(500).json({ message: "Error al actualizar el departamento" });
   }
 }

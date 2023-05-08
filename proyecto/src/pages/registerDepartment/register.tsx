@@ -11,6 +11,7 @@ interface DeparData {
   mainDepartment: boolean;
   subDepartment: string;
   nivel: string;
+  empleados: [string];
 }
 
 interface RegisterProps {
@@ -40,6 +41,7 @@ function Register(props: RegisterProps) {
         mainDepartment: false,
         subDepartment: "",
         nivel: "",
+        empleados: [""],
       };
     }
   });
@@ -53,7 +55,7 @@ function Register(props: RegisterProps) {
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     fetch(`/api/deparments`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
