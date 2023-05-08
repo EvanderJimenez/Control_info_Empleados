@@ -9,3 +9,4 @@ export type Employee = {
   puesto: string;
   sueldo: number;
 };
+

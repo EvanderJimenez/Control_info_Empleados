@@ -10,7 +10,7 @@ const InvoicePage: NextPage = () => {
   }, [router]);
 
   return (
-  <div className="bg-gray-900"></div>
+  <div className="bg-gray-900 w-full h-full"></div>
   );
 };
 

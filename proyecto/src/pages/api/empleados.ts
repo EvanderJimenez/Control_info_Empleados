@@ -19,8 +19,8 @@ export default async function handler(
   if (req.method === "GET") {
     await getEmployees(req, res);
   } else if (req.method === "POST") {
-    //await authentication(req, res);
-    await upDateEmployee(req, res);
+    await authentication(req, res);
+    //await upDateEmployee(req, res);
   } else if (req.method === "PUT") {
     await getEmployeByEmailPass(req,res)
    
