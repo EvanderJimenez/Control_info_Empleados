@@ -6,27 +6,18 @@ import upDateEmployee from "../../../dataBase/methods/employee/upDateEmploye";
 import getEmployeByEmailPass from "../../../dataBase/methods/employee/getEmployeByEmailPass";
 import authentication from "../../../dataBase/methods/employee/authentication";
 
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<any>
-) {
-
-  
-
+export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   if (req.method === "GET") {
     await getEmployees(req, res);
   } else if (req.method === "POST") {
-    if(req.body.option) {
-        await authentication(req, res);
+    if (req.body.option) {
+      await authentication(req, res);
     } else {
-       // await createEmployee(req, res);
+      // await createEmployee(req, res);
     }
-}
-
-   else if (req.method === "PUT") {
-    console.log(req.body.correo)
-    console.log(req.body.cedula)
+  } else if (req.method === "PUT") {
+    console.log(req.body.correo);
+    console.log(req.body.cedula);
     //await getEmployeByEmailPass(req,res)
     //await upDateEmployee(req, res);
     await deleteEmployee(req.body.correo, res);

@@ -1,17 +1,12 @@
 import { firestore, auth } from "../../../dataBase/firebase/firebase";
-import {
-  DocumentData,
-} from "firebase/firestore";
+import { DocumentData } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<DocumentData>
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<DocumentData>) {
   const { correo, contrasena, option } = req.body;
 
-  console.log(correo, contrasena, option)
+  console.log(correo, contrasena, option);
 
   try {
     if (option === "register") {
@@ -25,7 +20,6 @@ export default async function handler(
         return res.status(400).json({ message: "El correo electrónico no está registrado" });
       }
 
-
       const userCredential = await signInWithEmailAndPassword(auth, correo, contrasena);
       const user = userCredential.user;
 
@@ -34,7 +28,7 @@ export default async function handler(
       return res.status(400).json({ message: "Opción no válida" });
     }
   } catch (error) {
-    if (typeof error === 'object' && error !== null && 'code' in error && 'message' in error) {
+    if (typeof error === "object" && error !== null && "code" in error && "message" in error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error("Error al crear o autenticar usuario:", errorCode, errorMessage);

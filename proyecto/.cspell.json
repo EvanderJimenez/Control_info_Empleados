@@ -1,0 +1,15 @@
+
+{
+    "ignoreWords": [
+      "empleado",
+      "jefe",
+      "departamento",
+      "empleados",
+      "firestore",
+      "habilitado",
+      "correo",
+      "encontrado",
+      "desabilitado",
+      "contrasena"
+    ]
+  }
