@@ -9,31 +9,60 @@ import {
   getDocs
 } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
+import { Schedule } from "../../../src/root/components/listEmployee/ListEmployee";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<DocumentData>
 ) {
-  const { cedula, contrasena, correo, departamentoEmp, habilitado, jefe, nombre, puesto, sueldo } = req.body;
+  const {
+    uid,
+    option,
+    name,
+    firstSurname,
+    secondSurname,
+    cedula,
+    phoneNumber,
+    photo,
+    jobPosition,
+    salary,
+    enabled,
+    idDepartment,
+    password,
+    email,
+    boss,
+    schedule,
+  } = req.body;
 
   try {
-    const employeesRef = collection(firestore, "empleados");
-    const q = query(employeesRef, where("cedula", "==", cedula));
+    const employeesRef = collection(firestore, "employee");
+
+    const q = query(employeesRef, where("uid", "==", uid));
+    
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.size > 0) {
-      const employeeDoc = doc(firestore, "empleados", querySnapshot.docs[0].id);
-      console.log("Cédula: " + cedula);
+      const employeeDoc = doc(firestore, "employee", querySnapshot.docs[0].id);
+
       await updateDoc(employeeDoc, {
+        name,
+        firstSurname,
+        secondSurname,
         cedula,
-        contrasena,
-        correo,
-        departamentoEmp,
-        habilitado,
-        jefe,
-        nombre,
-        puesto,
-        sueldo
+        phoneNumber,
+        photo,
+        jobPosition,
+        salary,
+        enabled,
+        idDepartment,
+        password,
+        email,
+        boss,
+        schedule: schedule.map((s: Schedule) => ({
+          day: s.day,
+          startTime: s.startTime,
+          endTime: s.endTime,
+        })),
       });
 
       res.status(200).json({ message: "Empleado actualizado correctamente" });

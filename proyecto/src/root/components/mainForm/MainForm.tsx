@@ -16,7 +16,7 @@ export const MainForm = ({}) => {
         <a href="#" onClick={toggleComponent}>
           {showComponent ? "¿No estás registrado?, da clic aquí." : "¿Ya tienes una cuenta?, inicia sesión aquí."}
         </a>
-        {showComponent ? <Login /> : <ListEmployee/>}
+        {showComponent ? <Login /> : <Register user={undefined} onCancel={() => console.log("Cancelado")}/>}
         <div></div>
       </div>
     </div>

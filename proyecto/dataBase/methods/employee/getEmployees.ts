@@ -12,13 +12,13 @@ export default async function handler(
   res: NextApiResponse<DocumentData[]>
 ) {
   
-  const empleadosCollection = collection(firestore, "empleados");
-  const empleadosSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    empleadosCollection
+  const employeeCollection = collection(firestore, "employee");
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeCollection
   );
-  const empleados: DocumentData[] = empleadosSnapshot.docs.map((doc) =>
+  const emploeyees: DocumentData[] = employeeSnapshot.docs.map((doc) =>
     doc.data()
   );
 
-  res.status(200).json(empleados);
+  res.status(200).json(emploeyees);
 }

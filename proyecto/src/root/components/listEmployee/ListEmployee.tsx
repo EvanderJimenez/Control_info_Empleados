@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import Register from '../register/Register';
 
 
+export interface Schedule {
+  day: number,
+  startTime: string,
+  endTime: string
+}
+
 interface UserData {
+  uid: number
+  name: string
+  firstSurname: string
+  secondSurname: string
   cedula: number;
-  contrasena: string;
-  correo: string;
-  departamentoEmp: string;
-  habilitado: boolean;
-  jefe: string;
-  nombre: string;
-  puesto: string;
-  sueldo: number;
-
-
+  phoneNumber:number
+  photo: string
+  jobPosition: string
+  salary: number
+  enabled: boolean
+  idDepartment: number
+  password: string
+  email:string
+  boss: string
+  schedule: Schedule[]
+  option: string
 }
 
 const ListEmployee = () => {
@@ -22,15 +32,23 @@ const ListEmployee = () => {
 
   const [data, setData] = useState<UserData[]>([]);
   const [userData, setUserData] = useState<UserData>({
+    uid: 0,
+    name: "",
+    firstSurname:  "",
+    secondSurname:  "",
     cedula: 0,
-    contrasena: "",
-    correo: "",
-    departamentoEmp: "",
-    habilitado: false,
-    jefe: "",
-    nombre: "",
-    puesto: "",
-    sueldo: 0,
+    phoneNumber: 0,
+    photo:  "",
+    jobPosition:  "",
+    salary: 0,
+    enabled: true,
+    idDepartment:  0,
+    password:  "",
+    email: "",
+    boss: "",
+    schedule: [],
+    option: ""
+
   });
   const [actualiza, setActualiza] = useState<boolean | null>(null);
 
@@ -45,14 +63,16 @@ const ListEmployee = () => {
 
   }, [])
 
-  const handleDelete = async (correo: string) => {
+  const handleDelete = async (email: string) => {
+
+    console.log(email)
     try {
       const response = await fetch(`/api/empleados`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ correo }),
+        body: JSON.stringify({ email:email }),
       });
 
       if (response.ok) {
@@ -73,13 +93,13 @@ const ListEmployee = () => {
     try {
       console.log("Datos enviados:", { email, password })
       const response = await fetch('/api/empleados',{
-        method: "POST",
+        method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      correo: email,
-      contrasena: password
+      email: email,
+      password: password
     })
       });
 
@@ -88,6 +108,7 @@ const ListEmployee = () => {
         setUserData(data);
         setActualiza(true);
         setSelectedUser(data)
+        console.log("Data saved" + data.data)
       } else {
         throw new Error('Error al iniciar sesión');
       }
@@ -103,23 +124,23 @@ const ListEmployee = () => {
       ) : (
         <>
           {data.map((item) => (
-            <div key={item.cedula} className="p-4 border border-gray-300 rounded-lg">
-              <p className="font-bold">Nombre: {item.nombre}</p>
+            <div key={item.uid} className="p-4 border border-gray-300 rounded-lg">
+              <p className="font-bold">Nombre: {item.name}</p>
               <p className="mt-2">Cedula: {item.cedula}</p>
-              <p className="mt-2">Correo: {item.correo}</p>
-              <p className="mt-2">Departamento: {item.departamentoEmp}</p>
-              <p className="mt-2">Jefe: {item.jefe}</p>
-              <p className="mt-2">Habilitado: <input readOnly type="checkbox" checked={item.habilitado} /></p>
+              <p className="mt-2">Correo: {item.email}</p>
+              <p className="mt-2">Departamento: {item.idDepartment}</p>
+              <p className="mt-2">Jefe: {item.boss}</p>
+              <p className="mt-2">Habilitado: <input readOnly type="checkbox" checked={item.enabled} /></p>
               <button
                 className="mt-4 px-4 py-2 bg-red-500 bg-red text-white rounded hover:bg-red-600"
-                onClick={() => handleDelete(item.correo)}
+                onClick={() => handleDelete(item.email)}
               >
                 Eliminar
               </button>
 
               <button
                 className="mt-4 px-4 py-2 bg-red-500 bg-blue text-white rounded hover:bg-red-600"
-                onClick={() => handleUpdate(item.correo,item.contrasena)}
+                onClick={() => handleUpdate(item.email,item.password)}
               >
                 Actualizar
               </button>

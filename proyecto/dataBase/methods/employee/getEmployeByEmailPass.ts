@@ -9,33 +9,36 @@ import {
 } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 
-interface Empleado {
+interface Employee {
   email: string;
   password: string;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Empleado | string>
+  res: NextApiResponse<Employee | string>
 ) {
-  const { correo, contrasena } = req.body;
+  const { email, password } = req.body;
 
 
-  const empleadosCollection = collection(firestore, "empleados");
-  const empleadosQuery = query(
+  const empleadosCollection = collection(firestore, "employee");
+  const employeeQuery = query(
     empleadosCollection,
-    where("correo", "==", correo),
-    where("contrasena", "==", contrasena)
+    where("email", "==", email),
+    where("password", "==", password)
   );
-  const empleadosSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    empleadosQuery
+  const employyeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
   );
-  const empleadoDoc = empleadosSnapshot.docs[0];
+  const employeeDoc = employyeSnapshot.docs[0];
 
-  if (!empleadoDoc) {
+  if (!employeeDoc) {
     return res.status(401).json("Credenciales inválidas");
   }
   
-  const empleadoData = empleadoDoc.data() as Empleado;
-  return res.status(200).json(empleadoData);
+  const employeeData = employeeDoc.data() as Employee;
+
+  console.log("Updated employee" + employeeData)
+
+  return res.status(200).json(employeeData);
 }
