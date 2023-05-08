@@ -9,10 +9,12 @@ interface Department {
   skills: string;
   mainDepartment: boolean;
   subDepartment: string;
+  empleados: [string];
 }
 
 function RegisterDepartment() {
   const [isCheckedS, setIsCheckedS] = useState(false);
+  const [newEmployee, setNewEmployee] = useState<string>("");
   const [userData, setUserData] = useState<Department>({
     name: "",
     size: 0,
@@ -22,6 +24,7 @@ function RegisterDepartment() {
     skills: "",
     mainDepartment: false,
     subDepartment: "",
+    empleados: [" "],
   });
 
   const handleInputChangeD = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +47,7 @@ function RegisterDepartment() {
     }
 
     console.log("Nuevo usuario:", userData);
-
+    console.log(userData.empleados);
     fetch("/api/deparments", {
       method: "POST",
       headers: {
@@ -64,6 +67,7 @@ function RegisterDepartment() {
           skills: "",
           mainDepartment: false,
           subDepartment: "",
+          empleados: [" "],
         });
       })
       .catch((error) =>
@@ -73,6 +77,12 @@ function RegisterDepartment() {
 
   const handleCheckboxChangeS = () => {
     setIsCheckedS(!isCheckedS);
+  };
+  const [image, setImage] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const selectedImage = event.target.files[0];
+    setImage(selectedImage);
   };
 
   return (
@@ -171,6 +181,29 @@ function RegisterDepartment() {
             )}
           </>
         )}
+        <input
+          type="text"
+          name="newEmployee"
+          value={newEmployee}
+          onChange={(e) => setNewEmployee(e.target.value)}
+          placeholder="Nombre del empleado"
+          className="border rounded-md px-3 py-2"
+        />
+        <button
+          type="button"
+          onClick={() => {
+            setUserData((prevUserData) => ({
+              ...prevUserData,
+              empleados: [...prevUserData.empleados, newEmployee],
+            }));
+            setNewEmployee("");
+          }}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Agregar empleado
+        </button>
+        <input type="file" onChange={handleImageUpload} />
+
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

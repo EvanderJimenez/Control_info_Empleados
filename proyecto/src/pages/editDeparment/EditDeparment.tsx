@@ -9,9 +9,10 @@ interface UserData {
   area: string;
   leader: string;
   skills: string;
-  mainDepartment: string;
+  mainDepartment: boolean;
   subDepartment: string;
   nivel: string;
+  empleados: [string];
 }
 
 function EditDeparment() {
@@ -27,24 +28,11 @@ function EditDeparment() {
     area: "",
     leader: "",
     skills: "",
-    mainDepartment: "",
+    mainDepartment: false,
     subDepartment: "",
     nivel: "",
+    empleados: [""],
   });
-  /* const getOne = async (idDoc)=>{
- try {
-  const docRef = doc(db,"deparments",idDoc)
-  const docSnap = await get(docRef)
-  setidDoc(docSnap.data())
- } catch (error) {
-  
- }
-  }*/
-  useEffect(() => {
-    if (idDoc !== "") {
-      // getOne(idDoc);
-    }
-  }, [idDoc]);
   useEffect(() => {
     fetch("/api/deparments")
       .then((res) => res.json())
@@ -70,7 +58,6 @@ function EditDeparment() {
         setActualiza(true);
         setDta(data);
         console.log(data);
-        <Register depar={userData} />;
       } else {
         throw new Error("Error al adquirir la informacion");
       }
@@ -93,6 +80,17 @@ function EditDeparment() {
               <p className="font-bold">Nombre del Departamento: {item.name}</p>
               <p className="mt-2">Personas: {item.size}</p>
               <p className="mt-2">Ubicacion: {item.location}</p>
+              {item.empleados && item.empleados.length > 0 && (
+                <div>
+                  <h3>Empleados:</h3>
+                  <ul>
+                    {item.empleados.map((empleado, index) => (
+                      <li key={index}>{empleado}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {item.mainDepartment && (
                 <p>Departamento Principal: {item.mainDepartment}</p>
               )}
