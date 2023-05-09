@@ -1,10 +1,5 @@
 import { firestore } from "../../firebase/firebase";
-import {
-  collection,
-  getDocs,
-  DocumentData,
-  QuerySnapshot,
-} from "firebase/firestore";
+import { collection, getDocs, DocumentData, QuerySnapshot } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

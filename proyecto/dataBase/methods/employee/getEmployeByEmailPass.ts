@@ -1,12 +1,5 @@
 import { firestore } from "../../firebase/firebase";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  DocumentData,
-  QuerySnapshot,
-} from "firebase/firestore";
+import { collection, query, where, getDocs, DocumentData, QuerySnapshot } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 
 interface Employee {

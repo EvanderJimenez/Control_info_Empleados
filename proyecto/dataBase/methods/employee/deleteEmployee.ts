@@ -1,14 +1,5 @@
 import { firestore } from "../../firebase/firebase";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  DocumentData,
-  QuerySnapshot,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, query, where, getDocs, DocumentData, QuerySnapshot, updateDoc, doc } from "firebase/firestore";
 import { NextApiResponse } from "next";
 
 export default async function deleteEmployee(
@@ -35,5 +26,5 @@ export default async function deleteEmployee(
     enabled: false,
   });
 
-  return res.status(200).json("Empleado deshabilitado");
+  return res.status(200).json("Empleado desabilitado");
 }

@@ -63,25 +63,20 @@ function Login() {
     }
   };
 
-  return ( 
-    <div>
+  return (
+    <>
       {isLoggedIn ? (
         <ListEmployee />
       ) : (
         <div>
           {" "}
-          <form
-            className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10"
-            onSubmit={handleIngresar}
-          >
-            <h2 className="m-7">
-              {isRegistrando ? "Registrate" : "Iniciar sesión"}
-            </h2>
+          <form className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
+            <h2 className="m-7">{isRegistrando ? "Registrate" : "Iniciar sesión"}</h2>
             <div className="flex flex-col items-center justify-center p-2">
               <label>Correo electrónico</label>
               <input
                 type="email"
-                className="bg-primary secondary-font border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red rounded-md py-2 px-4 w-full"
+                className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
                 id="email"
                 name="email"
                 value={email}
@@ -93,7 +88,7 @@ function Login() {
               <label>Contraseña</label>
               <input
                 type="password"
-                className="bg-primary secondary-font border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red rounded-md py-2 px-4 w-full"
+                className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
                 id="password"
                 name="password"
                 value={password}
@@ -101,10 +96,7 @@ function Login() {
                 required
               />
             </div>
-            <button
-              type="submit"
-              className="bg-blue hover:bg-red text-white font-bold py-2 px-4 rounded mt-4"
-            >
+            <button type="submit" className="bg-blue hover:bg-red text-white font-bold py-2 px-4 rounded mt-4">
               {isRegistrando ? "Registrate" : "Iniciar sesión"}
             </button>
             {errorEmailPass ? <label>The employee does not exist</label> : null}
@@ -114,13 +106,11 @@ function Login() {
               setIsRegistrando(!isRegistrando);
             }}
           >
-            {isRegistrando
-              ? "Ya tienes cuenta? Inicia session"
-              : "No tienes cuenta? Registrate"}
+            {isRegistrando ? "Ya tienes cuenta? Inicia session" : "No tienes cuenta? Registrate"}
           </button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

@@ -7,7 +7,7 @@ type LayoutProps = {
 };
 const AdminPage = ({ children }: LayoutProps) => {
   return (
-    <div className="bg-gray-900">
+    <div className="bg-gray-900 w-full h-full">
       <Top />
       <main>{children}</main>
       <Foot />
