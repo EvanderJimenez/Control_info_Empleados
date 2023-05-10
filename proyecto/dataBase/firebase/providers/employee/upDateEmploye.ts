@@ -1,4 +1,4 @@
-import { firestore} from "../../../dataBase/firebase/firebase";
+import { firestore} from "../../firebase";
 import {
   doc,
   collection,
@@ -9,7 +9,7 @@ import {
   getDocs
 } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Schedule } from "../../../src/root/components/listEmployee/ListEmployee";
+import { Schedule } from "../../../../src/root/components/listEmployee/ListEmployee";
 
 export default async function handler(
   req: NextApiRequest,

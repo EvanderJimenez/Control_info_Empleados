@@ -1,4 +1,4 @@
-import { firestore } from "../../firebase/firebase";
+import { firestore } from "../../firebase";
 import { collection, query, where, getDocs, DocumentData, QuerySnapshot } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 

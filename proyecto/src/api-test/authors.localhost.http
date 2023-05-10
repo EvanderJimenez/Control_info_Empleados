@@ -1,0 +1,29 @@
+###
+# Get all authors
+GET http://localhost:3000/api/employees HTTP/1.1
+
+###
+# Get a existing author by id
+GET http://localhost:3000/api/employees/6504dhHgedMPc86NgQMvRm1URkQ2 HTTP/1.1
+
+###
+# Create a new author
+POST http://localhost:3000/api/employees HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ruben Mora Vargas"
+}
+
+###
+# Update a existing author
+PUT http://localhost:3000/api/employees/2 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ruben Mora Vargas"
+}
+
+###
+# Delete a existing author
+DELETE http://localhost:3000/api/employees/1 HTTP/1.1

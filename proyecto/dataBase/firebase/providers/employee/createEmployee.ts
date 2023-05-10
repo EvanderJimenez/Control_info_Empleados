@@ -1,5 +1,5 @@
-import { firestore } from "../../../dataBase/firebase/firebase";
-import {Schedule} from "../../../src/root/components/listEmployee/ListEmployee"
+import { firestore } from "../../firebase";
+import {Schedule} from "../../../../src/root/components/listEmployee/ListEmployee"
 import {
   collection,
   addDoc,
