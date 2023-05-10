@@ -1,8 +1,9 @@
 import { Employee } from "@/root/types/Employee.type";
 
 export const empProvider = async (searchTerm: string) => {
+  let isDelete = false;
   try {
-    console.log(searchTerm)
+    console.log(searchTerm);
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "DELETE",
       headers: {
@@ -11,11 +12,11 @@ export const empProvider = async (searchTerm: string) => {
     });
 
     if (response.ok) {
-      setData(data.filter(item => item.uid !== searchTerm));
+      isDelete = true;
+      return isDelete;
     } else {
     }
   } catch (error) {
-    console.error("Error al eliminar el empleado", error);
+    console.error("Error deleting the employee, mor information about that error: ", error);
   }
 };
-
