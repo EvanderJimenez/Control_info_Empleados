@@ -13,7 +13,7 @@ import { Schedule } from "../../../../src/root/components/listEmployee/ListEmplo
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<DocumentData>
+  res: NextApiResponse<DocumentData> 
 ) {
   const {
     option,
