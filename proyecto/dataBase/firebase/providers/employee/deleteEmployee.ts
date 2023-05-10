@@ -2,21 +2,12 @@ import { firestore } from "../../firebase";
 import { collection, query, where, getDocs, DocumentData, QuerySnapshot, updateDoc, doc } from "firebase/firestore";
 import { NextApiResponse } from "next";
 
-export default async function deleteEmployee(
-  email: string,
-  res: NextApiResponse<any>
-) {
-
+export default async function deleteEmployee(email: string, res: NextApiResponse<any>) {
   const employeeCollection = collection(firestore, "employee");
-  console.log("Email: " + email)
-  const employeeQuery = query(
-    employeeCollection,
-    where("email", "==", email)
-  );
+  console.log("Email: " + email);
+  const employeeQuery = query(employeeCollection, where("email", "==", email));
 
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
   const employeeDoc = employeeSnapshot.docs[0];
 
   if (!employeeDoc) {

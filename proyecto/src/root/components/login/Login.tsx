@@ -20,7 +20,6 @@ function Login() {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
-
     }
   };
 
@@ -29,10 +28,8 @@ function Login() {
 
     let option = isRegistrando ? "register" : "login";
 
-
     if (email && password) {
       try {
-
         const response = await fetch("/api/empleados", {
           method: "POST",
           headers: {
@@ -49,10 +46,9 @@ function Login() {
           const data = await response.json();
           setIsLoggedIn(true);
           setUserData(data);
-          
+
           const newPage = "/home/AdminMain";
           router.push(newPage);
-
         } else {
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");
@@ -69,11 +65,10 @@ function Login() {
         <ListEmployee />
       ) : (
         <div>
-          {" "}
-          <form className="bg-secondary flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
-            <h2 className="m-7">{isRegistrando ? "Registrate" : "Iniciar sesión"}</h2>
+          <form className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
+            <h2 className="m-7">Login</h2>
             <div className="flex flex-col items-center justify-center p-2">
-              <label>Correo electrónico</label>
+              <label>Email</label>
               <input
                 type="email"
                 className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
@@ -85,7 +80,7 @@ function Login() {
               />
             </div>
             <div className="flex flex-col items-center justify-center p-2">
-              <label>Contraseña</label>
+              <label>Password</label>
               <input
                 type="password"
                 className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
@@ -97,7 +92,7 @@ function Login() {
               />
             </div>
             <button type="submit" className="bg-blue hover:bg-red text-white font-bold py-2 px-4 rounded mt-4">
-              {isRegistrando ? "Registrate" : "Iniciar sesión"}
+              Log in
             </button>
             {errorEmailPass ? <label>The employee does not exist</label> : null}
           </form>
@@ -106,7 +101,6 @@ function Login() {
               setIsRegistrando(!isRegistrando);
             }}
           >
-            {isRegistrando ? "Ya tienes cuenta? Inicia session" : "No tienes cuenta? Registrate"}
           </button>
         </div>
       )}
