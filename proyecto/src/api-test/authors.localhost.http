@@ -1,13 +1,13 @@
 ###
-# Get all authors
+# Get all employees
 GET http://localhost:3000/api/employees HTTP/1.1
 
 ###
-# Get a existing author by id
+# Get a existing employee by uid
 GET http://localhost:3000/api/employees/6504dhHgedMPc86NgQMvRm1URkQ2 HTTP/1.1
 
 ###
-# Create a new author
+# Create a new employee
 POST http://localhost:3000/api/employees HTTP/1.1
 content-type: application/json
 
@@ -16,7 +16,7 @@ content-type: application/json
 }
 
 ###
-# Update a existing author
+# Update a existing employee
 PUT http://localhost:3000/api/employees/2 HTTP/1.1
 content-type: application/json
 
@@ -25,5 +25,5 @@ content-type: application/json
 }
 
 ###
-# Delete a existing author
+# Delete a existing employee
 DELETE http://localhost:3000/api/employees/1 HTTP/1.1

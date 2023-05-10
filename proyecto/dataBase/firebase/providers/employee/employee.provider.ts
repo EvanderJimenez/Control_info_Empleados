@@ -14,8 +14,10 @@ const getAll = async () => {
 }
 
 const getByUid = async (uid: string) => {
+  console.log(uid)
     const employeeCollection = collection(firestore, "employee");
-    const employeeQuery = query(employeeCollection, where("cedula", "==", uid));
+    const employeeQuery = query(employeeCollection, where("uid", "==", uid ));
+    console.log(uid)
     const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
     
     if (employeeSnapshot.empty) {

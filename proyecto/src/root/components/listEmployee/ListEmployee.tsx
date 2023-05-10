@@ -57,7 +57,7 @@ const ListEmployee = () => {
 
   useEffect(() => {
 
-    fetch("/api/empleados")
+    fetch("/api/employees")
       .then((res) => res.json())
       .then((data) => setData(data))
 
@@ -88,19 +88,14 @@ const ListEmployee = () => {
   };
 
 
-  const handleUpdate = async (email: string, password: string) => {
+  const handleUpdate = async (uid:number) => {
 
     try {
-      console.log("Datos enviados:", { email, password })
-      const response = await fetch('/api/empleados',{
-        method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password
-    })
+      const response = await fetch(`/api/employees?uid=${uid}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       if (response.ok) {
@@ -108,7 +103,6 @@ const ListEmployee = () => {
         setUserData(data);
         setActualiza(true);
         setSelectedUser(data)
-        console.log("Data saved" + data.data)
       } else {
         throw new Error('Error al iniciar sesión');
       }
@@ -140,7 +134,7 @@ const ListEmployee = () => {
 
               <button
                 className="mt-4 px-4 py-2 bg-red-500 bg-blue text-white rounded hover:bg-red-600"
-                onClick={() => handleUpdate(item.email,item.password)}
+                onClick={() => handleUpdate(item.uid)}
               >
                 Actualizar
               </button>

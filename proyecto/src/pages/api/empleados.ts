@@ -17,7 +17,7 @@ export default async function handler(
   const email = req.body.email;
 
   if (req.method === "GET") {
-    await getEmployees(req, res);
+   
   } else if (req.method === "POST") {
     await authentication(req, res);
     //await upDateEmployee(req, res);

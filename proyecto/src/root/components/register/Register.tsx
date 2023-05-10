@@ -41,7 +41,6 @@ function Register(props: RegisterProps) {
       console.log(props.user);
       return props.user;
     } else {
-      console.log(upDate);
       return {
         uid: 0,
         name: "",
