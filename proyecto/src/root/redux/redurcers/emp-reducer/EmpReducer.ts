@@ -24,6 +24,9 @@ export const EmployeeSlice = createSlice({
     DeleteEmp: (state, action: PayloadAction<any>) => {
       // state.Employees = Aquí deberia de ir el thuk cn el meotodo eliminar
     },
+    UpdateEmp: (state, action:PayloadAction<any>) =>{
+
+    },
   },
 });
 

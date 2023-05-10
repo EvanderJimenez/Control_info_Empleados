@@ -1,95 +1,82 @@
-import React, { useState, useEffect } from 'react'
-import Register from '../register/Register';
-
+import React, { useState, useEffect } from "react";
+import Register from "../register/Register";
 
 export interface Schedule {
-  day: number,
-  startTime: string,
-  endTime: string
+  day: number;
+  startTime: string;
+  endTime: string;
 }
 
 interface UserData {
-  uid: number
-  name: string
-  firstSurname: string
-  secondSurname: string
+  uid: number;
+  name: string;
+  firstSurname: string;
+  secondSurname: string;
   cedula: number;
-  phoneNumber:number
-  photo: string
-  jobPosition: string
-  salary: number
-  enabled: boolean
-  idDepartment: number
-  password: string
-  email:string
-  boss: string
-  schedule: Schedule[]
-  option: string
+  phoneNumber: number;
+  photo: string;
+  jobPosition: string;
+  salary: number;
+  enabled: boolean;
+  idDepartment: number;
+  password: string;
+  email: string;
+  boss: string;
+  schedule: Schedule[];
+  option: string;
 }
 
 const ListEmployee = () => {
-
-
   const [data, setData] = useState<UserData[]>([]);
   const [userData, setUserData] = useState<UserData>({
     uid: 0,
     name: "",
-    firstSurname:  "",
-    secondSurname:  "",
+    firstSurname: "",
+    secondSurname: "",
     cedula: 0,
     phoneNumber: 0,
-    photo:  "",
-    jobPosition:  "",
+    photo: "",
+    jobPosition: "",
     salary: 0,
     enabled: true,
-    idDepartment:  0,
-    password:  "",
+    idDepartment: 0,
+    password: "",
     email: "",
     boss: "",
     schedule: [],
-    option: ""
-
+    option: "",
   });
   const [actualiza, setActualiza] = useState<boolean | null>(null);
 
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
 
-
   useEffect(() => {
-
     fetch("/api/employees")
       .then((res) => res.json())
-      .then((data) => setData(data))
-
-  }, [])
+      .then((data) => setData(data));
+  }, []);
 
   const handleDelete = async (email: string) => {
-
-    console.log(email)
+    console.log(email);
     try {
       const response = await fetch(`/api/empleados`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email:email }),
+        body: JSON.stringify({ email: email }),
       });
 
       if (response.ok) {
         //error response
       } else {
-
       }
-
     } catch (error) {
-      console.error('Error al actualizar el empleado', error);
+      console.error("Error al actualizar el empleado", error);
     }
-
   };
 
-
-  const handleUpdate = async (uid:number) => {
-
+  const handleUpdate = async (uid: number) => {
     try {
       const response = await fetch(`/api/employees?uid=${uid}`, {
         method: "GET",
@@ -102,17 +89,17 @@ const ListEmployee = () => {
         const data = await response.json();
         setUserData(data);
         setActualiza(true);
-        setSelectedUser(data)
+        setSelectedUser(data);
       } else {
-        throw new Error('Error al iniciar sesión');
+        throw new Error("Error al iniciar sesión");
       }
     } catch (error) {
-      console.error('Error al obtener los datos del empleado', error);
+      console.error("Error al obtener los datos del empleado", error);
     }
-  }
+  };
 
   return (
-    <div className='grid grid-cols-1 gap-4 scroll'>
+    <div className="grid grid-cols-1 gap-4 scroll">
       {selectedUser ? (
         <Register user={selectedUser} onCancel={() => setSelectedUser(null)} />
       ) : (
@@ -124,29 +111,22 @@ const ListEmployee = () => {
               <p className="mt-2">Correo: {item.email}</p>
               <p className="mt-2">Departamento: {item.idDepartment}</p>
               <p className="mt-2">Jefe: {item.boss}</p>
-              <p className="mt-2">Habilitado: <input readOnly type="checkbox" checked={item.enabled} /></p>
-              <button
-                className="mt-4 px-4 py-2 bg-red-500 bg-red text-white rounded hover:bg-red-600"
-                onClick={() => handleDelete(item.email)}
-              >
+              <p className="mt-2">
+                Habilitado: <input readOnly type="checkbox" checked={item.enabled} />
+              </p>
+              <button className="mt-4 px-4 py-2 bg-red-500 bg-red text-white rounded hover:bg-red-600" onClick={() => handleDelete(item.email)}>
                 Eliminar
               </button>
 
-              <button
-                className="mt-4 px-4 py-2 bg-red-500 bg-blue text-white rounded hover:bg-red-600"
-                onClick={() => handleUpdate(item.uid)}
-              >
+              <button className="mt-4 px-4 py-2 bg-red-500 bg-blue text-white rounded hover:bg-red-600" onClick={() => handleUpdate(item.uid)}>
                 Actualizar
               </button>
-
             </div>
           ))}
         </>
       )}
     </div>
   );
-
-}
-
+};
 
 export default ListEmployee;

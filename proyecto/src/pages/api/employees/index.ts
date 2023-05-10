@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
-import employeeProvider from "../../../../dataBase/firebase/providers/employee/getEmployees";
+import employeeProvider from "../../../dataBase/firebase/providers/employee/getEmployees";
 
 const getAll = async (res: NextApiResponse) => {
   try {
@@ -13,10 +13,7 @@ const getAll = async (res: NextApiResponse) => {
 const handlers: any = {};
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
 
-export default async function employeesController(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function employeesController(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
   const handler = handlers[method as keyof typeof handlers](req, res);
