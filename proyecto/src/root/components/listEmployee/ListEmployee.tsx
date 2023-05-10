@@ -8,7 +8,7 @@ export interface Schedule {
 }
 
 interface UserData {
-  uid: number;
+  uid: string;
   name: string;
   firstSurname: string;
   secondSurname: string;
@@ -29,7 +29,7 @@ interface UserData {
 const ListEmployee = () => {
   const [data, setData] = useState<UserData[]>([]);
   const [userData, setUserData] = useState<UserData>({
-    uid: 0,
+    uid: "",
     name: "",
     firstSurname: "",
     secondSurname: "",
@@ -56,29 +56,29 @@ const ListEmployee = () => {
       .then((data) => setData(data));
   }, []);
 
-  const handleDelete = async (email: string) => {
-    console.log(email);
+  const handleDelete = async (uid: string) => {
     try {
-      const response = await fetch(`/api/empleados`, {
-        method: "PUT",
+      console.log(uid)
+      const response = await fetch(`/api/employees/${uid}`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email }),
       });
 
       if (response.ok) {
-        //error response
+        setData(data.filter(item => item.uid !== uid));
       } else {
       }
     } catch (error) {
-      console.error("Error al actualizar el empleado", error);
+      console.error("Error al eliminar el empleado", error);
     }
-  };
+};
 
-  const handleUpdate = async (uid: number) => {
+
+  const handleUpdate = async (uid: string) => {
     try {
-      const response = await fetch(`/api/employees?uid=${uid}`, {
+      const response = await fetch(`/api/employees/${uid}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ const ListEmployee = () => {
               <p className="mt-2">
                 Habilitado: <input readOnly type="checkbox" checked={item.enabled} />
               </p>
-              <button className="mt-4 px-4 py-2 bg-red-500 bg-red text-white rounded hover:bg-red-600" onClick={() => handleDelete(item.email)}>
+              <button className="mt-4 px-4 py-2 bg-red-500 bg-red text-white rounded hover:bg-red-600" onClick={() => handleDelete(item.uid)}>
                 Eliminar
               </button>
 

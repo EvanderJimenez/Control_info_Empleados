@@ -7,7 +7,7 @@ interface Schedule {
 }
 
 interface UserData {
-  uid: number;
+  uid: string;
   name: string;
   firstSurname: string;
   secondSurname: string;
@@ -82,7 +82,7 @@ function Register(props: RegisterProps) {
       .catch((error) => console.error("Error al crear nuevo usuario:", error));
 
     setUserData({
-      uid: 0,
+      uid: "",
       name: "",
       firstSurname: "",
       secondSurname: "",
