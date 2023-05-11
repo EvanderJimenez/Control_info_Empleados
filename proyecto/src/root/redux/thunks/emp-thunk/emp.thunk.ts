@@ -1,10 +1,17 @@
 import { DispatchType, DeleteEmp } from "../../redurcers/emp-reducer/EmpReducer";
 import { empProvider } from "../../provider/emp/emp.provider";
 
-export const startSetGif = (searchTerm: string): any => {
+export const DeletingEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchType) => {
-    const gifList = await gifProvider(searchTerm);
+    try {
+      const empDeleted = await empProvider(searchTerm);
 
-    dispatch(setGifs(gifList || []));
+      dispatch(DeleteEmp(empDeleted || null));
+    } catch (error) {
+      console.log(error)
+    }
   };
 };
+
+
+

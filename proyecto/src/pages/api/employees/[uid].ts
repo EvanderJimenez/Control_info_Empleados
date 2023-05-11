@@ -24,15 +24,10 @@ async function deleteByUid(req: NextApiRequest, res: NextApiResponse) {
 }
 
 const handlers: any = {};
-handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
-  getByUid(req, res);
-handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
-  deleteByUid(req, res);
+handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) => getByUid(req, res);
+handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) => deleteByUid(req, res);
 
-export default function employeesByIdController(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default function employeesByIdController(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
   const handler = handlers[method as keyof typeof handlers](req, res);

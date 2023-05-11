@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Employee } from "../../../types/Employee.type";
+import { DeleteEmployee, Employee } from "../../../types/Employee.type";
 
 interface EmpState {
-  Employees: Employee[];
+  deleteEmployee: DeleteEmployee | null;
 }
 
 type EmployeeAction = {
-  type: string;
-  id: number;
-  name?: string;
+  type: string
+  delete?: EmpState;
 };
 
 //We declared the initial state for the reducer
 export const initialState: EmpState = {
-  Employees: [],
+  deleteEmployee: null,
 };
 
 export const EmployeeSlice = createSlice({
@@ -21,15 +20,13 @@ export const EmployeeSlice = createSlice({
   initialState,
 
   reducers: {
-    DeleteEmp: (state, action: PayloadAction<any>) => {
-      // state.Employees = Aquí deberia de ir el thuk cn el meotodo eliminar
+    DeleteEmp: (state, action: PayloadAction<DeleteEmployee>) => {
+      state.deleteEmployee = action.payload; //we add the deleted employee in the state.deleteEmployee with the payload function
     },
-    UpdateEmp: (state, action:PayloadAction<any>) =>{
-
-    },
+    UpdateEmp: (state, action: PayloadAction<Employee>) => {},
   },
 });
 
 export const { DeleteEmp } = EmployeeSlice.actions;
-export const employeeReducer = EmployeeSlice.reducer;
+export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction; //unknown
