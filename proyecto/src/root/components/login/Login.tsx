@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, use } from "react";
-import Register from "../register/Register";
+import Register from "../registerEmployee/Register";
 import ListEmployee from "../listEmployee/ListEmployee";
 import MainBoss from "../mainBoss/MainBoss";
 import router from "next/router";
@@ -11,7 +11,7 @@ function Login() {
   const [isRegistrando, setIsRegistrando] = useState<boolean>(false);
   const [userData, setUserData] = useState<any>(null); //usar para props de otro componente
   const [errorEmailPass, setErrorEmailPass] = useState<any>(null);
-  interface Props {}
+  interface Props { }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -26,11 +26,12 @@ function Login() {
   const handleIngresar = async (e: any) => {
     e.preventDefault();
 
-    let option = isRegistrando ? "register" : "login";
 
     if (email && password) {
+
+
       try {
-        const response = await fetch("/api/empleados", {
+        const response = await fetch(`/api/employees/by-emailPassword`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -38,7 +39,6 @@ function Login() {
           body: JSON.stringify({
             email: email,
             password: password,
-            option: "login",
           }),
         });
 
@@ -64,7 +64,7 @@ function Login() {
       {isLoggedIn ? (
         <ListEmployee />
       ) : (
-        <div> 
+        <div>
           <form className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleIngresar}>
             <h2 className="m-7">Login</h2>
             <div className="flex flex-col items-center justify-center p-2">

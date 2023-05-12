@@ -1,10 +1,10 @@
 export interface Schedule {
-  day: number;
+  day: number | string ;
   startTime: string;
   endTime: string;
 }
 export interface UserData {
-  uid: number;
+  uid: string;
   name: string;
   firstSurname: string;
   secondSurname: string;
