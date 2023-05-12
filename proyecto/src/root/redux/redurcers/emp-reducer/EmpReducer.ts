@@ -6,7 +6,7 @@ interface EmpState {
 }
 
 type EmployeeAction = {
-  type: string
+  type: string;
   delete?: EmpState;
 };
 
