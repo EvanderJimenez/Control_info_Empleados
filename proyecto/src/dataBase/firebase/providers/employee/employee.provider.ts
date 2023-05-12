@@ -21,12 +21,8 @@ import {
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeCollection
-  );
-  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) =>
-    doc.data()
-  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeCollection);
+  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) => doc.data());
 
   return employees;
 };
@@ -155,9 +151,7 @@ const create = async (
 const getByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
   if (employeeSnapshot.empty) {
     throw new Error(`No se encontró un empleado con UID: ${uid}`);
@@ -170,9 +164,7 @@ const deleteByUid = async (uid: string) => {
   try {
     const employeeCollection = collection(firestore, "employee");
     const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-      employeeQuery
-    );
+    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
     if (employeeSnapshot.size === 0) {
       console.log(`No se encontró ningún empleado con UID ${uid}`);

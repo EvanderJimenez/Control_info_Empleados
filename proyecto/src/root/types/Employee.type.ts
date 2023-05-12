@@ -10,3 +10,6 @@ export type Employee = {
   sueldo: number;
 };
 
+export type DeleteEmployee = {
+  id: string;
+} | null;
