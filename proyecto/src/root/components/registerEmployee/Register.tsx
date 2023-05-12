@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { UserData } from "../../interface/employee/"
+import { UserData } from "../../interface/employee/";
 import PrincipalData from "./components/principalData/PrincipalData";
-
 
 interface RegisterProps {
   user?: UserData;
@@ -50,7 +49,6 @@ function Register(props: RegisterProps) {
 
     console.log("Data: " + JSON.stringify(userData));
 
-
     fetch("/api/employees", {
       method: "POST",
       headers: {
@@ -82,17 +80,14 @@ function Register(props: RegisterProps) {
     });
   };
 
-
   const handleScheduleChange = (newSchedule: any) => {
-    console.log(userData)
+    console.log(userData);
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 
   return (
     <div className="flex justify-center items-center flex-col">
-
-        < PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
-
+      <PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
     </div>
   );
 }
