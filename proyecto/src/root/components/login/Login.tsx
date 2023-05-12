@@ -6,13 +6,11 @@ import router from "next/router";
 import { LoginEP, UserData } from "../../interface/employee/";
 import FormLogin from "./components/FormLogin";
 
-
-
 function Login() {
   const [data, setData] = useState<LoginEP>(() => {
     return {
       email: "",
-      password: ""
+      password: "",
     };
   });
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -22,13 +20,13 @@ function Login() {
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setData((prevData) =>({... prevData, [name]: value}))
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleIngresar = async (e: any) => {
     e.preventDefault();
 
-    console.log(JSON.stringify({data}))
+    console.log(JSON.stringify({ data }));
 
     if (data.email && data.password) {
       try {
@@ -39,7 +37,7 @@ function Login() {
           },
           body: JSON.stringify({
             email: data.email,
-            password: data.password
+            password: data.password,
           }),
         });
 
@@ -58,15 +56,7 @@ function Login() {
     }
   };
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <ListEmployee />
-      ) : (
-        <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data}/>
-      )}
-    </>
-  );
+  return <>{isLoggedIn ? <ListEmployee /> : <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} />}</>;
 }
 
 export default Login;
