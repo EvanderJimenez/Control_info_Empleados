@@ -13,8 +13,6 @@ function Register(props: RegisterProps) {
 
   const [upDate, setUpDate] = useState<boolean | null>();
 
-
-
   const [userData, setUserData] = useState<UserData>(() => {
     if (props.user) {
       setUpDate(true);
@@ -52,7 +50,6 @@ function Register(props: RegisterProps) {
 
     console.log("Data: " + JSON.stringify(userData));
 
-    return
 
     fetch("/api/employees", {
       method: "POST",

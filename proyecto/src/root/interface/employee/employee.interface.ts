@@ -21,3 +21,8 @@ export interface UserData {
   schedule: Schedule[];
   option: string;
 }
+
+export interface LoginEP {
+  email: string;
+  password: string;
+}

@@ -6,11 +6,10 @@ const getByEmailPassword = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const email = String(req.body.email)
-  const password = String(req.body.password)
+  const {email,password } = req.body
 
-  console.log("Correo electrónico:", email);
-  console.log("Contraseña:", password);
+  console.log("Eamil: ", email);
+  console.log("password: ", password);
   try {
     const employee = await employeeProvider.getByEmailPassword(email, password);
     //const employee = await employeeProvider.getByEmailPassword("darvar2k@gmail.com" ,"12345678" );
