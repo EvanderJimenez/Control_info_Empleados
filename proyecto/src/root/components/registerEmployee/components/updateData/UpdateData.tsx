@@ -8,10 +8,11 @@ interface UpdateDataProps {
   userData: UserData;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleScheduleChange:  (newSchedule: any) => void;
   user?: UserData;
 }
 
-const UpdateData = ({ userData, handleInputChange, handleSubmit, user }: UpdateDataProps) => {
+const UpdateData = ({ userData, handleInputChange, handleSubmit,handleScheduleChange, user }: UpdateDataProps) => {
 
   return (
     <div>
@@ -41,6 +42,9 @@ const UpdateData = ({ userData, handleInputChange, handleSubmit, user }: UpdateD
           </button>
         </div>
       </form>
+
+      <Schedule schedule={userData.schedule}  handleScheduleChange={handleScheduleChange} />
+
     </div>
   );
 };

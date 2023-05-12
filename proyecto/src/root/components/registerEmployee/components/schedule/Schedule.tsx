@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Schedule } from "../../../../interface/employee/";
+import InputLabel from "./components/inputLabel/InputLabel";
+
 
 interface ScheduleFormProps {
   schedule: Schedule[];
@@ -21,6 +23,25 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
   const [saturdayEnd, setSaturdayEnd] = useState("");
   const [sundayStart, setSundayStart] = useState("");
   const [sundayEnd, setSundayEnd] = useState("");
+
+  useEffect(() => {
+    if (schedule.length > 0) {
+      setMondayStart(schedule[0].startTime);
+      setMondayEnd(schedule[0].endTime);
+      setTuesdayStart(schedule[1].startTime);
+      setTuesdayEnd(schedule[1].endTime);
+      setWednesdayStart(schedule[2].startTime);
+      setWednesdayEnd(schedule[2].endTime);
+      setThursdayStart(schedule[3].startTime);
+      setThursdayEnd(schedule[3].endTime);
+      setFridayStart(schedule[4].startTime);
+      setFridayEnd(schedule[4].endTime);
+      setSaturdayStart(schedule[5].startTime);
+      setSaturdayEnd(schedule[5].endTime);
+      setSundayStart(schedule[6].startTime);
+      setSundayEnd(schedule[6].endTime);
+    }
+  }, [schedule]);
 
   const handleScheduleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     console.log("Submitting  schedule form");
@@ -68,120 +89,29 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
 
   return (
     <div className="px-4 py-6">
-      <h2 className="text-xl font-semibold mb-4">Horario</h2>
+      <h2 className="text-xl font-semibold mb-4">Shedule</h2>
       <form onSubmit={handleScheduleSubmit}>
-        <div className="flex items-center mb-2">
-          <label className="mr-2">Monday:</label>
-          <input
-            type="text"
-            value={mondayStart}
-            onChange={(e) => setMondayStart(e.target.value)}
-            placeholder="Start Time"
-            className="mr-2"
-          />
-          <input
-            type="text"
-            value={mondayEnd}
-            onChange={(e) => setMondayEnd(e.target.value)}
-            placeholder="End Time"
-          />
-        </div>
-        <div className="flex items-center mb-2">
-          <label className="mr-2">Tuesday:</label>
-          <input
-            type="text"
-            value={tuesdayStart}
-            onChange={(e) => setTuesdayStart(e.target.value)}
-            placeholder="Start Time"
-            className="mr-2"
-          />
-          <input
-            type="text"
-            value={tuesdayEnd}
-            onChange={(e) => setTuesdayEnd(e.target.value)}
-            placeholder="End Time"
-          />
-        </div>
-        <div className="flex items-center mb-2">
-          <label className="mr-2">Wednesday:</label>
-          <input
-            type="text"
-            value={wednesdayStart}
-            onChange={(e) => setWednesdayStart(e.target.value)}
-            placeholder="Start Time"
-            className="mr-2"
-          />
-          <input
-            type="text"
-            value={wednesdayEnd}
-            onChange={(e) => setWednesdayEnd(e.target.value)}
-            placeholder="End Time"
-          />
-        </div>
-        <div className="flex items-center mb-2">
-          <label className="mr-2">Thursday:</label>
-          <input
-            type="text"
-            value={thursdayStart}
-            onChange={(e) => setThursdayStart(e.target.value)}
-            placeholder="Start Time"
-            className="mr-2"
-          />
-          <input
-            type="text"
-            value={thursdayEnd}
-            onChange={(e) => setThursdayEnd(e.target.value)}
-            placeholder="End Time"
-          />
-        </div>
-        <div className="flex items-center mb-2">
-          <label className="mr-2">Friday:</label>
-          <input
-            type="text"
-            value={fridayStart}
-            onChange={(e) => setFridayStart(e.target.value)}
-            placeholder="Start Time"
-            className="mr-2"
-          />
-          <input
-            type="text"
-            value={fridayEnd}
-            onChange={(e) => setFridayEnd(e.target.value)}
-            placeholder="End Time"
-          />
-        </div>
-        <div className="flex items-center mb-2">
-          <label className="mr-2">Saturday:</label>
-          <input
-            type="text"
-            value={saturdayStart}
-            onChange={(e) => setSaturdayStart(e.target.value)}
-            placeholder="Start Time"
-            className="mr-2"
-          />
-          <input
-            type="text"
-            value={saturdayEnd}
-            onChange={(e) => setSaturdayEnd(e.target.value)}
-            placeholder="End Time"
-          />
-        </div>
-        <div className="flex items-center">
-          <label className="mr-2">Sunday:</label>
-          <input
-            type="text"
-            value={sundayStart}
-            onChange={(e) => setSundayStart(e.target.value)}
-            placeholder="Start Time"
-            className="mr-2"
-          />
-          <input
-            type="text"
-            value={sundayEnd}
-            onChange={(e) => setSundayEnd(e.target.value)}
-            placeholder="End Time"
-          />
-        </div>
+
+        <InputLabel label="Monday" valueStart={mondayStart} valueEnd={mondayEnd}  onChangeStart={(e) => setMondayStart(e.target.value)}
+         onChangeEnd={(e) => setFridayEnd(e.target.value)} />
+
+        <InputLabel label="Tuesday" valueStart={tuesdayStart} valueEnd={tuesdayEnd}  onChangeStart={(e) => setTuesdayStart(e.target.value)}
+         onChangeEnd={(e) => setTuesdayEnd(e.target.value)} />
+
+        <InputLabel label="Wednesday" valueStart={wednesdayStart} valueEnd={wednesdayEnd}  onChangeStart={(e) => setWednesdayStart(e.target.value)}
+         onChangeEnd={(e) => setWednesdayEnd(e.target.value)} />
+
+         <InputLabel label="Thursday" valueStart={thursdayStart} valueEnd={thursdayEnd}  onChangeStart={(e) => setThursdayStart(e.target.value)}
+         onChangeEnd={(e) => setThursdayEnd(e.target.value)} />
+
+         <InputLabel label="Friday" valueStart={fridayStart} valueEnd={fridayEnd}  onChangeStart={(e) => setFridayStart(e.target.value)}
+         onChangeEnd={(e) => setFridayEnd(e.target.value)} />
+
+          <InputLabel label="Saturday" valueStart={saturdayStart} valueEnd={saturdayEnd}  onChangeStart={(e) => setSaturdayStart(e.target.value)}
+         onChangeEnd={(e) => setSaturdayEnd(e.target.value)} />
+
+         <InputLabel label="Sunday" valueStart={sundayStart} valueEnd={sundayEnd}  onChangeStart={(e) => setSundayEnd(e.target.value)}
+         onChangeEnd={(e) => setSaturdayEnd(e.target.value)} />
 
         <button
           type="submit"

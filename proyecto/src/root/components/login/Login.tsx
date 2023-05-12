@@ -28,8 +28,6 @@ function Login() {
   const handleIngresar = async (e: any) => {
     e.preventDefault();
 
-    console.log(JSON.stringify({data}))
-
     if (data.email && data.password) {
       try {
         const response = await fetch(`/api/employees/by-emailPassword`, {
@@ -44,7 +42,16 @@ function Login() {
         });
 
         if (response.ok) {
-          const data = await response.json();
+          const dataEmplo = await response.json();
+          console.log("Job Position: " + dataEmplo.jobPosition)
+          
+          if(dataEmplo.jobPosition === "employee"){
+            console.log("soy Employee")
+          }else if(dataEmplo.jobPosition === "Boss"){
+            console.log("soy Boss")
+          }else if(dataEmplo.jobPosition === "Admin"){
+            console.log("Soy Admin")
+          }
           setIsLoggedIn(true);
           const newPage = "/home/AdminMain";
           router.push(newPage);
