@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Register from "../register/Register";
+import Register from "../registerEmployee/Register";
 
 export interface Schedule {
   day: number;

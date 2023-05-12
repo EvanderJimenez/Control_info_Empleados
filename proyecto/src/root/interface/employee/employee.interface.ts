@@ -1,10 +1,10 @@
 export interface Schedule {
-  day: number;
+  day: number | string ;
   startTime: string;
   endTime: string;
 }
 export interface UserData {
-  uid: number;
+  uid: string;
   name: string;
   firstSurname: string;
   secondSurname: string;
@@ -20,4 +20,9 @@ export interface UserData {
   boss: string;
   schedule: Schedule[];
   option: string;
+}
+
+export interface LoginEP {
+  email: string;
+  password: string;
 }

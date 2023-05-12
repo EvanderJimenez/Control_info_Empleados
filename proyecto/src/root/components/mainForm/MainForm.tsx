@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Login from "../login/Login";
-import Register from "../register/Register";
+import Register from "../registerEmployee/Register";
 import ListEmployee from "../listEmployee/ListEmployee";
 import { Top } from "../header/Top";
 import { Foot } from "../foot/Foot";
