@@ -1,4 +1,4 @@
-import { Schedule } from "@/root/interface/employee";
+import { Brands, Schedule } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
 import {
   collection,
@@ -96,7 +96,8 @@ const create = async (
   password: string,
   email: string,
   boss: string,
-  schedule: Schedule[]
+  schedule: Schedule[],
+  brands: Brands[],
 ): Promise<{ message: string; employee?: any }> => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -126,6 +127,13 @@ const create = async (
         day: s.day,
         startTime: s.startTime,
         endTime: s.endTime,
+      })),
+      brands: brands.map((s: Brands) => ({
+        date: s.date,
+        startTime: s.startTime,
+        endTime: s.endTime,
+        justification: s.justification,
+        finished: s.finished,
       })),
     });
 

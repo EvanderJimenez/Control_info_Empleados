@@ -4,6 +4,7 @@ import { UserData } from "../../interface/employee/"
 import PrincipalData from "./components/principalData/PrincipalData";
 import UpdateData from "./components/updateData/UpdateData";
 import Schedule from "./components/schedule/Schedule";
+import Brands from "./components/brands/Brands";
 
 interface RegisterProps {
   user?: UserData;
@@ -14,8 +15,6 @@ function Register(props: RegisterProps) {
   const [data, setData] = useState<UserData[]>([]);
 
   const [upDate, setUpDate] = useState<boolean | null>();
-
-
 
   const [userData, setUserData] = useState<UserData>(() => {
     if (props.user) {
@@ -39,6 +38,7 @@ function Register(props: RegisterProps) {
         email: "",
         boss: "",
         schedule: [],
+        brands: [],
         option: "register",
       };
     }
@@ -53,8 +53,6 @@ function Register(props: RegisterProps) {
     event.preventDefault();
 
     console.log("Data: " + JSON.stringify(userData));
-
-    return
 
     fetch("/api/employees", {
       method: "POST",
@@ -83,6 +81,7 @@ function Register(props: RegisterProps) {
       email: "",
       boss: "",
       schedule: [],
+      brands: [],
       option: "register",
     });
   };
@@ -119,6 +118,11 @@ function Register(props: RegisterProps) {
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 
+  const handleBrandChange = (newBrand: any) => {
+    console.log(userData)
+    setUserData((prevUserData) => ({ ...prevUserData, brands: newBrand }));
+  };
+
   return (
     <div className="flex justify-center items-center flex-col">
       {upDate ? (
@@ -126,6 +130,8 @@ function Register(props: RegisterProps) {
       ) : (
         < PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
       )}
+
+        <Brands handleBrandsChange ={handleBrandChange}/>
 
     </div>
   );

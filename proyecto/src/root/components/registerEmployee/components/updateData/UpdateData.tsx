@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { UserData } from '@/root/interface/employee';
 import InputLabel from '../inputLabel/InputLabel';
 import Schedule from '../schedule/Schedule';
+import Brands from '../brands/Brands';
 
 
 interface UpdateDataProps {
@@ -43,7 +44,9 @@ const UpdateData = ({ userData, handleInputChange, handleSubmit,handleScheduleCh
         </div>
       </form>
 
-      <Schedule schedule={userData.schedule}  handleScheduleChange={handleScheduleChange} />
+      {/* <Schedule schedule={userData.schedule}  handleScheduleChange={handleScheduleChange} /> */}
+
+      {/* <Brands /> */}
 
     </div>
   );

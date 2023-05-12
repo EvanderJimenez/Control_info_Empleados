@@ -44,9 +44,9 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
   }, [schedule]);
 
   const handleScheduleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log("Submitting  schedule form");
+    
     event.preventDefault();
-    console.log("Submitting schedule form");
+    
     const newSchedule = [
       {
         day: 1,

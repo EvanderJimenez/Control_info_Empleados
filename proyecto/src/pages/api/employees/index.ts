@@ -29,6 +29,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       email,
       boss,
       schedule,
+      brands
     } = req.body;
 
     const newEmployee = await employeeProvider.create(
@@ -46,7 +47,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       password,
       email,
       boss,
-      schedule
+      schedule,
+      brands
     );
     res.status(201).json(newEmployee);
   } catch (error) {

@@ -19,10 +19,21 @@ export interface UserData {
   email: string;
   boss: string;
   schedule: Schedule[];
+  brands: Brands[];
   option: string;
 }
 
 export interface LoginEP {
   email: string;
   password: string;
+}
+
+export interface Brands{
+
+  date: string,
+  startTime: string,
+  endTime: string,
+  justification: string,
+  finished: boolean
+
 }
