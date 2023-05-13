@@ -8,10 +8,7 @@ export const DeletingEmployee = (searchTerm: string): any => {
 
       dispatch(DeleteEmp(empDeleted || null));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 };
-
-
-

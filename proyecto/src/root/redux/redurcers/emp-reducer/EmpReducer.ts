@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DeleteEmployee, Employee } from "../../../types/Employee.type";
+import { DeleteEmployee} from "../../../types/Employee.type";
 
 interface EmpState {
   deleteEmployee: DeleteEmployee | null;
@@ -23,10 +23,10 @@ export const EmployeeSlice = createSlice({
     DeleteEmp: (state, action: PayloadAction<DeleteEmployee>) => {
       state.deleteEmployee = action.payload; //we add the deleted employee in the state.deleteEmployee with the payload function
     },
-    UpdateEmp: (state, action: PayloadAction<Employee>) => {},
+    UpdateEmp: (state, action: PayloadAction<any>) => {},
   },
 });
 
 export const { DeleteEmp } = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
-export type DispatchType = (args: EmployeeAction) => EmployeeAction; //unknown
+export type DispatchType = (args: EmployeeAction) => EmployeeAction;

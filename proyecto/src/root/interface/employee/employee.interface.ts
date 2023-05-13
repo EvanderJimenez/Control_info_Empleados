@@ -1,5 +1,5 @@
 export interface Schedule {
-  day: number | string ;
+  day: number | string;
   startTime: string;
   endTime: string;
 }
@@ -25,4 +25,12 @@ export interface UserData {
 export interface LoginEP {
   email: string;
   password: string;
+}
+
+export interface EmployeePage {
+  name: string;
+  department: string;
+  entryTime: string;
+  exitTime: string;
+
 }
