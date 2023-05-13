@@ -8,7 +8,7 @@ export function Top() {
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
           <a href="https://flowbite.com" className="flex items-center">
             <img src="/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CrHome</span>
+            <span className="title-font">CrHome</span>
           </a>
           <div className="flex items-center">
             <a href="tel:89884062" className="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">

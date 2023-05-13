@@ -14,6 +14,7 @@ export const empProvider = async (searchTerm: string): Promise<DeleteEmployee | 
     }
     const data: { uid: string } = await response.json();
     return { id: data.uid };
+
   } catch (error) {
     console.error("Error deleting the employee, mor information about that: ", error);
     return;

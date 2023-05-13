@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { UserData } from "../../interface/employee/"
+import { UserData } from "../../interface/employee/";
 import PrincipalData from "./components/principalData/PrincipalData";
 import UpdateData from "./components/updateData/UpdateData";
 import Schedule from "./components/schedule/Schedule";
@@ -115,7 +115,7 @@ function Register(props: RegisterProps) {
   };
 
   const handleScheduleChange = (newSchedule: any) => {
-    console.log(userData)
+    console.log(userData);
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 

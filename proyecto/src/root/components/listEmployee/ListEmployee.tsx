@@ -52,7 +52,6 @@ const ListEmployee = () => {
     }
 };
 
-
   const handleUpdate = async (uid: string) => {
     try {
       const response = await fetch(`/api/employees/${uid}`, {

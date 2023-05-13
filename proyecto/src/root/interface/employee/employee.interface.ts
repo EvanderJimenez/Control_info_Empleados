@@ -1,5 +1,5 @@
 export interface Schedule {
-  day: number | string ;
+  day: number | string;
   startTime: string;
   endTime: string;
 }
@@ -35,5 +35,12 @@ export interface Brands{
   endTime: string,
   justification: string,
   finished: boolean
+
+}
+export interface EmployeePage {
+  name: string;
+  department: string;
+  entryTime: string;
+  exitTime: string;
 
 }

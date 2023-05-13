@@ -6,13 +6,11 @@ import router from "next/router";
 import { LoginEP, UserData } from "../../interface/employee/";
 import FormLogin from "./components/FormLogin";
 
-
-
 function Login() {
   const [data, setData] = useState<LoginEP>(() => {
     return {
       email: "",
-      password: ""
+      password: "",
     };
   });
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -22,7 +20,7 @@ function Login() {
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setData((prevData) =>({... prevData, [name]: value}))
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleIngresar = async (e: any) => {
@@ -37,25 +35,22 @@ function Login() {
           },
           body: JSON.stringify({
             email: data.email,
-            password: data.password
+            password: data.password,
           }),
         });
 
         if (response.ok) {
           const dataEmplo = await response.json();
-          console.log("Job Position: " + dataEmplo.jobPosition)
+          console.log("Job Position: " + dataEmplo.jobPosition);
 
-          if(dataEmplo.jobPosition === "employee"){
-
-            console.log("soy Employee")
-          }else if(dataEmplo.jobPosition === "Boss"){
-            console.log("soy Boss")
-          }else if(dataEmplo.jobPosition === "Admin"){
-            const newPage = "/home/AdminMain";
-            router.push(newPage);
+          if (dataEmplo.jobPosition === "employee") {
+            router.push("/home/EmployeeMain");
+          } else if (dataEmplo.jobPosition === "Boss") {
+            console.log("soy Boss");
+          } else if (dataEmplo.jobPosition === "Admin") {
+            router.push("/home/AdminMain");
           }
           setIsLoggedIn(true);
-         
         } else {
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");
@@ -66,15 +61,7 @@ function Login() {
     }
   };
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <ListEmployee />
-      ) : (
-        <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data}/>
-      )}
-    </>
-  );
+  return <>{isLoggedIn ? <ListEmployee /> : <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} />}</>;
 }
 
 export default Login;
