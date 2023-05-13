@@ -1,39 +1,18 @@
 import React, { useState } from "react";
-interface Documents {
-  type: string;
-  url: string;
-}
-interface Employee {
-  name: string;
-  des: string;
-  imageE: string;
-  documents: { [key: string]: Documents };
-}
-interface DeparData {
-  id: string;
-  name: string;
-  size: number;
-  location: string;
-  area: string;
-  leader: string;
-  mainDepartment: boolean;
-  subDepartment: string;
-  level: string;
-  employees: { [key: string]: Employee };
-}
+import { Department, Employee, Documents } from "@/root/interface/departments";
 
 interface RegisterProps {
-  depart: DeparData;
+  depart: Department;
 }
 
 function Register(props: RegisterProps) {
-  const [data, setData] = useState<DeparData[]>([]);
+  const [data, setData] = useState<Department[]>([]);
   const [isCheckedS, setIsCheckedS] = useState(false);
   const [actualizar, setActualizar] = useState<boolean | null>();
   const handleCheckboxChangeS = () => {
     setIsCheckedS(!isCheckedS);
   };
-  const [DeparData, setDeparData] = useState<DeparData>(() => {
+  const [DeparData, setDeparData] = useState<Department>(() => {
     if (props.depart) {
       setActualizar(true);
       return props.depart;

@@ -1,35 +1,13 @@
-import { setUserId } from "firebase/analytics";
 import React, { useState, useEffect } from "react";
-import Register from "../registerDepartment/register";
-interface Documents {
-  type: string;
-  url: string;
-}
-interface Employee {
-  name: string;
-  des: string;
-  imageE: string;
-  documents: { [key: string]: Documents };
-}
-interface UserData {
-  id: string;
-  name: string;
-  size: number;
-  location: string;
-  area: string;
-  leader: string;
-  level: string;
-  mainDepartment: boolean;
-  subDepartment: string;
-  employees: { [key: string]: Employee };
-}
+import Register from "../updateDepartment/register";
+import { Department } from "@/root/interface/departments";
 
 function EditDepartment() {
-  const [data, setData] = useState<UserData[]>([]);
+  const [data, setData] = useState<Department[]>([]);
   const [update, setUpdate] = useState<boolean | null>(null);
   const [idDoc, setidDoc] = useState("");
-  const [dataI, setDta] = useState<UserData[]>([]);
-  const [userData, setUserData] = useState<UserData>({
+  const [dataI, setDta] = useState<Department[]>([]);
+  const [userData, setUserData] = useState<Department>({
     id: "",
     name: "",
     size: 0,
@@ -41,23 +19,22 @@ function EditDepartment() {
     subDepartment: "",
     employees: {},
   });
+
   useEffect(() => {
     fetch("/api/departments")
       .then((res) => res.json())
       .then((data) => setData(data));
+    console.log(data);
   }, []);
 
   const handleUpdate = async (id: string) => {
     try {
       console.log(id);
-      const response = await fetch("/api/departments", {
-        method: "POST",
+      const response = await fetch(`/api/departments/${id}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id: id,
-        }),
       });
 
       if (response.ok) {
@@ -77,8 +54,6 @@ function EditDepartment() {
   return (
     <div className=" grid grid-cols-1 gap-4 scroll">
       {userData ? (
-        <Register depart={userData} />
-      ) : (
         <div>
           {data.map((item) => (
             <div
@@ -105,6 +80,8 @@ function EditDepartment() {
             </div>
           ))}
         </div>
+      ) : (
+        <Register depart={userData} />
       )}
     </div>
   );

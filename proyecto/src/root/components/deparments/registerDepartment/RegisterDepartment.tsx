@@ -1,27 +1,6 @@
 import React, { useState } from "react";
-import { upLoadFile, upLoadImage } from "../../../dataBase/firebase/firebase";
-interface Documents {
-  type: string;
-  url: string;
-}
-interface Employee {
-  name: string;
-  des: string;
-  imageE: string;
-  documents: { [key: string]: Documents };
-}
-
-interface Department {
-  name: string;
-  size: number;
-  location: string;
-  area: string;
-  leader: string;
-  level: string;
-  mainDepartment: boolean;
-  subDepartment: string;
-  employees: { [key: string]: Employee };
-}
+import { upLoadFile, upLoadImage } from "@/dataBase/firebase/firebase";
+import { Department, Employee, Documents } from "@/root/interface/departments";
 
 function RegisterDepartment() {
   const [isCheckedS, setIsCheckedS] = useState(false);
@@ -32,6 +11,7 @@ function RegisterDepartment() {
   const [image, setImage] = useState<string>("");
   const [newEmployeeData, setNewEmployeeData] = useState<string>("");
   const [userData, setUserData] = useState<Department>({
+    id: "",
     name: "",
     size: 0,
     location: "",
@@ -135,6 +115,7 @@ function RegisterDepartment() {
       .then((res) => res.json())
       .then((newUser) => {
         setUserData({
+          id: "",
           name: "",
           size: 0,
           location: "",
