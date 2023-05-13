@@ -1,36 +1,35 @@
 import { firestore } from "../../firebase/firebase";
 import { collection, addDoc, getDoc, DocumentData } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 const storage = getStorage();
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<DocumentData>
 ) {
-  // crear un nuevo documento en la colección "deparment"
   const {
     name,
     size,
     location,
     area,
     leader,
-    skills,
+    level,
     mainDepartment,
     subDepartment,
-    empleados,
+    employees,
   } = req.body;
 
-  const newDocRefD = await addDoc(collection(firestore, "deparments"), {
+  const newDocRefD = await addDoc(collection(firestore, "departments"), {
     name,
     size,
     location,
     area,
     leader,
-    skills,
+    level,
     mainDepartment,
     subDepartment,
-    empleados,
+    employees,
   });
 
   const newDoc = await getDoc(newDocRefD);
@@ -38,6 +37,6 @@ export default async function handler(
   if (newDoc.exists()) {
     res.status(201).json(newDoc.data());
   } else {
-    res.status(404).json({ message: "Documento no encontrado" });
+    res.status(404).json({ message: "Document not found" });
   }
 }

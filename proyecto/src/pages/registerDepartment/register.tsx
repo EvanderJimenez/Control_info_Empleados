@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-
+interface Documents {
+  type: string;
+  url: string;
+}
+interface Employee {
+  name: string;
+  des: string;
+  imageE: string;
+  documents: { [key: string]: Documents };
+}
 interface DeparData {
   id: string;
   name: string;
@@ -7,15 +16,14 @@ interface DeparData {
   location: string;
   area: string;
   leader: string;
-  skills: string;
   mainDepartment: boolean;
   subDepartment: string;
-  nivel: string;
-  empleados: [string];
+  level: string;
+  employees: { [key: string]: Employee };
 }
 
 interface RegisterProps {
-  depar: DeparData;
+  depart: DeparData;
 }
 
 function Register(props: RegisterProps) {
@@ -26,9 +34,9 @@ function Register(props: RegisterProps) {
     setIsCheckedS(!isCheckedS);
   };
   const [DeparData, setDeparData] = useState<DeparData>(() => {
-    if (props.depar) {
+    if (props.depart) {
       setActualizar(true);
-      return props.depar;
+      return props.depart;
     } else {
       return {
         id: "",
@@ -37,11 +45,10 @@ function Register(props: RegisterProps) {
         location: "",
         area: "",
         leader: "",
-        skills: "",
         mainDepartment: false,
         subDepartment: "",
-        nivel: "",
-        empleados: [""],
+        level: "",
+        employees: {},
       };
     }
   });
@@ -52,9 +59,10 @@ function Register(props: RegisterProps) {
     const { name, value } = event.target;
     setDeparData((prevDeparData) => ({ ...prevDeparData, [name]: value }));
   };
+
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`/api/deparments`, {
+    fetch(`/api/departments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +137,7 @@ function Register(props: RegisterProps) {
           <input
             type="text"
             name="skills"
-            value={DeparData.skills}
+            value={DeparData.level}
             onChange={handleInputChange}
             placeholder="Habilidades"
             className="border rounded-md px-3 py-2"
@@ -152,11 +160,40 @@ function Register(props: RegisterProps) {
               className="border rounded-md px-3 py-2"
             />
           )}
+
+          <div>
+            <div>
+              <p className="font-bold mt-2">Empleados:</p>
+              {Object.entries(DeparData.employees).map(([key, value]) => (
+                <div key={key}>
+                  <p>Name: {key}</p>
+                  <input
+                    type="text"
+                    name={`des-${key}`}
+                    value={value.des}
+                    onChange={handleInputChange}
+                    placeholder="Personal Information"
+                    className="border rounded-md px-3 py-2"
+                  />
+                  <p>Personal Information: {value.des}</p>
+                  {Object.entries(value.documents).map(([docKey, docValue]) => (
+                    <div key={docKey}>
+                      <p>Nombre del Documento: {docKey}</p>
+                      <p>Tipo de Documento: {docValue.type}</p>
+                      <p>
+                        URL del Documento: <a href={docValue.url}>Download</a>
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            {props.depar ? "Actualizar" : "Guardar"}
+            {props.depart ? "Actualizar" : "Guardar"}
           </button>
         </div>
       </form>

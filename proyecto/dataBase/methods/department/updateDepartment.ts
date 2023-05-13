@@ -1,4 +1,4 @@
-import { firestore } from "../../../dataBase/firebase/firebase";
+import { firestore } from "../../firebase/firebase";
 import {
   doc,
   collection,
@@ -20,23 +20,23 @@ export default async function handler(
     location,
     area,
     leader,
-    skills,
+    level,
     mainDepartment,
     subDepartment,
-    empleados,
+    employees,
   } = req.body;
 
   try {
-    const employeesRef = collection(firestore, "deparments");
+    const departmentRef = collection(firestore, "departments");
 
-    const q = query(employeesRef, where("name", "==", name));
+    const q = query(departmentRef, where("name", "==", name));
 
     const querySnapshot = await getDocs(q);
 
     if (querySnapshot.size > 0) {
       const employeeDoc = doc(
         firestore,
-        "deparments",
+        "departments",
         querySnapshot.docs[0].id
       );
 
@@ -46,20 +46,18 @@ export default async function handler(
         location,
         area,
         leader,
-        skills,
+        level,
         mainDepartment,
         subDepartment,
-        empleados,
+        employees,
       });
 
-      res
-        .status(200)
-        .json({ message: "Departamento actualizado correctamente" });
+      res.status(200).json({ message: "Successfully updated department" });
     } else {
-      res.status(404).json({ message: "Departamento no encontrado" });
+      res.status(404).json({ message: "Document not found" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error al actualizar el departamento" });
+    res.status(500).json({ message: "Error updating department" });
   }
 }

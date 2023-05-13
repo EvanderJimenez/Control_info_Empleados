@@ -1,6 +1,16 @@
 import { setUserId } from "firebase/analytics";
 import React, { useState, useEffect } from "react";
 import Register from "../registerDepartment/register";
+interface Documents {
+  type: string;
+  url: string;
+}
+interface Employee {
+  name: string;
+  des: string;
+  imageE: string;
+  documents: { [key: string]: Documents };
+}
 interface UserData {
   id: string;
   name: string;
@@ -8,16 +18,15 @@ interface UserData {
   location: string;
   area: string;
   leader: string;
-  skills: string;
+  level: string;
   mainDepartment: boolean;
   subDepartment: string;
-  nivel: string;
-  empleados: [string];
+  employees: { [key: string]: Employee };
 }
 
-function EditDeparment() {
+function EditDepartment() {
   const [data, setData] = useState<UserData[]>([]);
-  const [actualiza, setActualiza] = useState<boolean | null>(null);
+  const [update, setUpdate] = useState<boolean | null>(null);
   const [idDoc, setidDoc] = useState("");
   const [dataI, setDta] = useState<UserData[]>([]);
   const [userData, setUserData] = useState<UserData>({
@@ -27,23 +36,22 @@ function EditDeparment() {
     location: "",
     area: "",
     leader: "",
-    skills: "",
+    level: "",
     mainDepartment: false,
     subDepartment: "",
-    nivel: "",
-    empleados: [""],
+    employees: {},
   });
   useEffect(() => {
-    fetch("/api/deparments")
+    fetch("/api/departments")
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, []); //data
+  }, []);
 
   const handleUpdate = async (id: string) => {
     try {
       console.log(id);
-      const response = await fetch("/api/deparments", {
-        method: "PUT",
+      const response = await fetch("/api/departments", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -55,21 +63,21 @@ function EditDeparment() {
       if (response.ok) {
         const data = await response.json();
         setUserData(data);
-        setActualiza(true);
+        setUpdate(true);
         setDta(data);
         console.log(data);
       } else {
-        throw new Error("Error al adquirir la informacion");
+        throw new Error("Error acquiring information");
       }
     } catch (error) {
-      console.error("Error al obtener los datos del departamento", error);
+      console.error("Error getting department data", error);
     }
   };
 
   return (
     <div className=" grid grid-cols-1 gap-4 scroll">
       {userData ? (
-        <Register depar={userData} />
+        <Register depart={userData} />
       ) : (
         <div>
           {data.map((item) => (
@@ -77,32 +85,22 @@ function EditDeparment() {
               key={item.name}
               className="p-6 border border-gray-300 rounded-lg bg-gradient-to-r from-gray-300 to-gray-200 text-center "
             >
-              <p className="font-bold">Nombre del Departamento: {item.name}</p>
-              <p className="mt-2">Personas: {item.size}</p>
-              <p className="mt-2">Ubicacion: {item.location}</p>
-              {item.empleados && item.empleados.length > 0 && (
-                <div>
-                  <h3>Empleados:</h3>
-                  <ul>
-                    {item.empleados.map((empleado, index) => (
-                      <li key={index}>{empleado}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <p className="font-bold">Name Department: {item.name}</p>
+              <p className="mt-2">People: {item.size}</p>
+              <p className="mt-2">Location: {item.location}</p>
 
               {item.mainDepartment && (
-                <p>Departamento Principal: {item.mainDepartment}</p>
+                <p>Main Department: {item.mainDepartment}</p>
               )}
               {item.subDepartment && (
-                <p>SubDepartamento : {item.subDepartment}</p>
+                <p> Secondary Department: {item.subDepartment}</p>
               )}
-              <p className="mt-2">Jefe del Departamento: {item.leader}</p>
+              <p className="mt-2">Boss of Department: {item.leader}</p>
               <button
                 className="mt-4 px-4 py-2 bg-green-500 bg-blue text-white rounded hover:bg-green-800"
                 onClick={() => handleUpdate(item.id)}
               >
-                Actualizar
+                Update
               </button>
             </div>
           ))}
@@ -112,4 +110,4 @@ function EditDeparment() {
   );
 }
 
-export default EditDeparment;
+export default EditDepartment;

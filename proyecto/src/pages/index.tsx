@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import { Top } from "../root/components/header/Top";
 import Empleado from "@/root/components/empleado/Empleado";
-import EditDeparment from "./editDeparment/EditDeparment";
+import EditDepartment from "./editDeparment/EditDepartment";
 import RegisterDepartment from "./registerDepartment/RegisterDepartment";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,8 +16,7 @@ export default function Home() {
         <Top />
       </header>
       <div>
-        <RegisterDepartment />
-        <EditDeparment />
+        <EditDepartment />
       </div>
     </main>
   );

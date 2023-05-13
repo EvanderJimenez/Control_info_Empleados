@@ -2,23 +2,23 @@ import { firestore } from "../../firebase/firebase";
 import { doc, getDoc, DocumentData } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 
-interface Deparment {
+interface Department {
   idDoc: string;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Deparment | string>
+  res: NextApiResponse<Department | string>
 ) {
   const { id } = req.body;
   console.log(id);
-  const departmentDocRef = doc(firestore, "deparments", id);
+  const departmentDocRef = doc(firestore, "departments", id);
   const departmentDocSnapshot = await getDoc(departmentDocRef);
 
   if (!departmentDocSnapshot.exists()) {
-    return res.status(404).json("Documento no encontrado");
+    return res.status(404).json("Document not found");
   }
 
-  const department = departmentDocSnapshot.data() as Deparment;
+  const department = departmentDocSnapshot.data() as Department;
   return res.status(200).json(department);
 }
