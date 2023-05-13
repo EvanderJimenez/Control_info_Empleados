@@ -1,23 +1,17 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Top } from "../root/components/header/Top";
-import Empleado from "@/root/components/empleado/Empleado";
-import EditDepartment from "./editDeparment/EditDepartment";
-import RegisterDepartment from "./registerDepartment/RegisterDepartment";
+import React, { useEffect } from "react";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ["latin"] });
+const InvoicePage: NextPage = () => {
+  const router = useRouter();
 
-export default function Home() {
+  useEffect(() => {
+    router.push("./home");
+  }, [router]);
+
   return (
-    <main
-      className={` bg-PrimaryGreen flex min-h-screen flex-col items-center justify-between ${inter.className}`}
-    >
-      <header className="bg-SecondaryGreen w-full h-auto">
-        <Top />
-      </header>
-      <div>
-        <EditDepartment />
-      </div>
-    </main>
+  <div className="bg-gray-900 w-full h-full"></div>
   );
-}
+};
+
+export default InvoicePage;

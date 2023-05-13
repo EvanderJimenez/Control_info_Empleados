@@ -87,15 +87,9 @@ function Empleado() {
       method: "PUT",
     })
       .then(() => {
-        setData((prevData) =>
-          prevData.map((item) =>
-            item.cedula === cedula ? { ...item, habilitado: false } : item
-          )
-        );
+        setData((prevData) => prevData.map((item) => (item.cedula === cedula ? { ...item, habilitado: false } : item)));
       })
-      .catch((error) =>
-        console.error(`Error al deshabilitar el usuario ${cedula}:`, error)
-      );
+      .catch((error) => console.error(`Error al deshabilitar el usuario ${cedula}:`, error));
   };
 
   return (
@@ -106,10 +100,7 @@ function Empleado() {
             <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
             <form>
               <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  id="email"
-                >
+                <label className="block text-gray-700 font-bold mb-2" id="email">
                   Correo Electrónico
                 </label>
                 <input
@@ -120,10 +111,7 @@ function Empleado() {
                 />
               </div>
               <div className="mb-6">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  id="password"
-                >
+                <label className="block text-gray-700 font-bold mb-2" id="password">
                   Contraseña
                 </label>
                 <input
@@ -134,16 +122,10 @@ function Empleado() {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="button"
-                >
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                   Iniciar Sesión
                 </button>
-                <a
-                  className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                  href="#"
-                >
+                <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
                   Olvidé mi Contraseña
                 </a>
               </div>
@@ -152,93 +134,26 @@ function Empleado() {
         </div>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
-      >
-        <input
-          type="number"
-          name="cedula"
-          value={userData.cedula}
-          onChange={handleInputChange}
-          placeholder="Cédula"
-          className="border rounded-md px-3 py-2"
-        />
-        <input
-          type="password"
-          name="contrasena"
-          value={userData.contrasena}
-          onChange={handleInputChange}
-          placeholder="Contraseña"
-          className="border rounded-md px-3 py-2"
-        />
-        <input
-          type="email"
-          name="correo"
-          value={userData.correo}
-          onChange={handleInputChange}
-          placeholder="Correo"
-          className="border rounded-md px-3 py-2"
-        />
-        <input
-          type="text"
-          name="departamentoEmp"
-          value={userData.departamentoEmp}
-          onChange={handleInputChange}
-          placeholder="Departamento"
-          className="border rounded-md px-3 py-2"
-        />
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <input type="number" name="cedula" value={userData.cedula} onChange={handleInputChange} placeholder="Cédula" className="border rounded-md px-3 py-2" />
+        <input type="password" name="contrasena" value={userData.contrasena} onChange={handleInputChange} placeholder="Contraseña" className="border rounded-md px-3 py-2" />
+        <input type="email" name="correo" value={userData.correo} onChange={handleInputChange} placeholder="Correo" className="border rounded-md px-3 py-2" />
+        <input type="text" name="departamentoEmp" value={userData.departamentoEmp} onChange={handleInputChange} placeholder="Departamento" className="border rounded-md px-3 py-2" />
         <label htmlFor="habilitado" className="flex items-center">
           <input
             type="checkbox"
             name="habilitado"
             checked={userData.habilitado}
-            onChange={() =>
-              setUserData((prevUserData) => ({
-                ...prevUserData,
-                habilitado: !prevUserData.habilitado,
-              }))
-            }
+            onChange={() => setUserData((prevUserData) => ({ ...prevUserData, habilitado: !prevUserData.habilitado }))}
             className="form-checkbox h-4 w-4 text-blue-500"
           />
           <span className="ml-2 text-gray-700">Habilitado</span>
         </label>
-        <input
-          type="text"
-          name="jefe"
-          value={userData.jefe}
-          onChange={handleInputChange}
-          placeholder="Jefe"
-          className="border rounded-md px-3 py-2"
-        />
-        <input
-          type="text"
-          name="nombre"
-          value={userData.nombre}
-          onChange={handleInputChange}
-          placeholder="Nombre"
-          className="border rounded-md px-3 py-2"
-        />
-        <input
-          type="text"
-          name="puesto"
-          value={userData.puesto}
-          onChange={handleInputChange}
-          placeholder="Puesto"
-          className="border rounded-md px-3 py-2"
-        />
-        <input
-          type="number"
-          name="sueldo"
-          value={userData.sueldo}
-          onChange={handleInputChange}
-          placeholder="Sueldo"
-          className="border rounded-md px-3 py-2"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
+        <input type="text" name="jefe" value={userData.jefe} onChange={handleInputChange} placeholder="Jefe" className="border rounded-md px-3 py-2" />
+        <input type="text" name="nombre" value={userData.nombre} onChange={handleInputChange} placeholder="Nombre" className="border rounded-md px-3 py-2" />
+        <input type="text" name="puesto" value={userData.puesto} onChange={handleInputChange} placeholder="Puesto" className="border rounded-md px-3 py-2" />
+        <input type="number" name="sueldo" value={userData.sueldo} onChange={handleInputChange} placeholder="Sueldo" className="border rounded-md px-3 py-2" />
+        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Guardar
         </button>
       </form>
@@ -247,18 +162,14 @@ function Empleado() {
           <div key={item.cedula} className="border-b-2 py-2">
             <p className="font-bold">Nombre: {item.nombre}</p>
             <p className="text-gray-600">Cedula: {item.cedula}</p>
-            <p className="text-gray-600">
-              Departamento: {item.departamentoEmp}
-            </p>
+            <p className="text-gray-600">correo: {item.correo}</p>
+            <p className="text-gray-600">Departamento: {item.departamentoEmp}</p>
             <p className="text-gray-600">Jefe: {item.jefe}</p>
             <p>
               Habilitado: <input type="checkbox" checked={item.habilitado} />
             </p>
 
-            <button
-              className="bg-red-600"
-              onClick={() => handleDelete(item.cedula)}
-            >
+            <button className="bg-red-600" onClick={() => handleDelete(item.cedula)}>
               Eliminar
             </button>
           </div>
