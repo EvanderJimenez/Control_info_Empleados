@@ -19,6 +19,7 @@ export interface UserData {
   email: string;
   boss: string;
   schedule: Schedule[];
+  brands: Brands[];
   option: string;
 }
 
@@ -32,5 +33,14 @@ export interface EmployeePage {
   department: string;
   entryTime: string;
   exitTime: string;
+
+}
+export interface Brands{
+
+  date: string,
+  startTime: string,
+  endTime: string,
+  justification: string,
+  finished: boolean
 
 }

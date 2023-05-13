@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { UserData } from '@/root/interface/employee';
 import InputLabel from '../inputLabel/InputLabel';
 import Schedule from '../schedule/Schedule';
+import Brands from '../brands/Brands';
 
 
 interface UpdateDataProps {
   userData: UserData;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleScheduleChange:  (newSchedule: any) => void;
   user?: UserData;
 }
 
-const UpdateData = ({ userData, handleInputChange, handleSubmit, user }: UpdateDataProps) => {
+const UpdateData = ({ userData, handleInputChange, handleSubmit,handleScheduleChange, user }: UpdateDataProps) => {
 
   return (
     <div>
@@ -41,6 +43,11 @@ const UpdateData = ({ userData, handleInputChange, handleSubmit, user }: UpdateD
           </button>
         </div>
       </form>
+
+      {/* <Schedule schedule={userData.schedule}  handleScheduleChange={handleScheduleChange} /> */}
+
+      {/* <Brands /> */}
+
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { UserData } from "../../interface/employee/";
 import PrincipalData from "./components/principalData/PrincipalData";
+import UpdateData from "./components/updateData/UpdateData";
+import Schedule from "./components/schedule/Schedule";
+import Brands from "./components/brands/Brands";
 
 interface RegisterProps {
   user?: UserData;
@@ -34,6 +37,7 @@ function Register(props: RegisterProps) {
         email: "",
         boss: "",
         schedule: [],
+        brands: [],
         option: "register",
       };
     }
@@ -76,8 +80,36 @@ function Register(props: RegisterProps) {
       email: "",
       boss: "",
       schedule: [],
+      brands: [],
       option: "register",
     });
+  };
+
+  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log("Nuevo usuario:", userData);
+
+    fetch(`/api/employees/${userData.uid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => res.json())
+      .then((updatedUser) => {
+        setData((prevData) => {
+          const newData = [...prevData];
+          const userIndex = newData.findIndex((user) => user.cedula === updatedUser.uid);
+          if (userIndex >= 0) {
+            newData[userIndex] = updatedUser;
+          }
+          return newData;
+        });
+        props.onCancel();
+      })
+      .catch((error) => console.error("Error al actualizar usuario:", error));
   };
 
   const handleScheduleChange = (newSchedule: any) => {
@@ -85,9 +117,20 @@ function Register(props: RegisterProps) {
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 
+  const handleBrandChange = (newBrand: any) => {
+    console.log(userData);
+    setUserData((prevUserData) => ({ ...prevUserData, brands: newBrand }));
+  };
+
   return (
     <div className="flex justify-center items-center flex-col">
-      <PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
+      {upDate ? (
+        <UpdateData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleUpdate} handleScheduleChange={handleScheduleChange} />
+      ) : (
+        <PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
+      )}
+
+      <Brands handleBrandsChange={handleBrandChange} />
     </div>
   );
 }

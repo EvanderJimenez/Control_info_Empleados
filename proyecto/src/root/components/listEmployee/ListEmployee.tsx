@@ -1,30 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Register from "../registerEmployee/Register";
-
-export interface Schedule {
-  day: number;
-  startTime: string;
-  endTime: string;
-}
-
-interface UserData {
-  uid: string;
-  name: string;
-  firstSurname: string;
-  secondSurname: string;
-  cedula: number;
-  phoneNumber: number;
-  photo: string;
-  jobPosition: string;
-  salary: number;
-  enabled: boolean;
-  idDepartment: number;
-  password: string;
-  email: string;
-  boss: string;
-  schedule: Schedule[];
-  option: string;
-}
+import { UserData } from "@/root/interface/employee";
 
 const ListEmployee = () => {
   const [data, setData] = useState<UserData[]>([]);
@@ -54,7 +30,7 @@ const ListEmployee = () => {
     fetch("/api/employees")
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, []);
+  }, [data]);
 
   const handleDelete = async (uid: string) => {
     try {
