@@ -5,6 +5,7 @@ import PrincipalData from "./components/principalData/PrincipalData";
 import UpdateData from "./components/updateData/UpdateData";
 import Schedule from "./components/schedule/Schedule";
 import Brands from "./components/brands/Brands";
+import ImageEmployee from "./components/imageEmployee/ImageEmployee";
 
 interface RegisterProps {
   user?: UserData;
@@ -131,7 +132,11 @@ function Register(props: RegisterProps) {
         < PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
       )}
 
-        <Brands handleBrandsChange ={handleBrandChange}/>
+        <ImageEmployee userData={userData} handleSubmit={function (event: React.FormEvent<HTMLFormElement>): void {
+        throw new Error("Function not implemented.");
+      } }/>
+
+        {/* <Brands handleBrandsChange ={handleBrandChange}/> */}
 
     </div>
   );

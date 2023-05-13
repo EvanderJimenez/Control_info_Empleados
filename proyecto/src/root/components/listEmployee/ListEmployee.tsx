@@ -20,17 +20,18 @@ const ListEmployee = () => {
     email: "",
     boss: "",
     schedule: [],
+    brands: [],
     option: "",
   });
   const [actualiza, setActualiza] = useState<boolean | null>(null);
 
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
 
-  useEffect(() => {
+/*   useEffect(() => {
     fetch("/api/employees")
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, [data]);
+  }, [data]); */
 
   const handleDelete = async (uid: string) => {
     try {
@@ -80,7 +81,7 @@ const ListEmployee = () => {
         <Register user={selectedUser} onCancel={() => setSelectedUser(null)} />
       ) : (
         <>
-          {data.map((item) => (
+         {/*  {data.map((item) => (
             <div key={item.uid} className="p-4 border border-gray-300 rounded-lg">
               <p className="font-bold">Nombre: {item.name}</p>
               <p className="mt-2">Cedula: {item.cedula}</p>
@@ -98,7 +99,7 @@ const ListEmployee = () => {
                 Actualizar
               </button>
             </div>
-          ))}
+          ))} */}
         </>
       )}
     </div>

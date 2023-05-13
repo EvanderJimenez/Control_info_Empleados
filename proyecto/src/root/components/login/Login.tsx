@@ -44,17 +44,18 @@ function Login() {
         if (response.ok) {
           const dataEmplo = await response.json();
           console.log("Job Position: " + dataEmplo.jobPosition)
-          
+
           if(dataEmplo.jobPosition === "employee"){
+
             console.log("soy Employee")
           }else if(dataEmplo.jobPosition === "Boss"){
             console.log("soy Boss")
           }else if(dataEmplo.jobPosition === "Admin"){
-            console.log("Soy Admin")
+            const newPage = "/home/AdminMain";
+            router.push(newPage);
           }
           setIsLoggedIn(true);
-          const newPage = "/home/AdminMain";
-          router.push(newPage);
+         
         } else {
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");
