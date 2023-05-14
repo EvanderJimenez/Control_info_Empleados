@@ -20,3 +20,10 @@ const getAll = async () => {
 
     return brands;
   };
+
+  export const brandsProvider = {
+    getAll,
+
+  };
+  
+  export default brandsProvider;

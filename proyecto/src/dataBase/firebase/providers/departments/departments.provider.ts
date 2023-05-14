@@ -73,6 +73,7 @@ async function create(
 }
 
 const getByDocId = async (docId: string) => {
+  console.log("Id 2 :" + docId);
   const departmentsDocRef = doc(collection(firestore, "departments"), docId);
   const departmentsDocSnapshot = await getDoc(departmentsDocRef);
 

@@ -15,7 +15,7 @@ const ListEmployee = () => {
     jobPosition: "",
     salary: 0,
     enabled: true,
-    idDepartment: 0,
+    idDepartment: "",
     password: "",
     email: "",
     boss: "",

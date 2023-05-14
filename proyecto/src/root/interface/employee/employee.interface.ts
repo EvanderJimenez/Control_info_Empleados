@@ -14,7 +14,7 @@ export interface UserData {
   jobPosition: string;
   salary: number;
   enabled: boolean;
-  idDepartment: number;
+  idDepartment: string;
   password: string;
   email: string;
   boss: string;

@@ -8,7 +8,7 @@ import RegisterDepartment from "../../root/components/deparments/registerDepartm
 export default function index() {
   return (
     <LoginPage>
-      <RegisterDepartment />
+      <MainForm />
     </LoginPage>
   );
 }
