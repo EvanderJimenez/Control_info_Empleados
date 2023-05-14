@@ -41,18 +41,32 @@ function Login() {
 
         if (response.ok) {
           const dataEmplo = await response.json();
-          console.log("Job Position: " + dataEmplo.jobPosition)
-          
-          if(dataEmplo.jobPosition === "employee"){
-            console.log("soy Employee")
-          }else if(dataEmplo.jobPosition === "Boss"){
-            console.log("soy Boss")
-            router.push("./home/EmployeeMain")
-          }else if(dataEmplo.jobPosition === "Admin"){
-            console.log("Soy Admin")
-            router.push("./home/AdminMain")
+          console.log("Job Position: " + dataEmplo.idDepartment);
+
+          const resDepart = await fetch(`/api/departments/${dataEmplo.idDepartment}`, {
+            method: "Get",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (resDepart.ok) {
+            const dataDepartment = await resDepart.json();
+
+            console.log(dataDepartment);
+
+            if (dataEmplo.jobPosition === "employee" && dataDepartment.leader !== dataEmplo.uid) {
+              router.push("/home/EmployeeMain");
+            } else if (dataEmplo.jobPosition === "Boss" && dataDepartment.leader === dataEmplo.uid) {
+              //setIsLoggedIn(true);
+              console.log("soy Boss");
+            } else if (dataEmplo.jobPosition === "Admin") {
+              //setIsLoggedIn(true);
+              router.push("/home/AdminMain");
+            }
+          } else {
+            console.log(dataEmplo.idDepartment);
           }
-          setIsLoggedIn(true);
         } else {
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");

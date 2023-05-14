@@ -37,7 +37,7 @@ const PrincipalData = ({ userData, handleInputChange,handleScheduleChange, handl
                     </button>
                 </div>
             </form>
-            <Schedule schedule={userData.schedule}  handleScheduleChange={handleScheduleChange} />
+            {/* <Schedule schedule={userData.schedule}  handleScheduleChange={handleScheduleChange} /> */}
         </div>
     )
 }

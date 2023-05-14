@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import EditDepartment from "../root/components/deparments/editDeparment/EditDepartment";
 
 const InvoicePage: NextPage = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const InvoicePage: NextPage = () => {
   }, [router]);
 
   return (
-  <div className="bg-gray-900 w-full h-full"></div>
+    <div className="bg-gray-900 w-full h-full"></div>
   );
 };
 

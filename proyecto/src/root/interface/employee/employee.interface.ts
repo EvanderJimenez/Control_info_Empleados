@@ -14,7 +14,7 @@ export interface UserData {
   jobPosition: string;
   salary: number;
   enabled: boolean;
-  idDepartment: number;
+  idDepartment: string;
   password: string;
   email: string;
   boss: string;
@@ -28,14 +28,6 @@ export interface LoginEP {
   password: string;
 }
 
-export interface EmployeePage {
-  name: string;
-  department: string;
-  entryTime: string;
-  exitTime: string;
-  
-
-}
 export interface Brands{
 
   date: string,
@@ -44,5 +36,11 @@ export interface Brands{
   justification: string,
   finished: boolean
 
+}
+export interface EmployeePage {
+  name: string;
+  department: string;
+  entryTime: string;
+  exitTime: string;
 
 }
