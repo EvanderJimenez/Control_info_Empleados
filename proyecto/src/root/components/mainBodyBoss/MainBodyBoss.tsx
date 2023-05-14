@@ -10,7 +10,7 @@ export default function MainBodyBoss(props: EmployeePage) {
             <h2 className="text-xs text-indigo-500 tracking-widest font-medium  mb-1">{props.department}</h2>
             <h1 className="sm:text-3xl text-2xl font-medium mb-4 ">{props.name}</h1>
           </div>
-          <section className="flex flex-wrap">
+          <div className="flex flex-wrap">
             <div className="xl:w-1/3 space-y-4 flex flex-col lg:w-1/2  md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
               <h2 className="text-lg sm:text-xl font-medium mb-2">Timestamps</h2>
               <label htmlFor="Timestamps"> Entry time:{props.entryTime}</label>
@@ -21,7 +21,7 @@ export default function MainBodyBoss(props: EmployeePage) {
             <div className="xl:w-1/3 space-y-4 flex lg:w-1/2 flex-col md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
               <h2 className="text-lg sm:text-xl text-gray-900 font-medium mb-2">Late justification</h2>
               <button className="NormalButton zoom">Save</button>
-              <input type="datetime-local" />
+              <input type="datetime-local"/>
               <textarea name="" id="justificationEmployee" cols={29} rows={10}></textarea>
             </div>
             <div className="xl:w-1/3 space-y-4 flex flex-col lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
@@ -32,7 +32,7 @@ export default function MainBodyBoss(props: EmployeePage) {
               <label htmlFor="finalDate">Application end date</label>
               <input type="datetime-local" id="finalDate" />
             </div>
-          </section>
+          </div>
           <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
         </div>
       </section>

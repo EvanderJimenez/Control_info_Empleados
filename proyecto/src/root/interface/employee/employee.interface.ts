@@ -33,6 +33,7 @@ export interface EmployeePage {
   department: string;
   entryTime: string;
   exitTime: string;
+  
 
 }
 export interface Brands{
@@ -42,5 +43,6 @@ export interface Brands{
   endTime: string,
   justification: string,
   finished: boolean
+
 
 }
