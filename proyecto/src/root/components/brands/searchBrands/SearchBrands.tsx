@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const SearchBrands = () => {
   const [data, setData] = useState<Brands[]>([]);
-  const [userData, setUserData] = useState<Brands>({
+  const [brandsData, setBrandsData] = useState<Brands>({
     idEmployee: "",
     cycle: {},
   });
@@ -11,18 +11,15 @@ const SearchBrands = () => {
   useEffect(() => {
     fetch("/api/departments")
       .then((res) => res.json())
-      .then((data) => setData(data));
-    console.log(data);
+      .then((data) => setData(data))
+      .catch((error) => console.log(error));
   }, []);
+
   return (
     <div>
-      {" "}
       {data.map((item) => (
-        <div
-          key={item.idEmployee}
-          className="p-6 border border-gray-300 rounded-lg bg-gradient-to-r from-gray-300 to-gray-200 text-center "
-        >
-          <p className="font-bold">Name Department: {item.idEmployee}</p>
+        <div className="p-6 border border-gray-300 rounded-lg bg-gradient-to-r from-gray-300 to-gray-200 text-center">
+          <p className="font-bold">IDEmployee: {item.idEmployee}</p>
         </div>
       ))}
     </div>

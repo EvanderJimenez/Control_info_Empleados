@@ -1,10 +1,10 @@
 import LoginPage from "@/Layout/LoginPage";
-import RegisterDepartment from "../../root/components/deparments/registerDepartment/RegisterDepartment";
+import Admin from "@/root/components/adminDepartment/Admin";
 
 export default function index() {
   return (
     <LoginPage>
-      <RegisterDepartment />
+      <Admin />
     </LoginPage>
   );
 }

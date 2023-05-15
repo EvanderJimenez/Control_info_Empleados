@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { upLoadFile, upLoadImage } from "@/dataBase/firebase";
+import { upLoadFile, upLoadImage } from "@/dataBase/firebase/firebase";
 import { Department, Documents, Employee } from "@/root/interface/departments";
 
 function RegisterDepartment() {
@@ -201,7 +201,7 @@ function RegisterDepartment() {
           name="idEmployee"
           value={userData.idEmployee}
           onChange={handleInputChangeD}
-          placeholder="Area to which it belongs"
+          placeholder="Folio employ"
           className="border rounded-md px-3 py-2"
         />
         <input
