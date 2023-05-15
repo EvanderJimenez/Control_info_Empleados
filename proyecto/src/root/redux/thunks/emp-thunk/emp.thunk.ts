@@ -5,7 +5,7 @@ export const DeletingEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchType) => {
     try {
       const empDeleted = await empProvider(searchTerm);
-
+      //preguntar
       dispatch(DeleteEmp(empDeleted || null));
     } catch (error) {
       console.log(error);

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { UserData } from "../../interface/employee/";
 import PrincipalData from "./components/principalData/PrincipalData";
@@ -120,7 +119,7 @@ function Register(props: RegisterProps) {
   };
 
   const handleBrandChange = (newBrand: any) => {
-    console.log(userData)
+    console.log(userData);
     setUserData((prevUserData) => ({ ...prevUserData, brands: newBrand }));
   };
 
@@ -129,7 +128,7 @@ function Register(props: RegisterProps) {
       {upDate ? (
         <UpdateData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleUpdate} handleScheduleChange={handleScheduleChange} />
       ) : (
-        < PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
+        <PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
       )}
 
         <ImageEmployee userData={userData} handleSubmit={function (event: React.FormEvent<HTMLFormElement>): void {

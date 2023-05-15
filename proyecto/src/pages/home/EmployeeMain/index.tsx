@@ -1,11 +1,11 @@
 import EmployeeMain from "@/Layout/EmployeePage";
-import MainBodyBoss from "../../../root/components/mainBodyBoss/MainBodyBoss";
 import React from "react";
+import MainBodyEmployee from "../../../root/components/mainBodyEmployee/MainBodyEmployee";
 
 export default function index() {
   return (
     <EmployeeMain>
-      <MainBodyBoss />
+      <MainBodyEmployee />
     </EmployeeMain>
   );
 }

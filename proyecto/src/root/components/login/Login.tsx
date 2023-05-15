@@ -44,15 +44,14 @@ function Login() {
           const dataEmplo = await response.json();
           console.log("Job Position: " + dataEmplo.idDepartment);
 
-
-          const resDepart = await fetch(`/api/departments/${dataEmplo.idDepartment}`,{
+          const resDepart = await fetch(`/api/departments/${dataEmplo.idDepartment}`, {
             method: "Get",
             headers: {
               "Content-Type": "application/json",
             },
-          })
+          });
 
-          if(resDepart.ok){
+          if (resDepart.ok) {
             const dataDepartment = await resDepart.json();
 
             console.log(dataDepartment);
@@ -81,12 +80,9 @@ function Login() {
 
               router.push("/home/AdminMain");
             }
-          }else{
-            console.log(dataEmplo.idDepartment)
+          } else {
+            console.log(dataEmplo.idDepartment);
           }
-
-
-         
         } else {
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");
