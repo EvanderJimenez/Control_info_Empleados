@@ -7,7 +7,7 @@ const InvoicePage: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("./home/BossMain");
+    router.push("./home/");
   }, [router]);
 
   return (

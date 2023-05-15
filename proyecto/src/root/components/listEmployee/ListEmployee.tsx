@@ -1,86 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { listOfEmployee } from "../../redux/thunks/employee-thunk/employee.thunk";
+
+import { RootState } from "../../redux/store";
 import Register from "../registerEmployee/Register";
 import { UserData } from "@/root/interface/employee";
 
 const ListEmployee = () => {
-  const [data, setData] = useState<UserData[]>([]);
-  const [userData, setUserData] = useState<UserData>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    brands: [],
-    option: "",
-  });
-  const [actualiza, setActualiza] = useState<boolean | null>(null);
+  const dispatch = useDispatch();
+  const employees = useSelector((state: RootState) => state.employeesList.employees);
 
-  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
+  useEffect(() => {
+    dispatch(listOfEmployee());
+    console.log(employees)
+  }, [dispatch]);
 
-/*   useEffect(() => {
-    fetch("/api/employees")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, [data]); */
-
-  const handleDelete = async (uid: string) => {
-    try {
-      console.log(uid)
-      const response = await fetch(`/api/employees/${uid}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        setData(data.filter(item => item.uid !== uid));
-      } else {
-      }
-    } catch (error) {
-      console.error("Error al eliminar el empleado", error);
-    }
-};
-
-  const handleUpdate = async (uid: string) => {
-    try {
-      const response = await fetch(`/api/employees/${uid}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUserData(data);
-        setActualiza(true);
-        setSelectedUser(data);
-      } else {
-        throw new Error("Error al iniciar sesión");
-      }
-    } catch (error) {
-      console.error("Error al obtener los datos del empleado", error);
-    }
+  const handleDelete = (uid: string) => {
+    // Implementa la lógica para eliminar un empleado utilizando Redux
   };
+
+  const handleUpdate = (uid: string) => {
+    // Implementa la lógica para actualizar un empleado utilizando Redux
+  };
+
+
 
   return (
     <div className="grid grid-cols-1 gap-4 scroll">
-      {selectedUser ? (
-        <Register user={selectedUser} onCancel={() => setSelectedUser(null)} />
-      ) : (
+
         <>
-         {/*  {data.map((item) => (
+          {Array.isArray(employees) && employees.map((item) => (
             <div key={item.uid} className="p-4 border border-gray-300 rounded-lg">
               <p className="font-bold">Nombre: {item.name}</p>
               <p className="mt-2">Cedula: {item.cedula}</p>
@@ -98,9 +47,9 @@ const ListEmployee = () => {
                 Actualizar
               </button>
             </div>
-          ))} */}
+          ))}
         </>
-      )}
+      
     </div>
   );
 };

@@ -44,40 +44,56 @@ function Login() {
           const dataEmplo = await response.json();
           console.log("Job Position: " + dataEmplo.idDepartment);
 
-          const resDepart = await fetch(`/api/departments/${dataEmplo.idDepartment}`, {
-            method: "Get",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          const resDepart = await fetch(
+            `/api/departments/${dataEmplo.idDepartment}`,
+            {
+              method: "Get",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
           if (resDepart.ok) {
             const dataDepartment = await resDepart.json();
 
             console.log(dataDepartment);
-  
-  
-            if ((dataDepartment.leader !== dataEmplo.uid)) {
 
-              const expirationDate = new Date(Date.now() + 86400 * 1000);
+            const expirationDate = new Date(Date.now() + 86400 * 1000);
 
+            if (dataDepartment.leader !== dataEmplo.uid) {
               const cookieValue = JSON.stringify({
                 logged: true,
-                type: 'employee'
+                type: "employee",
               });
-              
-              setCookie('logged', cookieValue, {
-                path: '/',
-                expires: expirationDate
+
+              setCookie("logged", cookieValue, {
+                path: "/",
+                expires: expirationDate,
               });
 
               router.push("/home/EmployeeMain");
-            } else if ((dataDepartment.leader === dataEmplo.uid)) {
-              //setIsLoggedIn(true);
+            } else if (dataDepartment.leader === dataEmplo.uid) {
+              const cookieValue = JSON.stringify({
+                logged: true,
+                type: "boss",
+              });
 
+              setCookie("logged", cookieValue, {
+                path: "/",
+                expires: expirationDate,
+              });
+              router.push("/home/BossMain");
             } else if (dataEmplo.jobPosition === "Admin") {
-              //setIsLoggedIn(true);
+              const cookieValue = JSON.stringify({
+                logged: true,
+                type: "admin",
+              });
 
+              setCookie("logged", cookieValue, {
+                path: "/",
+                expires: expirationDate,
+              });
               router.push("/home/AdminMain");
             }
           } else {
@@ -93,7 +109,19 @@ function Login() {
     }
   };
 
-  return <>{isLoggedIn ? <ListEmployee /> : <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} />}</>;
+  return (
+    <>
+      {isLoggedIn ? (
+        <ListEmployee />
+      ) : (
+        <FormLogin
+          handleSubmit={handleIngresar}
+          handleInputChange={handleInputChange}
+          loginData={data}
+        />
+      )}
+    </>
+  );
 }
 
 export default Login;

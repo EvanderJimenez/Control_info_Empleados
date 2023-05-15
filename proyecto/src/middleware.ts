@@ -15,13 +15,13 @@ export function middleware(request: NextRequest) {
     const { type } = JSON.parse(isLogin.value);
     if (type === 'employee' && url.pathname !== '/home/EmployeeMain') {
       console.log("Redirigiendo a /home/EmployeeMain");
-      url.pathname = "/home/AdminMain";
+      url.pathname = "/home/EmployeeMain";
       return NextResponse.redirect(url);
     }  else if (type === 'admin' && url.pathname !== '/home/AdminMain') {
       url.pathname = "/home/AdminMain";
       return NextResponse.redirect(url);
-    } else if (type === 'boss' && url.pathname !== '/home/AdminMain') {
-      url.pathname = "/home/AdminMain";
+    } else if (type === 'boss' && url.pathname !== '/home/BossMain') {
+      url.pathname = "/home/BossMain";
       return NextResponse.redirect(url);
     } 
   } 
@@ -30,5 +30,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/home','/home/EmployeeMain','/home/AdminMain']
+  matcher: ['/home','/home/EmployeeMain','/home/AdminMain','/home/BossMain',]
 }
