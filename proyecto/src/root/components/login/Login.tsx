@@ -58,7 +58,7 @@ function Login() {
             if (dataDepartment.leader !== dataEmplo.uid) {
               router.push("/home/EmployeeMain");
             } else if (dataDepartment.leader === dataEmplo.uid) {
-              router.push("/home/EmployeeMain")
+              router.push("/home/EmployeeMain");
             } else if (dataEmplo.jobPosition === "Admin") {
               router.push("/home/AdminMain");
             }
