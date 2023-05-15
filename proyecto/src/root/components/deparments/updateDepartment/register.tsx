@@ -22,9 +22,8 @@ function Register(props: RegisterProps) {
         name: "",
         size: 0,
         location: "",
-        area: "",
+        idEmployee: "",
         leader: "",
-        mainDepartment: false,
         subDepartment: "",
         level: "",
         employees: {},
@@ -99,8 +98,8 @@ function Register(props: RegisterProps) {
           />
           <input
             type="text"
-            name="area"
-            value={DeparData.area}
+            name="idEmployee"
+            value={DeparData.idEmployee}
             onChange={handleInputChange}
             placeholder="Area al que pertenece"
             className="border rounded-md px-3 py-2"

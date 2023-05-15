@@ -12,10 +12,9 @@ function EditDepartment() {
     name: "",
     size: 0,
     location: "",
-    area: "",
+    idEmployee: "",
     leader: "",
     level: "",
-    mainDepartment: false,
     subDepartment: "",
     employees: {},
   });
@@ -64,9 +63,6 @@ function EditDepartment() {
               <p className="mt-2">People: {item.size}</p>
               <p className="mt-2">Location: {item.location}</p>
 
-              {item.mainDepartment && (
-                <p>Main Department: {item.mainDepartment}</p>
-              )}
               {item.subDepartment && (
                 <p> Secondary Department: {item.subDepartment}</p>
               )}

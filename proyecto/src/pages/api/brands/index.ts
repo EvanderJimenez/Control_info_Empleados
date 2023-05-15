@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
-import departmentProvider from "../../../dataBase/firebase/providers/departments/departments.provider";
+import departmentProvider from "../../../dataBase/firebase/providers/brands/brands.provider";
 
 const getAll = async (res: NextApiResponse) => {
   try {
-    const departments = await departmentProvider.getAll();
+    const departments = await departmentProvider.getAllBrands();
     res.status(200).json(departments);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
@@ -13,26 +13,11 @@ const getAll = async (res: NextApiResponse) => {
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const {
-      name,
-      size,
-      location,
-      idEmployee,
-      leader,
-      level,
-      subDepartment,
-      employees,
-    } = req.body;
+    const { idEmployee, cycle } = req.body;
 
-    const newDepartment = await departmentProvider.create(
-      name,
-      size,
-      location,
+    const newDepartment = await departmentProvider.createBrands(
       idEmployee,
-      leader,
-      level,
-      subDepartment,
-      employees
+      cycle
     );
     res.status(201).json(newDepartment);
   } catch (error) {
@@ -45,7 +30,7 @@ handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
 handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) =>
   create(req, res);
 
-export default async function departmentController(
+export default async function brandsController(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

@@ -21,10 +21,9 @@ async function updateId(req: NextApiRequest, res: NextApiResponse) {
       name,
       size,
       location,
-      area,
+      idEmployee,
       leader,
       level,
-      mainDepartment,
       subDepartment,
       employees,
     } = req.body;
@@ -34,10 +33,9 @@ async function updateId(req: NextApiRequest, res: NextApiResponse) {
       name,
       size,
       location,
-      area,
+      idEmployee,
       leader,
       level,
-      mainDepartment,
       subDepartment,
       employees
     );
