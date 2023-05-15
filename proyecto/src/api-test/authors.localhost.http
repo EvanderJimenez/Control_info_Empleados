@@ -1,0 +1,42 @@
+###
+# Get all employees
+GET http://localhost:3000/api/employees HTTP/1.1
+
+###
+# Get a existing employee by uid
+GET http://localhost:3000/api/employees/6504dhHgedMPc86NgQMvRm1URkQ2 HTTP/1.1
+
+###
+# Get a existing employee by email and password
+GET http://localhost:3000/api/employees/by-emailPassword/darvar2k@gmail.com+12345678 HTTP/1.1
+
+###
+# Create a new employee
+POST http://localhost:3000/api/employees HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ruben Mora Vargas"
+}
+###
+# Get by email and password
+POST http://localhost:3000/api/employees/by-emailPassword HTTP/1.1
+content-type: application/json
+ body: JSON.stringify({
+            email: email,
+            password: password,
+
+          }),
+
+###
+# Update a existing employee
+PUT http://localhost:3000/api/employees/2 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ruben Mora Vargas"
+}
+
+###
+# Delete a existing employee
+DELETE http://localhost:3000/api/employees/6504dhHgedMPc86NgQMvRm1URkQ2 HTTP/1.1
