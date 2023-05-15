@@ -5,14 +5,13 @@ import MainBoss from "../mainBoss/MainBoss";
 import router from "next/router";
 import { LoginEP, UserData } from "../../interface/employee/";
 import FormLogin from "./components/FormLogin";
-
-
+import { setCookie } from "cookies-next";
 
 function Login() {
   const [data, setData] = useState<LoginEP>(() => {
     return {
       email: "",
-      password: ""
+      password: "",
     };
   });
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -22,7 +21,7 @@ function Login() {
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setData((prevData) =>({... prevData, [name]: value}))
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleIngresar = async (e: any) => {
@@ -37,24 +36,65 @@ function Login() {
           },
           body: JSON.stringify({
             email: data.email,
-            password: data.password
+            password: data.password,
           }),
         });
 
         if (response.ok) {
           const dataEmplo = await response.json();
-          console.log("Job Position: " + dataEmplo.jobPosition)
-          
-          if(dataEmplo.jobPosition === "employee"){
-            console.log("soy Employee")
-          }else if(dataEmplo.jobPosition === "Boss"){
-            console.log("soy Boss")
-          }else if(dataEmplo.jobPosition === "Admin"){
-            console.log("Soy Admin")
+
+          const resDepart = await fetch(
+            `/api/departments/${dataEmplo.idDepartment}`,
+            {
+              method: "Get",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (resDepart.ok) {
+            const dataDepartment = await resDepart.json();
+
+            const expirationDate = new Date(Date.now() + 86400 * 1000);
+
+            if (dataDepartment.leader !== dataEmplo.uid) {
+              const cookieValue = JSON.stringify({
+                logged: true,
+                type: "employee",
+              });
+
+              setCookie("logged", cookieValue, {
+                path: "/",
+                expires: expirationDate,
+              });
+
+              router.push("/home/EmployeeMain");
+            } else if (dataDepartment.leader === dataEmplo.uid) {
+              const cookieValue = JSON.stringify({
+                logged: true,
+                type: "boss",
+              });
+
+              setCookie("logged", cookieValue, {
+                path: "/",
+                expires: expirationDate,
+              });
+              router.push("/home/BossMain");
+            } else if (dataEmplo.jobPosition === "Admin") {
+              const cookieValue = JSON.stringify({
+                logged: true,
+                type: "admin",
+              });
+
+              setCookie("logged", cookieValue, {
+                path: "/",
+                expires: expirationDate,
+              });
+              router.push("/home/AdminMain");
+            }
+          } else {
           }
-          setIsLoggedIn(true);
-          const newPage = "/home/AdminMain";
-          router.push(newPage);
         } else {
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");
@@ -70,7 +110,11 @@ function Login() {
       {isLoggedIn ? (
         <ListEmployee />
       ) : (
-        <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data}/>
+        <FormLogin
+          handleSubmit={handleIngresar}
+          handleInputChange={handleInputChange}
+          loginData={data}
+        />
       )}
     </>
   );

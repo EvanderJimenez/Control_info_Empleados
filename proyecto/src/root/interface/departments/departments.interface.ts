@@ -14,10 +14,9 @@ export interface Department {
   name: string;
   size: number;
   location: string;
-  area: string;
+  idEmployee: string;
   leader: string;
   level: string;
-  mainDepartment: boolean;
   subDepartment: string;
   employees: { [key: string]: Employee };
 }

@@ -12,10 +12,9 @@ function EditDepartment() {
     name: "",
     size: 0,
     location: "",
-    area: "",
+    idEmployee: "",
     leader: "",
     level: "",
-    mainDepartment: false,
     subDepartment: "",
     employees: {},
   });
@@ -24,12 +23,10 @@ function EditDepartment() {
     fetch("/api/departments")
       .then((res) => res.json())
       .then((data) => setData(data));
-    console.log(data);
   }, []);
 
   const handleUpdate = async (id: string) => {
     try {
-      console.log(id);
       const response = await fetch(`/api/departments/${id}`, {
         method: "GET",
         headers: {
@@ -42,7 +39,6 @@ function EditDepartment() {
         setUserData(data);
         setUpdate(true);
         setDta(data);
-        console.log(data);
       } else {
         throw new Error("Error acquiring information");
       }
@@ -64,9 +60,6 @@ function EditDepartment() {
               <p className="mt-2">People: {item.size}</p>
               <p className="mt-2">Location: {item.location}</p>
 
-              {item.mainDepartment && (
-                <p>Main Department: {item.mainDepartment}</p>
-              )}
               {item.subDepartment && (
                 <p> Secondary Department: {item.subDepartment}</p>
               )}

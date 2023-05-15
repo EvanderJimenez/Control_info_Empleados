@@ -17,10 +17,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       name,
       size,
       location,
-      area,
+      idEmployee,
       leader,
       level,
-      mainDepartment,
       subDepartment,
       employees,
     } = req.body;
@@ -29,10 +28,9 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       name,
       size,
       location,
-      area,
+      idEmployee,
       leader,
       level,
-      mainDepartment,
       subDepartment,
       employees
     );

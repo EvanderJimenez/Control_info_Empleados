@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import  ListEmployee  from "../listEmployee/ListEmployee";
+import ListEmployee from "../listEmployee/ListEmployee";
 
 export const MainBoss = ({}) => {
   const [isOpen, setIsOpen] = useState(false);

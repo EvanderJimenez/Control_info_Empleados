@@ -1,5 +1,5 @@
 export interface Schedule {
-  day: number | string ;
+  day: number | string;
   startTime: string;
   endTime: string;
 }
@@ -14,7 +14,7 @@ export interface UserData {
   jobPosition: string;
   salary: number;
   enabled: boolean;
-  idDepartment: number;
+  idDepartment: string;
   password: string;
   email: string;
   boss: string;
@@ -36,4 +36,20 @@ export interface Brands{
   justification: string,
   finished: boolean
 
+}
+export interface EmployeePage {
+  name: string;
+  department: string;
+  entryTime: string;
+  exitTime: string;
+}
+export interface Row {
+  name: string;
+  cedula: number;
+  email: string;
+  late:number
+}
+
+export interface TableProps {
+  rows: Row[];
 }

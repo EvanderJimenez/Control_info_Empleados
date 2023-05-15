@@ -92,7 +92,7 @@ const create = async (
   jobPosition: string,
   salary: number,
   enabled: boolean,
-  idDepartment: number,
+  idDepartment: string,
   password: string,
   email: string,
   boss: string,
@@ -189,22 +189,35 @@ const deleteByUid = async (uid: string) => {
 };
 
 const getByEmailPassword = async (email: string, password: string) => {
-  const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(
-    employeeCollection,
-    where("email", "==", email),
-    where("password", "==", password)
-  );
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
-  const employeeDoc = employeeSnapshot.docs[0];
 
-  if (!employeeDoc) {
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth,email, password);
+    const user = userCredential.user;
+    if (!user) {
+      throw new Error("No user found with that email and password");
+    }else{
+      const employeeCollection = collection(firestore, "employee");
+      const employeeQuery = query(
+        employeeCollection,
+        where("email", "==", email),
+        where("password", "==", password)
+      );
+      const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+        employeeQuery
+      );
+      const employeeDoc = employeeSnapshot.docs[0];
+    
+      if (!employeeDoc) {
+        throw new Error("No employee found with that email and password");
+      }
+      return employeeDoc.data();
+    }
+  } catch (error) {
     throw new Error("No employee found with that email and password");
   }
 
-  return employeeDoc.data();
+
 };
 
 

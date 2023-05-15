@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { upLoadFile, upLoadImage } from "@/dataBase/firebase/firebase";
-import { Department, Employee, Documents } from "@/root/interface/departments";
+import { Department, Documents, Employee } from "@/root/interface/departments";
 
 function RegisterDepartment() {
   const [isCheckedS, setIsCheckedS] = useState(false);
@@ -15,10 +15,9 @@ function RegisterDepartment() {
     name: "",
     size: 0,
     location: "",
-    area: "",
+    idEmployee: "",
     leader: "",
     level: "",
-    mainDepartment: false,
     subDepartment: "",
     employees: {},
   });
@@ -69,7 +68,6 @@ function RegisterDepartment() {
     };
 
     const selectedEmployee = userData.employees[newEmployee];
-    console.log(newEmployee);
 
     if (selectedEmployee) {
       selectedEmployee.documents = {
@@ -97,7 +95,7 @@ function RegisterDepartment() {
       !userData.name ||
       !userData.size ||
       !userData.location ||
-      !userData.area ||
+      !userData.idEmployee ||
       !userData.leader ||
       !userData.level
     ) {
@@ -119,10 +117,9 @@ function RegisterDepartment() {
           name: "",
           size: 0,
           location: "",
-          area: "",
+          idEmployee: "",
           leader: "",
           level: "",
-          mainDepartment: false,
           subDepartment: "",
           employees: {},
         });
@@ -134,22 +131,35 @@ function RegisterDepartment() {
     setIsCheckedS(!isCheckedS);
   };
 
-  const handleImageUpload = async (event) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     event.preventDefault();
     try {
-      const file = event.target.files[0];
-      const url = await upLoadImage(file);
-      setImage(url);
+      if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
+        const url = await upLoadImage(file);
+        setImage(url);
+      } else {
+        alert("Please select a file");
+      }
     } catch (error) {
       alert("Failed to upload image");
     }
   };
-  const handleDocumentsUpload = async (event) => {
+
+  const handleDocumentsUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     event.preventDefault();
     try {
-      const file = event.target.files[0];
-      const url = await upLoadFile(file);
-      setUrl(url);
+      if (event.target.files && event.target.files.length > 0) {
+        const file = event.target.files[0];
+        const url = await upLoadFile(file);
+        setUrl(url);
+      } else {
+        alert("Please select a file");
+      }
     } catch (error) {
       alert("Failed to upload file");
     }
@@ -187,10 +197,10 @@ function RegisterDepartment() {
         />
         <input
           type="text"
-          name="area"
-          value={userData.area}
+          name="idEmployee"
+          value={userData.idEmployee}
           onChange={handleInputChangeD}
-          placeholder="Area to which it belongs"
+          placeholder="Folio employ"
           className="border rounded-md px-3 py-2"
         />
         <input
@@ -209,47 +219,16 @@ function RegisterDepartment() {
           placeholder="Level to which it belongs"
           className="border rounded-md px-3 py-2"
         />
-        <label htmlFor="mainDepartment" className="flex items-center">
-          <input
-            type="checkbox"
-            name="mainDepartment"
-            checked={userData.mainDepartment}
-            onChange={() =>
-              setUserData((prevUserData) => ({
-                ...prevUserData,
-                mainDepartment: !prevUserData.mainDepartment,
-              }))
-            }
-            className="form-checkbox h-4 w-4 text-blue-500"
-          />
-          <span className="ml-2 text-gray-700">
-            {userData.mainDepartment
-              ? "Main Department"
-              : "Secondary Department"}
-          </span>
-        </label>
 
-        {!userData.mainDepartment && (
-          <>
-            <label>
-              <input
-                type="checkbox"
-                checked={isCheckedS}
-                onChange={handleCheckboxChangeS}
-              />
-              Secondary Department
-            </label>
-            {isCheckedS && (
-              <input
-                type="text"
-                name="subDepartment"
-                value={userData.subDepartment}
-                onChange={handleInputChangeD}
-                placeholder="Department to which it belongs"
-                className="border rounded-md px-3 py-2"
-              />
-            )}
-          </>
+        {isCheckedS && (
+          <input
+            type="text"
+            name="subDepartment"
+            value={userData.subDepartment}
+            onChange={handleInputChangeD}
+            placeholder="Department to which it belongs"
+            className="border rounded-md px-3 py-2"
+          />
         )}
 
         <button

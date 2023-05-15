@@ -1,10 +1,10 @@
-
 import React, { useState } from "react";
-import { UserData } from "../../interface/employee/"
+import { UserData } from "../../interface/employee/";
 import PrincipalData from "./components/principalData/PrincipalData";
 import UpdateData from "./components/updateData/UpdateData";
 import Schedule from "./components/schedule/Schedule";
 import Brands from "./components/brands/Brands";
+import ImageEmployee from "./components/imageEmployee/ImageEmployee";
 
 interface RegisterProps {
   user?: UserData;
@@ -19,7 +19,6 @@ function Register(props: RegisterProps) {
   const [userData, setUserData] = useState<UserData>(() => {
     if (props.user) {
       setUpDate(true);
-      console.log(props.user);
       return props.user;
     } else {
       return {
@@ -33,12 +32,12 @@ function Register(props: RegisterProps) {
         jobPosition: "",
         salary: 0,
         enabled: true,
-        idDepartment: 0,
+        idDepartment: "",
         password: "",
         email: "",
         boss: "",
         schedule: [],
-        brands: [],
+        brands: [], 
         option: "register",
       };
     }
@@ -51,8 +50,6 @@ function Register(props: RegisterProps) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    console.log("Data: " + JSON.stringify(userData));
 
     fetch("/api/employees", {
       method: "POST",
@@ -76,7 +73,7 @@ function Register(props: RegisterProps) {
       jobPosition: "",
       salary: 0,
       enabled: true,
-      idDepartment: 0,
+      idDepartment: "",
       password: "",
       email: "",
       boss: "",
@@ -88,8 +85,6 @@ function Register(props: RegisterProps) {
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    console.log("Nuevo usuario:", userData);
 
     fetch(`/api/employees/${userData.uid}`, {
       method: "PUT",
@@ -114,12 +109,11 @@ function Register(props: RegisterProps) {
   };
 
   const handleScheduleChange = (newSchedule: any) => {
-    console.log(userData)
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 
   const handleBrandChange = (newBrand: any) => {
-    console.log(userData)
+   
     setUserData((prevUserData) => ({ ...prevUserData, brands: newBrand }));
   };
 
@@ -128,10 +122,14 @@ function Register(props: RegisterProps) {
       {upDate ? (
         <UpdateData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleUpdate} handleScheduleChange={handleScheduleChange} />
       ) : (
-        < PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
+        <PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
       )}
 
-        <Brands handleBrandsChange ={handleBrandChange}/>
+        <ImageEmployee userData={userData} handleSubmit={function (event: React.FormEvent<HTMLFormElement>): void {
+        throw new Error("Function not implemented.");
+      } }/>
+
+        {/* <Brands handleBrandsChange ={handleBrandChange}/> */}
 
     </div>
   );
