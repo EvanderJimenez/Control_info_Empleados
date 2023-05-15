@@ -14,16 +14,18 @@
   font-weight: 600;
   color: black;
 }
-input {
+.EspecialInput{
   color:#181818;
+  background-color: transparent;
+  color:#ccc;
 }
 input::placeholder{
   color:#454fce;
+  
 }
 input[type="date"]{
   background-color: #5F5F5D  ;
   border-color: #ccc;
-
 }
 .title-font {
   color: #dfe0dc;
@@ -83,7 +85,7 @@ textarea {
   max-height: 100vh;
 }
 .zoom:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
   transition: all 0.3s ease-in-out;
 }
 /*for Chrome*/
@@ -156,19 +158,4 @@ button:active {
   }
 }
 
-html, body {
-  height: 100%;
-}
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
-
-footer {
-  flex-shrink: 0;
-}
