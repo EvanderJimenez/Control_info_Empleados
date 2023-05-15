@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 
-const Admin = () => {
+const AdminDepartment = () => {
   const [showInput, setShowInput] = useState(false);
 
   const handleCheckboxChange = (event) => {
     setShowInput(event.target.checked);
   };
+
   return (
     <div className="min-height-full flex">
       <div className="hidden lg:block relative h-full flex-1">
         <img
           src="https://www.dtic.una.ac.cr/images/img-generales/rectoria-peq.jpg"
           alt="Department"
-          id="height"
-          className="h-full"
+          className="h-max"
         />
       </div>
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -127,154 +127,147 @@ const Admin = () => {
                   </div>
                 )}
               </div>
-              <link
-                href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-                rel="stylesheet"
-              />
-              <div className="flex items-center justify-center min-h-screen bg-gray-900">
-                <div className="col-span-12">
-                  <div className="overflow-auto lg:overflow-visible ">
-                    <table className="table  text-gray-400 border-separate space-y-6 text-sm ">
-                      <thead className="bg-gray-800 text-gray-500">
-                        <tr>
-                          <th className="p-3">Employees</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="bg-gray-800">
-                          <td className="p-3">
-                            <div className="flex align-items-center">
-                              <img
-                                className="rounded-full h-12 w-12  object-cover"
-                                src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80"
-                                alt="unsplash image"
-                              />
-                              <div className="ml-3">
-                                <div className="">Appple</div>
-                                <div className="text-gray-500">
-                                  mail@rgmail.com
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="p-3 ">
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100 mr-2"
-                            >
-                              <i className="material-icons-outlined text-base">
-                                visibility
-                              </i>
-                            </a>
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100  mx-2"
-                            >
-                              <i className="material-icons-outlined text-base">
-                                edit
-                              </i>
-                            </a>
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100  ml-2"
-                            >
-                              <i className="material-icons-round text-base">
-                                delete_outline
-                              </i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr className="bg-gray-800">
-                          <td className="p-3">
-                            <div className="flex align-items-center">
-                              <img
-                                className="rounded-full h-12 w-12   object-cover"
-                                src="https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-                                alt="unsplash image"
-                              />
-                              <div className="ml-3">
-                                <div className="">Realme</div>
-                                <div className="text-gray-500">
-                                  mail@rgmail.com
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="p-3">
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100  mr-2"
-                            >
-                              <i className="material-icons-outlined text-base">
-                                visibility
-                              </i>
-                            </a>
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100 mx-2"
-                            >
-                              <i className="material-icons-outlined text-base">
-                                edit
-                              </i>
-                            </a>
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100 ml-2"
-                            >
-                              <i className="material-icons-round text-base">
-                                delete_outline
-                              </i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr className="bg-gray-800">
-                          <td className="p-3">
-                            <div className="flex align-items-center">
-                              <img
-                                className="rounded-full h-12 w-12   object-cover"
-                                src="https://images.unsplash.com/photo-1600856209923-34372e319a5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2135&q=80"
-                                alt="unsplash image"
-                              />
-                              <div className="ml-3">
-                                <div className="">Samsung</div>
-                                <div className="text-gray-500">
-                                  mail@rgmail.com
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="p-3">
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100 mr-2"
-                            >
-                              <i className="material-icons-outlined text-base">
-                                visibility
-                              </i>
-                            </a>
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100 mx-2"
-                            >
-                              <i className="material-icons-outlined text-base">
-                                edit
-                              </i>
-                            </a>
-                            <a
-                              href="#"
-                              className="text-gray-400 hover:text-gray-100 ml-2"
-                            >
-                              <i className="material-icons-round text-base">
-                                delete_outline
-                              </i>
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Save Department
+              </button>
+            </form>
+            <div id="app" className="container mx-auto p-4">
+              <table
+                id="employee-table"
+                className="min-w-full bg-white border border-gray-300"
+              >
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4 border-b">Name</th>
+                    <th className="py-2 px-4 border-b">Department</th>
+                    <th className="py-2 px-4 border-b">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="py-2 px-4 border-b">1</td>
+                    <td className="py-2 px-4 border-b">John Doe</td>
+                    <td className="py-2 px-4 border-b">IT</td>
+                    <td className="py-2 px-4 border-b">
+                      <button className="text-red-500 hover:text-red-700 mr-2">
+                        Delete
+                      </button>
+                      <button className="text-blue-500 hover:text-blue-700">
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-4 border-b">2</td>
+                    <td className="py-2 px-4 border-b">Jane Smith</td>
+                    <td className="py-2 px-4 border-b">HR</td>
+                    <td className="py-2 px-4 border-b">
+                      <button className="text-red-500 hover:text-red-700 mr-2">
+                        Delete
+                      </button>
+                      <button className="text-blue-500 hover:text-blue-700">
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <form id="employee-form">
+              <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Name:
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                />
               </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="description"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Description:
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                ></textarea>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="image"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Image:
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Save Employee
+              </button>
+            </form>
+            <form id="documents-form" className="mt-4">
+              <div className="mb-1">
+                <label
+                  htmlFor="type"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Type Documents:
+                </label>
+                <input
+                  type="text"
+                  id="type"
+                  name="type"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                />
+              </div>
+              <div className="mb-1">
+                <label
+                  htmlFor="documents"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Documents:
+                </label>
+                <input
+                  type="file"
+                  id="documents"
+                  name="documents"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+                  multiple
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Add Documents
+              </button>
             </form>
           </div>
         </div>
@@ -283,4 +276,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminDepartment;
