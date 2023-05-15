@@ -3,7 +3,9 @@ import React, { useState } from "react";
 const AdminDepartment = () => {
   const [showInput, setShowInput] = useState(false);
 
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event: {
+    target: { checked: boolean | ((prevState: boolean) => boolean) };
+  }) => {
     setShowInput(event.target.checked);
   };
 
@@ -16,7 +18,48 @@ const AdminDepartment = () => {
           className="h-max"
         />
       </div>
+
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        <div>
+          <form className="flex items-center">
+            <label htmlFor="voice-search" className="sr-only">
+              Search
+            </label>
+            <div className="relative w-full">
+              <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <svg
+                  aria-hidden="true"
+                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="voice-search"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search Department Name"
+              />
+              <button
+                type="button"
+                className="flex absolute inset-y-0 right-0 items-center pr-3"
+              ></button>
+            </div>
+            <button
+              type="submit"
+              className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Search
+            </button>
+          </form>
+        </div>
         <div className="mx-auto w-full max-w-sm lg:max-w-lg:w-[100rem]">
           <div className="text-center lg:text-left">
             <img src="" alt="" className="h-12 w-auto  lg:m-0" />
@@ -135,41 +178,35 @@ const AdminDepartment = () => {
               </button>
             </form>
             <div id="app" className="container mx-auto p-4">
-              <table
-                id="employee-table"
-                className="min-w-full bg-white border border-gray-300"
-              >
-                <thead>
-                  <tr>
-                    <th className="py-2 px-4 border-b">Name</th>
-                    <th className="py-2 px-4 border-b">Department</th>
-                    <th className="py-2 px-4 border-b">Actions</th>
+              <table className="min-w-full border-collapse block md:table">
+                <thead className="block md:table-header-group">
+                  <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
+                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
+                      Name
+                    </th>
+
+                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-2 px-4 border-b">1</td>
-                    <td className="py-2 px-4 border-b">John Doe</td>
-                    <td className="py-2 px-4 border-b">IT</td>
-                    <td className="py-2 px-4 border-b">
-                      <button className="text-red-500 hover:text-red-700 mr-2">
-                        Delete
-                      </button>
-                      <button className="text-blue-500 hover:text-blue-700">
-                        Edit
-                      </button>
+                <tbody className="block md:table-row-group">
+                  <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
+                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
+                      <span className="inline-block w-1/3 md:hidden font-bold">
+                        Name
+                      </span>
+                      Jose
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 px-4 border-b">2</td>
-                    <td className="py-2 px-4 border-b">Jane Smith</td>
-                    <td className="py-2 px-4 border-b">HR</td>
-                    <td className="py-2 px-4 border-b">
-                      <button className="text-red-500 hover:text-red-700 mr-2">
-                        Delete
-                      </button>
-                      <button className="text-blue-500 hover:text-blue-700">
+                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
+                      <span className="inline-block w-1/3 md:hidden font-bold">
+                        Actions
+                      </span>
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">
                         Edit
+                      </button>
+                      <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">
+                        Delete
                       </button>
                     </td>
                   </tr>
