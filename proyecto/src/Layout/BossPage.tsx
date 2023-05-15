@@ -10,9 +10,7 @@ const BossPage = ({ children }: LayoutProps) => {
     <div className="bg-gray-900 w-full h-full">
       <Top />
       <main>{children}</main>
-      <footer>
-        <Foot/>
-      </footer>
+      <Foot />
     </div>
   );
 };
