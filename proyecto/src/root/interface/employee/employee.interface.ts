@@ -28,14 +28,12 @@ export interface LoginEP {
   password: string;
 }
 
-export interface Brands{
-
-  date: string,
-  startTime: string,
-  endTime: string,
-  justification: string,
-  finished: boolean
-
+export interface Brands {
+  date: string;
+  startTime: string;
+  endTime: string;
+  justification: string;
+  finished: boolean;
 }
 export interface EmployeePage {
   name: string;
@@ -47,9 +45,18 @@ export interface Row {
   name: string;
   cedula: number;
   email: string;
-  late:number
+  late: number;
 }
 
 export interface TableProps {
   rows: Row[];
+}
+export interface RowSchedule {
+  name: string;
+  cedula: number;
+  entryTime: string;
+  exitTime: string;
+}
+export interface TableScheduleProps {
+  rows: RowSchedule[];
 }
