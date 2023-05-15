@@ -6,7 +6,7 @@ import ListEmployee from "@/root/components/listEmployee/ListEmployee";
 export default function index() {
   return (
     <EmployeeMain>
-      <ListEmployee />
+      <MainBodyEmployee />
     </EmployeeMain>
   );
 }
