@@ -125,30 +125,10 @@ function RegisterBrands() {
       <form onSubmit={handleSubmitCycle}>
         <button type="submit">Agregar Ciclo</button>
       </form>
-      <form
-        onSubmit={handleSubmit}
-        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1"
-      >
-        <input
-          type="text"
-          name="newCycle"
-          value={newCycle}
-          onChange={(event) => setNewCycle(event.target.value)}
-          placeholder="New Cycle"
-          className="border rounded-md px-3 py-2"
-        />
-        <input
-          type="text"
-          name="idEmployee"
-          value={brandData.idEmployee}
-          onChange={handleInputChange}
-          placeholder="ID Employee"
-          className="border rounded-md px-3 py-2"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1">
+        <input type="text" name="newCycle" value={newCycle} onChange={(event) => setNewCycle(event.target.value)} placeholder="New Cycle" className="border rounded-md px-3 py-2" />
+        <input type="text" name="idEmployee" value={brandData.idEmployee} onChange={handleInputChange} placeholder="ID Employee" className="border rounded-md px-3 py-2" />
+        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           save
         </button>
         <p>Fecha actual: {currentDate}</p>
@@ -161,10 +141,7 @@ function RegisterBrands() {
             <span className="mr-2 font-bold">Name:</span>
             <span>{key}</span>
             <span className="ml-4 mr-2 font-bold">Information Personal:</span>
-            <button
-              onClick={() => setNewCycle(key)}
-              className="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-            >
+            <button onClick={() => setNewCycle(key)} className="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
               Select
             </button>
           </div>
@@ -175,20 +152,10 @@ function RegisterBrands() {
           <label htmlFor="newCycle" className="mr-2 font-bold">
             Employees Name:
           </label>
-          <input
-            type="text"
-            name="newCycle"
-            value={newCycle}
-            onChange={(e) => setNewCycle(e.target.value)}
-            placeholder="Employee's name"
-            className="border rounded-md px-3 py-2"
-          />
+          <input type="text" name="newCycle" value={newCycle} onChange={(e) => setNewCycle(e.target.value)} placeholder="Employee's name" className="border rounded-md px-3 py-2" />
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
+        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           jajajaj
         </button>
       </form>
@@ -196,10 +163,7 @@ function RegisterBrands() {
         <form onSubmit={handleSubmitHours} className="space-y-4">
           <p>Fecha actual: {currentDate}</p>
           <p>Hora actual: {currentTime}</p>
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-          >
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
             Guardar Horas
           </button>
         </form>

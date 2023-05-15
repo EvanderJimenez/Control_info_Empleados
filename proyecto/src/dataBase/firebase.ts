@@ -3,13 +3,7 @@ import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import "firebase/compat/auth";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { v4 } from "uuid";
 import { getAuth } from "firebase/auth";
 
