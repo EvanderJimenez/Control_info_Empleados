@@ -42,5 +42,14 @@ export interface EmployeePage {
   department: string;
   entryTime: string;
   exitTime: string;
+}
+export interface Row {
+  name: string;
+  cedula: number;
+  email: string;
+  late:number
+}
 
+export interface TableProps {
+  rows: Row[];
 }

@@ -1,31 +1,23 @@
 import React from "react";
+import SearchInput from "../searchInput/SearchInput";
 
 export default function EditEmployeeSection() {
   return (
     <>
       <form className="bg-SecondaryColor p-6">
         <div className="mb-6 flex flex-row space-x-4">
+          <SearchInput labelInputSeekerOne="email" labelInputSeekerTwo="text" placeholderSeekerOne="Enter the email to search" placeholderSeekerTwo="Enter the name to search" />
           <div className="flex flex-col flex-1">
             <label htmlFor="Name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Name
             </label>
-            <input
-              type="text"
-              id="Name"
-              className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5"
-              required
-            />
+            <input type="text" id="Name" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="IDnumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               ID number
             </label>
-            <input
-              type="number"
-              id="IDnumber"
-              className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"
-              required
-            />
+            <input type="number" id="IDnumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -33,23 +25,13 @@ export default function EditEmployeeSection() {
             <label htmlFor="Surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Surname
             </label>
-            <input
-              type="text"
-              id="Surname"
-              className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"
-              required
-            />
+            <input type="text" id="Surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="Second-surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Second surname
             </label>
-            <input
-              type="text"
-              id="Second-surname"
-              className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5"
-              required
-            />
+            <input type="text" id="Second-surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -57,23 +39,13 @@ export default function EditEmployeeSection() {
             <label htmlFor="Job-position" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Job position
             </label>
-            <input
-              type="text"
-              id="Job-position"
-              className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5"
-              required
-            />
+            <input type="text" id="Job-position" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="PhoneNumber" className="block mb-2 text-sm font-medium text-gray-900  dark:text-white">
               Phone Number
             </label>
-            <input
-              type="number"
-              id="PhoneNumber"
-              className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"
-              required
-            />
+            <input type="number" id="PhoneNumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -81,12 +53,7 @@ export default function EditEmployeeSection() {
             <label htmlFor="Salary" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Salary
             </label>
-            <input
-              type="number"
-              id="Salary"
-              className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full "
-              required
-            />
+            <input type="number" id="Salary" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full " required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
