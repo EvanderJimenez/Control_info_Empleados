@@ -14,7 +14,17 @@
   font-weight: 600;
   color: black;
 }
+input {
+  color:#181818;
+}
+input::placeholder{
+  color:#454fce;
+}
+input[type="date"]{
+  background-color: #5F5F5D  ;
+  border-color: #ccc;
 
+}
 .title-font {
   color: #dfe0dc;
   border-color: red;
@@ -100,6 +110,7 @@ textarea {
 body {
   width: 100%;
   height: 100%;
+  min-height: 100vh;
 }
 .EliminatedButton {
   background-color: #e84443;
@@ -122,6 +133,14 @@ input[type="datetime-local"] {
   border-radius: 4px;
   color: #454fce;
 }
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+}
 
 button:active {
   animation-name: rotate;
@@ -135,4 +154,21 @@ button:active {
   to {
     transform: rotate(5deg);
   }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  flex-shrink: 0;
 }

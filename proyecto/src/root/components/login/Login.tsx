@@ -55,13 +55,11 @@ function Login() {
 
             console.log(dataDepartment);
 
-            if (dataEmplo.jobPosition === "employee" && dataDepartment.leader !== dataEmplo.uid) {
+            if (dataDepartment.leader !== dataEmplo.uid) {
               router.push("/home/EmployeeMain");
-            } else if (dataEmplo.jobPosition === "Boss" && dataDepartment.leader === dataEmplo.uid) {
-              //setIsLoggedIn(true);
-              console.log("soy Boss");
+            } else if (dataDepartment.leader === dataEmplo.uid) {
+              router.push("/home/EmployeeMain")
             } else if (dataEmplo.jobPosition === "Admin") {
-              //setIsLoggedIn(true);
               router.push("/home/AdminMain");
             }
           } else {
