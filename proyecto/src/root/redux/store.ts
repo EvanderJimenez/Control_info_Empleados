@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { EmployeeReducer } from "./redurcers/emp-reducer/EmpReducer";
+import { EmployeeReducer } from "./redurcers/employee-reducer/EmployeeReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {

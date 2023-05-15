@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
     const { type } = JSON.parse(isLogin.value);
     if (type === 'employee' && url.pathname !== '/home/EmployeeMain') {
       console.log("Redirigiendo a /home/EmployeeMain");
-      url.pathname = "/home/EmployeeMain";
+      url.pathname = "/home/AdminMain";
       return NextResponse.redirect(url);
     }  else if (type === 'admin' && url.pathname !== '/home/AdminMain') {
       url.pathname = "/home/AdminMain";
