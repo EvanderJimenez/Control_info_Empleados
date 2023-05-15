@@ -1,26 +1,26 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listOfEmployee } from "../../redux/thunks/employee-thunk/employee.thunk";
+import { listOfEmployee,deletingEmployee  } from "../../redux/thunks/employee-thunk/employee.thunk";
 
 import { RootState } from "../../redux/store";
-import Register from "../registerEmployee/Register";
-import { UserData } from "@/root/interface/employee";
+
 
 const ListEmployee = () => {
   const dispatch = useDispatch();
   const employees = useSelector((state: RootState) => state.employeesList.employees);
+  console.log(employees)
+
 
   useEffect(() => {
     dispatch(listOfEmployee());
-    console.log(employees)
   }, [dispatch]);
 
   const handleDelete = (uid: string) => {
-    // Implementa la lógica para eliminar un empleado utilizando Redux
-  };
+   dispatch(deletingEmployee(uid));
+ };
 
   const handleUpdate = (uid: string) => {
-    // Implementa la lógica para actualizar un empleado utilizando Redux
+    ///TODO
   };
 
 
@@ -49,7 +49,6 @@ const ListEmployee = () => {
             </div>
           ))}
         </>
-      
     </div>
   );
 };

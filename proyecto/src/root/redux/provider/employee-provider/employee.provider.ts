@@ -1,6 +1,6 @@
 import { DeleteEmployee,ListEmployees } from "@/root/types/Employee.type";
 
-export const employeeProvider = async (searchTerm: string): Promise<DeleteEmployee | undefined> => {
+export const employeeProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "DELETE",

@@ -15,7 +15,7 @@ export const initialState: EmployeeState = {
 
 type EmployeeAction = {
   type: string;
-  delete?: EmployeeState;
+  employee?: EmployeeState;
 };
 
 
@@ -25,8 +25,7 @@ export const EmployeeSlice = createSlice({
 
   reducers: {
     deleteEmp: (state, action: PayloadAction<DeleteEmployee>) => {
-      return  {...state,deleteEmployee:action.payload}
-      //state.deleteEmployee = action.payload; //we add the deleted employee in the state.deleteEmployee with the payload function
+      state.deleteEmployee = action.payload
     },
     listEmp: (state,action: PayloadAction<ListEmployees[]>) => {
       state.employees = action.payload 
