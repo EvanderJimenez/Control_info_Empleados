@@ -5,6 +5,7 @@ import MainBoss from "../mainBoss/MainBoss";
 import router from "next/router";
 import { LoginEP, UserData } from "../../interface/employee/";
 import FormLogin from "./components/FormLogin";
+import { setCookie } from "cookies-next";
 
 function Login() {
   const [data, setData] = useState<LoginEP>(() => {
@@ -42,7 +43,7 @@ function Login() {
         if (response.ok) {
           const dataEmplo = await response.json();
           console.log("Job Position: " + dataEmplo.idDepartment);
-          
+
 
           const resDepart = await fetch(`/api/departments/${dataEmplo.idDepartment}`,{
             method: "Get",
@@ -57,16 +58,27 @@ function Login() {
             console.log(dataDepartment);
   
   
-            if ((dataEmplo.jobPosition === "employee")  && (dataDepartment.leader !== dataEmplo.uid)) {
-  
-  
-  
+            if ((dataDepartment.leader !== dataEmplo.uid)) {
+
+              const expirationDate = new Date(Date.now() + 86400 * 1000);
+
+              const cookieValue = JSON.stringify({
+                logged: true,
+                type: 'employee'
+              });
+              
+              setCookie('logged', cookieValue, {
+                path: '/',
+                expires: expirationDate
+              });
+
               router.push("/home/EmployeeMain");
-            } else if ((dataEmplo.jobPosition === "Boss") && (dataDepartment.leader === dataEmplo.uid)) {
+            } else if ((dataDepartment.leader === dataEmplo.uid)) {
               //setIsLoggedIn(true);
-              console.log("soy Boss");
+
             } else if (dataEmplo.jobPosition === "Admin") {
               //setIsLoggedIn(true);
+
               router.push("/home/AdminMain");
             }
           }else{

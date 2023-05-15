@@ -34,12 +34,12 @@ function Register(props: RegisterProps) {
         jobPosition: "",
         salary: 0,
         enabled: true,
-        idDepartment: 0,
+        idDepartment: "",
         password: "",
         email: "",
         boss: "",
         schedule: [],
-        brands: [],
+        brands: [], 
         option: "register",
       };
     }
@@ -77,7 +77,7 @@ function Register(props: RegisterProps) {
       jobPosition: "",
       salary: 0,
       enabled: true,
-      idDepartment: 0,
+      idDepartment: "",
       password: "",
       email: "",
       boss: "",
