@@ -43,15 +43,12 @@ function Login() {
         if (response.ok) {
           const dataEmplo = await response.json();
 
-          const resDepart = await fetch(
-            `/api/departments/${dataEmplo.idDepartment}`,
-            {
-              method: "Get",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          const resDepart = await fetch(`/api/departments/${dataEmplo.idDepartment}`, {
+            method: "Get",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
 
           if (resDepart.ok) {
             const dataDepartment = await resDepart.json();
@@ -105,19 +102,7 @@ function Login() {
     }
   };
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <ListEmployee />
-      ) : (
-        <FormLogin
-          handleSubmit={handleIngresar}
-          handleInputChange={handleInputChange}
-          loginData={data}
-        />
-      )}
-    </>
-  );
+  return <>{isLoggedIn ? <ListEmployee /> : <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} />}</>;
 }
 
 export default Login;
