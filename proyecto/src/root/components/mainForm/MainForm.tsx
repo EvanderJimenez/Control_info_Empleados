@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Login from "../login/Login";
 import Register from "../registerEmployee/Register";
 import ListEmployee from "../listEmployee/ListEmployee";
-import { Top } from "../header/Top";
+import { Top } from "../top/Top";
 import { Foot } from "../foot/Foot";
 
 export const MainForm = ({}) => {

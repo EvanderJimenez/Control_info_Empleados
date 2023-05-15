@@ -1,5 +1,5 @@
 import { Foot } from "@/root/components/foot/Foot";
-import { Top } from "@/root/components/header/Top";
+import { Top } from "@/root/components/top/Top";
 import { ReactNode } from "react";
 
 type LayoutProps = {
