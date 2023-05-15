@@ -1,20 +1,34 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
-import brandsProvider from "@/dataBase/firebase/providers/brands/brands.provider";
+import departmentProvider from "../../../dataBase/firebase/providers/brands/brands.provider";
 
 const getAll = async (res: NextApiResponse) => {
-    try {
-      const brands = await brandsProvider.getAll();
-      res.status(200).json(brands);
-    } catch (error) {
-      res.status(500).json({ message: (error as Error).message });
-    }
-  };
+  try {
+    const departments = await departmentProvider.getAllBrands();
+    res.status(200).json(departments);
+  } catch (error) {
+    res.status(500).json({ message: (error as Error).message });
+  }
+};
 
-  
+const create = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const { idEmployee, cycle } = req.body;
 
-  const handlers: any = {};
+    const newDepartment = await departmentProvider.createBrands(
+      idEmployee,
+      cycle
+    );
+    res.status(201).json(newDepartment);
+  } catch (error) {
+    res.status(500).json({ message: (error as Error).message });
+  }
+};
+
+const handlers: any = {};
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
+handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) =>
+  create(req, res);
 
 export default async function brandsController(
   req: NextApiRequest,

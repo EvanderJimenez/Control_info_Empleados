@@ -1,11 +1,11 @@
 export interface Brands {
-    id: string;
-    name: string;
-    size: number;
-    location: string;
-    area: string;
-    leader: string;
-    level: string;
-    mainDepartment: boolean;
-  }
-  
+  idEmployee: string;
+  cycle: { [key: string]: Cycle };
+}
+export interface Cycle {
+  hours: { [key: string]: Hours };
+}
+export interface Hours {
+  hFin: string;
+  hIni: string;
+}

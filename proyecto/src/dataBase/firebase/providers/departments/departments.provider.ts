@@ -1,4 +1,4 @@
-import { firestore } from "../../firebase";
+import { firestore } from "@/dataBase/firebase";
 import { Employee, Documents } from "@/root/interface/departments";
 import {
   collection,
@@ -32,10 +32,9 @@ async function create(
   name: string,
   size: number,
   location: string,
-  area: string,
+  idEmployee: string,
   leader: string,
   level: string,
-  mainDepartment: boolean,
   subDepartment: string,
   employees: Employee
 ): Promise<{ message: string; departments?: any }> {
@@ -44,10 +43,9 @@ async function create(
       name,
       size,
       location,
-      area,
+      idEmployee,
       leader,
       level,
-      mainDepartment,
       subDepartment,
       employees,
     });
@@ -83,16 +81,15 @@ const getByDocId = async (docId: string) => {
 };
 
 const updateById = async (
+  id: string,
   name: string,
   size: number,
   location: string,
-  area: string,
+  idEmployee: string,
   leader: string,
   level: string,
-  mainDepartment: boolean,
   subDepartment: string,
-  employees: Employee,
-  {}
+  employees: Employee
 ) => {
   try {
     const departmentsRef = collection(firestore, "departments");
@@ -105,13 +102,13 @@ const updateById = async (
         querySnapshot.docs[0].id
       );
       await updateDoc(departmentsDoc, {
+        id,
         name,
         size,
         location,
-        area,
+        idEmployee,
         leader,
         level,
-        mainDepartment,
         subDepartment,
         employees,
       });
