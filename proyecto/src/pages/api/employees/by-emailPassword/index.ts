@@ -12,7 +12,6 @@ const getByEmailPassword = async (
   console.log("password: ", password);
   try {
     const employee = await employeeProvider.getByEmailPassword(email, password);
-    //const employee = await employeeProvider.getByEmailPassword("darvar2k@gmail.com" ,"12345678" );
     res.status(200).json(employee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });

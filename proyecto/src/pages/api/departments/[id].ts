@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 async function getDocId(req: NextApiRequest, res: NextApiResponse) {
   const id = String(req.query.id);
-  console.log("id " + id);
   try {
     const employee = await departmentProvider.getByDocId(id);
     res.status(200).json(employee);
@@ -54,7 +53,7 @@ handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>
   updateId(req, res);
 
-export default function employeesByIdController(
+export default function departmentsByIdController(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

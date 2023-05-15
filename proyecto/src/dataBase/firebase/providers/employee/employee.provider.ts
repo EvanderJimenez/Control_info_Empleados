@@ -211,7 +211,6 @@ const getByEmailPassword = async (email: string, password: string) => {
       if (!employeeDoc) {
         throw new Error("No employee found with that email and password");
       }
-    console.log("hola "+employeeDoc.data())
       return employeeDoc.data();
     }
   } catch (error) {

@@ -4,7 +4,6 @@ import {
   listOfEmployee,
   deletingEmployee,
 } from "../../redux/thunks/employee-thunk/employee.thunk";
-
 import { RootState } from "../../redux/store";
 
 const ListEmployee = () => {
@@ -15,7 +14,6 @@ const ListEmployee = () => {
   const deletedEmployee = useSelector(
     (state: RootState) => state.generalStore.deleteEmployee
   );
-  console.log(employees);
 
   useEffect(() => {
     dispatch(listOfEmployee());
@@ -34,7 +32,7 @@ const ListEmployee = () => {
       <>
         {Array.isArray(employees) &&
           employees
-            .filter((item) => item.enabled) // Filtrar solo los empleados con enabled en true
+            .filter((item) => item.enabled)
             .map((item) => (
               <div
                 key={item.uid}

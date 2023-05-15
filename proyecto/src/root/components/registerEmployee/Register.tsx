@@ -19,7 +19,6 @@ function Register(props: RegisterProps) {
   const [userData, setUserData] = useState<UserData>(() => {
     if (props.user) {
       setUpDate(true);
-      console.log(props.user);
       return props.user;
     } else {
       return {
@@ -51,8 +50,6 @@ function Register(props: RegisterProps) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    console.log("Data: " + JSON.stringify(userData));
 
     fetch("/api/employees", {
       method: "POST",
@@ -89,8 +86,6 @@ function Register(props: RegisterProps) {
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("Nuevo usuario:", userData);
-
     fetch(`/api/employees/${userData.uid}`, {
       method: "PUT",
       headers: {
@@ -114,12 +109,11 @@ function Register(props: RegisterProps) {
   };
 
   const handleScheduleChange = (newSchedule: any) => {
-    console.log(userData);
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 
   const handleBrandChange = (newBrand: any) => {
-    console.log(userData);
+   
     setUserData((prevUserData) => ({ ...prevUserData, brands: newBrand }));
   };
 

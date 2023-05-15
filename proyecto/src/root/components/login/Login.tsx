@@ -42,7 +42,6 @@ function Login() {
 
         if (response.ok) {
           const dataEmplo = await response.json();
-          console.log("Job Position: " + dataEmplo.idDepartment);
 
           const resDepart = await fetch(
             `/api/departments/${dataEmplo.idDepartment}`,
@@ -56,8 +55,6 @@ function Login() {
 
           if (resDepart.ok) {
             const dataDepartment = await resDepart.json();
-
-            console.log(dataDepartment);
 
             const expirationDate = new Date(Date.now() + 86400 * 1000);
 
@@ -97,7 +94,6 @@ function Login() {
               router.push("/home/AdminMain");
             }
           } else {
-            console.log(dataEmplo.idDepartment);
           }
         } else {
           setErrorEmailPass(true);

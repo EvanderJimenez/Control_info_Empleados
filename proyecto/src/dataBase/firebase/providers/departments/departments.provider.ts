@@ -14,7 +14,6 @@ import {
 } from "firebase/firestore";
 
 const getAll = async () => {
-  console.log("Hola");
   const departmentsCollection = collection(firestore, "departments");
   const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     departmentsCollection
@@ -73,7 +72,6 @@ async function create(
 }
 
 const getByDocId = async (docId: string) => {
-  console.log("Id 2 :" + docId);
   const departmentsDocRef = doc(collection(firestore, "departments"), docId);
   const departmentsDocSnapshot = await getDoc(departmentsDocRef);
 

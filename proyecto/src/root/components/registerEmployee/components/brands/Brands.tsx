@@ -26,7 +26,6 @@ const Brands = ({handleBrandsChange}: BrandsProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formValues);
 
     const newBrand = [
         {

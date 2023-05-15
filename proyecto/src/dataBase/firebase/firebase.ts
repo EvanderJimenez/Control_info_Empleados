@@ -26,14 +26,14 @@ export { firestore, auth };
 
 const storage = getStorage(app);
 
-export async function upLoadImage(file) {
+export async function upLoadImage(file : any) {
   const storageRef = ref(storage, "/imageEmployee/" + v4());
   await uploadBytes(storageRef, file);
   const url = await getDownloadURL(storageRef);
   return url;
 }
 
-export async function upLoadFile(file) {
+export async function upLoadFile(file : any) {
   const storageRef = ref(storage, "/documentsEmployee/" + v4());
   await uploadBytes(storageRef, file);
   const url = await getDownloadURL(storageRef);
