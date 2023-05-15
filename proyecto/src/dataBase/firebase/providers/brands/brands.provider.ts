@@ -1,4 +1,4 @@
-import { firestore } from "../../firebase";
+import { firestore } from "@/dataBase/firebase";
 import { Brands, Hours } from "@/root/interface/brands";
 import {
   collection,

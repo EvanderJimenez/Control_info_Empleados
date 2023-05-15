@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Brands, Cycle, Hours } from "@/root/interface/brands";
+import { Brands, Hours, Cycle } from "@/root/interface/brands";
 import axios from "axios";
 function RegisterBrands() {
   const [currentDate, setCurrentDate] = useState("");

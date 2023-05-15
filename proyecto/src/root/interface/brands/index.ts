@@ -1,1 +1,1 @@
-export * from './brands.interface';
+export * from "./brands.interface";
