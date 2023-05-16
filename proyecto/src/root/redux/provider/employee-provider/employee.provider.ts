@@ -1,3 +1,4 @@
+import { UserData } from "@/root/interface/employee";
 import { DeleteEmployee,ListEmployees } from "@/root/types/Employee.type";
 
 export const employeeProvider = async (searchTerm: string) => {
@@ -58,4 +59,55 @@ export const employeeListProvider = async () => {
   }
 };
 
+export const createEmployees = async (searchTerm: UserData) => {
+
+  try {
+    const response = await fetch("/api/employees", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(searchTerm),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error creating employee");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+
+  } catch (error) {
+    console.error("Error creating employee:", error);
+    throw error;
+  }
+};
+
+export const upDatEmployeeProvider = async (searchUser: string,searchTerm: UserData) =>{
+
+  try {
+    const response = await fetch(`/api/employees/${searchUser}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(searchTerm)
+    })
+
+    if (!response.ok) {
+      throw new Error("Error uodating employee");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.error("Error creating employee:", error);
+    throw error;
+  }
+
+}
 

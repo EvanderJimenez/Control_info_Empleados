@@ -100,6 +100,9 @@ const create = async (
   brands: Brands[],
 ): Promise<{ message: string; employee?: any }> => {
   try {
+
+    console.log("email: " + email + " password: " + password + " uid: " + uid);
+
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -107,6 +110,8 @@ const create = async (
     );
     const user = userCredential.user;
     uid = user.uid;
+
+    console.log("email: " + email + " password: " + password + " uid: " + uid);
 
     const newDocRef = await addDoc(collection(firestore, "employee"), {
       uid,

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
+/*   const url = request.nextUrl.clone();
   const isLogin = request.cookies.get('logged');
 
   if (!isLogin) {
@@ -21,9 +21,9 @@ export function middleware(request: NextRequest) {
       url.pathname = "/home/BossMain";
       return NextResponse.redirect(url);
     } 
-  } 
+  }
 
-  return NextResponse.next();
+  return NextResponse.next(); */
 }
 
 export const config = {

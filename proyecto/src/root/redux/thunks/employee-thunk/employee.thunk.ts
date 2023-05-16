@@ -1,5 +1,7 @@
-import { DispatchType, deleteEmp, listEmp } from "../../redurcers/employee-reducer/EmployeeReducer";
-import { employeeProvider,employeeListProvider } from "../../provider/employee-provider/employee.provider";
+import { DispatchType, deleteEmp, listEmp, createEmployeesprov,updateEmplo } from "../../redurcers/employee-reducer/EmployeeReducer";
+import { employeeProvider,employeeListProvider, createEmployees, upDatEmployeeProvider } from "../../provider/employee-provider/employee.provider";
+import { UserData } from "@/root/interface/employee";
+
 
 
 
@@ -26,3 +28,37 @@ export const listOfEmployee = (): any => {
     }
   };
 };
+
+export const createEmployee = (searchTerm: UserData) : any => {
+
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const employee = await createEmployees(searchTerm)
+
+      dispatch(createEmployeesprov(employee || null))
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const upDateEmployee = (searchUser: string, searchTerm: UserData): any => {
+
+  return async (dispacth: DispatchType) => {
+
+    try {
+
+      const employee = await upDatEmployeeProvider(searchUser,searchTerm)
+
+      dispacth(updateEmplo(employee || null))
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+
+}

@@ -6,12 +6,22 @@ import Schedule from "./components/schedule/Schedule";
 import Brands from "./components/brands/Brands";
 import ImageEmployee from "./components/imageEmployee/ImageEmployee";
 
+import { useDispatch, useSelector } from "react-redux";
+import {createEmployee} from "../../redux/thunks/employee-thunk/employee.thunk";
+import { RootState } from "../../redux/store";
+
+
 interface RegisterProps {
   user?: UserData;
   onCancel: () => void;
 }
 
 function Register(props: RegisterProps) {
+
+  const dispatch = useDispatch();
+
+  const createEmployeee = useSelector((state: RootState) => state.createEmployee.createEmploye);
+
   const [data, setData] = useState<UserData[]>([]);
 
   const [upDate, setUpDate] = useState<boolean | null>();
@@ -37,7 +47,7 @@ function Register(props: RegisterProps) {
         email: "",
         boss: "",
         schedule: [],
-        brands: [], 
+        brands: [],
         option: "register",
       };
     }
@@ -51,49 +61,17 @@ function Register(props: RegisterProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    fetch("/api/employees", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((res) => res.json())
-      .then((newUser) => setData([...data, newUser]))
-      .catch((error) => console.error("Error al crear nuevo usuario:", error));
+    dispatch(createEmployee(userData));
 
-    setUserData({
-      uid: "",
-      name: "",
-      firstSurname: "",
-      secondSurname: "",
-      cedula: 0,
-      phoneNumber: 0,
-      photo: "",
-      jobPosition: "",
-      salary: 0,
-      enabled: true,
-      idDepartment: "",
-      password: "",
-      email: "",
-      boss: "",
-      schedule: [],
-      brands: [],
-      option: "register",
-    });
+
   };
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    fetch(`/api/employees/${userData.uid}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((res) => res.json())
+    
+
+/*       .then((res) => res.json())
       .then((updatedUser) => {
         setData((prevData) => {
           const newData = [...prevData];
@@ -105,7 +83,7 @@ function Register(props: RegisterProps) {
         });
         props.onCancel();
       })
-      .catch((error) => console.error("Error al actualizar usuario:", error));
+      .catch((error) => console.error("Error al actualizar usuario:", error)); */
   };
 
   const handleScheduleChange = (newSchedule: any) => {

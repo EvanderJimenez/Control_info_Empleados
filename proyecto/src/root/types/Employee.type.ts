@@ -22,3 +22,4 @@ export type ListEmployees = {
   schedule: Schedule[];
   brands: Brands[];
 }
+

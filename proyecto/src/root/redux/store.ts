@@ -6,6 +6,8 @@ export const ApplicationStore = configureStore({
   reducer: {
     generalStore: EmployeeReducer,
     employeesList: EmployeeReducer,
+    createEmployee: EmployeeReducer,
+    updateEmployee: EmployeeReducer
   },
 });
 

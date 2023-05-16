@@ -12,6 +12,9 @@ const getAll = async (res: NextApiResponse) => {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
+
+  console.log("body" + JSON.stringify(req.body))
+
   try {
     const {
       uid,
@@ -32,6 +35,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       brands
     } = req.body;
 
+     console.log("email: " + email + " password: " + password + " uid: " + uid);
+
     const newEmployee = await employeeProvider.create(
       uid,
       name,
@@ -50,6 +55,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       schedule,
       brands
     );
+
+
     res.status(201).json(newEmployee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
