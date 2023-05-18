@@ -1,9 +1,6 @@
-import { DispatchType, deleteEmp, listEmp, createEmployeesprov,updateEmplo } from "../../redurcers/employee-reducer/EmployeeReducer";
-import { employeeProvider,employeeListProvider, createEmployees, upDatEmployeeProvider } from "../../provider/employee-provider/employee.provider";
+import { DispatchType, deleteEmp, listEmp, createEmployeesprov, updateEmplo } from "../../reducers/employee-reducer/EmployeeReducer";
+import { employeeProvider, employeeListProvider, createEmployees, upDatEmployeeProvider } from "../../provider/employee-provider/employee.provider";
 import { UserData } from "@/root/interface/employee";
-
-
-
 
 export const deletingEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchType) => {
@@ -29,36 +26,26 @@ export const listOfEmployee = (): any => {
   };
 };
 
-export const createEmployee = (searchTerm: UserData) : any => {
-
+export const createEmployee = (searchTerm: UserData): any => {
   return async (dispatch: DispatchType) => {
     try {
+      const employee = await createEmployees(searchTerm);
 
-      const employee = await createEmployees(searchTerm)
-
-      dispatch(createEmployeesprov(employee || null))
-
+      dispatch(createEmployeesprov(employee || null));
     } catch (error) {
       console.log(error);
     }
-  }
-}
+  };
+};
 
 export const upDateEmployee = (searchUser: string, searchTerm: UserData): any => {
-
-  return async (dispacth: DispatchType) => {
-
+  return async (dispatch: DispatchType) => {
     try {
+      const employee = await upDatEmployeeProvider(searchUser, searchTerm);
 
-      const employee = await upDatEmployeeProvider(searchUser,searchTerm)
-
-      dispacth(updateEmplo(employee || null))
-
+      dispatch(updateEmplo(employee || null));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
-
-
-}
+  };
+};
