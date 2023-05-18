@@ -1,4 +1,4 @@
-import { DispatchType, deleteEmp, listEmp, createEmployeesprov, updateEmplo } from "../../reducers/employee-reducer/EmployeeReducer";
+import { DispatchType, deleteEmp, listEmployee, createEmployeesprov, updateEmplo } from "../../reducers/employee-reducer/EmployeeReducer";
 import { employeeProvider, employeeListProvider, createEmployees, upDatEmployeeProvider } from "../../provider/employee-provider/employee.provider";
 import { UserData } from "@/root/interface/employee";
 
@@ -19,7 +19,7 @@ export const listOfEmployee = (): any => {
     const employeeList = await employeeListProvider();
 
     if (Array.isArray(employeeList)) {
-      dispatch(listEmp(employeeList));
+      dispatch(listEmployee(employeeList));
     } else {
       console.log("Invalid employee list");
     }

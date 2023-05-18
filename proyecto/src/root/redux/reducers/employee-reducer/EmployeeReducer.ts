@@ -28,7 +28,7 @@ export const EmployeeSlice = createSlice({
     deleteEmp: (state, action: PayloadAction<DeleteEmployee>) => {
       state.deleteEmployee = action.payload;
     },
-    listEmp: (state, action: PayloadAction<ListEmployees[]>) => {
+    listEmployee: (state, action: PayloadAction<ListEmployees[]>) => {
       state.employees = action.payload;
     },
     createEmployeesprov: (state, action: PayloadAction<ListEmployees>) => {
@@ -40,6 +40,6 @@ export const EmployeeSlice = createSlice({
   },
 });
 
-export const { deleteEmp, listEmp, createEmployeesprov, updateEmplo } = EmployeeSlice.actions;
+export const { deleteEmp, listEmployee, createEmployeesprov, updateEmplo } = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction;
