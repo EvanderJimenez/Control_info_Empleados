@@ -16,7 +16,7 @@ function Register(props: RegisterProps) {
     if (props.depart) {
       setActualizar(true);
       return props.depart;
-    } else {
+    } else {//TODO: You should not use else or simplify the complex with reverse if
       return {
         id: "",
         name: "",
@@ -40,7 +40,7 @@ function Register(props: RegisterProps) {
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`/api/departments`, {
+    fetch(`/api/departments`, {// You must not fetch in components
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,9 +61,9 @@ function Register(props: RegisterProps) {
         });
       })
 
-      .catch((error) => console.error("Error al actualizar usuario:", error));
+      .catch((error) => console.error("Error al actualizar usuario:", error));//TODO: You should erase all console log
   };
-
+//TODO: use the same name case in all files
   return (
     <div>
       <form
@@ -157,7 +157,7 @@ function Register(props: RegisterProps) {
                     <div key={docKey}>
                       <p>Nombre del Documento: {docKey}</p>
                       <p>Tipo de Documento: {docValue.type}</p>
-                      <p>
+                      <p>{/* TODO: Do not use a in Next.js */}
                         URL del Documento: <a href={docValue.url}>Download</a>
                       </p>
                     </div>

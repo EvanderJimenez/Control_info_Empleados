@@ -1,7 +1,7 @@
 import { DeleteEmployee,ListEmployees } from "@/root/types/Employee.type";
 
 export const employeeProvider = async (searchTerm: string) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "DELETE",
       headers: {
@@ -16,12 +16,12 @@ export const employeeProvider = async (searchTerm: string) => {
     return { id: data.uid };
 
   } catch (error) {
-    console.error("Error deleting the employee, mor information about that: ", error);
+    console.error("Error deleting the employee, mor information about that: ", error);//TODO: You should erase all console log
     return;
   }
 };
 export const employeeListProvider = async () => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const response = await fetch("/api/employees");
 
     if (!response.ok) {
@@ -53,7 +53,7 @@ export const employeeListProvider = async () => {
 
     return listEmployees;
   } catch (error) {
-    console.error("Error fetching the list of employees:", error);
+    console.error("Error fetching the list of employees:", error);//TODO: You should erase all console log
     throw error;
   }
 };

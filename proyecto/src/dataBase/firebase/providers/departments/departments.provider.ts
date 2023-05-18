@@ -1,4 +1,4 @@
-import { firestore } from "../../firebase";
+import { firestore } from "../../firebase";//TODO:You should use relative paths with @
 import { Employee, Documents } from "@/root/interface/departments";
 import {
   collection,
@@ -38,7 +38,7 @@ async function create(
   subDepartment: string,
   employees: Employee
 ): Promise<{ message: string; departments?: any }> {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const newDocRef = await addDoc(collection(firestore, "departments"), {
       name,
       size,
@@ -57,7 +57,7 @@ async function create(
         message: "Successfully created department",
         departments: newDoc.data(),
       };
-    } else {
+    } else {//TODO: You should not use else or simplify the complex with reverse if
       return {
         message: "Failed to create department",
       };
@@ -75,7 +75,7 @@ const getByDocId = async (docId: string) => {
 
   if (departmentsDocSnapshot.exists()) {
     return departmentsDocSnapshot.data();
-  } else {
+  } else {//TODO: You should not use else or simplify the complex with reverse if
     throw new Error(`A department with document ID was not found: ${docId}`);
   }
 };
@@ -91,7 +91,7 @@ const updateById = async (
   subDepartment: string,
   employees: Employee
 ) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const departmentsRef = collection(firestore, "departments");
     const q = query(departmentsRef, where("name", "==", name));
     const querySnapshot = await getDocs(q);
@@ -117,7 +117,7 @@ const updateById = async (
       return departmentUpdate;
     }
   } catch (error) {
-    console.error("Error updating department:", error);
+    console.error("Error updating department:", error);//TODO: You should erase all console log
     throw new Error("Failed to update department");
   }
 };

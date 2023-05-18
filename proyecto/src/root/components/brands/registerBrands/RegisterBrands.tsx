@@ -16,7 +16,7 @@ function RegisterBrands() {
 
   useEffect(() => {
     const fetchCurrentDateTime = async () => {
-      try {
+      try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
         const response = await axios.get("http://worldtimeapi.org/api/ip");
         const { datetime } = response.data;
         const [date, time] = datetime.split("T");
@@ -41,7 +41,7 @@ function RegisterBrands() {
     setNewHIni(currentTime);
     setNewHFin(currentTime);
   };
-
+//TODO: move to other file
   const handleSubmitCycle = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -56,12 +56,12 @@ function RegisterBrands() {
         [newCycle]: newCycleObject,
       },
     }));
-  };
+  };//TODO: move to other file
   const handleSubmitHours = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!newHIni || !newDate || !newCycle) {
-      console.error("Please enter values for all fields");
+      console.error("Please enter values for all fields");//TODO: You should erase all console log
       return;
     }
 
@@ -90,8 +90,8 @@ function RegisterBrands() {
 
       setNewHIni("");
       setNewHFin("");
-    } else {
-      console.error("The selected cycle does not exist");
+    } else {//TODO: You should not use else or simplify the complex with reverse if
+      console.error("The selected cycle does not exist");//TODO: You should erase all console log
     }
   };
 
@@ -99,11 +99,11 @@ function RegisterBrands() {
     event.preventDefault();
 
     if (!brandData.idEmployee) {
-      console.error("Please enter values for all fields");
+      console.error("Please enter values for all fields");//TODO: You should erase all console log
       return;
     }
 
-    fetch("/api/brands", {
+    fetch("/api/brands", { // You must not fetch in components
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function RegisterBrands() {
           cycle: {},
         });
       })
-      .catch((error) => console.error("Error creating new hours:", error));
+      .catch((error) => console.error("Error creating new hours:", error));//TODO: You should erase all console log
   };
 
   return (
@@ -153,7 +153,7 @@ function RegisterBrands() {
         </button>
         <p>Fecha actual: {currentDate}</p>
         <p>Hora actual: {currentTime}</p>
-      </form>
+      </form>{/* TODO: Separate this functional components in small dump components */}
       <button onClick={handleClick}>Clickme</button>
       <div>
         {Object.entries(brandData.cycle).map(([key, value]) => (

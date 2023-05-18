@@ -47,7 +47,7 @@ function AdminEdit() {
             Search
           </button>
         </form>
-      </div>
+      </div>{/* TODO: Separate this functional components in small dump components */}
       <div className="min-h-screen bg-gray-100 flex flex-col justify-center">
         <div className="relative m-3 flex flex-wrap mx-auto justify-center">
           <div className="min-w-[340px]flex flex-col group">
@@ -59,7 +59,7 @@ function AdminEdit() {
               />
 
               <div className="absolute z-10 border-4 border-primary w-[95%] h-[95%] invisible group-hover:visible opacity-0 group-hover:opacity-100 group-hover:scale-90 transition-all duration-500"></div>
-            </div>
+            </div>{/* TODO: Do not use a in Next.js */}
             <a className=" block text-black text-center hover:text-primary transition-colors duration-150 text-lg md:text-xl mb-1">Name</a>
 
             <p className="mb-4 font-light  text-sm md:text-sm text-center text-gray-400">List Employee</p>

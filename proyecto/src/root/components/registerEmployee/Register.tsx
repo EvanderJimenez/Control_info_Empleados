@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserData } from "../../interface/employee/";
+import { UserData } from "../../interface/employee/";//TODO:You should use relative paths with @
 import PrincipalData from "./components/principalData/PrincipalData";
 import UpdateData from "./components/updateData/UpdateData";
 import Schedule from "./components/schedule/Schedule";
@@ -20,7 +20,7 @@ function Register(props: RegisterProps) {
     if (props.user) {
       setUpDate(true);
       return props.user;
-    } else {
+    } else {//TODO: You should not use else or simplify the complex with reverse if
       return {
         uid: "",
         name: "",
@@ -51,7 +51,7 @@ function Register(props: RegisterProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    fetch("/api/employees", {
+    fetch("/api/employees", {// You must not fetch in components
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ function Register(props: RegisterProps) {
     })
       .then((res) => res.json())
       .then((newUser) => setData([...data, newUser]))
-      .catch((error) => console.error("Error al crear nuevo usuario:", error));
+      .catch((error) => console.error("Error al crear nuevo usuario:", error));//TODO: You should erase all console log
 
     setUserData({
       uid: "",

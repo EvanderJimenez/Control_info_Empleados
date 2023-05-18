@@ -3,7 +3,7 @@ import Register from "../registerEmployee/Register";
 import ListEmployee from "../listEmployee/ListEmployee";
 import MainBoss from "../mainBoss/MainBoss";
 import router from "next/router";
-import { LoginEP, UserData } from "../../interface/employee/";
+import { LoginEP, UserData } from "../../interface/employee/";//TODO:You should use relative paths with @
 import FormLogin from "./components/FormLogin";
 import { setCookie } from "cookies-next";
 
@@ -28,8 +28,8 @@ function Login() {
     e.preventDefault();
 
     if (data.email && data.password) {
-      try {
-        const response = await fetch(`/api/employees/by-emailPassword`, {
+      try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
+        const response = await fetch(`/api/employees/by-emailPassword`, {// You must not fetch in components
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -78,7 +78,7 @@ function Login() {
                 expires: expirationDate,
               });
               router.push("/home/BossMain");
-            } else if (dataEmplo.jobPosition === "Admin") {
+            } else if (dataEmplo.jobPosition === "Admin") {//TODO: You should not use else or simplify the complex with reverse if
               const cookieValue = JSON.stringify({
                 logged: true,
                 type: "admin",
@@ -90,9 +90,9 @@ function Login() {
               });
               router.push("/home/AdminMain");
             }
-          } else {
+          } else {//TODO: You should not use else or simplify the complex with reverse if
           }
-        } else {
+        } else {//TODO: You should not use else or simplify the complex with reverse if
           setErrorEmailPass(true);
           throw new Error("Error al iniciar sesión");
         }

@@ -20,13 +20,13 @@ function EditDepartment() {
   });
 
   useEffect(() => {
-    fetch("/api/departments")
+    fetch("/api/departments")// You must not fetch in components
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
 
   const handleUpdate = async (id: string) => {
-    try {
+    try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
       const response = await fetch(`/api/departments/${id}`, {
         method: "GET",
         headers: {
@@ -39,11 +39,11 @@ function EditDepartment() {
         setUserData(data);
         setUpdate(true);
         setDta(data);
-      } else {
+      } else {//TODO: You should not use else or simplify the complex with reverse if
         throw new Error("Error acquiring information");
       }
     } catch (error) {
-      console.error("Error getting department data", error);
+      console.error("Error getting department data", error);//TODO: You should erase all console log
     }
   };
 

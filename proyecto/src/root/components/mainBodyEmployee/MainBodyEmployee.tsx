@@ -1,5 +1,5 @@
 import React from "react";
-import { EmployeePage } from "../../interface/employee";
+import { EmployeePage } from "../../interface/employee";//TODO:You should use relative paths with @
 
 export default function MainBodyEmployee(props: EmployeePage) {
   return (

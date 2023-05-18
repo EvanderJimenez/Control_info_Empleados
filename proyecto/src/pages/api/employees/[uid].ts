@@ -1,10 +1,10 @@
 import employeeProvider from "../../../dataBase/firebase/providers/employee/employee.provider";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
+import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";//TODO:You should use relative paths with @
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function getByUid(req: NextApiRequest, res: NextApiResponse) {
   const uid = String(req.query.uid);
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const employee = await employeeProvider.getByUid(uid);
     res.status(200).json(employee);
   } catch (error) {
@@ -14,7 +14,7 @@ async function getByUid(req: NextApiRequest, res: NextApiResponse) {
 
 async function deleteByUid(req: NextApiRequest, res: NextApiResponse) {
   const uid = String(req.query.uid);
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     await employeeProvider.deleteByUid(uid);
     res.status(200).json({ uid, message: "Information deleted" });
   } catch (error) {
@@ -23,7 +23,7 @@ async function deleteByUid(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
 
     const uid = String(req.query.uid);
 

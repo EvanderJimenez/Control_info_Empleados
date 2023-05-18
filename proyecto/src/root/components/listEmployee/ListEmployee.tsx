@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   listOfEmployee,
   deletingEmployee,
-} from "../../redux/thunks/employee-thunk/employee.thunk";
-import { RootState } from "../../redux/store";
+} from "../../redux/thunks/employee-thunk/employee.thunk";//TODO:You should use relative paths with @
+import { RootState } from "../../redux/store";//TODO:You should use relative paths with @
 
 const ListEmployee = () => {
   const dispatch = useDispatch();

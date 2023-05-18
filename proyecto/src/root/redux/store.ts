@@ -4,7 +4,7 @@ import { EmployeeReducer } from "./redurcers/employee-reducer/EmployeeReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
-    generalStore: EmployeeReducer,
+    generalStore: EmployeeReducer, //TODO: use the same object?
     employeesList: EmployeeReducer,
   },
 });

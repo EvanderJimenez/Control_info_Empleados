@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginEP, UserData } from "../../../interface/employee/";
+import { LoginEP, UserData } from "../../../interface/employee/";//TODO:You should use relative paths with @
 
 interface FormLoginProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

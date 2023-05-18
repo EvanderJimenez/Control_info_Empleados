@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const InvoicePage: NextPage = () => {
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect(() => { //What is it the idea of this?
     router.push("./home/");
   }, [router]);
 

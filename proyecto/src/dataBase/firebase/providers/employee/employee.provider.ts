@@ -1,5 +1,5 @@
 import { Brands, Schedule } from "@/root/interface/employee";
-import { firestore, auth } from "../../firebase";
+import { firestore, auth } from "../../firebase";//TODO:You should use relative paths with @
 import {
   collection,
   getDocs,
@@ -44,7 +44,7 @@ const updatByUid = async (
   boss: string,
   schedule: Schedule[]
 ) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const employeesRef = collection(firestore, "employee");
     const q = query(employeesRef, where("uid", "==", uid));
     const querySnapshot = await getDocs(q);
@@ -75,7 +75,7 @@ const updatByUid = async (
       return empleadoActualizado;
     }
   } catch (error) {
-    console.error("Error al actualizar el empleado:", error);
+    console.error("Error al actualizar el empleado:", error);//TODO: You should erase all console log
     throw new Error("No se pudo actualizar el empleado");
   }
 }
@@ -99,7 +99,7 @@ const create = async (
   schedule: Schedule[],
   brands: Brands[],
 ): Promise<{ message: string; employee?: any }> => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -144,7 +144,7 @@ const create = async (
         message: "Empleado creado correctamente",
         employee: newDoc.data(),
       };
-    } else {
+    } else {//TODO: You should not use else or simplify the complex with reverse if
       return {
         message: "No se pudo crear el empleado",
       };
@@ -163,40 +163,40 @@ const getByUid = async (uid: string) => {
 
   if (employeeSnapshot.empty) {
     throw new Error(`No se encontró un empleado con UID: ${uid}`);
-  } else {
+  } else {//TODO: You should not use else or simplify the complex with reverse if
     return employeeSnapshot.docs[0].data();
   }
 };
 
 const deleteByUid = async (uid: string) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const employeeCollection = collection(firestore, "employee");
     const employeeQuery = query(employeeCollection, where("uid", "==", uid));
     const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
     if (employeeSnapshot.size === 0) {
-      console.log(`No se encontró ningún empleado con UID ${uid}`);
+      console.log(`No se encontró ningún empleado con UID ${uid}`);//TODO: You should erase all console log
       return;
     }
 
     const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
     await updateDoc(employeeRef, { enabled: false });
 
-    console.log(`Empleado con UID ${uid} actualizado correctamente`);
+    console.log(`Empleado con UID ${uid} actualizado correctamente`);//TODO: You should erase all console log
   } catch (error) {
-    console.error(`Error al actualizar el empleado con UID ${uid}:`, error);
+    console.error(`Error al actualizar el empleado con UID ${uid}:`, error);//TODO: You should erase all console log
   }
 };
 
 const getByEmailPassword = async (email: string, password: string) => {
 
 
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const userCredential = await signInWithEmailAndPassword(auth,email, password);
     const user = userCredential.user;
     if (!user) {
       throw new Error("No user found with that email and password");
-    }else{
+    }else{//TODO: You should not use else or simplify the complex with reverse if
       const employeeCollection = collection(firestore, "employee");
       const employeeQuery = query(
         employeeCollection,

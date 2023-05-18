@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DeleteEmployee,ListEmployees} from "../../../types/Employee.type";
+import { DeleteEmployee,ListEmployees} from "../../../types/Employee.type";//TODO:You should use relative paths with @
 
 
 
@@ -18,7 +18,7 @@ type EmployeeAction = {
   employee?: EmployeeState;
 };
 
-
+//TODO: use the same name case in all files
 export const EmployeeSlice = createSlice({
   name: "Employee",
   initialState,

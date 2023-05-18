@@ -1,4 +1,4 @@
-import { firestore } from "../../firebase";
+import { firestore } from "../../firebase";//TODO:You should use relative paths with @
 import { Brands, Hours } from "@/root/interface/brands";
 import {
   collection,
@@ -32,7 +32,7 @@ async function createBrands(
   idEmployee: string,
   cycle: Date
 ): Promise<{ message: string; brands?: any }> {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const newDocRef = await addDoc(collection(firestore, "brands"), {
       idEmployee,
       cycle,
@@ -45,7 +45,7 @@ async function createBrands(
         message: "Successfully created brands",
         brands: newDoc.data(),
       };
-    } else {
+    } else {//TODO: You should not use else or simplify the complex with reverse if
       return {
         message: "Failed to create brands",
       };
@@ -63,7 +63,7 @@ const getDocId = async (docId: string) => {
 
   if (brandsDocSnapshot.exists()) {
     return brandsDocSnapshot.data();
-  } else {
+  } else {//TODO: You should not use else or simplify the complex with reverse if
     throw new Error(`A brands with document ID was not found: ${docId}`);
   }
 };
@@ -78,13 +78,13 @@ const getDocByEmployeeId = async (idEmployee: string) => {
   if (!querySnapshot.empty) {
     const docSnapshot = querySnapshot.docs[0];
     return docSnapshot.data();
-  } else {
+  } else {//TODO: You should not use else or simplify the complex with reverse if
     throw new Error(`A brands with idEmployee '${idEmployee}' was not found`);
   }
 };
 
 const updateById = async (idEmployee: string, cycle: Hours) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const brandsRef = collection(firestore, "brands");
     const q = query(brandsRef, where("idEmployee", "==", idEmployee));
     const querySnapshot = await getDocs(q);
@@ -99,7 +99,7 @@ const updateById = async (idEmployee: string, cycle: Hours) => {
       return brandsUpdate;
     }
   } catch (error) {
-    console.error("Error updating brands:", error);
+    console.error("Error updating brands:", error);//TODO: You should erase all console log
     throw new Error("Failed to update brands");
   }
 };

@@ -30,7 +30,7 @@ function RegisterDepartment() {
     event.preventDefault();
 
     if (!newEmployee || !newEmployeeData) {
-      console.error("Please enter values for all employee fields");
+      console.error("Please enter values for all employee fields");//TODO: You should erase all console log
       return;
     }
 
@@ -53,12 +53,12 @@ function RegisterDepartment() {
     setNewEmployeeData("");
     setImage("");
   };
-
+//TODO: move to other file
   const handleSubmitDocuments = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!newDocuments || !newUrl) {
-      console.error("Please enter values for all fields in the document");
+      console.error("Please enter values for all fields in the document");//TODO: You should erase all console log
       return;
     }
 
@@ -85,10 +85,10 @@ function RegisterDepartment() {
 
       setNewDocuments("");
       setUrl("");
-    } else {
-      console.error("The selected employee does not exist");
+    } else {//TODO: You should not use else or simplify the complex with reverse if
+      console.error("The selected employee does not exist");//TODO: You should erase all console log
     }
-  };
+  };//TODO: move to other file
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
@@ -99,11 +99,11 @@ function RegisterDepartment() {
       !userData.leader ||
       !userData.level
     ) {
-      console.error("Please enter values for all fields");
+      console.error("Please enter values for all fields");//TODO: You should erase all console log
       return;
     }
 
-    fetch("/api/departments", {
+    fetch("/api/departments", {// You must not fetch in components
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +124,7 @@ function RegisterDepartment() {
           employees: {},
         });
       })
-      .catch((error) => console.error("Error creating new department:", error));
+      .catch((error) => console.error("Error creating new department:", error));//TODO: You should erase all console log
   };
 
   const handleCheckboxChangeS = () => {
@@ -135,12 +135,12 @@ function RegisterDepartment() {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.preventDefault();
-    try {
+    try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
       if (event.target.files && event.target.files.length > 0) {
         const file = event.target.files[0];
         const url = await upLoadImage(file);
         setImage(url);
-      } else {
+      } else {//TODO: You should not use else or simplify the complex with reverse if
         alert("Please select a file");
       }
     } catch (error) {
@@ -152,12 +152,12 @@ function RegisterDepartment() {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.preventDefault();
-    try {
+    try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
       if (event.target.files && event.target.files.length > 0) {
         const file = event.target.files[0];
         const url = await upLoadFile(file);
         setUrl(url);
-      } else {
+      } else {//TODO: You should not use else or simplify the complex with reverse if
         alert("Please select a file");
       }
     } catch (error) {
@@ -255,7 +255,7 @@ function RegisterDepartment() {
             </div>
           ))}
         </div>
-
+      {/ TODO:You should separate this functional components in custom hooks or other small functions in differents files */}
         <form onSubmit={handleSubmitEmployee} className="space-y-4">
           <div className="flex items-center">
             <label htmlFor="newEmployee" className="mr-2 font-bold">
@@ -302,6 +302,7 @@ function RegisterDepartment() {
         </form>
 
         <div>
+      {/ TODO:You should separate this functional components in custom hooks or other small functions in differents files */}
           <form onSubmit={handleSubmitDocuments} className="space-y-4">
             <div className="flex items-center">
               <label htmlFor="newDocuments" className="mr-2 font-bold">

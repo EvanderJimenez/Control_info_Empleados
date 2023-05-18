@@ -10,10 +10,10 @@ export function Top() {
             <img src="/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
             <span className="title-font">CrHome</span>
           </a>
-          <div className="flex items-center">
+          <div className="flex items-center">{/* TODO: Do not use a in Next.js */}
             <a href="tel:89884062" className="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">
               (506) 8988-4062
-            </a>
+            </a>{/* TODO: Do not use a in Next.js */}
             <a href="#" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">
               Login
             </a>
@@ -25,21 +25,22 @@ export function Top() {
           <div className="flex items-center">
             <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
               <li>
+                {/* TODO: Do not use a in Next.js */}
                 <a href="#" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
                   About us
                 </a>
               </li>
-              <li>
+              <li>{/* TODO: Do not use a in Next.js */}
                 <a href="#" className="text-gray-900 dark:text-white hover:underline">
                   Contact
                 </a>
               </li>
-              <li>
+              <li>{/* TODO: Do not use a in Next.js */}
                 <a href="#" className="text-gray-900 dark:text-white hover:underline">
                   Help and Support
                 </a>
               </li>
-              <li>
+              <li>{/* TODO: Do not use a in Next.js */}
                 <a href="#" className="text-gray-900 dark:text-white hover:underline">
                   Sign off
                 </a>

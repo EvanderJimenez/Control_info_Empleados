@@ -9,7 +9,7 @@ const SearchBrands = () => {
   });
 
   useEffect(() => {
-    fetch("/api/departments")
+    fetch("/api/departments")// You must not fetch in components
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((error) => console.log(error));

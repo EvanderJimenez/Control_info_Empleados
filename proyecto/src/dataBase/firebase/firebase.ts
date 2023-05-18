@@ -13,7 +13,7 @@ import {
 import { v4 } from "uuid";
 import { getAuth } from "firebase/auth";
 
-const firebaseConfig = {
+const firebaseConfig = {//TODO: Check if this file only live in the server, because it is sensitive information
   apiKey: "AIzaSyAfHPA-Ao8hwWfn9O1wt1dmwJSkJg3oGCc",
   authDomain: "departamentosdb.firebaseapp.com",
   projectId: "departamentosdb",
@@ -22,7 +22,7 @@ const firebaseConfig = {
   appId: "1:725611960379:web:4291e70de4866e0e29a41e",
   measurementId: "G-EMQVC3825X",
 };
-
+//TODO: Separate this file in each responsability that you need
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
@@ -47,13 +47,13 @@ export async function upLoadFile(file: any) {
 }
 
 const deleteFile = async (filePath: any) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const fileRef = ref(storage, filePath);
 
     await deleteObject(fileRef);
 
-    console.log("Archivo eliminado correctamente");
+    console.log("Archivo eliminado correctamente");//TODO: You should erase all console log
   } catch (error) {
-    console.log("Error al eliminar el archivo:", error);
+    console.log("Error al eliminar el archivo:", error);//TODO: You should erase all console log
   }
 };

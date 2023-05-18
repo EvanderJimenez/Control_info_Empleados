@@ -1,5 +1,5 @@
 import React from "react";
-import { TableProps } from "../../interface/employee";
+import { TableProps } from "../../interface/employee";//TODO:You should use relative paths with @
 
 interface Row {
   name: string;

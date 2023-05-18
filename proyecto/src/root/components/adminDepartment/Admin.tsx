@@ -18,7 +18,7 @@ const AdminDepartment = () => {
           className="h-max"
         />
       </div>
-
+{/* TODO: Separate this functional components in small dump components */}
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div>
           <form className="flex items-center">

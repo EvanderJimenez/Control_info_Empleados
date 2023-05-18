@@ -4,7 +4,7 @@ export type DeleteEmployee = {
   id: string;
 } | null;
 
-export type ListEmployees = {
+export type ListEmployees = { //TODO: types always will named in singular, maybe EmployeeList, but I expected an Array with this name
   uid: string;
   name: string;
   firstSurname: string;

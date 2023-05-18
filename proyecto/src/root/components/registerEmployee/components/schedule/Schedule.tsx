@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Schedule } from "../../../../interface/employee/";
+import { Schedule } from "../../../../interface/employee/";//TODO:You should use relative paths with @
 import InputLabel from "./components/inputLabel/InputLabel";
 
 interface ScheduleFormProps {
@@ -8,6 +8,7 @@ interface ScheduleFormProps {
 }
 
 const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
+{/ TODO:You should separate this functional components in custom hooks or other small functions in differents files */}
   const [mondayStart, setMondayStart] = useState("");
   const [mondayEnd, setMondayEnd] = useState("");
   const [tuesdayStart, setTuesdayStart] = useState("");

@@ -9,8 +9,8 @@ export function middleware(request: NextRequest) {
     if (url.pathname.startsWith('/home/EmployeeMain') || (url.pathname.startsWith('/home/AdminMain') || (url.pathname.startsWith('/home/AdminMain'))) ) {
       return NextResponse.rewrite(new URL("/home", request.url));
     }
-  }  else {
-    const { type } = JSON.parse(isLogin.value);
+  }  else {//TODO: You should not use else or simplify the complex with reverse if
+    const { type } = JSON.parse(isLogin.value);//TODO: You can make a better form to express your ideas in the code
     if (type === 'employee' && url.pathname !== '/home/EmployeeMain') {
       url.pathname = "/home/EmployeeMain";
       return NextResponse.redirect(url);

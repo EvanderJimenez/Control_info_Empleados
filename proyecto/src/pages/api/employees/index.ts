@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
+import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";//TODO:You should use relative paths with @
 import employeeProvider from "../../../dataBase/firebase/providers/employee/employee.provider";
 
 const getAll = async (res: NextApiResponse) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const employees = await employeeProvider.getAll();
     res.status(200).json(employees);
   } catch (error) {
@@ -12,7 +12,7 @@ const getAll = async (res: NextApiResponse) => {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const {
       uid,
       name,

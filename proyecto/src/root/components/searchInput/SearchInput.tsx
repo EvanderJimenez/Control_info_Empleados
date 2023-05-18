@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchComponentInterface } from "../../interface/searchParameters";
+import { SearchComponentInterface } from "../../interface/searchParameters";//TODO:You should use relative paths with @
 
 export default function SearchInput(props: SearchComponentInterface) {
   return (
