@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { EmployeeReducer } from "./redurcers/employee-reducer/EmployeeReducer";
+import { EmployeeReducer, setLoading } from "./reducers/employee-reducer/EmployeeReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -8,10 +8,10 @@ export const ApplicationStore = configureStore({
     employeesListStore: EmployeeReducer,
     createEmployeeStore: EmployeeReducer,
     updateEmployeeStore: EmployeeReducer,
-    getEmployeeByUidStore: EmployeeReducer
+    loading: EmployeeReducer,
+    getEmployeeByUidStore: EmployeeReducer,
   },
 });
-
 
 export type RootState = ReturnType<typeof ApplicationStore.getState>;
 export default ApplicationStore;

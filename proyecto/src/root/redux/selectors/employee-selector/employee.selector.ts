@@ -9,3 +9,5 @@ export  const  selectCreateEmployee  =  (state:  RootState)  =>  state.createEmp
 export  const  selectUpdateEmployee  =  (state:  RootState)  =>  state.updateEmployeeStore.updateEmployee
 
 export  const  selectGetEmployeeByUid  =  (state:  RootState)  =>  state.getEmployeeByUidStore.getEmployeeByUid
+
+export  const  loading  =  (state:  RootState)  =>  state.loading.loading;

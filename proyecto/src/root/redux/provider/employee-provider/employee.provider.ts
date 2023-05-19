@@ -15,7 +15,6 @@ export const deleteEmployeeProvider = async (searchTerm: string) => {
     }
     const data: { uid: string } = await response.json();
     return { id: data.uid };
-
   } catch (error) {
     console.error("Error deleting the employee, mor information about that: ", error);
     return;
@@ -76,8 +75,6 @@ export const createEmployeeProvider = async (searchTerm: UserData) => {
     const data = await response.json();
 
     return data;
-
-
   } catch (error) {
     console.error("Error creating employee:", error);
     throw error;
@@ -92,8 +89,8 @@ export const upDatEmployeeProvider = async (searchUser: string,searchTerm: Emplo
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(searchTerm)
-    })
+      body: JSON.stringify(searchTerm),
+    });
 
     if (!response.ok) {
       throw new Error("Error uodating employee");
@@ -102,7 +99,6 @@ export const upDatEmployeeProvider = async (searchUser: string,searchTerm: Emplo
     const data = await response.json();
 
     return data;
-
   } catch (error) {
     console.error("Error creating employee:", error);
     throw error;

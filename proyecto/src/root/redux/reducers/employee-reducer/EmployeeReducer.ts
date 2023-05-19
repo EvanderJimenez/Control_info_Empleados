@@ -5,6 +5,7 @@ import { DeleteEmployeeType,EmployeesType} from "../../../types/Employee.type";
 interface EmployeeState {
   deleteEmployee: DeleteEmployeeType | null;
   employees: EmployeesType[];
+  loading: boolean,
   createEmploye: EmployeesType | null;
   updateEmployee: EmployeesType | null,
   getEmployeeByUid: EmployeesType | null
@@ -13,6 +14,7 @@ interface EmployeeState {
 export const initialState: EmployeeState = {
   deleteEmployee: null,
   employees: [],
+  loading: false,
   createEmploye: null,
   updateEmployee: null,
   getEmployeeByUid: null,
@@ -22,7 +24,6 @@ type EmployeeAction = {
   type: string;
   employee?: EmployeeState;
 };
-
 
 export const EmployeeSlice = createSlice({
   name: "Employee",
@@ -34,6 +35,9 @@ export const EmployeeSlice = createSlice({
     },
     listEmployeeReducer: (state,action: PayloadAction<EmployeesType[]>) => {
       state.employees = action.payload 
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
     },
     createEmployeesReducer: (state, action: PayloadAction<EmployeesType>) => {
       state.createEmploye = action.payload
@@ -47,6 +51,6 @@ export const EmployeeSlice = createSlice({
   },
 });
 
-export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer } = EmployeeSlice.actions;
+export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer, setLoading} = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction;
