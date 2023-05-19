@@ -4,12 +4,14 @@ import { EmployeeReducer } from "./redurcers/employee-reducer/EmployeeReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
-    generalStore: EmployeeReducer,
-    employeesList: EmployeeReducer,
-    createEmployee: EmployeeReducer,
-    updateEmployee: EmployeeReducer
+    deleteEmployeeStore: EmployeeReducer,
+    employeesListStore: EmployeeReducer,
+    createEmployeeStore: EmployeeReducer,
+    updateEmployeeStore: EmployeeReducer,
+    getEmployeeByUidStore: EmployeeReducer
   },
 });
+
 
 export type RootState = ReturnType<typeof ApplicationStore.getState>;
 export default ApplicationStore;

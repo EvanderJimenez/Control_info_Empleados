@@ -1,20 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DeleteEmployee,ListEmployees} from "../../../types/Employee.type";
+import { DeleteEmployeeType,EmployeesType} from "../../../types/Employee.type";
 
-//cambiar nombre a types
 
 interface EmployeeState {
-  deleteEmployee: DeleteEmployee | null;
-  employees: ListEmployees[];
-  createEmploye: ListEmployees | null;
-  updateEmployee: ListEmployees | null
+  deleteEmployee: DeleteEmployeeType | null;
+  employees: EmployeesType[];
+  createEmploye: EmployeesType | null;
+  updateEmployee: EmployeesType | null,
+  getEmployeeByUid: EmployeesType | null
 }
 
 export const initialState: EmployeeState = {
   deleteEmployee: null,
   employees: [],
   createEmploye: null,
-  updateEmployee: null
+  updateEmployee: null,
+  getEmployeeByUid: null,
 };
 
 type EmployeeAction = {
@@ -28,21 +29,24 @@ export const EmployeeSlice = createSlice({
   initialState,
 
   reducers: {
-    deleteEmp: (state, action: PayloadAction<DeleteEmployee>) => {
+    deleteEmployeeReducer: (state, action: PayloadAction<DeleteEmployeeType>) => {
       state.deleteEmployee = action.payload
     },
-    listEmp: (state,action: PayloadAction<ListEmployees[]>) => {
+    listEmployeeReducer: (state,action: PayloadAction<EmployeesType[]>) => {
       state.employees = action.payload 
     },
-    createEmployeesprov: (state, action: PayloadAction<ListEmployees>) => {
+    createEmployeesReducer: (state, action: PayloadAction<EmployeesType>) => {
       state.createEmploye = action.payload
     },
-    updateEmplo: (state, action: PayloadAction<ListEmployees>) => {
+    updateEmployeeReducer: (state, action: PayloadAction<EmployeesType>) => {
       state.updateEmployee = action.payload
+    },
+    getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) =>{
+      state.getEmployeeByUid = action.payload
     }
   },
 });
 
-export const { deleteEmp,listEmp,createEmployeesprov,updateEmplo } = EmployeeSlice.actions;
+export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer } = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction;

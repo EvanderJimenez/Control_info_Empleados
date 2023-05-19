@@ -7,29 +7,44 @@ import Brands from "./components/brands/Brands";
 import ImageEmployee from "./components/imageEmployee/ImageEmployee";
 
 import { useDispatch, useSelector } from "react-redux";
-import {createEmployee} from "../../redux/thunks/employee-thunk/employee.thunk";
+import {StartCreateEmployee,StartUpDateEmployee} from "../../redux/thunks/employee-thunk/employee.thunk";
 import { RootState } from "../../redux/store";
 
 
-interface RegisterProps {
-  user?: UserData;
-  onCancel: () => void;
-}
 
-function Register(props: RegisterProps) {
+function Register() {
 
   const dispatch = useDispatch();
 
-  const createEmployeee = useSelector((state: RootState) => state.createEmployee.createEmploye);
-
+  const  employeeByUid = useSelector(
+    (state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid
+  );
   const [data, setData] = useState<UserData[]>([]);
 
   const [upDate, setUpDate] = useState<boolean | null>();
 
   const [userData, setUserData] = useState<UserData>(() => {
-    if (props.user) {
+    if (employeeByUid) {
       setUpDate(true);
-      return props.user;
+      return {
+        uid: "",
+        name: "",
+        firstSurname: "",
+        secondSurname: "",
+        cedula: 0,
+        phoneNumber: 0,
+        photo: "",
+        jobPosition: "",
+        salary: 0,
+        enabled: true,
+        idDepartment: "",
+        password: "",
+        email: "",
+        boss: "",
+        schedule: [],
+        brands: [],
+        option: "register",
+      };
     } else {
       return {
         uid: "",
@@ -61,29 +76,15 @@ function Register(props: RegisterProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(createEmployee(userData));
-
+    dispatch(StartCreateEmployee(userData));
 
   };
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    
+    dispatch(StartUpDateEmployee(userData.uid,userData));
 
-/*       .then((res) => res.json())
-      .then((updatedUser) => {
-        setData((prevData) => {
-          const newData = [...prevData];
-          const userIndex = newData.findIndex((user) => user.cedula === updatedUser.uid);
-          if (userIndex >= 0) {
-            newData[userIndex] = updatedUser;
-          }
-          return newData;
-        });
-        props.onCancel();
-      })
-      .catch((error) => console.error("Error al actualizar usuario:", error)); */
   };
 
   const handleScheduleChange = (newSchedule: any) => {
@@ -94,21 +95,10 @@ function Register(props: RegisterProps) {
    
     setUserData((prevUserData) => ({ ...prevUserData, brands: newBrand }));
   };
-
   return (
+    
     <div className="flex justify-center items-center flex-col">
-      {upDate ? (
-        <UpdateData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleUpdate} handleScheduleChange={handleScheduleChange} />
-      ) : (
-        <PrincipalData userData={userData} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleScheduleChange={handleScheduleChange} />
-      )}
-
-        <ImageEmployee userData={userData} handleSubmit={function (event: React.FormEvent<HTMLFormElement>): void {
-        throw new Error("Function not implemented.");
-      } }/>
-
-        {/* <Brands handleBrandsChange ={handleBrandChange}/> */}
-
+        <UpdateData handleInputChange={handleInputChange} handleSubmit={handleUpdate} handleScheduleChange={handleScheduleChange} />
     </div>
   );
 }

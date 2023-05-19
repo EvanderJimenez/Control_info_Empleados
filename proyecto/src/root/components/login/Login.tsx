@@ -1,7 +1,5 @@
 import { useState, ChangeEvent, use } from "react";
-import Register from "../registerEmployee/Register";
 import ListEmployee from "../listEmployee/ListEmployee";
-import MainBoss from "../mainBoss/MainBoss";
 import router from "next/router";
 import { LoginEP, UserData } from "../../interface/employee/";
 import FormLogin from "./components/FormLogin";
@@ -17,7 +15,6 @@ function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isRegistrando, setIsRegistrando] = useState<boolean>(false);
   const [errorEmailPass, setErrorEmailPass] = useState<any>(null);
-  interface Props {}
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -29,7 +26,7 @@ function Login() {
 
     if (data.email && data.password) {
       try {
-        const response = await fetch(`/api/employees/by-emailPassword`, {
+        const response = await fetch(`/api/employees/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -1,10 +1,10 @@
 import { Brands, Schedule } from "../interface/employee";
 
-export type DeleteEmployee = {
+export type DeleteEmployeeType = {
   id: string;
 } | null;
 
-export type ListEmployees = {
+export type EmployeesType = {
   uid: string;
   name: string;
   firstSurname: string;
@@ -20,6 +20,5 @@ export type ListEmployees = {
   email: string;
   boss: string;
   schedule: Schedule[];
-  brands: Brands[];
 }
 
