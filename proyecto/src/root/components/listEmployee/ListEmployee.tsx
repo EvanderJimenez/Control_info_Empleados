@@ -1,32 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listOfEmployee, deletingEmployee, deleteEmployee } from "../../redux/thunks/employee-thunk/employee.thunk";
+import { StartListOfEmployee, StartDeletingEmployee, StartGetEmployeeByUid } from "../../redux/thunks/employee-thunk/employee.thunk";
 import { RootState } from "../../redux/store";
+import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 
 const ListEmployee = () => {
   const dispatch = useDispatch();
-  const employees = useSelector((state: RootState) => state.employeesList.employees);
-  const deletedEmployee = useSelector((state: RootState) => state.generalStore.deleteEmployee);
-  const loading = useSelector((state: RootState) => state.employeesList.loading);
 
+  const employees = useSelector((state: RootState) => state.employeesListStore.employees);
+  const deletedEmployee = useSelector((state: RootState) => state.deleteEmployeeStore.deleteEmployee);
+
+  const getEmployeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
+  const loading = useSelector((state: RootState) => state.employeesListStore.loading);
 
   useEffect(() => {
-    dispatch(listOfEmployee());
-  }, []);
+    dispatch(StartListOfEmployee());
+  }, [dispatch, deletedEmployee, getEmployeeByUid]);
 
   const handleDelete = (uid: string) => {
-    dispatch(deleteEmployee(uid));
+    dispatch(StartDeletingEmployee(uid));
   };
 
   const handleUpdate = (uid: string) => {
-    ///TODO
+    dispatch(StartGetEmployeeByUid(uid));
   };
-
   return (
     <div className="grid grid-cols-1 gap-4 scroll">
       {loading ? (
-        <LoadingGeneralComponent/>
+        <LoadingGeneralComponent />
       ) : (
         Array.isArray(employees) &&
         employees

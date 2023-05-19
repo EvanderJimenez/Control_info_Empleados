@@ -1,11 +1,13 @@
 import  { RootState }  from  '@/root/redux/store';
 
-export  const  deleteEmployee  =  (state:  RootState)  =>  state.generalStore.deleteEmployee;
+export  const  selectDeleteEmployee  =  (state:  RootState)  =>  state.deleteEmployeeStore.deleteEmployee;
 
-export  const  listOfEmployee  =  (state:  RootState)  =>  state.employeesList.employees
+export  const  selectListOfEmployee  =  (state:  RootState)  =>  state.employeesListStore.employees
 
-export  const  createEmployee  =  (state:  RootState)  =>  state.createEmployee.createEmploye
+export  const  selectCreateEmployee  =  (state:  RootState)  =>  state.createEmployeeStore.createEmploye
 
-export  const  updateEmployee  =  (state:  RootState)  =>  state.updateEmployee.updateEmployee
+export  const  selectUpdateEmployee  =  (state:  RootState)  =>  state.updateEmployeeStore.updateEmployee
 
-export  const  loading  =  (state:  RootState)  =>  state.loading.loading
+export  const  selectGetEmployeeByUid  =  (state:  RootState)  =>  state.getEmployeeByUidStore.getEmployeeByUid
+
+export  const  loading  =  (state:  RootState)  =>  state.loading.loading;

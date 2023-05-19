@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DeleteEmployee, ListEmployees } from "../../../types/Employee.type";
+import { DeleteEmployeeType,EmployeesType} from "../../../types/Employee.type";
+
 
 interface EmployeeState {
-  deleteEmployee: DeleteEmployee | null;
-  employees: ListEmployees[];
-  loading: boolean;
-  createEmploye: ListEmployees | null;
-  updateEmployee: ListEmployees | null;
+  deleteEmployee: DeleteEmployeeType | null;
+  employees: EmployeesType[];
+  loading: boolean,
+  createEmploye: EmployeesType | null;
+  updateEmployee: EmployeesType | null,
+  getEmployeeByUid: EmployeesType | null
 }
 
 export const initialState: EmployeeState = {
@@ -15,6 +17,7 @@ export const initialState: EmployeeState = {
   loading: false,
   createEmploye: null,
   updateEmployee: null,
+  getEmployeeByUid: null,
 };
 
 type EmployeeAction = {
@@ -27,24 +30,27 @@ export const EmployeeSlice = createSlice({
   initialState,
 
   reducers: {
-    deleteEmp: (state, action: PayloadAction<DeleteEmployee>) => {
-      state.deleteEmployee = action.payload;
+    deleteEmployeeReducer: (state, action: PayloadAction<DeleteEmployeeType>) => {
+      state.deleteEmployee = action.payload
     },
-    listEmployee: (state, action: PayloadAction<ListEmployees[]>) => {
-      state.employees = action.payload;
+    listEmployeeReducer: (state,action: PayloadAction<EmployeesType[]>) => {
+      state.employees = action.payload 
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-    createEmployeesprov: (state, action: PayloadAction<ListEmployees>) => {
-      state.createEmploye = action.payload;
+    createEmployeesReducer: (state, action: PayloadAction<EmployeesType>) => {
+      state.createEmploye = action.payload
     },
-    updateEmplo: (state, action: PayloadAction<ListEmployees>) => {
-      state.updateEmployee = action.payload;
+    updateEmployeeReducer: (state, action: PayloadAction<EmployeesType>) => {
+      state.updateEmployee = action.payload
     },
+    getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) =>{
+      state.getEmployeeByUid = action.payload
+    }
   },
 });
 
-export const { deleteEmp, listEmployee, createEmployeesprov, updateEmplo, setLoading } = EmployeeSlice.actions;
+export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer, setLoading} = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction;

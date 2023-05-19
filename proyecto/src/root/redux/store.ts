@@ -4,11 +4,12 @@ import { EmployeeReducer, setLoading } from "./reducers/employee-reducer/Employe
 
 export const ApplicationStore = configureStore({
   reducer: {
-    generalStore: EmployeeReducer,
-    employeesList: EmployeeReducer,
-    createEmployee: EmployeeReducer,
-    updateEmployee: EmployeeReducer,
-    loading:EmployeeReducer
+    deleteEmployeeStore: EmployeeReducer,
+    employeesListStore: EmployeeReducer,
+    createEmployeeStore: EmployeeReducer,
+    updateEmployeeStore: EmployeeReducer,
+    loading: EmployeeReducer,
+    getEmployeeByUidStore: EmployeeReducer,
   },
 });
 

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import BossMenu from "../bossMenu/BossMenu";
 import EditEmployeeSection from "../editEmployeeSection/EditEmployeeSection";
 import EmployeeTimeSection from "../employeeTimeSection/EmployeeTimeSection";
+import Register from "../registerEmployee/Register";
+import ListEmployee from "../listEmployee/ListEmployee";
 
 
 
@@ -18,7 +20,7 @@ export function MainBodyBoss() {
         {showComponent ? "Go to Edit Employee Information, click here" : "Go to Employee Information, click here"}
       </button>
       <div className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10">
-        <div>{showComponent ? <EmployeeTimeSection /> : <EditEmployeeSection/>}</div>
+        <div>{showComponent ? <ListEmployee /> : <Register/>}</div>
       </div>
     </div>
     </>
