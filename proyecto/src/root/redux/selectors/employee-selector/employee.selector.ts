@@ -7,3 +7,5 @@ export  const  listOfEmployee  =  (state:  RootState)  =>  state.employeesList.e
 export  const  createEmployee  =  (state:  RootState)  =>  state.createEmployee.createEmploye
 
 export  const  updateEmployee  =  (state:  RootState)  =>  state.updateEmployee.updateEmployee
+
+export  const  loading  =  (state:  RootState)  =>  state.loading.loading

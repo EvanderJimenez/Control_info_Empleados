@@ -1,4 +1,4 @@
-import { DispatchType, deleteEmp, listEmployee, createEmployeesprov, updateEmplo } from "../../reducers/employee-reducer/EmployeeReducer";
+import { DispatchType, deleteEmp, listEmployee, createEmployeesprov, updateEmplo, setLoading } from "../../reducers/employee-reducer/EmployeeReducer";
 import { employeeProvider, employeeListProvider, createEmployees, upDatEmployeeProvider } from "../../provider/employee-provider/employee.provider";
 import { UserData } from "@/root/interface/employee";
 
@@ -13,6 +13,27 @@ export const deletingEmployee = (searchTerm: string): any => {
     }
   };
 };
+export const deleteEmployee = (employeeId: string): any => {
+  return async (dispatch: DispatchType) => {
+    dispatch(setLoading(true));
+    try {
+      await employeeProvider(employeeId);
+
+      const employeeList = await employeeListProvider();
+
+      if (Array.isArray(employeeList)) {
+        dispatch(listEmployee(employeeList));
+      } else {
+        console.log("Invalid employee list");
+      }
+    } catch (error) {
+      console.log("Error deleting employee:", error);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+};
+
 
 export const listOfEmployee = (): any => {
   return async (dispatch: DispatchType) => {
