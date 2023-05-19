@@ -68,7 +68,6 @@ function RegisterDepartment() {
     };
 
     const selectedEmployee = userData.employees[newEmployee];
-    console.log(newEmployee);
 
     if (selectedEmployee) {
       selectedEmployee.documents = {

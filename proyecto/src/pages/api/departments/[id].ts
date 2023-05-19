@@ -51,7 +51,7 @@ handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>
   updateId(req, res);
 
-export default function employeesByIdController(
+export default function departmentsByIdController(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

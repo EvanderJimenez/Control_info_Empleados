@@ -16,7 +16,6 @@ async function deleteByUid(req: NextApiRequest, res: NextApiResponse) {
   const uid = String(req.query.uid);
   try {
     await employeeProvider.deleteByUid(uid);
-    console.log("Toni kross " + uid);
     res.status(200).json({ uid, message: "Information deleted" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
@@ -27,8 +26,6 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
   try {
 
     const uid = String(req.query.uid);
-
-    console.log("Uid "+ uid)
 
     const {
       name,

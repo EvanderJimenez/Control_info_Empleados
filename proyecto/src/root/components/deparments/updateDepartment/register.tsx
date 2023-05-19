@@ -62,7 +62,6 @@ function Register(props: RegisterProps) {
       })
 
       .catch((error) => console.error("Error al actualizar usuario:", error));
-    console.log(DeparData);
   };
 
   return (

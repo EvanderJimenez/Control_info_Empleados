@@ -1,4 +1,4 @@
-import { firestore } from "@/dataBase/firebase";
+import { firestore } from "../../firebase";
 import { Employee, Documents } from "@/root/interface/departments";
 import {
   collection,

@@ -6,9 +6,9 @@ export function Top() {
     <>
       <nav className="bg-SecondaryColor border-gray-200 dark:bg-gray-900">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-          <a href="https://flowbite.com" className="flex items-center">
+          <a className="flex items-center">
             <img src="/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CrHome</span>
+            <span className="title-font">CrHome</span>
           </a>
           <div className="flex items-center">
             <a href="tel:89884062" className="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">
@@ -26,22 +26,22 @@ export function Top() {
             <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
               <li>
                 <a href="#" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
-                  Home
+                  About us
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-900 dark:text-white hover:underline">
-                  Company
+                  Contact
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-900 dark:text-white hover:underline">
-                  Team
+                  Help and Support
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-900 dark:text-white hover:underline">
-                  Features
+                  Sign off
                 </a>
               </li>
             </ul>

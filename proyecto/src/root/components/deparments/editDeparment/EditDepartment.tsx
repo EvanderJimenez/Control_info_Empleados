@@ -23,12 +23,10 @@ function EditDepartment() {
     fetch("/api/departments")
       .then((res) => res.json())
       .then((data) => setData(data));
-    console.log(data);
   }, []);
 
   const handleUpdate = async (id: string) => {
     try {
-      console.log(id);
       const response = await fetch(`/api/departments/${id}`, {
         method: "GET",
         headers: {
@@ -41,7 +39,6 @@ function EditDepartment() {
         setUserData(data);
         setUpdate(true);
         setDta(data);
-        console.log(data);
       } else {
         throw new Error("Error acquiring information");
       }
