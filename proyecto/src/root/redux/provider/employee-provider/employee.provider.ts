@@ -131,14 +131,17 @@ export const getEmployeeByUidProvider = async (searchTerm: string) => {
 
 }
 
-export const loginProvider = async (searchTerm: UserData) => {
+export const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
 
   try {
     const response = await fetch("/api/employees/login",{
 
       method : "POST",
       headers: { "Content-Type": "application/json",},
-      body: JSON.stringify(searchTerm),
+      body: JSON.stringify({
+        email: searchTerm1,
+        password: searchTerm2,
+    }),
     })
 
     if (!response.ok) {
@@ -155,4 +158,3 @@ export const loginProvider = async (searchTerm: UserData) => {
   }
 
 }
-

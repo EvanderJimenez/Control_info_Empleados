@@ -8,8 +8,6 @@ const getByEmailPassword = async (
 ) => {
   const {email,password } = req.body
 
-  console.log("Eamil: ", email);
-  console.log("password: ", password);
   try {
     const employee = await employeeProvider.getByEmailPassword(email, password);
     res.status(200).json(employee);

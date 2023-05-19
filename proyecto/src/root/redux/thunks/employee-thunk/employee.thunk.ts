@@ -88,11 +88,11 @@ export const StartGetEmployeeByUid = (searchTerm: string): any => {
     }
   };
 };
-export const StartLogin = (searchTerm: UserData) : any => {
+export const StartLogin = (searchTerm1: string,searchTerm2: string) : any => {
   return async (dispatch: DispatchType) => {
     try {
 
-      const response = await loginProvider(searchTerm);
+      const response = await loginProvider(searchTerm1,searchTerm2);
 
       dispatch(loginReducer(response || null));
 
