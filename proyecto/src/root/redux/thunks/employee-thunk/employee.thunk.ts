@@ -1,27 +1,23 @@
+import { DispatchType, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
 import {
-  DispatchType,
   deleteEmployeeReducer,
   listEmployeeReducer,
   createEmployeesReducer,
   updateEmployeeReducer,
   getEmployeeByUidReducer,
-  setLoading,
+  loginReducer,
 } from "../../reducers/employee-reducer/EmployeeReducer";
-import { deleteEmployeeProvider, employeeListProvider, createEmployeeProvider, upDatEmployeeProvider, getEmployeeByUidProvider } from "../../provider/employee-provider/employee.provider";
+import {
+  deleteEmployeeProvider,
+  employeeListProvider,
+  createEmployeeProvider,
+  upDatEmployeeProvider,
+  getEmployeeByUidProvider,
+  loginProvider,
+} from "../../provider/employee-provider/employee.provider";
 import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 
-/*export const StartDeletingEmployee = (searchTerm: string): any => {
-  return async (dispatch: DispatchType) => {
-    try {
-      const empDeleted = await deleteEmployeeProvider(searchTerm);
-
-      dispatch(deleteEmployeeReducer(empDeleted || null));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};*/
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchType) => {
     dispatch(setLoading(true));
@@ -66,12 +62,15 @@ export const StartCreateEmployee = (searchTerm: UserData): any => {
   };
 };
 
-export const StartUpDateEmployee = (searchUser: string, searchTerm: EmployeesType): any => {
-  return async (dispatch: DispatchType) => {
+export const StartUpDateEmployee = (
+  searchUser: string,
+  searchTerm: EmployeesType
+): any => {
+  return async (dispacth: DispatchType) => {
     try {
       const employee = await upDatEmployeeProvider(searchUser, searchTerm);
 
-      dispatch(updateEmployeeReducer(employee || null));
+      dispacth(updateEmployeeReducer(employee || null));
     } catch (error) {
       console.log(error);
     }
@@ -79,13 +78,27 @@ export const StartUpDateEmployee = (searchUser: string, searchTerm: EmployeesTyp
 };
 
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
-  return async (dispatch: DispatchType) => {
+  return async (dispacth: DispatchType) => {
     try {
       const employee = await getEmployeeByUidProvider(searchTerm);
 
-      dispatch(getEmployeeByUidReducer(employee || null));
+      dispacth(getEmployeeByUidReducer(employee || null));
     } catch (error) {
       console.log(error);
     }
   };
 };
+export const StartLogin = (searchTerm: UserData) : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await loginProvider(searchTerm);
+
+      dispatch(loginReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+

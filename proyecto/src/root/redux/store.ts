@@ -10,6 +10,7 @@ export const ApplicationStore = configureStore({
     updateEmployeeStore: EmployeeReducer,
     loading: EmployeeReducer,
     getEmployeeByUidStore: EmployeeReducer,
+    loginStore: EmployeeReducer,
   },
 });
 

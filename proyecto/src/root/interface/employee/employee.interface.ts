@@ -17,7 +17,7 @@ export interface UserData {
   idDepartment: string;
   password: string;
   email: string;
-  boss: string;
+  boss: string; //
   schedule: Schedule[];
   brands: Brands[];
   option: string;
