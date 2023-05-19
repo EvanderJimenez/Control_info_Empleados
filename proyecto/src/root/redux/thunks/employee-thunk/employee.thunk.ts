@@ -11,17 +11,6 @@ import { deleteEmployeeProvider, employeeListProvider, createEmployeeProvider, u
 import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 
-/*export const StartDeletingEmployee = (searchTerm: string): any => {
-  return async (dispatch: DispatchType) => {
-    try {
-      const empDeleted = await deleteEmployeeProvider(searchTerm);
-
-      dispatch(deleteEmployeeReducer(empDeleted || null));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};*/
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchType) => {
     dispatch(setLoading(true));
