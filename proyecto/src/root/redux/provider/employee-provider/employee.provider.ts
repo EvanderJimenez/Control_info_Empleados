@@ -146,7 +146,7 @@ export const loginProvider = async (searchTerm: UserData) => {
     })
 
     if (!response.ok) {
-      throw new Error("Error creating employee");
+      throw new Error("Error getting employee");
     }
 
     const data = await response.json();

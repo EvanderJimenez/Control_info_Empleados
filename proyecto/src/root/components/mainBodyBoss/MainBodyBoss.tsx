@@ -20,7 +20,7 @@ export function MainBodyBoss() {
         {showComponent ? "Go to Edit Employee Information, click here" : "Go to Employee Information, click here"}
       </button>
       <div className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10">
-        <div>{showComponent ? <ListEmployee /> : <Register/>}</div>
+        <div>{showComponent ? <EmployeeTimeSection /> : <EditEmployeeSection/>}</div>
       </div>
     </div>
     </>
