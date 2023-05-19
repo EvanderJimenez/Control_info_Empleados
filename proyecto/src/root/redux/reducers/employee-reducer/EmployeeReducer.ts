@@ -9,6 +9,7 @@ interface EmployeeState {
   createEmploye: EmployeesType | null;
   updateEmployee: EmployeesType | null,
   getEmployeeByUid: EmployeesType | null
+  loginUser: EmployeesType | null
 }
 
 export const initialState: EmployeeState = {
@@ -18,6 +19,7 @@ export const initialState: EmployeeState = {
   createEmploye: null,
   updateEmployee: null,
   getEmployeeByUid: null,
+  loginUser: null
 };
 
 type EmployeeAction = {
@@ -47,10 +49,13 @@ export const EmployeeSlice = createSlice({
     },
     getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) =>{
       state.getEmployeeByUid = action.payload
+    },
+    loginReducer: (state,action: PayloadAction<EmployeesType>) => {
+      state.loginUser = action.payload
     }
   },
 });
 
-export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer, setLoading} = EmployeeSlice.actions;
+export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer, setLoading,loginReducer} = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction;
