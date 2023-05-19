@@ -12,6 +12,8 @@ export const ApplicationStore = configureStore({
     updateEmployeeStore: EmployeeReducer,
     loading: EmployeeReducer,
     getEmployeeByUidStore: EmployeeReducer,
+    getEmployeeByCedulaStore: EmployeeReducer,
+    getEmployeeByNameStore: EmployeeReducer,
     loginStore: EmployeeReducer,
 
     getDepartmentByIdStore : DepartmentReducer,

@@ -10,6 +10,8 @@ interface EmployeeState {
   updateEmployee: EmployeesType | null,
   getEmployeeByUid: EmployeesType | null
   loginUser: EmployeesType | null
+  getEmployeeByCedula: EmployeesType | null
+  getEmployeeByName: EmployeesType | null
 }
 
 export const initialState: EmployeeState = {
@@ -19,7 +21,9 @@ export const initialState: EmployeeState = {
   createEmploye: null,
   updateEmployee: null,
   getEmployeeByUid: null,
-  loginUser: null
+  loginUser: null,
+  getEmployeeByCedula: null,
+  getEmployeeByName: null,
 };
 
 type EmployeeAction = {
@@ -52,10 +56,17 @@ export const EmployeeSlice = createSlice({
     },
     loginReducer: (state,action: PayloadAction<EmployeesType>) => {
       state.loginUser = action.payload
-    }
+    },
+    getEmployeeByCedulaReducer: (state, action: PayloadAction<EmployeesType>) =>{
+      state.getEmployeeByCedula = action.payload
+    },
+    getEmployeeByNameReducer: (state, action: PayloadAction<EmployeesType>) =>{
+      state.getEmployeeByName = action.payload
+    },
   },
 });
 
-export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer, setLoading,loginReducer} = EmployeeSlice.actions;
+export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer,
+  getEmployeeByCedulaReducer,getEmployeeByNameReducer, setLoading,loginReducer} = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction;

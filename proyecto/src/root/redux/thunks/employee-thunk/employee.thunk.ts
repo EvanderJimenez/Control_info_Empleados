@@ -1,4 +1,5 @@
-import { DispatchType, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
+import { getEmployeeByCedulaProvider, getEmployeeByNameProvider } from './../../provider/employee-provider/employee.provider';
+import { DispatchType, getEmployeeByCedulaReducer, getEmployeeByNameReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
 import {
   deleteEmployeeReducer,
   listEmployeeReducer,
@@ -71,6 +72,29 @@ export const StartUpDateEmployee = (
       const employee = await upDatEmployeeProvider(searchUser, searchTerm);
 
       dispacth(updateEmployeeReducer(employee || null));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const StartGetEmployeeByCedula = (searchTerm: string): any => {
+  return async (dispacth: DispatchType) => {
+    try {
+      const employee = await getEmployeeByCedulaProvider(searchTerm);
+
+      dispacth(getEmployeeByCedulaReducer(employee || null));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const StartGetEmployeeByName = (searchTerm: string): any => {
+  return async (dispacth: DispatchType) => {
+    try {
+      const employee = await getEmployeeByNameProvider(searchTerm);
+
+      dispacth(getEmployeeByNameReducer(employee || null));
     } catch (error) {
       console.log(error);
     }

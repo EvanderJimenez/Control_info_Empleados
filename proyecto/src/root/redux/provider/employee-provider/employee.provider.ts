@@ -131,6 +131,56 @@ export const getEmployeeByUidProvider = async (searchTerm: string) => {
 
 }
 
+export const getEmployeeByCedulaProvider = async (searchTerm: string) => {
+
+  try {
+
+    const response = await fetch(`/api/employees/by-cedula/${searchTerm}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error("Error getting employee");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
+export const getEmployeeByNameProvider = async (searchTerm: string) => {
+
+  try {
+
+    const response = await fetch(`/api/employees/by-name/${searchTerm}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error("Error getting employee");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
 export const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
 
   try {

@@ -226,6 +226,30 @@ const getByEmailPassword = async (email: string, password: string) => {
 };
 
 
+const getByCedula= async (cedula: string) =>{
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("cedula", "==", cedula));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+
+  if (employeeSnapshot.empty) {
+    throw new Error(`No se encontró un empleado con UID: ${cedula}`);
+  } else {
+    return employeeSnapshot.docs[0].data();
+  }
+}
+
+const getByName= async (name: string) =>{
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("name", "==", name));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+
+  if (employeeSnapshot.empty) {
+    throw new Error(`No se encontró un empleado con UID: ${name}`);
+  } else {
+    return employeeSnapshot.docs[0].data();
+  }
+}
+
 
 export const employeeProvider = {
   getAll,
@@ -234,6 +258,8 @@ export const employeeProvider = {
   create,
   getByEmailPassword,
   updatByUid,
+  getByCedula,
+  getByName
 };
 
 export default employeeProvider;

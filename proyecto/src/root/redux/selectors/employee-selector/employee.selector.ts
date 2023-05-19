@@ -10,6 +10,10 @@ export  const  selectUpdateEmployee  =  (state:  RootState)  =>  state.updateEmp
 
 export  const  selectGetEmployeeByUid  =  (state:  RootState)  =>  state.getEmployeeByUidStore.getEmployeeByUid
 
+export  const  selectGetEmployeeByCedula  =  (state:  RootState)  =>  state.getEmployeeByCedulaStore.getEmployeeByCedula
+
+export  const  selectGetEmployeeByName  =  (state:  RootState)  =>  state.getEmployeeByNameStore.getEmployeeByName
+
 export  const  selectLogin  =  (state:  RootState)  =>  state.loginStore.loginUser
 
 
