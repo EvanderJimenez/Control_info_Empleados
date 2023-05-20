@@ -22,10 +22,13 @@
     "jsonwebtoken": "^9.0.0",
     "next": "13.3.1",
     "next-cookies": "^2.0.3",
+    "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^5.3.4",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
     "typescript": "5.0.4",
     "uuid": "^9.0.0"
   },

@@ -1,23 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchInput from "../searchInput/SearchInput";
+import { useSelector } from "react-redux";
+import { selectGetEmployeeByCedula, selectGetEmployeeByName, selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import ListEmployee from "../listEmployee/ListEmployee";
 
 export default function EditEmployeeSection() {
+
+  const employeeCedula = useSelector(selectGetEmployeeByUid)
+  const employeeName = useSelector(selectGetEmployeeByName)
+  const user = useSelector(selectLogin)
+
+  useEffect(() => {
+
+  }, [])
+
+
   return (
-    <>
-      <form className="bg-SecondaryColor p-6">
+    <div className="flex flex-col">
+      <h3 className="w-full flex-none mb-3 text-2xl leading-none text-slate-900"> User: {user?.name}</h3>
+    <div className="flex flex-wrap p-1">
+    <div className="flex-none w-72 relative p-1 m-1">
+      <div className="flex">
+      <div className="flex flex-col">
+      <h2>Search By: </h2>
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Cedula" />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Name" />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Job Position" />
+      </div>
+      <button className="bg-red"> Search</button>
+      </div>
+
+      <ListEmployee />
+    </div>
+    <div className="flex-auto p-1">
+    <form className="bg-SecondaryColor p-6 h-screen">
         <div className="mb-6 flex flex-row space-x-4">
-          <SearchInput labelInputSeekerOne="email" labelInputSeekerTwo="text" placeholderSeekerOne="Enter the email to search" placeholderSeekerTwo="Enter the name to search" />
           <div className="flex flex-col flex-1">
             <label htmlFor="Name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Name
             </label>
-            <input type="text" id="Name" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5" required />
+            <input type="text" value ={employeeCedula?.name} id="Name" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="IDnumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               ID number
             </label>
-            <input type="number" id="IDnumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <input type="text" value ={employeeCedula?.cedula} id="IDnumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -25,13 +53,13 @@ export default function EditEmployeeSection() {
             <label htmlFor="Surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Surname
             </label>
-            <input type="text" id="Surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <input type="text" value ={employeeCedula?.firstSurname} id="Surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="Second-surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Second surname
             </label>
-            <input type="text" id="Second-surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5" required />
+            <input type="text" value ={employeeCedula?.secondSurname} id="Second-surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -39,13 +67,13 @@ export default function EditEmployeeSection() {
             <label htmlFor="Job-position" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Job position
             </label>
-            <input type="text" id="Job-position" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5" required />
+            <input type="text" value ={employeeCedula?.jobPosition} id="Job-position" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="PhoneNumber" className="block mb-2 text-sm font-medium text-gray-900  dark:text-white">
               Phone Number
             </label>
-            <input type="number" id="PhoneNumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <input type="number" value ={employeeCedula?.phoneNumber} id="PhoneNumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -53,7 +81,7 @@ export default function EditEmployeeSection() {
             <label htmlFor="Salary" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Salary
             </label>
-            <input type="number" id="Salary" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full " required />
+            <input type="number" value ={employeeCedula?.salary} id="Salary" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full " required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -76,7 +104,10 @@ export default function EditEmployeeSection() {
             </button>
           </div>
         </div>
-      </form>
-    </>
+     </form>
+    </div>
+    </div>
+    </div>
+
   );
 }
