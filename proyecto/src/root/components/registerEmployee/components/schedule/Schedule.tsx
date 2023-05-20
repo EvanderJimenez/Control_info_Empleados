@@ -3,11 +3,11 @@ import { Schedule } from "../../../../interface/employee/";
 import InputLabel from "./components/inputLabel/InputLabel";
 
 interface ScheduleFormProps {
-  schedule: Schedule[];
+  // schedule: Schedule[];
   handleScheduleChange: (newSchedule: Schedule[]) => void;
 }
 
-const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
+const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
   const [mondayStart, setMondayStart] = useState("");
   const [mondayEnd, setMondayEnd] = useState("");
   const [tuesdayStart, setTuesdayStart] = useState("");
@@ -23,7 +23,7 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
   const [sundayStart, setSundayStart] = useState("");
   const [sundayEnd, setSundayEnd] = useState("");
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (schedule.length > 0) {
       setMondayStart(schedule[0].startTime);
       setMondayEnd(schedule[0].endTime);
@@ -40,7 +40,7 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
       setSundayStart(schedule[6].startTime);
       setSundayEnd(schedule[6].endTime);
     }
-  }, [schedule]);
+  }, [schedule]); */
 
   const handleScheduleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

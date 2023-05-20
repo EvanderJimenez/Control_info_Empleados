@@ -25,8 +25,6 @@ const UpdateData = ({ handleInputChange, handleSubmit, handleScheduleChange }: U
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-   // dispatch(StartUpDateEmployee("1",getEmployeeByUid));
-
   };
 
   return (
@@ -42,15 +40,15 @@ const UpdateData = ({ handleInputChange, handleSubmit, handleScheduleChange }: U
 
           <InputLabel label={"Second Username"} type={"text"} name={"secondSurname"} value={getEmployeeByUid?.secondSurname ?? ''} id={"secondSurname"} onChange={handleInputChange} />
 
-{/*           <InputLabel label={"Cedula"} type={"number"} name={"cedula"} value={userData.cedula} id={"cedula"} onChange={handleInputChange} />
+           <InputLabel label={"Cedula"} type={"number"} name={"cedula"} value={getEmployeeByUid?.cedula ?? ''} id={"cedula"} onChange={handleInputChange} />
 
-          <InputLabel label={"Phone number"} type={"number"} name={"phoneNumber"} value={userData.phoneNumber} id={"phoneNumber"} onChange={handleInputChange} />
+          <InputLabel label={"Phone number"} type={"number"} name={"phoneNumber"} value={getEmployeeByUid?.phoneNumber ?? ''} id={"phoneNumber"} onChange={handleInputChange} />
 
-          <InputLabel label={"Boss"} type={"text"} name={"boss"} value={userData.boss} id={"boss"} onChange={handleInputChange} />
+          <InputLabel label={"Boss"} type={"text"} name={"boss"} value={getEmployeeByUid?.boss ?? ''} id={"boss"} onChange={handleInputChange} />
 
-          <InputLabel label={"Salary"} type={"text"} name={"salary"} value={userData.salary} id={"salary"} onChange={handleInputChange} />
+          <InputLabel label={"Salary"} type={"text"} name={"salary"} value={getEmployeeByUid?.salary ?? ''} id={"salary"} onChange={handleInputChange} />
 
-          <InputLabel label={"Department"} type={"text"} name={"idDepartment"} value={userData.idDepartment} id={"idDepartment"} onChange={handleInputChange} /> */}
+          <InputLabel label={"Department"} type={"text"} name={"idDepartment"} value={getEmployeeByUid?.idDepartment ?? ''} id={"idDepartment"} onChange={handleInputChange} /> 
 
           <button type="submit" className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             UpDate
