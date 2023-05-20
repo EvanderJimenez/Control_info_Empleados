@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import router from "next/router";
 
 export function Top() {
   return (
     <>
-      <nav className="bg-SecondaryColor border-gray-200 dark:bg-gray-900">
+      <nav className="bg-SecondaryColor border-gray-200 dark:bg-black">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
           <a className="flex items-center">
             <img src="/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
@@ -25,7 +26,7 @@ export function Top() {
           <div className="flex items-center">
             <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
               <li>
-                <a href="#" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
+                <a href="./home/" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
                   About us
                 </a>
               </li>
@@ -36,7 +37,7 @@ export function Top() {
               </li>
               <li>
                 <a href="#" className="text-gray-900 dark:text-white hover:underline">
-                  Help and Support
+                  Help
                 </a>
               </li>
               <li>

@@ -1,8 +1,4 @@
-export interface Schedule {
-  day: number | string;
-  startTime: string;
-  endTime: string;
-}
+
 export interface UserData {
   uid: string;
   name: string;
@@ -59,4 +55,9 @@ export interface RowSchedule {
 }
 export interface TableScheduleProps {
   rows: RowSchedule[];
+}
+export interface Schedule {
+  weekday: string;
+  entryTime: string;
+  exitTime: string;
 }

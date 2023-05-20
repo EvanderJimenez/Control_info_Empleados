@@ -19,6 +19,7 @@
   background-color: transparent;
   color:#ccc;
 }
+
 input::placeholder{
   color:#454fce;
   
@@ -196,4 +197,21 @@ tr th:nth-child(1) {
   10px 10px 10px rgba(0, 0, 0, 0.1),
   inset -8px -8px 15px rgba(255, 255, 255, 0.5),
   inset 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+.BlackTable {
+  background-color: #dfe0dc;
+  color: #181818;
+  border-collapse: collapse;
+}
+
+.GrayTable th,
+.GrayTable td {
+  border: 2px solid #181818;
+  padding: 8px;
+}
+.GrayTable input{
+  color:#dfe0dc;
+  background-color: transparent;
+  color: #181818;
+  font-weight: bold;
 }

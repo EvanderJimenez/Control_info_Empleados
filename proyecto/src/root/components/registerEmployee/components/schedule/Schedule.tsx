@@ -87,7 +87,7 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
 
   return (
     <div className="px-4 py-6">
-      <h2 className="text-xl font-semibold mb-4">Shedule</h2>
+      <h2 className="text-xl font-semibold mb-4">Schedule</h2>
       <form onSubmit={handleScheduleSubmit}>
         <InputLabel label="Monday" valueStart={mondayStart} valueEnd={mondayEnd} onChangeStart={(e) => setMondayStart(e.target.value)} onChangeEnd={(e) => setFridayEnd(e.target.value)} />
 

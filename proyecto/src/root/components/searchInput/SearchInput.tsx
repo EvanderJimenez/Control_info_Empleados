@@ -16,7 +16,7 @@ export default function SearchInput(props: SearchComponentInterface) {
             <input
               type={props.labelInputSeekerOne}
               id="InputSeekerOne"
-              className="block p-2.5 w-full z-20 text-sm rounded-l-lg rounded-r-lg border-l-gray-50 border-l-2 border  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600"
+              className="block p-2.5 w-full z-20 text-blue text-sm rounded-l-lg rounded-r-lg border-l-gray-50 border-l-2 border  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600"
               placeholder={props.placeholderSeekerOne}
               required
             />
@@ -33,7 +33,7 @@ export default function SearchInput(props: SearchComponentInterface) {
             <input
               type={props.labelInputSeekerTwo}
               id="InputSeekerOne"
-              className="block p-2.5 w-full z-20 text-sm rounded-r-lg rounded-l-lg border-l-2 border border-gray-300 focus:ring-blue focus:border-blue  dark:focus:border-blue"
+              className="block p-2.5 w-full z-20 text-blue text-sm rounded-r-lg rounded-l-lg border-l-2 border border-gray-300 focus:ring-blue focus:border-blue  dark:focus:border-blue"
               placeholder={props.placeholderSeekerTwo}
               required
             />
