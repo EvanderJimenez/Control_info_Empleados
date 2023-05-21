@@ -11,7 +11,7 @@ export function Top() {
       <nav className="bg-SecondaryColor border-gray-200 dark:bg-black">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
           <a className="flex items-center">
-            <img src="/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
+            <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
             <span className="title-font">CrHome</span>
           </a>
           <div className="flex items-center">

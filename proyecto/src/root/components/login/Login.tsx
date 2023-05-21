@@ -46,7 +46,7 @@ function Login() {
 
   useEffect(() => {
     if (loginState && resDepart) {
-      cookiesUser(loginState,resDepart);
+      cookiesUser(loginState, resDepart);
     }
   }, [loginState, resDepart]);
 
@@ -56,19 +56,7 @@ function Login() {
     }
   }, [loginState, resDepart]);
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <ListEmployee />
-      ) : (
-        <FormLogin
-          handleSubmit={handleIngresar}
-          handleInputChange={handleInputChange}
-          loginData={data}
-        />
-      )}
-    </>
-  );
+  return <>{isLoggedIn ? <ListEmployee /> : <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} />}</>;
 }
 
 export default Login;

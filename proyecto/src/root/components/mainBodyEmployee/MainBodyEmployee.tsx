@@ -1,5 +1,6 @@
 import React from "react";
 import { EmployeePage } from "../../interface/employee";
+import CenterMenu from "../menus/employeeCenterMenu/EmployeeCenterMenu";
 
 export default function MainBodyEmployee(props: EmployeePage) {
   return (
@@ -36,6 +37,7 @@ export default function MainBodyEmployee(props: EmployeePage) {
           <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
         </div>
       </section>
+      
     </>
   );
 }
