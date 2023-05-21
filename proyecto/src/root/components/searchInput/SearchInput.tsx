@@ -4,16 +4,13 @@ import { StartGetEmployeeByCedula } from "@/root/redux/thunks/employee-thunk/emp
 import { useDispatch } from "react-redux";
 
 export default function SearchInput(props: SearchComponentInterface) {
-
   const [cedulaValue, setCedulaValue] = useState("");
-
 
   const dispatch = useDispatch();
 
   const searchByCedula = async (cedula: string) => {
-
     dispatch(StartGetEmployeeByCedula(cedulaValue));
-  }
+  };
 
   return (
     <>

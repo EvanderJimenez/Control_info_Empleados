@@ -33,7 +33,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
 
   return (
     <>
-      <SearchInput labelInputSeekerOne="number" labelInputSeekerTwo="email" placeholderSeekerOne="ID number" placeholderSeekerTwo="example22@gmail.com" />
+      <SearchInput labelInputSeekerOne="number"  placeholderSeekerOne="ID number" valueEnd={""}/>
       <form className="relative overflow-x-auto h-screen">
         <table className="w-full text-sm text-left GrayTable">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

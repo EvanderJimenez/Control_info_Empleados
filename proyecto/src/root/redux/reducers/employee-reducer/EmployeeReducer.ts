@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DeleteEmployeeType,EmployeesType} from "../../../types/Employee.type";
-import { parseCookies } from 'nookies';
 
-const cookies = parseCookies();
-const loginCookie = cookies['logged'];
+
+
 
 
 interface EmployeeState {
@@ -25,7 +24,7 @@ export const initialState: EmployeeState = {
   createEmploye: null,
   updateEmployee: null,
   getEmployeeByUid: null,
-  loginUser: loginCookie ? JSON.parse(loginCookie) : null,
+  loginUser: null,
   getEmployeeByCedula: null,
   getEmployeeByName: null,
 };

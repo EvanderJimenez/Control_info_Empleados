@@ -4,7 +4,7 @@ import { selectLogin } from './root/redux/selectors/employee-selector/employee.s
 import { useSelector } from 'react-redux';
 
 export function middleware(request: NextRequest) {
-
+ /*
    const url = request.nextUrl.clone();
   const isLogin = request.cookies.get('logged');
 
@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
       url.pathname = "/home/BossMain";
       return NextResponse.redirect(url);
     }
-  }
+  }*/
 
   return NextResponse.next();
 }

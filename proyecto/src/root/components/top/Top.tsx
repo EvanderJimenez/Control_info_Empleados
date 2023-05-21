@@ -2,6 +2,9 @@ import React from "react";
 import Image from "next/image";
 import router from "next/router";
 
+
+
+
 export function Top() {
   return (
     <>
@@ -26,7 +29,7 @@ export function Top() {
           <div className="flex items-center">
             <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
               <li>
-                <a href="./home/" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
+                <a href="#" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
                   About us
                 </a>
               </li>
@@ -41,7 +44,7 @@ export function Top() {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-900 dark:text-white hover:underline">
+                <a href="/" className="text-gray-900 dark:text-white hover:underline">
                   Sign off
                 </a>
               </li>
