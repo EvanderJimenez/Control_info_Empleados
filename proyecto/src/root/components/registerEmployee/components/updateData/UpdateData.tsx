@@ -13,10 +13,9 @@ interface UpdateDataProps {
 
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleScheduleChange: (newSchedule: any) => void;
 }
 
-const UpdateData = ({ handleInputChange, handleSubmit, handleScheduleChange }: UpdateDataProps) => {
+const UpdateData = ({ handleInputChange, handleSubmit }: UpdateDataProps) => {
 
   const dispatch = useDispatch();
 
@@ -55,10 +54,6 @@ const UpdateData = ({ handleInputChange, handleSubmit, handleScheduleChange }: U
           </button>
         </div>
       </form>
-
-      {/* <Schedule schedule={userData.schedule}  handleScheduleChange={handleScheduleChange} /> */}
-
-      {/* <Brands /> */}
     </div>
   );
 };

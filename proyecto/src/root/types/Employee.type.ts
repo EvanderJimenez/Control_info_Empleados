@@ -9,7 +9,7 @@ export type EmployeesType = {
   name: string;
   firstSurname: string;
   secondSurname: string;
-  cedula: number;
+  cedula: number | string;
   phoneNumber: number;
   photo: string;
   jobPosition: string;
