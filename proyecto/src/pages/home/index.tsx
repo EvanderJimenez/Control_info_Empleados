@@ -1,11 +1,17 @@
 import LoginPage from "@/Layout/LoginPage";
-import ListEmployee from "@/root/components/listEmployee/ListEmployee";
+import ScheduleTimeSelection from "@/root/components/editSchedulePage/components/ScheduleTimeSelection";
 import MainForm from "@/root/components/mainForm/MainForm";
+import { Schedule } from "@/root/interface/employee";
 
 export default function index() {
+  const handleScheduleChange = (schedules: Schedule[]) => {
+    console.log(schedules);
+  };
+
   return (
     <LoginPage>
-      <MainForm />
+      <MainForm/>
     </LoginPage>
   );
 }
+//<ScheduleTimeSelection onScheduleChange={handleScheduleChange}/>
