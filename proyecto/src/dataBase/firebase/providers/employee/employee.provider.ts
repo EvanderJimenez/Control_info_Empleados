@@ -243,11 +243,15 @@ const getByName= async (name: string) =>{
   const employeeQuery = query(employeeCollection, where("name", "==", name));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
-  if (employeeSnapshot.empty) {
-    throw new Error(`No se encontró un empleado con UID: ${name}`);
-  } else {
-    return employeeSnapshot.docs[0].data();
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
   }
+
+  return employees;
 }
 
 

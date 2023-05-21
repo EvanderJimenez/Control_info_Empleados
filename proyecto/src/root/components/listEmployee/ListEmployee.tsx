@@ -4,11 +4,15 @@ import { StartListOfEmployee, StartGetEmployeeByUid } from "../../redux/thunks/e
 import { RootState } from "../../redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { EmployeesType } from "@/root/types/Employee.type";
 
-const ListEmployee = () => {
+interface NewList{
+  newList: EmployeesType[]
+}
+
+const ListEmployee = ({newList}: NewList) => {
   const dispatch = useDispatch();
 
-  const employees = useSelector((state: RootState) => state.employeesListStore.employees);
 
   const getEmployeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
   const loading = useSelector((state: RootState) => state.employeesListStore.loading);
@@ -23,7 +27,7 @@ const ListEmployee = () => {
     dispatch(StartGetEmployeeByUid(uid));
   };
 
-  const filteredEmployees = employees.filter((item) => item.enabled && item.idDepartment === loginState?.idDepartment && item.uid !== loginState?.uid);
+  const filteredEmployees = newList.filter((item) => item.enabled && item.idDepartment === loginState?.idDepartment && item.uid !== loginState?.uid);
 
 
   return (

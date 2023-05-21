@@ -1,22 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DeleteEmployeeType,EmployeesType} from "../../../types/Employee.type";
-import { parseCookies } from 'nookies';
-
-const cookies = parseCookies();
-const loginCookie = cookies['logged'];
-
 
 interface EmployeeState {
   deleteEmployee: DeleteEmployeeType | null;
   employees: EmployeesType[];
-  loading: boolean,
+  loading: boolean;
   createEmploye: EmployeesType | null;
-  updateEmployee: EmployeesType | null,
-  getEmployeeByUid: EmployeesType | null
-  loginUser: EmployeesType | null
-  getEmployeeByCedula: EmployeesType | null
-  getEmployeeByName: EmployeesType | null
+  updateEmployee: EmployeesType | null;
+  getEmployeeByUid: EmployeesType | null;
+  loginUser: EmployeesType | null;
+  getEmployeeByCedula: EmployeesType | null;
+  getEmployeeByName: EmployeesType | null;
 }
+
 
 export const initialState: EmployeeState = {
   deleteEmployee: null,
@@ -25,7 +21,7 @@ export const initialState: EmployeeState = {
   createEmploye: null,
   updateEmployee: null,
   getEmployeeByUid: null,
-  loginUser: loginCookie ? JSON.parse(loginCookie) : null,
+  loginUser: null,
   getEmployeeByCedula: null,
   getEmployeeByName: null,
 };

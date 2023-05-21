@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import SearchInput from "../searchInput/SearchInput";
 import { useSelector } from "react-redux";
-import { selectGetEmployeeByCedula, selectGetEmployeeByName, selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeeByCedula, selectGetEmployeeByName, selectGetEmployeeByUid, selectListOfEmployee, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import ListEmployee from "../listEmployee/ListEmployee";
+import { RootState } from "@/root/redux/store";
 
 export default function EditEmployeeSection() {
 
   const employeeCedula = useSelector(selectGetEmployeeByUid)
   const employeeName = useSelector(selectGetEmployeeByName)
   const user = useSelector(selectLogin)
+  const employees = useSelector(selectListOfEmployee);
 
   useEffect(() => {
 
   }, [])
-
 
   return (
     <div className="flex flex-col">
@@ -30,7 +31,7 @@ export default function EditEmployeeSection() {
       <button className="bg-red"> Search</button>
       </div>
 
-      <ListEmployee />
+      <ListEmployee newList={employees}/>
     </div>
     <div className="flex-auto p-1">
     <form className="bg-SecondaryColor p-6 h-screen">

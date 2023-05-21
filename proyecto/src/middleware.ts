@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 export function middleware(request: NextRequest) {
 
-   const url = request.nextUrl.clone();
+/*    const url = request.nextUrl.clone();
   const isLogin = request.cookies.get('logged');
 
   if (!isLogin) {
@@ -25,7 +25,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
   }
-
+ */
   return NextResponse.next();
 }
 
