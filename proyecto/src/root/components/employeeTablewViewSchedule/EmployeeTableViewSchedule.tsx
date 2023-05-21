@@ -1,16 +1,10 @@
 import React from "react";
 import { TableScheduleProps, RowSchedule } from "../../interface/employee";
 
-const row = [
-  { name: "Evander Jiménez", cedula: 208170802, entryTime: "03:00", exitTime: "04:00" },
-  { name: "Dario Mora", cedula: 109090090, entryTime: "03:00", late: "04:00" },
-  { name: "José Vargas", cedula: 509987123, entryTime: "03:00", late: "04:00" },
-  { name: "José Dario", cedula: 208170802, entryTime: "03:00", late: "04:00" },
-  { name: "Dario José", cedula: 109090090, entryTime: "03:00", late: 18 },
-];
+
 const EmployeeTableViewSchedule: React.FC<TableScheduleProps> = ({ rows }) => {
   return (
-    <table className="border-collapse w-full bg-white">
+    <table className="border-collapse w-full bg-white mt-2">
       <thead>
         <tr>
           <th className="border p-2">Name</th>
