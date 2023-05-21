@@ -1,19 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchInput from "../searchInput/SearchInput";
 import { useSelector } from "react-redux";
-import { selectGetEmployeeByCedula, selectGetEmployeeByName, selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeeByCedula, selectGetEmployeeByName, selectGetEmployeeByUid, selectListOfEmployee, selectLogin, selectgetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
 import ListEmployee from "../listEmployee/ListEmployee";
+import { RootState } from "@/root/redux/store";
+import { EmployeesType } from "@/root/types/Employee.type";
 
 export default function EditEmployeeSection() {
 
   const employeeCedula = useSelector(selectGetEmployeeByUid)
-  const employeeName = useSelector(selectGetEmployeeByName)
   const user = useSelector(selectLogin)
+  const [formData, setFormData] = useState({
+    name: "",
+    cedula: "",
+    firstSurname: "",
+    secondSurname: "",
+    jobPosition: "",
+    phoneNumber: "",
+    salary: "",
+  })
 
   useEffect(() => {
 
   }, [])
-
 
   return (
     <div className="flex flex-col">
@@ -23,13 +32,12 @@ export default function EditEmployeeSection() {
       <div className="flex">
       <div className="flex flex-col">
       <h2>Search By: </h2>
-      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Cedula" />
-      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Name" />
-      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Job Position" />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Cedula" typeList="cedula"    />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Name" typeList="name" />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Job Position" typeList="jobPosition" />
       </div>
       <button className="bg-red"> Search</button>
       </div>
-
       <ListEmployee />
     </div>
     <div className="flex-auto p-1">
@@ -39,13 +47,13 @@ export default function EditEmployeeSection() {
             <label htmlFor="Name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Name
             </label>
-            <input type="text" value ={employeeCedula?.name} id="Name" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5" required />
+            <input onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" value ={employeeCedula?.name} id="Name" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="IDnumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               ID number
             </label>
-            <input type="text" value ={employeeCedula?.cedula} id="IDnumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <input onChange={(e) => setFormData({ ...formData, cedula: e.target.value })} type="text" value ={employeeCedula?.cedula} id="IDnumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -53,13 +61,13 @@ export default function EditEmployeeSection() {
             <label htmlFor="Surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Surname
             </label>
-            <input type="text" value ={employeeCedula?.firstSurname} id="Surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <input onChange={(e) => setFormData({ ...formData, firstSurname: e.target.value })} type="text" value ={employeeCedula?.firstSurname} id="Surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="Second-surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Second surname
             </label>
-            <input type="text" value ={employeeCedula?.secondSurname} id="Second-surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5" required />
+            <input onChange={(e) => setFormData({ ...formData, secondSurname: e.target.value })} type="text" value ={employeeCedula?.secondSurname} id="Second-surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -67,13 +75,13 @@ export default function EditEmployeeSection() {
             <label htmlFor="Job-position" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Job position
             </label>
-            <input type="text" value ={employeeCedula?.jobPosition} id="Job-position" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5" required />
+            <input onChange={(e) => setFormData({ ...formData, jobPosition: e.target.value })} type="text" value ={employeeCedula?.jobPosition} id="Job-position" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5" required />
           </div>
           <div className="flex flex-col flex-1">
             <label htmlFor="PhoneNumber" className="block mb-2 text-sm font-medium text-gray-900  dark:text-white">
               Phone Number
             </label>
-            <input type="number" value ={employeeCedula?.phoneNumber} id="PhoneNumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <input onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} type="number" value ={employeeCedula?.phoneNumber} id="PhoneNumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
@@ -81,7 +89,7 @@ export default function EditEmployeeSection() {
             <label htmlFor="Salary" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Salary
             </label>
-            <input type="number" value ={employeeCedula?.salary} id="Salary" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full " required />
+            <input onChange={(e) => setFormData({ ...formData, salary: e.target.value })} type="number" value ={employeeCedula?.salary} id="Salary" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full " required />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">

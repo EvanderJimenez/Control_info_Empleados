@@ -22,9 +22,3 @@ export type EmployeesType = {
   schedule: Schedule[];
 }
 
-export type LoginType = {
-  uid: string;
-  name: string;
-  idDepartment: string;
-  jobPosition: string;
-}

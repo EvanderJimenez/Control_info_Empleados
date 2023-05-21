@@ -64,11 +64,6 @@ const updatByUid = async (
         password,
         email,
         boss,
-        schedule: schedule.map((s: Schedule) => ({
-          day: s.day,
-          startTime: s.startTime,
-          endTime: s.endTime,
-        })),
       });
       const snapshotEmpleadoActualizado = await getDoc(employeeDoc);
       const empleadoActualizado = snapshotEmpleadoActualizado.data();
@@ -128,11 +123,6 @@ const create = async (
       password,
       email,
       boss,
-      schedule: schedule.map((s: Schedule) => ({
-        day: s.day,
-        startTime: s.startTime,
-        endTime: s.endTime,
-      })),
       brands: brands.map((s: Brands) => ({
         date: s.date,
         startTime: s.startTime,
@@ -243,13 +233,34 @@ const getByName= async (name: string) =>{
   const employeeQuery = query(employeeCollection, where("name", "==", name));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
-  if (employeeSnapshot.empty) {
-    throw new Error(`No se encontró un empleado con UID: ${name}`);
-  } else {
-    return employeeSnapshot.docs[0].data();
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
   }
+
+  return employees;
 }
 
+const getByVariable= async (data: string, variable: string) =>{
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where(variable, "==", data));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+
+  console.log("employees: " + employees)
+
+  return employees;
+}
 
 export const employeeProvider = {
   getAll,
@@ -259,7 +270,8 @@ export const employeeProvider = {
   getByEmailPassword,
   updatByUid,
   getByCedula,
-  getByName
+  getByName,
+  getByVariable
 };
 
 export default employeeProvider;

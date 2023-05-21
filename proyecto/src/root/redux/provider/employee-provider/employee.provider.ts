@@ -200,6 +200,37 @@ export const loginProvider = async (searchTerm1: string, searchTerm2: string) =>
 
     const data = await response.json();
 
+
+    return data;
+
+  } catch (error) {
+    console.error("Error getting employee:", error);
+    throw error;
+  }
+
+}
+
+export const getByVariableProvider = async (searchTerm1: string, searchTerm2: string) => {
+
+  try {
+    const response = await fetch("/api/employees/by-variable",{
+
+      method : "POST",
+      headers: { "Content-Type": "application/json",},
+      body: JSON.stringify({
+        data: searchTerm1,
+        variable: searchTerm2,
+    }),
+    })
+
+    if (!response.ok) {
+      throw new Error("Error getting employee");
+    }
+
+    const data = await response.json();
+
+    console.log("data: " + data)
+
     return data;
 
   } catch (error) {

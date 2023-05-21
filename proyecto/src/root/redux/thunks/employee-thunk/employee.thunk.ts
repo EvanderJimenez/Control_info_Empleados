@@ -1,5 +1,5 @@
-import { getEmployeeByCedulaProvider, getEmployeeByNameProvider } from './../../provider/employee-provider/employee.provider';
-import { DispatchType, getEmployeeByCedulaReducer, getEmployeeByNameReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
+import { getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from './../../provider/employee-provider/employee.provider';
+import { DispatchType, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
 import {
   deleteEmployeeReducer,
   listEmployeeReducer,
@@ -126,3 +126,16 @@ export const StartLogin = (searchTerm1: string,searchTerm2: string) : any => {
   }
 }
 
+export const StartGetByVariable = (searchTerm1: string,searchTerm2: string) : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await getByVariableProvider(searchTerm1,searchTerm2);
+
+      dispatch(getByVariableReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
