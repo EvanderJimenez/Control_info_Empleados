@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { StartListOfEmployee, StartGetEmployeeByUid } from "../../redux/thunks/employee-thunk/employee.thunk";
 import { RootState } from "../../redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
-import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectLogin, selectgetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
 
-interface NewList{
-  newList: EmployeesType[]
-}
-
-const ListEmployee = ({newList}: NewList) => {
+const ListEmployee = () => {
   const dispatch = useDispatch();
+  let filteredEmployees : EmployeesType[] = []
 
+  const employeesListVariable = useSelector(selectgetByVariable);
 
   const getEmployeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
   const loading = useSelector((state: RootState) => state.employeesListStore.loading);
@@ -27,16 +25,18 @@ const ListEmployee = ({newList}: NewList) => {
     dispatch(StartGetEmployeeByUid(uid));
   };
 
-  const filteredEmployees = newList.filter((item) => item.enabled && item.idDepartment === loginState?.idDepartment && item.uid !== loginState?.uid);
-
+    if(employeesListVariable){
+      filteredEmployees = employeesListVariable.filter((item) => item.enabled && item.idDepartment === loginState?.idDepartment && item.uid !== loginState?.uid);
+    }else{
+    }
 
   return (
     <div className="grid grid-cols-1 gap-4 scroll overflow-y-auto p-2vh h-96">
       {loading ? (
         <LoadingGeneralComponent />
       ) : (
-        Array.isArray(filteredEmployees) &&
-        filteredEmployees
+        Array.isArray(employeesListVariable) &&
+        employeesListVariable
           .filter((item) => item.enabled)
           .map((item) => (
             <React.Fragment key={item.uid}>

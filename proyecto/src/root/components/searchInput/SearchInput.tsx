@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchComponentInterface } from "../../interface/searchParameters";
-import { StartGetEmployeeByCedula } from "@/root/redux/thunks/employee-thunk/employee.thunk";
-import { useDispatch } from "react-redux";
+import {
+  StartGetByVariable,
+} from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SearchInput(props: SearchComponentInterface) {
-  const [cedulaValue, setCedulaValue] = useState("");
+  const [Value, setValue] = useState("");
 
   const dispatch = useDispatch();
 
-  const searchByCedula = async (cedula: string) => {
-    dispatch(StartGetEmployeeByCedula(cedulaValue));
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      dispatch(StartGetByVariable(Value,props.typeList));
+    }
   };
 
   return (
@@ -23,7 +28,8 @@ export default function SearchInput(props: SearchComponentInterface) {
               className="block p-2.5 w-full z-20 text-blue text-sm rounded-l-lg rounded-r-lg border-l-gray-50 border-l-2 border  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600"
               placeholder={props.placeholderSeekerOne}
               required
-              onChange={(e) => setCedulaValue(e.target.value)}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
           </div>
         </div>

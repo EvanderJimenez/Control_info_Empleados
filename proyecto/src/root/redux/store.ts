@@ -14,7 +14,7 @@ export const ApplicationStore = configureStore({
     getEmployeeByCedulaStore: EmployeeReducer,
     getEmployeeByNameStore: EmployeeReducer,
     loginStore: EmployeeReducer,
-
+    getByVariableStore: EmployeeReducer,
     getDepartmentByIdStore: DepartmentReducer,
   },
 });
