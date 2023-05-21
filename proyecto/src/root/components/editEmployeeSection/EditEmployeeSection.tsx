@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import SearchInput from "../searchInput/SearchInput";
 import { useSelector } from "react-redux";
+<<<<<<< Updated upstream
 import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+=======
+>>>>>>> Stashed changes
 import ListEmployee from "../listEmployee/ListEmployee";
 import { UserData } from "@/root/interface/employee";
+import { selectLogin,selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 
 export default function EditEmployeeSection() {
   const employeeCedula = useSelector(selectGetEmployeeByUid);
