@@ -5,5 +5,6 @@ export interface SearchComponentInterface {
   placeholderSeekerOne: string;
   valueEnd: string | number
   typeList: string
+  id: string
   
 }

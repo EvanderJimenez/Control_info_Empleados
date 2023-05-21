@@ -1,28 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchInput from "../searchInput/SearchInput";
 import { useSelector } from "react-redux";
-import { selectGetEmployeeByCedula, selectGetEmployeeByName, selectGetEmployeeByUid, selectListOfEmployee, selectLogin, selectgetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeeByUid, selectLogin, } from "@/root/redux/selectors/employee-selector/employee.selector";
 import ListEmployee from "../listEmployee/ListEmployee";
-import { RootState } from "@/root/redux/store";
-import { EmployeesType } from "@/root/types/Employee.type";
+import { UserData } from "@/root/interface/employee";
 
 export default function EditEmployeeSection() {
 
   const employeeCedula = useSelector(selectGetEmployeeByUid)
   const user = useSelector(selectLogin)
-  const [formData, setFormData] = useState({
+
+  const [dataEmployee, setDataEmployee] = useState<UserData>({
+    uid: "",
     name: "",
-    cedula: "",
     firstSurname: "",
     secondSurname: "",
+    cedula: 0,
+    phoneNumber: 0,
+    photo: "",
     jobPosition: "",
-    phoneNumber: "",
-    salary: "",
-  })
+    salary: 0,
+    enabled: true,
+    idDepartment:"",
+    password: "",
+    email: "",
+    boss:"",
+    schedule:[],
+    brands: [],
+    option: "",
+  });
 
-  useEffect(() => {
+      const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  }, [])
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setDataEmployee((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   return (
     <div className="flex flex-col">
@@ -32,71 +48,57 @@ export default function EditEmployeeSection() {
       <div className="flex">
       <div className="flex flex-col">
       <h2>Search By: </h2>
-      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Cedula" typeList="cedula"    />
-      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Name" typeList="name" />
-      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Job Position" typeList="jobPosition" />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula"   />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Name" typeList="name" id="name" />
+      <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
       </div>
       <button className="bg-red"> Search</button>
       </div>
       <ListEmployee />
     </div>
+
     <div className="flex-auto p-1">
     <form className="bg-SecondaryColor p-6 h-screen">
-        <div className="mb-6 flex flex-row space-x-4">
+    <div className="mb-6 flex flex-row space-x-4">
           <div className="flex flex-col flex-1">
-            <label htmlFor="Name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Name
-            </label>
-            <input onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" value ={employeeCedula?.name} id="Name" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5" required />
+            <label htmlFor="Name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+            <input onChange={handleInputChange} name="name" type="text" value ={dataEmployee.name} id="Name"  className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5"  />
           </div>
           <div className="flex flex-col flex-1">
-            <label htmlFor="IDnumber" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              ID number
-            </label>
-            <input onChange={(e) => setFormData({ ...formData, cedula: e.target.value })} type="text" value ={employeeCedula?.cedula} id="IDnumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <label htmlFor="cedula" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cedula</label>
+            <input  onChange={handleInputChange} name = "cedula" type="number" value ={dataEmployee.cedula} id="cedula" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"   />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
           <div className="flex flex-col flex-1">
-            <label htmlFor="Surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Surname
-            </label>
-            <input onChange={(e) => setFormData({ ...formData, firstSurname: e.target.value })} type="text" value ={employeeCedula?.firstSurname} id="Surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <label htmlFor="firstSurname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+            <input onChange={handleInputChange} name="firstSurname" type="text" value ={dataEmployee.firstSurname} id="firstSurname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"  />
           </div>
           <div className="flex flex-col flex-1">
-            <label htmlFor="Second-surname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Second surname
-            </label>
-            <input onChange={(e) => setFormData({ ...formData, secondSurname: e.target.value })} type="text" value ={employeeCedula?.secondSurname} id="Second-surname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5" required />
+            <label htmlFor="secondSurname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Second surname</label>
+            <input  onChange={handleInputChange} type="text" name="secondSurname" value ={dataEmployee.secondSurname} id="SecondSurname" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5"  />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
           <div className="flex flex-col flex-1">
-            <label htmlFor="Job-position" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Job position
-            </label>
-            <input onChange={(e) => setFormData({ ...formData, jobPosition: e.target.value })} type="text" value ={employeeCedula?.jobPosition} id="Job-position" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5" required />
+            <label htmlFor="jobPosition" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job position</label>
+            <input  onChange={handleInputChange} type="text" name="secondSurname" value ={dataEmployee.secondSurname} id="Job-position" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5"  />
           </div>
           <div className="flex flex-col flex-1">
-            <label htmlFor="PhoneNumber" className="block mb-2 text-sm font-medium text-gray-900  dark:text-white">
-              Phone Number
-            </label>
-            <input onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })} type="number" value ={employeeCedula?.phoneNumber} id="PhoneNumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5" required />
+            <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium text-gray-900  dark:text-white">Phone Number</label>
+            <input  onChange={handleInputChange} type="number" name="phoneNumber" value ={dataEmployee.phoneNumber} id="PhoneNumber" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"  />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
           <div className="flex flex-col flex-1">
-            <label htmlFor="Salary" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Salary
-            </label>
-            <input onChange={(e) => setFormData({ ...formData, salary: e.target.value })} type="number" value ={employeeCedula?.salary} id="Salary" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full " required />
+            <label htmlFor="salary" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Salary</label>
+            <input  onChange={handleInputChange} type="number" name="salary" value ={dataEmployee.salary} id="salary" className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full "  />
           </div>
         </div>
         <div className="mb-6 flex flex-row space-x-4">
           <div className="flex flex-col flex-1">
             <button className="EliminatedButton  hover:bg-white hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Fire employee
-            </button>
+              Fire employee </button>
           </div>
           <div className="flex flex-col flex-1">
             <button
