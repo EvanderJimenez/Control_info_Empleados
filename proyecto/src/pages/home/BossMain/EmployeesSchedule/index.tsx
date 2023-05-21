@@ -6,10 +6,14 @@ import EmployeeTableViewSchedule from "@/root/components/employeeTablewViewSched
 import ScheduleTimeSelection from "@/root/components/editSchedulePage/components/ScheduleTimeSelection";
 import EmployeeTimeSection from "@/root/components/employeeTimeSection/EmployeeTimeSection";
 
+function SaveInformation(){
+
+}
+
 export default function index() {
   return (
     <BossPage>
-      <EmployeeTimeSection />
+      <ScheduleTimeSelection onScheduleChange={SaveInformation} />
     </BossPage>
   );
 }
