@@ -10,17 +10,17 @@ export function Foot() {
         <span className="text-sm font-medium text-white sm:text-center dark:text-gray-400">. All Rights Reserved.</span>
         <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-white  sm:mt-0">
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
+            <a href="/home/PrivacyPolicy" className="mr-4 hover:underline md:mr-6">
               Privacy Policy
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
+            <a href="/home/License" className="mr-4 hover:underline md:mr-6">
               Licensing
             </a>
           </li>
           <li>
-            <a href="#" className="hover:underline">
+            <a href="/home/CookiesInformation" className="hover:underline">
               Cookie policies
             </a>
           </li>

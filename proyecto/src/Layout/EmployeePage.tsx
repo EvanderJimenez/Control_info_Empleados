@@ -1,5 +1,5 @@
 import CenterMenu from "@/root/components/menus/employeeCenterMenu/EmployeeCenterMenu";
-import DashBoardMenu from "@/root/components/dashBoardMenu/DashBoardMenu";
+import DashBoardMenu from "@/root/components/menus/dashBoardMenu/DashBoardMenu";
 import { Foot } from "@/root/components/foot/Foot";
 import { Top } from "@/root/components/top/Top";
 import { ReactNode } from "react";
