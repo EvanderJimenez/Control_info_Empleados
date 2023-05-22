@@ -18,7 +18,7 @@ export function Top() {
             <a href="tel:89884062" className="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">
               (506) 8988-4062
             </a>
-            <a href="#" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">
+            <a href="/" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">
               Login
             </a>
           </div>
@@ -29,17 +29,17 @@ export function Top() {
           <div className="flex items-center">
             <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
               <li>
-                <a href="#" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
+                <a href="/home/AboutUs" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
                   About us
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-900 dark:text-white hover:underline">
+                <a href="/home/Contact" className="text-gray-900 dark:text-white hover:underline">
                   Contact
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-900 dark:text-white hover:underline">
+                <a href="/home/Help" className="text-gray-900 dark:text-white hover:underline">
                   Help
                 </a>
               </li>
