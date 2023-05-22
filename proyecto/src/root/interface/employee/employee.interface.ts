@@ -56,3 +56,9 @@ export interface Schedule {
   startTime: string;
   endTime: string;
 }
+
+export interface InformationPage{
+  title: string,
+  paragraph: string,
+  img: string
+}
