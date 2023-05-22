@@ -8,7 +8,6 @@ export function getMondaysOfYear(year: number): Date[] {
     }
     date.setDate(date.getDate() + 1);
   }
-
   return mondays;
 }
 export function getDaysBetweenDates(startDate: Date, endDate: Date): Date[] {
@@ -19,7 +18,6 @@ export function getDaysBetweenDates(startDate: Date, endDate: Date): Date[] {
     days.push(new Date(currentDate));
     currentDate.setDate(currentDate.getDate() + 1);
   }
-
   return days;
 }
 
@@ -34,7 +32,6 @@ export function addTimeToDates(dates: Date[], startTime: string, endTime: string
     };
     datesWithTime.push(dateWithTime);
   }
-
   return datesWithTime;
 }
 

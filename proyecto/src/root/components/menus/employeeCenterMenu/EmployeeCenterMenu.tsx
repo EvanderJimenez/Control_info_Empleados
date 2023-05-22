@@ -21,15 +21,27 @@ export default function EmployeeCenterMenu() {
             <img src="/Images/WhiteCalendar.png" alt="" />
             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Schedule</span>
           </button>
-          <button onClick={() => handleButtonClick("/home/EmployeeMain/Brands")} type="button" className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600">
+          <button
+            onClick={() => handleButtonClick("/home/EmployeeMain/Brands")}
+            type="button"
+            className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
+          >
             <img src="/Images/Timer.png" alt="" />
             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Brands</span>
           </button>
-          <button type="button" className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600">
+          <button
+            onClick={() => handleButtonClick("/home/EmployeeMain/Justification")}
+            type="button"
+            className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
+          >
             <img src="/Images/pencil.png" alt="" />
             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Justification</span>
           </button>
-          <button onClick={() => handleButtonClick("/home/EmployeeMain/Profile")} type="button" className="inline-flex flex-col items-center justify-center px-5 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 group border-x dark:border-gray-600">
+          <button
+            onClick={() => handleButtonClick("/home/EmployeeMain/Profile")}
+            type="button"
+            className="inline-flex flex-col items-center justify-center px-5 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 group border-x dark:border-gray-600"
+          >
             <svg
               className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
               fill="currentColor"

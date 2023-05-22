@@ -14,4 +14,3 @@ export default function index() {
     </LoginPage>
   );
 }
-//<ScheduleTimeSelection onScheduleChange={handleScheduleChange}/>

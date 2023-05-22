@@ -1,14 +1,14 @@
-import EmployeeMain from "@/Layout/EmployeePage";
-import React from "react";
-import MainBodyEmployee from "../../../root/components/mainBodyEmployee/MainBodyEmployee";
-import ListEmployee from "@/root/components/listEmployee/ListEmployee";
-import DashBoardMenu from "@/root/components/dashBoardMenu/DashBoardMenu";
-import CenterMenu from "@/root/components/menus/employeeCenterMenu/EmployeeCenterMenu";
+import EmployeePage from "@/Layout/EmployeePage";
+import LoginPage from "@/Layout/LoginPage";
+import ScheduleTimeSelection from "@/root/components/editSchedulePage/ScheduleTimeSelection";
+import InformationPage from "@/root/components/informationPage/InformationPage";
+import MainForm from "@/root/components/mainForm/MainForm";
+import { Schedule } from "@/root/interface/employee";
 
 export default function index() {
   return (
-    <EmployeeMain>
-      <MainBodyEmployee department="" entryTime="" exitTime="" name="" />
-    </EmployeeMain>
+    <EmployeePage>
+      <InformationPage img="/Images/EmployeeBackground.jpg" title="Welcome!" paragraph="Check your information for today" />
+    </EmployeePage>
   );
 }
