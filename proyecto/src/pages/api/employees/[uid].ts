@@ -26,7 +26,6 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
   try {
 
     const uid = String(req.query.uid);
-
     const {
       name,
       firstSurname,

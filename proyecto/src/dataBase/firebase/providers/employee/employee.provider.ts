@@ -64,6 +64,7 @@ const updatByUid = async (
         password,
         email,
         boss,
+        schedule
       });
       const snapshotEmpleadoActualizado = await getDoc(employeeDoc);
       const empleadoActualizado = snapshotEmpleadoActualizado.data();
@@ -74,7 +75,6 @@ const updatByUid = async (
     throw new Error("No se pudo actualizar el empleado");
   }
 }
-
 
 const create = async (
   uid: string,
@@ -92,22 +92,32 @@ const create = async (
   email: string,
   boss: string,
   schedule: Schedule[],
-  brands: Brands[],
+  brands: Brands[]
 ): Promise<{ message: string; employee?: any }> => {
   try {
-
-    console.log("email: " + email + " password: " + password + " uid: " + uid);
-
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     uid = user.uid;
 
-    console.log("email: " + email + " password: " + password + " uid: " + uid);
+    const defaultSchedule: Schedule[] = [
+      { day: "Monday", startTime: "", endTime: "" },
+      { day: "Tuesday", startTime: "", endTime: "" },
+      { day: "Wednesday", startTime: "", endTime: "" },
+      { day: "Thursday", startTime: "", endTime: "" },
+      { day: "Friday", startTime: "", endTime: "" },
+      { day: "Saturday", startTime: "", endTime: "" },
+      { day: "Sunday", startTime: "", endTime: "" },
+    ];
 
+    const mergedSchedule: Schedule[] = defaultSchedule.map((defaultDay) => {
+      const userDay = schedule.find((s) => s.day === defaultDay.day);
+      return {
+        ...defaultDay,
+        ...userDay,
+      };
+    });
+
+    
     const newDocRef = await addDoc(collection(firestore, "employee"), {
       uid,
       name,
@@ -123,6 +133,7 @@ const create = async (
       password,
       email,
       boss,
+      schedule: mergedSchedule,
       brands: brands.map((s: Brands) => ({
         date: s.date,
         startTime: s.startTime,
@@ -151,6 +162,85 @@ const create = async (
   }
 };
 
+
+
+/* const create = async (
+  uid: string,
+  name: string,
+  firstSurname: string,
+  secondSurname: string,
+  cedula: number,
+  phoneNumber: number,
+  photo: string,
+  jobPosition: string,
+  salary: number,
+  enabled: boolean,
+  idDepartment: string,
+  password: string,
+  email: string,
+  boss: string,
+  schedule: Schedule[],
+  brands: Brands[],
+): Promise<{ message: string; employee?: any }> => {
+  try {
+
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    uid = user.uid;
+
+    const newDocRef = await addDoc(collection(firestore, "employee"), {
+      uid,
+      name,
+      firstSurname,
+      secondSurname,
+      cedula,
+      phoneNumber,
+      photo,
+      jobPosition,
+      salary,
+      enabled,
+      idDepartment,
+      password,
+      email,
+      boss,
+      schedule :schedule.map((s: Schedule) =>({
+        day: s.day,
+        startTime:s.startTime,
+        endTime: s.endTime,
+      })),
+      brands: brands.map((s: Brands) => ({
+        date: s.date,
+        startTime: s.startTime,
+        endTime: s.endTime,
+        justification: s.justification,
+        finished: s.finished,
+      })),
+      
+    });
+
+    const newDoc = await getDoc(newDocRef);
+
+    if (newDoc.exists()) {
+      return {
+        message: "Empleado creado correctamente",
+        employee: newDoc.data(),
+      };
+    } else {
+      return {
+        message: "No se pudo crear el empleado",
+      };
+    }
+  } catch (error) {
+    return {
+      message: `Ocurrió un error al crear el empleado: ${error}`,
+    };
+  }
+}; */
+
 const getByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
@@ -177,7 +267,6 @@ const deleteByUid = async (uid: string) => {
     const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
     await updateDoc(employeeRef, { enabled: false });
 
-    console.log(`Empleado con UID ${uid} actualizado correctamente`);
   } catch (error) {
     console.error(`Error al actualizar el empleado con UID ${uid}:`, error);
   }
@@ -257,7 +346,6 @@ const getByVariable= async (data: string, variable: string) =>{
     });
   }
 
-  console.log("employees: " + employees)
 
   return employees;
 }

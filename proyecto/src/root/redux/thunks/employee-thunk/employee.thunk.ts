@@ -71,6 +71,7 @@ export const StartUpDateEmployee = (
     try {
       const employee = await upDatEmployeeProvider(searchUser, searchTerm);
 
+
       dispacth(updateEmployeeReducer(employee || null));
     } catch (error) {
       console.log(error);

@@ -88,7 +88,7 @@ function Register() {
   };
   return (
     <div className="flex justify-center items-center flex-col">
-      <UpdateData handleInputChange={handleInputChange} handleSubmit={handleUpdate}/>
+      <PrincipalData handleInputChange={handleInputChange} handleScheduleChange={handleScheduleChange} userData={userData} handleSubmit={handleSubmit}/>
     </div>
   );
 }

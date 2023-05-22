@@ -57,7 +57,7 @@ export interface TableScheduleProps {
   rows: RowSchedule[];
 }
 export interface Schedule {
-  weekday: string;
-  entryTime: string;
-  exitTime: string;
+  day: string;
+  startTime: string;
+  endTime: string;
 }

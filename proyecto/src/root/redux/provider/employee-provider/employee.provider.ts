@@ -84,6 +84,7 @@ export const createEmployeeProvider = async (searchTerm: UserData) => {
 export const upDatEmployeeProvider = async (searchUser: string,searchTerm: EmployeesType) =>{
 
   try {
+
     const response = await fetch(`/api/employees/${searchUser}`, {
       method: "PUT",
       headers: {
@@ -228,8 +229,6 @@ export const getByVariableProvider = async (searchTerm1: string, searchTerm2: st
     }
 
     const data = await response.json();
-
-    console.log("data: " + data)
 
     return data;
 

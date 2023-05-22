@@ -23,7 +23,7 @@ export default function SearchInput(props: SearchComponentInterface) {
         <div className=" flex-1 xl:w-1/2  flex flex-col lg:w-1/2  md:w-full py-1">
           <div className="relative w-full">
             <input
-              type={props.labelInputSeekerOne}
+              type="text"
               id={props.id}
               className="block p-2.5 w-full z-20 text-black text-sm rounded-l-sm rounded-r-sm  border-l-1 border  focus:ring-blue focus:border-blue "
               placeholder={props.placeholderSeekerOne}

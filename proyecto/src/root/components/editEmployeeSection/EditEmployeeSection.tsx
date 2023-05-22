@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchInput from "../searchInput/SearchInput";
-import { useSelector } from "react-redux";
-<<<<<<< Updated upstream
-import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
-=======
->>>>>>> Stashed changes
+import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../listEmployee/ListEmployee";
-import { UserData } from "@/root/interface/employee";
-import { selectLogin,selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectLogin,selectGetEmployeeByUid, selectUpdateEmployee } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { EmployeesType } from "@/root/types/Employee.type";
+import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 
 export default function EditEmployeeSection() {
   const employeeCedula = useSelector(selectGetEmployeeByUid);
+  const dispatch = useDispatch();
   const user = useSelector(selectLogin);
 
-  const [dataEmployee, setDataEmployee] = useState<UserData>({
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
     firstSurname: "",
@@ -29,13 +27,18 @@ export default function EditEmployeeSection() {
     email: "",
     boss: "",
     schedule: [],
-    brands: [],
-    option: "",
   });
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
   };
+
+  useEffect(() => {
+    if (employeeCedula) {
+      setDataEmployee(employeeCedula);
+    }
+  }, [employeeCedula,dataEmployee]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -59,7 +62,7 @@ export default function EditEmployeeSection() {
           <ListEmployee />
         </div>
         <div className="flex-auto h-auto">
-          <form className="bg-lithBlue p-2 h-auto">
+          <form onSubmit ={handleUpdate} className="bg-lithBlue p-2 h-auto">
             <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
               <div className="flex flex-col flex-1">
                 <label htmlFor="Name" className="block mb-2 text-sm font-medium text-black">
@@ -125,7 +128,7 @@ export default function EditEmployeeSection() {
                   onChange={handleInputChange}
                   type="text"
                   name="secondSurname"
-                  value={dataEmployee.secondSurname}
+                  value={dataEmployee.jobPosition}
                   id="Job-position"
                   className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5"
                 />

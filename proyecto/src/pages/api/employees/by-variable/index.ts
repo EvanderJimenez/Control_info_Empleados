@@ -8,12 +8,8 @@ const getByVariable = async (
 ) => {
   const {data,variable } = req.body
 
-  console.log("data: " + data + " variable: " + variable)
-
   try {
     const employee = await employeeProvider.getByVariable(data, variable);
-
-    console.log("employee api: " + employee)
 
     res.status(200).json(employee);
   } catch (error) {

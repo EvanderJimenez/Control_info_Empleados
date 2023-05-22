@@ -7,8 +7,8 @@ interface ScheduleFormProps {
   handleScheduleChange: (newSchedule: Schedule[]) => void;
 }
 
-const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
-  const [mondayStart, setMondayStart] = useState("");
+/* const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
+/*   const [mondayStart, setMondayStart] = useState("");
   const [mondayEnd, setMondayEnd] = useState("");
   const [tuesdayStart, setTuesdayStart] = useState("");
   const [tuesdayEnd, setTuesdayEnd] = useState("");
@@ -21,7 +21,7 @@ const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
   const [saturdayStart, setSaturdayStart] = useState("");
   const [saturdayEnd, setSaturdayEnd] = useState("");
   const [sundayStart, setSundayStart] = useState("");
-  const [sundayEnd, setSundayEnd] = useState("");
+  const [sundayEnd, setSundayEnd] = useState(""); */
 
 /*   useEffect(() => {
     if (schedule.length > 0) {
@@ -42,7 +42,7 @@ const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
     }
   }, [schedule]); */
 
-  const handleScheduleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+/*   const handleScheduleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const newSchedule = [
@@ -83,9 +83,9 @@ const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
       },
     ];
     handleScheduleChange(newSchedule);
-  };
+  }; */
 
-  return (
+/*   return (
     <div className="px-4 py-6">
       <h2 className="text-xl font-semibold mb-4">Schedule</h2>
       <form onSubmit={handleScheduleSubmit}>
@@ -114,7 +114,8 @@ const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
         </button>
       </form>
     </div>
-  );
+  ); 
 };
+ */
 
 export default Schedule;

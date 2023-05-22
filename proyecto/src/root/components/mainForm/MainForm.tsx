@@ -18,7 +18,7 @@ export const MainForm = ({}) => {
         {showComponent ? "Don't have an account?, register" : "Do you have an account?, log in"}
       </a>
       <div className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10">
-        <div>{showComponent ? <Login /> : <Register user={undefined} onCancel={() => console.log("Cancel")} />}</div>
+        <div>{showComponent ? <Login /> : <Register />}</div>
       </div>
     </div>
   );
