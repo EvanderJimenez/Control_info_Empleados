@@ -1,8 +1,10 @@
-
 {
     "ignoreWords": [
-      "empleado",
-      "firestore",
-      "cedula"
+        "empleado",
+        "firestore",
+        "cedula"
+    ],
+    "words": [
+        "reduxjs"
     ]
-  }
+}

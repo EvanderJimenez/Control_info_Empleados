@@ -163,84 +163,6 @@ const create = async (
 };
 
 
-
-/* const create = async (
-  uid: string,
-  name: string,
-  firstSurname: string,
-  secondSurname: string,
-  cedula: number,
-  phoneNumber: number,
-  photo: string,
-  jobPosition: string,
-  salary: number,
-  enabled: boolean,
-  idDepartment: string,
-  password: string,
-  email: string,
-  boss: string,
-  schedule: Schedule[],
-  brands: Brands[],
-): Promise<{ message: string; employee?: any }> => {
-  try {
-
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
-    uid = user.uid;
-
-    const newDocRef = await addDoc(collection(firestore, "employee"), {
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule :schedule.map((s: Schedule) =>({
-        day: s.day,
-        startTime:s.startTime,
-        endTime: s.endTime,
-      })),
-      brands: brands.map((s: Brands) => ({
-        date: s.date,
-        startTime: s.startTime,
-        endTime: s.endTime,
-        justification: s.justification,
-        finished: s.finished,
-      })),
-      
-    });
-
-    const newDoc = await getDoc(newDocRef);
-
-    if (newDoc.exists()) {
-      return {
-        message: "Empleado creado correctamente",
-        employee: newDoc.data(),
-      };
-    } else {
-      return {
-        message: "No se pudo crear el empleado",
-      };
-    }
-  } catch (error) {
-    return {
-      message: `Ocurrió un error al crear el empleado: ${error}`,
-    };
-  }
-}; */
-
 const getByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
@@ -272,7 +194,7 @@ const deleteByUid = async (uid: string) => {
   }
 };
 
-const getByEmailPassword = async (email: string, password: string) => {
+const login = async (email: string, password: string) => {
 
 
   try {
@@ -317,20 +239,17 @@ const getByCedula= async (cedula: string) =>{
   }
 }
 
-const getByName= async (name: string) =>{
+const dismissByUid= async (uid: string) =>{
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where("name", "==", name));
+  const employeeQuery = query(employeeCollection, where("uid", "==", uid));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
-  const employees: any[] = [];
-
-  if (!employeeSnapshot.empty) {
-    employeeSnapshot.forEach((doc) => {
-      employees.push(doc.data());
-    });
+  if (employeeSnapshot.size === 0) {
+    console.log(`No se encontró ningún empleado con UID ${uid}`);
+    return;
   }
-
-  return employees;
+  const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
+  await updateDoc(employeeRef, { idDepartment: "" });
 }
 
 const getByVariable= async (data: string, variable: string) =>{
@@ -355,10 +274,10 @@ export const employeeProvider = {
   getByUid,
   deleteByUid,
   create,
-  getByEmailPassword,
+  login,
   updatByUid,
   getByCedula,
-  getByName,
+  dismissByUid,
   getByVariable
 };
 

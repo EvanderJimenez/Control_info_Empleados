@@ -6,6 +6,7 @@ import { DepartmentReducer } from "./reducers/department-reducer/DepartmentReduc
 export const ApplicationStore = configureStore({
   reducer: {
     deleteEmployeeStore: EmployeeReducer,
+    dismissEmployeeStore: EmployeeReducer,
     employeesListStore: EmployeeReducer,
     createEmployeeStore: EmployeeReducer,
     updateEmployeeStore: EmployeeReducer,

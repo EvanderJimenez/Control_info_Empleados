@@ -16,7 +16,7 @@ export default function SearchInput(props: SearchComponentInterface) {
       dispatch(StartGetByVariable(Value,props.typeList));
     }
   };
-
+  
   return (
     <>
       <div className="bg-transparent flex flex-wrap">

@@ -3,6 +3,8 @@ import { RootState } from "../../store";
 
 export  const  selectDeleteEmployee  =  (state:  RootState)  =>  state.deleteEmployeeStore.deleteEmployee;
 
+export  const  selectDismissEmployee  =  (state:  RootState)  =>  state.dismissEmployeeStore.dismissEmployee;
+
 export  const  selectListOfEmployee  =  (state:  RootState)  =>  state.employeesListStore.employees
 
 export  const  selectCreateEmployee  =  (state:  RootState)  =>  state.createEmployeeStore.createEmploye

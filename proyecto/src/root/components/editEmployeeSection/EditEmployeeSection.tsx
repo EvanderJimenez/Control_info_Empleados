@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import SearchInput from "../searchInput/SearchInput";
 import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../listEmployee/ListEmployee";
-import { selectLogin,selectGetEmployeeByUid, selectUpdateEmployee } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
-import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { StartDismissEmployee, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 
 export default function EditEmployeeSection() {
-  const employeeCedula = useSelector(selectGetEmployeeByUid);
+  const employeeByUid = useSelector(selectGetEmployeeByUid);
   const dispatch = useDispatch();
-  const user = useSelector(selectLogin);
+
+  const [clear, setClear] = useState(false)
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -32,18 +33,44 @@ export default function EditEmployeeSection() {
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
+    setClear(true)
   };
 
   useEffect(() => {
-    if (employeeCedula) {
-      setDataEmployee(employeeCedula);
+    if(!clear){
+      if (employeeByUid) {
+        setDataEmployee(employeeByUid);
+      }
+    }else{
+      setDataEmployee({ uid: "",
+      name: "",
+      firstSurname: "",
+      secondSurname: "",
+      cedula: 0,
+      phoneNumber: 0,
+      photo: "",
+      jobPosition: "",
+      salary: 0,
+      enabled: true,
+      idDepartment: "",
+      password: "",
+      email: "",
+      boss: "",
+      schedule: [],})
     }
-  }, [employeeCedula]);
+
+  }, [employeeByUid,clear]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDataEmployee((prevData) => ({ ...prevData, [name]: value }));
   };
+
+  const handleDismissEmployee = () =>{
+
+    dispatch(StartDismissEmployee(employeeByUid?.uid || ""))
+
+  }
 
   return (
     <div className="flex flex-col">
@@ -59,7 +86,7 @@ export default function EditEmployeeSection() {
             <img src="/Images/searchIcon.png" alt="" />
           </button>
           </div>
-          <ListEmployee />
+          <ListEmployee clear = {clear} setClear={setClear} />
         </div>
         <div className="flex-auto h-auto">
           <form onSubmit ={handleUpdate} className="bg-lithBlue p-2 h-auto">
@@ -164,8 +191,8 @@ export default function EditEmployeeSection() {
             </div>
             <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
               <div className="flex flex-col flex-1">
-                <button className="EliminatedButton  hover:bg-black hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Fire employee
+                <button onClick={handleDismissEmployee} className="EliminatedButton  hover:bg-black hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Dismiss employee
                 </button>
               </div>
               <div className="flex flex-col flex-1">
@@ -173,7 +200,7 @@ export default function EditEmployeeSection() {
                   type="submit"
                   className="NormalButton hover:bg-black hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                  Submit
+                  Save
                 </button>
               </div>
               <div className="flex flex-col flex-1">

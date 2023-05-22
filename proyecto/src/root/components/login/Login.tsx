@@ -56,7 +56,7 @@ function Login() {
     }
   }, [loginState, resDepart]);
 
-  return <>{isLoggedIn ? <ListEmployee /> : <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} />}</>;
+  return <><FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} /></>;
 }
 
 export default Login;

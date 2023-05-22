@@ -3,19 +3,19 @@ import { notAllowedResponse } from "@/root/api/reponses/notAllowedResponse";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
-async function getByUid(req: NextApiRequest, res: NextApiResponse) {
-  const name = String(req.query.name);
+async function dismissByUid(req: NextApiRequest, res: NextApiResponse) {
+  const uid = String(req.query.uid);
   try {
-    const employee = await employeeProvider.getByName(name);
-    res.status(200).json(employee);
+    await employeeProvider.dismissByUid(uid);
+    res.status(200).json({ uid, message: "Employee dismissing" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
 
 const handlers: any = {};
-handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
-  getByUid(req, res);
+handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
+dismissByUid(req, res);
 
 export default function employeesByNameController(
   req: NextApiRequest,

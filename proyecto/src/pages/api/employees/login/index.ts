@@ -9,7 +9,7 @@ const getByEmailPassword = async (
   const {email,password } = req.body
 
   try {
-    const employee = await employeeProvider.getByEmailPassword(email, password);
+    const employee = await employeeProvider.login(email, password);
     res.status(200).json(employee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });

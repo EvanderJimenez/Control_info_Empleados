@@ -1,5 +1,5 @@
-import { getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from './../../provider/employee-provider/employee.provider';
-import { DispatchType, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
+import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from './../../provider/employee-provider/employee.provider';
+import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
 import {
   deleteEmployeeReducer,
   listEmployeeReducer,
@@ -35,6 +35,20 @@ export const StartDeletingEmployee = (employeeId: string): any => {
       console.log("Error deleting employee:", error);
     } finally {
       dispatch(setLoading(false));
+    }
+  };
+};
+
+export const StartDismissEmployee = (searchTerm: string): any => {
+  return async (dispatch: DispatchType) => {
+    try {
+      const employee = await dismissByUidProvider(searchTerm);
+
+      console.log("data thunk:" + JSON.stringify(employee))
+
+      dispatch(dismissEmployeeReducer(employee || null));
+    } catch (error) {
+      console.log(error);
     }
   };
 };

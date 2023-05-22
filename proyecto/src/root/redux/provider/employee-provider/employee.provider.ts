@@ -20,6 +20,31 @@ export const deleteEmployeeProvider = async (searchTerm: string) => {
     return;
   }
 };
+
+export const dismissByUidProvider = async (searchTerm: string) => {
+  try {
+    const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    
+    const data: { uid: string } = await response.json();
+
+    return { id: data.uid };
+  } catch (error) {
+    console.error("Error dismissing the employee, mor information about that: ", error);
+    return;
+  }
+};
+
 export const employeeListProvider = async () => {
   try {
     const response = await fetch("/api/employees");

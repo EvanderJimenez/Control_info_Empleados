@@ -81,7 +81,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
         <div className="xl:w-1/4 ">
           <SearchInput labelInputSeekerOne="number" placeholderSeekerOne="ID number" valueEnd={""} typeList={"cedula"} id={"cedula"} />
           <div className="pt-3">
-            <ListEmployee />
+            <ListEmployee clear setClear={() => {}} />
           </div>
         </div>
         <div className="flex-grow xl:w-3/4">
