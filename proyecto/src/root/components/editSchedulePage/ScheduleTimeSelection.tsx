@@ -59,14 +59,13 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
 
   useEffect(() => {
     if (employeeSchedule) {
-      console.log("object")
       setSchedules(employeeSchedule.schedule);
       setDataEmployee(employeeSchedule);
 
     }
   }, [employeeSchedule]);
 
-  const handleSaveSchadule = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSaveSchedule = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const newDataEmployee = { ...dataEmployee, schedule: schedules };
@@ -85,7 +84,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
           </div>
         </div>
         <div className="flex-grow xl:w-3/4">
-          <FormSchedule handleSaveSchadule={handleSaveSchadule} handleTimeChange={handleTimeChange} schedules={schedules} setSchedules={setSchedules} />
+          <FormSchedule handleSaveSchadule={handleSaveSchedule} handleTimeChange={handleTimeChange} schedules={schedules} setSchedules={setSchedules} />
         </div>
       </div>
     </>

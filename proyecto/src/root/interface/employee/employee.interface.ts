@@ -62,3 +62,10 @@ export interface InformationPage{
   paragraph: string,
   img: string
 }
+
+export interface Vacations{
+  dateStart : string
+  dateEnd: string
+  description: string
+  approved: boolean
+}

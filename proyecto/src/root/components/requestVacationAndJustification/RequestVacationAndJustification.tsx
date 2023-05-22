@@ -33,23 +33,6 @@ export default function RequestVacationAndJustification() {
                 Save
               </button>
             </div>
-            <div className="xl:w-1/2 space-y-4 flex flex-col lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60">
-              <h2 className="text-lg sm:text-xl font-medium  mb-2">Vacation request</h2>
-              <div className="flex justify-center items-center">
-                <div className="w-auto">
-                  <label htmlFor="initialDate">Initial application date</label>
-                  <input type="datetime-local" id="initialDateInput" />
-                </div>
-                <div className="flex flex-wrap w-auto">
-                  <label htmlFor="finalDate">Application end date</label>
-                  <input type="datetime-local" id="finalDateInput" />
-                </div>
-              </div>
-              <textarea name="" id="justificationEmployee" placeholder="Vacation request information" cols={29} rows={10}></textarea>
-              <button className="NormalButton zoom" onClick={handleVacationRequestSend}>
-                Send request
-              </button>
-            </div>
           </div>
           <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
         </div>
