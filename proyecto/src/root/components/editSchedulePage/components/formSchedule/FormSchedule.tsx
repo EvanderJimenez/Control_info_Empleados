@@ -3,15 +3,14 @@ import Schedule from "../../../registerEmployee/components/schedule/Schedule";
 
 type Field = "startTime" | "endTime";
 
-interface PropsFormSchedule{
-    schedules: Schedule[];
-    setSchedules: React.Dispatch<React.SetStateAction<Schedule[]>>;
-    handleSaveSchadule: (event: React.FormEvent<HTMLFormElement>) => void;
-    handleTimeChange: (index: number, field: Field, value: string) => void;
+interface PropsFormSchedule {
+  schedules: Schedule[];
+  setSchedules: React.Dispatch<React.SetStateAction<Schedule[]>>;
+  handleSaveSchadule: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleTimeChange: (index: number, field: Field, value: string) => void;
 }
 
-
-const FormSchedule = ({handleSaveSchadule,handleTimeChange,schedules,setSchedules} : PropsFormSchedule) => {
+const FormSchedule = ({ handleSaveSchadule, handleTimeChange, schedules, setSchedules }: PropsFormSchedule) => {
   return (
     <>
       <form onSubmit={handleSaveSchadule} className="relative overflow-x-auto">
@@ -31,14 +30,8 @@ const FormSchedule = ({handleSaveSchadule,handleTimeChange,schedules,setSchedule
           </thead>
           <tbody>
             {schedules.map((schedule, index) => (
-              <tr
-                key={index}
-                className="border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium whitespace-nowrap"
-                >
+              <tr key={index} className="border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                   {schedule.day}
                 </th>
                 <td className="px-6 py-4">
@@ -46,9 +39,7 @@ const FormSchedule = ({handleSaveSchadule,handleTimeChange,schedules,setSchedule
                     className="border-y-2 focus:outline-none border-blue bg-transparent text-sm zoom block"
                     type="time"
                     value={schedule.startTime}
-                    onChange={(e) =>
-                      handleTimeChange(index, "startTime", e.target.value)
-                    }
+                    onChange={(e) => handleTimeChange(index, "startTime", e.target.value)}
                   />
                 </td>
                 <td className="px-6 py-4">
@@ -56,10 +47,7 @@ const FormSchedule = ({handleSaveSchadule,handleTimeChange,schedules,setSchedule
                     className="border-y-2 focus:outline-none border-blue bg-transparent text-sm zoom block"
                     type="time"
                     value={schedule.endTime}
-                    onChange={(e) =>
-                      handleTimeChange(index, "endTime", e.target.value)
-                      
-                    }
+                    onChange={(e) => handleTimeChange(index, "endTime", e.target.value)}
                   />
                 </td>
               </tr>

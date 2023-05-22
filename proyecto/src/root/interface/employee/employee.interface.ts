@@ -31,12 +31,7 @@ export interface Brands {
   justification: string;
   finished: boolean;
 }
-export interface EmployeePage {
-  name: string;
-  department: string;
-  entryTime: string;
-  exitTime: string;
-}
+
 export interface Row {
   name: string;
   cedula: number;
