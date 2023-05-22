@@ -29,7 +29,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     { day: "Sunday", startTime: "", endTime: "" },
   ]);
 
-  
+
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -59,6 +59,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
 
   useEffect(() => {
     if (employeeSchedule) {
+      console.log("object")
       setSchedules(employeeSchedule.schedule);
       setDataEmployee(employeeSchedule);
 

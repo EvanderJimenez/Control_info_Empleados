@@ -38,7 +38,7 @@ export default function EditEmployeeSection() {
     if (employeeCedula) {
       setDataEmployee(employeeCedula);
     }
-  }, [employeeCedula,dataEmployee]);
+  }, [employeeCedula]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -127,9 +127,9 @@ export default function EditEmployeeSection() {
                 <input
                   onChange={handleInputChange}
                   type="text"
-                  name="secondSurname"
+                  name="jobPosition"
                   value={dataEmployee.jobPosition}
-                  id="Job-position"
+                  id="JobPosition"
                   className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5"
                 />
               </div>
