@@ -1,22 +1,17 @@
+import AdminPage from "@/Layout/AdminPage";
 import LoginPage from "@/Layout/LoginPage";
-<<<<<<< HEAD
-import RegisterBrands from "@/root/components/brands/registerBrands/RegisterBrands";
-import AdminDepartment from "@/root/components/adminDepartment/Admin";
+import MethodsDepartments from "@/root/components/adminDepartment/methods/MethodsDepartments";
 import AdminEdit from "@/root/components/adminEdit/AdminEdit";
-import BrandsClock from "@/root/components/brandsClock/BrandsClock";
-import MenuNavBar from "@/root/components/menuNavBar/MenuNavBar";
-=======
-import MainForm from "@/root/components/mainForm/MainForm";
->>>>>>> DarioDev
+import MethodsEmployee from "@/root/components/adminEdit/methodsEmployee/MethodsEmployee";
+import RegisterBrands from "@/root/components/brands/registerBrands/RegisterBrands";
+import Register from "@/root/components/registerEmployee/Register";
+import ScrollableTable from "@/root/components/table/table";
+import { ChangeEvent, FormEvent } from "react";
 
 export default function index() {
   return (
     <LoginPage>
-<<<<<<< HEAD
-      <MenuNavBar />
-=======
-      <MainForm />
->>>>>>> DarioDev
+      <RegisterBrands />
     </LoginPage>
   );
 }

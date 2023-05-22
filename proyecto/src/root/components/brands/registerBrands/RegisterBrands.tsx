@@ -67,7 +67,7 @@ function RegisterBrands() {
 
     const newHoursObject: Hours = {
       hIni: newHIni,
-      hFin: newHFin,
+      hFin: "",
     };
 
     const selectedCycle = brandData.cycle[newCycle];
@@ -80,6 +80,15 @@ function RegisterBrands() {
         [newDate]: newHoursObject,
       };
 
+      newFunction(updatedCycle);
+
+      setNewHIni("");
+      setNewHFin("");
+    } else {
+      console.error("The selected cycle does not exist");
+    }
+
+    function newFunction(updatedCycle: {}) {
       setBrandData((prevData) => ({
         ...prevData,
         cycle: {
@@ -87,11 +96,6 @@ function RegisterBrands() {
           [newCycle]: updatedCycle,
         },
       }));
-
-      setNewHIni("");
-      setNewHFin("");
-    } else {
-      console.error("The selected cycle does not exist");
     }
   };
 

@@ -102,7 +102,6 @@ const updateById = async (
         querySnapshot.docs[0].id
       );
       await updateDoc(departmentsDoc, {
-        id,
         name,
         size,
         location,

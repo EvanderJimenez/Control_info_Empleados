@@ -14,7 +14,7 @@ async function getDocId(req: NextApiRequest, res: NextApiResponse) {
 
 async function updateId(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const uid = String(req.query.id);
+    const Name = String(req.query.name);
 
     const {
       id,
@@ -39,7 +39,7 @@ async function updateId(req: NextApiRequest, res: NextApiResponse) {
       subDepartment,
       employees
     );
-    res.status(200).json({ uid, message: "Information updated" });
+    res.status(200).json({ Name, message: "Information updated" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
