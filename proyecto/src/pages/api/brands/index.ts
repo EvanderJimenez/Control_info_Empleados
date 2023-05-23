@@ -13,13 +13,14 @@ const getAll = async (res: NextApiResponse) => {
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { idEmployee, cycle } = req.body;
+    const { idEmployee, cycle, hoursEmployee } = req.body;
 
-    const newDepartment = await departmentProvider.createBrands(
+    const newBrands = await departmentProvider.createBrands(
       idEmployee,
-      cycle
+      cycle,
+      hoursEmployee
     );
-    res.status(201).json(newDepartment);
+    res.status(201).json(newBrands);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
