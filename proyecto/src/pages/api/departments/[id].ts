@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 async function getDocId(req: NextApiRequest, res: NextApiResponse) {
   const id = String(req.query.id);
+
   try {
     const employee = await departmentProvider.getByDocId(id);
     res.status(200).json(employee);

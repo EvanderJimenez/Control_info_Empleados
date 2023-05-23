@@ -267,3 +267,28 @@ export const getByVariableProvider = async (searchTerm1: string, searchTerm2: st
   }
 
 }
+
+export const getVacationsByUidProvider = async (searchTerm: string) => {
+
+  try {
+
+    const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error("Error getting vacations");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}

@@ -4,4 +4,4 @@ GET http://localhost:3000/api/departments/ HTTP/1.1
 
 ###
 # Get all departments
-GET http://localhost:3000/api/departments/DHctLaZmozV6hHBpQbXs HTTP/1.1
+GET http://localhost:3000/api/departments/eF23UVJvqJOwThp6pr2v HTTP/1.1

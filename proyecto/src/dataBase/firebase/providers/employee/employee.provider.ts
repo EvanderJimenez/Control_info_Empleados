@@ -274,6 +274,24 @@ const getByVariable= async (data: string, variable: string) =>{
   return employees;
 }
 
+const getVacationsByUid = async (uid: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "==", uid));
+
+  const employeeSnapshot = await getDocs(employeeQuery);
+
+  if (employeeSnapshot.empty) {
+    console.log("No se encontró ningún empleado con ese UID.");
+    return [];
+  }
+
+  const employeeDoc = employeeSnapshot.docs[0];
+  const vacations = employeeDoc.data().vacations;
+
+  return vacations;
+};
+
+
 export const employeeProvider = {
   getAll,
   getByUid,
@@ -283,7 +301,8 @@ export const employeeProvider = {
   updatByUid,
   getByCedula,
   dismissByUid,
-  getByVariable
+  getByVariable,
+  getVacationsByUid
 };
 
 export default employeeProvider;

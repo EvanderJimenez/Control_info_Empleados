@@ -19,10 +19,10 @@ function Login() {
     email: "",
     password: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
     if (loginState) {
+      console.log("IdDep " + loginState.idDepartment)
       dispatch(startGetDepartmentById(loginState.idDepartment));
     }
   }, [loginState, dispatch]);
@@ -32,7 +32,7 @@ function Login() {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleIngresar = async (e: any) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
 
     if (data.email && data.password) {
@@ -50,13 +50,7 @@ function Login() {
     }
   }, [loginState, resDepart]);
 
-  useEffect(() => {
-    if (loginState && resDepart) {
-      setIsLoggedIn(true);
-    }
-  }, [loginState, resDepart]);
-
-  return <><FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} /></>;
+  return <><FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} /></>;
 }
 
 export default Login;
