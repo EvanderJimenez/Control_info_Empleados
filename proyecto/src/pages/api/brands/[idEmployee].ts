@@ -12,23 +12,24 @@ async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
-async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
+async function updateId(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const uid = String(req.query.idEmployee);
+    const IdEmployee = String(req.query.idEmployee);
 
-    const { idEmployee, cycle } = req.body;
+    const { idEmployee, cycle, hoursEmployee } = req.body;
 
-    await brandsProvider.updateById(idEmployee, cycle);
-    res.status(200).json({ uid, message: "Information updated" });
+    await brandsProvider.updateBrands(idEmployee, cycle, hoursEmployee);
+    res.status(200).json({ IdEmployee, message: "Information updated" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
+
 const handlers: any = {};
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
   getDocByEmployeeId(req, res);
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>
-  updateByUid(req, res);
+  updateId(req, res);
 
 export default function BrandByIdController(
   req: NextApiRequest,

@@ -1,10 +1,23 @@
 import { firestore } from "../../firebase";
 import { Employee, Documents } from "@/root/interface/departments";
-import { collection, getDocs, DocumentData, QuerySnapshot, doc, getDoc, query, where, updateDoc, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  DocumentData,
+  QuerySnapshot,
+  doc,
+  getDoc,
+  query,
+  where,
+  updateDoc,
+  addDoc,
+} from "firebase/firestore";
 
 const getAll = async () => {
   const departmentsCollection = collection(firestore, "departments");
-  const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(departmentsCollection);
+  const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    departmentsCollection
+  );
   const departments: DocumentData[] = departmentsSnapshot.docs.map((doc) => {
     return {
       id: doc.id,
@@ -67,13 +80,27 @@ const getByDocId = async (docId: string) => {
   }
 };
 
-const updateById = async (id: string, name: string, size: number, location: string, idEmployee: string, leader: string, level: string, subDepartment: string, employees: Employee) => {
+const updateById = async (
+  id: string,
+  name: string,
+  size: number,
+  location: string,
+  idEmployee: string,
+  leader: string,
+  level: string,
+  subDepartment: string,
+  employees: Employee
+) => {
   try {
     const departmentsRef = collection(firestore, "departments");
     const q = query(departmentsRef, where("name", "==", name));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.size > 0) {
-      const departmentsDoc = doc(firestore, "departments", querySnapshot.docs[0].id);
+      const departmentsDoc = doc(
+        firestore,
+        "departments",
+        querySnapshot.docs[0].id
+      );
       await updateDoc(departmentsDoc, {
         name,
         size,
