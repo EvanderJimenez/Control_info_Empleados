@@ -75,7 +75,6 @@ const updateById = async (id: string, name: string, size: number, location: stri
     if (querySnapshot.size > 0) {
       const departmentsDoc = doc(firestore, "departments", querySnapshot.docs[0].id);
       await updateDoc(departmentsDoc, {
-        id,
         name,
         size,
         location,
