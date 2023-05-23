@@ -11,7 +11,7 @@ import { Schedule } from "@/root/interface/employee";
 
   return (
     <LoginPage>
-      <MainForm/>
+      <MainForm />
     </LoginPage>
   );
 }
