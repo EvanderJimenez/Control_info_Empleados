@@ -12,7 +12,7 @@ export default function EmployeeCenterMenu() {
   return (
     <>
       <div className="left-0 z-50 w-full h-16 bg-SecondaryColor  dark:bg-gray-700 dark:border-gray-600">
-        <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
+        <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
           <button
             onClick={() => handleButtonClick("/home/EmployeeMain/Schedule")}
             type="button"

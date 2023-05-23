@@ -9,7 +9,7 @@ const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
 
   const [vacations, setVacations] = useState<Vacations[]>([
-    { dateStart: "", dateEnd: "", description: "", approved: false },
+    { dateStart: "", dateEnd: "", description: "",name: "", approved: false },
   ]);
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
