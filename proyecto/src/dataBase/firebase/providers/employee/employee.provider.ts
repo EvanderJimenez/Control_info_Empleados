@@ -1,4 +1,4 @@
-import { Brands, Schedule } from "@/root/interface/employee";
+import { Brands, Schedule, Vacations } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
 import {
   collection,
@@ -42,7 +42,8 @@ const updatByUid = async (
   password: string,
   email: string,
   boss: string,
-  schedule: Schedule[]
+  schedule: Schedule[],
+  vacations: Vacations
 ) => {
   try {
     const employeesRef = collection(firestore, "employee");
@@ -64,8 +65,10 @@ const updatByUid = async (
         password,
         email,
         boss,
-        schedule
+        schedule,
+        vacations
       });
+
       const snapshotEmpleadoActualizado = await getDoc(employeeDoc);
       const empleadoActualizado = snapshotEmpleadoActualizado.data();
       return empleadoActualizado;
@@ -92,7 +95,8 @@ const create = async (
   email: string,
   boss: string,
   schedule: Schedule[],
-  brands: Brands[]
+  brands: Brands[],
+  vacations: Vacations
 ): Promise<{ message: string; employee?: any }> => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -133,6 +137,7 @@ const create = async (
       password,
       email,
       boss,
+      vacations,
       schedule: mergedSchedule,
       brands: brands.map((s: Brands) => ({
         date: s.date,

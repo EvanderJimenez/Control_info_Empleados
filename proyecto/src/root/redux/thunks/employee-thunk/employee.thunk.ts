@@ -65,7 +65,7 @@ export const StartListOfEmployee = (): any => {
   };
 };
 
-export const StartCreateEmployee = (searchTerm: UserData): any => {
+export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
   return async (dispatch: DispatchType) => {
     try {
       const employee = await createEmployeeProvider(searchTerm);

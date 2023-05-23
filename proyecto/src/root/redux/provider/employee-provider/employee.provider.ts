@@ -72,6 +72,7 @@ export const employeeListProvider = async () => {
           email: listEmployee.email,
           boss: listEmployee.boss,
           schedule: listEmployee.schedule,
+          vacations: listEmployee.vacations
         }))
       : [];
 
@@ -82,9 +83,12 @@ export const employeeListProvider = async () => {
   }
 };
 
-export const createEmployeeProvider = async (searchTerm: UserData) => {
+export const createEmployeeProvider = async (searchTerm: EmployeesType) => {
 
   try {
+
+    console.log("Data user " + JSON.stringify(searchTerm))
+
     const response = await fetch("/api/employees", {
       method: "POST",
       headers: {

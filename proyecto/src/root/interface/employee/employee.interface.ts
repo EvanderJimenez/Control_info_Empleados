@@ -67,7 +67,6 @@ export interface Vacations{
   dateStart : string
   dateEnd: string
   description: string
-  name: string
   approved: boolean
 }
 export interface FirstPagePDFInformation{

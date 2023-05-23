@@ -5,12 +5,16 @@ import { EmployeesType } from "@/root/types/Employee.type";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+
+
+html2pdf
+
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
 
-  const [vacations, setVacations] = useState<Vacations[]>([
+/*   const [vacations, setVacations] = useState<Vacations[]>([
     { dateStart: "", dateEnd: "", description: "",name: "", approved: false },
-  ]);
+  ]); */
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -28,17 +32,65 @@ const RequestVacationsEmployee = () => {
     email: "",
     boss: "",
     schedule: [],
+    vacations: {},
   });
+
+  const [newDateStart, setNewDateStart] = useState("")
+  const [newDateEnd, setNewDateEnd] = useState("")
+  const [newDescription, setNewDescription] = useState("")
+  const [newName, setNewName] = useState("")
+
 
   const dispatch = useDispatch();
 
-  const handleVacationRequestSend = () => {
-    const newDataEmployee = { ...dataEmployee, vacations: vacations };
+  const handleVacationRequestSend = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    console.log("vacation "+ JSON.stringify(newDataEmployee.vacations))
+    if (!newName) {
+      console.error("New date is empty");
+      return;
+    }
+    const newVacations: Vacations = {
 
-    //dispatch(StartUpDateEmployee("", newDataEmployee));
+  dateStart : newDateStart,
+  dateEnd: newDateEnd,
+  description: newDescription,
+  approved: false
+    };
+
+    setDataEmployee((prevUserData) => {
+      const updatedVacations = {
+        ...prevUserData.vacations,
+        [newName]: newVacations,
+      };
+
+      return {
+        ...prevUserData,
+        vacations: updatedVacations,
+      };
+    });
+
+
+    
+
+    console.log(newVacations)
+    console.log(dataEmployee.vacations)
+
+    //const newDataEmployee = { ...dataEmployee, vacations: vacations };
+    
+
+    setNewDateStart("")
+    setNewDateEnd("")
+    setNewDescription("")
+
   };
+
+  useEffect(() => {
+
+    //dispatch(StartUpDateEmployee("Yi1cFJipKWXYs5aOOiebHHLu6qF3", dataEmployee));
+    console.log(dataEmployee.vacations);
+    console.log("DataEmployee " + dataEmployee)
+  }, [dataEmployee]);
 
   useEffect(() => {
     if (employeeVacations) {
@@ -48,19 +100,30 @@ const RequestVacationsEmployee = () => {
 
   return (
     <>
-      <div className="xl:w-1/2 space-y-4 flex flex-col lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60">
+    <form onSubmit={handleVacationRequestSend}>
+    <div className="xl:w-1/2 space-y-4 flex flex-col lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60">
         <h2 className="text-lg sm:text-xl font-medium  mb-2">
           Vacation request
         </h2>
+        <div>
+        <input
+              type="text"
+              id="name"
+              value={newName}
+              onChange={(e) =>
+                setNewName(e.target.value)
+              }
+            />
+        </div>
         <div className="flex justify-center items-center">
           <div className="w-auto">
             <label htmlFor="dateStar">Initial application date</label>
             <input
               type="datetime-local"
               id="dateStar"
-              value={vacations[0].dateStart}
+              value={newDateStart}
               onChange={(e) =>
-                setVacations([{ ...vacations[0], dateStart: e.target.value }])
+                setNewDateStart(e.target.value)
               }
             />
           </div>
@@ -69,9 +132,9 @@ const RequestVacationsEmployee = () => {
             <input
               type="datetime-local"
               id="dateEnd"
-              value={vacations[0].dateEnd}
+              value={newDateEnd}
               onChange={(e) =>
-                setVacations([{ ...vacations[0], dateEnd: e.target.value }])
+                setNewDateEnd(e.target.value)
               }
             />
           </div>
@@ -82,18 +145,20 @@ const RequestVacationsEmployee = () => {
           placeholder="Vacation request information"
           cols={29}
           rows={10}
-          value={vacations[0].description}
+          value={newDescription}
           onChange={(e) =>
-            setVacations([{ ...vacations[0], description: e.target.value }])
+            setNewDescription(e.target.value)
           }
         ></textarea>
         <button
           className="NormalButton zoom"
-          onClick={handleVacationRequestSend}
+          type="submit"
         >
           Send request
         </button>
       </div>
+    </form>
+
     </>
   );
 };
