@@ -111,7 +111,6 @@ const updateBrands = async (
     throw new Error("Not possible update brands ");
   }
 };
-
 export const departmentProvider = {
   getAllBrands,
   getDocId,
