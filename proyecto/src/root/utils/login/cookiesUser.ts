@@ -10,6 +10,7 @@ interface LoginState {
 
 interface ResDepartState {
   idEmployee: string;
+  idDepartment: string
 }
 
 function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartState | undefined) {
