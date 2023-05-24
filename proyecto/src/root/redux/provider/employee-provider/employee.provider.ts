@@ -54,25 +54,24 @@ export const employeeListProvider = async () => {
     const data = await response.json();
 
     const listEmployees: EmployeesType[] = Array.isArray(data)
-      ? data.map(
-          (listEmployee: any): EmployeesType => ({
-            uid: listEmployee.uid,
-            name: listEmployee.name,
-            firstSurname: listEmployee.firstSurname,
-            secondSurname: listEmployee.secondSurname,
-            cedula: listEmployee.cedula,
-            phoneNumber: listEmployee.phoneNumber,
-            photo: listEmployee.photo,
-            jobPosition: listEmployee.jobPosition,
-            salary: listEmployee.salary,
-            enabled: listEmployee.enabled,
-            idDepartment: listEmployee.idDepartment,
-            password: listEmployee.password,
-            email: listEmployee.email,
-            boss: listEmployee.boss,
-            schedule: listEmployee.schedule,
-          })
-        )
+      ? data.map((listEmployee: any): EmployeesType => ({
+          uid: listEmployee.uid,
+          name: listEmployee.name,
+          firstSurname: listEmployee.firstSurname,
+          secondSurname: listEmployee.secondSurname,
+          cedula: listEmployee.cedula,
+          phoneNumber: listEmployee.phoneNumber,
+          photo: listEmployee.photo,
+          jobPosition: listEmployee.jobPosition,
+          salary: listEmployee.salary,
+          enabled: listEmployee.enabled,
+          idDepartment: listEmployee.idDepartment,
+          password: listEmployee.password,
+          email: listEmployee.email,
+          boss: listEmployee.boss,
+          schedule: listEmployee.schedule,
+          vacations: listEmployee.vacations
+        }))
       : [];
 
     return listEmployees;
@@ -82,8 +81,12 @@ export const employeeListProvider = async () => {
   }
 };
 
-export const createEmployeeProvider = async (searchTerm: UserData) => {
+export const createEmployeeProvider = async (searchTerm: EmployeesType) => {
+
   try {
+
+    console.log("Data user " + JSON.stringify(searchTerm))
+
     const response = await fetch("/api/employees", {
       method: "POST",
       headers: {
@@ -237,4 +240,55 @@ export const getByVariableProvider = async (searchTerm1: string, searchTerm2: st
     console.error("Error getting employee:", error);
     throw error;
   }
-};
+
+}
+
+export const getVacationsByUidProvider = async (searchTerm: string) => {
+
+  try {
+
+    const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error("Error getting vacations");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+
+export const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
+
+  try {
+
+    const response = await fetch(`/api/employees/by-idDepartment/${searchTerm}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error("Error getting vacations");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}

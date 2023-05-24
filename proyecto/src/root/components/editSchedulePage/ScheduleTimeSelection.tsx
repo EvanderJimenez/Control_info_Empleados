@@ -47,6 +47,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     email: "",
     boss: "",
     schedule: [],
+    vacations: {}
   });
 
   const handleTimeChange = (index: number, field: "startTime" | "endTime", value: string) => {

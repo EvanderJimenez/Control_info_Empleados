@@ -9,7 +9,7 @@ interface LoginState {
 }
 
 interface ResDepartState {
-  leader: string;
+  idEmployee: string;
 }
 
 function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartState | undefined) {
@@ -18,10 +18,10 @@ function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartSta
     const expirationDate = new Date(Date.now() + 86400 * 1000);
     let cookieValue = '';
 
-    if (resDepart.leader !== loginState.uid) {
+    if (resDepart.idEmployee !== loginState.uid) {
       cookieValue = JSON.stringify({ logged: true, type: "employee",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/EmployeeMain");
-    } else if (resDepart.leader === loginState.uid) {
+    } else if (resDepart.idEmployee === loginState.uid) {
       cookieValue = JSON.stringify({ logged: true, type: "boss",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/BossMain");
     } else if (loginState.jobPosition === "Admin") {

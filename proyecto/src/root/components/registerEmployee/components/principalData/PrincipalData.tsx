@@ -2,9 +2,10 @@ import React from 'react'
 import { UserData } from '@/root/interface/employee'
 import InputLabel from '../inputLabel/InputLabel';
 import Schedule from '../schedule/Schedule';
+import { EmployeesType } from '@/root/types/Employee.type';
 
 interface RegisterProps {
-    userData: UserData;
+    userData: EmployeesType;
     handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     handleScheduleChange:  (newSchedule: any) => void;
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

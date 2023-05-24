@@ -18,6 +18,8 @@ export const ApplicationStore = configureStore({
     loginStore: EmployeeReducer,
     getByVariableStore: EmployeeReducer,
     getDepartmentByIdStore: DepartmentReducer,
+    getVacationsByUidStore: EmployeeReducer,
+    getEmployeesByIdDepartmentStore: EmployeeReducer,
   },
 });
 

@@ -62,7 +62,6 @@ export interface InformationPage{
   paragraph: string,
   img: string
 }
-<<<<<<< Updated upstream
 
 export interface Vacations{
   dateStart : string
@@ -70,11 +69,9 @@ export interface Vacations{
   description: string
   approved: boolean
 }
-=======
 export interface FirstPagePDFInformation{
   title:string,
   createdBy: string,
   dateCreated: Date;
   filterUsed: string,
 }
->>>>>>> Stashed changes

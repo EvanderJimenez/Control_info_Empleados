@@ -8,6 +8,7 @@ import ImageEmployee from "./components/imageEmployee/ImageEmployee";
 import { useDispatch, useSelector } from "react-redux";
 import { StartCreateEmployee, StartUpDateEmployee } from "../../redux/thunks/employee-thunk/employee.thunk";
 import { RootState } from "../../redux/store";
+import { EmployeesType } from "@/root/types/Employee.type";
 
 function Register() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function Register() {
 
   const [upDate, setUpDate] = useState<boolean | null>();
 
-  const [userData, setUserData] = useState<UserData>(() => {
+  const [userData, setUserData] = useState<EmployeesType>(() => {
     if (employeeByUid) {
       setUpDate(true);
       return {
@@ -38,6 +39,7 @@ function Register() {
         schedule: [],
         brands: [],
         option: "register",
+        vacations: {}
       };
     } else {
       return {
@@ -58,6 +60,7 @@ function Register() {
         schedule: [],
         brands: [],
         option: "register",
+         vacations: {}
       };
     }
   });

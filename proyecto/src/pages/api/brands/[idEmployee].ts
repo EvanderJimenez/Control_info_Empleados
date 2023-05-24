@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {
   const idEmployee = String(req.query.idEmployee);
+  console.log(idEmployee);
   try {
     const brand = await brandsProvider.getDocByEmployeeId(idEmployee);
     res.status(200).json(brand);
@@ -11,7 +12,6 @@ async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
-
 async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
   try {
     const uid = String(req.query.idEmployee);

@@ -1,5 +1,5 @@
 import { firestore } from "../../firebase";
-import { Brands, Hours } from "@/root/interface/brands";
+import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
 import {
   collection,
   getDocs,
@@ -30,12 +30,14 @@ const getAllBrands = async () => {
 
 async function createBrands(
   idEmployee: string,
-  cycle: Date
+  cycle: Cycle,
+  hoursEmployee: HoursEmployee
 ): Promise<{ message: string; brands?: any }> {
   try {
     const newDocRef = await addDoc(collection(firestore, "brands"), {
       idEmployee,
       cycle,
+      hoursEmployee,
     });
 
     const newDoc = await getDoc(newDocRef);
@@ -68,18 +70,19 @@ const getDocId = async (docId: string) => {
   }
 };
 const getDocByEmployeeId = async (idEmployee: string) => {
-  const brandsCollectionRef = collection(firestore, "brands");
-  const queryRef = query(
-    brandsCollectionRef,
+  const brandsCollection = collection(firestore, "brands");
+  const queryBrands = query(
+    brandsCollection,
     where("idEmployee", "==", idEmployee)
   );
-  const querySnapshot = await getDocs(queryRef);
+  const brandsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    queryBrands
+  );
 
-  if (!querySnapshot.empty) {
-    const docSnapshot = querySnapshot.docs[0];
-    return docSnapshot.data();
+  if (brandsSnapshot.empty) {
+    throw new Error(`No brands document found for idEmpleado: ${idEmployee}`);
   } else {
-    throw new Error(`A brands with idEmployee '${idEmployee}' was not found`);
+    return brandsSnapshot.docs[0].data();
   }
 };
 

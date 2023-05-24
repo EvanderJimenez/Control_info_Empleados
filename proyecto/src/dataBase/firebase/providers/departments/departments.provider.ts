@@ -57,10 +57,12 @@ async function create(
 }
 
 const getByDocId = async (docId: string) => {
+
   const departmentsDocRef = doc(collection(firestore, "departments"), docId);
   const departmentsDocSnapshot = await getDoc(departmentsDocRef);
 
   if (departmentsDocSnapshot.exists()) {
+    console.log("DATA: " + JSON.stringify(departmentsDocSnapshot.data()))
     return departmentsDocSnapshot.data();
   } else {
     throw new Error(`A department with document ID was not found: ${docId}`);

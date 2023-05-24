@@ -28,6 +28,7 @@ export default function EditEmployeeSection() {
     email: "",
     boss: "",
     schedule: [],
+    vacations: {}
   });
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
@@ -56,7 +57,9 @@ export default function EditEmployeeSection() {
       password: "",
       email: "",
       boss: "",
-      schedule: [],})
+      schedule: [],
+    vacations: {}
+    })
     }
 
   }, [employeeByUid,clear]);

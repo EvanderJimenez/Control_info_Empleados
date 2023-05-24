@@ -1,5 +1,5 @@
-import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from "./../../provider/employee-provider/employee.provider";
-import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer} from "./../../reducers/employee-reducer/EmployeeReducer";
+import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider, getEmployeesByIdDepartProvider, getVacationsByUidProvider } from "./../../provider/employee-provider/employee.provider";
+import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, getEmployeesByIdDepartmentReducer, getVacationsByUidReducer} from "./../../reducers/employee-reducer/EmployeeReducer";
 import { deleteEmployeeReducer, listEmployeeReducer, createEmployeesReducer, updateEmployeeReducer, getEmployeeByUidReducer, loginReducer } from "../../reducers/employee-reducer/EmployeeReducer";
 import {
   deleteEmployeeProvider,
@@ -62,7 +62,7 @@ export const StartListOfEmployee = (): any => {
   };
 };
 
-export const StartCreateEmployee = (searchTerm: UserData): any => {
+export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
   return async (dispatch: DispatchType) => {
     dispatch(setLoading(true));
     try {
@@ -145,5 +145,34 @@ export const StartGetByVariable = (searchTerm1: string, searchTerm2: string): an
     } catch (error) {
       console.log(error);
     }
-  };
-};
+  }
+}
+
+
+export const StarGetVacationsByUid = (searchTerm: string) : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await getVacationsByUidProvider(searchTerm);
+
+      dispatch(getVacationsByUidReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const StarGetEmployeesByIdDepartment = (searchTerm: string) : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await getEmployeesByIdDepartProvider(searchTerm);
+
+      dispatch(getEmployeesByIdDepartmentReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

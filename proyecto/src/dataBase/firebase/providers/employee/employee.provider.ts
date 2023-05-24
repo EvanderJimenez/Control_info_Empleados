@@ -1,4 +1,4 @@
-import { Brands, Schedule } from "@/root/interface/employee";
+import { Brands, Schedule, Vacations } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
 import {
   collection,
@@ -42,7 +42,8 @@ const updatByUid = async (
   password: string,
   email: string,
   boss: string,
-  schedule: Schedule[]
+  schedule: Schedule[],
+  vacations: Vacations
 ) => {
   try {
     const employeesRef = collection(firestore, "employee");
@@ -64,8 +65,10 @@ const updatByUid = async (
         password,
         email,
         boss,
-        schedule
+        schedule,
+        vacations
       });
+
       const snapshotEmpleadoActualizado = await getDoc(employeeDoc);
       const empleadoActualizado = snapshotEmpleadoActualizado.data();
       return empleadoActualizado;
@@ -92,7 +95,8 @@ const create = async (
   email: string,
   boss: string,
   schedule: Schedule[],
-  brands: Brands[]
+  brands: Brands[],
+  vacations: Vacations
 ): Promise<{ message: string; employee?: any }> => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -133,6 +137,7 @@ const create = async (
       password,
       email,
       boss,
+      vacations,
       schedule: mergedSchedule,
       brands: brands.map((s: Brands) => ({
         date: s.date,
@@ -269,6 +274,42 @@ const getByVariable= async (data: string, variable: string) =>{
   return employees;
 }
 
+const getVacationsByUid = async (uid: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "==", uid));
+
+  const employeeSnapshot = await getDocs(employeeQuery);
+
+  if (employeeSnapshot.empty) {
+    console.log("No se encontró ningún empleado con ese UID.");
+    return [];
+  }
+
+  const employeeDoc = employeeSnapshot.docs[0];
+  const vacations = employeeDoc.data().vacations;
+
+  return vacations;
+};
+
+const getEmployeesByIdDepartment = async (idDepartment: string) => {
+
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("idDepartment", "==", idDepartment));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+
+
+  return employees;
+
+}
+
 export const employeeProvider = {
   getAll,
   getByUid,
@@ -278,7 +319,9 @@ export const employeeProvider = {
   updatByUid,
   getByCedula,
   dismissByUid,
-  getByVariable
+  getByVariable,
+  getVacationsByUid,
+  getEmployeesByIdDepartment
 };
 
 export default employeeProvider;

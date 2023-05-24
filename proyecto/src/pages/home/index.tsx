@@ -1,4 +1,3 @@
-import AdminPage from "@/Layout/AdminPage";
 import LoginPage from "@/Layout/LoginPage";
 import ScheduleTimeSelection from "@/root/components/editSchedulePage/ScheduleTimeSelection";
 import MainForm from "@/root/components/mainForm/MainForm";

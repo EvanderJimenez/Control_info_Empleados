@@ -119,6 +119,7 @@ function RegisterBrands() {
         setBrandData({
           idEmployee: "",
           cycle: {},
+          hoursEmployee: {},
         });
       })
       .catch((error) => console.error("Error creating new hours:", error));
@@ -127,7 +128,12 @@ function RegisterBrands() {
   return (
     <div>
       <form onSubmit={handleSubmitCycle}>
-        <button type="submit">Agregar Ciclo</button>
+        <button
+          type="submit"
+          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+        >
+          Agregar Ciclo
+        </button>
       </form>
       <form
         onSubmit={handleSubmit}
@@ -151,7 +157,7 @@ function RegisterBrands() {
         />
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
         >
           save
         </button>
@@ -191,9 +197,9 @@ function RegisterBrands() {
 
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
         >
-          jajajaj
+          Save Cycle
         </button>
       </form>
       <div>
@@ -202,7 +208,7 @@ function RegisterBrands() {
           <p>Hora actual: {currentTime}</p>
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+            className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
           >
             Guardar Horas
           </button>

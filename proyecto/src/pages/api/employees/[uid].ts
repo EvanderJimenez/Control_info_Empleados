@@ -1,3 +1,4 @@
+import { Vacations } from './../../../root/interface/employee/employee.interface';
 import employeeProvider from "../../../dataBase/firebase/providers/employee/employee.provider";
 import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -41,6 +42,7 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
       email,
       boss,
       schedule,
+      vacations
     } = req.body;
 
     await employeeProvider.updatByUid(
@@ -58,8 +60,10 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
       password,
       email,
       boss,
-      schedule
+      schedule,
+      vacations
     );
+
     res.status(200).json({ uid, message: "Information updated" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
