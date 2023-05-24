@@ -28,5 +28,5 @@ async function createPDF(firstPageInformation: FirstPagePDFInformation): Promise
   });
 
   const pdfBytes = await pdfDoc.save();
-  //Save file
+
 }
