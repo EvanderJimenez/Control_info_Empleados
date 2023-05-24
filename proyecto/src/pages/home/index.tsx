@@ -1,5 +1,6 @@
 import LoginPage from "@/Layout/LoginPage";
 import MethodsDepartments from "@/root/components/adminDepartment/methods/MethodsDepartments";
+import { BrandsEmployee } from "@/root/components/brandsClock/brandsEmployee/BrandsEmployee";
 import RegisterBrand from "@/root/components/brandsClock/registerBrands/RegisterBrand";
 import ScheduleTimeSelection from "@/root/components/editSchedulePage/ScheduleTimeSelection";
 import MainForm from "@/root/components/mainForm/MainForm";
@@ -12,7 +13,7 @@ export default function index() {
 
   return (
     <LoginPage>
-      <RegisterBrand />
+      <BrandsEmployee />
     </LoginPage>
   );
 }

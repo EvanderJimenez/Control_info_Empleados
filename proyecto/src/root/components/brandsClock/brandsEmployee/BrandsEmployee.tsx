@@ -7,15 +7,14 @@ import { Brands } from "@/root/interface/brands";
 export const BrandsEmployee = () => {
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
+  const [hoursIni, setHoursIni] = useState("");
+  const [hoursFin, setHoursFin] = useState("");
   const [updateDateTime, setUpdateDateTime] = useState(false);
   const [brandData, setBrandData] = useState<Brands>({
     idEmployee: "",
     cycle: {},
     hoursEmployee: {},
   });
-  const [editedDate, setEditedDate] = useState("");
-  const [editedHIni, setEditedHIni] = useState("");
-  const [editedHFin, setEditedHFin] = useState("");
 
   useEffect(() => {
     const fetchCurrentDateTime = async () => {
@@ -37,16 +36,16 @@ export const BrandsEmployee = () => {
     setUpdateDateTime(true);
     const weekday = getDateOfWeekday(currentDate);
     console.log(weekday);
-    const cycle = brandData.cycle;
+    const hoursEmployee = brandData.hoursEmployee;
 
-    if (cycle) {
-      const cicloDeseado = cycle["Ciclo 1"];
-      const hours = cicloDeseado?.hours[currentDate];
-
-      if (hours) {
-        const { hIni, hFin } = hours;
-        console.log(hIni, hFin);
-      }
+    if (hoursEmployee.hasOwnProperty(weekday)) {
+      const hours = hoursEmployee[weekday];
+      const hIni = hours.hIni;
+      const hFin = hours.hFin;
+      setHoursFin(hFin);
+      setHoursIni(hIni);
+    } else {
+      console.log(`No information found for the day: ${weekday}`);
     }
   };
 
@@ -79,6 +78,7 @@ export const BrandsEmployee = () => {
   };
 
   const handleUpdateCycleHours = (cycleName: string) => {
+    handleClick1;
     if (brandData && brandData.cycle && brandData.cycle[cycleName]) {
       const cycle = brandData.cycle[cycleName];
       const existingHours = cycle.hours[currentDate];
@@ -94,7 +94,6 @@ export const BrandsEmployee = () => {
             },
           },
         };
-
         setBrandData((prevData: any) => ({
           ...prevData,
           cycle: {
@@ -124,63 +123,95 @@ export const BrandsEmployee = () => {
           },
         }));
       }
-
-      setEditedDate("");
-      setEditedHIni("");
-      setEditedHFin("");
     }
     console.log(brandData);
   };
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(brandData.idEmployee);
-    fetch(`/api/brands/${brandData.idEmployee}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(brandData),
-    })
-      .then((res) => res.json())
-      .then((updatedBrands) => {
-        setBrandData((prevData) => ({
-          ...prevData,
-          ...updatedBrands,
-        }));
-      })
-      .catch((error) => console.error("Error updating brands:", error));
+    const currentDateOfWeekday = getDateOfWeekday(currentDate);
+
+    if (currentDateOfWeekday && brandData.cycle && brandData.cycle["Ciclo 1"]) {
+      const cycle = brandData.cycle["Ciclo 1"];
+      const existingHours = cycle.hours[currentDate];
+
+      if (existingHours) {
+        const markStart = existingHours.hIni;
+        const markEnd = existingHours.hFin;
+
+        if (checkMarkHours(markStart, markEnd)) {
+          console.log("The hours match. Performing update...");
+        } else {
+          console.log("The mark hours do not match the defined hours.");
+        }
+
+        fetch(`/api/brands/${brandData.idEmployee}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(brandData),
+        })
+          .then((res) => res.json())
+          .then((updatedBrands) => {
+            setBrandData((prevData) => ({
+              ...prevData,
+              ...updatedBrands,
+            }));
+          })
+          .catch((error) => console.error("Error updating brands:", error));
+      } else {
+        console.log(`No information found for the day: ${currentDate}`);
+
+        fetch(`/api/brands/${brandData.idEmployee}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(brandData),
+        })
+          .then((res) => res.json())
+          .then((updatedBrands) => {
+            setBrandData((prevData) => ({
+              ...prevData,
+              ...updatedBrands,
+            }));
+          })
+          .catch((error) => console.error("Error updating brands:", error));
+      }
+    }
   };
+
+  const checkMarkHours = (markStart: string, markEnd: string): boolean => {
+    if (!markEnd) {
+      if ((hoursIni && markStart === hoursIni) || markStart < hoursIni) {
+        console.log("They match");
+        return true;
+      } else {
+        console.log("The mark start hour does not match");
+      }
+    } else if (
+      (hoursIni &&
+        hoursFin &&
+        markStart === hoursIni &&
+        markEnd === hoursFin) ||
+      markEnd < hoursFin
+    ) {
+      console.log("The hours match");
+      return true;
+    } else {
+      console.log("The mark end hour does not match");
+    }
+
+    return false;
+  };
+
   return (
     <div>
       <SearchDepartment handleGet={handleGetBrands} />
-
-      <input
-        type="text"
-        value={editedDate}
-        onChange={(e) => setEditedDate(e.target.value)}
-        placeholder="Edited Date"
-      />
-
-      <input
-        type="text"
-        value={editedHIni}
-        onChange={(e) => setEditedHIni(e.target.value)}
-        placeholder="Edited Start Hour"
-      />
-
-      <input
-        type="text"
-        value={editedHFin}
-        onChange={(e) => setEditedHFin(e.target.value)}
-        placeholder="Edited Finish Hour"
-      />
-
       <button onClick={() => handleUpdateCycleHours("Ciclo 1")}>
         Edit Marks
       </button>
-
-      <button onClick={handleClick1}>ClickMe</button>
       <form action="" onSubmit={handleUpdate}>
         <button
           type="submit"
