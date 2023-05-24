@@ -1,5 +1,5 @@
 import { UserData } from "@/root/interface/employee";
-import {EmployeesType } from "@/root/types/Employee.type";
+import { EmployeesType } from "@/root/types/Employee.type";
 
 export const deleteEmployeeProvider = async (searchTerm: string) => {
   try {
@@ -30,12 +30,10 @@ export const dismissByUidProvider = async (searchTerm: string) => {
       },
     });
 
-
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
 
-    
     const data: { uid: string } = await response.json();
 
     return { id: data.uid };
@@ -56,23 +54,25 @@ export const employeeListProvider = async () => {
     const data = await response.json();
 
     const listEmployees: EmployeesType[] = Array.isArray(data)
-      ? data.map((listEmployee: any): EmployeesType => ({
-          uid: listEmployee.uid,
-          name: listEmployee.name,
-          firstSurname: listEmployee.firstSurname,
-          secondSurname: listEmployee.secondSurname,
-          cedula: listEmployee.cedula,
-          phoneNumber: listEmployee.phoneNumber,
-          photo: listEmployee.photo,
-          jobPosition: listEmployee.jobPosition,
-          salary: listEmployee.salary,
-          enabled: listEmployee.enabled,
-          idDepartment: listEmployee.idDepartment,
-          password: listEmployee.password,
-          email: listEmployee.email,
-          boss: listEmployee.boss,
-          schedule: listEmployee.schedule,
-        }))
+      ? data.map(
+          (listEmployee: any): EmployeesType => ({
+            uid: listEmployee.uid,
+            name: listEmployee.name,
+            firstSurname: listEmployee.firstSurname,
+            secondSurname: listEmployee.secondSurname,
+            cedula: listEmployee.cedula,
+            phoneNumber: listEmployee.phoneNumber,
+            photo: listEmployee.photo,
+            jobPosition: listEmployee.jobPosition,
+            salary: listEmployee.salary,
+            enabled: listEmployee.enabled,
+            idDepartment: listEmployee.idDepartment,
+            password: listEmployee.password,
+            email: listEmployee.email,
+            boss: listEmployee.boss,
+            schedule: listEmployee.schedule,
+          })
+        )
       : [];
 
     return listEmployees;
@@ -83,7 +83,6 @@ export const employeeListProvider = async () => {
 };
 
 export const createEmployeeProvider = async (searchTerm: UserData) => {
-
   try {
     const response = await fetch("/api/employees", {
       method: "POST",
@@ -106,10 +105,8 @@ export const createEmployeeProvider = async (searchTerm: UserData) => {
   }
 };
 
-export const upDatEmployeeProvider = async (searchUser: string,searchTerm: EmployeesType) =>{
-
+export const upDatEmployeeProvider = async (searchUser: string, searchTerm: EmployeesType) => {
   try {
-
     const response = await fetch(`/api/employees/${searchUser}`, {
       method: "PUT",
       headers: {
@@ -129,19 +126,16 @@ export const upDatEmployeeProvider = async (searchUser: string,searchTerm: Emplo
     console.error("Error creating employee:", error);
     throw error;
   }
-
-}
+};
 
 export const getEmployeeByUidProvider = async (searchTerm: string) => {
-
   try {
-
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Error getting employee");
@@ -150,23 +144,19 @@ export const getEmployeeByUidProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-}
+};
 
 export const getEmployeeByCedulaProvider = async (searchTerm: string) => {
-
   try {
-
     const response = await fetch(`/api/employees/by-cedula/${searchTerm}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Error getting employee");
@@ -175,23 +165,19 @@ export const getEmployeeByCedulaProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-}
+};
 
 export const getEmployeeByNameProvider = async (searchTerm: string) => {
-
   try {
-
     const response = await fetch(`/api/employees/by-name/${searchTerm}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Error getting employee");
@@ -200,25 +186,21 @@ export const getEmployeeByNameProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-}
+};
 
 export const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
-
   try {
-    const response = await fetch("/api/employees/login",{
-
-      method : "POST",
-      headers: { "Content-Type": "application/json",},
+    const response = await fetch("/api/employees/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: searchTerm1,
         password: searchTerm2,
-    }),
-    })
+      }),
+    });
 
     if (!response.ok) {
       throw new Error("Error getting employee");
@@ -226,28 +208,23 @@ export const loginProvider = async (searchTerm1: string, searchTerm2: string) =>
 
     const data = await response.json();
 
-
     return data;
-
   } catch (error) {
     console.error("Error getting employee:", error);
     throw error;
   }
-
-}
+};
 
 export const getByVariableProvider = async (searchTerm1: string, searchTerm2: string) => {
-
   try {
-    const response = await fetch("/api/employees/by-variable",{
-
-      method : "POST",
-      headers: { "Content-Type": "application/json",},
+    const response = await fetch("/api/employees/by-variable", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         data: searchTerm1,
         variable: searchTerm2,
-    }),
-    })
+      }),
+    });
 
     if (!response.ok) {
       throw new Error("Error getting employee");
@@ -256,10 +233,8 @@ export const getByVariableProvider = async (searchTerm1: string, searchTerm2: st
     const data = await response.json();
 
     return data;
-
   } catch (error) {
     console.error("Error getting employee:", error);
     throw error;
   }
-
-}
+};

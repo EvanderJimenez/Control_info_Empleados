@@ -1,13 +1,6 @@
-import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from './../../provider/employee-provider/employee.provider';
-import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
-import {
-  deleteEmployeeReducer,
-  listEmployeeReducer,
-  createEmployeesReducer,
-  updateEmployeeReducer,
-  getEmployeeByUidReducer,
-  loginReducer,
-} from "../../reducers/employee-reducer/EmployeeReducer";
+import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from "./../../provider/employee-provider/employee.provider";
+import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer} from "./../../reducers/employee-reducer/EmployeeReducer";
+import { deleteEmployeeReducer, listEmployeeReducer, createEmployeesReducer, updateEmployeeReducer, getEmployeeByUidReducer, loginReducer } from "../../reducers/employee-reducer/EmployeeReducer";
 import {
   deleteEmployeeProvider,
   employeeListProvider,
@@ -18,6 +11,7 @@ import {
 } from "../../provider/employee-provider/employee.provider";
 import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchType) => {
@@ -41,32 +35,36 @@ export const StartDeletingEmployee = (employeeId: string): any => {
 
 export const StartDismissEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchType) => {
+    dispatch(setLoading(true));
     try {
       const employee = await dismissByUidProvider(searchTerm);
 
-      console.log("data thunk:" + JSON.stringify(employee))
+      console.log("data thunk:" + JSON.stringify(employee));
 
       dispatch(dismissEmployeeReducer(employee || null));
     } catch (error) {
       console.log(error);
     }
+    dispatch(setLoading(false));
   };
 };
 
 export const StartListOfEmployee = (): any => {
   return async (dispatch: DispatchType) => {
     const employeeList = await employeeListProvider();
-
+    dispatch(setLoading(true));
     if (Array.isArray(employeeList)) {
       dispatch(listEmployeeReducer(employeeList));
     } else {
       console.log("Invalid employee list");
     }
+    dispatch(setLoading(false));
   };
 };
 
 export const StartCreateEmployee = (searchTerm: UserData): any => {
   return async (dispatch: DispatchType) => {
+    dispatch(setLoading(true));
     try {
       const employee = await createEmployeeProvider(searchTerm);
 
@@ -74,17 +72,14 @@ export const StartCreateEmployee = (searchTerm: UserData): any => {
     } catch (error) {
       console.log(error);
     }
+    dispatch(setLoading(false));
   };
 };
 
-export const StartUpDateEmployee = (
-  searchUser: string,
-  searchTerm: EmployeesType
-): any => {
+export const StartUpDateEmployee = (searchUser: string, searchTerm: EmployeesType): any => {
   return async (dispacth: DispatchType) => {
     try {
       const employee = await upDatEmployeeProvider(searchUser, searchTerm);
-
 
       dispacth(updateEmployeeReducer(employee || null));
     } catch (error) {
@@ -127,30 +122,28 @@ export const StartGetEmployeeByUid = (searchTerm: string): any => {
     }
   };
 };
-export const StartLogin = (searchTerm1: string,searchTerm2: string) : any => {
+export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchType) => {
+    dispatch(setLoading(true));
     try {
-
-      const response = await loginProvider(searchTerm1,searchTerm2);
+      const response = await loginProvider(searchTerm1, searchTerm2);
 
       dispatch(loginReducer(response || null));
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+    dispatch(setLoading(false));
+  };
+};
 
-export const StartGetByVariable = (searchTerm1: string,searchTerm2: string) : any => {
+export const StartGetByVariable = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchType) => {
     try {
-
-      const response = await getByVariableProvider(searchTerm1,searchTerm2);
+      const response = await getByVariableProvider(searchTerm1, searchTerm2);
 
       dispatch(getByVariableReducer(response || null));
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
