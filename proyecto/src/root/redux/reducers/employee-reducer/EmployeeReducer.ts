@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DeleteEmployeeType,EmployeesType} from "../../../types/Employee.type";
 
-interface EmployeeState {
+interface EmployeeState { //employee : EmployeesType
   deleteEmployee: DeleteEmployeeType | null;
   dismissEmployee: DeleteEmployeeType | null;
   employees: EmployeesType[];
@@ -16,13 +16,13 @@ interface EmployeeState {
   getVacationsByUid: EmployeesType[]
   getEmployeesByIdDepartment: EmployeesType[]
 }
-
+// employee {} as type
 
 export const initialState: EmployeeState = {
   deleteEmployee: null,
   dismissEmployee: null,
   employees: [],
-  loading: false,
+  loading: false, 
   createEmploye: null,
   updateEmployee: null,
   getEmployeeByUid: null,
@@ -41,7 +41,7 @@ type EmployeeAction = {
 
 export const EmployeeSlice = createSlice({
   name: "Employee",
-  initialState,
+  initialState, 
 
   reducers: {
     deleteEmployeeReducer: (state, action: PayloadAction<DeleteEmployeeType>) => {

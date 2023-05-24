@@ -5,7 +5,7 @@ export function Foot() {
   return (
     <>
     
-    <footer className="bg-darkBlue shadow fixed bottom-0 w-full h-10 ">
+    <footer className="bg-darkBlue shadow fixed bottom-0 w-full h-10 print:hidden">
       <div className="w-full h-full  max-w-screen-xl pt-4 pb-4 md:flex md:items-center md:justify-between ml-2">
         <span className="text-sm font-medium text-white sm:text-center dark:text-gray-400">. All Rights Reserved.</span>
         <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-white  sm:mt-0">

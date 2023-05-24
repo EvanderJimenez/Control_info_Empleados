@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { EmployeeReducer } from "./reducers/employee-reducer/EmployeeReducer";
 import { DepartmentReducer } from "./reducers/department-reducer/DepartmentReducer";
+import { LoadReducer } from "./reducers/loading-reducer/LoadingReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -10,7 +11,7 @@ export const ApplicationStore = configureStore({
     employeesListStore: EmployeeReducer,
     createEmployeeStore: EmployeeReducer,
     updateEmployeeStore: EmployeeReducer,
-    loading: EmployeeReducer,
+    loading: LoadReducer,
     getEmployeeByUidStore: EmployeeReducer,
     getEmployeeByCedulaStore: EmployeeReducer,
     getEmployeeByNameStore: EmployeeReducer,

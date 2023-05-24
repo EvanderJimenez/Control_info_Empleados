@@ -22,6 +22,20 @@
   color: #181818;
   background-color: transparent;
 }
+@media print {
+  @page {
+    counter-increment: page;
+    counter-reset: page 1;
+  }
+
+  body {
+    counter-reset: page;
+  }
+
+  .page-number::after {
+    content: counter(page);
+  }
+}
 
 input::placeholder {
   color: #454fce;

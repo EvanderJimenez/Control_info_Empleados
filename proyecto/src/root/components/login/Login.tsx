@@ -8,12 +8,15 @@ import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.s
 import { selectGetDepartmentById } from "@/root/redux/selectors/department-selector/department.selector";
 import { startGetDepartmentById } from "@/root/redux/thunks/department-thunk/department.thunk";
 import cookiesUser from "@/root/utils/login/cookiesUser";
+import { RootState } from "@/root/redux/store";
+import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 
 function Login() {
   const dispatch = useDispatch();
 
   const loginState = useSelector(selectLogin);
   const resDepart = useSelector(selectGetDepartmentById);
+  const loading = useSelector((state: RootState) => state.loading.loading);
 
   const [data, setData] = useState<LoginEP>({
     email: "",
@@ -50,7 +53,21 @@ function Login() {
     }
   }, [loginState, resDepart]);
 
-  return <><FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} /></>;
+  useEffect(() => {
+    if (loginState && resDepart) {
+      setIsLoggedIn(true);
+    }
+  }, [loginState, resDepart]);
+
+  return (
+    <>
+      <div>{loading ? <LoadingGeneralComponent /> : <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />}</div>
+    </>
+  );
 }
 
 export default Login;
+function setIsLoggedIn(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+
