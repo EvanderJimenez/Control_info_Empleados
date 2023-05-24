@@ -61,9 +61,13 @@ function Login() {
 
   return (
     <>
-      <div>{loading ? <LoadingGeneralComponent /> : <FormLogin handleSubmit={handleIngresar} handleInputChange={handleInputChange} loginData={data} />}</div>
+      <div>{loading ? <LoadingGeneralComponent /> : <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />}</div>
     </>
   );
 }
 
 export default Login;
+function setIsLoggedIn(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+
