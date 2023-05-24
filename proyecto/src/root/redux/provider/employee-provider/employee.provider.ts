@@ -292,3 +292,28 @@ export const getVacationsByUidProvider = async (searchTerm: string) => {
   }
 
 }
+
+export const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
+
+  try {
+
+    const response = await fetch(`/api/employees/by-idDepartment/${searchTerm}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error("Error getting vacations");
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.log(error)
+  }
+
+}

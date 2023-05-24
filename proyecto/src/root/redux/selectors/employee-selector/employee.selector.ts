@@ -25,3 +25,5 @@ export const selectgetByVariable = (state: RootState) => state.getByVariableStor
 export  const  loading  =  (state:  RootState)  =>  state.loading.loading;
 
 export  const  selectGetVacationsByUid  =  (state:  RootState)  =>  state.getVacationsByUidStore.getVacationsByUid;
+
+export  const  selectGetEmployeesByIdDepartment =  (state:  RootState)  =>  state.getEmployeesByIdDepartmentStore.getEmployeesByIdDepartment;

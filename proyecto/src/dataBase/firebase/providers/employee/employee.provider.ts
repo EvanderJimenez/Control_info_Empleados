@@ -291,6 +291,24 @@ const getVacationsByUid = async (uid: string) => {
   return vacations;
 };
 
+const getEmployeesByIdDepartment = async (idDepartment: string) => {
+
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("idDepartment", "==", idDepartment));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+
+
+  return employees;
+
+}
 
 export const employeeProvider = {
   getAll,
@@ -302,7 +320,8 @@ export const employeeProvider = {
   getByCedula,
   dismissByUid,
   getByVariable,
-  getVacationsByUid
+  getVacationsByUid,
+  getEmployeesByIdDepartment
 };
 
 export default employeeProvider;

@@ -1,5 +1,5 @@
-import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider, getVacationsByUidProvider } from './../../provider/employee-provider/employee.provider';
-import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, getVacationsByUidReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
+import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider, getVacationsByUidProvider, getEmployeesByIdDepartProvider } from './../../provider/employee-provider/employee.provider';
+import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, getEmployeesByIdDepartmentReducer, getVacationsByUidReducer, setLoading } from './../../reducers/employee-reducer/EmployeeReducer';
 import {
   deleteEmployeeReducer,
   listEmployeeReducer,
@@ -163,6 +163,20 @@ export const StarGetVacationsByUid = (searchTerm: string) : any => {
       const response = await getVacationsByUidProvider(searchTerm);
 
       dispatch(getVacationsByUidReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const StarGetEmployeesByIdDepartment = (searchTerm: string) : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await getEmployeesByIdDepartProvider(searchTerm);
+
+      dispatch(getEmployeesByIdDepartmentReducer(response || null));
 
     } catch (error) {
       console.log(error)

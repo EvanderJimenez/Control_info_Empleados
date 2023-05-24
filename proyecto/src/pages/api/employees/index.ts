@@ -13,8 +13,6 @@ const getAll = async (res: NextApiResponse) => {
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  console.log("body" + JSON.stringify(req.body))
-
   try {
     const {
       uid,
@@ -35,8 +33,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       brands,
       vacations
     } = req.body;
-
-     console.log("email: " + email + " password: " + password + " uid: " + uid);
 
     const newEmployee = await employeeProvider.create(
       uid,

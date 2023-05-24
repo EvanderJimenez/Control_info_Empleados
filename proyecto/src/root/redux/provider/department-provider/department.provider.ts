@@ -1,6 +1,5 @@
 export const getDepartmentByIdProvider = async (searchTerm: string) => {
   try {
-    console.log(searchTerm);
     const response = await fetch(`/api/departments/${searchTerm}`, {
       method: "GET",
       headers: {

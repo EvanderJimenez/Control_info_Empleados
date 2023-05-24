@@ -14,6 +14,7 @@ interface EmployeeState {
   getEmployeeByName: EmployeesType[];
   getByVariable: EmployeesType[];
   getVacationsByUid: EmployeesType[]
+  getEmployeesByIdDepartment: EmployeesType[]
 }
 
 
@@ -29,7 +30,8 @@ export const initialState: EmployeeState = {
   getEmployeeByCedula: [],
   getEmployeeByName: [],
   getByVariable: [],
-  getVacationsByUid: []
+  getVacationsByUid: [],
+  getEmployeesByIdDepartment: []
 };
 
 type EmployeeAction = {
@@ -78,10 +80,14 @@ export const EmployeeSlice = createSlice({
     getVacationsByUidReducer: (state, action: PayloadAction<EmployeesType[]>) =>{
       state.getVacationsByUid = action.payload
     },
+    getEmployeesByIdDepartmentReducer: (state, action: PayloadAction<EmployeesType[]>) =>{
+      state.getEmployeesByIdDepartment = action.payload
+    },
   },
 });
 
 export const { deleteEmployeeReducer,listEmployeeReducer,createEmployeesReducer,updateEmployeeReducer,getEmployeeByUidReducer,
-  getEmployeeByCedulaReducer,getEmployeeByNameReducer, setLoading,loginReducer, getByVariableReducer, dismissEmployeeReducer,getVacationsByUidReducer} = EmployeeSlice.actions;
+  getEmployeeByCedulaReducer,getEmployeeByNameReducer, setLoading,loginReducer, getByVariableReducer, dismissEmployeeReducer,
+  getEmployeesByIdDepartmentReducer,getVacationsByUidReducer} = EmployeeSlice.actions;
 export const EmployeeReducer = EmployeeSlice.reducer;
 export type DispatchType = (args: EmployeeAction) => EmployeeAction;

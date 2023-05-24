@@ -4,10 +4,10 @@ import { notAllowedResponse } from "@/root/api/reponses/notAllowedResponse";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
-async function getByUid(req: NextApiRequest, res: NextApiResponse) {
-  const cedula = String(req.query.cedula);
+async function getEmployeesByIdDepartment(req: NextApiRequest, res: NextApiResponse) {
+  const idDepartment = String(req.query.idDepartment);
   try {
-    const employee = await employeeProvider.getByCedula(cedula);
+    const employee = await employeeProvider.getEmployeesByIdDepartment(idDepartment);
     res.status(200).json(employee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
@@ -16,7 +16,7 @@ async function getByUid(req: NextApiRequest, res: NextApiResponse) {
 
 const handlers: any = {};
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
-  getByUid(req, res);
+getEmployeesByIdDepartment(req, res);
 
   export default function employeesByCedulaController(req: NextApiRequest, res: NextApiResponse) {
     const { method } = req;
