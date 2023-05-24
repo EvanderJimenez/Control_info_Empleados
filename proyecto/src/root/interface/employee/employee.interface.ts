@@ -75,3 +75,12 @@ export interface FirstPagePDFInformation{
   dateCreated: Date;
   filterUsed: string,
 }
+export interface PendingRequest {
+  key: string;
+  employeeName: string;
+  employeeUID: string;
+  dateStart: string;
+  dateEnd: string;
+  description: string;
+  approved: boolean;
+}

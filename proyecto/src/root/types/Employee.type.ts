@@ -22,4 +22,3 @@ export type EmployeesType = {
   schedule: Schedule[];
   vacations: { [Key: string]: Vacations };
 }
-

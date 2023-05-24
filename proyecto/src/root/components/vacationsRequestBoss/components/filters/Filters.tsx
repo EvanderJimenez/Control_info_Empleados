@@ -7,7 +7,7 @@ const Filters = () => {
 
   return (
     <div className="flex flex-col m-2">
-      <div className="">
+      <div className="m-1">
       <label className="mr-2">Name: </label>
       <input type="text" value={name} className="mr-2" onChange={(e) =>  setName(e.target.value)}/>
       </div>

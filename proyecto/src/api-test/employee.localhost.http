@@ -33,8 +33,6 @@ GET  http://localhost:3000/api/employees/by-uid/Yi1cFJipKWXYs5aOOiebHHLu6qF3 HTT
 # Get list employees by idDepartment
 GET  http://localhost:3000/api/employees/by-idDepartment/eF23UVJvqJOwThp6pr2v HTTP/1.1
 
-
-
 ###
 # Delete a existing employee
 DELETE http://localhost:3000/api/employees/6504dhHgedMPc86NgQMvRm1URkQ2 HTTP/1.1

@@ -1,32 +1,28 @@
-import { selectGetEmployeesByIdDepartment, selectLogin } from '@/root/redux/selectors/employee-selector/employee.selector';
-import { StarGetEmployeesByIdDepartment } from '@/root/redux/thunks/employee-thunk/employee.thunk';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { PendingRequest } from "@/root/interface/employee";
+import {
+  selectGetEmployeesByIdDepartment,
+  selectLogin,
+} from "@/root/redux/selectors/employee-selector/employee.selector";
+import { StarGetEmployeesByIdDepartment } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-interface PendingRequest {
-  employeeName: string;
-  employeeUID: string;
-  dateStart: string;
-  dateEnd: string;
-  description: string;
+interface  RequestEmployeeProps{
+  selectedRequest: any;
 }
 
-const ListRequestVacations: React.FC = () => {
+const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
   const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
   const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
 
   useEffect(() => {
-    dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ''));
+    dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
   }, []);
 
   useEffect(() => {
     if (listEmployees) {
-
-      console.log("Listing employees: " + listEmployees)
-      console.log("Uid: " +loginState?.uid)
-
       const pendingRequestsList: PendingRequest[] = [];
 
       listEmployees.forEach((employee) => {
@@ -40,28 +36,38 @@ const ListRequestVacations: React.FC = () => {
 
             if (!approved) {
               const pendingRequest: PendingRequest = {
+                key: key.toString(),
                 employeeName,
                 employeeUID,
                 dateStart,
                 dateEnd,
                 description,
+                approved
               };
               pendingRequestsList.push(pendingRequest);
             }
           });
         }
       });
-
       setPendingRequests(pendingRequestsList);
     }
+    
   }, [listEmployees]);
 
+  const handleLoadInformation = (request: PendingRequest) => {
+    selectedRequest(request);
+  };
+  
+
   return (
-    <div>
+    <div className="bg-gray-100 p-4">
       {pendingRequests.map((request: PendingRequest, index: number) => (
-        <div key={index}>
-          <h3>Employee: {request.employeeName}</h3>
-          <p>Descripción: {request.description}</p>
+        <div key={index} className="mb-4 p-2 border border-gray-300 rounded">
+          <h3 className="text-lg font-semibold mb-2">
+            Employee: {request.employeeName}
+          </h3>
+          <p className="text-gray-600">Name request: {request.key}</p>
+          <button className="bg-darkBlue" onClick={() => handleLoadInformation(request)}>Load Information</button>
         </div>
       ))}
     </div>

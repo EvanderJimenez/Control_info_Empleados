@@ -53,12 +53,6 @@ function Login() {
     }
   }, [loginState, resDepart]);
 
-  useEffect(() => {
-    if (loginState && resDepart) {
-      setIsLoggedIn(true);
-    }
-  }, [loginState, resDepart]);
-
   return (
     <>
       <div>{loading ? <LoadingGeneralComponent /> : <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />}</div>
@@ -67,7 +61,3 @@ function Login() {
 }
 
 export default Login;
-function setIsLoggedIn(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
-
