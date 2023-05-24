@@ -34,7 +34,7 @@ const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
           Object.entries(vacations).forEach(([key, value]) => {
             const { approved, dateEnd, dateStart, description } = value;
 
-            if (!approved) {
+            if (approved == "waiting") {
               const pendingRequest: PendingRequest = {
                 key: key.toString(),
                 employeeName,

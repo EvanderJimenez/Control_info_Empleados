@@ -43,8 +43,8 @@ const VacationsRequestBoss = () => {
 
     if (employeeByUid && employeeByUid.vacations) {
       const vacation = employeeByUid.vacations[selectedRequest?.key || ''];
-      const updatedVacation = { ...vacation, approved: true };
-      
+      const updatedVacation = { ...vacation, approved: "accepted" };
+
       const updatedVacations = {
         ...employeeByUid.vacations,
         [selectedRequest?.key || '']: updatedVacation,

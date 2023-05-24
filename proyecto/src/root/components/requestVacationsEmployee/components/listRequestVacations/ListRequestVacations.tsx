@@ -29,7 +29,7 @@ const ListRequestVacations = () => {
             <p>Description: {employeesListVacations.vacations[name].description}</p>
             <p>Date Start: {employeesListVacations.vacations[name].dateStart}</p>
             <p>Date End: {employeesListVacations.vacations[name].dateEnd}</p>
-            <p>State: {employeesListVacations.vacations[name].approved ? 'Accepted' : 'Denied' }</p>
+            <p>State: {employeesListVacations.vacations[name].approved }</p>
 
           </div>
         ))}
