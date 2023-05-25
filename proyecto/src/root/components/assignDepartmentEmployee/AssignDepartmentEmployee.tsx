@@ -49,37 +49,23 @@ const AssignDepartmentEmployee = () => {
     }
   }, [employeeSelect,dispatch]);
 
-  const handleSave = () =>{
-
+  const handleSave = async () => {
     if (employeeSelect && selectedOption) {
       const updatedDataEmployee: EmployeesType = {
         ...employeeSelect,
         idDepartment: selectedOption,
       };
-  
-      setEmployeeUpdate((prevEmployee) => ({
-        ...prevEmployee,
-        idDepartment: updatedDataEmployee.idDepartment,
-      }));
-  
 
-      console.log("idDepartment: " + employeeUpdate.idDepartment);
+      setEmployeeUpdate(updatedDataEmployee);
 
-      //console.log("employee: " + JSON.stringify(employeeUpdate))
+      console.log("idDepartment: "+updatedDataEmployee.idDepartment);
+      console.log("uid: "+updatedDataEmployee.uid);
 
-      dispatch(StartUpDateEmployee(employeeUpdate.uid,employeeUpdate))
+      await dispatch(StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee));
     }
+  };
 
-  }
 
-
-  useEffect(() => {
-
-    if(employeeUpdate.idDepartment !== "0") {
-      console.log("new IdDepartment  " + employeeUpdate.idDepartment)
-    }
-
-  }, [selectedOption])
 
   const handleLoadEmployee = async (uid: string) =>{
     dispatch(StartGetEmployeeByUid(uid))
@@ -114,12 +100,13 @@ const AssignDepartmentEmployee = () => {
           <InputLabel
             label="Phone Number"
             type="text"
-            value=""
+            value={employeeUpdate.uid}
             id="phoneNumber"
           />
         </div>
 
         <div>
+        <InputLabel label="Id Department" type="text" value={selectedOption} id="" />
           <ComboBox items={departments} label="Departments" selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
         </div>
         <div>

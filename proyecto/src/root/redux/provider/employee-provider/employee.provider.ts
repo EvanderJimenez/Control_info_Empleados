@@ -1,7 +1,7 @@
 import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 
-export const deleteEmployeeProvider = async (searchTerm: string) => {
+ const deleteEmployeeProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "DELETE",
@@ -21,7 +21,7 @@ export const deleteEmployeeProvider = async (searchTerm: string) => {
   }
 };
 
-export const dismissByUidProvider = async (searchTerm: string) => {
+ const dismissByUidProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
       method: "DELETE",
@@ -43,7 +43,7 @@ export const dismissByUidProvider = async (searchTerm: string) => {
   }
 };
 
-export const employeeListProvider = async () => {
+ const employeeListProvider = async () => {
   try {
     const response = await fetch("/api/employees");
 
@@ -81,7 +81,7 @@ export const employeeListProvider = async () => {
   }
 };
 
-export const createEmployeeProvider = async (searchTerm: EmployeesType) => {
+ const createEmployeeProvider = async (searchTerm: EmployeesType) => {
 
   try {
 
@@ -108,7 +108,7 @@ export const createEmployeeProvider = async (searchTerm: EmployeesType) => {
   }
 };
 
-export const upDatEmployeeProvider = async (searchUser: string, searchTerm: EmployeesType) => {
+ const upDatEmployeeProvider = async (searchUser: string, searchTerm: EmployeesType) => {
   try {
     const response = await fetch(`/api/employees/${searchUser}`, {
       method: "PUT",
@@ -131,7 +131,7 @@ export const upDatEmployeeProvider = async (searchUser: string, searchTerm: Empl
   }
 };
 
-export const getEmployeeByUidProvider = async (searchTerm: string) => {
+ const getEmployeeByUidProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "GET",
@@ -152,7 +152,7 @@ export const getEmployeeByUidProvider = async (searchTerm: string) => {
   }
 };
 
-export const getEmployeeByCedulaProvider = async (searchTerm: string) => {
+ const getEmployeeByCedulaProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/by-cedula/${searchTerm}`, {
       method: "GET",
@@ -173,7 +173,7 @@ export const getEmployeeByCedulaProvider = async (searchTerm: string) => {
   }
 };
 
-export const getEmployeeByNameProvider = async (searchTerm: string) => {
+ const getEmployeeByNameProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/by-name/${searchTerm}`, {
       method: "GET",
@@ -194,7 +194,7 @@ export const getEmployeeByNameProvider = async (searchTerm: string) => {
   }
 };
 
-export const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
+ const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
   try {
     const response = await fetch("/api/employees/login", {
       method: "POST",
@@ -218,7 +218,7 @@ export const loginProvider = async (searchTerm1: string, searchTerm2: string) =>
   }
 };
 
-export const getByVariableProvider = async (searchTerm1: string, searchTerm2: string) => {
+ const getByVariableProvider = async (searchTerm1: string, searchTerm2: string) => {
   try {
     const response = await fetch("/api/employees/by-variable", {
       method: "POST",
@@ -243,7 +243,7 @@ export const getByVariableProvider = async (searchTerm1: string, searchTerm2: st
 
 }
 
-export const getVacationsByUidProvider = async (searchTerm: string) => {
+ const getVacationsByUidProvider = async (searchTerm: string) => {
 
   try {
 
@@ -268,7 +268,7 @@ export const getVacationsByUidProvider = async (searchTerm: string) => {
 
 }
 
-export const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
+const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
 
   try {
 
@@ -290,5 +290,13 @@ export const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
   } catch (error) {
     console.log(error)
   }
+
+}
+
+export const providerRedux= {
+  getEmployeesByIdDepartProvider,getVacationsByUidProvider,getByVariableProvider,
+  loginProvider,getEmployeeByNameProvider,getEmployeeByCedulaProvider,
+  getEmployeeByUidProvider,upDatEmployeeProvider,createEmployeeProvider,employeeListProvider,
+  dismissByUidProvider,deleteEmployeeProvider
 
 }
