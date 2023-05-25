@@ -11,7 +11,8 @@ export interface HoursEmployee {
 export interface Cycle {
   hours: { [key: string]: Hours };
 }
+
 export interface Hours {
-  hFin: string;
   hIni: string;
+  hFin: string;
 }
