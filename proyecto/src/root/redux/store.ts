@@ -20,6 +20,7 @@ export const ApplicationStore = configureStore({
     getDepartmentByIdStore: DepartmentReducer,
     getVacationsByUidStore: EmployeeReducer,
     getEmployeesByIdDepartmentStore: EmployeeReducer,
+    getAllDepartmentStore: DepartmentReducer,
   },
 });
 

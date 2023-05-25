@@ -1,38 +1,44 @@
-import { Department } from '@/root/interface/departments';
-import { getDepartmentByIdProvider } from './../../provider/department-provider/department.provider';
+import { Department } from "@/root/interface/departments";
+import { getDepartmentByIdProvider } from "./../../provider/department-provider/department.provider";
 import { DepartmentType } from "@/root/types/Department.type";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface DepartmentState {
-
-    getDepartmentById: DepartmentType | null
-
+  getDepartmentById: DepartmentType | null;
+  getAllDepartments: DepartmentType[] | null;
 }
 
-export const initialState : DepartmentState ={ //ver nombre
-    getDepartmentById : null
-}
+export const initialState: DepartmentState = {
+  getDepartmentById: null,
+  getAllDepartments: [],
+};
 
 type DepartmentAction = {
-type : string
-department?:DepartmentState 
-}
+  type: string;
+  department?: DepartmentState;
+};
 
 export const DepartmentSlice = createSlice({
-    
-    name:"Departments",
-    initialState,
+  name: "Departments",
+  initialState,
 
-    reducers: {
+  reducers: {
+    getDepartmentByIdReducer: (
+      state,
+      action: PayloadAction<DepartmentType>
+    ) => {
+      state.getDepartmentById = action.payload;
+    },
+    getAllDepartmentReducer: (
+      state,
+      action: PayloadAction<DepartmentType[]>
+    ) => {
+      state.getAllDepartments = action.payload;
+    },
+  },
+});
 
-        getDepartmentByIdReducer: (state, action: PayloadAction<DepartmentType>) => {
-            state.getDepartmentById = action.payload;
-        }
-
-    }
-
-})
-
-export const {getDepartmentByIdReducer} = DepartmentSlice.actions;
+export const { getDepartmentByIdReducer, getAllDepartmentReducer } =
+  DepartmentSlice.actions;
 export const DepartmentReducer = DepartmentSlice.reducer;
 export type DispatchType = (args: DepartmentAction) => DepartmentAction;

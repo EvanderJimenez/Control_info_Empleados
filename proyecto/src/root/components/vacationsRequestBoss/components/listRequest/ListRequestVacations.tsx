@@ -3,7 +3,7 @@ import {
   selectGetEmployeesByIdDepartment,
   selectLogin,
 } from "@/root/redux/selectors/employee-selector/employee.selector";
-import { StarGetEmployeesByIdDepartment } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { StarGetEmployeesByIdDepartment, StartGetEmployeeByUid } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -55,7 +55,9 @@ const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
   }, [listEmployees]);
 
   const handleLoadInformation = (request: PendingRequest) => {
+    
     selectedRequest(request);
+   
   };
   
 

@@ -13,6 +13,8 @@ import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
+
+
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchType) => {
     dispatch(setLoading(true));
@@ -38,8 +40,6 @@ export const StartDismissEmployee = (searchTerm: string): any => {
     dispatch(setLoading(true));
     try {
       const employee = await dismissByUidProvider(searchTerm);
-
-      console.log("data thunk:" + JSON.stringify(employee));
 
       dispatch(dismissEmployeeReducer(employee || null));
     } catch (error) {

@@ -8,7 +8,6 @@ export const MainBoss = ({}) => {
     <div className="w-full h-full primary-font">
       <div className="GridThreeColumns">
         <div className="bg-PrimaryColor">
-          <ListEmployee   />
         </div>
         <div className="bg-SecondaryColor w-full h-full ">
           <section className="h-screen">Center</section>
