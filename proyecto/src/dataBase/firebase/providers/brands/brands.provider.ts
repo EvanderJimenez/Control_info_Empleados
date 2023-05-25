@@ -86,36 +86,32 @@ const getDocByEmployeeId = async (idEmployee: string) => {
   }
 };
 
-const updateBrands = async (
-  idEmployee: string,
-  cycle: Cycle,
-  hoursEmployee: HoursEmployee
-) => {
+const updateById = async (idEmployee: string, cycle: Hours) => {
   try {
-    const employeesRef = collection(firestore, "brands");
-    const q = query(employeesRef, where("idEmployee", "==", idEmployee));
+    const brandsRef = collection(firestore, "brands");
+    const q = query(brandsRef, where("idEmployee", "==", idEmployee));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.size > 0) {
-      const employeeDoc = doc(firestore, "brands", querySnapshot.docs[0].id);
-      await updateDoc(employeeDoc, {
+      const brandsDoc = doc(firestore, "brands", querySnapshot.docs[0].id);
+      await updateDoc(brandsDoc, {
         idEmployee,
         cycle,
-        hoursEmployee,
       });
-      const snapshotBrandsUpdate = await getDoc(employeeDoc);
-      const BrandsUpdate = snapshotBrandsUpdate.data();
-      return BrandsUpdate;
+      const snapshotbrandsUpdate = await getDoc(brandsDoc);
+      const brandsUpdate = snapshotbrandsUpdate.data();
+      return brandsUpdate;
     }
   } catch (error) {
-    console.error("Error update brands:", error);
-    throw new Error("Not possible update brands ");
+    console.error("Error updating brands:", error);
+    throw new Error("Failed to update brands");
   }
 };
+
 export const departmentProvider = {
   getAllBrands,
   getDocId,
   createBrands,
-  updateBrands,
+  updateById,
   getDocByEmployeeId,
 };
 
