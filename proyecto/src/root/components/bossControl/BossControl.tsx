@@ -63,7 +63,6 @@ const BossControl = () => {
 
       const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("data: " + JSON.stringify(dataEmployee))
         dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
         setClear(true)
       };
@@ -187,9 +186,7 @@ const BossControl = () => {
                 </button>
               </div>
               <div className="flex flex-col flex-1">
-                <button className="NormalButton hover:bg-black hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Choose file
-                </button>
+
               </div>
             </div>
           </form>
