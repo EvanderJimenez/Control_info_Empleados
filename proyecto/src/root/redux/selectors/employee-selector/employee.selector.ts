@@ -21,6 +21,7 @@ export const selectLogin = (state: RootState) => state.loginStore.loginUser;
 
 export const selectgetByVariable = (state: RootState) => state.getByVariableStore.getByVariable;
 
+export const selectGetAllBosses = (state: RootState) => state.getAllBossesStore.getAllBosses;
 
 export  const  loading  =  (state:  RootState)  =>  state.loading.loading;
 

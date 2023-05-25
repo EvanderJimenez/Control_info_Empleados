@@ -169,3 +169,17 @@ export const StarGetEmployeesByIdDepartment = (searchTerm: string) : any => {
     }
   }
 }
+
+export const StarGetAllBosses = () : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await providerRedux.getAllBossesProvider();
+
+      dispatch(EmployeeSlice.actions.getAllBossesReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

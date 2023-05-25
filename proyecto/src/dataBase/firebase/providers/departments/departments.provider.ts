@@ -62,7 +62,6 @@ const getByDocId = async (docId: string) => {
   const departmentsDocSnapshot = await getDoc(departmentsDocRef);
 
   if (departmentsDocSnapshot.exists()) {
-    console.log("DATA: " + JSON.stringify(departmentsDocSnapshot.data()))
     return departmentsDocSnapshot.data();
   } else {
     throw new Error(`A department with document ID was not found: ${docId}`);
@@ -96,11 +95,36 @@ const updateById = async (id: string, name: string, size: number, location: stri
   }
 };
 
+const getDepartmentByUidEmployee = async () => {
+
+  const departmentCollection = collection(firestore, "departments");
+  const departQuery = query(
+    departmentCollection,
+    where("idEmployee", "==", ""),
+    where("boss", "==", "")
+  );
+  const departSnapshot: QuerySnapshot<DocumentData> = await getDocs(departQuery);
+
+  const departs: any[] = [];
+
+  if (!departSnapshot.empty) {
+    departSnapshot.forEach((doc) => {
+      departs.push(doc.data());
+    });
+  }
+
+
+  return departs;
+
+}
+
 export const departmentProvider = {
   getAll,
   getByDocId,
   create,
   updateById,
+  getDepartmentByUidEmployee
 };
 
 export default departmentProvider;
+

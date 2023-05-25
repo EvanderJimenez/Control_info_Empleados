@@ -19,6 +19,7 @@ export const ApplicationStore = configureStore({
     getByVariableStore: EmployeeReducer,
     getDepartmentByIdStore: DepartmentReducer,
     getVacationsByUidStore: EmployeeReducer,
+    getAllBossesStore: EmployeeReducer,
     getEmployeesByIdDepartmentStore: EmployeeReducer,
     getAllDepartmentStore: DepartmentReducer,
   },

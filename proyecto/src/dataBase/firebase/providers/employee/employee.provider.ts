@@ -11,6 +11,7 @@ import {
   where,
   updateDoc,
   addDoc,
+  
 } from "firebase/firestore";
 import {
   getAuth,
@@ -310,6 +311,41 @@ const getEmployeesByIdDepartment = async (idDepartment: string) => {
 
 }
 
+const getAllUD = async () => {
+  const departmentCollection = collection(firestore, "departments");
+  const departmentQuery = query(departmentCollection, where("leader", "!=", ""));
+  const departmentSnapshot = await getDocs(departmentQuery);
+  
+  const departmentIds: any[] = [];
+  
+  if (!departmentSnapshot.empty) {
+    departmentSnapshot.forEach((doc) => {
+      const department = doc.data();
+      departmentIds.push(department.idEmployee);
+    });
+  }
+  
+  return departmentIds;
+};
+
+const getAllBosses = async () => {
+  const departmentIds = await getAllUD();
+  
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "in", departmentIds));
+  const employeeSnapshot = await getDocs(employeeQuery);
+  
+  const employees: DocumentData[] = [];
+  
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+  
+  return employees;
+};
+
 export const employeeProvider = {
   getAll,
   getByUid,
@@ -321,7 +357,8 @@ export const employeeProvider = {
   dismissByUid,
   getByVariable,
   getVacationsByUid,
-  getEmployeesByIdDepartment
+  getEmployeesByIdDepartment,
+  getAllBosses
 };
 
 export default employeeProvider;

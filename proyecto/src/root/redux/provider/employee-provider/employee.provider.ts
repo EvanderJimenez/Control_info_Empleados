@@ -1,7 +1,7 @@
 import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 
- const deleteEmployeeProvider = async (searchTerm: string) => {
+const deleteEmployeeProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "DELETE",
@@ -16,12 +16,15 @@ import { EmployeesType } from "@/root/types/Employee.type";
     const data: { uid: string } = await response.json();
     return { id: data.uid };
   } catch (error) {
-    console.error("Error deleting the employee, mor information about that: ", error);
+    console.error(
+      "Error deleting the employee, mor information about that: ",
+      error
+    );
     return;
   }
 };
 
- const dismissByUidProvider = async (searchTerm: string) => {
+const dismissByUidProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
       method: "DELETE",
@@ -38,12 +41,15 @@ import { EmployeesType } from "@/root/types/Employee.type";
 
     return { id: data.uid };
   } catch (error) {
-    console.error("Error dismissing the employee, mor information about that: ", error);
+    console.error(
+      "Error dismissing the employee, mor information about that: ",
+      error
+    );
     return;
   }
 };
 
- const employeeListProvider = async () => {
+const employeeListProvider = async () => {
   try {
     const response = await fetch("/api/employees");
 
@@ -54,24 +60,26 @@ import { EmployeesType } from "@/root/types/Employee.type";
     const data = await response.json();
 
     const listEmployees: EmployeesType[] = Array.isArray(data)
-      ? data.map((listEmployee: any): EmployeesType => ({
-          uid: listEmployee.uid,
-          name: listEmployee.name,
-          firstSurname: listEmployee.firstSurname,
-          secondSurname: listEmployee.secondSurname,
-          cedula: listEmployee.cedula,
-          phoneNumber: listEmployee.phoneNumber,
-          photo: listEmployee.photo,
-          jobPosition: listEmployee.jobPosition,
-          salary: listEmployee.salary,
-          enabled: listEmployee.enabled,
-          idDepartment: listEmployee.idDepartment,
-          password: listEmployee.password,
-          email: listEmployee.email,
-          boss: listEmployee.boss,
-          schedule: listEmployee.schedule,
-          vacations: listEmployee.vacations
-        }))
+      ? data.map(
+          (listEmployee: any): EmployeesType => ({
+            uid: listEmployee.uid,
+            name: listEmployee.name,
+            firstSurname: listEmployee.firstSurname,
+            secondSurname: listEmployee.secondSurname,
+            cedula: listEmployee.cedula,
+            phoneNumber: listEmployee.phoneNumber,
+            photo: listEmployee.photo,
+            jobPosition: listEmployee.jobPosition,
+            salary: listEmployee.salary,
+            enabled: listEmployee.enabled,
+            idDepartment: listEmployee.idDepartment,
+            password: listEmployee.password,
+            email: listEmployee.email,
+            boss: listEmployee.boss,
+            schedule: listEmployee.schedule,
+            vacations: listEmployee.vacations,
+          })
+        )
       : [];
 
     return listEmployees;
@@ -81,11 +89,9 @@ import { EmployeesType } from "@/root/types/Employee.type";
   }
 };
 
- const createEmployeeProvider = async (searchTerm: EmployeesType) => {
-
+const createEmployeeProvider = async (searchTerm: EmployeesType) => {
   try {
-
-    console.log("Data user " + JSON.stringify(searchTerm))
+    console.log("Data user " + JSON.stringify(searchTerm));
 
     const response = await fetch("/api/employees", {
       method: "POST",
@@ -108,7 +114,10 @@ import { EmployeesType } from "@/root/types/Employee.type";
   }
 };
 
- const upDatEmployeeProvider = async (searchUser: string, searchTerm: EmployeesType) => {
+const upDatEmployeeProvider = async (
+  searchUser: string,
+  searchTerm: EmployeesType
+) => {
   try {
     const response = await fetch(`/api/employees/${searchUser}`, {
       method: "PUT",
@@ -131,7 +140,7 @@ import { EmployeesType } from "@/root/types/Employee.type";
   }
 };
 
- const getEmployeeByUidProvider = async (searchTerm: string) => {
+const getEmployeeByUidProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "GET",
@@ -152,7 +161,7 @@ import { EmployeesType } from "@/root/types/Employee.type";
   }
 };
 
- const getEmployeeByCedulaProvider = async (searchTerm: string) => {
+const getEmployeeByCedulaProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/by-cedula/${searchTerm}`, {
       method: "GET",
@@ -173,7 +182,7 @@ import { EmployeesType } from "@/root/types/Employee.type";
   }
 };
 
- const getEmployeeByNameProvider = async (searchTerm: string) => {
+const getEmployeeByNameProvider = async (searchTerm: string) => {
   try {
     const response = await fetch(`/api/employees/by-name/${searchTerm}`, {
       method: "GET",
@@ -194,7 +203,7 @@ import { EmployeesType } from "@/root/types/Employee.type";
   }
 };
 
- const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
+const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
   try {
     const response = await fetch("/api/employees/login", {
       method: "POST",
@@ -218,7 +227,10 @@ import { EmployeesType } from "@/root/types/Employee.type";
   }
 };
 
- const getByVariableProvider = async (searchTerm1: string, searchTerm2: string) => {
+const getByVariableProvider = async (
+  searchTerm1: string,
+  searchTerm2: string
+) => {
   try {
     const response = await fetch("/api/employees/by-variable", {
       method: "POST",
@@ -240,19 +252,16 @@ import { EmployeesType } from "@/root/types/Employee.type";
     console.error("Error getting employee:", error);
     throw error;
   }
+};
 
-}
-
- const getVacationsByUidProvider = async (searchTerm: string) => {
-
+const getVacationsByUidProvider = async (searchTerm: string) => {
   try {
-
     const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Error getting vacations");
@@ -261,23 +270,43 @@ import { EmployeesType } from "@/root/types/Employee.type";
     const data = await response.json();
 
     return data;
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-}
+};
 
 const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
-
   try {
+    const response = await fetch(
+      `/api/employees/by-idDepartment/${searchTerm}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    const response = await fetch(`/api/employees/by-idDepartment/${searchTerm}`, {
+    if (!response.ok) {
+      throw new Error("Error getting vacations");
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getAllBossesProvider = async () => {
+  try {
+    const response = await fetch(`/api/employees/allBoss`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      }
-    })
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Error getting vacations");
@@ -286,17 +315,23 @@ const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
+};
 
-}
-
-export const providerRedux= {
-  getEmployeesByIdDepartProvider,getVacationsByUidProvider,getByVariableProvider,
-  loginProvider,getEmployeeByNameProvider,getEmployeeByCedulaProvider,
-  getEmployeeByUidProvider,upDatEmployeeProvider,createEmployeeProvider,employeeListProvider,
-  dismissByUidProvider,deleteEmployeeProvider
-
-}
+export const providerRedux = {
+  getEmployeesByIdDepartProvider,
+  getVacationsByUidProvider,
+  getByVariableProvider,
+  loginProvider,
+  getEmployeeByNameProvider,
+  getEmployeeByCedulaProvider,
+  getEmployeeByUidProvider,
+  upDatEmployeeProvider,
+  createEmployeeProvider,
+  employeeListProvider,
+  dismissByUidProvider,
+  deleteEmployeeProvider,
+  getAllBossesProvider,
+};
