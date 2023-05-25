@@ -1,5 +1,5 @@
-import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from "./../../provider/employee-provider/employee.provider";
-import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer } from "./../../reducers/employee-reducer/EmployeeReducer";
+import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider, getEmployeesByIdDepartProvider, getVacationsByUidProvider } from "./../../provider/employee-provider/employee.provider";
+import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, getEmployeesByIdDepartmentReducer, getVacationsByUidReducer} from "./../../reducers/employee-reducer/EmployeeReducer";
 import { deleteEmployeeReducer, listEmployeeReducer, createEmployeesReducer, updateEmployeeReducer, getEmployeeByUidReducer, loginReducer } from "../../reducers/employee-reducer/EmployeeReducer";
 import {
   deleteEmployeeProvider,
@@ -37,6 +37,7 @@ export const StartDeletingEmployee = (employeeId: string): any => {
 
 export const StartDismissEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchType) => {
+    dispatch(setLoading(true));
     try {
       const employee = await dismissByUidProvider(searchTerm);
 
@@ -44,18 +45,20 @@ export const StartDismissEmployee = (searchTerm: string): any => {
     } catch (error) {
       console.log(error);
     }
+    dispatch(setLoading(false));
   };
 };
 
 export const StartListOfEmployee = (): any => {
   return async (dispatch: DispatchType) => {
     const employeeList = await employeeListProvider();
-
+    dispatch(setLoading(true));
     if (Array.isArray(employeeList)) {
       dispatch(listEmployeeReducer(employeeList));
     } else {
       console.log("Invalid employee list");
     }
+    dispatch(setLoading(false));
   };
 };
 
@@ -129,7 +132,7 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
     } catch (error) {
       console.log(error);
     }
-    dispatch(setLoading(true));
+    dispatch(setLoading(false));
   };
 };
 
@@ -142,5 +145,34 @@ export const StartGetByVariable = (searchTerm1: string, searchTerm2: string): an
     } catch (error) {
       console.log(error);
     }
-  };
-};
+  }
+}
+
+
+export const StarGetVacationsByUid = (searchTerm: string) : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await getVacationsByUidProvider(searchTerm);
+
+      dispatch(getVacationsByUidReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const StarGetEmployeesByIdDepartment = (searchTerm: string) : any => {
+  return async (dispatch: DispatchType) => {
+    try {
+
+      const response = await getEmployeesByIdDepartProvider(searchTerm);
+
+      dispatch(getEmployeesByIdDepartmentReducer(response || null));
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
