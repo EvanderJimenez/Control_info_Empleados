@@ -80,12 +80,7 @@ html {
   height: 100%;
 }
 
-textarea {
-  border: 1px solid #ccc;
-  border-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
+
 
 .GridThreeColumns {
   display: grid;

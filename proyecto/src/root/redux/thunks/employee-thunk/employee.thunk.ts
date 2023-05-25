@@ -1,5 +1,5 @@
-import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider } from "./../../provider/employee-provider/employee.provider";
-import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer } from "./../../reducers/employee-reducer/EmployeeReducer";
+import { dismissByUidProvider, getByVariableProvider, getEmployeeByCedulaProvider, getEmployeeByNameProvider, getEmployeesByIdDepartProvider, getVacationsByUidProvider } from "./../../provider/employee-provider/employee.provider";
+import { DispatchType, dismissEmployeeReducer, getByVariableReducer, getEmployeeByCedulaReducer, getEmployeeByNameReducer, getEmployeesByIdDepartmentReducer, getVacationsByUidReducer } from "./../../reducers/employee-reducer/EmployeeReducer";
 import { deleteEmployeeReducer, listEmployeeReducer, createEmployeesReducer, updateEmployeeReducer, getEmployeeByUidReducer, loginReducer } from "../../reducers/employee-reducer/EmployeeReducer";
 import {
   deleteEmployeeProvider,

@@ -6,7 +6,7 @@ interface EmployeeState { //employee : EmployeesType
   dismissEmployee: DeleteEmployeeType | null;
   employees: EmployeesType[];
   loading: boolean;
-  createEmploye: EmployeesType | null;
+  createEmployee: EmployeesType | null;
   updateEmployee: EmployeesType | null;
   getEmployeeByUid: EmployeesType | null;
   loginUser: EmployeesType | null;
@@ -23,7 +23,7 @@ export const initialState: EmployeeState = {
   dismissEmployee: null,
   employees: [],
   loading: false, 
-  createEmploye: null,
+  createEmployee: null,
   updateEmployee: null,
   getEmployeeByUid: null,
   loginUser: null,
@@ -57,7 +57,7 @@ export const EmployeeSlice = createSlice({
       state.loading = action.payload;
     },
     createEmployeesReducer: (state, action: PayloadAction<EmployeesType>) => {
-      state.createEmploye = action.payload
+      state.createEmployee = action.payload
     },
     updateEmployeeReducer: (state, action: PayloadAction<EmployeesType>) => {
       state.updateEmployee = action.payload
