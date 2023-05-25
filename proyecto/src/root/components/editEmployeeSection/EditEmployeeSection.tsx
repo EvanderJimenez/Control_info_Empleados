@@ -10,7 +10,7 @@ export default function EditEmployeeSection() {
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const dispatch = useDispatch();
 
-  const [clear, setClear] = useState(false)
+  const [clear, setClear] = useState(false);
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -28,52 +28,50 @@ export default function EditEmployeeSection() {
     email: "",
     boss: "",
     schedule: [],
-    vacations: {}
+    vacations: {},
   });
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
-    setClear(true)
+    setClear(true);
   };
 
   useEffect(() => {
-    if(!clear){
+    if (!clear) {
       if (employeeByUid) {
         setDataEmployee(employeeByUid);
       }
-    }else{
-      setDataEmployee({ uid: "",
-      name: "",
-      firstSurname: "",
-      secondSurname: "",
-      cedula: 0,
-      phoneNumber: 0,
-      photo: "",
-      jobPosition: "",
-      salary: 0,
-      enabled: true,
-      idDepartment: "",
-      password: "",
-      email: "",
-      boss: "",
-      schedule: [],
-    vacations: {}
-    })
+    } else {
+      setDataEmployee({
+        uid: "",
+        name: "",
+        firstSurname: "",
+        secondSurname: "",
+        cedula: 0,
+        phoneNumber: 0,
+        photo: "",
+        jobPosition: "",
+        salary: 0,
+        enabled: true,
+        idDepartment: "",
+        password: "",
+        email: "",
+        boss: "",
+        schedule: [],
+        vacations: {},
+      });
     }
-
-  }, [employeeByUid,clear]);
+  }, [employeeByUid, clear]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDataEmployee((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleDismissEmployee = () =>{
-
-    dispatch(StartDismissEmployee(employeeByUid?.uid || ""))
-
-  }
+  const handleDismissEmployee = () => {
+    dispatch(StartDismissEmployee(employeeByUid?.uid || ""));
+  };
 
   return (
     <div className="flex flex-col">
@@ -85,14 +83,14 @@ export default function EditEmployeeSection() {
             <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Name" typeList="name" id="name" />
             <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
             <button className="bg-red flex justify-center">
-            {" "}
-            <img src="/Images/searchIcon.png" alt="" />
-          </button>
+              {" "}
+              <img src="/Images/searchIcon.png" alt="" />
+            </button>
           </div>
-          <ListEmployee clear = {clear} setClear={setClear} />
+          <ListEmployee clear={clear} setClear={setClear} />
         </div>
         <div className="flex-auto h-auto">
-          <form onSubmit ={handleUpdate} className="bg-lithBlue p-2 h-auto">
+          <form onSubmit={handleUpdate} className="bg-lithBlue p-2 h-auto">
             <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
               <div className="flex flex-col flex-1">
                 <label htmlFor="Name" className="block mb-2 text-sm font-medium text-black">
@@ -194,7 +192,10 @@ export default function EditEmployeeSection() {
             </div>
             <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
               <div className="flex flex-col flex-1">
-                <button onClick={handleDismissEmployee} className="EliminatedButton  hover:bg-black hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button
+                  onClick={handleDismissEmployee}
+                  className="EliminatedButton  hover:bg-black hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
                   Dismiss employee
                 </button>
               </div>

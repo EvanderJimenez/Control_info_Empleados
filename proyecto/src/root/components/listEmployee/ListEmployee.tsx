@@ -6,12 +6,12 @@ import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralCo
 import { selectLogin, selectgetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
 
-interface ListClear{
-  clear : boolean;
+interface ListClear {
+  clear: boolean;
   setClear: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ListEmployee = ({clear,setClear} : ListClear) => {
+const ListEmployee = ({ clear, setClear }: ListClear) => {
   const dispatch = useDispatch();
   let filteredEmployees: EmployeesType[] = [];
 
@@ -28,7 +28,7 @@ const ListEmployee = ({clear,setClear} : ListClear) => {
 
   const handleLoad = (uid: string) => {
     dispatch(StartGetEmployeeByUid(uid));
-    setClear(false)
+    setClear(false);
   };
 
   if (employeesListVariable) {
