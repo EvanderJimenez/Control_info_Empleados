@@ -1,6 +1,3 @@
-
-
-
 import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
@@ -171,4 +168,3 @@ export const StarGetAllBosses = () : any => {
     }
   }
 }
-  

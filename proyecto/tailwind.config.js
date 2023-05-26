@@ -13,12 +13,13 @@ module.exports = {
       mono: ["Menlo", "Monaco", "Consolas", "monospace"],
     },
     colors: {
-      red: "#e84443",
+      red: "#CD0404",
       blue: "#454fce",
       black: "#181818",
       white: "#dfe0dc",
       darkBlue: "#27374D",
-      lithBlue: "#dfe9f5",
+      lithBlue: "#9DB2BF",
+      lithGray: "#DDDDDD"
     },
     extend: {},
   },

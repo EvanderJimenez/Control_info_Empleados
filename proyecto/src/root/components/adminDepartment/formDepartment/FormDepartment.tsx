@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Input from "../input/Input";
+import Input from "../input/";
 import { Department } from "@/root/interface/departments";
 interface infoDepart {
   departmentsData: Department;
