@@ -67,7 +67,7 @@ export interface Vacations{
   dateStart : string
   dateEnd: string
   description: string
-  approved: boolean
+  approved: string
 }
 export interface FirstPagePDFInformation{
   title:string,
@@ -82,5 +82,5 @@ export interface PendingRequest {
   dateStart: string;
   dateEnd: string;
   description: string;
-  approved: boolean;
+  approved: string;
 }

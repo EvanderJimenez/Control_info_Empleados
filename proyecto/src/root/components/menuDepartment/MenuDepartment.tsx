@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import MethodsDepartments from "../adminDepartment/methods/MethodsDepartments";
+import router from "next/router";
+import { Url } from "next/dist/shared/lib/router/router";
 
 export const MenuDepartment = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -8,6 +10,9 @@ export const MenuDepartment = () => {
     setSelectedOption(option);
   };
 
+  const handleButtonClick = (route: Url) => {
+    router.push(route);
+  };
   return (
     <div>
       <div className="w-full ">
@@ -34,7 +39,7 @@ export const MenuDepartment = () => {
                         ? "bg-sky-500"
                         : "hover:bg-sky-500"
                     }`}
-                    onClick={() => handleOptionClick("created-departments")}
+                    onClick={() => handleButtonClick("/home/AdminMain/Department/CreateDepartment")}
                   >
                     Created Departments
                   </button>
@@ -44,9 +49,19 @@ export const MenuDepartment = () => {
                         ? "bg-blue-500"
                         : "hover:bg-blue-500"
                     }`}
-                    onClick={() => handleOptionClick("update-departments")}
+                    onClick={() => handleButtonClick("/home/AdminMain/Department/UpdateDepartment")}
                   >
                     Update Departments
+                  </button>
+                  <button
+                    className={`mx-4 px-4 py-3 bg-blue text-blue-900 text-xs font-semibold rounded ${
+                      selectedOption === "assign-department"
+                        ? "bg-blue-500"
+                        : "hover:bg-blue-500"
+                    }`}
+                    onClick={() => handleButtonClick("/home/AdminMain/Department/AssignBoss")}
+                  >
+                    Assign Boss Department
                   </button>
                 </div>
               </div>

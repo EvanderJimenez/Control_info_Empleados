@@ -48,7 +48,7 @@ const RequestVacationsEmployee = () => {
       dateStart: newDateStart,
       dateEnd: newDateEnd,
       description: newDescription,
-      approved: false,
+      approved: "waiting",
     };
 
     setDataEmployee((prevUserData) => {

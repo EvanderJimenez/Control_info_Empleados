@@ -5,7 +5,7 @@ export default function RequestVacationSection() {
   return (
     <>
       <div className="overflow-y-auto p-2vh max-h-screen">
-        <ListEmployee/>
+        <ListEmployee setClear={()=>{}} clear/>
       </div>
     </>
   );

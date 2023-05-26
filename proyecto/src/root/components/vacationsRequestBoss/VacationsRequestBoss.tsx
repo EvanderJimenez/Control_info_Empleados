@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Filters from "./components/filters/Filters";
 import ListRequestVacations from "./components/listRequest/ListRequestVacations";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,11 +40,14 @@ const VacationsRequestBoss = () => {
   const handleAccept = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
 
+  }
+
+  useEffect(() => {
 
     if (employeeByUid && employeeByUid.vacations) {
       const vacation = employeeByUid.vacations[selectedRequest?.key || ''];
-      const updatedVacation = { ...vacation, approved: true };
-      
+      const updatedVacation = { ...vacation, approved: "accepted" };
+
       const updatedVacations = {
         ...employeeByUid.vacations,
         [selectedRequest?.key || '']: updatedVacation,
@@ -57,14 +60,15 @@ const VacationsRequestBoss = () => {
 
       setDataEmployee(updatedDataEmployee)
 
-      console.log("Name: " + JSON.stringify(updatedDataEmployee.name));
-      console.log("Email: " + JSON.stringify(updatedDataEmployee.email));
-      console.log("new DataEmployee: " + JSON.stringify(updatedDataEmployee.vacations));
+      console.log("Name: " + JSON.stringify(dataEmployee.name));
+      console.log("Email: " + JSON.stringify(dataEmployee.email));
+      console.log("new DataEmployee: " + JSON.stringify(dataEmployee.vacations));
 
     }
+    
+    //dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
 
-    dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
-  }
+  }, [employeeByUid,dispatch])
 
   return (
     <div className="flex flex-row">
