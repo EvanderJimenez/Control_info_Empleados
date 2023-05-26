@@ -1,5 +1,5 @@
 
-import { DispatchType} from "./../../reducers/employee-reducer/EmployeeReducer";
+import { DispatchType, getByVariableReducer} from "./../../reducers/employee-reducer/EmployeeReducer";
 
 import {EmployeeSlice}  from "../../reducers/employee-reducer/EmployeeReducer";
 
@@ -148,7 +148,9 @@ export const StarGetVacationsByUid = (searchTerm: string) : any => {
 
       const response = await providerRedux.getVacationsByUidProvider(searchTerm);
 
-      dispatch(EmployeeSlice.actions.getVacationsByUidReducer(response || null));
+      //dispatch(EmployeeSlice.actions.getVacationsByUidReducer(response || null));
+
+      dispatch(getByVariableReducer(response || null));
 
     } catch (error) {
       console.log(error)

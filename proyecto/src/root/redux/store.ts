@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { EmployeeReducer } from "./reducers/employee-reducer/EmployeeReducer";
 import { DepartmentReducer } from "./reducers/department-reducer/DepartmentReducer";
 import { LoadReducer } from "./reducers/loading-reducer/LoadingReducer";
+import { VacationsReducer } from "./reducers/employee-reducer/getVacationsByUid/getVacationsByUidReducers";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -18,7 +19,7 @@ export const ApplicationStore = configureStore({
     loginStore: EmployeeReducer,
     getByVariableStore: EmployeeReducer,
     getDepartmentByIdStore: DepartmentReducer,
-    getVacationsByUidStore: EmployeeReducer,
+    getVacationsByUidStore: VacationsReducer,
     getAllBossesStore: EmployeeReducer,
     getEmployeesByIdDepartmentStore: EmployeeReducer,
     getAllDepartmentStore: DepartmentReducer,

@@ -280,6 +280,8 @@ const getVacationsByUid = async (uid: string) => {
   const employeeDoc = employeeSnapshot.docs[0];
   const vacations = employeeDoc.data().vacations;
 
+  console.log("vacations: " + JSON.stringify(vacations));
+
   return vacations;
 };
 
