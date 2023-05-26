@@ -1,5 +1,5 @@
 export const getDepartmentByIdProvider = async (searchTerm: string) => {
-  try {
+
     const response = await fetch(`/api/departments/${searchTerm}`, {
       method: "GET",
       headers: {
@@ -14,13 +14,10 @@ export const getDepartmentByIdProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 export const getAllDepartmentProvider = async () => {
-  try {
+
     const response = await fetch(`/api/departments`, {
       method: "GET",
       headers: {
@@ -35,7 +32,4 @@ export const getAllDepartmentProvider = async () => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.log(error);
-  }
 }

@@ -14,7 +14,6 @@ const ComboBox: React.FC<ComboBoxProps> = ({ label, items,selectedOption,setSele
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
-    console.log("option selected", selectedOption)
   };
 
   return (

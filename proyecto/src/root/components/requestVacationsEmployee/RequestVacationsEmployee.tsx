@@ -41,7 +41,6 @@ const RequestVacationsEmployee = () => {
     event.preventDefault();
 
     if (!newName) {
-      console.error("New date is empty");
       return;
     }
     const newVacations: Vacations = {
@@ -71,7 +70,7 @@ const RequestVacationsEmployee = () => {
 
   useEffect(() => {
     if(dataEmployee?.uid != ""){
-      console.log("JSON" + JSON.stringify(dataEmployee))
+
     dispatch(StartUpDateEmployee(employeeVacations?.uid || "", dataEmployee));
     }
   }, [dataEmployee]);

@@ -5,21 +5,18 @@ export  const  selectDeleteEmployee  =  (state:  RootState)  =>  state.deleteEmp
 
 export  const  selectDismissEmployee  =  (state:  RootState)  =>  state.dismissEmployeeStore.dismissEmployee;
 
-export  const  selectListOfEmployee  =  (state:  RootState)  =>  state.employeesListStore.employees
+export  const  selectListOfEmployee  =  (state:  RootState)  =>  state.employeesListStore.listEmployees
 
-export  const  selectCreateEmployee  =  (state:  RootState)  =>  state.createEmployeeStore.createEmploye
+export  const  selectCreateEmployee  =  (state:  RootState)  =>  state.createEmployeeStore.createEmployee
 
 export  const  selectUpdateEmployee  =  (state:  RootState)  =>  state.updateEmployeeStore.updateEmployee
 
 export  const  selectGetEmployeeByUid  =  (state:  RootState)  =>  state.getEmployeeByUidStore.getEmployeeByUid
 
-export  const  selectGetEmployeeByCedula  =  (state:  RootState)  =>  state.getEmployeeByCedulaStore.getEmployeeByCedula
 
-export  const  selectGetEmployeeByName  =  (state:  RootState)  =>  state.getEmployeeByNameStore.getEmployeeByName
+export const selectLogin = (state: RootState) => state.loginStore.login;
 
-export const selectLogin = (state: RootState) => state.loginStore.loginUser;
-
-export const selectgetByVariable = (state: RootState) => state.getByVariableStore.getByVariable;
+export const selectGetByVariable = (state: RootState) => state.getByVariableStore.getByVariable;
 
 export const selectGetAllBosses = (state: RootState) => state.getAllBossesStore.getAllBosses;
 

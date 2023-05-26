@@ -7,7 +7,6 @@ export const SearchDepartment = ({ handleGet, ...props }: getDepartment) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const searchValue = event.currentTarget["voice-search"].value;
-    console.log(searchValue);
     handleGet(searchValue);
   };
 

@@ -18,8 +18,6 @@ function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartSta
     const expirationDate = new Date(Date.now() + 86400 * 1000);
     let cookieValue = '';
 
-    console.log("job position: " + loginState.jobPosition)
-
     if (resDepart.idEmployee !== loginState.uid && loginState.jobPosition !== "Admin") {
       cookieValue = JSON.stringify({ logged: true, type: "employee",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/EmployeeMain");

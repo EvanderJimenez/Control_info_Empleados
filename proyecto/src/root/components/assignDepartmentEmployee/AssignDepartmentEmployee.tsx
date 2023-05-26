@@ -58,9 +58,6 @@ const AssignDepartmentEmployee = () => {
 
       setEmployeeUpdate(updatedDataEmployee);
 
-      console.log("idDepartment: "+updatedDataEmployee.idDepartment);
-      console.log("uid: "+updatedDataEmployee.uid);
-
       await dispatch(StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee));
     }
   };
