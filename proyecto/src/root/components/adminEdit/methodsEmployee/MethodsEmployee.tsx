@@ -32,6 +32,7 @@ const MethodsEmployee = (props: RegisterProps) => {
         schedule: [],
         brands: [],
         option: "register",
+        attendance: {},
       };
     }
   });
