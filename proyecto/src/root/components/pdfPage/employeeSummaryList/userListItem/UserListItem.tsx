@@ -9,13 +9,13 @@ interface UserListItemProps {
 
 const UserListItem: React.FC<UserListItemProps> = ({ name, FirstSurname, cedula }) => {
   return (
-    <li className="pt-3 pb-0 sm:pt-4">
-      <div className="flex items-center space-x-4">
-        <div className="flex flex-row space-x-3">
-          <p className="w-8 h-8 rounded-full text-white print:text-black">{name}</p>
-          <p className="w-8 h-8 rounded-full text-white print:text-black">{FirstSurname}</p>
+    <li className="pt-3 pb-0 w-full sm:pt-4">
+      <div className="flex w-full items-center ">
+        <div className="flex flex-row ">
+          <p className="w-8 h-8 rounded-full text-white mr-6 print:text-black">{name}</p>
+          <p className="w-8 h-8 rounded-full text-white  print:text-black">{FirstSurname}</p>
         </div>
-        <div className="flex-1 flex-col">
+        <div className="flex-1 flex-col flex justify-start w-full">
           <p className="text-sm font-medium text-gray-900 truncate dark:text-white">{cedula}</p>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function index() {
 
   return (
     <LoginPage>
-      <BrandsEmployee />
+      <MainForm/>
     </LoginPage>
   );
 }

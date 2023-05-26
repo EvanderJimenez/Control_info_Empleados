@@ -19,7 +19,7 @@ export default function EmployeeSummaryList(props: EmployeeSummaryListProps) {
       <div className="flex items-center flex-col justify-between mb-4">
         <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Employees in charge of {props.department}</h5>
         <div className="flex justify-between mt-4 w-full">
-          <p className="text-white print:text-black">Name</p>
+          <p className="text-white w-full print:text-black">Name</p>
           <div className="justify-center w-full flex">
             <p className="text-white print:text-black">ID number:</p>
           </div>
@@ -28,7 +28,7 @@ export default function EmployeeSummaryList(props: EmployeeSummaryListProps) {
       <div className="flow-root">
         <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
           {props.users.map((user, index) => (
-            <UserListItem key={index} name={user.name} FirstSurname={user.firstSurname} cedula={user.cedula} />
+            <UserListItem key={index} name={index+1 +"." + user.name} FirstSurname={user.firstSurname} cedula={user.cedula} />
           ))}
         </ul>
       </div>
