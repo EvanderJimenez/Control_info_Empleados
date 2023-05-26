@@ -35,9 +35,7 @@ const RequestVacationsEmployee = () => {
 
   const dispatch = useDispatch();
 
-  const handleVacationRequestSend = (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleVacationRequestSend = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!newName) {
@@ -70,9 +68,8 @@ const RequestVacationsEmployee = () => {
   };
 
   useEffect(() => {
-    if(dataEmployee?.uid != ""){
-      console.log("JSON" + JSON.stringify(dataEmployee))
-    dispatch(StartUpDateEmployee(employeeVacations?.uid || "", dataEmployee));
+    if (dataEmployee?.uid != "") {
+      dispatch(StartUpDateEmployee(employeeVacations?.uid || "", dataEmployee));
     }
   }, [dataEmployee]);
 
@@ -83,66 +80,47 @@ const RequestVacationsEmployee = () => {
   }, [employeeVacations]);
 
   return (
-      <div className="flex flex-row flex-wrap justify-center items-center">
-        <div className="xl:w-1/2 space-y-4 ">
-          <form className="" onSubmit={handleVacationRequestSend}>
-            <div className=" flex flex-col lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60">
-              <h2 className="text-lg sm:text-xl font-medium  mb-2">
-                Vacation request
-              </h2>
-              <div>
-                <label>Name Request: </label>
-                <input
-                  type="text"
-                  id="name"
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                />
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-auto">
-                  <label htmlFor="dateStar">Initial application date</label>
-                  <input
-                    type="datetime-local"
-                    id="dateStar"
-                    value={newDateStart}
-                    onChange={(e) => setNewDateStart(e.target.value)}
-                  />
-                </div>
-                <div className="flex flex-wrap w-auto">
-                  <label htmlFor="dateEnd">Application end date</label>
-                  <input
-                    type="datetime-local"
-                    id="dateEnd"
-                    value={newDateEnd}
-                    onChange={(e) => setNewDateEnd(e.target.value)}
-                  />
-                </div>
-              </div>
-              <textarea
-                name="description"
-                id="description"
-                placeholder="Vacation request information"
-                cols={29}
-                rows={10}
-                value={newDescription}
-                onChange={(e) => setNewDescription(e.target.value)}
-              ></textarea>
-              <button className="NormalButton zoom" type="submit">
-                Send request
-              </button>
+    <div className="flex xl:h-screen flex-col lg:flex-row lg:flex-wrap justify-center items-center">
+      <div className="lg:w-1/2 space-y-4 px-4 lg:px-0">
+        <form onSubmit={handleVacationRequestSend}>
+          <div className=" flex flex-col w-full lg:w-1/2 md:w-full border-gray-200 border-opacity-60">
+            <h2 className="text-lg sm:text-xl font-medium text-center mb-2">Vacation request</h2>
+            <div className="items-center">
+              <label className="font-semibold">Name request: </label>
+              <input className="w-1/2" type="text" id="name" value={newName} onChange={(e) => setNewName(e.target.value)} />
             </div>
-          </form>
-        </div>
-        <div className=" xl:w-1/2 space-y-4 w-auto flex flex-col ">
-          <h2>List Request Vacations</h2>
-          <div className="flex flex-row">
-            <button className="bg-darkBlue">Accepted</button>
-            <button className="bg-red">Denied</button>
+
+            <div className="w-auto flex flex-col space-y-2 items-center">
+              <label htmlFor="dateStar">Start date</label>
+              <input type="datetime-local" id="dateStar" value={newDateStart} onChange={(e) => setNewDateStart(e.target.value)} />
+              <label htmlFor="dateEnd">Final date</label>
+              <input type="datetime-local" id="dateEnd" value={newDateEnd} onChange={(e) => setNewDateEnd(e.target.value)} />
+            </div>
+
+            <textarea
+              name="description"
+              id="description"
+              placeholder="Vacation request information"
+              cols={29}
+              rows={10}
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+            ></textarea>
+            <button className="NormalButton zoom" type="submit">
+              Send request
+            </button>
           </div>
-          <ListRequestVacations />
-        </div>
+        </form>
       </div>
+      <div className="lg:w-1/2 space-y-4 w-full flex flex-col">
+        <h2>List Request Vacations</h2>
+        <div className="flex flex-row">
+          <button className="bg-darkBlue">Accepted</button>
+          <button className="bg-red">Denied</button>
+        </div>
+        <ListRequestVacations />
+      </div>
+    </div>
   );
 };
 
