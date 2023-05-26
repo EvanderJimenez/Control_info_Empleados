@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Schedule from '../registerEmployee/components/schedule/Schedule';
+import Schedule from '../../registerEmployee/components/schedule/Schedule';
 import FormScheduleEmployee from './components/FormScheduleEmployee';
 import { useSelector } from 'react-redux';
 import { selectLogin } from '@/root/redux/selectors/employee-selector/employee.selector';
@@ -19,7 +19,7 @@ const ReadOnlyScheduleEmployee = () => {
       ]);
 
       useEffect(() => {
-        if (employeeSchedule) {
+        if (employeeSchedule?.schedule) {
           setSchedules(employeeSchedule.schedule);
         }
       }, [employeeSchedule]);

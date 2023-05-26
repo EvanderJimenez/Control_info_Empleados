@@ -26,6 +26,7 @@ function Login() {
   useEffect(() => {
     if (loginState) {
       dispatch(startGetDepartmentById(loginState.idDepartment));
+      console.log("id deparmen")
     }
   }, [loginState, dispatch]);
 

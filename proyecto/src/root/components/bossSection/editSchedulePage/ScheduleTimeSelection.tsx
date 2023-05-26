@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Schedule from "../registerEmployee/components/schedule/Schedule";
-import SearchInput from "../searchInput/SearchInput";
-import ListEmployee from "../listEmployee/ListEmployee";
+import Schedule from "../../registerEmployee/components/schedule/Schedule";
+import SearchInput from "../../ui/searchInput/SearchInput";
+import ListEmployee from "../../listEmployee/ListEmployee";
 import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { useDispatch, useSelector } from "react-redux";
 import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
@@ -71,6 +71,9 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
 
     const newDataEmployee = { ...dataEmployee, schedule: schedules };
 
+    console.log("uid: " + JSON.stringify(newDataEmployee.schedule));
+    console.log("employ: " + JSON.stringify(newDataEmployee.schedule));
+
     dispatch(StartUpDateEmployee(newDataEmployee?.uid || "", newDataEmployee));
 
   }
@@ -85,7 +88,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
           </div>
         </div>
         <div className="flex-grow xl:w-3/4">
-          <FormSchedule handleSaveSchadule={handleSaveSchedule} handleTimeChange={handleTimeChange} schedules={schedules} setSchedules={setSchedules} />
+          <FormSchedule handleSaveSchedule={handleSaveSchedule} handleTimeChange={handleTimeChange} schedules={schedules} setSchedules={setSchedules} />
         </div>
       </div>
     </>

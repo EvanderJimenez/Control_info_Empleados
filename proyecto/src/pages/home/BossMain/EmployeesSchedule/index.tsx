@@ -3,7 +3,7 @@ import React from "react";
 import BossMain from "..";
 import BossPage from "@/Layout/BossPage";
 import EmployeeTableViewSchedule from "@/root/components/employeeTablewViewSchedule/EmployeeTableViewSchedule";
-import ScheduleTimeSelection from "@/root/components/editSchedulePage/ScheduleTimeSelection";
+import ScheduleTimeSelection from "@/root/components/bossSection/editSchedulePage/ScheduleTimeSelection";
 import EmployeeTimeSection from "@/root/components/employeeTimeSection/EmployeeTimeSection";
 
 function SaveInformation(){

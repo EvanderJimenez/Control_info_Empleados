@@ -7,7 +7,7 @@ interface LoginState {
   }
 
   export const initialState: LoginState = {
-    login: {} as EmployeesType
+    login: null
   };
 
 

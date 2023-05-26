@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import SearchInput from "../searchInput/SearchInput";
+import SearchInput from "../../ui/searchInput/SearchInput";
 import { useDispatch, useSelector } from "react-redux";
-import ListEmployee from "../listEmployee/ListEmployee";
+import ListEmployee from "../../listEmployee/ListEmployee";
 import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { StartDismissEmployee, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";

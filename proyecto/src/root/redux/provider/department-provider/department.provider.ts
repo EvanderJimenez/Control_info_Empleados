@@ -8,7 +8,7 @@ export const getDepartmentByIdProvider = async (searchTerm: string) => {
     });
 
     if (!response.ok) {
-      throw new Error("Error getting employee");
+      throw new Error("Error getting depart");
     }
 
     const data = await response.json();
