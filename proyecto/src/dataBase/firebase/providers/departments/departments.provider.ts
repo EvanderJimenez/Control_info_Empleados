@@ -25,7 +25,7 @@ async function create(
   subDepartment: string,
   employees: Employee
 ): Promise<{ message: string; departments?: any }> {
-  try {
+
     const newDocRef = await addDoc(collection(firestore, "departments"), {
       name,
       size,
@@ -49,11 +49,6 @@ async function create(
         message: "Failed to create department",
       };
     }
-  } catch (error) {
-    return {
-      message: `An error occurred while creating the department: ${error}`,
-    };
-  }
 }
 
 const getByDocId = async (docId: string) => {
@@ -69,7 +64,7 @@ const getByDocId = async (docId: string) => {
 };
 
 const updateById = async (id: string, name: string, size: number, location: string, idEmployee: string, leader: string, level: string, subDepartment: string, employees: Employee) => {
-  try {
+
     const departmentsRef = collection(firestore, "departments");
     const q = query(departmentsRef, where("name", "==", name));
     const querySnapshot = await getDocs(q);
@@ -89,10 +84,6 @@ const updateById = async (id: string, name: string, size: number, location: stri
       const departmentUpdate = snapshotDepartmentUpdate.data();
       return departmentUpdate;
     }
-  } catch (error) {
-    console.error("Error updating department:", error);
-    throw new Error("Failed to update department");
-  }
 };
 
 const getDepartmentByUidEmployee = async () => {

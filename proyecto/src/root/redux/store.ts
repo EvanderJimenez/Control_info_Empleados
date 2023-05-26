@@ -1,27 +1,34 @@
+import { LoginReducer } from './reducers/login-reducer/loginReducer';
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { EmployeeReducer } from "./reducers/employee-reducer/EmployeeReducer";
 import { DepartmentReducer } from "./reducers/department-reducer/DepartmentReducer";
 import { LoadReducer } from "./reducers/loading-reducer/LoadingReducer";
 import { VacationsReducer } from "./reducers/employee-reducer/getVacationsByUid/getVacationsByUidReducers";
+import { DeleteEmployeesReducer } from "./reducers/employee-reducer/deleteEmployee/deleteEmployeeReducer";
+import { DismissEmployeesReducer } from "./reducers/employee-reducer/dismissEmployee/dismissEmployeeReducer";
+import { CreateEmployeeReducer } from "./reducers/employee-reducer/createEmployee/createEmployeeReducer";
+import { ListEmployeesReducer } from "./reducers/employee-reducer/listEmployees/listEmployeeReducer";
+import { UpdateEmployeeReducer } from "./reducers/employee-reducer/updateEmployee/updateEmployeeReducer";
+import { GetEmployeeByUidReducer } from './reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer';
+import { GetByVariableReducer } from './reducers/employee-reducer/getByVariable/getByVariableReducer';
+import { GetEmployeesByIdDepartmentReducer } from './reducers/employee-reducer/getEmployeesByIdDepartment/getEmployeesByIdDepartmentReducer';
+import { GetAllBossReducer } from './reducers/employee-reducer/getAllBosses/getAllBossesReducer';
 
 export const ApplicationStore = configureStore({
   reducer: {
-    deleteEmployeeStore: EmployeeReducer,
-    dismissEmployeeStore: EmployeeReducer,
-    employeesListStore: EmployeeReducer,
-    createEmployeeStore: EmployeeReducer,
-    updateEmployeeStore: EmployeeReducer,
+    deleteEmployeeStore: DeleteEmployeesReducer,
+    dismissEmployeeStore: DismissEmployeesReducer,
+    employeesListStore: ListEmployeesReducer,
+    createEmployeeStore: CreateEmployeeReducer,
+    updateEmployeeStore: UpdateEmployeeReducer,
     loading: LoadReducer,
-    getEmployeeByUidStore: EmployeeReducer,
-    getEmployeeByCedulaStore: EmployeeReducer,
-    getEmployeeByNameStore: EmployeeReducer,
-    loginStore: EmployeeReducer,
-    getByVariableStore: EmployeeReducer,
+    getEmployeeByUidStore: GetEmployeeByUidReducer,
+    loginStore: LoginReducer,
+    getByVariableStore: GetByVariableReducer,
     getDepartmentByIdStore: DepartmentReducer,
     getVacationsByUidStore: VacationsReducer,
-    getAllBossesStore: EmployeeReducer,
-    getEmployeesByIdDepartmentStore: EmployeeReducer,
+    getAllBossesStore: GetAllBossReducer,
+    getEmployeesByIdDepartmentStore: GetEmployeesByIdDepartmentReducer,
     getAllDepartmentStore: DepartmentReducer,
   },
 });

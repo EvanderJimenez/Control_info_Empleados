@@ -41,7 +41,7 @@ function Login() {
       try {
         dispatch(StartLogin(data.email, data.password));
       } catch (error) {
-        console.error(error);
+        //error
       }
     }
   };

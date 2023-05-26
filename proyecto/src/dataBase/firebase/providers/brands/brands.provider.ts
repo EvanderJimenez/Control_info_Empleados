@@ -33,7 +33,6 @@ async function createBrands(
   cycle: Cycle,
   hoursEmployee: HoursEmployee
 ): Promise<{ message: string; brands?: any }> {
-  try {
     const newDocRef = await addDoc(collection(firestore, "brands"), {
       idEmployee,
       cycle,
@@ -52,11 +51,6 @@ async function createBrands(
         message: "Failed to create brands",
       };
     }
-  } catch (error) {
-    return {
-      message: `An error occurred while creating the brands: ${error}`,
-    };
-  }
 }
 
 const getDocId = async (docId: string) => {
@@ -87,7 +81,6 @@ const getDocByEmployeeId = async (idEmployee: string) => {
 };
 
 const updateById = async (idEmployee: string, cycle: Hours) => {
-  try {
     const brandsRef = collection(firestore, "brands");
     const q = query(brandsRef, where("idEmployee", "==", idEmployee));
     const querySnapshot = await getDocs(q);
@@ -101,10 +94,6 @@ const updateById = async (idEmployee: string, cycle: Hours) => {
       const brandsUpdate = snapshotbrandsUpdate.data();
       return brandsUpdate;
     }
-  } catch (error) {
-    console.error("Error updating brands:", error);
-    throw new Error("Failed to update brands");
-  }
 };
 
 export const departmentProvider = {

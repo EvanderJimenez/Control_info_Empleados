@@ -39,7 +39,6 @@ const RequestVacationsEmployee = () => {
     event.preventDefault();
 
     if (!newName) {
-      console.error("New date is empty");
       return;
     }
     const newVacations: Vacations = {

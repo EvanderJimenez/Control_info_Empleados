@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StartListOfEmployee, StartGetEmployeeByUid } from "../../redux/thunks/employee-thunk/employee.thunk";
 import { RootState } from "../../redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
-import { selectLogin, selectgetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectLogin, selectGetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
 
 interface ListClear{
@@ -15,10 +15,10 @@ const ListEmployee = ({clear,setClear} : ListClear) => {
   const dispatch = useDispatch();
   let filteredEmployees: EmployeesType[] = [];
 
-  const employeesListVariable = useSelector(selectgetByVariable);
+  const employeesListVariable = useSelector(selectGetByVariable);
 
   const getEmployeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
-  const loading = useSelector((state: RootState) => state.employeesListStore.loading);
+  const loading = useSelector((state: RootState) => state.loading.loading);
 
   const loginState = useSelector(selectLogin);
 

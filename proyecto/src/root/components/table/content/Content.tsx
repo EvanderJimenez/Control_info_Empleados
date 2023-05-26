@@ -28,7 +28,6 @@ export default function Content({
   };
 
   const handleSaveClick = () => {
-    console.log(editingEmployee!, updatedEmployeeData);
     onEditEmployee(editingEmployee!, { ...updatedEmployeeData });
     setEditingEmployee(null);
   };

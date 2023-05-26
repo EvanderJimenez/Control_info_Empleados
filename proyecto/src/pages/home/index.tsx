@@ -5,7 +5,6 @@ import { Schedule } from "@/root/interface/employee";
 
   export default function index() {
   const handleScheduleChange = (schedules: Schedule[]) => {
-    console.log(schedules);
   };
 
   return (

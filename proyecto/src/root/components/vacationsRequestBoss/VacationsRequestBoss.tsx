@@ -59,11 +59,6 @@ const VacationsRequestBoss = () => {
       };
 
       setDataEmployee(updatedDataEmployee)
-
-      console.log("Name: " + JSON.stringify(dataEmployee.name));
-      console.log("Email: " + JSON.stringify(dataEmployee.email));
-      console.log("new DataEmployee: " + JSON.stringify(dataEmployee.vacations));
-
     }
     
     //dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
