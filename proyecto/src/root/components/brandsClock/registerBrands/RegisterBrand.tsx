@@ -149,25 +149,6 @@ export default function RegisterBrand() {
       console.error("Error getting brands data", error);
     }
   };
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(brandData.idEmployee);
-    fetch(`/api/brands/${brandData.idEmployee}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(brandData),
-    })
-      .then((res) => res.json())
-      .then((updatedBrands) => {
-        setBrandData((prevData) => ({
-          ...prevData,
-          ...updatedBrands,
-        }));
-      })
-      .catch((error) => console.error("Error updating brands:", error));
-  };
 
   return (
     <div>
@@ -273,17 +254,6 @@ export default function RegisterBrand() {
               className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
             >
               save
-            </button>
-          </form>
-          <form
-            onSubmit={handleUpdate}
-            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1 pt-10"
-          >
-            <button
-              type="submit"
-              className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-            >
-              Update
             </button>
           </form>
         </div>

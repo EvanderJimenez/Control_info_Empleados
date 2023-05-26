@@ -10,8 +10,8 @@ interface FormLoginProps {
 const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProps) => {
   return (
     <div>
-      <form className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-2" onSubmit={handleSubmit}>
-        <h2 className="m-5">Login</h2>
+      <form className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleSubmit}>
+        <h2 className="m-7">Login</h2>
         <div className="flex flex-col items-center justify-center p-2">
           <label>Email</label>
           <input

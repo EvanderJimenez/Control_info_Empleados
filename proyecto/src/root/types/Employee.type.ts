@@ -1,4 +1,4 @@
-import { Brands, Schedule, Vacations } from "../interface/employee";
+import { Brands, Schedule } from "../interface/employee";
 
 export type DeleteEmployeeType = {
   id: string;
@@ -21,4 +21,10 @@ export type EmployeesType = {
   boss: string;
   schedule: Schedule[];
   vacations: { [Key: string]: Vacations };
+}
+export type Vacations = {
+  dateStart : string
+  dateEnd: string
+  description: string
+  approved: string
 }

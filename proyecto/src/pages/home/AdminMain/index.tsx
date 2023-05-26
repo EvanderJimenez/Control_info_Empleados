@@ -1,11 +1,11 @@
 import AdminPage from '@/Layout/AdminPage'
-import MainBoss from "../../../root/components/mainBoss/MainBoss"
 import React from 'react'
+import InformationPage from '@/root/components/informationPage/InformationPage'
 
 export default function index() {
   return (
     <AdminPage>
-        <MainBoss/>
+        <InformationPage img="/Images/AdminDesk.jpg" title="Welcome!" paragraph="Check your information for today" />
     </AdminPage>
   )
 }

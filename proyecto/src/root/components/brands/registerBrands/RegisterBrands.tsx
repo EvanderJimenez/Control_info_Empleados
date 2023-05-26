@@ -12,7 +12,6 @@ function RegisterBrands() {
   const [brandData, setBrandData] = useState<Brands>({
     idEmployee: "",
     cycle: {},
-    hoursEmployee: {},
   });
 
   useEffect(() => {
@@ -128,6 +127,81 @@ function RegisterBrands() {
 
   return (
     <div>
+      <form onSubmit={handleSubmitCycle}>
+        <button
+          type="submit"
+          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+        >
+          Agregar Ciclo
+        </button>
+      </form>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1"
+      >
+        <input
+          type="text"
+          name="newCycle"
+          value={newCycle}
+          onChange={(event) => setNewCycle(event.target.value)}
+          placeholder="New Cycle"
+          className="border rounded-md px-3 py-2"
+        />
+        <input
+          type="text"
+          name="idEmployee"
+          value={brandData.idEmployee}
+          onChange={handleInputChange}
+          placeholder="ID Employee"
+          className="border rounded-md px-3 py-2"
+        />
+        <button
+          type="submit"
+          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+        >
+          save
+        </button>
+        <p>Fecha actual: {currentDate}</p>
+        <p>Hora actual: {currentTime}</p>
+      </form>
+      <button onClick={handleClick}>Clickme</button>
+      <div>
+        {Object.entries(brandData.cycle).map(([key, value]) => (
+          <div key={key} className="flex items-center">
+            <span className="mr-2 font-bold">Name:</span>
+            <span>{key}</span>
+            <span className="ml-4 mr-2 font-bold">Information Personal:</span>
+            <button
+              onClick={() => setNewCycle(key)}
+              className="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+            >
+              Select
+            </button>
+          </div>
+        ))}
+      </div>
+      <form onSubmit={handleSubmitCycle} className="space-y-4">
+        <div className="flex items-center">
+          <label htmlFor="newCycle" className="mr-2 font-bold">
+            Employees Name:
+          </label>
+          <input
+            type="text"
+            name="newCycle"
+            value={newCycle}
+            onChange={(e) => setNewCycle(e.target.value)}
+            placeholder="Employee's name"
+            className="border rounded-md px-3 py-2"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+        >
+          Save Cycle
+        </button>
+      </form>
       <div>
         <form onSubmit={handleSubmitHours} className="space-y-4">
           <p>Fecha actual: {currentDate}</p>

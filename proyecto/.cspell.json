@@ -5,6 +5,12 @@
         "cedula"
     ],
     "words": [
-        "reduxjs"
+        "APIKEY",
+        "AUTHDOMAIN",
+        "MEASUREMENTID",
+        "MESSAGINGSENDERID",
+        "PROJECTID",
+        "reduxjs",
+        "STORAGEBUCKET"
     ]
 }

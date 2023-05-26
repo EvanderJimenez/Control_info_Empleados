@@ -11,8 +11,8 @@ GET http://localhost:3000/api/employees/6504dhHgedMPc86NgQMvRm1URkQ2 HTTP/1.1
 DELETE  http://localhost:3000/api/employees/by-uid/vPev4pXaCVfNT8L6XheBSYP2X992 HTTP/1.1
 
 ###
-# Get a existing employee by cedula
-DELETE  http://localhost:3000/api/employees/iymduxOMpveoyp0Bx42nDz8jpfj1 HTTP/1.1
+# Get all boss
+GET  http://localhost:3000/api/employees/allBoss HTTP/1.1
 
 
 ###
@@ -31,7 +31,7 @@ GET  http://localhost:3000/api/employees/by-uid/Yi1cFJipKWXYs5aOOiebHHLu6qF3 HTT
 
 ###
 # Get list employees by idDepartment
-GET  http://localhost:3000/api/employees/by-idDepartment/eF23UVJvqJOwThp6pr2v HTTP/1.1
+GET  http://localhost:3000/api/employees/by-idDepartment/0 HTTP/1.1
 
 ###
 # Delete a existing employee
