@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-=======
-
-
-
->>>>>>> Stashed changes
 import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
