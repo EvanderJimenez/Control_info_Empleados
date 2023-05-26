@@ -1,6 +1,3 @@
-import { DispatchType, getByVariableReducer } from "./../../reducers/employee-reducer/EmployeeReducer";
-
-
 import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
@@ -124,13 +121,14 @@ export const StartGetByVariable = (searchTerm1: string, searchTerm2: string): an
     } catch (error) {
       console.log(error);
     }
-  };
-};
+  }
+}
 
 
 export const StarGetVacationsByUid = (searchTerm: string) : any => {
   return async (dispatch: DispatchTypeVacations) => {
     try {
+
       const response = await providerRedux.getVacationsByUidProvider(searchTerm);
 
       //dispatch(EmployeeSlice.actions.getVacationsByUidReducer(response || null));
@@ -138,33 +136,35 @@ export const StarGetVacationsByUid = (searchTerm: string) : any => {
       dispatch(getVacationsByUidReducer(response || null));
 
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-};
+  }
+}
 
 export const StarGetEmployeesByIdDepartment = (searchTerm: string) : any => {
   return async (dispatch: DispatchTypeByIdDepart) => {
     try {
+
       const response = await providerRedux.getEmployeesByIdDepartProvider(searchTerm);
 
       dispatch(getEmployeesByIdDepartmentReducer(response || null));
 
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-};
+  }
+}
 
 export const StarGetAllBosses = () : any => {
   return async (dispatch: DispatchTypeAllBoss) => {
     try {
+
       const response = await providerRedux.getAllBossesProvider();
 
       dispatch(getAllBossReducer(response || null));
 
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-};
+  }
+}

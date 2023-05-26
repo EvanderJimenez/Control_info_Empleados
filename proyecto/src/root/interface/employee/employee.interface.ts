@@ -1,4 +1,3 @@
-
 export interface UserData {
   uid: string;
   name: string;
@@ -13,7 +12,7 @@ export interface UserData {
   idDepartment: string;
   password: string;
   email: string;
-  boss: string; //
+  boss: string;
   schedule: Schedule[];
   brands: Brands[];
   option: string;
@@ -57,23 +56,23 @@ export interface Schedule {
   endTime: string;
 }
 
-export interface InformationPage{
-  title: string,
-  paragraph: string,
-  img: string
+export interface InformationPage {
+  title: string;
+  paragraph: string;
+  img: string;
 }
 
-export interface Vacations{
-  dateStart : string
-  dateEnd: string
-  description: string
-  approved: string
+export interface Vacations {
+  dateStart: string;
+  dateEnd: string;
+  description: string;
+  approved: string;
 }
-export interface FirstPagePDFInformation{
-  title:string,
-  createdBy: string,
+export interface FirstPagePDFInformation {
+  title: string;
+  createdBy: string;
   dateCreated: Date;
-  filterUsed: string,
+  filterUsed: string;
 }
 export interface PendingRequest {
   key: string;
@@ -83,4 +82,13 @@ export interface PendingRequest {
   dateEnd: string;
   description: string;
   approved: string;
+}
+
+export interface InputInterface {
+  labelFloat: string;
+  type: string;
+  id: string;
+  name:string;
+  value:string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
