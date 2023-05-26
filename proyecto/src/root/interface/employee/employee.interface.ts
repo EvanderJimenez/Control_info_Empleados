@@ -1,4 +1,3 @@
-
 export interface UserData {
   uid: string;
   name: string;
@@ -17,6 +16,7 @@ export interface UserData {
   schedule: Schedule[];
   brands: Brands[];
   option: string;
+  attendance: { [key: string]: Attendance };
 }
 
 export interface LoginEP {
@@ -57,22 +57,30 @@ export interface Schedule {
   endTime: string;
 }
 
-export interface InformationPage{
-  title: string,
-  paragraph: string,
-  img: string
+export interface InformationPage {
+  title: string;
+  paragraph: string;
+  img: string;
 }
 
-export interface Vacations{
-  dateStart : string
-  dateEnd: string
-  description: string
-  name: string
-  approved: boolean
+export interface Vacations {
+  dateStart: string;
+  dateEnd: string;
+  description: string;
+  name: string;
+  approved: boolean;
 }
-export interface FirstPagePDFInformation{
-  title:string,
-  createdBy: string,
+export interface FirstPagePDFInformation {
+  title: string;
+  createdBy: string;
   dateCreated: Date;
-  filterUsed: string,
+  filterUsed: string;
+}
+
+export interface Attendance {
+  startTime: string;
+  endTime: string;
+  justificationIni: string;
+  justificationFin: string;
+  state: string;
 }

@@ -3,11 +3,13 @@ import axios from "axios";
 import { SearchDepartment } from "../../adminDepartment/SearchDepartment";
 import { format, parseISO, getDay } from "date-fns";
 import { Brands } from "@/root/interface/brands";
+import BrandsClock from "../BrandsClock";
 
 export const BrandsEmployee = () => {
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
   const [hoursIni, setHoursIni] = useState("");
+  const [formattedDay, setFormattedDay] = useState("");
   const [hoursFin, setHoursFin] = useState("");
   const [updateDateTime, setUpdateDateTime] = useState(false);
   const [brandData, setBrandData] = useState<Brands>({
@@ -49,9 +51,9 @@ export const BrandsEmployee = () => {
     }
   };
 
-  const handleGetBrands = async (idEmployee: string) => {
+  const handleGetBrands = async (id: string) => {
     try {
-      const response = await fetch(`/api/brands/${idEmployee}`, {
+      const response = await fetch(`/api/brands/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -73,12 +75,13 @@ export const BrandsEmployee = () => {
   const getDateOfWeekday = (newDate: string) => {
     const date = parseISO(newDate);
     const dayOfWeek = getDay(date);
-    const formattedDay = format(date, "EEEE");
+    setFormattedDay(format(date, "EEEE"));
+    console.log(formattedDay);
+
     return formattedDay;
   };
 
   const handleUpdateCycleHours = (cycleName: string) => {
-    handleClick1;
     if (brandData && brandData.cycle && brandData.cycle[cycleName]) {
       const cycle = brandData.cycle[cycleName];
       const existingHours = cycle.hours[currentDate];
@@ -127,80 +130,46 @@ export const BrandsEmployee = () => {
     console.log(brandData);
   };
 
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const currentDateOfWeekday = getDateOfWeekday(currentDate);
-
-    if (currentDateOfWeekday && brandData.cycle && brandData.cycle["Ciclo 1"]) {
-      const cycle = brandData.cycle["Ciclo 1"];
-      const existingHours = cycle.hours[currentDate];
-
-      if (existingHours) {
-        const markStart = existingHours.hIni;
-        const markEnd = existingHours.hFin;
-
-        if (checkMarkHours(markStart, markEnd)) {
-          console.log("The hours match. Performing update...");
-        } else {
-          console.log("The mark hours do not match the defined hours.");
-        }
-
-        fetch(`/api/brands/${brandData.idEmployee}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(brandData),
-        })
-          .then((res) => res.json())
-          .then((updatedBrands) => {
-            setBrandData((prevData) => ({
-              ...prevData,
-              ...updatedBrands,
-            }));
-          })
-          .catch((error) => console.error("Error updating brands:", error));
-      } else {
-        console.log(`No information found for the day: ${currentDate}`);
-
-        fetch(`/api/brands/${brandData.idEmployee}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(brandData),
-        })
-          .then((res) => res.json())
-          .then((updatedBrands) => {
-            setBrandData((prevData) => ({
-              ...prevData,
-              ...updatedBrands,
-            }));
-          })
-          .catch((error) => console.error("Error updating brands:", error));
-      }
-    }
-  };
-
   const checkMarkHours = (markStart: string, markEnd: string): boolean => {
+    const markStartHour = Number(markStart.split(":")[0]);
+    const markStartMinute = Number(markStart.split(":")[1]);
+
+    const hoursIniHour = Number(hoursIni.split(":")[0]);
+    const hoursIniMinute = Number(hoursIni.split(":")[1]);
+
+    const hoursFinHour = Number(hoursFin.split(":")[0]);
+    const hoursFinMinute = Number(hoursFin.split(":")[1]);
+
     if (!markEnd) {
-      if ((hoursIni && markStart === hoursIni) || markStart < hoursIni) {
+      if (
+        (hoursIni &&
+          markStartHour === hoursIniHour &&
+          markStartMinute === hoursIniMinute) ||
+        markStartHour < hoursIniHour ||
+        (markStartHour === hoursIniHour && markStartMinute < hoursIniMinute)
+      ) {
         console.log("They match");
         return true;
       } else {
         console.log("The mark start hour does not match");
       }
-    } else if (
-      (hoursIni &&
-        hoursFin &&
-        markStart === hoursIni &&
-        markEnd === hoursFin) ||
-      markEnd < hoursFin
-    ) {
-      console.log("The hours match");
-      return true;
     } else {
-      console.log("The mark end hour does not match");
+      const markEndHour = Number(markEnd.split(":")[0]);
+      const markEndMinute = Number(markEnd.split(":")[1]);
+
+      if (
+        (hoursIni &&
+          hoursFin &&
+          markEndHour === hoursFinHour &&
+          markEndMinute === hoursFinMinute) ||
+        markEndHour > hoursFinHour ||
+        (markEndHour === hoursFinHour && markEndMinute >= hoursFinMinute)
+      ) {
+        console.log("The hours match");
+        return true;
+      } else {
+        console.log("The mark end hour does not match");
+      }
     }
 
     return false;
@@ -208,18 +177,21 @@ export const BrandsEmployee = () => {
 
   return (
     <div>
-      <SearchDepartment handleGet={handleGetBrands} />
-      <button onClick={() => handleUpdateCycleHours("Ciclo 1")}>
-        Edit Marks
-      </button>
-      <form action="" onSubmit={handleUpdate}>
-        <button
-          type="submit"
-          className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
-        >
-          save
-        </button>
-      </form>
+      <BrandsClock
+        currentDate={currentDate}
+        currentTime={currentTime}
+        hoursIni={hoursIni}
+        formattedDay={formattedDay}
+        hoursFin={hoursFin}
+        updateDateTime={false}
+        brandData={brandData}
+        handleClick1={handleClick1}
+        handleGetBrands={handleGetBrands}
+        getDateOfWeekday={getDateOfWeekday}
+        handleUpdateCycleHours={handleUpdateCycleHours}
+        checkMarkHours={checkMarkHours}
+        setBrandData={setBrandData}
+      />
     </div>
   );
 };
