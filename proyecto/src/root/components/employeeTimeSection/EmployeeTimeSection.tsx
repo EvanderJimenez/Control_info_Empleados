@@ -1,7 +1,6 @@
 import React from "react";
-import SearchInput from "../searchInput/SearchInput";
-import TableViewEmployees from "../tableViewEmployees/TableViewEmployees";
-import RequestVacationSection from "../requestVacationSection/RequestVacationSection";
+import SearchInput from "../ui/searchInput/SearchInput";
+import TableViewEmployees from "../ui/tableViewEmployees/TableViewEmployees";
 import ParameterBar from "../parameterBar/ParameterBar";
 
 const rows = [

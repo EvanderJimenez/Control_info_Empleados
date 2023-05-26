@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Filters from "../vacationsRequestBoss/components/filters/Filters";
+import Filters from "../bossSection/vacationsRequestBoss/components/filters/Filters";
 import ListWithoutDepartment from "./components/listWithoutDepartment/ListWithoutDepartment";
-import InputForm from "../editEmployeeSection/components/input-form/InputForm";
+import InputForm from "../brands/InputForm";
 import InputLabel from "./components/inputLabel/InputLabel";
 import ComboBox from "./components/comboBox/ComboBox";
 import { useDispatch, useSelector } from "react-redux";

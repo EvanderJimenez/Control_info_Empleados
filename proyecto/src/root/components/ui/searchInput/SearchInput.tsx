@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SearchComponentInterface } from "../../interface/searchParameters";
+import { SearchComponentInterface } from "../../../interface/searchParameters";
 import {
   StartGetByVariable,
 } from "@/root/redux/thunks/employee-thunk/employee.thunk";

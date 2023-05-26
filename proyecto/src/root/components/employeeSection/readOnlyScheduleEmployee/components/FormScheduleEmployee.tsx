@@ -1,5 +1,5 @@
 import React from 'react'
-import Schedule from '../../registerEmployee/components/schedule/Schedule';
+import Schedule from '../../../registerEmployee/components/schedule/Schedule';
 
 type Field = "startTime" | "endTime";
 

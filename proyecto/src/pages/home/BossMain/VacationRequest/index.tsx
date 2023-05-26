@@ -1,5 +1,5 @@
 import BossPage from "@/Layout/BossPage";
-import VacationsRequestBoss from "@/root/components/vacationsRequestBoss/VacationsRequestBoss";
+import VacationsRequestBoss from "@/root/components/bossSection/vacationsRequestBoss/VacationsRequestBoss";
 import React from "react";
 
 const index = () => {

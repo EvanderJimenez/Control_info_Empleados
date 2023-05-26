@@ -1,19 +1,19 @@
 import React from "react";
-import Schedule from "../../../registerEmployee/components/schedule/Schedule";
+import Schedule from "../../../../registerEmployee/components/schedule/Schedule";
 
 type Field = "startTime" | "endTime";
 
 interface PropsFormSchedule {
   schedules: Schedule[];
   setSchedules: React.Dispatch<React.SetStateAction<Schedule[]>>;
-  handleSaveSchadule: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleSaveSchedule: (event: React.FormEvent<HTMLFormElement>) => void;
   handleTimeChange: (index: number, field: Field, value: string) => void;
 }
 
-const FormSchedule = ({ handleSaveSchadule, handleTimeChange, schedules, setSchedules }: PropsFormSchedule) => {
+const FormSchedule = ({ handleSaveSchedule, handleTimeChange, schedules, setSchedules }: PropsFormSchedule) => {
   return (
     <>
-      <form onSubmit={handleSaveSchadule} className="relative overflow-x-auto">
+      <form onSubmit={handleSaveSchedule} className="relative overflow-x-auto">
         <table className="w-full text-sm text-left GrayTable">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

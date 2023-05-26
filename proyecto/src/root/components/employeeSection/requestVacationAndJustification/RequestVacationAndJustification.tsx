@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CenterMenu from "../menus/employeeCenterMenu/EmployeeCenterMenu";
+import CenterMenu from "../../menus/employeeCenterMenu/EmployeeCenterMenu";
 
 export default function RequestVacationAndJustification() {
   const handleLateJustificationSave = () => {

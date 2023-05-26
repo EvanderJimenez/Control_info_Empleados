@@ -7,8 +7,7 @@ interface GetEmployeesByIdDepartmentState {
   }
 
   export const initialState: GetEmployeesByIdDepartmentState = {
-    getEmployeesByIdDepartment:[]
-
+    getEmployeesByIdDepartment: []
 };
 
   type EmployeeAction = {

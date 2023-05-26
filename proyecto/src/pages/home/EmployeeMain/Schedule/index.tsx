@@ -5,7 +5,7 @@ import ListEmployee from "@/root/components/listEmployee/ListEmployee";
 import DashBoardMenu from "@/root/components/menus/dashBoardMenu/DashBoardMenu";
 import CenterMenu from "@/root/components/menus/employeeCenterMenu/EmployeeCenterMenu";
 import EmployeeTableViewSchedule from "@/root/components/employeeTablewViewSchedule/EmployeeTableViewSchedule";
-import ReadOnlyScheduleEmployee from "@/root/components/readOnlyScheduleEmployee/ReadOnlyScheduleEmployee";
+import ReadOnlyScheduleEmployee from "@/root/components/employeeSection/readOnlyScheduleEmployee/ReadOnlyScheduleEmployee";
 
 export default function index() {
   return (
