@@ -6,6 +6,4 @@ export interface SearchComponentInterface {
   valueEnd: string | number
   typeList: string
   id: string
-  
-  
 }

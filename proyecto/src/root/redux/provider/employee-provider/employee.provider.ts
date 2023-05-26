@@ -2,7 +2,7 @@ import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 
 const deleteEmployeeProvider = async (searchTerm: string) => {
-  try {
+
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "DELETE",
       headers: {
@@ -15,17 +15,9 @@ const deleteEmployeeProvider = async (searchTerm: string) => {
     }
     const data: { uid: string } = await response.json();
     return { id: data.uid };
-  } catch (error) {
-    console.error(
-      "Error deleting the employee, mor information about that: ",
-      error
-    );
-    return;
-  }
 };
 
 const dismissByUidProvider = async (searchTerm: string) => {
-  try {
     const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
       method: "DELETE",
       headers: {
@@ -40,17 +32,10 @@ const dismissByUidProvider = async (searchTerm: string) => {
     const data: { uid: string } = await response.json();
 
     return { id: data.uid };
-  } catch (error) {
-    console.error(
-      "Error dismissing the employee, mor information about that: ",
-      error
-    );
-    return;
-  }
 };
 
 const employeeListProvider = async () => {
-  try {
+
     const response = await fetch("/api/employees");
 
     if (!response.ok) {
@@ -83,14 +68,9 @@ const employeeListProvider = async () => {
       : [];
 
     return listEmployees;
-  } catch (error) {
-    console.error("Error fetching the list of employees:", error);
-    throw error;
-  }
 };
 
 const createEmployeeProvider = async (searchTerm: EmployeesType) => {
-  try {
     console.log("Data user " + JSON.stringify(searchTerm));
 
     const response = await fetch("/api/employees", {
@@ -108,17 +88,12 @@ const createEmployeeProvider = async (searchTerm: EmployeesType) => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.error("Error creating employee:", error);
-    throw error;
-  }
 };
 
 const upDatEmployeeProvider = async (
   searchUser: string,
   searchTerm: EmployeesType
 ) => {
-  try {
     const response = await fetch(`/api/employees/${searchUser}`, {
       method: "PUT",
       headers: {
@@ -128,20 +103,15 @@ const upDatEmployeeProvider = async (
     });
 
     if (!response.ok) {
-      throw new Error("Error uodating employee");
+      throw new Error("Error updating employee");
     }
 
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.error("Error creating employee:", error);
-    throw error;
-  }
 };
 
 const getEmployeeByUidProvider = async (searchTerm: string) => {
-  try {
     const response = await fetch(`/api/employees/${searchTerm}`, {
       method: "GET",
       headers: {
@@ -156,13 +126,10 @@ const getEmployeeByUidProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.log(error);
-  }
+
 };
 
 const getEmployeeByCedulaProvider = async (searchTerm: string) => {
-  try {
     const response = await fetch(`/api/employees/by-cedula/${searchTerm}`, {
       method: "GET",
       headers: {
@@ -177,9 +144,6 @@ const getEmployeeByCedulaProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const getEmployeeByNameProvider = async (searchTerm: string) => {
@@ -204,7 +168,6 @@ const getEmployeeByNameProvider = async (searchTerm: string) => {
 };
 
 const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
-  try {
     const response = await fetch("/api/employees/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -221,17 +184,14 @@ const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.error("Error getting employee:", error);
-    throw error;
-  }
+
 };
 
 const getByVariableProvider = async (
   searchTerm1: string,
   searchTerm2: string
 ) => {
-  try {
+
     const response = await fetch("/api/employees/by-variable", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -248,14 +208,9 @@ const getByVariableProvider = async (
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.error("Error getting employee:", error);
-    throw error;
-  }
 };
 
 const getVacationsByUidProvider = async (searchTerm: string) => {
-  try {
     const response = await fetch(`/api/employees/by-uid/${searchTerm}`, {
       method: "GET",
       headers: {
@@ -270,13 +225,9 @@ const getVacationsByUidProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
-  try {
     const response = await fetch(
       `/api/employees/by-idDepartment/${searchTerm}`,
       {
@@ -294,13 +245,10 @@ const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const getAllBossesProvider = async () => {
-  try {
+
     const response = await fetch(`/api/employees/allBoss`, {
       method: "GET",
       headers: {
@@ -315,9 +263,7 @@ const getAllBossesProvider = async () => {
     const data = await response.json();
 
     return data;
-  } catch (error) {
-    console.log(error);
-  }
+
 };
 
 export const providerRedux = {
