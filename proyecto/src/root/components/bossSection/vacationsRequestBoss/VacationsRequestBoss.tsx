@@ -8,17 +8,19 @@ import {
 } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { PendingRequest } from "@/root/interface/employee";
 import {
+  ResetEmployeeByUid,
   StartGetEmployeeByUid,
   StartUpDateEmployee,
 } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 
 const VacationsRequestBoss = () => {
+  let denied = false;
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [selectedRequest, setSelectedRequest] = useState<PendingRequest>();
-   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
     firstSurname: "",
@@ -34,23 +36,36 @@ const VacationsRequestBoss = () => {
     email: "",
     boss: "",
     schedule: [],
-    vacations: {}
+    vacations: {},
+    attendance: {},
   });
 
   const handleAccept = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
+    denied = true;
+  };
 
-  }
+  const handleDenied = async () => {
+    dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
+    denied = false;
+  };
 
   useEffect(() => {
 
     if (employeeByUid && employeeByUid.vacations) {
-      const vacation = employeeByUid.vacations[selectedRequest?.key || ''];
-      const updatedVacation = { ...vacation, approved: "accepted" };
+      const vacation = employeeByUid.vacations[selectedRequest?.key || ""];
+
+      let updatedVacation;
+
+      if (!denied) {
+        updatedVacation = { ...vacation, approved: "denied" };
+      } else {
+        updatedVacation = { ...vacation, approved: "accepted" };
+      }
 
       const updatedVacations = {
         ...employeeByUid.vacations,
-        [selectedRequest?.key || '']: updatedVacation,
+        [selectedRequest?.key || ""]: updatedVacation,
       };
 
       const updatedDataEmployee = {
@@ -58,12 +73,23 @@ const VacationsRequestBoss = () => {
         vacations: updatedVacations,
       };
 
-      setDataEmployee(updatedDataEmployee)
-    }
-    
-    //dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
+      setDataEmployee(updatedDataEmployee);
 
-  }, [employeeByUid,dispatch])
+      console.log(
+        "updatedDataEmployee: " + JSON.stringify(dataEmployee.vacations)
+      );
+
+      console.log("dataEmployee: " + dataEmployee.uid.length)
+
+      if(dataEmployee.uid.length !== 0){
+        console.log("enter")
+        //dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
+        dispatch(ResetEmployeeByUid());
+      }
+    }
+
+
+  }, [employeeByUid, dispatch]);
 
   return (
     <div className="flex flex-row">
@@ -116,7 +142,9 @@ const VacationsRequestBoss = () => {
             <button className="bg-blue" onClick={handleAccept}>
               Accepted
             </button>
-            <button className="bg-red">Denied</button>
+            <button onClick={handleDenied} className="bg-red">
+              Denied
+            </button>
           </div>
         </section>
       </div>
