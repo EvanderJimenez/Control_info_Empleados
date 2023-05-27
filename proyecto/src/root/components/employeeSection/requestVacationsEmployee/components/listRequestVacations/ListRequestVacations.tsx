@@ -16,7 +16,7 @@ const ListRequestVacations = (props: filter) => {
   }, [dispatch, employeesListVacations]);
 
   return (
-    <section className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-64 border-t-4 border-b-4">
+    <section className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-64  ">
       <div className="flex flex-col justify-center items-center">
         {employeesListVacations?.vacations ? (
           <>

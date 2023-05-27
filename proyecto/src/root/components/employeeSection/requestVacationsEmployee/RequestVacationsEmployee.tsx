@@ -93,10 +93,10 @@ const RequestVacationsEmployee = () => {
   const [showBy, setShowBy] = useState("waiting");
 
   return (
-    <div className="bg-lithGray flex xl:h-screen flex-col flex-wrap lg:flex-row lg:flex-wrap justify-center items-center">
+    <div className="bg-lithGray flex xl:h-screen xl:flex-col flex-col lg:flex-row lg:flex-wrap mt-10">
       <div className="lg:w-1/2 items-center">
         <form className="m-5" onSubmit={handleVacationRequestSend}>
-          <div className=" flex flex-col  md:w-full sm:w-full border-gray-200 ">
+          <div className=" flex flex-col  md:w-full sm:w-full">
             <h2 className="text-lg sm:text-xl font-medium text-center mb-2">Vacation request</h2>
             <div className="items-center">
               <label className="font-semibold">Name request: </label>
@@ -129,7 +129,7 @@ const RequestVacationsEmployee = () => {
       <div className="lg:w-1/2 justify-center flex flex-col overflow-auto h-96">
         <h2 className="text-lg sm:text-xl font-medium text-center mb-8">List request vacations</h2>
         <ListRequestVacations filter={showBy}/>
-        <div className="flex flex-row justify-center space-x-4 sm:mb-10 md:mb-10 m-2">
+        <div className="flex flex-row justify-center space-x-4 mb-10 m-2">
           <button onClick={FilterByAccepted} className="bg-darkBlue">
             Accepted
           </button>
