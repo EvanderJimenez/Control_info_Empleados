@@ -12,11 +12,11 @@ export default function EditEmployeeSection() {
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const dispatch = useDispatch();
 
-  const [clear, setClear] = useState(false)
-  const [cedula, setCedula] = useState("")
-  const [name, setName] = useState("")
-  const [jobPosition, setJobPosition] = useState("")
-  const [clearInput, setClearInput] = useState(false)
+  const [clear, setClear] = useState(false);
+  const [cedula, setCedula] = useState("");
+  const [name, setName] = useState("");
+  const [jobPosition, setJobPosition] = useState("");
+  const [clearInput, setClearInput] = useState(false);
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -35,72 +35,70 @@ export default function EditEmployeeSection() {
     boss: "",
     schedule: defaultSchedule,
     vacations: {},
-    attendance: {}
+    attendance: {},
   });
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
-    setClear(true)
-    dispatch(ResetEmployeeByUid())
-    dispatch(ResetByVariable())
+    setClear(true);
+    dispatch(ResetEmployeeByUid());
+    dispatch(ResetByVariable());
   };
-
   useEffect(() => {
-    if(!clear){
+    if (!clear) {
       if (employeeByUid) {
         setDataEmployee(employeeByUid);
       }
-    }else{
-      setDataEmployee({ uid: "",
-      name: "",
-      firstSurname: "",
-      secondSurname: "",
-      cedula: 0,
-      phoneNumber: 0,
-      photo: "",
-      jobPosition: "",
-      salary: 0,
-      enabled: true,
-      idDepartment: "",
-      password: "",
-      email: "",
-      boss: "",
-      schedule: [],
-     vacations: {},
-     attendance:{}
-    })
+    } else {
+      setDataEmployee({
+        uid: "",
+        name: "",
+        firstSurname: "",
+        secondSurname: "",
+        cedula: 0,
+        phoneNumber: 0,
+        photo: "",
+        jobPosition: "",
+        salary: 0,
+        enabled: true,
+        idDepartment: "",
+        password: "",
+        email: "",
+        boss: "",
+        schedule: [],
+        vacations: {},
+        attendance: {},
+      });
     }
-
-  }, [employeeByUid,clear]);
+  }, [employeeByUid, clear]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDataEmployee((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleDismissEmployee = () =>{
-
-    dispatch(StartDismissEmployee(employeeByUid?.uid || ""))
-
-  }
+  const handleDismissEmployee = () => {
+    dispatch(StartDismissEmployee(employeeByUid?.uid || ""));
+  };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-wrap p-1">
-        <div className="flex-none w-full sm:w-72 relative p-1 m-1">
+    <div className="flex flex-wrap bg-white">
+      <div className="flex flex-wrap xl:w-1/2 p-1">
+        <div className="w-full sm:w-72 relative p-1 m-1">
           <div className="flex flex-col mb-3">
-            <h2>filters: </h2>
+            <h2>Filters:</h2>
             <SearchInput labelInputSeekerOne="text" valueEnd={cedula} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
             <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
             <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
           </div>
-          <ListEmployee clear = {clear} setClear={setClear} />
+          <ListEmployee clear={clear} setClear={setClear} />
         </div>
-        <div className="flex-auto h-auto">
-          <form onSubmit ={handleUpdate} className="bg-lithBlue p-2 h-auto">
-            <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
-              <div className="flex flex-col flex-1">
+        <div className="flex-auto">
+          <form onSubmit={handleUpdate} className="bg-lithBlue p-2">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col">
+                
                 <label htmlFor="Name" className="block mb-2 text-sm font-medium text-black">
                   Name
                 </label>
@@ -110,10 +108,10 @@ export default function EditEmployeeSection() {
                   type="text"
                   value={dataEmployee.name}
                   id="Name"
-                  className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  zoom block w-full p-2.5"
+                  className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"
                 />
               </div>
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col">
                 <label htmlFor="cedula" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
                   Cedula
                 </label>
@@ -126,9 +124,7 @@ export default function EditEmployeeSection() {
                   className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"
                 />
               </div>
-            </div>
-            <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col">
                 <label htmlFor="firstSurname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
                   Surname
                 </label>
@@ -141,7 +137,7 @@ export default function EditEmployeeSection() {
                   className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"
                 />
               </div>
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col">
                 <label htmlFor="secondSurname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
                   Second surname
                 </label>
@@ -154,9 +150,7 @@ export default function EditEmployeeSection() {
                   className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm  block zoom w-full p-2.5"
                 />
               </div>
-            </div>
-            <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col">
                 <label htmlFor="jobPosition" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
                   Job position
                 </label>
@@ -169,7 +163,7 @@ export default function EditEmployeeSection() {
                   className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm block zoom w-full p-2.5"
                 />
               </div>
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col">
                 <label htmlFor="phoneNumber" className="block mb-2 text-sm font-medium text-gray-900  dark:text-black">
                   Phone Number
                 </label>
@@ -182,9 +176,7 @@ export default function EditEmployeeSection() {
                   className="EspecialInput border-b focus:outline-none border-red bg-transparent text-sm zoom block w-full p-2.5"
                 />
               </div>
-            </div>
-            <div className="mb-6 flex flex-row space-x-4">
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col col-span-2">
                 <label htmlFor="salary" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
                   Salary
                 </label>
@@ -198,26 +190,25 @@ export default function EditEmployeeSection() {
                 />
               </div>
             </div>
-            <div className="mb-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
-              <div className="flex flex-col flex-1">
-                <button onClick={handleDismissEmployee} className="EliminatedButton  hover:bg-black hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Dismiss employee
-                </button>
-              </div>
-              <div className="flex flex-col flex-1">
-                <button
-                  type="submit"
-                  onClick={() => {toast.success("Update")}}
-                  className="NormalButton hover:bg-black hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Save
-                </button>
-              </div>
-              <div className="flex flex-col flex-1">
-                <button className="NormalButton hover:bg-black hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Choose file
-                </button>
-              </div>
+            <div className="flex justify-between space-x-4">
+              <button
+                onClick={handleDismissEmployee}
+                className="EliminatedButton hover:bg-black hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Dismiss employee
+              </button>
+              <button
+                type="submit"
+                onClick={() => {
+                  toast.success("Update");
+                }}
+                className="NormalButton hover:bg-black hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Save
+              </button>
+              <button className="NormalButton hover:bg-black hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Choose file
+              </button>
             </div>
           </form>
         </div>
