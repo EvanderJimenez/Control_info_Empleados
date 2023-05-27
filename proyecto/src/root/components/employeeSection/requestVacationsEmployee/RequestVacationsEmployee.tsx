@@ -28,7 +28,7 @@ const RequestVacationsEmployee = () => {
     boss: "",
     schedule: [],
     vacations: {},
-    attendance: {}
+    attendance: {},
   });
 
   const [newDateStart, setNewDateStart] = useState("");
@@ -100,7 +100,7 @@ const RequestVacationsEmployee = () => {
           <div className=" flex flex-col  md:w-full sm:w-full">
             <h2 className="text-lg sm:text-xl font-medium text-center mb-2">Vacation request</h2>
             <div className="items-center">
-              <label className="font-semibold">Name request: </label>
+              <label className="font-semibold">Affair: </label>
               <input className="w-1/4 focus:outline-none " type="text" id="name" value={newName} onChange={(e) => setNewName(e.target.value)} />
             </div>
 
@@ -121,7 +121,13 @@ const RequestVacationsEmployee = () => {
               onChange={(e) => setNewDescription(e.target.value)}
               className="mt-3 shadow-lg focus:border-transparent focus:outline-none  rounded-xl"
             ></textarea>
-            <button className="NormalButton zoom mt-3 " type="submit" onClick={()=>{toast.success("save")}}>
+            <button
+              className="NormalButton zoom mt-3 "
+              type="submit"
+              onClick={() => {
+                toast.success("save");
+              }}
+            >
               Send request
             </button>
           </div>

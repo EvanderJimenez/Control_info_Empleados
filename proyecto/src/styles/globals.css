@@ -207,19 +207,11 @@ i {
   font-size: 1rem !important;
 }
 
-.table tr {
-  border-radius: 20px;
+
+button:hover{
+  background: #8696FE;
 }
 
-tr td:nth-child(n + 5),
-tr th:nth-child(n + 5) {
-  border-radius: 0 0.625rem 0.625rem 0;
-}
-
-tr td:nth-child(1),
-tr th:nth-child(1) {
-  border-radius: 0.625rem 0 0 0.625rem;
-}
 
 #clock {
   font-size: 24px;
@@ -234,15 +226,9 @@ tr th:nth-child(1) {
   border: 4px solid #cad3dc;
   box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.5), 10px 10px 10px rgba(0, 0, 0, 0.1), inset -8px -8px 15px rgba(255, 255, 255, 0.5), inset 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
-.BlackTable {
-  background-color: #dfe0dc;
-  color: #181818;
-  border-collapse: collapse;
-}
 
 .GrayTable th,
 .GrayTable td {
-  border: 2px solid #181818;
   padding: 8px;
 }
 .GrayTable input {

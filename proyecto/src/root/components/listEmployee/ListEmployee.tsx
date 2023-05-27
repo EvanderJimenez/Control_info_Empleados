@@ -7,12 +7,12 @@ import { selectLogin, selectGetByVariable } from "@/root/redux/selectors/employe
 import { EmployeesType } from "@/root/types/Employee.type";
 import { startGetDepartmentById } from "@/root/redux";
 
-interface ListClear{
-  clear : boolean;
+interface ListClear {
+  clear: boolean;
   setClear: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ListEmployee = ({clear,setClear} : ListClear) => {
+const ListEmployee = ({ clear, setClear }: ListClear) => {
   const dispatch = useDispatch();
   let filteredEmployees: EmployeesType[] = [];
 
@@ -24,28 +24,28 @@ const ListEmployee = ({clear,setClear} : ListClear) => {
   const loginState = useSelector(selectLogin);
 
   useEffect(() => {
-    console.log("k")
+    console.log("k");
   }, [dispatch, getEmployeeByUid]);
 
   const handleLoad = (uid: string) => {
     dispatch(StartGetEmployeeByUid(uid));
-    setClear(false)
+    setClear(false);
   };
 
   return (
-    <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-56 border-2 ">
+    <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
       {Array.isArray(employeesListVariable) &&
         employeesListVariable
           .filter((item) => item.enabled)
           .map((item) => (
-            <div key={item.uid} className="border-2 flex flex-col border-black m-2 rounded-sm p-4">
+            <div key={item.uid} className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4">
               <p className="font-bold">Name: {item.name}</p>
-              <p className="mt-2">Cedula: {item.cedula}</p>
-              <p className="mt-2">Email: {item.email}</p>
-              <p className="mt-2">Job Position: {item.jobPosition}</p>
-              <p className="mt-2">Department: {item.idDepartment}</p>
+              <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
+              <p className="mt-2 font-semibold">Email: {item.email}</p>
+              <p className="mt-2 font-semibold">Job Position: {item.jobPosition}</p>
+              <p className="mt-2 font-semibold">Department: {item.idDepartment}</p>
 
-              <button className="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-red-600" onClick={() => handleLoad(item.uid)}>
+              <button className="mt-4 px-4 py-2 bg-black text-white rounded " onClick={() => handleLoad(item.uid)}>
                 Load Information
               </button>
             </div>
