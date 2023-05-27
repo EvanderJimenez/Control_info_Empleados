@@ -26,7 +26,6 @@ function Login() {
   useEffect(() => {
     if (loginState) {
       dispatch(startGetDepartmentById(loginState.idDepartment));
-      console.log("id deparmen")
     }
   }, [loginState, dispatch]);
 
@@ -42,7 +41,7 @@ function Login() {
       try {
         dispatch(StartLogin(data.email, data.password));
       } catch (error) {
-        //error
+        
       }
     }
   };
@@ -55,7 +54,8 @@ function Login() {
 
   return (
     <>
-      <div>{loading ? <LoadingGeneralComponent /> : <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />}</div>
+      <div className="flex justify-center">{loading ? <LoadingGeneralComponent/> : <div>Hi</div> }</div>
+      <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />
     </>
   );
 }

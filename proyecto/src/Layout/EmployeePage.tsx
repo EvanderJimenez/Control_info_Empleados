@@ -10,12 +10,12 @@ type LayoutProps = {
 };
 const EmployeePage = ({ children }: LayoutProps) => {
   return (
-    <div className="bg-white w-full h-full">
+    <>
       <Top />
-      <EmployeeCenterMenu/>
+      <EmployeeCenterMenu />
       <main>{children}</main>
       <Foot />
-    </div>
+    </>
   );
 };
 export default EmployeePage;
