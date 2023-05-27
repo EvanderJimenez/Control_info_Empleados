@@ -63,6 +63,7 @@ const employeeListProvider = async () => {
             boss: listEmployee.boss,
             schedule: listEmployee.schedule,
             vacations: listEmployee.vacations,
+            attendance: listEmployee.attendance
           })
         )
       : [];
@@ -71,7 +72,6 @@ const employeeListProvider = async () => {
 };
 
 const createEmployeeProvider = async (searchTerm: EmployeesType) => {
-    console.log("Data user " + JSON.stringify(searchTerm));
 
     const response = await fetch("/api/employees", {
       method: "POST",
@@ -80,6 +80,7 @@ const createEmployeeProvider = async (searchTerm: EmployeesType) => {
       },
       body: JSON.stringify(searchTerm),
     });
+
 
     if (!response.ok) {
       throw new Error("Error creating employee");

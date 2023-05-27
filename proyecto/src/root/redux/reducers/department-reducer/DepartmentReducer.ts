@@ -1,5 +1,3 @@
-import { Department } from "@/root/interface/departments";
-import { getDepartmentByIdProvider } from "./../../provider/department-provider/department.provider";
 import { DepartmentType } from "@/root/types/Department.type";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -8,7 +6,7 @@ interface DepartmentState {
   getAllDepartments: DepartmentType[] | null;
 }
 
-export const initialState: DepartmentState = {
+export const initialStateDepartment: DepartmentState = {
   getDepartmentById: null,
   getAllDepartments: [],
 };
@@ -20,7 +18,7 @@ type DepartmentAction = {
 
 export const DepartmentSlice = createSlice({
   name: "Departments",
-  initialState,
+  initialState: initialStateDepartment,
 
   reducers: {
     getDepartmentByIdReducer: (

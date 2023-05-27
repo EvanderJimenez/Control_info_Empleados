@@ -6,7 +6,7 @@ interface GetByVariableState {
     getByVariable: EmployeesType []
   }
 
-  export const initialState: GetByVariableState = {
+  export const initialStateByVariable: GetByVariableState = {
     getByVariable:[]
 
 };
@@ -18,7 +18,7 @@ interface GetByVariableState {
 
   export const GetByVariableSlice = createSlice({
     name: "getByVariable",
-    initialState: initialState,
+    initialState: initialStateByVariable,
 
     reducers: {
 

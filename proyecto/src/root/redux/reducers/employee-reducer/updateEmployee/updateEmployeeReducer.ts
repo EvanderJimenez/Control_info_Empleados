@@ -6,7 +6,7 @@ interface UpdateEmployeeState {
     updateEmployee: EmployeesType
   }
 
-  export const initialState: UpdateEmployeeState = {
+  export const initialStateUpdate: UpdateEmployeeState = {
     updateEmployee: {} as EmployeesType
   };
 
@@ -18,7 +18,7 @@ interface UpdateEmployeeState {
 
   export const UpdateEmployeeSlice = createSlice({
     name: "updateEmployee",
-    initialState: initialState,
+    initialState: initialStateUpdate,
 
     reducers: {
 

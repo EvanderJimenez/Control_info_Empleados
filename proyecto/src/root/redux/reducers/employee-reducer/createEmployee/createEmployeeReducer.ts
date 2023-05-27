@@ -1,4 +1,4 @@
-import { DeleteEmployeeType, EmployeesType } from "@/root/types/Employee.type";
+import { EmployeesType } from "@/root/types/Employee.type";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
@@ -6,19 +6,19 @@ interface CreateEmployeeState {
     createEmployee: EmployeesType
   }
 
-  export const initialState: CreateEmployeeState = {
+  export const initialStateCreate: CreateEmployeeState = {
     createEmployee: {} as EmployeesType
   };
 
 
   type EmployeeAction = {
     type: string;
-    login?: CreateEmployeeState;
+    createEmployee?: CreateEmployeeState;
   };
 
   export const CreateEmployeeSlice = createSlice({
     name: "createEmployee",
-    initialState: initialState,
+    initialState: initialStateCreate,
 
     reducers: {
 

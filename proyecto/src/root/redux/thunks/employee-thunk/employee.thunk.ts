@@ -2,17 +2,17 @@ import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
 import { providerRedux } from "../../provider";
-import { DispatchTypeDelete, deleteEmployeeReducer } from "../../reducers/employee-reducer/deleteEmployee/deleteEmployeeReducer";
-import { DispatchTypeDismiss, dismissEmployeeReducer } from "../../reducers/employee-reducer/dismissEmployee/dismissEmployeeReducer";
-import { DispatchTypeListEmployee, listEmployeesReducer } from "../../reducers/employee-reducer/listEmployees/listEmployeeReducer";
-import { DispatchTypeCreate, createEmployeeReducer } from "../../reducers/employee-reducer/createEmployee/createEmployeeReducer";
-import { DispatchTypeUpdate, updateEmployeeReducer } from "../../reducers/employee-reducer/updateEmployee/updateEmployeeReducer";
+import { DispatchTypeDelete, deleteEmployeeReducer } from "../../reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
+import { DispatchTypeDismiss, dismissEmployeeReducer } from "../../reducers/employee-reducer/dismissEmployee/DismissEmployeeReducer";
+import { DispatchTypeListEmployee, listEmployeesReducer } from "../../reducers/employee-reducer/listEmployees/ListEmployeeReducer";
+import { DispatchTypeCreate, createEmployeeReducer } from "../../reducers/employee-reducer/createEmployee/CreateEmployeeReducer";
+import { DispatchTypeUpdate, updateEmployeeReducer } from "../../reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
+import { DispatchTypeEmployeeByUid, getEmployeeByUidReducer } from "../../reducers/employee-reducer/getEmployeeByUid/GetEmployeeByUidReducer";
+import { DispatchTypeByVariable, getByVariableReducer } from "../../reducers/employee-reducer/getByVariable/GetByVariableReducer";
+import { DispatchTypeVacations, getVacationsByUidReducer } from "../../reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
+import { DispatchTypeByIdDepart, getEmployeesByIdDepartmentReducer } from "../../reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
+import { DispatchTypeAllBoss, getAllBossReducer } from "../../reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
 import { DispatchTypeLogin, loginReducer } from "../../reducers/login-reducer/loginReducer";
-import { DispatchTypeEmployeeByUid, getEmployeeByUidReducer } from "../../reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
-import { DispatchTypeByVariable, getByVariableReducer } from "../../reducers/employee-reducer/getByVariable/getByVariableReducer";
-import { DispatchTypeVacations, getVacationsByUidReducer } from "../../reducers/employee-reducer/getVacationsByUid/getVacationsByUidReducers";
-import { DispatchTypeByIdDepart, getEmployeesByIdDepartmentReducer } from "../../reducers/employee-reducer/getEmployeesByIdDepartment/getEmployeesByIdDepartmentReducer";
-import { DispatchTypeAllBoss, getAllBossReducer } from "../../reducers/employee-reducer/getAllBosses/getAllBossesReducer";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {

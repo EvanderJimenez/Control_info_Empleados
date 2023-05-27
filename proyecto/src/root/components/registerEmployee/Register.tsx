@@ -39,7 +39,8 @@ function Register() {
         schedule: [],
         brands: [],
         option: "register",
-        vacations: {}
+        vacations: {},
+        attendance: {}
       };
     } else {
       return {
@@ -60,7 +61,8 @@ function Register() {
         schedule: [],
         brands: [],
         option: "register",
-         vacations: {}
+         vacations: {},
+         attendance:{}
       };
     }
   });
