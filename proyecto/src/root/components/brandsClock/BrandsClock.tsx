@@ -16,6 +16,7 @@ interface methodsBrands {
   handleUpdateCycleHours: (cycleName: string) => void;
   checkMarkHours: (markStart: string, markEnd: string) => boolean;
   setBrandData: React.Dispatch<React.SetStateAction<Brands>>;
+  setFinish: React.Dispatch<React.SetStateAction<boolean>>;
 }
 function BrandsClock({
   currentDate,
@@ -31,6 +32,7 @@ function BrandsClock({
   handleUpdateCycleHours,
   checkMarkHours,
   setBrandData,
+  setFinish,
   ...props
 }: methodsBrands) {
   const [time, setTime] = useState("");
@@ -63,13 +65,11 @@ function BrandsClock({
     if (formattedDay && brandData.cycle && brandData.cycle["Ciclo 1"]) {
       const cycle = brandData.cycle["Ciclo 1"];
       const existingHours = cycle.hours[currentDate];
-
+      console.log(existingHours.hFin);
       if (existingHours) {
         const markStart = existingHours.hIni;
         const markEnd = existingHours.hFin;
 
-        console.log(markStart);
-        console.log(markEnd);
         if (checkMarkHours(markStart, markEnd)) {
           console.log("The hours match. Performing update...");
         } else {
@@ -89,6 +89,7 @@ function BrandsClock({
               ...prevData,
               ...updatedBrands,
             }));
+            setFinish(true);
           })
           .catch((error) => console.error("Error updating brands:", error));
       }

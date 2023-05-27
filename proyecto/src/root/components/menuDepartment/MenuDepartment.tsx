@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import MethodsDepartments from "../adminDepartment/methods/MethodsDepartments";
 import router from "next/router";
 import { Url } from "next/dist/shared/lib/router/router";
 
@@ -39,7 +38,11 @@ export const MenuDepartment = () => {
                         ? "bg-sky-500"
                         : "hover:bg-sky-500"
                     }`}
-                    onClick={() => handleButtonClick("/home/AdminMain/Department/CreateDepartment")}
+                    onClick={() =>
+                      handleButtonClick(
+                        "/home/AdminMain/Department/CreateDepartment"
+                      )
+                    }
                   >
                     Created Departments
                   </button>
@@ -49,7 +52,11 @@ export const MenuDepartment = () => {
                         ? "bg-blue-500"
                         : "hover:bg-blue-500"
                     }`}
-                    onClick={() => handleButtonClick("/home/AdminMain/Department/UpdateDepartment")}
+                    onClick={() =>
+                      handleButtonClick(
+                        "/home/AdminMain/Department/UpdateDepartment"
+                      )
+                    }
                   >
                     Update Departments
                   </button>
@@ -59,7 +66,9 @@ export const MenuDepartment = () => {
                         ? "bg-blue-500"
                         : "hover:bg-blue-500"
                     }`}
-                    onClick={() => handleButtonClick("/home/AdminMain/Department/AssignBoss")}
+                    onClick={() =>
+                      handleButtonClick("/home/AdminMain/Department/AssignBoss")
+                    }
                   >
                     Assign Boss Department
                   </button>

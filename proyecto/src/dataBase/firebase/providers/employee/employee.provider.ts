@@ -177,9 +177,9 @@ const dismissByUid = async (uid: string) => {
   await updateDoc(employeeRef, { idDepartment: "" });
 };
 
-const getByVariable = async (data: string, variable: string) => {
+const getByVariable = async (data: string, variable: string, idDepartment: string) => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where(variable, "==", data));
+  const employeeQuery = query(employeeCollection, where(variable, "==", data),where("idDepartment", "==", idDepartment));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     employeeQuery
   );

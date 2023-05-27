@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { SearchComponentInterface } from "../../../interface/searchParameters";
 import { StartGetByVariable } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { useDispatch, useSelector } from "react-redux";
+import { selectLogin } from "@/root/redux";
 
 export default function SearchInput(props: SearchComponentInterface) {
   const [Value, setValue] = useState("");
 
   const dispatch = useDispatch();
+  const employeeLogin = useSelector(selectLogin)
 
      const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      dispatch(StartGetByVariable(Value,props.typeList));
+      dispatch(StartGetByVariable(Value,props.typeList,employeeLogin?.idDepartment || ''));
     }
   };
 
@@ -18,7 +20,7 @@ export default function SearchInput(props: SearchComponentInterface) {
  
 
   const handleSearch = async () => {
-    dispatch(StartGetByVariable(Value,props.typeList));
+    dispatch(StartGetByVariable(Value,props.typeList, employeeLogin?.idDepartment || ''));
   };
 
   return (

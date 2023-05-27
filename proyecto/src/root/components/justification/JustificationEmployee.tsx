@@ -69,7 +69,7 @@ export default function JustificationEmployee({
         attendance: {
           ...prevUserData.attendance,
           [attendanceDate]: {
-            ...prevUserData.attendance[attendanceDate],
+            ...(prevUserData.attendance?.[attendanceDate] || {}),
             startTime: hIni,
             justificationIni: justify,
             endTime: "",
@@ -86,7 +86,7 @@ export default function JustificationEmployee({
         attendance: {
           ...prevUserData.attendance,
           [attendanceDate]: {
-            ...prevUserData.attendance[attendanceDate],
+            ...(prevUserData.attendance?.[attendanceDate] || {}),
             endTime: hFin,
             justificationFin: justify,
             startTime: "",
@@ -97,6 +97,7 @@ export default function JustificationEmployee({
       }));
     }
     setJustify("");
+    handleUpdate(event);
   };
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -145,50 +146,41 @@ export default function JustificationEmployee({
   };
 
   return (
-    <div className="flex h-screen justify-center items-center">
-      <div className="flex flex-wrap">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2">
-          ATTENDANCE
-        </h2>
-        <form
-          className="w-full max-w-lg px-10"
-          onSubmit={handleSubmitAttendance}
-        >
-          <div className="flex flex-wrap -mx-3 mb-6">
-            <div className="w-full px-3">
-              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                Justification
-              </label>
-              <textarea
-                className="no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
-                id="message"
-                value={justify}
-                onChange={(event) => setJustify(event.target.value)}
-              ></textarea>
+    <div>
+      <div className=" flex h-screen justify-center items-center">
+        <div className="flex flex-wrap">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2">
+            ATTENDANCE
+          </h2>
+          <form
+            className="w-full max-w-lg px-10"
+            onSubmit={handleSubmitAttendance}
+          >
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Justification
+                </label>
+                <textarea
+                  className="no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+                  id="message"
+                  value={justify}
+                  onChange={(event) => setJustify(event.target.value)}
+                ></textarea>
+              </div>
             </div>
-          </div>
-          <div className="flex justify-center">
-            <button
-              className="shadow bg-blue hover:bg-teal focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              type="submit"
-            >
-              Completed
-            </button>
-          </div>
-        </form>
-        <form className="w-full max-w-lg px-10" onSubmit={handleUpdate}>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="shadow bg-blue hover:bg-teal focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded gap-5"
-            >
-              Send
-            </button>
-          </div>
-        </form>
-        <button className="bg-red" onClick={handleClick}>
-          HI CLICK ME
-        </button>
+            <div className="flex justify-center ">
+              <button
+                className="shadow bg-blue hover:bg-teal focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                type="submit"
+              >
+                Completed
+              </button>
+            </div>
+          </form>
+
+          <div className="w-full max-w-lg px-10 mb-4"></div>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
-import { providerRedux } from "../../provider";
 import { DispatchTypeDelete, deleteEmployeeReducer } from "../../reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
 import { DispatchTypeDismiss, dismissEmployeeReducer } from "../../reducers/employee-reducer/dismissEmployee/DismissEmployeeReducer";
 import { DispatchTypeListEmployee, listEmployeesReducer } from "../../reducers/employee-reducer/listEmployees/ListEmployeeReducer";
@@ -13,6 +12,7 @@ import { DispatchTypeVacations, getVacationsByUidReducer } from "../../reducers/
 import { DispatchTypeByIdDepart, getEmployeesByIdDepartmentReducer } from "../../reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
 import { DispatchTypeAllBoss, getAllBossReducer } from "../../reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
 import { DispatchTypeLogin, loginReducer } from "../../reducers/login-reducer/loginReducer";
+import { providerRedux } from "../../provider";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -112,10 +112,10 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   };
 };
 
-export const StartGetByVariable = (searchTerm1: string, searchTerm2: string): any => {
+export const StartGetByVariable = (searchTerm1: string, searchTerm2: string,  searchTerm3: string): any => {
   return async (dispatch: DispatchTypeByVariable) => {
     try {
-      const response = await providerRedux.getByVariableProvider(searchTerm1, searchTerm2);
+      const response = await providerRedux.getByVariableProvider(searchTerm1, searchTerm2, searchTerm3);
 
       dispatch(getByVariableReducer(response || null));
     } catch (error) {

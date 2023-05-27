@@ -5,6 +5,7 @@ import ListEmployee from "../../listEmployee/ListEmployee";
 import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { StartDismissEmployee, StartGetByVariable, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { toast } from "react-hot-toast";
 
 export default function EditEmployeeSection() {
   const employeeByUid = useSelector(selectGetEmployeeByUid);
@@ -32,7 +33,8 @@ export default function EditEmployeeSection() {
     email: "",
     boss: "",
     schedule: [],
-    vacations: {}
+    vacations: {},
+    attendance: {}
   });
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
@@ -62,7 +64,8 @@ export default function EditEmployeeSection() {
       email: "",
       boss: "",
       schedule: [],
-    vacations: {}
+     vacations: {},
+     attendance:{}
     })
     }
 
@@ -201,6 +204,7 @@ export default function EditEmployeeSection() {
               <div className="flex flex-col flex-1">
                 <button
                   type="submit"
+                  onClick={() => {toast.success("Update")}}
                   className="NormalButton hover:bg-black hover:text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Save

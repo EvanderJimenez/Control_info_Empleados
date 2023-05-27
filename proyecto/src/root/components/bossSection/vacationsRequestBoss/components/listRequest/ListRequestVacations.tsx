@@ -55,11 +55,11 @@ const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
   }, [listEmployees]);
 
   const handleLoadInformation = (request: PendingRequest) => {
-    
+
     selectedRequest(request);
-   
+
   };
-  
+
 
   return (
     <div className="bg-gray-100 p-4">

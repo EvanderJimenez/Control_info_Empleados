@@ -14,8 +14,7 @@ export default function RegisterBrand() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number>(-1);
 
-  const employeeLogin =  useSelector(selectLogin)
-
+  const employeeLogin = useSelector(selectLogin);
 
   const handleEditClick = (index: number) => {
     const schedule = Object.values(brandData.hoursEmployee)[index];
@@ -154,13 +153,6 @@ export default function RegisterBrand() {
       console.error("Error getting brands data", error);
     }
   };
-
-  useEffect(() => {
-    if (employeeLogin?.uid) {
-      handleGetBrands(employeeLogin?.uid);
-    }
-  }, [employeeLogin?.uid]);
-  
 
   return (
     <div>
