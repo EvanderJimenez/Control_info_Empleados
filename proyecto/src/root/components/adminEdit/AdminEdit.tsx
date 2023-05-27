@@ -1,14 +1,20 @@
 import { useState } from "react";
 import RegisterFormEmployee from "./formEmployee/RegisterFormEmployee";
 import { UserData } from "@/root/interface/employee";
-import { SearchDepartment } from "../adminDepartment/SearchDepartment";
+import { SearchDepartment } from "../creationDeparment/SearchDepartment";
 interface RegisterProps {
   usersData: UserData;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleGetUsers: (id: string) => void;
   handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
 }
-function AdminEdit({ usersData, handleInputChange, handleGetUsers, handleUpdate, ...props }: RegisterProps) {
+function AdminEdit({
+  usersData,
+  handleInputChange,
+  handleGetUsers,
+  handleUpdate,
+  ...props
+}: RegisterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -44,9 +50,13 @@ function AdminEdit({ usersData, handleInputChange, handleGetUsers, handleUpdate,
 
               <div className="absolute z-10 border-4 border-primary w-[95%] h-[95%] invisible group-hover:visible opacity-0 group-hover:opacity-100 group-hover:scale-90 transition-all duration-500"></div>
             </div>
-            <a className=" block text-black text-center hover:text-primary transition-colors duration-150 text-lg md:text-xl mb-1">Name</a>
+            <a className=" block text-black text-center hover:text-primary transition-colors duration-150 text-lg md:text-xl mb-1">
+              Name
+            </a>
 
-            <p className="mb-4 font-light  text-sm md:text-sm text-center text-gray-400">List Employee</p>
+            <p className="mb-4 font-light  text-sm md:text-sm text-center text-gray-400">
+              List Employee
+            </p>
 
             <div className="flex justify-center gap-x-3">
               <button
@@ -64,21 +74,11 @@ function AdminEdit({ usersData, handleInputChange, handleGetUsers, handleUpdate,
       </div>
 
       {isOpen && (
-        <div className="mt-2 p-4 bg-gray-900 rounded">
-          {selectedRow && (
-            <div>
-              <div className="flex flex-col justify-center items-center h-[100vh]">
-                <div className="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
-                  <div className="mt-2 mb-8 w-full">
-                    <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">General Information</h4>
-                    <p className="mt-2 px-2 text-base text-gray-600">CrHome's team of employees is comprised of highly trained professionals committed to providing an exceptional experience</p>
-                  </div>
-                  <RegisterFormEmployee handleInputChange={handleInputChange} userData={usersData} upDate={handleUpdate} />
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        <RegisterFormEmployee
+          handleInputChange={handleInputChange}
+          userData={usersData}
+          upDate={handleUpdate}
+        />
       )}
     </div>
   );

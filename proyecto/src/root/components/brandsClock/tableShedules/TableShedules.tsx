@@ -73,19 +73,18 @@ const TableShedules = ({
                       className="text-blue-500 hover:text-blue-700 mr-2 bg-[blue]"
                       onClick={() => handleSaveClick(index)}
                     >
-                      Guardar
+                      Save
                     </button>
                   ) : (
                     <button
                       className="text-blue-500 hover:text-blue-700 mr-2 bg-[blue]"
                       onClick={() => handleEditClick(index)}
                     >
-                      Editar
+                      Edit
                     </button>
                   )}
                 </td>
                 <td>
-                  {" "}
                   <button
                     className="text-red-500 hover:text-red-700 bg-[red]"
                     onClick={() => handleDeleteSchedule(date)}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SearchDepartment } from "../../adminDepartment/SearchDepartment";
+import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import { format, parseISO, getDay } from "date-fns";
 import { Brands } from "@/root/interface/brands";
 import BrandsClock from "../BrandsClock";
@@ -33,6 +33,14 @@ export const BrandsEmployee = () => {
 
     fetchCurrentDateTime();
   }, [updateDateTime]);
+
+  const getDateOfWeekday = (newDate: string) => {
+    const date = parseISO(newDate);
+    setFormattedDay(format(date, "EEEE"));
+    console.log(formattedDay);
+
+    return formattedDay;
+  };
 
   const handleClick1 = () => {
     setUpdateDateTime(true);
@@ -70,15 +78,6 @@ export const BrandsEmployee = () => {
     } catch (error) {
       console.error("Error getting brands data", error);
     }
-  };
-
-  const getDateOfWeekday = (newDate: string) => {
-    const date = parseISO(newDate);
-    const dayOfWeek = getDay(date);
-    setFormattedDay(format(date, "EEEE"));
-    console.log(formattedDay);
-
-    return formattedDay;
   };
 
   const handleUpdateCycleHours = (cycleName: string) => {
@@ -131,44 +130,44 @@ export const BrandsEmployee = () => {
   };
 
   const checkMarkHours = (markStart: string, markEnd: string): boolean => {
-    const markStartHour = Number(markStart.split(":")[0]);
-    const markStartMinute = Number(markStart.split(":")[1]);
-
-    const hoursIniHour = Number(hoursIni.split(":")[0]);
-    const hoursIniMinute = Number(hoursIni.split(":")[1]);
-
-    const hoursFinHour = Number(hoursFin.split(":")[0]);
-    const hoursFinMinute = Number(hoursFin.split(":")[1]);
+    if (!markStart && !markEnd) {
+      console.log("Both markStart and markEnd are required");
+      return false;
+    }
 
     if (!markEnd) {
-      if (
-        (hoursIni &&
-          markStartHour === hoursIniHour &&
-          markStartMinute === hoursIniMinute) ||
-        markStartHour < hoursIniHour ||
-        (markStartHour === hoursIniHour && markStartMinute < hoursIniMinute)
-      ) {
-        console.log("They match");
-        return true;
-      } else {
-        console.log("The mark start hour does not match");
+      if (markStart) {
+        const markStartHour = Number(markStart.split(":")[0]);
+        const markStartMinute = Number(markStart.split(":")[1]);
+
+        const hoursIniHour = Number(hoursIni.split(":")[0]);
+        const hoursIniMinute = Number(hoursIni.split(":")[1]);
+
+        if (
+          markStartHour < hoursIniHour ||
+          (markStartHour === hoursIniHour && markStartMinute < hoursIniMinute)
+        ) {
+          console.log("The mark start hour is earlier than hoursIni");
+          return true;
+        } else {
+          console.log("The mark start hour does not match the condition");
+        }
       }
-    } else {
+    } else if (markStart && markEnd) {
       const markEndHour = Number(markEnd.split(":")[0]);
       const markEndMinute = Number(markEnd.split(":")[1]);
 
+      const hoursFinHour = Number(hoursFin.split(":")[0]);
+      const hoursFinMinute = Number(hoursFin.split(":")[1]);
+
       if (
-        (hoursIni &&
-          hoursFin &&
-          markEndHour === hoursFinHour &&
-          markEndMinute === hoursFinMinute) ||
         markEndHour > hoursFinHour ||
         (markEndHour === hoursFinHour && markEndMinute >= hoursFinMinute)
       ) {
-        console.log("The hours match");
+        console.log("The mark end hour is greater than or equal to hoursFin");
         return true;
       } else {
-        console.log("The mark end hour does not match");
+        console.log("The mark end hour does not match the condition");
       }
     }
 
