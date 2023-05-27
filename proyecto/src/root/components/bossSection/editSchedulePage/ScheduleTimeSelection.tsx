@@ -30,8 +30,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
   ]);
 
 
-
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
+  const  test = {
     uid: "",
     name: "",
     firstSurname: "",
@@ -47,8 +46,11 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     email: "",
     boss: "",
     schedule: [],
-    vacations: {}
-  });
+    vacations: {},
+    attendance: {}
+  }
+
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(test);
 
   const handleTimeChange = (index: number, field: "startTime" | "endTime", value: string) => {
     setSchedules((prevSchedules) => {
@@ -63,16 +65,23 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
       setSchedules(employeeSchedule.schedule);
       setDataEmployee(employeeSchedule);
     }
-  }, [employeeSchedule]);
+  }, [employeeSchedule,dataEmployee]);
 
   const handleSaveSchedule = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const newDataEmployee = { ...dataEmployee, schedule: schedules };
 
+
     dispatch(StartUpDateEmployee(newDataEmployee?.uid || "", newDataEmployee));
 
+    setDataEmployee(test)
+
+    console.log("test: " + JSON.stringify(test));
+
   }
+
+  
 
   return (
     <>

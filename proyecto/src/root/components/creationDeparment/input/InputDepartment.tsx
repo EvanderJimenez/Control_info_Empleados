@@ -7,23 +7,24 @@ interface InputProps {
   id: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-function InputEmployee(props: InputProps) {
+export const InputDepartment = (props: InputProps) => {
   return (
-    <div>
-      <label className="text-sm text-gray-600">{props.label}</label>
+    <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+      <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
+        {props.label}
+      </label>
       <div className="mt-2.5">
         <input
           type={props.type}
           name={props.name}
           value={props.value}
           onChange={props.onChange}
-          className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-[#049473] rounded py-3 px-4 mb-3"
           id={props.name}
           placeholder={props.label}
         />
       </div>
     </div>
   );
-}
-
-export default InputEmployee;
+};
+export default InputDepartment;

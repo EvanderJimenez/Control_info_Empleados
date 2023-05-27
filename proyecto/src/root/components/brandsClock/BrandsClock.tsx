@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Clock from "./brandsEmployee/clock/Clock";
-import { SearchDepartment } from "../adminDepartment/SearchDepartment";
+import { SearchDepartment } from "../creationDeparment/SearchDepartment";
 import { Brands } from "@/root/interface/brands";
 interface methodsBrands {
   currentDate: string;
@@ -59,8 +59,7 @@ function BrandsClock({
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleUpdateCycleHours("Ciclo 1");
-    console.log(hoursFin, hoursIni);
+
     if (formattedDay && brandData.cycle && brandData.cycle["Ciclo 1"]) {
       const cycle = brandData.cycle["Ciclo 1"];
       const existingHours = cycle.hours[currentDate];
@@ -69,6 +68,8 @@ function BrandsClock({
         const markStart = existingHours.hIni;
         const markEnd = existingHours.hFin;
 
+        console.log(markStart);
+        console.log(markEnd);
         if (checkMarkHours(markStart, markEnd)) {
           console.log("The hours match. Performing update...");
         } else {
@@ -98,6 +99,12 @@ function BrandsClock({
       <SearchDepartment handleGet={handleGetBrands} />
       <button onClick={handleClick1} className="bg-red">
         Click me
+      </button>
+      <button
+        onClick={() => handleUpdateCycleHours("Ciclo 1")}
+        className="bg-red"
+      >
+        SaveHours
       </button>
       <Clock time={time} handleUpdate={handleUpdate} />
     </div>

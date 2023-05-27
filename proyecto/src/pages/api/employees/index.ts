@@ -31,8 +31,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       email,
       boss,
       schedule,
-      brands,
-      vacations
+      vacations,
+      attendance
     } = req.body;
 
     const newEmployee = await employeeProvider.create(
@@ -51,8 +51,8 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       email,
       boss,
       schedule,
-      brands,
-      vacations
+      vacations,
+      attendance
     );
 
 

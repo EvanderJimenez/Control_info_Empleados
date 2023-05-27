@@ -62,14 +62,6 @@ export interface InformationPage {
   paragraph: string;
   img: string;
 }
-
-export interface Vacations {
-  dateStart: string;
-  dateEnd: string;
-  description: string;
-  name: string;
-  approved: boolean;
-}
 export interface FirstPagePDFInformation {
   title: string;
   createdBy: string;

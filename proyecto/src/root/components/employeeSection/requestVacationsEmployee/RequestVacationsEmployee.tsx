@@ -1,16 +1,16 @@
-import { Vacations } from "@/root/interface/employee";
+
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
-import { EmployeesType } from "@/root/types/Employee.type";
+import { EmployeesType, Vacations } from "@/root/types/Employee.type";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
-import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
+
 
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
 
-  let filter: string = "waiting";
+  const [sendRequest, setSendRequest] = useState(true)
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -29,6 +29,7 @@ const RequestVacationsEmployee = () => {
     boss: "",
     schedule: [],
     vacations: {},
+    attendance: {}
   });
 
   const [newDateStart, setNewDateStart] = useState("");
@@ -67,6 +68,7 @@ const RequestVacationsEmployee = () => {
     setNewDateEnd("");
     setNewDescription("");
     setNewName("");
+    setSendRequest(!sendRequest)
   };
 
   useEffect(() => {
@@ -128,7 +130,7 @@ const RequestVacationsEmployee = () => {
       </div>
       <div className="lg:w-1/2 justify-center flex flex-col overflow-auto h-96">
         <h2 className="text-lg sm:text-xl font-medium text-center mb-8">List request vacations</h2>
-        <ListRequestVacations filter={showBy}/>
+        <ListRequestVacations data={dataEmployee} setSendRequest={setSendRequest} filter={showBy}/>
         <div className="flex flex-row justify-center space-x-4 mb-10 m-2">
           <button onClick={FilterByAccepted} className="bg-darkBlue">
             Accepted
