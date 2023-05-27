@@ -3,7 +3,10 @@ import { StarGetVacationsByUid } from "@/root/redux/thunks/employee-thunk/employ
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const ListRequestVacations = () => {
+interface filter {
+  filter: string;
+}
+const ListRequestVacations = (props: filter) => {
   const employeesListVacations = useSelector(selectLogin);
 
   const dispatch = useDispatch();
@@ -19,7 +22,9 @@ const ListRequestVacations = () => {
           <>
             {
               <>
-                {Object.entries(employeesListVacations.vacations).map(([name]) => (
+                {Object.entries(employeesListVacations.vacations)
+            .filter(([_, value]) => value.approved === props.filter)
+            .map(([name, vacation]) => (
                   <div className="flex items-center " key={name}>
                     <div className="flex w-full">
                       <div className="relative flex  flex-row items-center m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl md:w-80 md:-ml-16 md:hover:-translate-x-16 md:hover:-translate-y-8">

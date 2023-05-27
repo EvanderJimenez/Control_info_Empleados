@@ -10,6 +10,8 @@ import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
 
+  let filter: string = "waiting";
+
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
@@ -79,6 +81,17 @@ const RequestVacationsEmployee = () => {
     }
   }, [employeeVacations]);
 
+  const FilterByAccepted = () => {
+    setShowBy("accepted")
+  };
+  const FilterByDenied = () => {
+    setShowBy("denied")
+  };
+  const FilterByWaiting = () => {
+   setShowBy("waiting")
+  };
+  const [showBy, setShowBy] = useState("waiting");
+
   return (
     <div className="bg-lithGray flex xl:h-screen flex-col flex-wrap lg:flex-row lg:flex-wrap justify-center items-center">
       <div className="lg:w-1/2 items-center">
@@ -92,7 +105,7 @@ const RequestVacationsEmployee = () => {
 
             <div className="w-auto flex justify-between lx:flex-row space-x-2 mt-5 items-center">
               <label htmlFor="dateStar">Start date:</label>
-              <input className = "bg-white"type="datetime-local" id="dateStar" value={newDateStart} onChange={(e) => setNewDateStart(e.target.value)} />
+              <input className="bg-white" type="datetime-local" id="dateStar" value={newDateStart} onChange={(e) => setNewDateStart(e.target.value)} />
               <label htmlFor="dateEnd">Final date:</label>
               <input type="datetime-local" id="dateEnd" value={newDateEnd} onChange={(e) => setNewDateEnd(e.target.value)} />
             </div>
@@ -115,10 +128,17 @@ const RequestVacationsEmployee = () => {
       </div>
       <div className="lg:w-1/2 justify-center flex flex-col overflow-auto h-96">
         <h2 className="text-lg sm:text-xl font-medium text-center mb-8">List request vacations</h2>
-        <ListRequestVacations />
-        <div className="flex flex-row justify-center space-x-4  m-2">
-          <button className="bg-darkBlue">Accepted</button>
-          <button className="bg-red">Denied</button>
+        <ListRequestVacations filter={showBy}/>
+        <div className="flex flex-row justify-center space-x-4 sm:mb-10 md:mb-10 m-2">
+          <button onClick={FilterByAccepted} className="bg-darkBlue">
+            Accepted
+          </button>
+          <button onClick={FilterByDenied} className="bg-red">
+            Denied
+          </button>
+          <button onClick={FilterByWaiting} className="bg-blue">
+            Waiting
+          </button>
         </div>
       </div>
     </div>
