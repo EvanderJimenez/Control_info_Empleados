@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import AdminDepartment from "../mainForm/MainForm";
 import { Department, Documents, Employee } from "@/root/interface/departments";
-import SelectionOption from "../mainForm/MainForm";
+import CreationDepartment from "../../creationDeparment/CreationDepartment";
 
 interface RegisterProps {
   user?: Department;
@@ -56,7 +55,7 @@ function MethodsDepartments(props: RegisterProps) {
   const handleSubmitDocuments = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!newDocuments || !newUrl) {
+    if (!newDocuments) {
       console.error("Please enter values for all fields in the document");
       return;
     }
@@ -212,7 +211,7 @@ function MethodsDepartments(props: RegisterProps) {
   return (
     <div className="flex justify-center items-center flex-col">
       {upDate ? (
-        <SelectionOption
+        <CreationDepartment
           departmentsData={departmentData}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
@@ -223,11 +222,12 @@ function MethodsDepartments(props: RegisterProps) {
           setNewEmployeeData={setNewEmployeeData}
           handleGetDepartment={handleGetDepartment}
           handleUpdate={handleUpdate}
-          onDeleteEmployee={handleDeleteEmployee}
-          onEditEmployee={handleEditEmployee}
+          handleSubmitDocuments={handleSubmitDocuments}
+          newDocuments={newDocuments}
+          setNewDocuments={setNewDocuments}
         />
       ) : (
-        <SelectionOption
+        <CreationDepartment
           departmentsData={departmentData}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
@@ -238,8 +238,9 @@ function MethodsDepartments(props: RegisterProps) {
           setNewEmployeeData={setNewEmployeeData}
           handleGetDepartment={handleGetDepartment}
           handleUpdate={handleUpdate}
-          onDeleteEmployee={handleDeleteEmployee}
-          onEditEmployee={handleEditEmployee}
+          handleSubmitDocuments={handleSubmitDocuments}
+          newDocuments={newDocuments}
+          setNewDocuments={setNewDocuments}
         />
       )}
     </div>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { RegisterClock } from "../registerClock/RegisterClock";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
 import TableShedules from "../tableShedules/TableShedules";
-import { SearchDepartment } from "../../adminDepartment/SearchDepartment";
+import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 
 export default function RegisterBrand() {
   const [newCycle, setNewCycle] = useState<string>("");

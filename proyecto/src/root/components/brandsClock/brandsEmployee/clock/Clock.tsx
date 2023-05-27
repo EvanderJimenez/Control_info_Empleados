@@ -35,7 +35,7 @@ export default function Clock(props: timeClock) {
               to working time.
             </p>
             <form action="" onSubmit={props.handleUpdate}>
-              <div className="sm:border border-white flex-col sm:flex-row flex items-center lg:w-5/12 w-full mt-12 space-y-4 sm:space-y-0">
+              <div className="sm:border border-white  sm:flex-row flex items-center w-full mt-12 space-y-4 sm:space-y-0">
                 <button
                   type="submit"
                   className=" focus:outline-none focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full  bg-blue py-4 px-6 hover:bg-opacity-75 "
