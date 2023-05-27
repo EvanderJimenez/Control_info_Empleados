@@ -3,8 +3,7 @@ import ScheduleTimeSelection from "@/root/components/bossSection/editSchedulePag
 import MainForm from "@/root/components/mainForm/MainForm";
 import { Schedule } from "@/root/interface/employee";
 
-  export default function index() {
-
+export default function index() {
   return (
     <LoginPage>
       <MainForm />
