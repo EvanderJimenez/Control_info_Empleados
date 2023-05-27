@@ -190,7 +190,9 @@ const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
 
 const getByVariableProvider = async (
   searchTerm1: string,
-  searchTerm2: string
+  searchTerm2: string,
+  searchTerm3: string
+
 ) => {
 
     const response = await fetch("/api/employees/by-variable", {
@@ -199,6 +201,7 @@ const getByVariableProvider = async (
       body: JSON.stringify({
         data: searchTerm1,
         variable: searchTerm2,
+        idDepartment: searchTerm3
       }),
     });
 
