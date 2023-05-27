@@ -16,6 +16,7 @@ export interface UserData {
   schedule: Schedule[];
   brands: Brands[];
   option: string;
+  attendance: { [key: string]: Attendance };
 }
 
 export interface LoginEP {
@@ -66,7 +67,8 @@ export interface Vacations {
   dateStart: string;
   dateEnd: string;
   description: string;
-  approved: string;
+  name: string;
+  approved: boolean;
 }
 export interface FirstPagePDFInformation {
   title: string;
@@ -91,4 +93,12 @@ export interface InputInterface {
   name:string;
   value:string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export interface Attendance {
+  startTime: string;
+  endTime: string;
+  justificationIni: string;
+  justificationFin: string;
+  state: string;
 }
