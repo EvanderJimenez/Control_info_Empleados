@@ -1,4 +1,5 @@
-import { Brands, Schedule, Vacations } from "@/root/interface/employee";
+import { Attendance } from './../../../../root/interface/employee/employee.interface';
+import { Brands, Schedule } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
 import {
   collection,
@@ -16,6 +17,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { Vacations } from "@/root/types/Employee.type";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -45,7 +47,8 @@ const updatByUid = async (
   email: string,
   boss: string,
   schedule: Schedule[],
-  vacations: Vacations
+  vacations: Vacations,
+  attendance: Attendance
 ) => {
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
@@ -68,6 +71,7 @@ const updatByUid = async (
       boss,
       schedule,
       vacations,
+      attendance
     });
 
     const snapshotEmployeeUpdate = await getDoc(employeeDoc);
@@ -92,8 +96,8 @@ const create = async (
   email: string,
   boss: string,
   schedule: Schedule[],
-  brands: Brands[],
-  vacations: Vacations
+  vacations: Vacations,
+  attendance: Attendance
 ): Promise<{ message: string; employee?: any }> => {
   const userCredential = await createUserWithEmailAndPassword(
     auth,
@@ -137,14 +141,8 @@ const create = async (
     email,
     boss,
     vacations,
+    attendance,
     schedule: mergedSchedule,
-    brands: brands.map((s: Brands) => ({
-      date: s.date,
-      startTime: s.startTime,
-      endTime: s.endTime,
-      justification: s.justification,
-      finished: s.finished,
-    })),
   });
 
   const newDoc = await getDoc(newDocRef);

@@ -1,3 +1,4 @@
+import { Attendance } from './../interface/employee/employee.interface';
 import { Brands, Schedule } from "../interface/employee";
 
 export type DeleteEmployeeType = {
@@ -21,7 +22,9 @@ export type EmployeesType = {
   boss: string;
   schedule: Schedule[];
   vacations: { [Key: string]: Vacations };
+  attendance:{ [Key: string]: Attendance };
 }
+
 export type Vacations = {
   dateStart : string
   dateEnd: string

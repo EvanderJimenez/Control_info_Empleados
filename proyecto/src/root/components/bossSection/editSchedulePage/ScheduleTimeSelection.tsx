@@ -46,7 +46,8 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     email: "",
     boss: "",
     schedule: [],
-    vacations: {}
+    vacations: {},
+    attendance: {}
   }
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>(test);

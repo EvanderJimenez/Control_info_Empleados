@@ -1,9 +1,11 @@
 import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RegisterClock } from "../registerClock/RegisterClock";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
 import TableShedules from "../tableShedules/TableShedules";
 import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
+import { useSelector } from "react-redux";
+import { selectLogin } from "@/root/redux";
 
 export default function RegisterBrand() {
   const [newCycle, setNewCycle] = useState<string>("");
@@ -11,6 +13,9 @@ export default function RegisterBrand() {
   const [newHIni, setNewHIni] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number>(-1);
+
+  const employeeLogin =  useSelector(selectLogin)
+
 
   const handleEditClick = (index: number) => {
     const schedule = Object.values(brandData.hoursEmployee)[index];
@@ -149,6 +154,13 @@ export default function RegisterBrand() {
       console.error("Error getting brands data", error);
     }
   };
+
+  useEffect(() => {
+    if (employeeLogin?.uid) {
+      handleGetBrands(employeeLogin?.uid);
+    }
+  }, [employeeLogin?.uid]);
+  
 
   return (
     <div>
