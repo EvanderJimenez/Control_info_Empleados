@@ -57,7 +57,7 @@ input {
 }
 
 input::placeholder {
-  color: #454fce;
+  color: #27374D;
 }
 input[type="date"] {
   background-color: #5f5f5d;
