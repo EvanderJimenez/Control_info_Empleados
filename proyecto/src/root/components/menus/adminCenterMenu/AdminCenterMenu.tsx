@@ -24,7 +24,7 @@ export default function AdminCenterMenu() {
             </span>
           </button>
           <button
-          onClick={() => handleButtonClick("/home/AdminMain/Departments")}
+          onClick={() => handleButtonClick("/home/AdminMain/Department")}
             type="button"
             className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
           >

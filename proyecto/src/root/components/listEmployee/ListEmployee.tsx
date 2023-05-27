@@ -5,6 +5,7 @@ import { RootState } from "../../redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 import { selectLogin, selectGetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { startGetDepartmentById } from "@/root/redux";
 
 interface ListClear{
   clear : boolean;
@@ -23,18 +24,13 @@ const ListEmployee = ({clear,setClear} : ListClear) => {
   const loginState = useSelector(selectLogin);
 
   useEffect(() => {
-    dispatch(StartListOfEmployee());
+    console.log("k")
   }, [dispatch, getEmployeeByUid]);
 
   const handleLoad = (uid: string) => {
     dispatch(StartGetEmployeeByUid(uid));
     setClear(false)
   };
-
-  if (employeesListVariable) {
-    filteredEmployees = employeesListVariable.filter((item) => item.enabled && item.idDepartment === loginState?.idDepartment && item.uid !== loginState?.uid);
-  } else {
-  }
 
   return (
     <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-56 border-2 ">

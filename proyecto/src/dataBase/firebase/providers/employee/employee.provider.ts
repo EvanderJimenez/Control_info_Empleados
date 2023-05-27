@@ -150,7 +150,7 @@ const getByCedula = async (cedula: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(
     employeeCollection,
-    where("cedula", "==", cedula)
+    where("uid", "==", cedula)
   );
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     employeeQuery

@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../../listEmployee/ListEmployee";
 import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
-import { StartDismissEmployee, StartGetByVariable, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { ResetByVariable, ResetEmployeeByUid, StartDismissEmployee, StartGetByVariable, StartGetEmployeeByUid, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { toast } from "react-hot-toast";
+import { defaultSchedule } from "@/root/constants/schedule/schedule";
 
 export default function EditEmployeeSection() {
   const employeeByUid = useSelector(selectGetEmployeeByUid);
@@ -32,7 +33,7 @@ export default function EditEmployeeSection() {
     password: "",
     email: "",
     boss: "",
-    schedule: [],
+    schedule: defaultSchedule,
     vacations: {},
     attendance: {}
   });
@@ -41,6 +42,8 @@ export default function EditEmployeeSection() {
     event.preventDefault();
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
     setClear(true)
+    dispatch(ResetEmployeeByUid())
+    dispatch(ResetByVariable())
   };
 
   useEffect(() => {
