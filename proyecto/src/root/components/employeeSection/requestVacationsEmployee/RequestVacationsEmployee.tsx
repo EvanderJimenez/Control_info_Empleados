@@ -1,14 +1,16 @@
-import { Vacations } from "@/root/interface/employee";
+
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
-import { EmployeesType } from "@/root/types/Employee.type";
+import { EmployeesType, Vacations } from "@/root/types/Employee.type";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
-import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
+
 
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
+
+  const [sendRequest, setSendRequest] = useState(true)
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -65,6 +67,7 @@ const RequestVacationsEmployee = () => {
     setNewDateEnd("");
     setNewDescription("");
     setNewName("");
+    setSendRequest(!sendRequest)
   };
 
   useEffect(() => {
@@ -115,10 +118,11 @@ const RequestVacationsEmployee = () => {
       </div>
       <div className="lg:w-1/2 justify-center flex flex-col overflow-auto h-96">
         <h2 className="text-lg sm:text-xl font-medium text-center mb-8">List request vacations</h2>
-        <ListRequestVacations />
+        <ListRequestVacations data={dataEmployee} setSendRequest={setSendRequest}/>
         <div className="flex flex-row justify-center space-x-4  m-2">
           <button className="bg-darkBlue">Accepted</button>
           <button className="bg-red">Denied</button>
+          <button className="bg-lithBlue">Wait</button>
         </div>
       </div>
     </div>

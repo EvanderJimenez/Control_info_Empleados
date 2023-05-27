@@ -1,16 +1,22 @@
 import { selectGetVacationsByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StarGetVacationsByUid } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { EmployeesType } from "@/root/types/Employee.type";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const ListRequestVacations = () => {
+interface PropsListRequest {
+  data: EmployeesType;
+  setSendRequest: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ListRequestVacations = ({setSendRequest, data} : PropsListRequest) => {
   const employeesListVacations = useSelector(selectLogin);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(StarGetVacationsByUid(employeesListVacations?.uid || ""));
-  }, [dispatch, employeesListVacations]);
+  }, [dispatch, employeesListVacations,data]);
 
   return (
     <section className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-64 border-t-4 border-b-4">
