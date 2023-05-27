@@ -1,17 +1,14 @@
 import { PendingRequest } from "@/root/interface/employee";
-import {
-  selectGetEmployeesByIdDepartment,
-  selectLogin,
-} from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StarGetEmployeesByIdDepartment, StartGetEmployeeByUid } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-interface  RequestEmployeeProps{
+interface RequestEmployeeProps {
   selectedRequest: any;
 }
 
-const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
+const ListRequestVacations = ({ selectedRequest }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
   const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
@@ -42,7 +39,7 @@ const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
                 dateStart,
                 dateEnd,
                 description,
-                approved
+                approved,
               };
               pendingRequestsList.push(pendingRequest);
             }
@@ -51,25 +48,21 @@ const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
       });
       setPendingRequests(pendingRequestsList);
     }
-    
   }, [listEmployees]);
 
   const handleLoadInformation = (request: PendingRequest) => {
-
     selectedRequest(request);
-
   };
 
-
   return (
-    <div className="bg-gray-100 p-4">
+    <div className="shadow-lg space-y-5 overflow-auto h-72 w-full p-4">
       {pendingRequests.map((request: PendingRequest, index: number) => (
-        <div key={index} className="mb-4 p-2 border border-gray-300 rounded">
-          <h3 className="text-lg font-semibold mb-2">
-            Employee: {request.employeeName}
-          </h3>
-          <p className="text-gray-600">Name request: {request.key}</p>
-          <button className="bg-darkBlue" onClick={() => handleLoadInformation(request)}>Load Information</button>
+        <div key={index} className="p-5 shadow-lg flex-col space-y-3 flex bg-lithBlue bg-opacity-40  rounded">
+          <h3 className="text-md text-center font-semibold  mb-2">Employee: {request.employeeName}</h3>
+          <p className="font-semibold text-center">Affair: {request.key}</p>
+          <button className="bg-darkBlue" onClick={() => handleLoadInformation(request)}>
+            Load information
+          </button>
         </div>
       ))}
     </div>

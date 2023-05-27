@@ -2,36 +2,28 @@ import React, { useEffect, useState } from "react";
 import Filters from "./components/filters/Filters";
 import ListRequestVacations from "./components/listRequest/ListRequestVacations";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectGetEmployeeByUid,
-  selectLogin,
-} from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { PendingRequest } from "@/root/interface/employee";
-import {
-  
-  ResetEmployeeByUid,
-  StartGetEmployeeByUid,
-  StartUpDateEmployee,
-} from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { ResetEmployeeByUid, StartGetEmployeeByUid, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 
-let optionSelect = "wait"
+let optionSelect = "wait";
 
- const  pendingRequest: PendingRequest = {
+const pendingRequest: PendingRequest = {
   key: "",
   employeeName: "",
-  employeeUID:"",
+  employeeUID: "",
   dateStart: "",
-  dateEnd:"",
+  dateEnd: "",
   description: "",
   approved: "",
-}
+};
 
 const VacationsRequestBoss = () => {
   const dispatch = useDispatch();
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [selectedRequest, setSelectedRequest] = useState<PendingRequest>();
-   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
     firstSurname: "",
@@ -48,37 +40,32 @@ const VacationsRequestBoss = () => {
     boss: "",
     schedule: [],
     vacations: {},
-    attendance: {}
+    attendance: {},
   });
-
-  
 
   const handleAccept = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
-    optionSelect = "accept"
-    console.log("option: " + optionSelect)
-  }
+    optionSelect = "accept";
+    console.log("option: " + optionSelect);
+  };
 
-  
   const handleDenied = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
-    optionSelect = "denied"
-    console.log("option: " + optionSelect)
-  }
+    optionSelect = "denied";
+    console.log("option: " + optionSelect);
+  };
 
   useEffect(() => {
-
-    console.log("option: "  + optionSelect)
+    console.log("option: " + optionSelect);
 
     if (employeeByUid && employeeByUid.vacations && optionSelect !== "wait") {
-      const vacation = employeeByUid.vacations[selectedRequest?.key || ''];
+      const vacation = employeeByUid.vacations[selectedRequest?.key || ""];
 
       const updatedVacation = { ...vacation, approved: optionSelect };
 
-
       const updatedVacations = {
         ...employeeByUid.vacations,
-        [selectedRequest?.key || '']: updatedVacation,
+        [selectedRequest?.key || ""]: updatedVacation,
       };
 
       const updatedDataEmployee = {
@@ -86,73 +73,63 @@ const VacationsRequestBoss = () => {
         vacations: updatedVacations,
       };
 
-      setDataEmployee(updatedDataEmployee)
+      setDataEmployee(updatedDataEmployee);
 
-      console.log("Status :" + JSON.stringify(updatedDataEmployee.vacations))
+      console.log("Status :" + JSON.stringify(updatedDataEmployee.vacations));
 
-      dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
+      dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
       //dispatch(ResetEmployeeByUid())
 
-      setSelectedRequest(pendingRequest)
-
+      setSelectedRequest(pendingRequest);
     }
-
-    //
-
-  }, [employeeByUid,dispatch])
+  }, [employeeByUid, dispatch]);
 
   return (
-    <div className="flex flex-row">
-      <div>
-        <div className="flex flex-col justify-center items-center">
-          <h2>List Request</h2>
+    <div className="flex flex-col lg:flex-row overflow-hidden pb-14">
+      <div className="w-full lg:w-1/4">
+        <div className="flex flex-col mb-3 justify-center items-center">
           <Filters />
         </div>
         <div>
           <ListRequestVacations selectedRequest={setSelectedRequest} />
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center m-3">
-        <div className="flex flex-col justify-center items-center">
-          <label className="">
-            Name employee: {selectedRequest?.employeeName || ""}
-          </label>
-          <label>Name Request: {selectedRequest?.key || ""}</label>
+      <div className="flex flex-col lg:w-1/2 md:w-1/2 sm:flex-col lg:3/4 w-full justify-center items-center m-3">
+        <div className="flex w-full justify-center space-x-5  items-center">
+          <label className="text-center font-semibold">From: {selectedRequest?.employeeName || ""}</label>
+          <label className="text-center font-semibold ">Affair: {selectedRequest?.key || ""}</label>
         </div>
-        <section className="xl:w-3/4 flex flex-col justify-center items-center">
-          <div className="flex flex-col justify-center items-center  p-3">
-            <label>Date Start: </label>
-            <input
-              type="text"
-              id="dateStar"
-              value={selectedRequest?.dateStart || ""}
-              readOnly
-            />
-            <label>Date Finish:</label>
-            <input
-              type="text"
-              id="dateEnd"
-              value={selectedRequest?.dateEnd || ""}
-              readOnly
-            />
+        <section className="w-full xl:w-3/4 flex flex-col justify-center items-center">
+          <div className="flex flex-row space-x-3 mb-3 justify-center items-center pt-3">
+            <div>
+              <label>Start date: </label>
+              <input type="text" id="dateStar" className="outline-none w-auto" value={selectedRequest?.dateStart || ""} readOnly />
+            </div>
+            <div>
+              <label>End date:</label>
+              <input type="text" className="outline-none w-auto" id="dateEnd" value={selectedRequest?.dateEnd || ""} readOnly />
+            </div>
           </div>
-          <div>
+
+          <div className="justify-center">
             <textarea
+              className="font-semibold w-full shadow-xl rounded-md outline-none"
               name="description"
               id="description"
               placeholder="Vacation request information"
-              cols={29}
+              cols={40}
               rows={10}
               value={selectedRequest?.description || ""}
               readOnly
             ></textarea>
           </div>
-
-          <div className="flex flex-row">
-            <button className="bg-blue" onClick={handleAccept}>
+          <div className="flex flex-row justify-center space-x-2 sm:flex-row">
+            <button className="bg-blue " onClick={handleAccept}>
               Accepted
             </button>
-            <button onClick={handleDenied} className="bg-red">Denied</button>
+            <button onClick={handleDenied} className="bg-red ">
+              Denied
+            </button>
           </div>
         </section>
       </div>

@@ -1,4 +1,5 @@
 import InputLabel from "@/root/components/registerEmployee/components/schedule/components/inputLabel/InputLabel";
+import InputFloatLabel from "@/root/components/ui/InputFloatLabel/InputFloatLabel";
 import React, { useState } from "react";
 
 const Filters = () => {
@@ -6,18 +7,11 @@ const Filters = () => {
     const [name, setName] = useState("")
 
   return (
-    <div className="flex flex-col m-2">
-      <div className="m-1">
-      <label className="mr-2">Name: </label>
-      <input type="text" value={name} className="mr-2" onChange={(e) =>  setName(e.target.value)}/>
-      </div>
-      <div className="">
-      <button className="bg-red flex justify-center w-60">
-        {" "}
+    <div className="flex flex-row space-x-2 mt-5 m-2">
+      <InputFloatLabel type="text" value={name} onChange={(e) =>  setName(e.target.value)} id="name" labelFloat="Name" name="name"  />
+      <button className="bg-red flex justify-center items-center w-auto h-auto">
         <img src="/Images/searchIcon.png" alt="" />
-
       </button>
-      </div>
     </div>
   );
 };
