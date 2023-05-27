@@ -33,8 +33,8 @@ const ListRequestVacations = (props: filter) => {
                             <span>Name Request: {name}</span>
                           </h4>
                           <p className=" text-base font-normal text-black">Description: {employeesListVacations.vacations[name].description}</p>
-                          <p>Date Start: {employeesListVacations.vacations[name].dateStart}</p>
-                          <p>Date End: {employeesListVacations.vacations[name].dateEnd}</p>
+                          <p className=" font-semibold">Date start: {employeesListVacations.vacations[name].dateStart}</p>
+                          <p>Date end: {employeesListVacations.vacations[name].dateEnd}</p>
                           <p>State: {employeesListVacations.vacations[name].approved}</p>
                         </div>
                       </div>
