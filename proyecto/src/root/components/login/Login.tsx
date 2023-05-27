@@ -10,6 +10,7 @@ import { startGetDepartmentById } from "@/root/redux/thunks/department-thunk/dep
 import cookiesUser from "@/root/utils/login/cookiesUser";
 import { RootState } from "@/root/redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
+import toast from "react-hot-toast";
 
 function Login() {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function Login() {
 
   return (
     <>
-      <div className="flex justify-center">{loading ? <LoadingGeneralComponent/> : <div>Hi</div> }</div>
+      <div className="flex justify-center">{loading ? <LoadingGeneralComponent/> : <div className="font-medium text-white">Welcome!</div> }</div>
       <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />
     </>
   );

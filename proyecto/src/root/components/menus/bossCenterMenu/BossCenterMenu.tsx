@@ -11,7 +11,7 @@ export default function BossCenterMenu() {
 
   return (
     <>
-      <div className=" print:hidden left-0 z-50 w-full h-20 bg-SecondaryColor  dark:bg-gray-700 dark:border-gray-600">
+      <div className=" print:hidden left-0 z-50 w-full h-20 bg-lithBlue ">
         <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
           <button
             onClick={() => handleButtonClick("/home/BossMain/Employees")}
