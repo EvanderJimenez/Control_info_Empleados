@@ -13,10 +13,10 @@ interface PropsFormSchedule {
 const FormSchedule = ({ handleSaveSchedule, handleTimeChange, schedules, setSchedules }: PropsFormSchedule) => {
   return (
     <>
-      <form onSubmit={handleSaveSchedule} className="relative overflow-x-auto">
+      <form onSubmit={handleSaveSchedule} className=" pb-14 w-auto h-auto">
         <table className="w-full text-sm text-left GrayTable">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
+          <thead className="text-xs  uppercase bg-gray-50">
+            <tr className="bg-black text-white">
               <th scope="col" className="px-6 py-3">
                 Weekday
               </th>
@@ -30,13 +30,13 @@ const FormSchedule = ({ handleSaveSchedule, handleTimeChange, schedules, setSche
           </thead>
           <tbody>
             {schedules.map((schedule, index) => (
-              <tr key={index} className="border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+              <tr key={index} className=" even:bg-lithBlue odd:bg-white dark:bg-gray-800 ">
+                <th scope="row" className="px-6 py-4 font-medium">
                   {schedule.day}
                 </th>
                 <td className="px-6 py-4">
                   <input
-                    className="border-y-2 focus:outline-none border-blue bg-transparent text-sm zoom block"
+                    className="focus:outline-none border-y-2 border-blue bg-transparent text-sm zoom block"
                     type="time"
                     value={schedule.startTime}
                     onChange={(e) => handleTimeChange(index, "startTime", e.target.value)}
@@ -55,7 +55,7 @@ const FormSchedule = ({ handleSaveSchedule, handleTimeChange, schedules, setSche
           </tbody>
         </table>
         <div className="flex justify-center mt-2">
-          <button className="NormalButton" type="submit">
+          <button className="bg-darkBlue w-full" type="submit">
             Save schedule
           </button>
         </div>

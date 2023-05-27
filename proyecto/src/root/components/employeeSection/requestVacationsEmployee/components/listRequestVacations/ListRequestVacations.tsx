@@ -34,7 +34,7 @@ const ListRequestVacations = ({ setSendRequest, data, filter }: PropsListRequest
                         <div className="relative flex  flex-row items-center m-1 transition duration-300 ease-in-out delay-150 transform bg-white shadow-2xl rounded-xl md:w-80 md:-ml-16 md:hover:-translate-x-16 md:hover:-translate-y-8">
                           <div className=" px-6 py-8">
                             <h4 className=" text-xl font-semibold text-neutral">
-                              <span>Name Request: {name}</span>
+                              <span>Affair: {name}</span>
                             </h4>
                             <p className=" text-base font-normal text-black">Description: {employeesListVacations.vacations[name].description}</p>
                             <p className=" font-semibold">Date start: {employeesListVacations.vacations[name].dateStart}</p>
