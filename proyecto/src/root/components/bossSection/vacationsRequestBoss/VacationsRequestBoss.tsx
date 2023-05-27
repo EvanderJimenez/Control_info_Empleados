@@ -108,7 +108,7 @@ const VacationsRequestBoss = () => {
           <Filters />
         </div>
         <div>
-          <ListRequestVacations dataEmployee={dataEmployee} selectedRequest={setSelectedRequest} />
+          <ListRequestVacations selectedRequest={setSelectedRequest} />
         </div>
       </div>
       <div className="flex flex-col justify-center items-center m-3">

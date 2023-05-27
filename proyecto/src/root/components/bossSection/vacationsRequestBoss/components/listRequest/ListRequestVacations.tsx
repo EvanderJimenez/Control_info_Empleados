@@ -4,16 +4,14 @@ import {
   selectLogin,
 } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StarGetEmployeesByIdDepartment, StartGetEmployeeByUid } from "@/root/redux/thunks/employee-thunk/employee.thunk";
-import { EmployeesType } from "@/root/types/Employee.type";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface  RequestEmployeeProps{
-  dataEmployee: EmployeesType
   selectedRequest: any;
 }
 
-const ListRequestVacations = ({selectedRequest,dataEmployee} : RequestEmployeeProps) => {
+const ListRequestVacations = ({selectedRequest} : RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
   const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
@@ -53,8 +51,8 @@ const ListRequestVacations = ({selectedRequest,dataEmployee} : RequestEmployeePr
       });
       setPendingRequests(pendingRequestsList);
     }
-    console.log("Data received: " + JSON.stringify(dataEmployee))
-  }, [listEmployees,pendingRequests]);
+    
+  }, [listEmployees]);
 
   const handleLoadInformation = (request: PendingRequest) => {
 
