@@ -4,6 +4,9 @@ import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import { format, parseISO, getDay } from "date-fns";
 import { Brands } from "@/root/interface/brands";
 import BrandsClock from "../BrandsClock";
+import { useSelector } from "react-redux";
+import { selectLogin } from "@/root/redux";
+import JustificationEmployee from "../../justification/JustificationEmployee";
 
 export const BrandsEmployee = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -11,7 +14,13 @@ export const BrandsEmployee = () => {
   const [hoursIni, setHoursIni] = useState("");
   const [formattedDay, setFormattedDay] = useState("");
   const [hoursFin, setHoursFin] = useState("");
+  const employeeLogin = useSelector(selectLogin);
   const [updateDateTime, setUpdateDateTime] = useState(false);
+  const [initialLate, setInitialLate] = useState(false);
+  const [finalDelay, setFinalDelay] = useState(false);
+  const [markInitial, setMarkInitial] = useState("");
+  const [markFinal, setMarkFinal] = useState("");
+  const [finish, setFinish] = useState(false);
   const [brandData, setBrandData] = useState<Brands>({
     idEmployee: "",
     cycle: {},
@@ -84,7 +93,7 @@ export const BrandsEmployee = () => {
     if (brandData && brandData.cycle && brandData.cycle[cycleName]) {
       const cycle = brandData.cycle[cycleName];
       const existingHours = cycle.hours[currentDate];
-
+      console.log(currentTime);
       if (existingHours) {
         const updatedCycle = {
           ...cycle,
@@ -147,10 +156,12 @@ export const BrandsEmployee = () => {
           markStartHour < hoursIniHour ||
           (markStartHour === hoursIniHour && markStartMinute < hoursIniMinute)
         ) {
+          console.log(markStartHour, hoursIni);
           console.log("The mark start hour is earlier than hoursIni");
           return true;
         } else {
-          console.log("The mark start hour does not match the condition");
+          setInitialLate(true);
+          setMarkInitial(markStart);
         }
       }
     } else if (markStart && markEnd) {
@@ -164,16 +175,23 @@ export const BrandsEmployee = () => {
         markEndHour > hoursFinHour ||
         (markEndHour === hoursFinHour && markEndMinute >= hoursFinMinute)
       ) {
+        console.log(markEndHour, hoursFin);
         console.log("The mark end hour is greater than or equal to hoursFin");
         return true;
       } else {
-        console.log("The mark end hour does not match the condition");
+        setFinalDelay(true);
+        setMarkFinal(markEnd);
       }
     }
 
     return false;
   };
 
+  useEffect(() => {
+    if (employeeLogin?.uid) {
+      handleGetBrands(employeeLogin?.uid);
+    }
+  }, [employeeLogin?.uid]);
   return (
     <div>
       <BrandsClock
@@ -190,7 +208,24 @@ export const BrandsEmployee = () => {
         handleUpdateCycleHours={handleUpdateCycleHours}
         checkMarkHours={checkMarkHours}
         setBrandData={setBrandData}
+        setFinish={setFinish}
       />
+      {initialLate === true && finish === true ? (
+        <JustificationEmployee
+          hIni={markInitial}
+          hFin={""}
+          date={currentDate}
+          uuid={brandData.idEmployee}
+        />
+      ) : null}
+      {finalDelay === true && finish === true ? (
+        <JustificationEmployee
+          hIni={""}
+          hFin={markFinal}
+          date={currentDate}
+          uuid={brandData.idEmployee}
+        />
+      ) : null}
     </div>
   );
 };
