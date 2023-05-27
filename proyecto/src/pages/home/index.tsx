@@ -4,8 +4,6 @@ import MainForm from "@/root/components/mainForm/MainForm";
 import { Schedule } from "@/root/interface/employee";
 
   export default function index() {
-  const handleScheduleChange = (schedules: Schedule[]) => {
-  };
 
   return (
     <LoginPage>

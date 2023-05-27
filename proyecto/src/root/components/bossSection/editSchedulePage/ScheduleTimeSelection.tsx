@@ -62,7 +62,6 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     if (employeeSchedule) {
       setSchedules(employeeSchedule.schedule);
       setDataEmployee(employeeSchedule);
-
     }
   }, [employeeSchedule]);
 
@@ -70,9 +69,6 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     event.preventDefault();
 
     const newDataEmployee = { ...dataEmployee, schedule: schedules };
-
-    console.log("uid: " + JSON.stringify(newDataEmployee.schedule));
-    console.log("employ: " + JSON.stringify(newDataEmployee.schedule));
 
     dispatch(StartUpDateEmployee(newDataEmployee?.uid || "", newDataEmployee));
 

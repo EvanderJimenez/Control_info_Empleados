@@ -94,7 +94,6 @@ export interface InputInterface {
   value:string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
-
 export interface Attendance {
   startTime: string;
   endTime: string;

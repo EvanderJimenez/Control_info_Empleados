@@ -4,13 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../../listEmployee/ListEmployee";
 import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
-import { StartDismissEmployee, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { StartDismissEmployee, StartGetByVariable, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 
 export default function EditEmployeeSection() {
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const dispatch = useDispatch();
 
   const [clear, setClear] = useState(false)
+  const [cedula, setCedula] = useState("")
+  const [name, setName] = useState("")
+  const [jobPosition, setJobPosition] = useState("")
+  const [clearInput, setClearInput] = useState(false)
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -81,13 +85,9 @@ export default function EditEmployeeSection() {
         <div className="flex-none w-full sm:w-72 relative p-1 m-1">
           <div className="flex flex-col mb-3">
             <h2>filters: </h2>
-            <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
-            <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Name" typeList="name" id="name" />
-            <SearchInput labelInputSeekerOne="text" valueEnd={""} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
-            <button className="bg-red flex justify-center">
-            {" "}
-            <img src="/Images/searchIcon.png" alt="" />
-          </button>
+            <SearchInput labelInputSeekerOne="text" valueEnd={cedula} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
+            <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
+            <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
           </div>
           <ListEmployee clear = {clear} setClear={setClear} />
         </div>

@@ -1,5 +1,5 @@
-import employeeProvider from "../../../../dataBase/firebase/providers/employee/employee.provider";
-import { notAllowedResponse } from "../../../../root/api/reponses/notAllowedResponse";
+import { employeeProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getByEmailPassword = async (
