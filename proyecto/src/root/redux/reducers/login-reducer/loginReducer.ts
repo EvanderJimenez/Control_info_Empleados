@@ -6,7 +6,7 @@ interface LoginState {
     login: EmployeesType | null
   }
 
-  export const initialState: LoginState = {
+  export const initialStateLogin: LoginState = {
     login: null
   };
 
@@ -18,7 +18,7 @@ interface LoginState {
 
   export const LoginSlice = createSlice({
     name: "login",
-    initialState: initialState,
+    initialState: initialStateLogin,
 
     reducers: {
 

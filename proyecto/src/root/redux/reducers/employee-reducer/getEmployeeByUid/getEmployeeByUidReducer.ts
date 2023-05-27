@@ -6,7 +6,7 @@ interface GetEmployeeByUidState {
     getEmployeeByUid: EmployeesType | null
   }
 
-  export const initialState: GetEmployeeByUidState = {
+  export const initialStateByUid: GetEmployeeByUidState = {
     getEmployeeByUid: null  };
 
 
@@ -17,7 +17,7 @@ interface GetEmployeeByUidState {
 
   export const GetEmployeeByUidSlice = createSlice({
     name: "getEmployeeByUid",
-    initialState: initialState,
+    initialState: initialStateByUid,
 
     reducers: {
 

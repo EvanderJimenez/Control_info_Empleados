@@ -29,6 +29,7 @@ const RequestVacationsEmployee = () => {
     boss: "",
     schedule: [],
     vacations: {},
+    attendance: {}
   });
 
   const [newDateStart, setNewDateStart] = useState("");

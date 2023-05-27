@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 interface LoadState {
   loading: boolean;
 }
-export const initialState: LoadState = {
+export const initialStateLoading: LoadState = {
   loading: false,
 };
 
@@ -14,7 +13,7 @@ type LoadAction = {
 
 export const LoadSlice = createSlice({
   name: "Load",
-  initialState,
+  initialState: initialStateLoading,
 
   reducers: {
     setLoading: (state, action: PayloadAction<boolean>) => {
@@ -25,4 +24,4 @@ export const LoadSlice = createSlice({
 
 export const { setLoading } = LoadSlice.actions;
 export const LoadReducer = LoadSlice.reducer;
-export type DispatchType = (args: LoadAction) => LoadAction;
+export type DispatchTypeLoading = (args: LoadAction) => LoadAction;

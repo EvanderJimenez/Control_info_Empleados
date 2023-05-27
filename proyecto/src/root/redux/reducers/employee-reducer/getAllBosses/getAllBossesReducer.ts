@@ -6,7 +6,7 @@ interface GetAllBossesState {
     getAllBosses: EmployeesType []
   }
 
-  export const initialState: GetAllBossesState = {
+  export const initialStateAllBoss: GetAllBossesState = {
     getAllBosses:[]
 
 };
@@ -18,7 +18,7 @@ interface GetAllBossesState {
 
   export const getAllBossSlice = createSlice({
     name: "getAllBosses",
-    initialState: initialState,
+    initialState: initialStateAllBoss,
 
     reducers: {
 

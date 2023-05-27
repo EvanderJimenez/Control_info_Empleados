@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { EmployeesType } from "@/root/types/Employee.type";
 
 
 const getAll = async (res: NextApiResponse) => {
@@ -13,54 +14,17 @@ const getAll = async (res: NextApiResponse) => {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-
   try {
-    const {
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-      vacations,
-      attendance
-    } = req.body;
+    const employeeData : EmployeesType = req.body;
 
-    const newEmployee = await employeeProvider.create(
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-      vacations,
-      attendance
-    );
-
+    const newEmployee = await employeeProvider.create(employeeData);
 
     res.status(201).json(newEmployee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
 };
+
 
 const handlers: any = {};
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
