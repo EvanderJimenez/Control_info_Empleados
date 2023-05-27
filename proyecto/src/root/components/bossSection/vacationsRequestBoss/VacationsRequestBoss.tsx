@@ -14,13 +14,23 @@ import {
 } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 
+let optionSelect = "wait"
+
+ const  pendingRequest: PendingRequest = {
+  key: "",
+  employeeName: "",
+  employeeUID:"",
+  dateStart: "",
+  dateEnd:"",
+  description: "",
+  approved: "",
+}
+
 const VacationsRequestBoss = () => {
-  let denied = false;
   const dispatch = useDispatch();
-  const loginState = useSelector(selectLogin);
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [selectedRequest, setSelectedRequest] = useState<PendingRequest>();
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
+   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
     firstSurname: "",
@@ -37,35 +47,37 @@ const VacationsRequestBoss = () => {
     boss: "",
     schedule: [],
     vacations: {},
-    attendance: {},
+    attendance: {}
   });
+
+  
 
   const handleAccept = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
-    denied = true;
-  };
+    optionSelect = "accept"
+    console.log("option: " + optionSelect)
+  }
 
+  
   const handleDenied = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
-    denied = false;
-  };
+    optionSelect = "denied"
+    console.log("option: " + optionSelect)
+  }
 
   useEffect(() => {
 
-    if (employeeByUid && employeeByUid.vacations) {
-      const vacation = employeeByUid.vacations[selectedRequest?.key || ""];
+    console.log("option: "  + optionSelect)
 
-      let updatedVacation;
+    if (employeeByUid && employeeByUid.vacations && optionSelect !== "wait") {
+      const vacation = employeeByUid.vacations[selectedRequest?.key || ''];
 
-      if (!denied) {
-        updatedVacation = { ...vacation, approved: "denied" };
-      } else {
-        updatedVacation = { ...vacation, approved: "accepted" };
-      }
+      const updatedVacation = { ...vacation, approved: optionSelect };
+
 
       const updatedVacations = {
         ...employeeByUid.vacations,
-        [selectedRequest?.key || ""]: updatedVacation,
+        [selectedRequest?.key || '']: updatedVacation,
       };
 
       const updatedDataEmployee = {
@@ -73,23 +85,20 @@ const VacationsRequestBoss = () => {
         vacations: updatedVacations,
       };
 
-      setDataEmployee(updatedDataEmployee);
+      setDataEmployee(updatedDataEmployee)
 
-      console.log(
-        "updatedDataEmployee: " + JSON.stringify(dataEmployee.vacations)
-      );
+      console.log("Status :" + JSON.stringify(updatedDataEmployee.vacations))
 
-      console.log("dataEmployee: " + dataEmployee.uid.length)
+      dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
+      //dispatch(ResetEmployeeByUid())
 
-      if(dataEmployee.uid.length !== 0){
-        console.log("enter")
-        //dispatch(StartUpDateEmployee(dataEmployee.uid,dataEmployee))
-        dispatch(ResetEmployeeByUid());
-      }
+      setSelectedRequest(pendingRequest)
+
     }
 
+    //
 
-  }, [employeeByUid, dispatch]);
+  }, [employeeByUid,dispatch])
 
   return (
     <div className="flex flex-row">
@@ -99,7 +108,7 @@ const VacationsRequestBoss = () => {
           <Filters />
         </div>
         <div>
-          <ListRequestVacations selectedRequest={setSelectedRequest} />
+          <ListRequestVacations dataEmployee={dataEmployee} selectedRequest={setSelectedRequest} />
         </div>
       </div>
       <div className="flex flex-col justify-center items-center m-3">
@@ -142,9 +151,7 @@ const VacationsRequestBoss = () => {
             <button className="bg-blue" onClick={handleAccept}>
               Accepted
             </button>
-            <button onClick={handleDenied} className="bg-red">
-              Denied
-            </button>
+            <button onClick={handleDenied} className="bg-red">Denied</button>
           </div>
         </section>
       </div>
