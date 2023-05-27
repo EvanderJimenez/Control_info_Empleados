@@ -7,7 +7,30 @@ interface GetEmployeeByUidState {
   }
 
   export const initialStateByUid: GetEmployeeByUidState = {
-    getEmployeeByUid: null  };
+    getEmployeeByUid: {
+
+      uid: "",
+      name: "",
+      firstSurname: "",
+      secondSurname: "",
+      cedula: 0,
+      phoneNumber: 0,
+      photo: "",
+      jobPosition: "",
+      salary: 0,
+      enabled: true,
+      idDepartment: "",
+      password: "",
+      email: "",
+      boss: "",
+      schedule: [],
+      vacations: {},
+      attendance: {}
+
+    }
+  
+  
+  };
 
 
   type EmployeeAction = {
@@ -24,9 +47,12 @@ interface GetEmployeeByUidState {
         getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) =>{
         return {getEmployeeByUid: action.payload}
       },
+      resetEmployeeByUid: (state) => {
+        state.getEmployeeByUid = initialStateByUid.getEmployeeByUid;
+      },
     },
   });
 
-  export const {getEmployeeByUidReducer} = GetEmployeeByUidSlice.actions;
+  export const {getEmployeeByUidReducer,resetEmployeeByUid } = GetEmployeeByUidSlice.actions;
   export const GetEmployeeByUidReducer = GetEmployeeByUidSlice.reducer;
   export type DispatchTypeEmployeeByUid = (args: EmployeeAction) => EmployeeAction;

@@ -25,9 +25,12 @@ interface GetByVariableState {
         getByVariableReducer: (state, action: PayloadAction<EmployeesType[]>) =>{
         return {getByVariable: action.payload}
       },
+      resetByVariable: (state) => {
+        state.getByVariable = [];
+      },
     },
   });
 
-  export const {getByVariableReducer} = GetByVariableSlice.actions;
+  export const {getByVariableReducer,resetByVariable } = GetByVariableSlice.actions;
   export const GetByVariableReducer = GetByVariableSlice.reducer;
   export type DispatchTypeByVariable = (args: EmployeeAction) => EmployeeAction;

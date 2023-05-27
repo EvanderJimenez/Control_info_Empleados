@@ -6,8 +6,8 @@ import { DispatchTypeDismiss, dismissEmployeeReducer } from "../../reducers/empl
 import { DispatchTypeListEmployee, listEmployeesReducer } from "../../reducers/employee-reducer/listEmployees/ListEmployeeReducer";
 import { DispatchTypeCreate, createEmployeeReducer } from "../../reducers/employee-reducer/createEmployee/CreateEmployeeReducer";
 import { DispatchTypeUpdate, updateEmployeeReducer } from "../../reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
-import { DispatchTypeEmployeeByUid, getEmployeeByUidReducer } from "../../reducers/employee-reducer/getEmployeeByUid/GetEmployeeByUidReducer";
-import { DispatchTypeByVariable, getByVariableReducer } from "../../reducers/employee-reducer/getByVariable/GetByVariableReducer";
+import { DispatchTypeEmployeeByUid, getEmployeeByUidReducer, resetEmployeeByUid } from "../../reducers/employee-reducer/getEmployeeByUid/GetEmployeeByUidReducer";
+import { DispatchTypeByVariable, getByVariableReducer, resetByVariable } from "../../reducers/employee-reducer/getByVariable/GetByVariableReducer";
 import { DispatchTypeVacations, getVacationsByUidReducer } from "../../reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
 import { DispatchTypeByIdDepart, getEmployeesByIdDepartmentReducer } from "../../reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
 import { DispatchTypeAllBoss, getAllBossReducer } from "../../reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
@@ -98,6 +98,13 @@ export const StartGetEmployeeByUid = (searchTerm: string): any => {
     }
   };
 };
+
+export const ResetEmployeeByUid = (): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    dispatch(resetEmployeeByUid());
+  };
+};
+
 export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchTypeLogin) => {
     dispatch(setLoading(true));
@@ -124,6 +131,11 @@ export const StartGetByVariable = (searchTerm1: string, searchTerm2: string,  se
   }
 }
 
+export const ResetByVariable = (): any => {
+  return async (dispatch: DispatchTypeByVariable) => {
+    dispatch(resetByVariable());
+  };
+};
 
 export const StarGetVacationsByUid = (searchTerm: string) : any => {
   return async (dispatch: DispatchTypeVacations) => {
