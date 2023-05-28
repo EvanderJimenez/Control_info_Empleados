@@ -33,24 +33,24 @@ async function createBrands(
   cycle: Cycle,
   hoursEmployee: HoursEmployee
 ): Promise<{ message: string; brands?: any }> {
-    const newDocRef = await addDoc(collection(firestore, "brands"), {
-      idEmployee,
-      cycle,
-      hoursEmployee,
-    });
+  const newDocRef = await addDoc(collection(firestore, "brands"), {
+    idEmployee,
+    cycle,
+    hoursEmployee,
+  });
 
-    const newDoc = await getDoc(newDocRef);
+  const newDoc = await getDoc(newDocRef);
 
-    if (newDoc.exists()) {
-      return {
-        message: "Successfully created brands",
-        brands: newDoc.data(),
-      };
-    } else {
-      return {
-        message: "Failed to create brands",
-      };
-    }
+  if (newDoc.exists()) {
+    return {
+      message: "Successfully created brands",
+      brands: newDoc.data(),
+    };
+  } else {
+    return {
+      message: "Failed to create brands",
+    };
+  }
 }
 
 const getDocId = async (docId: string) => {
@@ -80,20 +80,25 @@ const getDocByEmployeeId = async (idEmployee: string) => {
   }
 };
 
-const updateById = async (idEmployee: string, cycle: Hours) => {
-    const brandsRef = collection(firestore, "brands");
-    const q = query(brandsRef, where("idEmployee", "==", idEmployee));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.size > 0) {
-      const brandsDoc = doc(firestore, "brands", querySnapshot.docs[0].id);
-      await updateDoc(brandsDoc, {
-        idEmployee,
-        cycle,
-      });
-      const snapshotBrandsUpdate = await getDoc(brandsDoc);
-      const brandsUpdate = snapshotBrandsUpdate.data();
-      return brandsUpdate;
-    }
+const updateById = async (
+  idEmployee: string,
+  cycle: Hours,
+  hoursEmployee: HoursEmployee
+) => {
+  const brandsRef = collection(firestore, "brands");
+  const q = query(brandsRef, where("idEmployee", "==", idEmployee));
+  const querySnapshot = await getDocs(q);
+  if (querySnapshot.size > 0) {
+    const brandsDoc = doc(firestore, "brands", querySnapshot.docs[0].id);
+    await updateDoc(brandsDoc, {
+      idEmployee,
+      cycle,
+      hoursEmployee,
+    });
+    const snapshotBrandsUpdate = await getDoc(brandsDoc);
+    const brandsUpdate = snapshotBrandsUpdate.data();
+    return brandsUpdate;
+  }
 };
 
 export const brandsProvider = {

@@ -8,6 +8,7 @@ interface RegisterEmployeesProps {
   setNewEmployee: React.Dispatch<React.SetStateAction<string>>;
   setNewEmployeeData: React.Dispatch<React.SetStateAction<string>>;
   formRef: React.RefObject<HTMLFormElement>;
+  handleToggleDocumentsForm: () => void;
 }
 
 const AddEmployee = ({
@@ -16,6 +17,7 @@ const AddEmployee = ({
   newEmployeeData,
   setNewEmployee,
   setNewEmployeeData,
+  handleToggleDocumentsForm,
   formRef,
 }: RegisterEmployeesProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -77,6 +79,14 @@ const AddEmployee = ({
                     type="submit"
                   >
                     Save Employee
+                  </button>
+                </div>
+                <div className="md:w-1/2 px-3 mb-6 md:mb-0 px-10">
+                  <button
+                    onClick={handleToggleDocumentsForm}
+                    className="bg-[#049473] hover:bg-sky text-white font-bold py-2 px-4 rounded "
+                  >
+                    AddEmployee
                   </button>
                 </div>
               </div>

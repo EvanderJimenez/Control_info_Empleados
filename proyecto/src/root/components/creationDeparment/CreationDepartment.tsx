@@ -36,11 +36,15 @@ const CreationDepartment = ({
   ...props
 }: infoDepart) => {
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
+  const [showDocumentsForm, setShowDocumentsForm] = useState(false);
   const employeeFormRef = useRef(null);
 
   const handleToggleEmployeeForm = () => {
     setShowEmployeeForm(!showEmployeeForm);
-    console.log(departmentsData);
+  };
+
+  const handleToggleDocumentsForm = () => {
+    setShowDocumentsForm(!showDocumentsForm);
   };
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -153,13 +157,27 @@ const CreationDepartment = ({
           newEmployeeData={newEmployeeData}
           setNewEmployee={setNewEmployee}
           setNewEmployeeData={setNewEmployeeData}
+          handleToggleDocumentsForm={handleToggleDocumentsForm}
         />
       )}
-      <AddDocuments
-        handleSubmitDocuments={handleSubmitDocuments}
-        newDocuments={newDocuments}
-        setNewDocuments={setNewDocuments}
-      />
+      {showDocumentsForm && (
+        <AddDocuments
+          handleSubmitDocuments={handleSubmitDocuments}
+          newDocuments={newDocuments}
+          setNewDocuments={setNewDocuments}
+        />
+      )}
+      <div>
+        {departmentsData.employees &&
+          Object.entries(departmentsData.employees).map(([name, department]) =>
+            Object.values(department).map((employee: Employee) => (
+              <tr key={name}>
+                <td>{employee.imageE}</td>
+                <td>{employee.des}</td>
+              </tr>
+            ))
+          )}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -45,7 +44,10 @@ handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>
   updateByUid(req, res);
 
-export default function employeesByIdController(req: NextApiRequest, res: NextApiResponse) {
+export default function employeesByIdController(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { method } = req;
 
   const handler = handlers[method as keyof typeof handlers](req, res);
