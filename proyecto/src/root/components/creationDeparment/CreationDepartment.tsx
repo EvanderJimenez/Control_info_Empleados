@@ -54,7 +54,7 @@ const CreationDepartment = ({
         <SearchDepartment handleGet={handleGetDepartment} />
       </div>
 
-      <form className="mx-auto mt-16 max-w-xl sm:mt-20" onSubmit={handleSubmit}>
+      <form className="mx-auto mt-16 max-w-xl sm:mt-20" onSubmit={handleUpdate}>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl  py-2 px-2 pt-5 pd-5 ">
@@ -168,15 +168,45 @@ const CreationDepartment = ({
         />
       )}
       <div>
-        {departmentsData.employees &&
-          Object.entries(departmentsData.employees).map(([name, department]) =>
-            Object.values(department).map((employee: Employee) => (
-              <tr key={name}>
-                <td>{employee.imageE}</td>
-                <td>{employee.des}</td>
+        <table className="border-collapse border border-gray-300 mt-4">
+          <thead>
+            <tr>
+              <th className="border border-gray-300 px-4 py-2">Name</th>
+              <th className="border border-gray-300 px-4 py-2">
+                Personal Information
+              </th>
+              <th className="border border-gray-300 px-4 py-2">Documents</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(departmentsData.employees).map(([key, value]) => (
+              <tr key={key}>
+                <td className="border border-gray-300 px-4 py-2">{key}</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  <input
+                    type="text"
+                    name={`des-${key}`}
+                    value={value.des}
+                    onChange={handleInputChange}
+                    placeholder="Personal Information"
+                    className="border rounded-md px-3 py-2"
+                  />
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {Object.entries(value.documents).map(([docKey, docValue]) => (
+                    <div key={docKey}>
+                      <p>Nombre del Documento: {docKey}</p>
+                      <p>Tipo de Documento: {docValue.type}</p>
+                      <p>
+                        URL del Documento: <a href={docValue.url}>Download</a>
+                      </p>
+                    </div>
+                  ))}
+                </td>
               </tr>
-            ))
-          )}
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

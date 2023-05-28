@@ -15,3 +15,12 @@ export interface Hours {
   hFin: string;
   hIni: string;
 }
+export interface  Complete_brands {
+   cycle: {[key: string]: cycleDate}
+}
+export interface cycleDate{
+  hours: {[key:string]: exactlyDate }
+}
+export interface exactlyDate{
+  
+}
