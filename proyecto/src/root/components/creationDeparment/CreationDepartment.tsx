@@ -54,7 +54,7 @@ const CreationDepartment = ({
         <SearchDepartment handleGet={handleGetDepartment} />
       </div>
 
-      <form className="mx-auto mt-16 max-w-xl sm:mt-20" onSubmit={handleSubmit}>
+      <form className="mx-auto mt-16 max-w-xl sm:mt-20" onSubmit={handleUpdate}>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl  py-2 px-2 pt-5 pd-5 ">
