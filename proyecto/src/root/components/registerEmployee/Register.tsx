@@ -37,7 +37,6 @@ function Register() {
         email: "",
         boss: "",
         schedule: [],
-        brands: [],
         option: "register",
         vacations: {},
         attendance: {}
@@ -59,7 +58,6 @@ function Register() {
         email: "",
         boss: "",
         schedule: [],
-        brands: [],
         option: "register",
          vacations: {},
          attendance:{}

@@ -27,6 +27,8 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
     const uid = String(req.query.uid);
     const employeeData = req.body;
 
+    console.log(JSON.stringify(employeeData))
+
     await employeeProvider.updateByUid(uid, employeeData);
 
     res.status(200).json({ uid, message: "Information updated" });

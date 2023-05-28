@@ -71,6 +71,8 @@ const create = async (employeeData: EmployeesType): Promise<{ message: string; e
   });
 
   const employeeDoc = {
+    password,
+    email,
     uid: uuid,
     schedule: mergedSchedule,
     ...restData,

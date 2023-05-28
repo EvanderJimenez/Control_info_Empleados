@@ -14,7 +14,6 @@ export interface UserData {
   email: string;
   boss: string;
   schedule: Schedule[];
-  brands: Brands[];
   option: string;
   attendance: { [key: string]: Attendance };
 }
