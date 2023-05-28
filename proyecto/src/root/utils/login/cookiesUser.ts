@@ -21,15 +21,15 @@ function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartSta
     const expirationDate = new Date(Date.now() + 86400 * 1000);
     let cookieValue = '';
 
-    if (resDepart.idEmployee !== loginState.uid && loginState.jobPosition !== "Admin") {
-      cookieValue = JSON.stringify({ logged: true, type: "employee",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
-      router.push("/home/EmployeeMain");
+    if (loginState.jobPosition === "Admin") {
+      cookieValue = JSON.stringify({ logged: true, type: "admin",user: loginState.name, department: loginState.idDepartment , uid: loginState.uid });
+      router.push("/home/AdminMain");
     } else if (resDepart.idEmployee === loginState.uid) {
       cookieValue = JSON.stringify({ logged: true, type: "boss",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/BossMain");
-    } else if (loginState.jobPosition === "Admin") {
-      cookieValue = JSON.stringify({ logged: true, type: "admin",user: loginState.name, department: loginState.idDepartment , uid: loginState.uid });
-      router.push("/home/AdminMain");
+    } else {
+      cookieValue = JSON.stringify({ logged: true, type: "employee",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
+      router.push("/home/EmployeeMain");
     }
 
     setCookie("logged", cookieValue, { path: "/", expires: expirationDate });
@@ -37,5 +37,6 @@ function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartSta
     toast.error("User not Found")
   }
 }
+
 
 export default cookiesUser;
