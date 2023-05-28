@@ -3,40 +3,9 @@ import Clock from "./brandsEmployee/clock/Clock";
 import { SearchDepartment } from "../creationDeparment/SearchDepartment";
 import { Brands } from "@/root/interface/brands";
 interface methodsBrands {
-  currentDate: string;
-  currentTime: string;
-  hoursIni: string;
-  formattedDay: string;
-  hoursFin: string;
-  updateDateTime: boolean;
-  brandData: Brands;
-  handleClick1: () => void;
-  handleGetBrands: (id: string) => void;
-  getDateOfWeekday: (newDate: string) => string;
-  handleUpdateCycleHours: (cycleName: string) => void;
-  checkMarkHours: (markStart: string, markEnd: string) => boolean;
-  setBrandData: React.Dispatch<React.SetStateAction<Brands>>;
-  setFinish: React.Dispatch<React.SetStateAction<boolean>>;
   handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
 }
-function BrandsClock({
-  currentDate,
-  currentTime,
-  hoursIni,
-  formattedDay,
-  hoursFin,
-  updateDateTime,
-  brandData,
-  handleClick1,
-  handleGetBrands,
-  getDateOfWeekday,
-  handleUpdateCycleHours,
-  checkMarkHours,
-  setBrandData,
-  setFinish,
-  handleUpdate,
-  ...props
-}: methodsBrands) {
+function BrandsClock({ handleUpdate, ...props }: methodsBrands) {
   const [time, setTime] = useState("");
 
   useEffect(() => {
@@ -63,11 +32,6 @@ function BrandsClock({
 
   return (
     <div>
-      <SearchDepartment handleGet={handleGetBrands} />
-      <button onClick={handleClick1} className="bg-red">
-        Click me
-      </button>
-
       <Clock time={time} handleUpdate={handleUpdate} />
     </div>
   );
