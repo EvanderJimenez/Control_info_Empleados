@@ -1,3 +1,4 @@
+import { Attendance } from "./../../../../root/interface/employee/employee.interface";
 import { Brands, Schedule } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";//TODO:You should use relative paths with @
 import {
@@ -13,222 +14,280 @@ import {
   addDoc,
 } from "firebase/firestore";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  fetchSignInMethodsForEmail,
 } from "firebase/auth";
+import { EmployeesType, Vacations } from "@/root/types/Employee.type";
+import { defaultSchedule } from '@/root/constants/schedule/schedule';
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeCollection);
-  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) => doc.data());
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeCollection
+  );
+  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) =>
+    doc.data()
+  );
 
   return employees;
 };
 
-const updatByUid = async (
-  uid: string,
-  name: string,
-  firstSurname: string,
-  secondSurname: string,
-  cedula: number,
-  phoneNumber: number,
-  photo: string,
-  jobPosition: string,
-  salary: number,
-  enabled: boolean,
-  idDepartment: number,
-  password: string,
-  email: string,
-  boss: string,
-  schedule: Schedule[]
-) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const employeesRef = collection(firestore, "employee");
-    const q = query(employeesRef, where("uid", "==", uid));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.size > 0) {
-      const employeeDoc = doc(firestore, "employee", querySnapshot.docs[0].id);
-      await updateDoc(employeeDoc, {
-        name,
-        firstSurname,
-        secondSurname,
-        cedula,
-        phoneNumber,
-        photo,
-        jobPosition,
-        salary,
-        enabled,
-        idDepartment,
-        password,
-        email,
-        boss,
-        schedule: schedule.map((s: Schedule) => ({
-          day: s.day,
-          startTime: s.startTime,
-          endTime: s.endTime,
-        })),
-      });
-      const snapshotEmpleadoActualizado = await getDoc(employeeDoc);
-      const empleadoActualizado = snapshotEmpleadoActualizado.data();
-      return empleadoActualizado;
-    }
-  } catch (error) {
-    console.error("Error al actualizar el empleado:", error);//TODO: You should erase all console log
-    throw new Error("No se pudo actualizar el empleado");
+
+
+const updateByUid = async (uid: string,employeeData: EmployeesType): Promise<any> => {
+  const employeesRef = collection(firestore, "employee");
+  const q = query(employeesRef, where("uid", "==", uid));
+  const querySnapshot = await getDocs(q);
+
+  if (querySnapshot.size > 0) {
+    const employeeDoc = doc(firestore, "employee", querySnapshot.docs[0].id);
+    await updateDoc(employeeDoc, employeeData);
+
+    const snapshotEmployeeUpdate = await getDoc(employeeDoc);
+    const employeeUpdate = snapshotEmployeeUpdate.data();
+    return employeeUpdate;
   }
-}
+};
 
+const create = async (employeeData: EmployeesType): Promise<{ message: string; employee?: any }> => {
+  const {
+    password,
+    email,
+    schedule,
+    uid,
+    ...restData
+  } = employeeData;
 
-const create = async (
-  uid: string,
-  name: string,
-  firstSurname: string,
-  secondSurname: string,
-  cedula: number,
-  phoneNumber: number,
-  photo: string,
-  jobPosition: string,
-  salary: number,
-  enabled: boolean,
-  idDepartment: string,
-  password: string,
-  email: string,
-  boss: string,
-  schedule: Schedule[],
-  brands: Brands[],
-): Promise<{ message: string; employee?: any }> => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
-    uid = user.uid;
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const user = userCredential.user;
+   const uuid = user.uid;
 
-    const newDocRef = await addDoc(collection(firestore, "employee"), {
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule: schedule.map((s: Schedule) => ({
-        day: s.day,
-        startTime: s.startTime,
-        endTime: s.endTime,
-      })),
-      brands: brands.map((s: Brands) => ({
-        date: s.date,
-        startTime: s.startTime,
-        endTime: s.endTime,
-        justification: s.justification,
-        finished: s.finished,
-      })),
-    });
-
-    const newDoc = await getDoc(newDocRef);
-
-    if (newDoc.exists()) {
-      return {
-        message: "Empleado creado correctamente",
-        employee: newDoc.data(),
-      };
-    } else {//TODO: You should not use else or simplify the complex with reverse if
-      return {
-        message: "No se pudo crear el empleado",
-      };
-    }
-  } catch (error) {
+  const mergedSchedule: Schedule[] = defaultSchedule.map((defaultDay) => {
+    const userDay = schedule.find((s) => s.day === defaultDay.day);
     return {
-      message: `Ocurrió un error al crear el empleado: ${error}`,
+      ...defaultDay,
+      ...userDay,
     };
-  }
+  });
+
+  const employeeDoc = {
+    password,
+    email,
+    uid: uuid,
+    schedule: mergedSchedule,
+    ...restData,
+  };
+
+  const newDocRef = await addDoc(collection(firestore, "employee"), employeeDoc);
+  const newDoc = await getDoc(newDocRef);
+
+  return newDoc.exists()
+    ? {
+        message: "Employee created successfully",
+        employee: newDoc.data(),
+      }
+    : {
+        message: "Employee creation failed",
+      };
 };
 
 const getByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
   if (employeeSnapshot.empty) {
-    throw new Error(`No se encontró un empleado con UID: ${uid}`);
-  } else {//TODO: You should not use else or simplify the complex with reverse if
+    throw new Error(`User not found: ${uid}`);
+  } else {
     return employeeSnapshot.docs[0].data();
   }
 };
 
 const deleteByUid = async (uid: string) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "==", uid));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
+
+  if (employeeSnapshot.size === 0) {
+    return;
+  }
+
+  const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
+  await updateDoc(employeeRef, { enabled: false });
+};
+
+const login = async (email: string, password: string) => {
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
+  const user = userCredential.user;
+  if (!user) {
+    throw new Error("No user found with that email and password");
+  } else {
     const employeeCollection = collection(firestore, "employee");
-    const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+    const employeeQuery = query(
+      employeeCollection,
+      where("email", "==", email),
+      where("password", "==", password)
+    );
+    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+      employeeQuery
+    );
+    const employeeDoc = employeeSnapshot.docs[0];
 
-    if (employeeSnapshot.size === 0) {
-      console.log(`No se encontró ningún empleado con UID ${uid}`);//TODO: You should erase all console log
-      return;
+    if (!employeeDoc) {
+      throw new Error("No employee found with that email and password");
     }
-
-    const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
-    await updateDoc(employeeRef, { enabled: false });
-
-    console.log(`Empleado con UID ${uid} actualizado correctamente`);//TODO: You should erase all console log
-  } catch (error) {
-    console.error(`Error al actualizar el empleado con UID ${uid}:`, error);//TODO: You should erase all console log
+    return employeeDoc.data();
   }
 };
 
-const getByEmailPassword = async (email: string, password: string) => {
+const getByCedula = async (cedula: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(
+    employeeCollection,
+    where("uid", "==", cedula)
+  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
-
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const userCredential = await signInWithEmailAndPassword(auth,email, password);
-    const user = userCredential.user;
-    if (!user) {
-      throw new Error("No user found with that email and password");
-    }else{//TODO: You should not use else or simplify the complex with reverse if
-      const employeeCollection = collection(firestore, "employee");
-      const employeeQuery = query(
-        employeeCollection,
-        where("email", "==", email),
-        where("password", "==", password)
-      );
-      const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-        employeeQuery
-      );
-      const employeeDoc = employeeSnapshot.docs[0];
-    
-      if (!employeeDoc) {
-        throw new Error("No employee found with that email and password");
-      }
-      return employeeDoc.data();
-    }
-  } catch (error) {
-    throw new Error("No employee found with that email and password");
+  if (employeeSnapshot.empty) {
+    throw new Error(`User not found ${cedula}`);
+  } else {
+    return employeeSnapshot.docs[0].data();
   }
-
-
 };
 
+const dismissByUid = async (uid: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "==", uid));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
+  if (employeeSnapshot.size === 0) {
+    return;
+  }
+  const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
+  await updateDoc(employeeRef, { idDepartment: "" });
+};
+
+const getByVariable = async (data: string, variable: string, idDepartment: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where(variable, "==", data),where("idDepartment", "==", idDepartment));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
+
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+
+  return employees;
+};
+
+const getVacationsByUid = async (uid: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "==", uid));
+
+  const employeeSnapshot = await getDocs(employeeQuery);
+
+  if (employeeSnapshot.empty) {
+    return [];
+  }
+
+  const employeeDoc = employeeSnapshot.docs[0];
+  const vacations = employeeDoc.data().vacations;
+  return vacations;
+};
+
+const getEmployeesByIdDepartment = async (idDepartment: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(
+    employeeCollection,
+    where("idDepartment", "==", idDepartment)
+  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
+
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+
+  return employees;
+};
+
+const getAllUD = async () => {
+  const departmentCollection = collection(firestore, "departments");
+  const departmentQuery = query(
+    departmentCollection,
+    where("leader", "!=", "")
+  );
+  const departmentSnapshot = await getDocs(departmentQuery);
+
+  const departmentIds: any[] = [];
+
+  if (!departmentSnapshot.empty) {
+    departmentSnapshot.forEach((doc) => {
+      const department = doc.data();
+      departmentIds.push(department.idEmployee);
+    });
+  }
+
+  return departmentIds;
+};
+
+const getAllBosses = async () => {
+  const departmentIds = await getAllUD();
+
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(
+    employeeCollection,
+    where("uid", "in", departmentIds)
+  );
+  const employeeSnapshot = await getDocs(employeeQuery);
+
+  const employees: DocumentData[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+
+  return employees;
+};
 
 export const employeeProvider = {
   getAll,
   getByUid,
   deleteByUid,
   create,
-  getByEmailPassword,
-  updatByUid,
+  login,
+  updateByUid,
+  getByCedula,
+  dismissByUid,
+  getByVariable,
+  getVacationsByUid,
+  getEmployeesByIdDepartment,
+  getAllBosses,
 };
 
 export default employeeProvider;

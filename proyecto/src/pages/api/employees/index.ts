@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";//TODO:You should use relative paths with @
-import employeeProvider from "../../../dataBase/firebase/providers/employee/employee.provider";
+import { employeeProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
+import { EmployeesType } from "@/root/types/Employee.type";
+
 
 const getAll = async (res: NextApiResponse) => {
   try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
@@ -12,49 +14,17 @@ const getAll = async (res: NextApiResponse) => {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const {
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-      brands
-    } = req.body;
+  try {
+    const employeeData : EmployeesType = req.body;
 
-    const newEmployee = await employeeProvider.create(
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-      brands
-    );
+    const newEmployee = await employeeProvider.create(employeeData);
+
     res.status(201).json(newEmployee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
 };
+
 
 const handlers: any = {};
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);

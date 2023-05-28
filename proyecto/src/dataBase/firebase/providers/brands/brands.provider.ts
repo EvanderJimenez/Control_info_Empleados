@@ -1,5 +1,5 @@
-import { firestore } from "../../firebase";//TODO:You should use relative paths with @
-import { Brands, Hours } from "@/root/interface/brands";
+import { firestore } from "../../firebase";
+import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
 import {
   collection,
   getDocs,
@@ -30,29 +30,25 @@ const getAllBrands = async () => {
 
 async function createBrands(
   idEmployee: string,
-  cycle: Date
+  cycle: Cycle,
+  hoursEmployee: HoursEmployee
 ): Promise<{ message: string; brands?: any }> {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const newDocRef = await addDoc(collection(firestore, "brands"), {
-      idEmployee,
-      cycle,
-    });
+  const newDocRef = await addDoc(collection(firestore, "brands"), {
+    idEmployee,
+    cycle,
+    hoursEmployee,
+  });
 
-    const newDoc = await getDoc(newDocRef);
+  const newDoc = await getDoc(newDocRef);
 
-    if (newDoc.exists()) {
-      return {
-        message: "Successfully created brands",
-        brands: newDoc.data(),
-      };
-    } else {//TODO: You should not use else or simplify the complex with reverse if
-      return {
-        message: "Failed to create brands",
-      };
-    }
-  } catch (error) {
+  if (newDoc.exists()) {
     return {
-      message: `An error occurred while creating the brands: ${error}`,
+      message: "Successfully created brands",
+      brands: newDoc.data(),
+    };
+  } else {
+    return {
+      message: "Failed to create brands",
     };
   }
 }
@@ -68,43 +64,44 @@ const getDocId = async (docId: string) => {
   }
 };
 const getDocByEmployeeId = async (idEmployee: string) => {
-  const brandsCollectionRef = collection(firestore, "brands");
-  const queryRef = query(
-    brandsCollectionRef,
+  const brandsCollection = collection(firestore, "brands");
+  const queryBrands = query(
+    brandsCollection,
     where("idEmployee", "==", idEmployee)
   );
-  const querySnapshot = await getDocs(queryRef);
+  const brandsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    queryBrands
+  );
 
-  if (!querySnapshot.empty) {
-    const docSnapshot = querySnapshot.docs[0];
-    return docSnapshot.data();
-  } else {//TODO: You should not use else or simplify the complex with reverse if
-    throw new Error(`A brands with idEmployee '${idEmployee}' was not found`);
+  if (brandsSnapshot.empty) {
+    throw new Error(`No brands document found for idEmpleado: ${idEmployee}`);
+  } else {
+    return brandsSnapshot.docs[0].data();
   }
 };
 
-const updateById = async (idEmployee: string, cycle: Hours) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const brandsRef = collection(firestore, "brands");
-    const q = query(brandsRef, where("idEmployee", "==", idEmployee));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.size > 0) {
-      const brandsDoc = doc(firestore, "brands", querySnapshot.docs[0].id);
-      await updateDoc(brandsDoc, {
-        idEmployee,
-        cycle,
-      });
-      const snapshotbrandsUpdate = await getDoc(brandsDoc);
-      const brandsUpdate = snapshotbrandsUpdate.data();
-      return brandsUpdate;
-    }
-  } catch (error) {
-    console.error("Error updating brands:", error);//TODO: You should erase all console log
-    throw new Error("Failed to update brands");
+const updateById = async (
+  idEmployee: string,
+  cycle: Hours,
+  hoursEmployee: HoursEmployee
+) => {
+  const brandsRef = collection(firestore, "brands");
+  const q = query(brandsRef, where("idEmployee", "==", idEmployee));
+  const querySnapshot = await getDocs(q);
+  if (querySnapshot.size > 0) {
+    const brandsDoc = doc(firestore, "brands", querySnapshot.docs[0].id);
+    await updateDoc(brandsDoc, {
+      idEmployee,
+      cycle,
+      hoursEmployee,
+    });
+    const snapshotBrandsUpdate = await getDoc(brandsDoc);
+    const brandsUpdate = snapshotBrandsUpdate.data();
+    return brandsUpdate;
   }
 };
 
-export const departmentProvider = {
+export const brandsProvider = {
   getAllBrands,
   getDocId,
   createBrands,
@@ -112,4 +109,4 @@ export const departmentProvider = {
   getDocByEmployeeId,
 };
 
-export default departmentProvider;
+export default brandsProvider;

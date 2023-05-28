@@ -1,8 +1,3 @@
-export interface Schedule {
-  day: number | string;
-  startTime: string;
-  endTime: string;
-}
 export interface UserData {
   uid: string;
   name: string;
@@ -19,8 +14,8 @@ export interface UserData {
   email: string;
   boss: string;
   schedule: Schedule[];
-  brands: Brands[];
   option: string;
+  attendance: { [key: string]: Attendance };
 }
 
 export interface LoginEP {
@@ -35,12 +30,7 @@ export interface Brands {
   justification: string;
   finished: boolean;
 }
-export interface EmployeePage {
-  name: string;
-  department: string;
-  entryTime: string;
-  exitTime: string;
-}
+
 export interface Row {
   name: string;
   cedula: number;
@@ -59,4 +49,47 @@ export interface RowSchedule {
 }
 export interface TableScheduleProps {
   rows: RowSchedule[];
+}
+export interface Schedule {
+  day: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface InformationPage {
+  title: string;
+  paragraph: string;
+  img: string;
+}
+export interface FirstPagePDFInformation {
+  title: string;
+  createdBy: string;
+  dateCreated: Date;
+  filterUsed: string;
+}
+export interface PendingRequest {
+  key: string;
+  employeeName: string;
+  employeeUID: string;
+  dateStart: string;
+  dateEnd: string;
+  description: string;
+  approved: string;
+}
+
+export interface InputInterface {
+  labelFloat: string;
+  type: string;
+  id: string;
+  name:string;
+  value:string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export interface Attendance {
+  startTime: string;
+  endTime: string;
+  justificationIni: string;
+  justificationFin: string;
+  state: string;
 }

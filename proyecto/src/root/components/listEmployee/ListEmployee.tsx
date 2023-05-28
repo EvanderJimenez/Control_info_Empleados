@@ -1,68 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  listOfEmployee,
-  deletingEmployee,
-} from "../../redux/thunks/employee-thunk/employee.thunk";//TODO:You should use relative paths with @
-import { RootState } from "../../redux/store";//TODO:You should use relative paths with @
+import { StartListOfEmployee, StartGetEmployeeByUid } from "../../redux/thunks/employee-thunk/employee.thunk";
+import { RootState } from "../../redux/store";
+import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
+import { selectLogin, selectGetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { EmployeesType } from "@/root/types/Employee.type";
+import { startGetDepartmentById } from "@/root/redux";
 
-const ListEmployee = () => {
+interface ListClear {
+  clear: boolean;
+  setClear: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ListEmployee = ({ clear, setClear }: ListClear) => {
   const dispatch = useDispatch();
-  const employees = useSelector(
-    (state: RootState) => state.employeesList.employees
-  );
-  const deletedEmployee = useSelector(
-    (state: RootState) => state.generalStore.deleteEmployee
-  );
+
+  const employeesListVariable = useSelector(selectGetByVariable);
+
+  const getEmployeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
+  const loading = useSelector((state: RootState) => state.loading.loading);
+
+  const loginState = useSelector(selectLogin);
 
   useEffect(() => {
-    dispatch(listOfEmployee());
-  }, [dispatch, deletedEmployee]);
+  }, [dispatch, getEmployeeByUid]);
 
-  const handleDelete = (uid: string) => {
-    dispatch(deletingEmployee(uid));
+  const handleLoad = (uid: string) => {
+    dispatch(StartGetEmployeeByUid(uid));
+    setClear(false);
   };
 
-  const handleUpdate = (uid: string) => {
-    ///TODO
-  };
+  console.log("List: " + JSON.stringify(employeesListVariable));
 
+  
   return (
-    <div className="grid grid-cols-1 gap-4 scroll">
-      <>
-        {Array.isArray(employees) &&
-          employees
-            .filter((item) => item.enabled)
-            .map((item) => (
-              <div
-                key={item.uid}
-                className="p-4 border border-gray-300 rounded-lg"
-              >
-                <p className="font-bold">Name: {item.name}</p>
-                <p className="mt-2">Cedula: {item.cedula}</p>
-                <p className="mt-2">Email: {item.email}</p>
-                <p className="mt-2">Department: {item.idDepartment}</p>
-                <p className="mt-2">Boss: {item.boss}</p>
-                <p className="mt-2">
-                  Enabled:{" "}
-                  <input readOnly type="checkbox" checked={item.enabled} />
-                </p>
-                <button
-                  className="mt-4 px-4 py-2 bg-red-500 bg-red text-white rounded hover:bg-red-600"
-                  onClick={() => handleDelete(item.uid)}
-                >
-                  Delete
-                </button>
+    <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
+      {Array.isArray(employeesListVariable) &&
+        employeesListVariable
+          .filter((item) => item.enabled)
+          .map((item) => (
+            <div key={item.uid} className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4">
+              <p className="font-bold">Name: {item.name}</p>
+              <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
+              <p className="mt-2 font-semibold">Email: {item.email}</p>
+              <p className="mt-2 font-semibold">Job Position: {item.jobPosition}</p>
+              <p className="mt-2 font-semibold">Department: {item.idDepartment}</p>
 
-                <button
-                  className="mt-4 px-4 py-2 bg-red-500 bg-blue text-white rounded hover:bg-red-600"
-                  onClick={() => handleUpdate(item.uid)}
-                >
-                  Update
-                </button>
-              </div>
-            ))}
-      </>
+              <button className="mt-4 px-4 py-2 bg-black text-white rounded " onClick={() => handleLoad(item.uid)}>
+                Load Information
+              </button>
+            </div>
+          ))}
+      {loading && <LoadingGeneralComponent />}
     </div>
   );
 };

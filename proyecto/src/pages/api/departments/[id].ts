@@ -1,10 +1,12 @@
-import { departmentProvider } from "../../../dataBase/firebase/providers/departments/departments.provider";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";//TODO:You should use relative paths with @
+
+import { departmentProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function getDocId(req: NextApiRequest, res: NextApiResponse) {
   const id = String(req.query.id);
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
+
+  try {
     const employee = await departmentProvider.getByDocId(id);
     res.status(200).json(employee);
   } catch (error) {
@@ -13,8 +15,8 @@ async function getDocId(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function updateId(req: NextApiRequest, res: NextApiResponse) {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const uid = String(req.query.id);
+  try {
+    const Name = String(req.query.name);
 
     const {
       id,
@@ -39,7 +41,7 @@ async function updateId(req: NextApiRequest, res: NextApiResponse) {
       subDepartment,
       employees
     );
-    res.status(200).json({ uid, message: "Information updated" });
+    res.status(200).json({ Name, message: "Information updated" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }

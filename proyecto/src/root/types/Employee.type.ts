@@ -1,15 +1,16 @@
+import { Attendance } from './../interface/employee/employee.interface';
 import { Brands, Schedule } from "../interface/employee";
 
-export type DeleteEmployee = {
+export type DeleteEmployeeType = {
   id: string;
 } | null;
 
-export type ListEmployees = { //TODO: types always will named in singular, maybe EmployeeList, but I expected an Array with this name
+export type EmployeesType = {
   uid: string;
   name: string;
   firstSurname: string;
   secondSurname: string;
-  cedula: number;
+  cedula: number | string;
   phoneNumber: number;
   photo: string;
   jobPosition: string;
@@ -20,5 +21,13 @@ export type ListEmployees = { //TODO: types always will named in singular, maybe
   email: string;
   boss: string;
   schedule: Schedule[];
-  brands: Brands[];
+  vacations: { [Key: string]: Vacations };
+  attendance:{ [Key: string]: Attendance };
+}
+
+export type Vacations = {
+  dateStart : string
+  dateEnd: string
+  description: string
+  approved: string
 }

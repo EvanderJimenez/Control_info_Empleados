@@ -1,10 +1,11 @@
+import { brandsProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";//TODO:You should use relative paths with @
-import departmentProvider from "../../../dataBase/firebase/providers/brands/brands.provider";
+
 
 const getAll = async (res: NextApiResponse) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const departments = await departmentProvider.getAllBrands();
+  try {
+    const departments = await brandsProvider.getAllBrands();
     res.status(200).json(departments);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
@@ -12,14 +13,15 @@ const getAll = async (res: NextApiResponse) => {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const { idEmployee, cycle } = req.body;
+  try {
+    const { idEmployee, cycle, hoursEmployee } = req.body;
 
-    const newDepartment = await departmentProvider.createBrands(
+    const newBrands = await brandsProvider.createBrands(
       idEmployee,
-      cycle
+      cycle,
+      hoursEmployee
     );
-    res.status(201).json(newDepartment);
+    res.status(201).json(newBrands);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }

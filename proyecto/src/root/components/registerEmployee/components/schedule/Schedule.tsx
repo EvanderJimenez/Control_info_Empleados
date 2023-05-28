@@ -3,13 +3,12 @@ import { Schedule } from "../../../../interface/employee/";//TODO:You should use
 import InputLabel from "./components/inputLabel/InputLabel";
 
 interface ScheduleFormProps {
-  schedule: Schedule[];
+  // schedule: Schedule[];
   handleScheduleChange: (newSchedule: Schedule[]) => void;
 }
 
-const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
-{/ TODO:You should separate this functional components in custom hooks or other small functions in differents files */}
-  const [mondayStart, setMondayStart] = useState("");
+/* const Schedule = ({  handleScheduleChange }: ScheduleFormProps) => {
+/*   const [mondayStart, setMondayStart] = useState("");
   const [mondayEnd, setMondayEnd] = useState("");
   const [tuesdayStart, setTuesdayStart] = useState("");
   const [tuesdayEnd, setTuesdayEnd] = useState("");
@@ -22,9 +21,9 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
   const [saturdayStart, setSaturdayStart] = useState("");
   const [saturdayEnd, setSaturdayEnd] = useState("");
   const [sundayStart, setSundayStart] = useState("");
-  const [sundayEnd, setSundayEnd] = useState("");
+  const [sundayEnd, setSundayEnd] = useState(""); */
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (schedule.length > 0) {
       setMondayStart(schedule[0].startTime);
       setMondayEnd(schedule[0].endTime);
@@ -41,9 +40,9 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
       setSundayStart(schedule[6].startTime);
       setSundayEnd(schedule[6].endTime);
     }
-  }, [schedule]);
+  }, [schedule]); */
 
-  const handleScheduleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+/*   const handleScheduleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const newSchedule = [
@@ -84,11 +83,11 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
       },
     ];
     handleScheduleChange(newSchedule);
-  };
+  }; */
 
-  return (
+/*   return (
     <div className="px-4 py-6">
-      <h2 className="text-xl font-semibold mb-4">Shedule</h2>
+      <h2 className="text-xl font-semibold mb-4">Schedule</h2>
       <form onSubmit={handleScheduleSubmit}>
         <InputLabel label="Monday" valueStart={mondayStart} valueEnd={mondayEnd} onChangeStart={(e) => setMondayStart(e.target.value)} onChangeEnd={(e) => setFridayEnd(e.target.value)} />
 
@@ -115,7 +114,8 @@ const Schedule = ({ schedule, handleScheduleChange }: ScheduleFormProps) => {
         </button>
       </form>
     </div>
-  );
+  ); 
 };
+ */
 
 export default Schedule;

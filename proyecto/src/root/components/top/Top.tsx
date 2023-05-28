@@ -1,54 +1,65 @@
 import React from "react";
 import Image from "next/image";
+import router from "next/router";
+import Cookies from "js-cookie";
+
+
+const handleSingOff = () =>{
+  Cookies.remove("token");
+  router.push("/")
+}
+
+
 
 export function Top() {
   return (
     <>
-      <nav className="bg-SecondaryColor border-gray-200 dark:bg-gray-900">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-          <a className="flex items-center">
-            <img src="/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
-            <span className="title-font">CrHome</span>
-          </a>
-          <div className="flex items-center">{/* TODO: Do not use a in Next.js */}
-            <a href="tel:89884062" className="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">
-              (506) 8988-4062
-            </a>{/* TODO: Do not use a in Next.js */}
-            <a href="#" className="text-sm  text-blue-600 dark:text-blue-500 hover:underline">
-              Login
+
+        <nav className="print:hidden bg-darkBlue">
+          <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 print:hidden">
+            <a className="flex items-center print:hidden">
+              <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
+              <span className="title-font">CrHome</span>
             </a>
+            <div className="flex items-center">
+              <a href="tel:89884062" className="mr-6 text-sm  text-gray-500 dark:text-white hover:underline">
+                (506) 8988-4062
+              </a>
+              <a href="/" className="text-sm  text-white dark:text-blue-500 hover:underline print:hidden">
+                Login
+              </a>
+            </div>
           </div>
-        </div>
-      </nav>
-      <nav className="bg-SecondaryColor dark:bg-gray-700">
-        <div className="max-w-screen-xl px-4 py-3 mx-auto">
-          <div className="flex items-center">
-            <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm">
-              <li>
-                {/* TODO: Do not use a in Next.js */}
-                <a href="#" className="text-gray-900 dark:text-white hover:underline" aria-current="page">
-                  About us
-                </a>
-              </li>
-              <li>{/* TODO: Do not use a in Next.js */}
-                <a href="#" className="text-gray-900 dark:text-white hover:underline">
-                  Contact
-                </a>
-              </li>
-              <li>{/* TODO: Do not use a in Next.js */}
-                <a href="#" className="text-gray-900 dark:text-white hover:underline">
-                  Help and Support
-                </a>
-              </li>
-              <li>{/* TODO: Do not use a in Next.js */}
-                <a href="#" className="text-gray-900 dark:text-white hover:underline">
+        </nav>
+        <nav className="bg-darkBlue dark:bg-gray-700 print:hidden">
+          <div className="max-w-screen-xl px-4 py-3 mx-auto print:hidden">
+            <div className="flex items-center">
+              <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm print:hidden">
+                <li>
+                  <a href="/home/AboutUs" className="text-gray-900 dark:text-white hover:underline print:hidden" aria-current="page">
+                    About us
+                  </a>
+                </li>
+                <li>
+                  <a href="/home/Contact" className="text-gray-900 dark:text-white hover:underline print:hidden">
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a href="/home/Help" className="text-gray-900 dark:text-white hover:underline print:hidden">
+                    Help
+                  </a>
+                </li>
+                <li>
+                  <button className="text-gray-900 dark:text-white hover:underline print:hidden" onClick={handleSingOff}>
                   Sign off
-                </a>
-              </li>
-            </ul>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+
     </>
   );
 }

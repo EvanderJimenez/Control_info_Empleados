@@ -10,13 +10,13 @@ interface FormLoginProps {
 const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProps) => {
   return (
     <div>
-      <form className="bg-SecondaryColor flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleSubmit}>
-        <h2 className="m-7">Login</h2>
+      <form className="bg-lithBlue  flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleSubmit}>
+        <h2 className="m-7  font-bold">Login</h2>
         <div className="flex flex-col items-center justify-center p-2">
-          <label>Email</label>
+          <label className="font-semibold ">Email</label>
           <input
             type="email"
-            className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
+            className="EspecialInput border-b focus:outline-none border-black bg-transparent text-sm  zoom block w-full p-2.5"
             id="email"
             name="email"
             value={loginData.email}
@@ -25,10 +25,10 @@ const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProp
           />
         </div>
         <div className="flex flex-col items-center justify-center p-2">
-          <label>Password</label>
+          <label className="font-semibold " >Password</label>
           <input
             type="password"
-            className="bg-PrimaryColor secondary-font  border-2 border-gray-300 focus:outline-none focus:border-blue hover:border-red"
+            className="EspecialInput border-b focus:outline-none border-black bg-transparent text-sm  zoom block w-full p-2.5"
             id="password"
             name="password"
             value={loginData.password}

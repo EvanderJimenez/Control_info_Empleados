@@ -1,7 +1,6 @@
 import React from "react";
-import SearchInput from "../searchInput/SearchInput";
-import TableViewEmployees from "../tableViewEmployees/TableViewEmployees";
-import RequestVacationSection from "../requestVacationSection/RequestVacationSection";
+import SearchInput from "../ui/searchInput/SearchInput";
+import TableViewEmployees from "../ui/tableViewEmployees/TableViewEmployees";
 import ParameterBar from "../parameterBar/ParameterBar";
 
 const rows = [
@@ -18,7 +17,7 @@ export default function EmployeeTimeSection() {
       <div className="flex flex-wrap">
         <div className="flex-1 flex flex-col lg:w-1/2  md:w-full">
         <ParameterBar/>
-          <SearchInput labelInputSeekerOne="email" labelInputSeekerTwo="text" placeholderSeekerOne="Enter the email to search" placeholderSeekerTwo="Enter the name to search" />
+          <SearchInput labelInputSeekerOne="email"  placeholderSeekerOne="Enter the email to search" valueEnd={""} />
           <TableViewEmployees rows={rows} />
         </div>
       </div>

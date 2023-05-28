@@ -1,12 +1,27 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { selectLogin } from "./root/redux/selectors/employee-selector/employee.selector";
+import { useSelector } from "react-redux";
 
-export function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
+export async function middleware(request: NextRequest) {
+  const tokenCookie = await request.cookies.get("token");
+
+  if (tokenCookie) {
+    NextResponse.next();
+  }else{
+    const requestedPage = request.nextUrl.pathname;
+            const url = request.nextUrl.clone();
+            url.pathname = `/home`;
+            url.search = `p=${requestedPage}`;
+            return NextResponse.redirect(url);
+  }
+
+  /*
+   const url = request.nextUrl.clone();
   const isLogin = request.cookies.get('logged');
 
   if (!isLogin) {
-    if (url.pathname.startsWith('/home/EmployeeMain') || (url.pathname.startsWith('/home/AdminMain') || (url.pathname.startsWith('/home/AdminMain'))) ) {
+    if (url.pathname.startsWith('/home/EmployeeMain') || (url.pathname.startsWith('/home/BossMain') || (url.pathname.startsWith('/home/AdminMain'))) ) {
       return NextResponse.rewrite(new URL("/home", request.url));
     }
   }  else {//TODO: You should not use else or simplify the complex with reverse if
@@ -20,12 +35,10 @@ export function middleware(request: NextRequest) {
     } else if (type === 'boss' && url.pathname !== '/home/BossMain') {
       url.pathname = "/home/BossMain";
       return NextResponse.redirect(url);
-    } 
-  } 
-
-  return NextResponse.next();
+    }
+  }*/
 }
 
 export const config = {
-  matcher: ['/home','/home/EmployeeMain','/home/AdminMain','/home/BossMain',]
-}
+  matcher: ["/home/EmployeeMain", "/home/AdminMain", "/home/BossMain","api/employees"],
+};

@@ -1,8 +1,16 @@
-
 {
     "ignoreWords": [
-      "empleado",
-      "firestore",
-      "cedula"
+        "empleado",
+        "firestore",
+        "cedula"
+    ],
+    "words": [
+        "APIKEY",
+        "AUTHDOMAIN",
+        "MEASUREMENTID",
+        "MESSAGINGSENDERID",
+        "PROJECTID",
+        "reduxjs",
+        "STORAGEBUCKET"
     ]
-  }
+}

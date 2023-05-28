@@ -1,12 +1,14 @@
-import EmployeeMain from "@/Layout/EmployeePage";
-import React from "react";
-import MainBodyEmployee from "../../../root/components/mainBodyEmployee/MainBodyEmployee";//TODO:You should use relative paths with @
-import ListEmployee from "@/root/components/listEmployee/ListEmployee";
-//TODO: you should use kebab-case in the name of the routes
+import EmployeePage from "@/Layout/EmployeePage";
+import LoginPage from "@/Layout/LoginPage";
+import ScheduleTimeSelection from "@/root/components/bossSection/editSchedulePage/ScheduleTimeSelection";
+import InformationPage from "@/root/components/informationPage/InformationPage";
+import MainForm from "@/root/components/mainForm/MainForm";
+import { Schedule } from "@/root/interface/employee";
+
 export default function index() {
   return (
-    <EmployeeMain>
-      <MainBodyEmployee />
-    </EmployeeMain>
+    <EmployeePage>
+      <InformationPage img="/Images/EmployeeBackground.jpg" title="Welcome!" paragraph="Check your information for today" />
+    </EmployeePage>
   );
 }

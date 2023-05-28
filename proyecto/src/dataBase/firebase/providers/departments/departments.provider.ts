@@ -1,5 +1,5 @@
-import { firestore } from "../../firebase";//TODO:You should use relative paths with @
-import { Employee, Documents } from "@/root/interface/departments";
+import { firestore } from "../../firebase";
+import { Employee } from "@/root/interface/departments";
 import {
   collection,
   getDocs,
@@ -38,33 +38,27 @@ async function create(
   subDepartment: string,
   employees: Employee
 ): Promise<{ message: string; departments?: any }> {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const newDocRef = await addDoc(collection(firestore, "departments"), {
-      name,
-      size,
-      location,
-      idEmployee,
-      leader,
-      level,
-      subDepartment,
-      employees,
-    });
+  const newDocRef = await addDoc(collection(firestore, "departments"), {
+    name,
+    size,
+    location,
+    idEmployee,
+    leader,
+    level,
+    subDepartment,
+    employees,
+  });
 
-    const newDoc = await getDoc(newDocRef);
+  const newDoc = await getDoc(newDocRef);
 
-    if (newDoc.exists()) {
-      return {
-        message: "Successfully created department",
-        departments: newDoc.data(),
-      };
-    } else {//TODO: You should not use else or simplify the complex with reverse if
-      return {
-        message: "Failed to create department",
-      };
-    }
-  } catch (error) {
+  if (newDoc.exists()) {
     return {
-      message: `An error occurred while creating the department: ${error}`,
+      message: "Successfully created department",
+      departments: newDoc.data(),
+    };
+  } else {
+    return {
+      message: "Failed to create department",
     };
   }
 }
@@ -91,35 +85,51 @@ const updateById = async (
   subDepartment: string,
   employees: Employee
 ) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-    const departmentsRef = collection(firestore, "departments");
-    const q = query(departmentsRef, where("name", "==", name));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.size > 0) {
-      const departmentsDoc = doc(
-        firestore,
-        "departments",
-        querySnapshot.docs[0].id
-      );
-      await updateDoc(departmentsDoc, {
-        id,
-        name,
-        size,
-        location,
-        idEmployee,
-        leader,
-        level,
-        subDepartment,
-        employees,
-      });
-      const snapshotDepartmentUpdate = await getDoc(departmentsDoc);
-      const departmentUpdate = snapshotDepartmentUpdate.data();
-      return departmentUpdate;
-    }
-  } catch (error) {
-    console.error("Error updating department:", error);//TODO: You should erase all console log
-    throw new Error("Failed to update department");
+  const departmentsRef = collection(firestore, "departments");
+  const q = query(departmentsRef, where("name", "==", name));
+  const querySnapshot = await getDocs(q);
+  if (querySnapshot.size > 0) {
+    const departmentsDoc = doc(
+      firestore,
+      "departments",
+      querySnapshot.docs[0].id
+    );
+    await updateDoc(departmentsDoc, {
+      name,
+      size,
+      location,
+      idEmployee,
+      leader,
+      level,
+      subDepartment,
+      employees,
+    });
+    const snapshotDepartmentUpdate = await getDoc(departmentsDoc);
+    const departmentUpdate = snapshotDepartmentUpdate.data();
+    return departmentUpdate;
   }
+};
+
+const getDepartmentByUidEmployee = async () => {
+  const departmentCollection = collection(firestore, "departments");
+  const departQuery = query(
+    departmentCollection,
+    where("idEmployee", "==", ""),
+    where("boss", "==", "")
+  );
+  const departSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    departQuery
+  );
+
+  const departs: any[] = [];
+
+  if (!departSnapshot.empty) {
+    departSnapshot.forEach((doc) => {
+      departs.push(doc.data());
+    });
+  }
+
+  return departs;
 };
 
 export const departmentProvider = {
@@ -127,6 +137,7 @@ export const departmentProvider = {
   getByDocId,
   create,
   updateById,
+  getDepartmentByUidEmployee,
 };
 
 export default departmentProvider;

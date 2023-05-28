@@ -1,0 +1,7 @@
+###
+# Get all departments
+GET http://localhost:3000/api/brands/117510623 HTTP/1.1
+
+###
+# Get all brands
+GET http://localhost:3000/api/brands HTTP/1.1

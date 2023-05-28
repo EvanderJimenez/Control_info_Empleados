@@ -1,5 +1,5 @@
-import employeeProvider from "../../../dataBase/firebase/providers/employee/employee.provider";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";//TODO:You should use relative paths with @
+import { employeeProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function getByUid(req: NextApiRequest, res: NextApiResponse) {
@@ -23,49 +23,20 @@ async function deleteByUid(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
-
+  try {
     const uid = String(req.query.uid);
+    const employeeData = req.body;
 
-    const {
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-    } = req.body;
+    console.log(JSON.stringify(employeeData))
 
-    await employeeProvider.updatByUid(
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule
-    );
+    await employeeProvider.updateByUid(uid, employeeData);
+
     res.status(200).json({ uid, message: "Information updated" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
+
 
 const handlers: any = {};
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
@@ -75,7 +46,10 @@ handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>
   updateByUid(req, res);
 
-export default function employeesByIdController(req: NextApiRequest, res: NextApiResponse) {
+export default function employeesByIdController(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { method } = req;
 
   const handler = handlers[method as keyof typeof handlers](req, res);
