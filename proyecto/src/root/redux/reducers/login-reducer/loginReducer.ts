@@ -3,11 +3,11 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
 interface LoginState {
-    login: EmployeesType | null
+    login: EmployeesType 
   }
 
   export const initialStateLogin: LoginState = {
-    login: null
+    login: {} as EmployeesType
   };
 
 

@@ -11,13 +11,28 @@ import cookiesUser from "@/root/utils/login/cookiesUser";
 import { RootState } from "@/root/redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 import toast from "react-hot-toast";
+import { EmployeesType } from "@/root/types/Employee.type";
+import { connectStorageEmulator } from "firebase/storage";
 
 function Login() {
   const dispatch = useDispatch();
 
   const loginState = useSelector(selectLogin);
+
   const resDepart = useSelector(selectGetDepartmentById);
   const loading = useSelector((state: RootState) => state.loading.loading);
+  /*localStorage.setItem("loginState", JSON.stringify(loginState));
+
+  const loginStateStored = localStorage.getItem("loginState");
+  let loginState2: EmployeesType | null = null;
+
+  if (loginStateStored) {
+    try {
+      loginState2 = JSON.parse(loginStateStored);
+    } catch (error) {
+      console.error("Error al analizar el valor almacenado en localStorage:", error);
+    }
+  }*/
 
   const [data, setData] = useState<LoginEP>({
     email: "",
@@ -41,9 +56,7 @@ function Login() {
     if (data.email && data.password) {
       try {
         dispatch(StartLogin(data.email, data.password));
-      } catch (error) {
-        
-      }
+      } catch (error) {}
     }
   };
 
@@ -55,7 +68,7 @@ function Login() {
 
   return (
     <>
-      <div className="flex justify-center">{loading ? <LoadingGeneralComponent/> : <div className="font-medium text-white">Welcome!</div> }</div>
+      <div className="flex justify-center">{loading ? <LoadingGeneralComponent /> : <div className="font-medium text-white">Welcome!</div>}</div>
       <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />
     </>
   );

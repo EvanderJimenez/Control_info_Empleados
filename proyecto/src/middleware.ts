@@ -1,10 +1,22 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { selectLogin } from './root/redux/selectors/employee-selector/employee.selector';
-import { useSelector } from 'react-redux';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { selectLogin } from "./root/redux/selectors/employee-selector/employee.selector";
+import { useSelector } from "react-redux";
 
-export function middleware(request: NextRequest) {
- /*
+export async function middleware(request: NextRequest) {
+  const tokenCookie = await request.cookies.get("token");
+
+  if (tokenCookie) {
+    NextResponse.next();
+  }else{
+    const requestedPage = request.nextUrl.pathname;
+            const url = request.nextUrl.clone();
+            url.pathname = `/home`;
+            url.search = `p=${requestedPage}`;
+            return NextResponse.redirect(url);
+  }
+
+  /*
    const url = request.nextUrl.clone();
   const isLogin = request.cookies.get('logged');
 
@@ -25,10 +37,8 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
   }*/
-
-  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/home','/home/EmployeeMain','/home/AdminMain','/home/BossMain',]
-}
+  matcher: ["/home/EmployeeMain", "/home/AdminMain", "/home/BossMain"],
+};
