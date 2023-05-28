@@ -1,5 +1,6 @@
 import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
+import Cookies from 'js-cookie'
 
 const deleteEmployeeProvider = async (searchTerm: string) => {
 
@@ -183,8 +184,8 @@ const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
     }
 
     const data = await response.json();
-
-    return data;
+    Cookies.set('token',data.token)
+    return data.employee;
 
 };
 

@@ -17,6 +17,8 @@ import cookiesUser from "@/root/utils/login/cookiesUser";
 import { RootState } from "@/root/redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 import toast from "react-hot-toast";
+import { EmployeesType } from "@/root/types/Employee.type";
+import { connectStorageEmulator } from "firebase/storage";
 
 function Login() {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function Login() {
   const loginState = useSelector(selectLogin);
   const resDepart = useSelector(selectGetByIdDocDepartment);
   const loading = useSelector((state: RootState) => state.loading.loading);
+
 
   const [data, setData] = useState<LoginEP>({
     email: "",
@@ -59,18 +62,8 @@ function Login() {
 
   return (
     <>
-      <div className="flex justify-center">
-        {loading ? (
-          <LoadingGeneralComponent />
-        ) : (
-          <div className="font-medium text-white">Welcome!</div>
-        )}
-      </div>
-      <FormLogin
-        handleSubmit={handleLogin}
-        handleInputChange={handleInputChange}
-        loginData={data}
-      />
+      <div className="flex justify-center">{loading ? <LoadingGeneralComponent /> : <div className="font-medium text-white">Welcome!</div>}</div>
+      <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />
     </>
   );
 }

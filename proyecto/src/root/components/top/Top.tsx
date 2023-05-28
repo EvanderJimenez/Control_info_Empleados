@@ -1,6 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import router from "next/router";
+import Cookies from "js-cookie";
+
+
+const handleSingOff = () =>{
+  Cookies.remove("token");
+  router.push("/")
+}
+
+
 
 export function Top() {
   return (
@@ -42,9 +51,9 @@ export function Top() {
                   </a>
                 </li>
                 <li>
-                  <a href="/" className="text-gray-900 dark:text-white hover:underline print:hidden">
-                    Sign off
-                  </a>
+                  <button className="text-gray-900 dark:text-white hover:underline print:hidden" onClick={handleSingOff}>
+                  Sign off
+                  </button>
                 </li>
               </ul>
             </div>
