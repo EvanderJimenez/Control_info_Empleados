@@ -53,7 +53,7 @@ export default function JustificationEmployee({
       console.error("Please enter values for all fields");
       return;
     }
-
+    console.log(userData);
     const newAttendanceObject: Attendance = {
       startTime: hIni,
       endTime: hFin,

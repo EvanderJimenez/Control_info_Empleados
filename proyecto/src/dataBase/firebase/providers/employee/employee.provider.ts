@@ -1,4 +1,4 @@
-import { Attendance } from './../../../../root/interface/employee/employee.interface';
+import { Attendance } from "./../../../../root/interface/employee/employee.interface";
 import { Brands, Schedule } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
 import {
@@ -71,7 +71,7 @@ const updatByUid = async (
       boss,
       schedule,
       vacations,
-      attendance
+      attendance,
     });
 
     const snapshotEmployeeUpdate = await getDoc(employeeDoc);

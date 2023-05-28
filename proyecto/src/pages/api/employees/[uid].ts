@@ -1,4 +1,3 @@
-
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -25,7 +24,6 @@ async function deleteByUid(req: NextApiRequest, res: NextApiResponse) {
 
 async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
   try {
-
     const uid = String(req.query.uid);
     const {
       name,
@@ -42,7 +40,7 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
       email,
       boss,
       schedule,
-      vacations
+      vacations,
     } = req.body;
 
     await employeeProvider.updatByUid(
@@ -78,7 +76,10 @@ handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>
   updateByUid(req, res);
 
-export default function employeesByIdController(req: NextApiRequest, res: NextApiResponse) {
+export default function employeesByIdController(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { method } = req;
 
   const handler = handlers[method as keyof typeof handlers](req, res);

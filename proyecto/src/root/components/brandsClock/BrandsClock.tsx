@@ -17,6 +17,7 @@ interface methodsBrands {
   checkMarkHours: (markStart: string, markEnd: string) => boolean;
   setBrandData: React.Dispatch<React.SetStateAction<Brands>>;
   setFinish: React.Dispatch<React.SetStateAction<boolean>>;
+  handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 function BrandsClock({
   currentDate,
@@ -33,6 +34,7 @@ function BrandsClock({
   checkMarkHours,
   setBrandData,
   setFinish,
+  handleUpdate,
   ...props
 }: methodsBrands) {
   const [time, setTime] = useState("");
@@ -59,54 +61,13 @@ function BrandsClock({
     return () => clearInterval(interval);
   }, []);
 
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (formattedDay && brandData.cycle && brandData.cycle["Ciclo 1"]) {
-      const cycle = brandData.cycle["Ciclo 1"];
-      const existingHours = cycle.hours[currentDate];
-      console.log(existingHours.hFin);
-      if (existingHours) {
-        const markStart = existingHours.hIni;
-        const markEnd = existingHours.hFin;
-
-        if (checkMarkHours(markStart, markEnd)) {
-          console.log("The hours match. Performing update...");
-        } else {
-          console.log("The mark hours do not match the defined hours.");
-        }
-
-        fetch(`/api/brands/${brandData.idEmployee}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(brandData),
-        })
-          .then((res) => res.json())
-          .then((updatedBrands) => {
-            setBrandData((prevData) => ({
-              ...prevData,
-              ...updatedBrands,
-            }));
-            setFinish(true);
-          })
-          .catch((error) => console.error("Error updating brands:", error));
-      }
-    }
-  };
   return (
     <div>
       <SearchDepartment handleGet={handleGetBrands} />
       <button onClick={handleClick1} className="bg-red">
         Click me
       </button>
-      <button
-        onClick={() => handleUpdateCycleHours("Ciclo 1")}
-        className="bg-red"
-      >
-        SaveHours
-      </button>
+
       <Clock time={time} handleUpdate={handleUpdate} />
     </div>
   );
