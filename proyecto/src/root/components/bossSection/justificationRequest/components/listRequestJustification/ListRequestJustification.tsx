@@ -9,9 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 interface RequestEmployeeProps {
   selectedRequest: any;
+  changeState: boolean;
+  setChangeState:  React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ListRequestJustification = ({
+const ListRequestJustification = ({setChangeState, changeState,
   selectedRequest,
 }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
@@ -26,7 +28,10 @@ const ListRequestJustification = ({
   }, []);
 
   useEffect(() => {
+    console.log("case: "+ changeState)
+    console.log("list: "+ JSON.stringify(listEmployees))
     if (listEmployees) {
+        console.log("intent modify: "+changeState)
       const pendingRequestsList: PendingRequestJustifications[] = [];
 
       listEmployees.forEach((employee) => {
@@ -56,7 +61,7 @@ const ListRequestJustification = ({
       });
       setPendingRequests(pendingRequestsList);
     }
-  }, [listEmployees]);
+  }, [listEmployees,changeState]);
 
   const handleLoadInformation = (request: PendingRequestJustifications) => {
     selectedRequest(request);

@@ -25,6 +25,9 @@ const JustificationRequest = () => {
   const [selectedRequest, setSelectedRequest] =
     useState<PendingRequestJustifications>();
     const employeeByUid = useSelector(selectGetEmployeeByUid);
+
+    const [changeState, setChangeState] = useState(false)
+
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
@@ -56,7 +59,6 @@ const JustificationRequest = () => {
   };
 
   useEffect(() => {
-    console.log("option: " + optionSelect);
 
     if (employeeByUid && employeeByUid.attendance && optionSelect !== "wait") {
       const attendance = employeeByUid.attendance[selectedRequest?.key || ""];
@@ -75,18 +77,18 @@ const JustificationRequest = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-      console.log("Status :" + JSON.stringify(updatedDataEmployee.attendance));
-      
 
 
       dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
 
       setSelectedRequest(pendingRequest)
+      setChangeState(!changeState)
+      console.log("changeState: " + changeState)
       //dispatch(ResetEmployeeByUid())
 
-      //setSelectedRequest(pendingRequest);
+    setSelectedRequest(pendingRequest);
     }
-  }, [employeeByUid, dispatch]);
+  }, [employeeByUid, dispatch]); 
 
   return (
     <div className="flex flex-col lg:flex-row overflow-hidden pb-14">
@@ -95,7 +97,7 @@ const JustificationRequest = () => {
           <Filters />
         </div>
         <div>
-          <ListRequestJustification selectedRequest={setSelectedRequest} />
+          <ListRequestJustification setChangeState={setChangeState} changeState selectedRequest={setSelectedRequest} />
         </div>
       </div>
       <div className="flex flex-col lg:w-1/2 md:w-1/2 sm:flex-col lg:3/4 w-full justify-center items-center m-3">
