@@ -1,15 +1,16 @@
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { id } from "date-fns/locale";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getByVariable = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const {data,variable } = req.body
+  const {data,variable,idDepartment } = req.body
 
   try {
-    const employee = await employeeProvider.getByVariable(data, variable);
+    const employee = await employeeProvider.getByVariable(data, variable,idDepartment);
 
     res.status(200).json(employee);
   } catch (error) {

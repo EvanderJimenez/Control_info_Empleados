@@ -13,11 +13,9 @@ interface ScheduleTimeSelectionProps {
 }
 
 const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onScheduleChange }) => {
-
   const employeeSchedule = useSelector(selectGetEmployeeByUid);
 
   const dispatch = useDispatch();
-  
 
   const [schedules, setSchedules] = useState<Schedule[]>([
     { day: "Monday", startTime: "", endTime: "" },
@@ -29,8 +27,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     { day: "Sunday", startTime: "", endTime: "" },
   ]);
 
-
-  const  test = {
+  const test = {
     uid: "",
     name: "",
     firstSurname: "",
@@ -47,8 +44,8 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     boss: "",
     schedule: [],
     vacations: {},
-    attendance: {}
-  }
+    attendance: {},
+  };
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>(test);
 
@@ -65,38 +62,32 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
       setSchedules(employeeSchedule.schedule);
       setDataEmployee(employeeSchedule);
     }
-  }, [employeeSchedule,dataEmployee]);
+  }, [employeeSchedule, dataEmployee]);
 
   const handleSaveSchedule = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const newDataEmployee = { ...dataEmployee, schedule: schedules };
 
-
     dispatch(StartUpDateEmployee(newDataEmployee?.uid || "", newDataEmployee));
 
-    setDataEmployee(test)
+    setDataEmployee(test);
 
     console.log("test: " + JSON.stringify(test));
-
-  }
-
-  
-
+  };
   return (
-    <>
-      <div className="flex flex-wrap justify-center">
-        <div className="xl:w-1/4 ">
-          <SearchInput labelInputSeekerOne="number" placeholderSeekerOne="ID number" valueEnd={""} typeList={"cedula"} id={"cedula"} />
-          <div className="pt-3">
-            <ListEmployee clear setClear={() => {}} />
-          </div>
-        </div>
-        <div className="flex-grow xl:w-3/4">
-          <FormSchedule handleSaveSchedule={handleSaveSchedule} handleTimeChange={handleTimeChange} schedules={schedules} setSchedules={setSchedules} />
+    <div className="flex flex-wrap mt-2 justify-center">
+      
+      <div className="flex-grow xl:w-1/2 md:w-1/2 px-2">
+        <FormSchedule handleSaveSchedule={handleSaveSchedule} handleTimeChange={handleTimeChange} schedules={schedules} setSchedules={setSchedules} />
+      </div>
+      <div className="xl:w-1/2 md:w-1/2 px-2">
+        <SearchInput labelInputSeekerOne="number" placeholderSeekerOne="ID number" valueEnd={""} typeList={"cedula"} id={"cedula"} />
+        <div className="pt-3">
+          <ListEmployee clear setClear={() => {}} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

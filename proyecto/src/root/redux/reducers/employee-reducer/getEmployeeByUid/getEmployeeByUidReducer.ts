@@ -1,32 +1,51 @@
-import {  EmployeesType } from "@/root/types/Employee.type";
+import { EmployeesType } from "@/root/types/Employee.type";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-
 interface GetEmployeeByUidState {
-    getEmployeeByUid: EmployeesType | null
-  }
+  getEmployeeByUid: EmployeesType | null;
+}
 
-  export const initialState: GetEmployeeByUidState = {
-    getEmployeeByUid: null  };
+export const initialStateByUid: GetEmployeeByUidState = {
+  getEmployeeByUid: {
+    uid: "",
+    name: "",
+    firstSurname: "",
+    secondSurname: "",
+    cedula: 0,
+    phoneNumber: 0,
+    photo: "",
+    jobPosition: "",
+    salary: 0,
+    enabled: true,
+    idDepartment: "",
+    password: "",
+    email: "",
+    boss: "",
+    schedule: [],
+    vacations: {},
+    attendance: {},
+  },
+};
 
+type EmployeeAction = {
+  type: string;
+  getEmployeeByUid?: GetEmployeeByUidState;
+};
 
-  type EmployeeAction = {
-    type: string;
-    getEmployeeByUid?: GetEmployeeByUidState;
-  };
+export const GetEmployeeByUidSlice = createSlice({
+  name: "getEmployeeByUid",
+  initialState: initialStateByUid,
 
-  export const GetEmployeeByUidSlice = createSlice({
-    name: "getEmployeeByUid",
-    initialState: initialState,
-
-    reducers: {
-
-        getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) =>{
-        return {getEmployeeByUid: action.payload}
-      },
+  reducers: {
+    getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) => {
+      return { getEmployeeByUid: action.payload };
     },
-  });
+    resetEmployeeByUid: (state) => {
+      state.getEmployeeByUid = initialStateByUid.getEmployeeByUid;
+    },
+  },
+});
 
-  export const {getEmployeeByUidReducer} = GetEmployeeByUidSlice.actions;
-  export const GetEmployeeByUidReducer = GetEmployeeByUidSlice.reducer;
-  export type DispatchTypeEmployeeByUid = (args: EmployeeAction) => EmployeeAction;
+export const { getEmployeeByUidReducer, resetEmployeeByUid } = GetEmployeeByUidSlice.actions;
+export const GetEmployeeByUidReducer = GetEmployeeByUidSlice.reducer;
+export type DispatchTypeEmployeeByUid = (args: EmployeeAction) => EmployeeAction;

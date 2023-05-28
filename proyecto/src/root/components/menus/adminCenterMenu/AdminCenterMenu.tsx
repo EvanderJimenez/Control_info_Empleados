@@ -11,7 +11,7 @@ export default function AdminCenterMenu() {
 
   return (
     <>
-      <div className=" print:hidden left-0 z-50 w-full h-20 bg-SecondaryColor  dark:bg-gray-700 dark:border-gray-600">
+      <div className=" print:hidden left-0 z-50 w-full h-20 bg-lithBlue ">
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
           <button
             onClick={() => handleButtonClick("/home/AdminMain/Employees")}
@@ -24,7 +24,7 @@ export default function AdminCenterMenu() {
             </span>
           </button>
           <button
-          onClick={() => handleButtonClick("/home/AdminMain/Departments")}
+          onClick={() => handleButtonClick("/home/AdminMain/Department")}
             type="button"
             className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
           >

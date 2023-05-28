@@ -6,7 +6,7 @@ interface EmployeeVacationsState {
     getVacationsByUid: EmployeesType[]
   }
 
-  export const initialState: EmployeeVacationsState = {
+  export const initialStateVacations: EmployeeVacationsState = {
     getVacationsByUid: {} as EmployeesType [],
   };
 
@@ -16,9 +16,9 @@ interface EmployeeVacationsState {
     getVacationsByUid?: EmployeeVacationsState;
   };
 
-  export const EmployeeSlice = createSlice({
+  export const EmployeeVacationsSlice = createSlice({
     name: "getVacationsByUid",
-    initialState: initialState,
+    initialState: initialStateVacations,
 
     reducers: {
 
@@ -28,6 +28,6 @@ interface EmployeeVacationsState {
     },
   });
 
-  export const {getVacationsByUidReducer} = EmployeeSlice.actions;
-  export const VacationsReducer = EmployeeSlice.reducer;
+  export const {getVacationsByUidReducer} = EmployeeVacationsSlice.actions;
+  export const VacationsReducer = EmployeeVacationsSlice.reducer;
   export type DispatchTypeVacations = (args: EmployeeAction) => EmployeeAction;

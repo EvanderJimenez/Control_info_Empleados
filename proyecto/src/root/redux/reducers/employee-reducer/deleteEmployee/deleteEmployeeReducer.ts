@@ -6,7 +6,7 @@ interface EmployeeDeleteState {
     deleteEmployee: DeleteEmployeeType
   }
 
-  export const initialState: EmployeeDeleteState = {
+  export const initialStateDelete: EmployeeDeleteState = {
     deleteEmployee: {
         id: ""
     }
@@ -15,12 +15,12 @@ interface EmployeeDeleteState {
 
   type EmployeeAction = {
     type: string;
-    getVacationsByUid?: EmployeeDeleteState;
+    deleteEmployee?: EmployeeDeleteState;
   };
 
   export const EmployeeDeleteSlice = createSlice({
     name: "deleteEmployee",
-    initialState: initialState,
+    initialState: initialStateDelete,
 
     reducers: {
 

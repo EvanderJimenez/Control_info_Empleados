@@ -33,7 +33,6 @@ export default function JustificationEmployee({
     email: "",
     boss: "",
     schedule: [],
-    brands: [],
     option: "register",
     attendance: {},
   });
@@ -97,7 +96,6 @@ export default function JustificationEmployee({
       }));
     }
     setJustify("");
-    handleUpdate(event);
   };
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -108,7 +106,7 @@ export default function JustificationEmployee({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(userData),
       });
 
       if (response.ok) {
@@ -178,7 +176,20 @@ export default function JustificationEmployee({
               </button>
             </div>
           </form>
-
+          <form
+            className="w-full max-w-lg px-10"
+            onSubmit={handleUpdate}
+          >
+            
+            <div className="flex justify-center ">
+              <button
+                className="shadow bg-blue hover:bg-teal focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                type="submit"
+              >
+                Send
+              </button>
+            </div>
+          </form>
           <div className="w-full max-w-lg px-10 mb-4"></div>
         </div>
       </div>

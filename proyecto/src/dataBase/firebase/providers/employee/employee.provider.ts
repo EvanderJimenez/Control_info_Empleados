@@ -17,7 +17,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { Vacations } from "@/root/types/Employee.type";
+import { EmployeesType, Vacations } from "@/root/types/Employee.type";
+import { defaultSchedule } from '@/root/constants/schedule/schedule';
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -31,48 +32,16 @@ const getAll = async () => {
   return employees;
 };
 
-const updatByUid = async (
-  uid: string,
-  name: string,
-  firstSurname: string,
-  secondSurname: string,
-  cedula: number,
-  phoneNumber: number,
-  photo: string,
-  jobPosition: string,
-  salary: number,
-  enabled: boolean,
-  idDepartment: number,
-  password: string,
-  email: string,
-  boss: string,
-  schedule: Schedule[],
-  vacations: Vacations,
-  attendance: Attendance
-) => {
+
+
+const updateByUid = async (uid: string,employeeData: EmployeesType): Promise<any> => {
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
   const querySnapshot = await getDocs(q);
+
   if (querySnapshot.size > 0) {
     const employeeDoc = doc(firestore, "employee", querySnapshot.docs[0].id);
-    await updateDoc(employeeDoc, {
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-      vacations,
-      attendance,
-    });
+    await updateDoc(employeeDoc, employeeData);
 
     const snapshotEmployeeUpdate = await getDoc(employeeDoc);
     const employeeUpdate = snapshotEmployeeUpdate.data();
@@ -80,42 +49,18 @@ const updatByUid = async (
   }
 };
 
-const create = async (
-  uid: string,
-  name: string,
-  firstSurname: string,
-  secondSurname: string,
-  cedula: number,
-  phoneNumber: number,
-  photo: string,
-  jobPosition: string,
-  salary: number,
-  enabled: boolean,
-  idDepartment: string,
-  password: string,
-  email: string,
-  boss: string,
-  schedule: Schedule[],
-  vacations: Vacations,
-  attendance: Attendance
-): Promise<{ message: string; employee?: any }> => {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
+const create = async (employeeData: EmployeesType): Promise<{ message: string; employee?: any }> => {
+  const {
+    password,
     email,
-    password
-  );
-  const user = userCredential.user;
-  uid = user.uid;
+    schedule,
+    uid,
+    ...restData
+  } = employeeData;
 
-  const defaultSchedule: Schedule[] = [
-    { day: "Monday", startTime: "", endTime: "" },
-    { day: "Tuesday", startTime: "", endTime: "" },
-    { day: "Wednesday", startTime: "", endTime: "" },
-    { day: "Thursday", startTime: "", endTime: "" },
-    { day: "Friday", startTime: "", endTime: "" },
-    { day: "Saturday", startTime: "", endTime: "" },
-    { day: "Sunday", startTime: "", endTime: "" },
-  ];
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const user = userCredential.user;
+   const uuid = user.uid;
 
   const mergedSchedule: Schedule[] = defaultSchedule.map((defaultDay) => {
     const userDay = schedule.find((s) => s.day === defaultDay.day);
@@ -125,38 +70,25 @@ const create = async (
     };
   });
 
-  const newDocRef = await addDoc(collection(firestore, "employee"), {
-    uid,
-    name,
-    firstSurname,
-    secondSurname,
-    cedula,
-    phoneNumber,
-    photo,
-    jobPosition,
-    salary,
-    enabled,
-    idDepartment,
+  const employeeDoc = {
     password,
     email,
-    boss,
-    vacations,
-    attendance,
+    uid: uuid,
     schedule: mergedSchedule,
-  });
+    ...restData,
+  };
 
+  const newDocRef = await addDoc(collection(firestore, "employee"), employeeDoc);
   const newDoc = await getDoc(newDocRef);
 
-  if (newDoc.exists()) {
-    return {
-      message: "Employee create successfully",
-      employee: newDoc.data(),
-    };
-  } else {
-    return {
-      message: "Employee don't create",
-    };
-  }
+  return newDoc.exists()
+    ? {
+        message: "Employee created successfully",
+        employee: newDoc.data(),
+      }
+    : {
+        message: "Employee creation failed",
+      };
 };
 
 const getByUid = async (uid: string) => {
@@ -220,7 +152,7 @@ const getByCedula = async (cedula: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(
     employeeCollection,
-    where("cedula", "==", cedula)
+    where("uid", "==", cedula)
   );
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     employeeQuery
@@ -247,9 +179,9 @@ const dismissByUid = async (uid: string) => {
   await updateDoc(employeeRef, { idDepartment: "" });
 };
 
-const getByVariable = async (data: string, variable: string) => {
+const getByVariable = async (data: string, variable: string, idDepartment: string) => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where(variable, "==", data));
+  const employeeQuery = query(employeeCollection, where(variable, "==", data),where("idDepartment", "==", idDepartment));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     employeeQuery
   );
@@ -348,7 +280,7 @@ export const employeeProvider = {
   deleteByUid,
   create,
   login,
-  updatByUid,
+  updateByUid,
   getByCedula,
   dismissByUid,
   getByVariable,

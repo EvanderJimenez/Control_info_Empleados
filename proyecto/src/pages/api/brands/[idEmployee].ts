@@ -1,5 +1,6 @@
-import brandsProvider from "../../../dataBase/firebase/providers/brands/brands.provider";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
+
+import { brandsProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {

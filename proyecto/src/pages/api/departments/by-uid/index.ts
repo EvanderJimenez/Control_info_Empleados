@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { notAllowedResponse } from "../../../../root/api/reponses/notAllowedResponse";
-import departmentProvider from "../../../../dataBase/firebase/providers/departments/departments.provider";
+import { departmentProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
+
 
 const getDepartmentByUidEmployee = async (res: NextApiResponse) => {
   try {

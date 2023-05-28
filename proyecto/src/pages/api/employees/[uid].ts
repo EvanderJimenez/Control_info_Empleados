@@ -25,48 +25,18 @@ async function deleteByUid(req: NextApiRequest, res: NextApiResponse) {
 async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
   try {
     const uid = String(req.query.uid);
-    const {
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-      vacations,
-    } = req.body;
+    const employeeData = req.body;
 
-    await employeeProvider.updatByUid(
-      uid,
-      name,
-      firstSurname,
-      secondSurname,
-      cedula,
-      phoneNumber,
-      photo,
-      jobPosition,
-      salary,
-      enabled,
-      idDepartment,
-      password,
-      email,
-      boss,
-      schedule,
-      vacations
-    );
+    console.log(JSON.stringify(employeeData))
+
+    await employeeProvider.updateByUid(uid, employeeData);
 
     res.status(200).json({ uid, message: "Information updated" });
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
+
 
 const handlers: any = {};
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>

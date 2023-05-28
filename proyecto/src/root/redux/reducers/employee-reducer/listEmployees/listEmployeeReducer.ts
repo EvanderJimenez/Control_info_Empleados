@@ -6,7 +6,7 @@ interface ListEmployeesState {
     listEmployees: EmployeesType[]
   }
 
-  export const initialState: ListEmployeesState = {
+  export const initialStateListEmployee: ListEmployeesState = {
     listEmployees: {} as EmployeesType[]
   };
 
@@ -18,7 +18,7 @@ interface ListEmployeesState {
 
   export const ListEmployeeSlice = createSlice({
     name: "listEmployees",
-    initialState: initialState,
+    initialState: initialStateListEmployee,
 
     reducers: {
 

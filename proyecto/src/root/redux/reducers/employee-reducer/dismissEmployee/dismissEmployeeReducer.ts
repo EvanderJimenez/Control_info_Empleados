@@ -6,7 +6,7 @@ interface EmployeeDismissState {
     dismissEmployee: DeleteEmployeeType
   }
 
-  export const initialState: EmployeeDismissState = {
+  export const initialStateDismiss: EmployeeDismissState = {
     dismissEmployee: {
         id: ""
     }
@@ -15,12 +15,12 @@ interface EmployeeDismissState {
 
   type EmployeeAction = {
     type: string;
-    getVacationsByUid?: EmployeeDismissState;
+    dismissEmployee?: EmployeeDismissState;
   };
 
   export const EmployeeDismissSlice = createSlice({
     name: "dismissEmployee",
-    initialState: initialState,
+    initialState: initialStateDismiss,
 
     reducers: {
 

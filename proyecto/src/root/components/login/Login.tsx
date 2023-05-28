@@ -5,17 +5,18 @@ import FormLogin from "./components/FormLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { StartLogin } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
-import { selectGetDepartmentById } from "@/root/redux/selectors/department-selector/department.selector";
-import { startGetDepartmentById } from "@/root/redux/thunks/department-thunk/department.thunk";
+import { selectGetByIdDocDepartment, selectGetDepartmentById } from "@/root/redux/selectors/department-selector/department.selector";
+import { startGetDepartByIdDoc, startGetDepartmentById } from "@/root/redux/thunks/department-thunk/department.thunk";
 import cookiesUser from "@/root/utils/login/cookiesUser";
 import { RootState } from "@/root/redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
+import toast from "react-hot-toast";
 
 function Login() {
   const dispatch = useDispatch();
 
   const loginState = useSelector(selectLogin);
-  const resDepart = useSelector(selectGetDepartmentById);
+  const resDepart = useSelector(selectGetByIdDocDepartment);
   const loading = useSelector((state: RootState) => state.loading.loading);
 
   const [data, setData] = useState<LoginEP>({
@@ -25,8 +26,7 @@ function Login() {
 
   useEffect(() => {
     if (loginState) {
-      dispatch(startGetDepartmentById(loginState.idDepartment));
-      console.log("id deparmen")
+      dispatch(startGetDepartByIdDoc(loginState.idDepartment));
     }
   }, [loginState, dispatch]);
 
@@ -42,11 +42,10 @@ function Login() {
       try {
         dispatch(StartLogin(data.email, data.password));
       } catch (error) {
-        //error
       }
     }
   };
-
+-
   useEffect(() => {
     if (loginState && resDepart) {
       cookiesUser(loginState, resDepart);
@@ -55,7 +54,8 @@ function Login() {
 
   return (
     <>
-      <div>{loading ? <LoadingGeneralComponent /> : <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />}</div>
+      <div className="flex justify-center">{loading ? <LoadingGeneralComponent/> : <div className="font-medium text-white">Welcome!</div> }</div>
+      <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />
     </>
   );
 }

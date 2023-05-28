@@ -6,7 +6,7 @@ interface GetEmployeesByIdDepartmentState {
     getEmployeesByIdDepartment: EmployeesType []
   }
 
-  export const initialState: GetEmployeesByIdDepartmentState = {
+  export const initialStateIdDepart: GetEmployeesByIdDepartmentState = {
     getEmployeesByIdDepartment: []
 };
 
@@ -17,7 +17,7 @@ interface GetEmployeesByIdDepartmentState {
 
   export const GetEmployeesByIdDepartmentSlice = createSlice({
     name: "getEmployeesByIdDepartment",
-    initialState: initialState,
+    initialState: initialStateIdDepart,
 
     reducers: {
 

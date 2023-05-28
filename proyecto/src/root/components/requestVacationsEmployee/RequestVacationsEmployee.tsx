@@ -1,9 +1,9 @@
-import { Vacations } from "@/root/interface/employee";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
-import { EmployeesType } from "@/root/types/Employee.type";
+import { EmployeesType, Vacations } from "@/root/types/Employee.type";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ListRequestVacations from "../employeeSection/requestVacationsEmployee/components/listRequestVacations/ListRequestVacations";
 
 
 const RequestVacationsEmployee = () => {
@@ -26,6 +26,7 @@ const RequestVacationsEmployee = () => {
     boss: "",
     schedule: [],
     vacations: {},
+    attendance: {}
   });
 
   const [newDateStart, setNewDateStart] = useState("");
@@ -117,7 +118,7 @@ const RequestVacationsEmployee = () => {
           <button className="bg-darkBlue">Accepted</button>
           <button className="bg-red">Denied</button>
         </div>
-        <ListRequestVacations />
+        <ListRequestVacations data={dataEmployee} filter="" setSendRequest={() => {}  }/>
       </div>
     </div>
   );

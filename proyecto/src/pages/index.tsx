@@ -9,7 +9,10 @@ const InvoicePage: NextPage = () => {
     router.push("./home/");
   }, [router]);
 
-  return <div className="bg-gray-900 w-full h-full"></div>;
+  return (
+    <>
+    </>
+  );
 };
 
 export default InvoicePage;

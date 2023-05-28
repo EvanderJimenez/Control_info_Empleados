@@ -1,16 +1,15 @@
-
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType, Vacations } from "@/root/types/Employee.type";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
-
+import toast, { Toaster } from "react-hot-toast";
 
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
 
-  const [sendRequest, setSendRequest] = useState(true)
+  const [sendRequest, setSendRequest] = useState(true);
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
@@ -29,6 +28,7 @@ const RequestVacationsEmployee = () => {
     boss: "",
     schedule: [],
     vacations: {},
+    attendance: {},
   });
 
   const [newDateStart, setNewDateStart] = useState("");
@@ -67,7 +67,7 @@ const RequestVacationsEmployee = () => {
     setNewDateEnd("");
     setNewDescription("");
     setNewName("");
-    setSendRequest(!sendRequest)
+    setSendRequest(!sendRequest);
   };
 
   useEffect(() => {
@@ -82,20 +82,31 @@ const RequestVacationsEmployee = () => {
     }
   }, [employeeVacations]);
 
+  const FilterByAccepted = () => {
+    setShowBy("accepted");
+  };
+  const FilterByDenied = () => {
+    setShowBy("denied");
+  };
+  const FilterByWaiting = () => {
+    setShowBy("waiting");
+  };
+  const [showBy, setShowBy] = useState("waiting");
+
   return (
-    <div className="bg-lithGray flex xl:h-screen flex-col flex-wrap lg:flex-row lg:flex-wrap justify-center items-center">
+    <div className="bg-lithGray flex xl:h-screen xl:flex-col flex-col lg:flex-row lg:flex-wrap mt-10">
       <div className="lg:w-1/2 items-center">
         <form className="m-5" onSubmit={handleVacationRequestSend}>
-          <div className=" flex flex-col  md:w-full sm:w-full border-gray-200 ">
+          <div className=" flex flex-col  md:w-full sm:w-full">
             <h2 className="text-lg sm:text-xl font-medium text-center mb-2">Vacation request</h2>
             <div className="items-center">
-              <label className="font-semibold">Name request: </label>
+              <label className="font-semibold">Affair: </label>
               <input className="w-1/4 focus:outline-none " type="text" id="name" value={newName} onChange={(e) => setNewName(e.target.value)} />
             </div>
 
             <div className="w-auto flex justify-between lx:flex-row space-x-2 mt-5 items-center">
               <label htmlFor="dateStar">Start date:</label>
-              <input className = "bg-white"type="datetime-local" id="dateStar" value={newDateStart} onChange={(e) => setNewDateStart(e.target.value)} />
+              <input className="bg-white" type="datetime-local" id="dateStar" value={newDateStart} onChange={(e) => setNewDateStart(e.target.value)} />
               <label htmlFor="dateEnd">Final date:</label>
               <input type="datetime-local" id="dateEnd" value={newDateEnd} onChange={(e) => setNewDateEnd(e.target.value)} />
             </div>
@@ -110,7 +121,13 @@ const RequestVacationsEmployee = () => {
               onChange={(e) => setNewDescription(e.target.value)}
               className="mt-3 shadow-lg focus:border-transparent focus:outline-none  rounded-xl"
             ></textarea>
-            <button className="NormalButton zoom mt-3 " type="submit">
+            <button
+              className="NormalButton zoom mt-3 "
+              type="submit"
+              onClick={() => {
+                toast.success("save");
+              }}
+            >
               Send request
             </button>
           </div>
@@ -118,11 +135,17 @@ const RequestVacationsEmployee = () => {
       </div>
       <div className="lg:w-1/2 justify-center flex flex-col overflow-auto h-96">
         <h2 className="text-lg sm:text-xl font-medium text-center mb-8">List request vacations</h2>
-        <ListRequestVacations data={dataEmployee} setSendRequest={setSendRequest}/>
-        <div className="flex flex-row justify-center space-x-4  m-2">
-          <button className="bg-darkBlue">Accepted</button>
-          <button className="bg-red">Denied</button>
-          <button className="bg-lithBlue">Wait</button>
+        <ListRequestVacations data={dataEmployee} setSendRequest={setSendRequest} filter={showBy} />
+        <div className="flex flex-row justify-center space-x-4 mb-10 m-2">
+          <button onClick={FilterByAccepted} className="bg-darkBlue">
+            Accepted
+          </button>
+          <button onClick={FilterByDenied} className="bg-red">
+            Denied
+          </button>
+          <button onClick={FilterByWaiting} className="bg-blue">
+            Waiting
+          </button>
         </div>
       </div>
     </div>
