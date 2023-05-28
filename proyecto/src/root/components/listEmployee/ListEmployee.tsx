@@ -14,7 +14,6 @@ interface ListClear {
 
 const ListEmployee = ({ clear, setClear }: ListClear) => {
   const dispatch = useDispatch();
-  let filteredEmployees: EmployeesType[] = [];
 
   const employeesListVariable = useSelector(selectGetByVariable);
 
@@ -24,7 +23,6 @@ const ListEmployee = ({ clear, setClear }: ListClear) => {
   const loginState = useSelector(selectLogin);
 
   useEffect(() => {
-    console.log("k");
   }, [dispatch, getEmployeeByUid]);
 
   const handleLoad = (uid: string) => {
@@ -32,6 +30,9 @@ const ListEmployee = ({ clear, setClear }: ListClear) => {
     setClear(false);
   };
 
+  console.log("List: " + JSON.stringify(employeesListVariable));
+
+  
   return (
     <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
       {Array.isArray(employeesListVariable) &&

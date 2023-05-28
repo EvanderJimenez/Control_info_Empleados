@@ -1,5 +1,6 @@
 import { setCookie } from 'cookies-next';
 import router from 'next/router';
+import toast from 'react-hot-toast';
 
 interface LoginState {
   uid: string;
@@ -32,6 +33,8 @@ function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartSta
     }
 
     setCookie("logged", cookieValue, { path: "/", expires: expirationDate });
+  }else{
+    toast.error("User not Found")
   }
 }
 

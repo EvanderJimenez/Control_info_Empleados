@@ -58,6 +58,9 @@ const updateDepartmentByIdProvider = async (searchTerm1 :string, searchTerm2 :st
 }
 
 const getDepartmentByDocIdProvider = async (searchTerm : string) => {
+
+  console.log("search term: " + searchTerm)
+
   const response = await fetch(`/api/departments/${searchTerm}`, {
     method: "GET",
     headers: {

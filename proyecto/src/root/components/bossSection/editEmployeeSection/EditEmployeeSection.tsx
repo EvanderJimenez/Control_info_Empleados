@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import SearchInput from "../../ui/searchInput/SearchInput";
 import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../../listEmployee/ListEmployee";
-import { selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetByVariable, selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { ResetByVariable, ResetEmployeeByUid, StartDismissEmployee, StartGetByVariable, StartGetEmployeeByUid, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { toast } from "react-hot-toast";
 import { defaultSchedule } from "@/root/constants/schedule/schedule";
-import { resetEmployeeByUid } from "@/root/redux";
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
 
 export default function EditEmployeeSection() {
@@ -20,6 +19,7 @@ export default function EditEmployeeSection() {
   const [jobPosition, setJobPosition] = useState("");
   const [clearInput, setClearInput] = useState(false);
 
+  const employeesListVariable = useSelector(selectGetByVariable);
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
@@ -83,6 +83,15 @@ export default function EditEmployeeSection() {
   const handleDismissEmployee = () => {
     dispatch(StartDismissEmployee(employeeByUid?.uid || ""));
   };
+
+  useEffect(() => {
+
+    if(!employeesListVariable){
+      toast.error("List empty")
+    }
+
+  }, [])
+  
 
   return (
     <>

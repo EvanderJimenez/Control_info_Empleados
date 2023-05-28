@@ -27,7 +27,7 @@ export const initialStateByUid: GetEmployeeByUidState = {
   },
 };
 
-type EmployeeAction = {
+type EmployeeByUidAction = {
   type: string;
   getEmployeeByUid?: GetEmployeeByUidState;
 };
@@ -48,4 +48,4 @@ export const GetEmployeeByUidSlice = createSlice({
 
 export const { getEmployeeByUidReducer, resetEmployeeByUid } = GetEmployeeByUidSlice.actions;
 export const GetEmployeeByUidReducer = GetEmployeeByUidSlice.reducer;
-export type DispatchTypeEmployeeByUid = (args: EmployeeAction) => EmployeeAction;
+export type DispatchTypeEmployeeByUid = (args: EmployeeByUidAction) => EmployeeByUidAction;

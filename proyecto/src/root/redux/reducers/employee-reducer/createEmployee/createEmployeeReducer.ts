@@ -11,7 +11,7 @@ interface CreateEmployeeState {
   };
 
 
-  type EmployeeAction = {
+  type EmployeeCreateEmployeeAction = {
     type: string;
     createEmployee?: CreateEmployeeState;
   };
@@ -30,4 +30,4 @@ interface CreateEmployeeState {
 
   export const {createEmployeeReducer} = CreateEmployeeSlice.actions;
   export const CreateEmployeeReducer = CreateEmployeeSlice.reducer;
-  export type DispatchTypeCreate = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeCreate = (args: EmployeeCreateEmployeeAction) => EmployeeCreateEmployeeAction;

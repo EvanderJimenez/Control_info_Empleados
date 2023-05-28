@@ -11,7 +11,7 @@ interface ListEmployeesState {
   };
 
 
-  type EmployeeAction = {
+  type EmployeeListEmployeeAction = {
     type: string;
     getVacationsByUid?: ListEmployeesState;
   };
@@ -30,4 +30,4 @@ interface ListEmployeesState {
 
   export const {listEmployeesReducer} = ListEmployeeSlice.actions;
   export const ListEmployeesReducer = ListEmployeeSlice.reducer;
-  export type DispatchTypeListEmployee = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeListEmployee = (args: EmployeeListEmployeeAction) => EmployeeListEmployeeAction;

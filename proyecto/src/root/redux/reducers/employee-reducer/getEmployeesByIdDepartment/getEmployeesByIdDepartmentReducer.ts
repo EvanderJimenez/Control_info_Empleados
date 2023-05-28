@@ -10,7 +10,7 @@ interface GetEmployeesByIdDepartmentState {
     getEmployeesByIdDepartment: []
 };
 
-  type EmployeeAction = {
+  type EmployeeByIdDepartmentAction = {
     type: string;
     getEmployeesByIdDepartment?: GetEmployeesByIdDepartmentState;
   };
@@ -29,4 +29,4 @@ interface GetEmployeesByIdDepartmentState {
 
   export const {getEmployeesByIdDepartmentReducer} = GetEmployeesByIdDepartmentSlice.actions;
   export const GetEmployeesByIdDepartmentReducer = GetEmployeesByIdDepartmentSlice.reducer;
-  export type DispatchTypeByIdDepart = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeByIdDepart = (args: EmployeeByIdDepartmentAction) => EmployeeByIdDepartmentAction;

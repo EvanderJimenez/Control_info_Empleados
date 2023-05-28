@@ -11,7 +11,7 @@ interface EmployeeVacationsState {
   };
 
 
-  type EmployeeAction = {
+  type EmployeeVacationsAction = {
     type: string;
     getVacationsByUid?: EmployeeVacationsState;
   };
@@ -30,4 +30,4 @@ interface EmployeeVacationsState {
 
   export const {getVacationsByUidReducer} = EmployeeVacationsSlice.actions;
   export const VacationsReducer = EmployeeVacationsSlice.reducer;
-  export type DispatchTypeVacations = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeVacations = (args: EmployeeVacationsAction) => EmployeeVacationsAction;

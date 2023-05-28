@@ -126,6 +126,7 @@ const login = async (email: string, password: string) => {
     email,
     password
   );
+
   const user = userCredential.user;
   if (!user) {
     throw new Error("No user found with that email and password");

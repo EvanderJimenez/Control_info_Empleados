@@ -11,7 +11,7 @@ interface GetByVariableState {
 
 };
 
-  type EmployeeAction = {
+  type EmployeeByVariableAction = {
     type: string;
     getByVariable?: GetByVariableState;
   };
@@ -33,4 +33,4 @@ interface GetByVariableState {
 
   export const {getByVariableReducer,resetByVariable } = GetByVariableSlice.actions;
   export const GetByVariableReducer = GetByVariableSlice.reducer;
-  export type DispatchTypeByVariable = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeByVariable = (args: EmployeeByVariableAction) => EmployeeByVariableAction;

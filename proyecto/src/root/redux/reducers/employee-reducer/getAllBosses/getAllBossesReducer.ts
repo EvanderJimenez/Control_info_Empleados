@@ -11,7 +11,7 @@ interface GetAllBossesState {
 
 };
 
-  type EmployeeAction = {
+  type EmployeeGetAllAction = {
     type: string;
     getAllBosses?: GetAllBossesState;
   };
@@ -30,4 +30,4 @@ interface GetAllBossesState {
 
   export const {getAllBossReducer} = getAllBossSlice.actions;
   export const GetAllBossReducer = getAllBossSlice.reducer;
-  export type DispatchTypeAllBoss = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeAllBoss = (args: EmployeeGetAllAction) => EmployeeGetAllAction;

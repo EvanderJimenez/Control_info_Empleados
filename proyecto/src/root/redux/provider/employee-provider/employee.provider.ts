@@ -179,7 +179,7 @@ const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
     });
 
     if (!response.ok) {
-      throw new Error("Error getting employee");
+      
     }
 
     const data = await response.json();

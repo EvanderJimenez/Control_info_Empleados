@@ -10,7 +10,6 @@ import { GetByVariableReducer } from './reducers/employee-reducer/getByVariable/
 import { GetEmployeesByIdDepartmentReducer } from './reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer';
 import { GetAllBossReducer } from './reducers/employee-reducer/getAllBosses/GetAllBossesReducer';
 import { DeleteEmployeesReducer } from './reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer';
-import { GetEmployeeByUidReducer, LoginReducer } from "./reducers";
 import { GetAllDepartmentsReducer } from "./reducers/department-reducer/getAllDepartments/GetAllDepartmentsReducer";
 import { GetByIdEmployeeDepartmentsReducer } from "./reducers/department-reducer/getDepartmentById/GetDepartmentByIdEmployee";
 import { ByIdDocReducer } from "./reducers/department-reducer/getDepartmentByDocId/GetDepartmentByDocIdReducer";
@@ -19,6 +18,8 @@ import { CreateBrandsReducer } from "./reducers/brands-reducer/createBrands/Crea
 import { GetBrandsByDocIdReducer } from "./reducers/brands-reducer/getBrandsByDocId/GetBrandsByDocIdReducer";
 import { UpdateBrandsReducer } from "./reducers/brands-reducer/updateBrandsById/UpdateBrandsByIdReducer";
 import { GetBrandsByIdEmployeeReducer } from "./reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
+import { LoginReducer } from "./reducers/login-reducer/LoginReducer";
+import { GetEmployeeByUidReducer } from "./reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {

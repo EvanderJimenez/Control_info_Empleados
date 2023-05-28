@@ -13,7 +13,7 @@ interface EmployeeDismissState {
   };
 
 
-  type EmployeeAction = {
+  type EmployeeDismissAction = {
     type: string;
     dismissEmployee?: EmployeeDismissState;
   };
@@ -32,4 +32,4 @@ interface EmployeeDismissState {
 
   export const {dismissEmployeeReducer} = EmployeeDismissSlice.actions;
   export const DismissEmployeesReducer = EmployeeDismissSlice.reducer;
-  export type DispatchTypeDismiss = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeDismiss = (args: EmployeeDismissAction) => EmployeeDismissAction;

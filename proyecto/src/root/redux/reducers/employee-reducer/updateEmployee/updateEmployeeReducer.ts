@@ -11,7 +11,7 @@ interface UpdateEmployeeState {
   };
 
 
-  type EmployeeAction = {
+  type EmployeeUpdateAction = {
     type: string;
     getVacationsByUid?: UpdateEmployeeState;
   };
@@ -30,4 +30,4 @@ interface UpdateEmployeeState {
 
   export const {updateEmployeeReducer} = UpdateEmployeeSlice.actions;
   export const UpdateEmployeeReducer = UpdateEmployeeSlice.reducer;
-  export type DispatchTypeUpdate = (args: EmployeeAction) => EmployeeAction;
+  export type DispatchTypeUpdate = (args: EmployeeUpdateAction) => EmployeeUpdateAction;
