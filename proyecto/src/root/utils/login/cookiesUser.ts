@@ -14,6 +14,8 @@ interface ResDepartState {
 
 function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartState | undefined) {
 
+  console.log("IdDepartment: " +resDepart?.idEmployee)
+
   if (loginState && resDepart) {
     const expirationDate = new Date(Date.now() + 86400 * 1000);
     let cookieValue = '';

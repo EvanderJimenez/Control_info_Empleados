@@ -1,10 +1,11 @@
+import { brandsProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
-import departmentProvider from "../../../dataBase/firebase/providers/brands/brands.provider";
+
 
 const getAll = async (res: NextApiResponse) => {
   try {
-    const departments = await departmentProvider.getAllBrands();
+    const departments = await brandsProvider.getAllBrands();
     res.status(200).json(departments);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
@@ -15,7 +16,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { idEmployee, cycle, hoursEmployee } = req.body;
 
-    const newBrands = await departmentProvider.createBrands(
+    const newBrands = await brandsProvider.createBrands(
       idEmployee,
       cycle,
       hoursEmployee

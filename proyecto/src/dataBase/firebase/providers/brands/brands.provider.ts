@@ -90,13 +90,13 @@ const updateById = async (idEmployee: string, cycle: Hours) => {
         idEmployee,
         cycle,
       });
-      const snapshotbrandsUpdate = await getDoc(brandsDoc);
-      const brandsUpdate = snapshotbrandsUpdate.data();
+      const snapshotBrandsUpdate = await getDoc(brandsDoc);
+      const brandsUpdate = snapshotBrandsUpdate.data();
       return brandsUpdate;
     }
 };
 
-export const departmentProvider = {
+export const brandsProvider = {
   getAllBrands,
   getDocId,
   createBrands,
@@ -104,4 +104,4 @@ export const departmentProvider = {
   getDocByEmployeeId,
 };
 
-export default departmentProvider;
+export default brandsProvider;
