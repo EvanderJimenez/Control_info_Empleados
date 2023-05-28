@@ -77,6 +77,18 @@ export interface PendingRequest {
   approved: string;
 }
 
+export interface PendingRequestJustifications {
+  key: string;
+  employeeName: string;
+  employeeUID: string;
+  endTime: string;
+  justificationFin: string;
+  justificationIni: string;
+  startTime: string;
+  state: string;
+}
+
+
 export interface InputInterface {
   labelFloat: string;
   type: string;

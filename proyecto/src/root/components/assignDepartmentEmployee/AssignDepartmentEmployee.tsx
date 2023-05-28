@@ -33,7 +33,8 @@ const AssignDepartmentEmployee = () => {
       email: "",
       boss: "",
       schedule: [],
-      vacations: {}
+      vacations: {},
+      attendance: {}
     }
   )
 

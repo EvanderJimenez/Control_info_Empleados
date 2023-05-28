@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Filters from "./components/filters/Filters";
-import ListRequestVacations from "./components/listRequest/ListRequestVacations";
+import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { PendingRequest } from "@/root/interface/employee";
