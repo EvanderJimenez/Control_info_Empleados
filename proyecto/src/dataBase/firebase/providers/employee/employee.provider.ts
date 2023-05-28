@@ -1,4 +1,4 @@
-import { Attendance } from './../../../../root/interface/employee/employee.interface';
+import { Attendance } from "./../../../../root/interface/employee/employee.interface";
 import { Brands, Schedule } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
 import {
@@ -71,6 +71,8 @@ const create = async (employeeData: EmployeesType): Promise<{ message: string; e
   });
 
   const employeeDoc = {
+    password,
+    email,
     uid: uuid,
     schedule: mergedSchedule,
     ...restData,

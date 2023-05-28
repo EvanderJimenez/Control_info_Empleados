@@ -16,19 +16,9 @@ export const RegisterCycle = (props: addCycle) => {
           >
             {props.label}
           </label>
-          <div className="flex items-center">
-            <input
-              type="text"
-              name="newCycle"
-              value={props.value}
-              onChange={props.onChange}
-              placeholder={props.label}
-              className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-            />
-          </div>
 
           <button className="hover:shadow-form rounded-md bg-[#165488] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-            Save Cycle
+            Add New Cycle
           </button>
         </form>
       </div>

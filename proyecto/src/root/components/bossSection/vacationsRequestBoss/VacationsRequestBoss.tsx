@@ -80,7 +80,7 @@ const VacationsRequestBoss = () => {
       dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
       //dispatch(ResetEmployeeByUid())
 
-      setSelectedRequest(pendingRequest);
+      //setSelectedRequest(pendingRequest);
     }
   }, [employeeByUid, dispatch]);
 

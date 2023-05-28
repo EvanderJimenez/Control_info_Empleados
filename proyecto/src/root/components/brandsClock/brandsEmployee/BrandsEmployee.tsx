@@ -21,6 +21,7 @@ export const BrandsEmployee = () => {
   const [markInitial, setMarkInitial] = useState("");
   const [markFinal, setMarkFinal] = useState("");
   const [finish, setFinish] = useState(false);
+  const [monthGroup, setMonthGroup] = useState<number | undefined>(undefined);
   const [brandData, setBrandData] = useState<Brands>({
     idEmployee: "",
     cycle: {},
@@ -43,8 +44,8 @@ export const BrandsEmployee = () => {
     fetchCurrentDateTime();
   }, [updateDateTime]);
 
-  const getDateOfWeekday = (newDate: string) => {
-    const date = parseISO(newDate);
+  const getDateOfWeekday = () => {
+    const date = parseISO(currentDate);
     setFormattedDay(format(date, "EEEE"));
     console.log(formattedDay);
 
@@ -53,7 +54,7 @@ export const BrandsEmployee = () => {
 
   const handleClick1 = () => {
     setUpdateDateTime(true);
-    const weekday = getDateOfWeekday(currentDate);
+    const weekday = getDateOfWeekday();
     console.log(weekday);
     const hoursEmployee = brandData.hoursEmployee;
 
@@ -90,6 +91,20 @@ export const BrandsEmployee = () => {
   };
 
   const handleUpdateCycleHours = (cycleName: string) => {
+    setUpdateDateTime(true);
+    const weekday = getDateOfWeekday();
+    console.log(weekday);
+    const hoursEmployee = brandData.hoursEmployee;
+
+    if (hoursEmployee.hasOwnProperty(weekday)) {
+      const hours = hoursEmployee[weekday];
+      const hIni = hours.hIni;
+      const hFin = hours.hFin;
+      setHoursFin(hFin);
+      setHoursIni(hIni);
+    } else {
+      console.log(`No information found for the day: ${weekday}`);
+    }
     if (brandData && brandData.cycle && brandData.cycle[cycleName]) {
       const cycle = brandData.cycle[cycleName];
       const existingHours = cycle.hours[currentDate];
@@ -192,6 +207,60 @@ export const BrandsEmployee = () => {
       handleGetBrands(employeeLogin?.uid);
     }
   }, [employeeLogin?.uid]);
+
+  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const date = new Date(currentDate);
+    const month = date.getMonth() + 1;
+    let monthCycle: number;
+
+    if (month >= 1 && month <= 6) {
+      monthCycle = 1;
+    } else if (month >= 7 && month <= 12) {
+      monthCycle = 2;
+    } else {
+      monthCycle = 0;
+    }
+
+    const year = new Date(currentDate).getFullYear();
+    const nameCycle = monthCycle.toString() + year.toString();
+    handleUpdateCycleHours(nameCycle);
+
+    console.log(nameCycle);
+
+    if (formattedDay && brandData.cycle && brandData.cycle[nameCycle]) {
+      const cycle = brandData.cycle[nameCycle];
+      const existingHours = cycle.hours[currentDate];
+      if (existingHours) {
+        const markStart = existingHours.hIni;
+        const markEnd = existingHours.hFin;
+
+        if (checkMarkHours(markStart, markEnd)) {
+          console.log("The hours match. Performing update...");
+        } else {
+          console.log("The mark hours do not match the defined hours.");
+        }
+
+        fetch(`/api/brands/${brandData.idEmployee}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(brandData),
+        })
+          .then((res) => res.json())
+          .then((updatedBrands) => {
+            setBrandData((prevData) => ({
+              ...prevData,
+              ...updatedBrands,
+            }));
+            setFinish(true);
+          })
+          .catch((error) => console.error("Error updating brands:", error));
+      }
+    }
+  };
   return (
     <div>
       <BrandsClock
@@ -209,6 +278,7 @@ export const BrandsEmployee = () => {
         checkMarkHours={checkMarkHours}
         setBrandData={setBrandData}
         setFinish={setFinish}
+        handleUpdate={handleUpdate}
       />
       {initialLate === true && finish === true ? (
         <JustificationEmployee
