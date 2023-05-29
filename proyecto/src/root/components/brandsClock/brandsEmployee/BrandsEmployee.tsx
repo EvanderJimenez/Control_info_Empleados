@@ -6,6 +6,7 @@ import BrandsClock from "../BrandsClock";
 import { useSelector } from "react-redux";
 import { selectLogin } from "@/root/redux";
 import JustificationEmployee from "../../justification/JustificationEmployee";
+import { toast } from "react-hot-toast";
 
 export const BrandsEmployee = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -40,7 +41,7 @@ export const BrandsEmployee = () => {
         console.log(formattedDay);
         setFormattedDay(formattedDay);
       } catch (error) {
-        console.error("Error getting date and time:", error);
+        toast.error("Error getting date and time:");
       }
     };
 
@@ -59,12 +60,11 @@ export const BrandsEmployee = () => {
       if (response.ok) {
         const data = await response.json();
         setBrandData(data);
-        console.log(data);
       } else {
-        throw new Error("Error acquiring information");
+        toast.error("Error acquiring information");
       }
     } catch (error) {
-      console.error("Error getting brands data", error);
+      toast.error("Error getting brands data");
     }
   };
 
@@ -81,13 +81,12 @@ export const BrandsEmployee = () => {
       setHoursFin(hFin);
       setHoursIni(hIni);
     } else {
-      console.log(`No information found for the day: ${weekday}`);
+      toast.error(`No information found for the day: ${weekday}`);
     }
 
     if (brandData && brandData.cycle && brandData.cycle[cycleName]) {
       const cycle = brandData.cycle[cycleName];
       const existingHours = cycle.hours[currentDate];
-    
       if (existingHours) {
         const updatedCycle = {
           ...cycle,
@@ -128,13 +127,11 @@ export const BrandsEmployee = () => {
         }));
       }
     }
-
-    console.log(brandData);
   };
 
   const checkMarkHours = (markStart: string, markEnd: string): boolean => {
     if (!markStart && !markEnd) {
-      console.log("Both markStart and markEnd are required");
+      toast.error("Both markStart and markEnd are required");
       return false;
     }
 
@@ -150,11 +147,9 @@ export const BrandsEmployee = () => {
           markStartHour < hoursIniHour ||
           (markStartHour === hoursIniHour && markStartMinute < hoursIniMinute)
         ) {
-          console.log(markStartHour, hoursIni);
-          console.log("The mark start hour is earlier than hoursIni");
+          toast.success("The mark start hour is earlier than hoursIni");
           return true;
         } else {
-          console.log(markEnd);
           setInitialLate(true);
           setMarkInitial(markStart);
         }
@@ -171,8 +166,7 @@ export const BrandsEmployee = () => {
         markEndHour > hoursFinHour ||
         (markEndHour === hoursFinHour && markEndMinute >= hoursFinMinute)
       ) {
-        console.log(markEndHour, hoursFin);
-        console.log("The mark end hour is greater than or equal to hoursFin");
+        toast.success("The mark end hour is greater than or equal to hoursFin");
         return true;
       } else {
         setFinalDelay(true);
@@ -216,9 +210,9 @@ export const BrandsEmployee = () => {
           const markEnd = existingHours.hFin;
           console.log(markStart, markEnd);
           if (checkMarkHours(markStart, markEnd)) {
-            console.log("The hours match. Performing update...");
+            toast.success("The hours match. Performing update...");
           } else {
-            console.log("The mark hours do not match the defined hours.");
+            toast.success("The mark hours do not match the defined hours.");
           }
 
           try {
@@ -239,11 +233,12 @@ export const BrandsEmployee = () => {
                 ...updatedBrands,
               }));
               setFinish(true);
+              toast.success("Save suffuses");
             } else {
-              throw new Error("Error updating brands");
+              toast.error("Save suffuses");
             }
           } catch (error) {
-            console.error("Error updating brands:", error);
+            toast.error("Error updating brands:");
           }
         }
       }

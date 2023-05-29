@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Department, Documents, Employee } from "@/root/interface/departments";
 import CreationDepartment from "../../creationDeparment/CreationDepartment";
+import { toast } from "react-hot-toast";
 
 interface RegisterProps {
   user?: Department;
@@ -56,7 +57,7 @@ function MethodsDepartments(props: RegisterProps) {
     event.preventDefault();
 
     if (!newDocuments) {
-      console.error("Please enter values for all fields in the document");
+      toast.error("Please enter values for all fields in the document");
       return;
     }
 
@@ -84,7 +85,7 @@ function MethodsDepartments(props: RegisterProps) {
       setNewDocuments("");
       setUrl("");
     } else {
-      console.error("The selected employee does not exist");
+      toast.error("The selected employee does not exist");
     }
   };
   const handleDeleteEmployee = (employeeName: string | number) => {
@@ -106,7 +107,7 @@ function MethodsDepartments(props: RegisterProps) {
       !departmentData.location ||
       !departmentData.level
     ) {
-      console.error("Please enter values for all fields");
+      toast.error("Please enter values for all fields");
       return;
     }
 
@@ -132,7 +133,7 @@ function MethodsDepartments(props: RegisterProps) {
           employees: {},
         });
       })
-      .catch((error) => console.error("Error creating new department:", error));
+      .catch((error) => toast.error("Error creating new department:", error));
   };
 
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -150,12 +151,10 @@ function MethodsDepartments(props: RegisterProps) {
         },
         body: JSON.stringify(departmentData),
       });
-      console.log(JSON.stringify(departmentData));
 
       if (response.ok) {
         const updatedUser = await response.json();
         setData(updatedUser);
-        console.log(updatedUser);
       } else {
         const errorResponse = await response.json();
         throw new Error(`Failed to update user: ${errorResponse.message}`);
@@ -173,15 +172,14 @@ function MethodsDepartments(props: RegisterProps) {
         employees: {},
       });
     } catch (error) {
-      console.error("Error updating user:", error);
+      toast.error("Error updating user:");
     }
   };
 
   const handleSubmitEmployee = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(newEmployee);
     if (!newEmployee) {
-      console.error("Please enter values for all employee fields");
+      toast.error("Please enter values for all employee fields");
       return;
     }
 
@@ -216,12 +214,11 @@ function MethodsDepartments(props: RegisterProps) {
         const data = await response.json();
         setData(data);
         setdepartmentData(data);
-        console.log(data);
       } else {
         throw new Error("Error acquiring information");
       }
     } catch (error) {
-      console.error("Error getting department data", error);
+      toast.error("Error getting department data");
     }
   };
 
