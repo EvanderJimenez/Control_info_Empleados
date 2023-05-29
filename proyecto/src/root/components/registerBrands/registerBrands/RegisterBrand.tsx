@@ -1,12 +1,13 @@
 import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
 import React, { useState, useEffect } from "react";
 
-import TableShedules from "../tableShedules/TableShedules";
+import TableShedules from "../tableSchedules/TableShedules";
 import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import axios from "axios";
 import FormEmployee from "../../registerBrands/formIdEmployee/FormEmployee";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
 import { RegisterClock } from "../registerClock/RegisterClock";
+import TableSchedules from "../tableSchedules/TableShedules";
 
 export default function RegisterBrand() {
   const [currentDate, setCurrentDate] = useState("");
@@ -215,12 +216,12 @@ export default function RegisterBrand() {
   };
 
   return (
-    <div>
-      <SearchDepartment handleGet={handleGetBrands} />
-
-      <div className="flex items-center justify-center p-12">
-        <div className="mx-auto w-full max-w-[550px]">
+    <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-start pt-10">
+      <div className="flex items-center justify-center p-4 sm:p-12">
+        <div className="bg-white p-4 sm:p-8 rounded-lg shadow-md w-full max-w-2xl">
+          <SearchDepartment handleGet={handleGetBrands} />
           <RegisterCycle
+            brandData={brandData}
             label="Cycle to belongs"
             onChange={(e) => setNewCycle(e.target.value)}
             value={newCycle}
@@ -229,12 +230,13 @@ export default function RegisterBrand() {
           <form
             action="https://formbold.com/s/FORM_ID"
             onSubmit={handleSubmitHours}
+            className="space-y-5"
           >
             <div className="-mx-3 flex flex-wrap"></div>
             <div className="mb-5">
               <label
                 htmlFor="day"
-                className="mb-3 block text-base font-medium text-[#07074D]"
+                className="mb-3 block text-base font-medium text-gray-700"
               >
                 Day
               </label>
@@ -243,7 +245,7 @@ export default function RegisterBrand() {
                 id="day"
                 value={newDate}
                 onChange={handleDayChange}
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-full rounded-md border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -255,7 +257,7 @@ export default function RegisterBrand() {
               </select>
             </div>
 
-            <div className="-mx-3 flex flex-wrap">
+            <div className="-mx-3 flex flex-wrap space-y-4 md:space-y-0 md:space-x-4">
               <RegisterClock
                 label={"Hora Inicio"}
                 type={"hIni"}
@@ -275,12 +277,12 @@ export default function RegisterBrand() {
             </div>
 
             <div>
-              <button className="hover:shadow-form rounded-md bg-[#036302] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+              <button className="w-full bg-black hover:bg-green text-white font-bold py-3 px-4 rounded">
                 Add Schedules
               </button>
             </div>
           </form>
-          <TableShedules
+          <TableSchedules
             brandData={brandData}
             setNewHIni={setNewHIni}
             setNewHFin={setNewHFin}
@@ -297,13 +299,10 @@ export default function RegisterBrand() {
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
           />
-          <form
-            onSubmit={handleUpdate}
-            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1 pt-10"
-          >
+          <form onSubmit={handleUpdate} className="pt-10">
             <button
               type="submit"
-              className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+              className="w-full bg-black hover:bg-blue-700 text-white font-bold py-3 px-4 rounded"
             >
               Update
             </button>

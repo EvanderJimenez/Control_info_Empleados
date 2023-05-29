@@ -4,14 +4,16 @@ import {
   selectGetEmployeesByIdDepartment,
   selectLogin,
 } from "@/root/redux";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface RequestEmployeeProps {
   selectedRequest: any;
+  option: string;
 }
 
 const ListRequestJustification = ({
+  option,
   selectedRequest,
 }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
@@ -23,7 +25,8 @@ const ListRequestJustification = ({
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
-  }, []);
+    console.log("Cont");
+  }, [option]);
 
   useEffect(() => {
     if (listEmployees) {
@@ -36,7 +39,13 @@ const ListRequestJustification = ({
 
         if (attendance) {
           Object.entries(attendance).forEach(([key, value]) => {
-            const { endTime, startTime, justificationFin, justificationIni, state } = value;
+            const {
+              endTime,
+              startTime,
+              justificationFin,
+              justificationIni,
+              state,
+            } = value;
 
             if (state == "waiting") {
               const pendingRequest: PendingRequestJustifications = {
@@ -47,7 +56,7 @@ const ListRequestJustification = ({
                 endTime,
                 justificationFin,
                 justificationIni,
-                state
+                state,
               };
               pendingRequestsList.push(pendingRequest);
             }
@@ -64,16 +73,26 @@ const ListRequestJustification = ({
 
   return (
     <div className="shadow-lg space-y-5 overflow-auto h-72 w-full p-4">
-    {pendingRequests.map((request: PendingRequestJustifications, index: number) => (
-      <div key={index} className="p-5 shadow-lg flex-col space-y-3 flex bg-lithBlue bg-opacity-40  rounded">
-        <h3 className="text-md text-center font-semibold  mb-2">Employee: {request.employeeName}</h3>
-        <p className="font-semibold text-center">Date: {request.key}</p>
-        <button className="bg-darkBlue" onClick={() => handleLoadInformation(request)}>
-          Load information
-        </button>
-      </div>
-    ))}
-  </div>
+      {pendingRequests.map(
+        (request: PendingRequestJustifications, index: number) => (
+          <div
+            key={index}
+            className="p-5 shadow-lg flex-col space-y-3 flex bg-lithBlue bg-opacity-40  rounded"
+          >
+            <h3 className="text-md text-center font-semibold  mb-2">
+              Employee: {request.employeeName}
+            </h3>
+            <p className="font-semibold text-center">Date: {request.key}</p>
+            <button
+              className="bg-darkBlue"
+              onClick={() => handleLoadInformation(request)}
+            >
+              Load information
+            </button>
+          </div>
+        )
+      )}
+    </div>
   );
 };
 

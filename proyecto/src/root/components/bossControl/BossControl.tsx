@@ -26,7 +26,8 @@ const BossControl = () => {
         email: "",
         boss: "",
         schedule: [],
-        vacations: {}
+        vacations: {},
+        attendance: {}
       });
 
       useEffect(() => {
@@ -35,7 +36,8 @@ const BossControl = () => {
             setDataEmployee(employeeByUid);
           }
         }else{
-          setDataEmployee({ uid: "",
+          setDataEmployee({ 
+         uid: "",
           name: "",
           firstSurname: "",
           secondSurname: "",
@@ -50,7 +52,8 @@ const BossControl = () => {
           email: "",
           boss: "",
           schedule: [],
-        vacations: {}
+        vacations: {},
+        attendance: {}
         })
         }
     

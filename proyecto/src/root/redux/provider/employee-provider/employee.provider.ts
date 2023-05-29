@@ -96,6 +96,8 @@ const upDatEmployeeProvider = async (
   searchUser: string,
   searchTerm: EmployeesType
 ) => {
+  console.log("user: " + searchUser)
+  console.log("body: " + JSON.stringify(searchTerm))
     const response = await fetch(`/api/employees/${searchUser}`, {
       method: "PUT",
       headers: {

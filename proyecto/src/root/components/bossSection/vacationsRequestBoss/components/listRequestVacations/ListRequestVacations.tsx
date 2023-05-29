@@ -1,14 +1,15 @@
 import { PendingRequest } from "@/root/interface/employee";
 import { selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StarGetEmployeesByIdDepartment, StartGetEmployeeByUid } from "@/root/redux/thunks/employee-thunk/employee.thunk";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface RequestEmployeeProps {
   selectedRequest: any;
+  option: string
 }
 
-const ListRequestVacations = ({ selectedRequest }: RequestEmployeeProps) => {
+const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
   const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
@@ -16,10 +17,12 @@ const ListRequestVacations = ({ selectedRequest }: RequestEmployeeProps) => {
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
-  }, []);
+     console.log("Cont")
+  }, [option]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (listEmployees) {
+     
       const pendingRequestsList: PendingRequest[] = [];
 
       listEmployees.forEach((employee) => {
@@ -60,6 +63,7 @@ const ListRequestVacations = ({ selectedRequest }: RequestEmployeeProps) => {
         <div key={index} className="p-5 shadow-lg flex-col space-y-3 flex bg-lithBlue bg-opacity-40  rounded">
           <h3 className="text-md text-center font-semibold  mb-2">Employee: {request.employeeName}</h3>
           <p className="font-semibold text-center">Affair: {request.key}</p>
+          <p className="font-semibold text-center">State: {request.approved}</p>
           <button className="bg-darkBlue" onClick={() => handleLoadInformation(request)}>
             Load information
           </button>

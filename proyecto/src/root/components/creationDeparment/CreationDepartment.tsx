@@ -4,6 +4,7 @@ import { Department, Employee } from "@/root/interface/departments";
 import AddEmployee from "./addEmployee/AddEmployee";
 import { SearchDepartment } from "./SearchDepartment";
 import AddDocuments from "./addEmployee/addDocuments/AddDocuments";
+import Table from "./table/Table";
 interface infoDepart {
   departmentsData: Department;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -36,20 +37,13 @@ const CreationDepartment = ({
   ...props
 }: infoDepart) => {
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
-  const [showDocumentsForm, setShowDocumentsForm] = useState(false);
-  const employeeFormRef = useRef(null);
 
   const handleToggleEmployeeForm = () => {
     setShowEmployeeForm(!showEmployeeForm);
   };
 
-  const handleToggleDocumentsForm = () => {
-    setShowDocumentsForm(!showDocumentsForm);
-  };
-
-  const formRef = useRef<HTMLFormElement>(null);
   return (
-    <div className="bg-[#049473] shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
+    <div className="bg-#DDDDDD shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
         <SearchDepartment handleGet={handleGetDepartment} />
       </div>
@@ -133,80 +127,53 @@ const CreationDepartment = ({
             <div className="md:w-1/2 px-3 mb-6 md:mb-0 px-10">
               <button
                 type="submit"
-                className="bg-[#049473] hover:bg-sky text-white font-bold py-2 px-4 rounded "
+                className="bg-black hover:bg-sky text-white font-bold py-2 px-4 rounded "
               >
                 Save Department
               </button>
             </div>
-            <div className="md:w-1/2 px-3 mb-6 md:mb-0 px-10">
-              <button
-                onClick={handleToggleEmployeeForm}
-                className="bg-[#049473] hover:bg-sky text-white font-bold py-2 px-4 rounded "
-              >
-                AddEmployee
-              </button>
-            </div>
+            <div className="md:w-1/2 px-3 mb-6 md:mb-0 px-10"></div>
           </div>
         </div>
       </form>
+
+      <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 bg-white p-6">
+        <div className="mt-6 max-w-md mx-auto sm:mt-0 sm:max-w-none sm:w-full sm:flex-1 sm:px-8 sm:py-4 border border-blue-500 rounded-md shadow-sm">
+          <button
+            onClick={handleToggleEmployeeForm}
+            className="bg-black hover:bg-#9DB2BF text-white font-semibold py-2 px-4 w-full rounded-md transition duration-200 ease-in-out"
+          >
+            AddEmployee
+          </button>
+        </div>
+        <form
+          className="mt-6 max-w-md mx-auto sm:mt-0 sm:max-w-none sm:w-full sm:flex-1 sm:px-8 sm:py-4 border border-blue-500 rounded-md shadow-sm"
+          onSubmit={handleUpdate}
+        >
+          <button
+            className="bg-black hover:bg-#9DB2BF text-white font-semibold py-2 px-4 w-full rounded-md transition duration-200 ease-in-out"
+            type="submit"
+          >
+            Update
+          </button>
+        </form>
+      </div>
+
       {showEmployeeForm && (
         <AddEmployee
-          formRef={formRef}
           handleSubmitEmployee={handleSubmitEmployee}
           newEmployee={newEmployee}
           newEmployeeData={newEmployeeData}
           setNewEmployee={setNewEmployee}
           setNewEmployeeData={setNewEmployeeData}
-          handleToggleDocumentsForm={handleToggleDocumentsForm}
-        />
-      )}
-      {showDocumentsForm && (
-        <AddDocuments
           handleSubmitDocuments={handleSubmitDocuments}
           newDocuments={newDocuments}
           setNewDocuments={setNewDocuments}
         />
       )}
-      <div>
-        <table className="border-collapse border border-gray-300 mt-4">
-          <thead>
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">Name</th>
-              <th className="border border-gray-300 px-4 py-2">
-                Personal Information
-              </th>
-              <th className="border border-gray-300 px-4 py-2">Documents</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(departmentsData.employees).map(([key, value]) => (
-              <tr key={key}>
-                <td className="border border-gray-300 px-4 py-2">{key}</td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <input
-                    type="text"
-                    name={`des-${key}`}
-                    value={value.des}
-                    onChange={handleInputChange}
-                    placeholder="Personal Information"
-                    className="border rounded-md px-3 py-2"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {Object.entries(value.documents).map(([docKey, docValue]) => (
-                    <div key={docKey}>
-                      <p>Nombre del Documento: {docKey}</p>
-                      <p>Tipo de Documento: {docValue.type}</p>
-                      <p>
-                        URL del Documento: <a href={docValue.url}>Download</a>
-                      </p>
-                    </div>
-                  ))}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+
+      <div className="bg-white shadow-lg rounded-lg p-4 md:p-8 flex flex-col my-4">
+        <Table departmentsData={departmentsData} />
       </div>
     </div>
   );

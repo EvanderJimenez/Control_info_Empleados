@@ -46,7 +46,7 @@ export const SearchDepartment = ({ handleGet, ...props }: getDepartment) => {
         </div>
         <button
           type="submit"
-          className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-[#049473]  border border-blue-700 hover:bg-[#118158] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-black  border border-blue-700 hover:bg-#9DB2BF focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Search
         </button>

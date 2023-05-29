@@ -134,30 +134,48 @@ function MethodsDepartments(props: RegisterProps) {
       })
       .catch((error) => console.error("Error creating new department:", error));
   };
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`/api/departments/${departmentData.name}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(departmentData),
-    })
-      .then((res) => res.json())
-      .then((updatedDepartment) => {
-        setData((prevData) => {
-          const newData = Array.isArray(prevData) ? [...prevData] : [];
-          const departmentIndex = newData.findIndex(
-            (department) => department.name === updatedDepartment.name
-          );
-          if (departmentIndex >= 0) {
-            newData[departmentIndex] = updatedDepartment;
-          }
-          console.log(newData);
-          return newData;
-        });
-      })
-      .catch((error) => console.error("Error updating department:", error));
+
+    try {
+      if (!departmentData.name) {
+        throw new Error("Department name is not defined");
+      }
+
+      console.log(departmentData.name);
+      const response = await fetch(`/api/departments/${departmentData.name}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(departmentData),
+      });
+      console.log(JSON.stringify(departmentData));
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        setData(updatedUser);
+        console.log(updatedUser);
+      } else {
+        const errorResponse = await response.json();
+        throw new Error(`Failed to update user: ${errorResponse.message}`);
+      }
+
+      setdepartmentData({
+        id: "",
+        name: "",
+        size: 0,
+        location: "",
+        idEmployee: "",
+        leader: "",
+        level: "",
+        subDepartment: "",
+        employees: {},
+      });
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   };
 
   const handleSubmitEmployee = (event: React.FormEvent<HTMLFormElement>) => {

@@ -46,7 +46,7 @@ import {
 import {
   DispatchTypeLogin,
   loginReducer,
-} from "../../reducers/login-reducer/LoginReducer";
+} from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
