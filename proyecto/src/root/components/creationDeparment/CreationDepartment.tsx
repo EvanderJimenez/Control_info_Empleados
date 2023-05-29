@@ -5,6 +5,7 @@ import AddEmployee from "./addEmployee/AddEmployee";
 import { SearchDepartment } from "./SearchDepartment";
 import AddDocuments from "./addEmployee/addDocuments/AddDocuments";
 import Table from "./table/Table";
+
 interface infoDepart {
   departmentsData: Department;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
