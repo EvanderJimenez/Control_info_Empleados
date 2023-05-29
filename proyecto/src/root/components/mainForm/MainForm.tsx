@@ -5,6 +5,8 @@ import ListEmployee from "../listEmployee/ListEmployee";
 import { Top } from "../top/Top";
 import { Foot } from "../foot/Foot";
 import AlertOfSave from "../alerts/alertOfSave/AlertOfSave";
+import { useDispatch, useSelector } from "react-redux";
+import { selectID, startGetID } from "@/root/redux";
 
 export const MainForm = ({}) => {
   const [showComponent, setShowComponent] = useState(true);
@@ -22,7 +24,7 @@ export const MainForm = ({}) => {
               <a className=" font-semibold cursor-pointer" onClick={toggleComponent}>
                 {showComponent ? "Don't have an account?, register" : "Do you have an account?, log in"}
               </a>
-              <div className=" flex items-center justify-center flex-col h-screen w-full p-10">
+              <div className="flex items-center justify-center flex-col h-screen w-full p-2">
                 <div>{showComponent ? <Login /> : <Register />}</div>
               </div>
             </div>

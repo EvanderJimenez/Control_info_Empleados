@@ -48,6 +48,7 @@ import {
   loginReducer,
 } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
+import { toast } from "react-hot-toast";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -58,11 +59,9 @@ export const StartDeletingEmployee = (employeeId: string): any => {
       const employeeList = await providerRedux.employeeListProvider();
       if (Array.isArray(employeeList)) {
         dispatch(listEmployeesReducer(employeeList));
-      } else {
-        console.log("Invalid employee list");
       }
     } catch (error) {
-      console.log("Error deleting employee:", error);
+      toast.error("Error deleting employee");
     } finally {
       dispatch(setLoading(false));
     }
@@ -72,13 +71,10 @@ export const StartDeletingEmployee = (employeeId: string): any => {
 export const StartDismissEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeDismiss) => {
     dispatch(setLoading(true));
-    try {
-      const employee = await providerRedux.dismissByUidProvider(searchTerm);
+    const employee = await providerRedux.dismissByUidProvider(searchTerm);
 
-      dispatch(dismissEmployeeReducer(employee || null));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(dismissEmployeeReducer(employee || null));
+
     dispatch(setLoading(false));
   };
 };
@@ -89,8 +85,6 @@ export const StartListOfEmployee = (): any => {
     dispatch(setLoading(true));
     if (Array.isArray(employeeList)) {
       dispatch(listEmployeesReducer(employeeList));
-    } else {
-      console.log("Invalid employee list");
     }
     dispatch(setLoading(false));
   };
@@ -99,13 +93,11 @@ export const StartListOfEmployee = (): any => {
 export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
   return async (dispatch: DispatchTypeCreate) => {
     dispatch(setLoading(true));
-    try {
+
       const employee = await providerRedux.createEmployeeProvider(searchTerm);
 
       dispatch(createEmployeeReducer(employee || null));
-    } catch (error) {
-      console.log(error);
-    }
+
     dispatch(setLoading(false));
   };
 };
@@ -115,28 +107,22 @@ export const StartUpDateEmployee = (
   searchTerm: EmployeesType
 ): any => {
   return async (dispatch: DispatchTypeUpdate) => {
-    try {
-      const employee = await providerRedux.upDatEmployeeProvider(
-        searchUser,
-        searchTerm
-      );
+    const employee = await providerRedux.upDatEmployeeProvider(
+      searchUser,
+      searchTerm
+    );
 
-      dispatch(updateEmployeeReducer(employee || null));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(updateEmployeeReducer(employee || null));
   };
 };
 
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeEmployeeByUid) => {
-    try {
+    
       const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
 
       dispatch(getEmployeeByUidReducer(employee || null));
-    } catch (error) {
-      console.log(error);
-    }
+
   };
 };
 
@@ -149,16 +135,13 @@ export const ResetEmployeeByUid = (): any => {
 export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchTypeLogin) => {
     dispatch(setLoading(true));
-    try {
-      const response = await providerRedux.loginProvider(
-        searchTerm1,
-        searchTerm2
-      );
+    const response = await providerRedux.loginProvider(
+      searchTerm1,
+      searchTerm2
+    );
 
-      dispatch(loginReducer(response || null));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(loginReducer(response || null));
+
     dispatch(setLoading(false));
   };
 };
@@ -169,17 +152,13 @@ export const StartGetByVariable = (
   searchTerm3: string
 ): any => {
   return async (dispatch: DispatchTypeByVariable) => {
-    try {
-      const response = await providerRedux.getByVariableProvider(
-        searchTerm1,
-        searchTerm2,
-        searchTerm3
-      );
+    const response = await providerRedux.getByVariableProvider(
+      searchTerm1,
+      searchTerm2,
+      searchTerm3
+    );
 
-      dispatch(getByVariableReducer(response || null));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(getByVariableReducer(response || null));
   };
 };
 
@@ -191,42 +170,28 @@ export const ResetByVariable = (): any => {
 
 export const StarGetVacationsByUid = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeVacations) => {
-    try {
-      const response = await providerRedux.getVacationsByUidProvider(
-        searchTerm
-      );
+    const response = await providerRedux.getVacationsByUidProvider(searchTerm);
 
-      //dispatch(EmployeeSlice.actions.getVacationsByUidReducer(response || null));
+    //dispatch(EmployeeSlice.actions.getVacationsByUidReducer(response || null));
 
-      dispatch(getVacationsByUidReducer(response || null));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(getVacationsByUidReducer(response || null));
   };
 };
 
 export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeByIdDepart) => {
-    try {
-      const response = await providerRedux.getEmployeesByIdDepartProvider(
-        searchTerm
-      );
+    const response = await providerRedux.getEmployeesByIdDepartProvider(
+      searchTerm
+    );
 
-      dispatch(getEmployeesByIdDepartmentReducer(response || null));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(getEmployeesByIdDepartmentReducer(response || null));
   };
 };
 
 export const StarGetAllBosses = (): any => {
   return async (dispatch: DispatchTypeAllBoss) => {
-    try {
-      const response = await providerRedux.getAllBossesProvider();
+    const response = await providerRedux.getAllBossesProvider();
 
-      dispatch(getAllBossReducer(response || null));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(getAllBossReducer(response || null));
   };
 };

@@ -8,7 +8,7 @@ import { Schedule } from "@/root/interface/employee";
 export default function index() {
   return (
     <EmployeePage>
-      <InformationPage img="/Images/EmployeeBackground.jpg" title="Welcome!" paragraph="Check your information for today" />
+      <InformationPage img="https://unsplash.com/photos/YI_9SivVt_s/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8Nnx8ZW1wbG95ZWVzfGVzfDB8fHx8MTY4NTMwMjc1NHww&force=true" title="Welcome!" paragraph="Check your information for today" />
     </EmployeePage>
   );
 }

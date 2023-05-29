@@ -7,7 +7,6 @@ interface employesDepart {
   onDeleteEmployee: (employeeName: string) => void;
 }
 const ScrollableTable = ({ employeeDepa, ...props }: employesDepart) => {
-  console.log(employeeDepa.employees);
   return (
     <div>
       <body className="antialiased font-sans bg-gray-200">

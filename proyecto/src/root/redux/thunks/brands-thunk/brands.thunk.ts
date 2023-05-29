@@ -1,4 +1,4 @@
-import { Brands } from "@/root/interface/employee";
+
 import { brandProvider } from "../../provider/brands-provider/brands.provider";
 import {
   DispatchTypeGetAllBrands,
@@ -20,6 +20,7 @@ import {
   DispatchTypeByIdEmployeeBrandsBrands,
   getBrandsByIdEmployeeReducer,
 } from "../../reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
+import { Brands } from "@/root/interface/brands";
 
 export const startGetAllBrands = (): any => {
   return async (dispatch: DispatchTypeGetAllBrands) => {
@@ -31,7 +32,7 @@ export const startGetAllBrands = (): any => {
 
 export const startUpdateBrands = (
   searchTerm: string,
-  searchTerm2: string
+  searchTerm2: Brands
 ): any => {
   return async (dispatch: DispatchTypeUpdateBrands) => {
     const response = await brandProvider.updateBrandsByIdProvider(
@@ -61,7 +62,7 @@ export const startCreateBrands = (searchTerm: Brands): any => {
 
 export const startGetBrandsByIdEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeByIdEmployeeBrandsBrands) => {
-    const response = await brandProvider.getBrandsByDocIdProvider(searchTerm);
+    const response = await brandProvider.getBrandsDocByEmployeeIdProvider(searchTerm);
 
     dispatch(getBrandsByIdEmployeeReducer(response || null));
   };

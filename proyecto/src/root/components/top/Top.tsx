@@ -25,15 +25,11 @@ export function Top() {
     <>
       <nav className="print:hidden bg-darkBlue">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 print:hidden">
-          <a className="flex items-center print:hidden">
+          <div className="flex items-center print:hidden">
             <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
             <span className="title-font">CrHome</span>
-          </a>
-          <div className="flex text-white font-semibold items-center">
-              (506) 8988-4062
-           
-       
           </div>
+          <div className="flex text-white font-semibold items-center">(506) 8988-4062</div>
         </div>
       </nav>
       <nav className="bg-darkBlue dark:bg-gray-700 print:hidden">
@@ -41,8 +37,8 @@ export function Top() {
           <div className="flex items-center">
             <ul className="flex flex-row font-medium mt-0 mr-6 space-x-8 text-sm print:hidden">
               <li>
-              <button className=" dark:text-white  print:hidden" onClick={handleAbout}>
-              About us
+                <button className=" dark:text-white  print:hidden" onClick={handleAbout}>
+                  About us
                 </button>
               </li>
               <li>
@@ -56,7 +52,7 @@ export function Top() {
                 </button>
               </li>
               <li>
-                <button className=" dark:text-white hover:underline print:hidden" onClick={handleSingOff}>
+                <button className=" dark:text-white  print:hidden" onClick={handleSingOff}>
                   Sign off
                 </button>
               </li>
