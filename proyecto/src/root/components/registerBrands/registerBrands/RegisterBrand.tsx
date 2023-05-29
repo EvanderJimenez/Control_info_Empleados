@@ -93,7 +93,7 @@ export default function RegisterBrand() {
     }
 
     const year = new Date(currentDate).getFullYear();
-    const nameCycle = monthCycle.toString() + "-" + year.toString();
+    const nameCycle = monthCycle.toString() + year.toString();
 
     if (brandData.cycle && brandData.cycle[nameCycle]) {
       toast.error("Cycle already exists");
@@ -141,19 +141,8 @@ export default function RegisterBrand() {
     setNewHFin("");
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setBrandData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(brandData);
-    if (!brandData.idEmployee) {
-      toast.error("Please enter values for all fields");
-      return;
-    }
-  };
 
   const handleDeleteSchedule = (date: string) => {
     if (brandData.hoursEmployee[date]) {
@@ -180,9 +169,6 @@ export default function RegisterBrand() {
 
     setIsEditing(false);
     setEditingIndex(-1);
-  };
-  const handleGetBrands = async (idEmployee: string) => {
-    //dispatch(startGetBrandsByIdEmployee(idEmployee));
   };
 
   useEffect(() => {
@@ -223,7 +209,6 @@ export default function RegisterBrand() {
     <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-start pt-10">
       <div className="flex items-center justify-center p-4 sm:p-12">
         <div className="bg-white p-4 sm:p-8 rounded-lg shadow-md w-full max-w-2xl">
-          <SearchDepartment handleGet={handleGetBrands} />
           <h2 className="font-semibold text-center">Filters</h2>
           <SearchInput
             labelInputSeekerOne="text"
@@ -325,17 +310,13 @@ export default function RegisterBrand() {
             handleEditClick={handleEditClick}
             handleDeleteSchedule={handleDeleteSchedule}
           />
-          <FormEmployee
-            brandData={brandData}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-          />
+
           <form onSubmit={handleUpdate} className="pt-10">
             <button
               type="submit"
               className="w-full bg-black hover:bg-blue-700 text-white font-bold py-3 px-4 rounded"
             >
-              Update
+              Save
             </button>
           </form>
         </div>
