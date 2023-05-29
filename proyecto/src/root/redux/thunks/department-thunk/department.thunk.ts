@@ -6,12 +6,12 @@ import { DispatchTypeUpdateDepartment, updateDepartmentByIdReducer } from "../..
 import { DepartmentType } from "@/root/types/Department.type";
 import { DispatchTypeCreateDepartment, createDepartmentReducer } from "../../reducers/department-reducer/createDepartment/CreateDepartmentReducer";
 import { DispatchID, getID } from "../../reducers/department-reducer/Idreducer/IDreducer";
+import { Department } from "@/root/interface/departments";
 
 export const startGetDepartmentById = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeGetByIdEmployee) => {
     const response = await departProvider.getDepartmentByIdProvider(searchTerm);
-
-    dispatch(getDepartmentByIdEmployeeReducer(response || null));
+    dispatch(getDepartmentByDocIdReducer(response || null));
   };
 };
 export const startGetID = (ID: string): any => {
@@ -36,7 +36,7 @@ export const startGetDepartByIdDoc = (searchTerm: string): any => {
   };
 };
 
-export const startUpdateDepartment = (searchTerm: string, searchTerm2: string): any => {
+export const startUpdateDepartment = (searchTerm: string, searchTerm2: Department): any => {
   return async (dispatch: DispatchTypeUpdateDepartment) => {
     const response = await departProvider.updateDepartmentByIdProvider(searchTerm, searchTerm2);
 
