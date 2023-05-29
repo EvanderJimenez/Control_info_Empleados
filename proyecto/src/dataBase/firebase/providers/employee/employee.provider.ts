@@ -1,41 +1,21 @@
 import { Attendance } from "./../../../../root/interface/employee/employee.interface";
 import { Brands, Schedule } from "@/root/interface/employee";
-import { firestore, auth } from "../../firebase";//TODO:You should use relative paths with @
-import {
-  collection,
-  getDocs,
-  DocumentData,
-  QuerySnapshot,
-  doc,
-  getDoc,
-  query,
-  where,
-  updateDoc,
-  addDoc,
-} from "firebase/firestore";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { firestore, auth } from "../../firebase";
+import { collection, getDocs, DocumentData, QuerySnapshot, doc, getDoc, query, where, updateDoc, addDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { EmployeesType, Vacations } from "@/root/types/Employee.type";
-import { defaultSchedule } from '@/root/constants/schedule/schedule';
+import { defaultSchedule } from "@/root/constants/schedule/schedule";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeCollection
-  );
-  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) =>
-    doc.data()
-  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeCollection);
+  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) => doc.data());
 
   return employees;
-};
+};    
 
-
-
-const updateByUid = async (uid: string,employeeData: EmployeesType): Promise<any> => {
-  const {vacations} = employeeData
+const updateByUid = async (uid: string, employeeData: EmployeesType): Promise<any> => {
+  const { vacations } = employeeData;
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
   const querySnapshot = await getDocs(q);
@@ -51,17 +31,11 @@ const updateByUid = async (uid: string,employeeData: EmployeesType): Promise<any
 };
 
 const create = async (employeeData: EmployeesType): Promise<{ message: string; employee?: any }> => {
-  const {
-    password,
-    email,
-    schedule,
-    uid,
-    ...restData
-  } = employeeData;
+  const { password, email, schedule, uid, ...restData } = employeeData;
 
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
-   const uuid = user.uid;
+  const uuid = user.uid;
 
   const mergedSchedule: Schedule[] = defaultSchedule.map((defaultDay) => {
     const userDay = schedule.find((s) => s.day === defaultDay.day);
@@ -95,9 +69,7 @@ const create = async (employeeData: EmployeesType): Promise<{ message: string; e
 const getByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
   if (employeeSnapshot.empty) {
     throw new Error(`User not found: ${uid}`);
@@ -109,9 +81,7 @@ const getByUid = async (uid: string) => {
 const deleteByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
   if (employeeSnapshot.size === 0) {
     return;
@@ -122,25 +92,15 @@ const deleteByUid = async (uid: string) => {
 };
 
 const login = async (email: string, password: string) => {
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
   const user = userCredential.user;
   if (!user) {
     throw new Error("No user found with that email and password");
   } else {
     const employeeCollection = collection(firestore, "employee");
-    const employeeQuery = query(
-      employeeCollection,
-      where("email", "==", email),
-      where("password", "==", password)
-    );
-    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-      employeeQuery
-    );
+    const employeeQuery = query(employeeCollection, where("email", "==", email), where("password", "==", password));
+    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
     const employeeDoc = employeeSnapshot.docs[0];
 
     if (!employeeDoc) {
@@ -152,13 +112,8 @@ const login = async (email: string, password: string) => {
 
 const getByCedula = async (cedula: string) => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(
-    employeeCollection,
-    where("uid", "==", cedula)
-  );
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeQuery = query(employeeCollection, where("uid", "==", cedula));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
   if (employeeSnapshot.empty) {
     throw new Error(`User not found ${cedula}`);
@@ -170,9 +125,7 @@ const getByCedula = async (cedula: string) => {
 const dismissByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
   if (employeeSnapshot.size === 0) {
     return;
@@ -183,10 +136,8 @@ const dismissByUid = async (uid: string) => {
 
 const getByVariable = async (data: string, variable: string, idDepartment: string) => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where(variable, "==", data),where("idDepartment", "==", idDepartment));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeQuery = query(employeeCollection, where(variable, "==", data), where("idDepartment", "==", idDepartment));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
   const employees: any[] = [];
 
@@ -216,13 +167,8 @@ const getVacationsByUid = async (uid: string) => {
 
 const getEmployeesByIdDepartment = async (idDepartment: string) => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(
-    employeeCollection,
-    where("idDepartment", "==", idDepartment)
-  );
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
+  const employeeQuery = query(employeeCollection, where("idDepartment", "==", idDepartment));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
   const employees: any[] = [];
 
@@ -237,10 +183,7 @@ const getEmployeesByIdDepartment = async (idDepartment: string) => {
 
 const getAllUD = async () => {
   const departmentCollection = collection(firestore, "departments");
-  const departmentQuery = query(
-    departmentCollection,
-    where("leader", "!=", "")
-  );
+  const departmentQuery = query(departmentCollection, where("leader", "!=", ""));
   const departmentSnapshot = await getDocs(departmentQuery);
 
   const departmentIds: any[] = [];
@@ -259,10 +202,7 @@ const getAllBosses = async () => {
   const departmentIds = await getAllUD();
 
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(
-    employeeCollection,
-    where("uid", "in", departmentIds)
-  );
+  const employeeQuery = query(employeeCollection, where("uid", "in", departmentIds));
   const employeeSnapshot = await getDocs(employeeQuery);
 
   const employees: DocumentData[] = [];

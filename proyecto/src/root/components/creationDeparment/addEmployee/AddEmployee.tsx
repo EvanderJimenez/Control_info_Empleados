@@ -25,7 +25,7 @@ const AddEmployee = ({
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-500 flex items-center justify-center">
+    <div className="min-h-screen  flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-md p-6 md:p-10 w-full max-w-lg">
         <h1 className="text-2xl md:text-3xl text-center font-bold mb-8">
           Add Employee for Department
@@ -71,7 +71,7 @@ const AddEmployee = ({
 
           <div className="flex justify-center">
             <button
-              className="mt-6 bg-black text-white px-5 py-3 rounded hover:bg-green-600"
+              className="mt-6 bg-darkBlue font-semibold text-white px-5 py-3 "
               type="submit"
             >
               Save Employee

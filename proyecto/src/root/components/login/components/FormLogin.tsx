@@ -36,7 +36,7 @@ const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProp
             required
           />
         </div>
-        <button type="submit" className="bg-blue hover:bg-red text-white font-bold py-2 px-4 rounded mt-4">
+        <button type="submit" className="bg-darkBlue hover:text-black text-white font-bold py-2 px-4 rounded mt-4">
           Log in
         </button>
       </form>
