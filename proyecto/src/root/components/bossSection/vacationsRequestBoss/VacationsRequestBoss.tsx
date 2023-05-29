@@ -74,7 +74,6 @@ const VacationsRequestBoss = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-      console.log("Status :" + JSON.stringify(updatedDataEmployee.vacations));
 
       if(updatedDataEmployee.uid === undefined){
         return

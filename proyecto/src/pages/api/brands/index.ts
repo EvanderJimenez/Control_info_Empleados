@@ -16,8 +16,6 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { idEmployee, cycle, hoursEmployee } = req.body;
 
-    console.log("idEmployee: " + idEmployee + " cycle: " + cycle + " hoursEmployee: " + hoursEmployee);
-
     const newBrands = await brandsProvider.createBrands(
       idEmployee,
       cycle,

@@ -3,8 +3,6 @@ import { Brands } from "@/root/interface/brands";
 
 const createBrandsProvider = async (searchTerm: Brands) => {
 
-  console.log("Data: " + JSON.stringify(searchTerm));
-
   const response = await fetch("/api/brands", {
     method: "POST",
     headers: {

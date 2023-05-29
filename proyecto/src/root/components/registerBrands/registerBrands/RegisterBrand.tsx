@@ -68,7 +68,7 @@ export default function RegisterBrand() {
         const [date, time] = datetime.split("T");
         setCurrentDate(date);
       } catch (error) {
-        console.error("Error getting date and time:", error);
+        toast.error("Error getting date and time:");
       }
     };
 
@@ -139,9 +139,6 @@ export default function RegisterBrand() {
     setNewHFin("");
   };
 
-  
-
-
   const handleDeleteSchedule = (date: string) => {
     if (brandData.hoursEmployee[date]) {
       const updatedHoursEmployee = { ...brandData.hoursEmployee };
@@ -170,17 +167,14 @@ export default function RegisterBrand() {
   };
 
   useEffect(() => {
-    console.log("clear: " + clear);
     if (employeeUid) {
       dispatch(startGetBrandsByIdEmployee(employeeUid.uid));
     }
   }, [dispatch, clear]);
 
   useEffect(() => {
-    console.log("brands: " + JSON.stringify(brandsIdEmployee));
     if (brandsIdEmployee) {
       setBrandData(brandsIdEmployee);
-      console.log("cont");
     }
   }, [dispatch, brandsIdEmployee]);
 
@@ -191,7 +185,7 @@ export default function RegisterBrand() {
       dispatch(startUpdateBrands(brandData.idEmployee, brandData));
       setBrandData(data);
       dispatch(ResetEmployeeByUid());
-      dispatch(ResetByVariable());  
+      dispatch(ResetByVariable());
     } else if (employeeUid?.uid) {
       const updatedBrandData = { ...brandData };
       updatedBrandData.idEmployee = employeeUid.uid;

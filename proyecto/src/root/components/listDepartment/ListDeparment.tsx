@@ -1,6 +1,7 @@
 import { Department } from "@/root/interface/departments";
 import React, { useState, useEffect } from "react";
 import MethodsDepartments from "../creationDeparment/methodsDepartment/MethodsDepartments";
+import toast from "react-hot-toast";
 
 export const ListDepartment = () => {
   const [departmentData, setDepartmentData] = useState<Department[]>([]);
@@ -30,13 +31,10 @@ export const ListDepartment = () => {
       if (response.ok) {
         const data = await response.json();
         setDepartmentData(data);
-        console.log(data);
       } else {
-        throw new Error("Error acquiring information");
+        toast.error("Error acquiring information");
       }
-    } catch (error) {
-      console.error("Error getting department data", error);
-    }
+    } catch (error) {}
   };
 
   const handleNextPage = () => {
@@ -53,7 +51,6 @@ export const ListDepartment = () => {
 
   const handleOpenDepartment = (departmentId: string) => {
     setSelectedDepartmentId(departmentId);
-    console.log(selectedDepartmentId);
   };
 
   return (

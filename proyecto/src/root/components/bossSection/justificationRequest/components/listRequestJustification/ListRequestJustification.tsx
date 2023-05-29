@@ -25,7 +25,6 @@ const ListRequestJustification = ({
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
-    console.log("Cont");
   }, [option]);
 
   useEffect(() => {

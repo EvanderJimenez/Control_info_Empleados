@@ -72,8 +72,6 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     dispatch(StartUpDateEmployee(newDataEmployee?.uid || "", newDataEmployee));
 
     setDataEmployee(test);
-
-    console.log("test: " + JSON.stringify(test));
   };
   return (
     <div className="flex flex-wrap mt-2 justify-center">

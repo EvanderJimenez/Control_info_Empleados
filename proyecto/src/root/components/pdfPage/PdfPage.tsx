@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { FirstPagePDFInformation } from "@/root/interface/employee";
 import jsPDF from "jspdf";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import {
+  selectGetEmployeesByIdDepartment,
+  selectLogin,
+} from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StarGetEmployeesByIdDepartment } from "@/root/redux/thunks/employee-thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 import EmployeeSummaryList from "./employeeSummaryList/EmployeeSummaryList";
@@ -15,7 +18,9 @@ export default function PdfPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(StarGetEmployeesByIdDepartment(loginInformation?.idDepartment || ""));
+    dispatch(
+      StarGetEmployeesByIdDepartment(loginInformation?.idDepartment || "")
+    );
   }, []);
 
   interface User {
@@ -92,39 +97,70 @@ export default function PdfPage() {
       } else {
         throw new Error("Error acquiring information");
       }
-    } catch (error) {
-      console.error("Error getting brands data", error);
-    }
+    } catch (error) {}
   };
-
-  console.log(handleGetBrands("7QMS8GM2bVYxySW9PD2V3AGxGGJ3"));
 
   return (
     <>
       <section className="space-y-4 font-light text-center flex justify-center flex-col items-center">
-        <div id="Front page" className="flex flex-col space-y-4 justify-center items-center">
-          <div id="ButtonSection" className="flex space-x-4 fle-row items-center justify-center">
-            <button className="NormalButton font-semibold print:hidden" onClick={handleBrands}>
+        <div
+          id="Front page"
+          className="flex flex-col space-y-4 justify-center items-center"
+        >
+          <div
+            id="ButtonSection"
+            className="flex space-x-4 fle-row items-center justify-center"
+          >
+            <button
+              className="NormalButton font-semibold print:hidden"
+              onClick={handleBrands}
+            >
               Brands
             </button>
-            <button className="NormalButton font-semibold print:hidden" onClick={handleEmployees}>
+            <button
+              className="NormalButton font-semibold print:hidden"
+              onClick={handleEmployees}
+            >
               On department
             </button>
-            <button className="EliminatedButton font-semibold print:hidden" onClick={handleJustifications}>
+            <button
+              className="EliminatedButton font-semibold print:hidden"
+              onClick={handleJustifications}
+            >
               Justifications
             </button>
-            <button className="NormalButton font-semibold print:hidden" onClick={CreatedPdf}>
+            <button
+              className="NormalButton font-semibold print:hidden"
+              onClick={CreatedPdf}
+            >
               Generated
             </button>
           </div>
           <p className="print:hidden ">Preview of pdf</p>
-          <textarea className="text-center font-bold" name="Tile" id="title" cols={30} rows={5} placeholder="Title of pdf"></textarea>
+          <textarea
+            className="text-center font-bold"
+            name="Tile"
+            id="title"
+            cols={30}
+            rows={5}
+            placeholder="Title of pdf"
+          ></textarea>
           <p>Print by: {loginInformation?.name}</p>
           <p>Print Date: {CurrentDate.toUTCString()}</p>
         </div>
-        <div id="body" className="flex justify-center items-center space-y-5 w-full">
-          {showComponent === "EmployeeBody" && <EmployeeSummaryList users={users} department={loginInformation?.name} />}
-          {showComponent === "BrandBody" && <TableView columnTitles={columnTitles} rows={rows} />}
+        <div
+          id="body"
+          className="flex justify-center items-center space-y-5 w-full"
+        >
+          {showComponent === "EmployeeBody" && (
+            <EmployeeSummaryList
+              users={users}
+              department={loginInformation?.name}
+            />
+          )}
+          {showComponent === "BrandBody" && (
+            <TableView columnTitles={columnTitles} rows={rows} />
+          )}
           {showComponent === "JustificationBody" && <div> Adios</div>}
         </div>
       </section>

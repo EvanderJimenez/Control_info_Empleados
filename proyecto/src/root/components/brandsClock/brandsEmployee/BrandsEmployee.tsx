@@ -38,7 +38,7 @@ export const BrandsEmployee = () => {
 
         const parsedDate = parseISO(date);
         const formattedDay = format(parsedDate, "EEEE");
-        console.log(formattedDay);
+
         setFormattedDay(formattedDay);
       } catch (error) {
         toast.error("Error getting date and time:");
@@ -71,7 +71,6 @@ export const BrandsEmployee = () => {
   const handleUpdateCycleHours = async (cycleName: string) => {
     setUpdateDateTime(true);
     const weekday = formattedDay;
-    console.log(weekday);
     const hoursEmployee = brandData.hoursEmployee;
 
     if (hoursEmployee.hasOwnProperty(weekday)) {
@@ -159,7 +158,6 @@ export const BrandsEmployee = () => {
       const markEndMinute = Number(markEnd.split(":")[1]);
 
       const hoursFinHour = Number(hoursFin.split(":")[0]);
-      console.log(hoursFin);
       const hoursFinMinute = Number(hoursFin.split(":")[1]);
 
       if (
@@ -208,7 +206,6 @@ export const BrandsEmployee = () => {
         if (existingHours) {
           const markStart = existingHours.hIni;
           const markEnd = existingHours.hFin;
-          console.log(markStart, markEnd);
           if (checkMarkHours(markStart, markEnd)) {
             toast.success("The hours match. Performing update...");
           } else {

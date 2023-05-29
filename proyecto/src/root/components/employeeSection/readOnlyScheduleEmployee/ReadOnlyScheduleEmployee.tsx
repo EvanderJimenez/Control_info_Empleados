@@ -37,7 +37,6 @@ const ReadOnlyScheduleEmployee = () => {
         throw new Error("Error acquiring information");
       }
     } catch (error) {
-      console.error("Error getting brands data", error);
       return [];
     }
   };
