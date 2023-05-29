@@ -85,8 +85,6 @@ const JustificationRequest = () => {
 
       setSelectedRequest(pendingRequest)
 
-     
-      //dispatch(ResetEmployeeByUid())
 
     setSelectedRequest(pendingRequest);
     }
@@ -135,7 +133,7 @@ const JustificationRequest = () => {
             </div>
           </div>
 
-          <div className="flex flex-row p-2 ">
+          <div className="flex flex-row space-x-4">
             <textarea
               className="font-semibold w-full shadow-xl rounded-md outline-none"
               name="description"
