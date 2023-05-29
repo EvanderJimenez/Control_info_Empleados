@@ -70,12 +70,12 @@ const BossControl = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <section className="flex flex-col">
+    <div className="flex flex-col h-screen bg-gray-200">
+      <section className="flex flex-col items-center py-4 px-4 bg-white shadow-md">
         <ListBoss clear={clear} setClear={setClear} />
       </section>
-      <section className="min-h-screen bg-gray-100 flex flex-col justify-center">
-        <div className="m-3 flex flex-wrap justify-center">
+      <section className="flex-grow flex items-center justify-center bg-gray-100">
+        <div className="p-4 bg-white rounded shadow-lg max-w-xl m-auto">
           <RegisterFormEmployee
             handleInputChange={handleInputChange}
             userData={dataEmployee}
@@ -86,5 +86,4 @@ const BossControl = () => {
     </div>
   );
 };
-
 export default BossControl;
