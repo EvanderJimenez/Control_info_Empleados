@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FirstPagePDFInformation } from "@/root/interface/employee";
-import jsPDF from "jspdf";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectGetEmployeesByIdDepartment,
@@ -122,12 +121,6 @@ export default function PdfPage() {
               onClick={handleEmployees}
             >
               On department
-            </button>
-            <button
-              className="EliminatedButton font-semibold print:hidden"
-              onClick={handleJustifications}
-            >
-              Justifications
             </button>
             <button
               className="NormalButton font-semibold print:hidden"

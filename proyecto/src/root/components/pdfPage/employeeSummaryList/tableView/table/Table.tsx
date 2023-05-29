@@ -16,9 +16,9 @@ export const TableColumn: React.FC<TableColumnProps> = ({ title }) => {
 
 const TableView: React.FC<TableProps> = ({ columnTitles, rows }) => {
     return (
-      <table className="w-full text-center">
-        <thead>
-          <tr>
+      <table className="w-full text-center border-none">
+        <thead className="bg-black">
+          <tr className="bg-black text-white">
             {columnTitles.map((title, index) => (
               <TableColumn key={index} title={title} />
             ))}
