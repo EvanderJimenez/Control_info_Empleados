@@ -16,64 +16,56 @@ export default function RegisterFormEmployee({
 }: EmployeesData) {
   return (
     <div>
-      <div className="grid min-h-screen place-items-center">
-        <div className="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-          <form className="mt-6" onSubmit={upDate}>
-            <div className="flex justify-between gap-3">
-              <span className="w-1/2">
-                <InputEmployee
-                  label={"Name"}
-                  type={"name"}
-                  name={"name"}
-                  value={userData.name}
-                  id={"name"}
-                  onChange={handleInputChange}
-                />
-              </span>
-              <span className="w-1/2">
-                <InputEmployee
-                  label={"First surname"}
-                  type={"firstSurname"}
-                  name={"firstSurname"}
-                  value={userData.firstSurname}
-                  id={"firstSurname"}
-                  onChange={handleInputChange}
-                />
-              </span>
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full bg-white shadow-lg p-6 rounded-lg">
+          <form className="space-y-6" onSubmit={upDate}>
+            <div className="grid grid-cols-2 gap-4">
+              <InputEmployee
+                label={"Name"}
+                type={"name"}
+                name={"name"}
+                value={userData.name}
+                id={"name"}
+                onChange={handleInputChange}
+              />
             </div>
-            <InputEmployee
-              label={"Second surname"}
-              type={"secondSurname"}
-              name={"secondSurname"}
-              value={userData.secondSurname}
-              id={"secondSurname"}
-              onChange={handleInputChange}
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <InputEmployee
+                label={"First surname"}
+                type={"firstSurname"}
+                name={"firstSurname"}
+                value={userData.firstSurname}
+                id={"firstSurname"}
+                onChange={handleInputChange}
+              />
+              <InputEmployee
+                label={"Second surname"}
+                type={"secondSurname"}
+                name={"secondSurname"}
+                value={userData.secondSurname}
+                id={"secondSurname"}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <InputEmployee
+                label={"Identification"}
+                type={"cedula"}
+                name={"cedula"}
+                value={userData.cedula}
+                id={"cedula"}
+                onChange={handleInputChange}
+              />
+              <InputEmployee
+                label={"Phone Number"}
+                type={"phoneNumber"}
+                name={"phoneNumber"}
+                value={userData.phoneNumber}
+                id={"phoneNumber"}
+                onChange={handleInputChange}
+              />
+            </div>
 
-            <InputEmployee
-              label={"Identification"}
-              type={"cedula"}
-              name={"cedula"}
-              value={userData.cedula}
-              id={"cedula"}
-              onChange={handleInputChange}
-            />
-            <InputEmployee
-              label={"Identification"}
-              type={"cedula"}
-              name={"cedula"}
-              value={userData.cedula}
-              id={"cedula"}
-              onChange={handleInputChange}
-            />
-            <InputEmployee
-              label={"Phone Number"}
-              type={"phoneNumber"}
-              name={"phoneNumber"}
-              value={userData.phoneNumber}
-              id={"phoneNumber"}
-              onChange={handleInputChange}
-            />
             <InputEmployee
               label={"Job Position"}
               type={"jobPosition"}

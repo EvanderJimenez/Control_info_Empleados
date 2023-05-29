@@ -1,3 +1,4 @@
+import { Department } from "@/root/interface/departments";
 import { DepartmentType } from "@/root/types/Department.type";
 
 const getDepartmentByIdProvider = async (searchTerm: string) => {
@@ -36,7 +37,7 @@ const getAllDepartmentProvider = async () => {
 
 const updateDepartmentByIdProvider = async (
   searchTerm1: string,
-  searchTerm2: string
+  searchTerm2: Department
 ) => {
   const response = await fetch(`/api/departments/${searchTerm1}`, {
     method: "PUT",

@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Department, Documents, Employee } from "@/root/interface/departments";
 import CreationDepartment from "../../creationDeparment/CreationDepartment";
 import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGetDepartmentById, startCreateDepartment, startGetDepartmentById, startUpdateDepartment } from "@/root/redux";
 
 interface RegisterProps {
   user?: Department;
 }
 
+const newDtaDepart = {
+  id: "",
+  name: "",
+  size: 0,
+  location: "",
+  idEmployee: "",
+  leader: "",
+  level: "",
+  subDepartment: "",
+  employees: {},
+}
+
 function MethodsDepartments(props: RegisterProps) {
+
+  const dispatch = useDispatch()
+
+  const departId = useSelector(selectGetDepartmentById)
+
   const [data, setData] = useState<Department[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [newDocuments, setNewDocuments] = useState<string>("");
@@ -111,69 +130,25 @@ function MethodsDepartments(props: RegisterProps) {
       return;
     }
 
-    fetch("/api/departments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    if (!departmentData.name && !departmentData.leader && !departmentData.idEmployee) {
+      toast.error("Department name is not defined");
+      return
+    }
 
-      body: JSON.stringify(departmentData),
-    })
-      .then((res) => res.json())
-      .then((newUser) => {
-        setdepartmentData({
-          id: "",
-          name: "",
-          size: 0,
-          location: "",
-          idEmployee: "",
-          leader: "",
-          level: "",
-          subDepartment: "",
-          employees: {},
-        });
-      })
-      .catch((error) => toast.error("Error creating new department:", error));
+      dispatch(startCreateDepartment(departmentData))
+      setdepartmentData(newDtaDepart);
+
   };
 
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
       if (!departmentData.name) {
-        throw new Error("Department name is not defined");
+        toast.error("Department name is not defined");
+        return
       }
-
-      const response = await fetch(`/api/departments/${departmentData.name}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(departmentData),
-      });
-
-      if (response.ok) {
-        const updatedUser = await response.json();
-        setData(updatedUser);
-      } else {
-        const errorResponse = await response.json();
-        throw new Error(`Failed to update user: ${errorResponse.message}`);
-      }
-
-      setdepartmentData({
-        id: "",
-        name: "",
-        size: 0,
-        location: "",
-        idEmployee: "",
-        leader: "",
-        level: "",
-        subDepartment: "",
-        employees: {},
-      });
-    } catch (error) {
-      toast.error("Error updating user:");
-    }
+      dispatch(startUpdateDepartment(departmentData.name,departmentData))
+      setdepartmentData(newDtaDepart);
   };
 
   const handleSubmitEmployee = (event: React.FormEvent<HTMLFormElement>) => {
@@ -202,25 +177,18 @@ function MethodsDepartments(props: RegisterProps) {
     setNewEmployeeData("");
   };
   const handleGetDepartment = async (id: string) => {
-    try {
-      const response = await fetch(`/api/departments/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        setData(data);
-        setdepartmentData(data);
-      } else {
-        throw new Error("Error acquiring information");
-      }
-    } catch (error) {
-      toast.error("Error getting department data");
-    }
+    dispatch(startGetDepartmentById(id))
+
   };
+
+  useEffect(() => {
+    if(departId){
+      setdepartmentData(departId)
+    }
+  
+  }, [departId])
+
 
   return (
     <div className="flex justify-center items-center flex-col">
