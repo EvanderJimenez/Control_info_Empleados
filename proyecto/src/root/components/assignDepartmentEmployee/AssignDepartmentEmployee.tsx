@@ -15,6 +15,26 @@ import {
 import { DepartmentType } from "@/root/types/Department.type";
 import { EmployeesType } from "@/root/types/Employee.type";
 
+const data = {
+  uid: "",
+  name: "",
+  firstSurname: "",
+  secondSurname: "",
+  cedula: 0,
+  phoneNumber: 0,
+  photo: "",
+  jobPosition: "",
+  salary: 0,
+  enabled: true,
+  idDepartment: "0",
+  password: "",
+  email: "",
+  boss: "",
+  schedule: [],
+  vacations: {},
+  attendance: {},
+}
+
 const AssignDepartmentEmployee = () => {
   const dispatch = useDispatch();
   const departmentsList = useSelector(selectGetAllDepartment);
@@ -22,25 +42,8 @@ const AssignDepartmentEmployee = () => {
 
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [employeeUpdate, setEmployeeUpdate] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "0",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-  });
+  const [employeeUpdate, setEmployeeUpdate] = useState<EmployeesType>(data);
+  const [change, setChange] = useState(false)
 
   useEffect(() => {
     dispatch(startGetAllDepartment());
@@ -65,6 +68,9 @@ const AssignDepartmentEmployee = () => {
       await dispatch(
         StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee)
       );
+      dispatch(ResetEmployeeByUid());
+      setEmployeeUpdate(data)
+      setChange(!change)
     }
   };
 
@@ -82,7 +88,7 @@ const AssignDepartmentEmployee = () => {
           <Filters />
         </div>
         <div>
-          <ListWithoutDepartment handleLoadEmployee={handleLoadEmployee} />
+          <ListWithoutDepartment change={change} handleLoadEmployee={handleLoadEmployee} />
         </div>
       </section>
 

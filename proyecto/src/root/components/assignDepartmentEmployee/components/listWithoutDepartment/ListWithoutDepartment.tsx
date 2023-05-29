@@ -11,9 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 interface ListWithoutDepartmentProps {
   handleLoadEmployee: (uid: string) => Promise<void>;
+  change: boolean
 }
 
-const ListWithoutDepartment = ({
+const ListWithoutDepartment = ({change,
   handleLoadEmployee,
 }: ListWithoutDepartmentProps) => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const ListWithoutDepartment = ({
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment("0"));
-  }, [dispatch, employeesListVacations]);
+  }, [dispatch, employeesListVacations,change]);
 
   return (
     <div className="container mx-auto">

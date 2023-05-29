@@ -65,7 +65,7 @@ const getDepartmentByDocIdProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting depart");
+    return null
   }
 
   const data = await response.json();
