@@ -6,6 +6,7 @@ import FormEmployee from "../../registerBrands/formIdEmployee/FormEmployee";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
 import { RegisterClock } from "../registerClock/RegisterClock";
 import TableSchedules from "../tableShedules/TableShedules";
+import { toast } from "react-hot-toast";
 
 export default function RegisterBrand() {
   const [currentDate, setCurrentDate] = useState("");
@@ -189,7 +190,7 @@ export default function RegisterBrand() {
         throw new Error("Error acquiring information");
       }
     } catch (error) {
-      console.error("Error getting brands data", error);
+      toast.error("Error getting brands data");
     }
   };
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
@@ -210,7 +211,7 @@ export default function RegisterBrand() {
         }));
       })
 
-      .catch((error) => console.error("Error updating brands:", error));
+      .catch((error) => toast.error("Error updating brands:"));
   };
 
   return (
