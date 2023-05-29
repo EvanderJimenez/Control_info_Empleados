@@ -133,9 +133,9 @@ export default function EditEmployeeSection() {
             <div className=" pt-3 space-x-4 flex justify-center">
               <button
                 onClick={handleDismissEmployee}
-                className="bg-red   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="bg-red   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
               >
-                Dismiss employee
+                Dismiss
               </button>
 
               <button
@@ -143,7 +143,7 @@ export default function EditEmployeeSection() {
                 onClick={() => {
                   toast.success("Update");
                 }}
-                className="NormalButton focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="bg-blue focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-56 sm:w-auto px-5 py-2.5 text-center "
               >
                 Save
               </button>

@@ -88,7 +88,7 @@ export const BrandsEmployee = () => {
     if (brandData && brandData.cycle && brandData.cycle[cycleName]) {
       const cycle = brandData.cycle[cycleName];
       const existingHours = cycle.hours[currentDate];
-      console.log("Cycle" + currentTime + existingHours.hFin);
+    
       if (existingHours) {
         const updatedCycle = {
           ...cycle,

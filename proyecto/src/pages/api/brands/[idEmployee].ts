@@ -7,10 +7,15 @@ async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {
   const idEmployee = String(req.query.idEmployee);
   try {
     const brand = await brandsProvider.getDocByEmployeeId(idEmployee);
-    res.status(200).json(brand);
+    if (brand === null) {
+      res.status(404).json({ message: "Not found" });
+    } else {
+      res.status(200).json(brand);
+    }
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
+  
 }
 async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
   try {
