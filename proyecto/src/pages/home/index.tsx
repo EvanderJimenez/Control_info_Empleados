@@ -5,7 +5,7 @@ import MainForm from "@/root/components/mainForm/MainForm";
 export default function index() {
   return (
     <LoginPage>
-      <ListDepartment />
+      <MainForm/>
     </LoginPage>
   );
 }
