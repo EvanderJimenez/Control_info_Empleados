@@ -2,8 +2,11 @@ import React from "react";
 import InputEmployee from "./inputEmployee/InputEmployee";
 import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { ResetEmployeeByUid } from "@/root/redux";
+import { useDispatch } from "react-redux";
 interface EmployeesData {
   userData: EmployeesType;
+
   upDate: (event: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -14,6 +17,12 @@ export default function RegisterFormEmployee({
   upDate,
   ...props
 }: EmployeesData) {
+
+  const dispatch = useDispatch()  
+
+  const handleClear = async () => {
+    dispatch(ResetEmployeeByUid());
+  };
   return (
     <div>
       <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -108,9 +117,15 @@ export default function RegisterFormEmployee({
             />
             <button
               type="submit"
-              className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
+              className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-blue shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
             >
               Save
+            </button>
+            <button
+              onClick={handleClear}
+              className="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-pink shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none"
+            >
+              Clear
             </button>
           </form>
         </div>

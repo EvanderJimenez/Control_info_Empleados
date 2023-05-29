@@ -26,9 +26,9 @@ const ListBoss = ({ clear, setClear }: ListClear) => {
   };
 
   return (
-    <div className="bg-gray-100 p-4">
+    <div className="bg-gray-100 overflow-auto h-52 p-4">
       {listBoss?.map((request: EmployeesType, index: number) => (
-        <div key={index} className="mb-4 p-2 border border-gray-300 rounded">
+        <div key={index} className="mb-4 p-2 border  shadow-md rounded">
           <h3 className="text-lg font-semibold mb-2">
             Employee: {request.name}
           </h3>

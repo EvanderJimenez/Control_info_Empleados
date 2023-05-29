@@ -34,35 +34,39 @@ const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
   };
 
   return (
-    <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
-      {Array.isArray(employeesListVariable) &&
-        employeesListVariable
-          .filter((item) => item.enabled)
-          .map((item) => (
-            <div
-              key={item.uid}
-              className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4"
-            >
-              <p className="font-bold">Name: {item.name}</p>
-              <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
-              <p className="mt-2 font-semibold">Email: {item.email}</p>
-              <p className="mt-2 font-semibold">
-                Job Position: {item.jobPosition}
-              </p>
-              <p className="mt-2 font-semibold">
-                Department: {item.idDepartment}
-              </p>
+<>
+{
+  employeesListVariable.length > 0 ?  (    <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
+  {Array.isArray(employeesListVariable) &&
+    employeesListVariable
+      .filter((item) => item.enabled && item.uid !== loginState.uid)
+      .map((item) => (
+        <div
+          key={item.uid}
+          className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4"
+        >
+          <p className="font-bold">Name: {item.name}</p>
+          <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
+          <p className="mt-2 font-semibold">Email: {item.email}</p>
+          <p className="mt-2 font-semibold">
+            Job Position: {item.jobPosition}
+          </p>
+          <p className="mt-2 font-semibold">
+            Department: {item.idDepartment}
+          </p>
 
-              <button
-                className="mt-4 px-4 py-2 bg-black text-white rounded "
-                onClick={() => handleLoad(item.uid)}
-              >
-                Load Information
-              </button>
-            </div>
-          ))}
-      {loading && <LoadingGeneralComponent />}
-    </div>
+          <button
+            className="mt-4 px-4 py-2 bg-black text-white rounded "
+            onClick={() => handleLoad(item.uid)}
+          >
+            Load Information
+          </button>
+        </div>
+      ))}
+  {loading && <LoadingGeneralComponent />}
+</div>) : (<h2>List Empty</h2>)
+}
+</>
   );
 };
 

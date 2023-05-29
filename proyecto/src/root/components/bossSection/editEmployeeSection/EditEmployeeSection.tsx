@@ -93,6 +93,10 @@ export default function EditEmployeeSection() {
   }, [])
   
 
+  const handleClear = async () => {
+    dispatch(ResetEmployeeByUid());
+  };
+
   return (
     <>
       <div className="flex flex-wrap justify-center bg-white">
@@ -146,6 +150,12 @@ export default function EditEmployeeSection() {
                 className="bg-blue focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-56 sm:w-auto px-5 py-2.5 text-center "
               >
                 Save
+              </button>
+              <button
+                onClick={handleClear}
+                className="bg-pink   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+              >
+                Clear
               </button>
             </div>
           </form>

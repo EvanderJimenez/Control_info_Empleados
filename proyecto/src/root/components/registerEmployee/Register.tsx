@@ -10,58 +10,40 @@ import { StartCreateEmployee, StartUpDateEmployee } from "../../redux/thunks/emp
 import { RootState } from "../../redux/store";
 import { EmployeesType } from "@/root/types/Employee.type";
 
+
+const data = {
+  uid: "",
+  name: "",
+  firstSurname: "",
+  secondSurname: "",
+  cedula: 0,
+  phoneNumber: 0,
+  photo: "",
+  jobPosition: "",
+  salary: 0,
+  enabled: true,
+  idDepartment: "0",
+  password: "",
+  email: "",
+  boss: "",
+  schedule: [],
+  vacations: {},
+  attendance: {}
+}
+
 function Register() {
   const dispatch = useDispatch();
 
   const employeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
-  const [data, setData] = useState<UserData[]>([]);
 
   const [upDate, setUpDate] = useState<boolean | null>();
 
   const [userData, setUserData] = useState<EmployeesType>(() => {
     if (employeeByUid) {
       setUpDate(true);
-      return {
-        uid: "",
-        name: "",
-        firstSurname: "",
-        secondSurname: "",
-        cedula: 0,
-        phoneNumber: 0,
-        photo: "",
-        jobPosition: "",
-        salary: 0,
-        enabled: true,
-        idDepartment: "",
-        password: "",
-        email: "",
-        boss: "",
-        schedule: [],
-        option: "register",
-        vacations: {},
-        attendance: {}
-      };
+      return data
     } else {
-      return {
-        uid: "",
-        name: "",
-        firstSurname: "",
-        secondSurname: "",
-        cedula: 0,
-        phoneNumber: 0,
-        photo: "",
-        jobPosition: "",
-        salary: 0,
-        enabled: true,
-        idDepartment: "",
-        password: "",
-        email: "",
-        boss: "",
-        schedule: [],
-        option: "register",
-         vacations: {},
-         attendance:{}
-      };
+      return data
     }
   });
 
@@ -74,6 +56,7 @@ function Register() {
     event.preventDefault();
 
     dispatch(StartCreateEmployee(userData));
+    setUserData(data)
   };
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {

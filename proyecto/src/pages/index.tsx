@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 
 const InvoicePage: NextPage = () => {
   const router = useRouter();
-
-  useEffect(() => { //What is it the idea of this?
+  
+  useEffect(() => {
     router.push("./home/");
   }, [router]);
 
