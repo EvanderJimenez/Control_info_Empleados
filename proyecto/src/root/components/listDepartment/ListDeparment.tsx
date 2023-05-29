@@ -1,12 +1,14 @@
 import { Department } from "@/root/interface/departments";
 import React, { useState, useEffect } from "react";
 import MethodsDepartments from "../creationDeparment/methodsDepartment/MethodsDepartments";
+import { useDispatch } from "react-redux";
 
 export const ListDepartment = () => {
   const [departmentData, setDepartmentData] = useState<Department[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [selectedDepartmentId, setSelectedDepartmentId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+
   let filteredDepartments = departmentData;
 
   if (searchTerm) {
