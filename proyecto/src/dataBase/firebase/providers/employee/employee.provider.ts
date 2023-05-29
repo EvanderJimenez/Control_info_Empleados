@@ -35,6 +35,7 @@ const getAll = async () => {
 
 
 const updateByUid = async (uid: string,employeeData: EmployeesType): Promise<any> => {
+  const {vacations} = employeeData
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
   const querySnapshot = await getDocs(q);

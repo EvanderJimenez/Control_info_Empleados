@@ -18,7 +18,7 @@ import { CreateBrandsReducer } from "./reducers/brands-reducer/createBrands/Crea
 import { GetBrandsByDocIdReducer } from "./reducers/brands-reducer/getBrandsByDocId/GetBrandsByDocIdReducer";
 import { UpdateBrandsReducer } from "./reducers/brands-reducer/updateBrandsById/UpdateBrandsByIdReducer";
 import { GetBrandsByIdEmployeeReducer } from "./reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
-import { LoginReducer } from "./reducers/login-reducer/LoginReducer";
+import { LoginReducer } from "./reducers/login-reducer/loginReducer";
 import { GetEmployeeByUidReducer } from "./reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 
 export const ApplicationStore = configureStore({
@@ -37,7 +37,7 @@ export const ApplicationStore = configureStore({
     getEmployeesByIdDepartmentStore: GetEmployeesByIdDepartmentReducer,
 
     getAllDepartmentStore: GetAllDepartmentsReducer,
-    getDepartmentByIdStore: GetByIdEmployeeDepartmentsReducer,
+    getDepartmentByIdStore: ByIdDocReducer,
     getDepartmentByIdDocStore: ByIdDocReducer,
 
     getAllBrans: GetAllBrandsReducer,

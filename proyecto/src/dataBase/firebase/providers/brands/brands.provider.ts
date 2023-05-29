@@ -74,7 +74,7 @@ const getDocByEmployeeId = async (idEmployee: string) => {
   );
 
   if (brandsSnapshot.empty) {
-    throw new Error(`No brands document found for idEmpleado: ${idEmployee}`);
+    return null
   } else {
     return brandsSnapshot.docs[0].data();
   }

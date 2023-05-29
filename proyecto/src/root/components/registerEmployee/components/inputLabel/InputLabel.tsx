@@ -11,7 +11,7 @@ interface InputLabelProps{
 
 const InputLabel = (props: InputLabelProps) => {
   return (
-    <div className="flex items-center justify-center p-2">
+    <div className="flex  flex-col items-center justify-center p-2">
       <label className="text-PrimaryColor">{props.label}</label>
       <input
         type={props.type}

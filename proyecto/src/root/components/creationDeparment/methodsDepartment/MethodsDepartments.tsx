@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Department, Documents, Employee } from "@/root/interface/departments";
 import CreationDepartment from "../../creationDeparment/CreationDepartment";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGetDepartmentById, startCreateDepartment, startGetDepartmentById, startUpdateDepartment } from "@/root/redux";
 
 interface RegisterProps {
   user?: Department;
 }
 
+const newDtaDepart = {
+  id: "",
+  name: "",
+  size: 0,
+  location: "",
+  idEmployee: "",
+  leader: "",
+  level: "",
+  subDepartment: "",
+  employees: {},
+}
+
 function MethodsDepartments(props: RegisterProps) {
+
+  const dispatch = useDispatch()
+
+  const departId = useSelector(selectGetDepartmentById)
+
   const [data, setData] = useState<Department[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [newDocuments, setNewDocuments] = useState<string>("");
@@ -56,7 +76,7 @@ function MethodsDepartments(props: RegisterProps) {
     event.preventDefault();
 
     if (!newDocuments) {
-      console.error("Please enter values for all fields in the document");
+      toast.error("Please enter values for all fields in the document");
       return;
     }
 
@@ -84,7 +104,7 @@ function MethodsDepartments(props: RegisterProps) {
       setNewDocuments("");
       setUrl("");
     } else {
-      console.error("The selected employee does not exist");
+      toast.error("The selected employee does not exist");
     }
   };
   const handleDeleteEmployee = (employeeName: string | number) => {
@@ -106,65 +126,35 @@ function MethodsDepartments(props: RegisterProps) {
       !departmentData.location ||
       !departmentData.level
     ) {
-      console.error("Please enter values for all fields");
+      toast.error("Please enter values for all fields");
       return;
     }
 
-    fetch("/api/departments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    if (!departmentData.name && !departmentData.leader && !departmentData.idEmployee) {
+      toast.error("Department name is not defined");
+      return
+    }
 
-      body: JSON.stringify(departmentData),
-    })
-      .then((res) => res.json())
-      .then((newUser) => {
-        setdepartmentData({
-          id: "",
-          name: "",
-          size: 0,
-          location: "",
-          idEmployee: "",
-          leader: "",
-          level: "",
-          subDepartment: "",
-          employees: {},
-        });
-      })
-      .catch((error) => console.error("Error creating new department:", error));
+      dispatch(startCreateDepartment(departmentData))
+      setdepartmentData(newDtaDepart);
+
   };
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`/api/departments/${departmentData.name}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(departmentData),
-    })
-      .then((res) => res.json())
-      .then((updatedDepartment) => {
-        setData((prevData) => {
-          const newData = Array.isArray(prevData) ? [...prevData] : [];
-          const departmentIndex = newData.findIndex(
-            (department) => department.name === updatedDepartment.name
-          );
-          if (departmentIndex >= 0) {
-            newData[departmentIndex] = updatedDepartment;
-          }
-          console.log(newData);
-          return newData;
-        });
-      })
-      .catch((error) => console.error("Error updating department:", error));
+
+      if (!departmentData.name) {
+        toast.error("Department name is not defined");
+        return
+      }
+      dispatch(startUpdateDepartment(departmentData.name,departmentData))
+      setdepartmentData(newDtaDepart);
   };
 
   const handleSubmitEmployee = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(newEmployee);
     if (!newEmployee) {
-      console.error("Please enter values for all employee fields");
+      toast.error("Please enter values for all employee fields");
       return;
     }
 
@@ -187,26 +177,18 @@ function MethodsDepartments(props: RegisterProps) {
     setNewEmployeeData("");
   };
   const handleGetDepartment = async (id: string) => {
-    try {
-      const response = await fetch(`/api/departments/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        setData(data);
-        setdepartmentData(data);
-        console.log(data);
-      } else {
-        throw new Error("Error acquiring information");
-      }
-    } catch (error) {
-      console.error("Error getting department data", error);
-    }
+    dispatch(startGetDepartmentById(id))
+
   };
+
+  useEffect(() => {
+    if(departId){
+      setdepartmentData(departId)
+    }
+  
+  }, [departId])
+
 
   return (
     <div className="flex justify-center items-center flex-col">

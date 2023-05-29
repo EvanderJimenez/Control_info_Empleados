@@ -36,8 +36,6 @@ function Login() {
   useEffect(() => {
     if (loginState?.idDepartment !== undefined) {
       dispatch(startGetDepartByIdDoc(loginState.idDepartment));
-    }else{
-      
     }
   }, [loginState, dispatch]);
 

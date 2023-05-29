@@ -13,7 +13,7 @@ interface tableShedul {
   handleDeleteSchedule: (date: string) => void;
 }
 
-const TableShedules = ({
+const TableSchedules = ({
   brandData,
   setNewHIni,
   setNewHFin,
@@ -26,16 +26,15 @@ const TableShedules = ({
   handleDeleteSchedule,
 }: tableShedul) => {
   return (
-    <div className=" pd-10 pt-10 flex flex-wrap">
-      {" "}
+    <div className="p-10 pt-10 flex flex-wrap">
       <table className="w-full">
         <thead>
-          <tr>
-            <th className="py-2 px-4 bg-[#165488] text-gray-700">Date</th>
-            <th className="py-2 px-4 bg-[#165488] text-gray-700">Start Time</th>
-            <th className="py-2 px-4 bg-[#165488] text-gray-700">End Time</th>
-            <th className="py-2 px-4 bg-[#165488] text-gray-700">Edit</th>
-            <th className="py-2 px-4 bg-[#165488] text-gray-700">Delete</th>
+          <tr className="bg-[#696969]">
+            <th className="py-2 px-4 bg-blue-700 text-gray-700">Date</th>
+            <th className="py-2 px-4 bg-blue-700 text-gray-700">Start Time</th>
+            <th className="py-2 px-4 bg-blue-700 text-gray-700">End Time</th>
+            <th className="py-2 px-4 bg-blue-700 text-gray-700">Edit</th>
+            <th className="py-2 px-4 bg-blue-700 text-gray-700">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -71,14 +70,14 @@ const TableShedules = ({
                   <td className="py-2 px-4 border-b">
                     {isEditing && editingIndex === index ? (
                       <button
-                        className="text-blue-500 hover:text-blue-700 mr-2 bg-[blue]"
+                        className="text-blue-500 hover:text-blue-700 mr-2 bg-blue"
                         onClick={() => handleSaveClick(index)}
                       >
                         Save
                       </button>
                     ) : (
                       <button
-                        className="text-blue-500 hover:text-blue-700 mr-2 bg-[blue]"
+                        className="text-blue-500 hover:text-blue-700 mr-2 bg-blue"
                         onClick={() => handleEditClick(index)}
                       >
                         Edit
@@ -87,10 +86,10 @@ const TableShedules = ({
                   </td>
                   <td>
                     <button
-                      className="text-red-500 hover:text-red-700 bg-[red]"
+                      className="text-red-500 hover:text-red-700 bg-red"
                       onClick={() => handleDeleteSchedule(date)}
                     >
-                      Eliminar
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -102,4 +101,4 @@ const TableShedules = ({
   );
 };
 
-export default TableShedules;
+export default TableSchedules;

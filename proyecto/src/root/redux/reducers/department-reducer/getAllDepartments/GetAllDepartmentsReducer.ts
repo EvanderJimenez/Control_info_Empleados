@@ -7,7 +7,7 @@ interface GetAllDepartmentsState {
   }
 
   export const initialStateDepartGetAll: GetAllDepartmentsState = {
-    getAllDepartments: {} as DepartmentType[]
+    getAllDepartments: []
   };
 
 

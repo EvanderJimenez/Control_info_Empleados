@@ -1,10 +1,7 @@
-import EmployeeMain from "@/Layout/EmployeePage";
 import React from "react";
-import BossMain from "..";
 import BossPage from "@/Layout/BossPage";
-import EmployeeTableViewSchedule from "@/root/components/employeeTablewViewSchedule/EmployeeTableViewSchedule";
 import ScheduleTimeSelection from "@/root/components/bossSection/editSchedulePage/ScheduleTimeSelection";
-import EmployeeTimeSection from "@/root/components/employeeTimeSection/EmployeeTimeSection";
+import RegisterBrand from "@/root/components/registerBrands/registerBrands/RegisterBrand";
 
 function SaveInformation(){
 
@@ -13,7 +10,7 @@ function SaveInformation(){
 export default function index() {
   return (
     <BossPage>
-      <ScheduleTimeSelection onScheduleChange={SaveInformation} />
+      <RegisterBrand />
     </BossPage>
   );
 }

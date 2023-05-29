@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Filters from "./components/filters/Filters";
-import ListRequestVacations from "./components/listRequest/ListRequestVacations";
+import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { PendingRequest } from "@/root/interface/employee";
@@ -46,17 +46,16 @@ const VacationsRequestBoss = () => {
   const handleAccept = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
     optionSelect = "accept";
-    console.log("option: " + optionSelect);
+   
   };
 
   const handleDenied = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
     optionSelect = "denied";
-    console.log("option: " + optionSelect);
+   
   };
 
-  useEffect(() => {
-    console.log("option: " + optionSelect);
+  useLayoutEffect(() => {
 
     if (employeeByUid && employeeByUid.vacations && optionSelect !== "wait") {
       const vacation = employeeByUid.vacations[selectedRequest?.key || ""];
@@ -75,12 +74,15 @@ const VacationsRequestBoss = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-      console.log("Status :" + JSON.stringify(updatedDataEmployee.vacations));
+
+      if(updatedDataEmployee.uid === undefined){
+        return
+      }
 
       dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
       //dispatch(ResetEmployeeByUid())
-
-      //setSelectedRequest(pendingRequest);
+      optionSelect = "wait"
+      setSelectedRequest(pendingRequest);
     }
   }, [employeeByUid, dispatch]);
 
@@ -91,7 +93,7 @@ const VacationsRequestBoss = () => {
           <Filters />
         </div>
         <div>
-          <ListRequestVacations selectedRequest={setSelectedRequest} />
+          <ListRequestVacations option={optionSelect} selectedRequest={setSelectedRequest} />
         </div>
       </div>
       <div className="flex flex-col lg:w-1/2 md:w-1/2 sm:flex-col lg:3/4 w-full justify-center items-center m-3">

@@ -7,92 +7,117 @@ interface RegisterEmployeesProps {
   newEmployeeData: string;
   setNewEmployee: React.Dispatch<React.SetStateAction<string>>;
   setNewEmployeeData: React.Dispatch<React.SetStateAction<string>>;
-  formRef: React.RefObject<HTMLFormElement>;
-  handleToggleDocumentsForm: () => void;
+  handleSubmitDocuments: (event: React.FormEvent<HTMLFormElement>) => void;
+  newDocuments: string;
+  setNewDocuments: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AddEmployee = ({
+  handleSubmitDocuments,
+  newDocuments,
+  setNewDocuments,
   handleSubmitEmployee,
   newEmployee,
   newEmployeeData,
   setNewEmployee,
   setNewEmployeeData,
-  handleToggleDocumentsForm,
-  formRef,
 }: RegisterEmployeesProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <div>
-      <div className="w-full bg-grey-500">
-        <div className="container mx-auto py-8">
-          <div className="w-96 mx-auto bg-white rounded shadow">
-            <form
-              className="mx-auto mt-16 max-w-xl sm:mt-20 border border-blue rounded"
-              onSubmit={handleSubmitEmployee}
-              ref={formRef}
+    <div className="min-h-screen bg-gray-500 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-md p-6 md:p-10 w-full max-w-lg">
+        <h1 className="text-2xl md:text-3xl text-center font-bold mb-8">
+          Add Employee for Department
+        </h1>
+        <form onSubmit={handleSubmitEmployee} className="space-y-6">
+          <InputDepartment
+            label={"Name Employee:"}
+            type={"text"}
+            name={"newEmployee"}
+            value={newEmployee}
+            id={"employee"}
+            onChange={(e: {
+              target: { value: React.SetStateAction<string> };
+            }) => setNewEmployee(e.target.value)}
+          />
+
+          <InputDepartment
+            label={"Personal Information:"}
+            type={"text"}
+            name={"newEmployeeData"}
+            value={newEmployeeData}
+            id={"employee"}
+            onChange={(e: {
+              target: { value: React.SetStateAction<string> };
+            }) => setNewEmployeeData(e.target.value)}
+          />
+
+          <div className="space-y-2">
+            <label
+              htmlFor="documents"
+              className="block text-gray-700 text-sm font-medium"
             >
-              <h1 className="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">
-                Add Employee for Department
-              </h1>
-              <div className="py-4 px-8">
-                <InputDepartment
-                  label={"Name Employee:"}
-                  type={"text"}
-                  name={"newEmployee"}
-                  value={newEmployee}
-                  id={"employee"}
-                  onChange={(e: {
-                    target: { value: React.SetStateAction<string> };
-                  }) => setNewEmployee(e.target.value)}
-                />
-
-                <InputDepartment
-                  label={"Personal Information:"}
-                  type={"text"}
-                  name={"newEmployeeData"}
-                  value={newEmployeeData}
-                  id={"employee"}
-                  onChange={(e: {
-                    target: { value: React.SetStateAction<string> };
-                  }) => setNewEmployeeData(e.target.value)}
-                />
-                <div className="mb-1">
-                  <label
-                    htmlFor="documents"
-                    className="block text-gray-700 font-bold mb-2"
-                  >
-                    Image:
-                  </label>
-                  <input
-                    type="file"
-                    id="documents"
-                    name="documents"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-                    placeholder="Image perfil to the employee"
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <button
-                    className="bg-[#049473] cmb-2 mx-16 rounded-full px-10"
-                    type="submit"
-                  >
-                    Save Employee
-                  </button>
-                </div>
-                <div className="md:w-1/2 px-3 mb-6 md:mb-0 px-10">
-                  <button
-                    onClick={handleToggleDocumentsForm}
-                    className="bg-[#049473] hover:bg-sky text-white font-bold py-2 px-4 rounded "
-                  >
-                    AddEmployee
-                  </button>
-                </div>
-              </div>
-            </form>
+              Image:
+            </label>
+            <input
+              type="file"
+              id="documents"
+              name="documents"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Image profile for the employee"
+            />
           </div>
-        </div>
+
+          <div className="flex justify-center">
+            <button
+              className="mt-6 bg-black text-white px-5 py-3 rounded hover:bg-green-600"
+              type="submit"
+            >
+              Save Employee
+            </button>
+          </div>
+        </form>
+
+        <hr className="my-8" />
+
+        <h1 className="text-2xl md:text-3xl text-center font-bold mb-8">
+          Add Documents for Department
+        </h1>
+        <form onSubmit={handleSubmitDocuments} className="space-y-6">
+          <InputDepartment
+            label={"Document Name:"}
+            type={"text"}
+            name={"newDocuments"}
+            value={newDocuments}
+            id={"newDocuments"}
+            onChange={(e: {
+              target: { value: React.SetStateAction<string> };
+            }) => setNewDocuments(e.target.value)}
+          />
+
+          <div className="space-y-2">
+            <label
+              htmlFor="documents"
+              className="block text-gray-700 text-sm font-medium"
+            >
+              Upload Document:
+            </label>
+            <input
+              type="file"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="flex justify-center">
+            <button
+              className="mt-6 bg-black text-white px-5 py-3 rounded hover:bg-green-600"
+              type="submit"
+            >
+              Save Documents
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
