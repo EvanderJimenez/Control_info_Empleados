@@ -3,8 +3,13 @@ import React, { useState, useEffect } from "react";
 import MethodsDepartments from "../creationDeparment/methodsDepartment/MethodsDepartments";
 import ButtonList from "./buttonList/ButtonList";
 import { TableView } from "./tableView/TableView";
-
-export const ListDepartment = () => {
+interface listDepartment {
+  handleGetDepartment: (id: string) => void;
+}
+export const ListDepartment = ({
+  handleGetDepartment,
+  ...props
+}: listDepartment) => {
   const [departmentData, setDepartmentData] = useState<Department[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [selectedDepartmentId, setSelectedDepartmentId] = useState("");
@@ -79,6 +84,7 @@ export const ListDepartment = () => {
               <TableView
                 filteredDepartments={filteredDepartments}
                 handleOpenDepartment={handleOpenDepartment}
+                handleGetDepartment={handleGetDepartment}
               />
               <ButtonList
                 startIndex={startIndex}
@@ -88,11 +94,6 @@ export const ListDepartment = () => {
               />
             </div>
           </div>
-        </div>
-      )}
-      {selectedDepartmentId && (
-        <div>
-          <MethodsDepartments id={selectedDepartmentId} />
         </div>
       )}
     </div>

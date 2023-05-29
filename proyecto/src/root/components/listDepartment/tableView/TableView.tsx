@@ -3,6 +3,7 @@ import React from "react";
 interface table {
   filteredDepartments: Department[];
   handleOpenDepartment: (departmentId: string) => void;
+  handleGetDepartment: (id: string) => void;
 }
 export const TableView = ({
   handleOpenDepartment,
@@ -34,6 +35,9 @@ export const TableView = ({
                 <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
                   Actions
                 </th>
+                <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                  Add Department
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -58,9 +62,17 @@ export const TableView = ({
                     <td className="px-2 sm:px-6 py-2 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
                       <button
                         className="text-indigo-600 hover:text-indigo-900 bg-blue"
-                        onClick={() => handleOpenDepartment(department.id)}
+                        onClick={() => props.handleGetDepartment(department.id)}
                       >
                         EDIT
+                      </button>
+                    </td>
+                    <td className="px-2 sm:px-6 py-2 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
+                      <button
+                        className="text-indigo-600 hover:text-indigo-900 bg-blue"
+                        onClick={() => props.handleGetDepartment(department.id)}
+                      >
+                        Add
                       </button>
                     </td>
                   </tr>
