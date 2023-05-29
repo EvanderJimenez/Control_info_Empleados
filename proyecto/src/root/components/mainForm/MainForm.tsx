@@ -6,7 +6,6 @@ import { Top } from "../top/Top";
 import { Foot } from "../foot/Foot";
 import AlertOfSave from "../alerts/alertOfSave/AlertOfSave";
 import { useDispatch, useSelector } from "react-redux";
-import { selectID, startGetID } from "@/root/redux";
 
 export const MainForm = ({}) => {
   const [showComponent, setShowComponent] = useState(true);

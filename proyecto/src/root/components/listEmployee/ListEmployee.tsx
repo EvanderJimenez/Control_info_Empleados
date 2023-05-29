@@ -35,7 +35,7 @@ const ListEmployee = ({ clear, setClear }: ListClear) => {
     <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
       {Array.isArray(employeesListVariable) &&
         employeesListVariable
-          .filter((item) => item.enabled)
+          .filter((item) => item.enabled && item.uid !== loginState.uid)
           .map((item) => (
             <div key={item.uid} className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4">
               <p className="font-bold">Name: {item.name}</p>

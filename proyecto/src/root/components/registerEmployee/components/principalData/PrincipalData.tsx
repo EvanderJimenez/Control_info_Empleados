@@ -28,8 +28,8 @@ const PrincipalData = ({ userData, handleInputChange, handleScheduleChange, hand
           </div>
 
           <div className="xl:w-1/3">
-            <InputFloatLabel labelFloat={"Fist Username"} type={"text"} name={"firstSurname"} value={userData.firstSurname} id={"firstSurname"} onChange={handleInputChange} />
-            <InputFloatLabel labelFloat={"Second Username"} type={"text"} name={"secondSurname"} value={userData.secondSurname} id={"secondSurname"} onChange={handleInputChange} />
+            <InputFloatLabel labelFloat={"Fist surname"} type={"text"} name={"firstSurname"} value={userData.firstSurname} id={"firstSurname"} onChange={handleInputChange} />
+            <InputFloatLabel labelFloat={"Second surname"} type={"text"} name={"secondSurname"} value={userData.secondSurname} id={"secondSurname"} onChange={handleInputChange} />
             <InputFloatLabel labelFloat={"Phone number"} type={"number"} name={"phoneNumber"} value={userData.phoneNumber.toString()} id={"phoneNumber"} onChange={handleInputChange} />
           </div>
           <div className="xl:w-1/3 space-y-12">

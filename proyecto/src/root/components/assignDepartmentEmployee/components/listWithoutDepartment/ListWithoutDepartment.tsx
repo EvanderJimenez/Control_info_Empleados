@@ -1,4 +1,7 @@
-import { StarGetEmployeesByIdDepartment, StartGetEmployeeByUid } from "@/root/redux";
+import {
+  StarGetEmployeesByIdDepartment,
+  StartGetEmployeeByUid,
+} from "@/root/redux";
 import {
   selectGetEmployeesByIdDepartment,
   selectLogin,
@@ -7,20 +10,19 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface ListWithoutDepartmentProps {
-    handleLoadEmployee: (uid: string) => Promise<void>;
-  }
+  handleLoadEmployee: (uid: string) => Promise<void>;
+}
 
-const ListWithoutDepartment = ({handleLoadEmployee} : ListWithoutDepartmentProps) => {
+const ListWithoutDepartment = ({
+  handleLoadEmployee,
+}: ListWithoutDepartmentProps) => {
   const dispatch = useDispatch();
   const employeesListVacations = useSelector(selectLogin);
   const employeesWithoutDepart = useSelector(selectGetEmployeesByIdDepartment);
 
-
-
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment("0"));
   }, [dispatch, employeesListVacations]);
-
 
   return (
     <div className="container mx-auto">
@@ -50,7 +52,12 @@ const ListWithoutDepartment = ({handleLoadEmployee} : ListWithoutDepartmentProps
                       <span className="font-semibold">Phone Number:</span>{" "}
                       {employee.phoneNumber}
                     </p>
-                    <button className="bg-blue border-r-red" onClick={() =>(handleLoadEmployee(employee.uid))}>Load Info</button>
+                    <button
+                      className="bg-blue border-r-red"
+                      onClick={() => handleLoadEmployee(employee.uid)}
+                    >
+                      Load Info
+                    </button>
                   </li>
                 ))}
               </ul>
