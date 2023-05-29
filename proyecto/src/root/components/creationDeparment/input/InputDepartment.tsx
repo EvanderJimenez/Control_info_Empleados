@@ -19,7 +19,7 @@ export const InputDepartment = (props: InputProps) => {
           name={props.name}
           value={props.value}
           onChange={props.onChange}
-          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-[#049473] rounded py-3 px-4 mb-3"
+          className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-#9DB2BF rounded py-3 px-4 mb-3"
           id={props.name}
           placeholder={props.label}
         />

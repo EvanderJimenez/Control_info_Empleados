@@ -2,16 +2,21 @@ import { Employee } from "@/root/interface/departments";
 import { Attendance, UserData } from "@/root/interface/employee";
 import React, { useState, useEffect } from "react";
 import { SearchDepartment } from "../creationDeparment/SearchDepartment";
+import Completed from "./completed/Completed";
+import FormJustify from "./formJustify/FormJustify";
 interface asistence {
   hIni: string;
   hFin: string;
   date: string;
   uuid: string;
+  style?: React.CSSProperties;
+  setFinish: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function JustificationEmployee({
   hIni,
   hFin,
   uuid,
+  setFinish,
   ...props
 }: asistence) {
   const [dateA, setDataA] = useState("");
@@ -42,17 +47,16 @@ export default function JustificationEmployee({
     }
   }, [uuid]);
 
-  const handleClick = () => {
-    console.log(userData);
-  };
-  const handleSubmitAttendance = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitAttendanceAndUpdate = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
     if (!props.date || !justify) {
       console.error("Please enter values for all fields");
       return;
     }
-    console.log(userData);
+
     const newAttendanceObject: Attendance = {
       startTime: hIni,
       endTime: hFin,
@@ -80,27 +84,40 @@ export default function JustificationEmployee({
     }
 
     if (hFin && justify) {
-      setUserData((prevUserData) => ({
-        ...prevUserData,
-        attendance: {
-          ...prevUserData.attendance,
-          [attendanceDate]: {
-            ...(prevUserData.attendance?.[attendanceDate] || {}),
-            endTime: hFin,
-            justificationFin: justify,
-            startTime: "",
-            justificationIni: "",
-            state: "waiting",
+      setUserData((prevUserData) => {
+        const { attendance } = prevUserData;
+        const attendanceDateData = attendance?.[attendanceDate] || {};
+
+        return {
+          ...prevUserData,
+          attendance: {
+            ...attendance,
+            [attendanceDate]: {
+              ...attendanceDateData,
+              endTime: hFin,
+              justificationFin: justify,
+              startTime: attendanceDateData.startTime || "",
+              justificationIni: attendanceDateData.justificationIni || "",
+              state: "waiting",
+            },
           },
-        },
-      }));
+        };
+      });
     }
-    setJustify("");
+
+    const justifyRef = justify;
+
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    await handleUpdate(event);
+    setJustify(justifyRef);
   };
+
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
+      console.log(userData);
       const response = await fetch(`/api/employees/${userData.uid}`, {
         method: "PUT",
         headers: {
@@ -119,6 +136,8 @@ export default function JustificationEmployee({
     } catch (error) {
       console.error("Error updating user:", error);
     }
+    setJustify("");
+    setFinish(false);
   };
 
   const handleEmployee = async (id: string) => {
@@ -144,54 +163,13 @@ export default function JustificationEmployee({
   };
 
   return (
-    <div>
-      <div className=" flex h-screen justify-center items-center">
-        <div className="flex flex-wrap">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2">
-            ATTENDANCE
-          </h2>
-          <form
-            className="w-full max-w-lg px-10"
-            onSubmit={handleSubmitAttendance}
-          >
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Justification
-                </label>
-                <textarea
-                  className="no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
-                  id="message"
-                  value={justify}
-                  onChange={(event) => setJustify(event.target.value)}
-                ></textarea>
-              </div>
-            </div>
-            <div className="flex justify-center ">
-              <button
-                className="shadow bg-blue hover:bg-teal focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                type="submit"
-              >
-                Completed
-              </button>
-            </div>
-          </form>
-          <form
-            className="w-full max-w-lg px-10"
-            onSubmit={handleUpdate}
-          >
-            
-            <div className="flex justify-center ">
-              <button
-                className="shadow bg-blue hover:bg-teal focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                type="submit"
-              >
-                Send
-              </button>
-            </div>
-          </form>
-          <div className="w-full max-w-lg px-10 mb-4"></div>
-        </div>
+    <div className="flex h-screen justify-center items-center">
+      <div className={`flex flex-col ${props.style}`}>
+        <FormJustify
+          handleSubmitAttendance={handleSubmitAttendanceAndUpdate}
+          justify={justify}
+          setJustify={setJustify}
+        />
       </div>
     </div>
   );
