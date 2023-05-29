@@ -1,6 +1,8 @@
-import { Brands } from "@/root/interface/employee";
+import { Brands } from "@/root/interface/brands";
+
 
 const createBrandsProvider = async (searchTerm: Brands) => {
+
   const response = await fetch("/api/brands", {
     method: "POST",
     headers: {
@@ -44,7 +46,7 @@ const getBrandsByDocIdProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting");
+    return null
   }
 
   const data = await response.json();
@@ -54,7 +56,7 @@ const getBrandsByDocIdProvider = async (searchTerm: string) => {
 
 const updateBrandsByIdProvider = async (
   searchTerm1: string,
-  searchTerm2: string
+  searchTerm2: Brands
 ) => {
   const response = await fetch(`/api/brands/${searchTerm1}`, {
     method: "PUT",
@@ -82,7 +84,7 @@ const getBrandsDocByEmployeeIdProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting ");
+   null
   }
 
   const data = await response.json();

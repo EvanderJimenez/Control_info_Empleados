@@ -1,15 +1,36 @@
 import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
 import React, { useState, useEffect } from "react";
-
-import TableShedules from "../tableSchedules/TableShedules";
 import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import axios from "axios";
 import FormEmployee from "../../registerBrands/formIdEmployee/FormEmployee";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
 import { RegisterClock } from "../registerClock/RegisterClock";
-import TableSchedules from "../tableSchedules/TableShedules";
+import TableSchedules from "../tableShedules/TableShedules";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ResetByVariable,
+  ResetEmployeeByUid,
+  selectGetBrandsByIdEmployee,
+  selectGetEmployeeByUid,
+  startCreateBrands,
+  startGetBrandsByIdEmployee,
+  startUpdateBrands,
+} from "@/root/redux";
+import SearchInput from "../../ui/searchInput/SearchInput";
+import ListEmployee from "../../listEmployee/ListEmployee";
+import ListScheduleEmployee from "./components/listSheduleEmployee/ListScheduleEmployee";
+
+const data = {
+  idEmployee: "",
+  cycle: {},
+  hoursEmployee: {},
+};
 
 export default function RegisterBrand() {
+  const brandsIdEmployee = useSelector(selectGetBrandsByIdEmployee);
+  const employeeUid = useSelector(selectGetEmployeeByUid);
+  const dispatch = useDispatch();
   const [currentDate, setCurrentDate] = useState("");
   const [newCycle, setNewCycle] = useState<string>("");
   const [newDate, setNewDate] = useState("");
@@ -17,6 +38,10 @@ export default function RegisterBrand() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number>(-1);
   const [updateDateTime, setUpdateDateTime] = useState(false);
+  const [clear, setClear] = useState(false);
+  const [cedula, setCedula] = useState("");
+  const [name, setName] = useState("");
+  const [jobPosition, setJobPosition] = useState("");
   const handleEditClick = (index: number) => {
     const schedule = Object.values(brandData.hoursEmployee)[index];
 
@@ -29,11 +54,7 @@ export default function RegisterBrand() {
   };
 
   const [newHFin, setNewHFin] = useState("");
-  const [brandData, setBrandData] = useState<Brands>({
-    idEmployee: "",
-    cycle: {},
-    hoursEmployee: {},
-  });
+  const [brandData, setBrandData] = useState<Brands>(data);
 
   const handleDayChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setNewDate(event.target.value);
@@ -47,12 +68,13 @@ export default function RegisterBrand() {
         const [date, time] = datetime.split("T");
         setCurrentDate(date);
       } catch (error) {
-        console.error("Error getting date and time:", error);
+        toast.error("Error getting date and time:");
       }
     };
 
     fetchCurrentDateTime();
   }, [updateDateTime]);
+
   const handleSubmitCycle = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setUpdateDateTime(true);
@@ -70,10 +92,9 @@ export default function RegisterBrand() {
 
     const year = new Date(currentDate).getFullYear();
     const nameCycle = monthCycle.toString() + year.toString();
-    console.log(nameCycle);
 
     if (brandData.cycle && brandData.cycle[nameCycle]) {
-      console.error("Cycle already exists");
+      toast.error("Cycle already exists");
       return;
     }
 
@@ -92,12 +113,12 @@ export default function RegisterBrand() {
   const handleSubmitHours = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!newDate) {
-      console.error("New date is empty");
+      toast.error("New date is empty");
       return;
     }
 
     if (brandData.hoursEmployee && brandData.hoursEmployee[newDate]) {
-      console.error("There is already a schedule for this date");
+      toast.error("There is already a schedule for this date");
       return;
     }
 
@@ -116,37 +137,6 @@ export default function RegisterBrand() {
 
     setNewHIni("");
     setNewHFin("");
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setBrandData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(brandData);
-    if (!brandData.idEmployee) {
-      console.error("Please enter values for all fields");
-      return;
-    }
-
-    fetch("/api/brands", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(brandData),
-    })
-      .then((res) => res.json())
-      .then((newData) => {
-        setBrandData({
-          idEmployee: "",
-          cycle: {},
-          hoursEmployee: {},
-        });
-      })
-      .catch((error) => console.error("Error creating new brand:", error));
   };
 
   const handleDeleteSchedule = (date: string) => {
@@ -175,51 +165,69 @@ export default function RegisterBrand() {
     setIsEditing(false);
     setEditingIndex(-1);
   };
-  const handleGetBrands = async (idEmployee: string) => {
-    try {
-      const response = await fetch(`/api/brands/${idEmployee}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        setBrandData(data);
-      } else {
-        throw new Error("Error acquiring information");
-      }
-    } catch (error) {
-      console.error("Error getting brands data", error);
+  useEffect(() => {
+    if (employeeUid) {
+      dispatch(startGetBrandsByIdEmployee(employeeUid.uid));
     }
-  };
+  }, [dispatch, clear]);
+
+  useEffect(() => {
+    if (brandsIdEmployee) {
+      setBrandData(brandsIdEmployee);
+    }
+  }, [dispatch, brandsIdEmployee]);
+
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(brandData);
-    fetch(`/api/brands/${brandData.idEmployee}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(brandData),
-    })
-      .then((res) => res.json())
-      .then((updatedBrands) => {
-        setBrandData((prevData) => ({
-          ...prevData,
-          ...updatedBrands,
-        }));
-      })
 
-      .catch((error) => console.error("Error updating brands:", error));
+    if (brandData.idEmployee && employeeUid) {
+      dispatch(startUpdateBrands(brandData.idEmployee, brandData));
+      setBrandData(data);
+      dispatch(ResetEmployeeByUid());
+      dispatch(ResetByVariable());
+    } else if (employeeUid?.uid) {
+      const updatedBrandData = { ...brandData };
+      updatedBrandData.idEmployee = employeeUid.uid;
+
+      dispatch(startCreateBrands(updatedBrandData));
+      setBrandData(data);
+      dispatch(ResetEmployeeByUid());
+      dispatch(ResetByVariable());
+    }
   };
 
   return (
     <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-start pt-10">
       <div className="flex items-center justify-center p-4 sm:p-12">
         <div className="bg-white p-4 sm:p-8 rounded-lg shadow-md w-full max-w-2xl">
-          <SearchDepartment handleGet={handleGetBrands} />
+          <h2 className="font-semibold text-center">Filters</h2>
+          <SearchInput
+            labelInputSeekerOne="text"
+            valueEnd={cedula}
+            placeholderSeekerOne="Cedula"
+            typeList="cedula"
+            id="cedula"
+          />
+          <SearchInput
+            labelInputSeekerOne="text"
+            valueEnd={name}
+            placeholderSeekerOne="Name"
+            typeList="name"
+            id="name"
+          />
+          <SearchInput
+            labelInputSeekerOne="text"
+            valueEnd={jobPosition}
+            placeholderSeekerOne="Job Position"
+            typeList="jobPosition"
+            id="jobPosition"
+          />
+          <ListScheduleEmployee
+            dispatch={dispatch}
+            clear={clear}
+            setClear={setClear}
+          />
           <RegisterCycle
             brandData={brandData}
             label="Cycle to belongs"
@@ -294,17 +302,13 @@ export default function RegisterBrand() {
             handleEditClick={handleEditClick}
             handleDeleteSchedule={handleDeleteSchedule}
           />
-          <FormEmployee
-            brandData={brandData}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-          />
+
           <form onSubmit={handleUpdate} className="pt-10">
             <button
               type="submit"
               className="w-full bg-black hover:bg-blue-700 text-white font-bold py-3 px-4 rounded"
             >
-              Update
+              Save
             </button>
           </form>
         </div>

@@ -1,4 +1,5 @@
-import { Brands } from "@/root/interface/employee";
+
+import { Brands } from "@/root/interface/brands";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface BrandsByIdEmployeeState {

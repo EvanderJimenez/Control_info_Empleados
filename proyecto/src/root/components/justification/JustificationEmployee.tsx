@@ -1,9 +1,8 @@
 import { Employee } from "@/root/interface/departments";
 import { Attendance, UserData } from "@/root/interface/employee";
 import React, { useState, useEffect } from "react";
-import { SearchDepartment } from "../creationDeparment/SearchDepartment";
-import Completed from "./completed/Completed";
 import FormJustify from "./formJustify/FormJustify";
+import { toast } from "react-hot-toast";
 interface asistence {
   hIni: string;
   hFin: string;
@@ -53,10 +52,9 @@ export default function JustificationEmployee({
     event.preventDefault();
 
     if (!props.date || !justify) {
-      console.error("Please enter values for all fields");
+      toast.error("Please enter values for all fields");
       return;
     }
-
     const newAttendanceObject: Attendance = {
       startTime: hIni,
       endTime: hFin,
@@ -117,7 +115,6 @@ export default function JustificationEmployee({
     event.preventDefault();
 
     try {
-      console.log(userData);
       const response = await fetch(`/api/employees/${userData.uid}`, {
         method: "PUT",
         headers: {
@@ -129,12 +126,11 @@ export default function JustificationEmployee({
       if (response.ok) {
         const updatedUser = await response.json();
         setData(updatedUser);
-        console.log(updatedUser);
       } else {
         throw new Error("Failed to update user");
       }
     } catch (error) {
-      console.error("Error updating user:", error);
+      toast.error("Error updating user:");
     }
     setJustify("");
     setFinish(false);
@@ -153,12 +149,11 @@ export default function JustificationEmployee({
         const data = await response.json();
         setData(data);
         setUserData(data);
-        console.log(data);
       } else {
         throw new Error("Error acquiring information");
       }
     } catch (error) {
-      console.error("Error getting user data", error);
+      toast.error("Error getting user data");
     }
   };
 

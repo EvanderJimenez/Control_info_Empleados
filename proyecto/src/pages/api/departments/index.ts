@@ -1,6 +1,6 @@
+import { departmentProvider } from "@/dataBase";
+import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
-import { notAllowedResponse } from "../../../root/api/reponses/notAllowedResponse";
-import departmentProvider from "../../../dataBase/firebase/providers/departments/departments.provider";
 
 const getAll = async (res: NextApiResponse) => {
   try {

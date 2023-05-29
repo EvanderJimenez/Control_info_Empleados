@@ -17,7 +17,6 @@ const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) 
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
-     console.log("Cont")
   }, [option]);
 
   useLayoutEffect(() => {
