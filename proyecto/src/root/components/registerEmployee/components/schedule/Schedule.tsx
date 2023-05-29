@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Schedule } from "../../../../interface/employee/";
+import { Schedule } from "../../../../interface/employee/";//TODO:You should use relative paths with @
 import InputLabel from "./components/inputLabel/InputLabel";
 
 interface ScheduleFormProps {

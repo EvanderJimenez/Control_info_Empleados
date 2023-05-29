@@ -3,7 +3,7 @@ import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getAll = async (res: NextApiResponse) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const departments = await departmentProvider.getAll();
     res.status(200).json(departments);
   } catch (error) {
@@ -12,7 +12,7 @@ const getAll = async (res: NextApiResponse) => {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const {
       name,
       size,

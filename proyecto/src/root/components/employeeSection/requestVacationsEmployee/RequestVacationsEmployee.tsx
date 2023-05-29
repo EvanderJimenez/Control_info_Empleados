@@ -83,7 +83,7 @@ const RequestVacationsEmployee = () => {
   }, [employeeVacations]);
 
   const FilterByAccepted = () => {
-    setShowBy("accepted");
+    setShowBy("accept");
   };
   const FilterByDenied = () => {
     setShowBy("denied");

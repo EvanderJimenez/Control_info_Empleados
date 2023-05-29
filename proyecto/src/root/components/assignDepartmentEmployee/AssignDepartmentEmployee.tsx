@@ -5,6 +5,7 @@ import InputLabel from "./components/inputLabel/InputLabel";
 import ComboBox from "./components/comboBox/ComboBox";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ResetEmployeeByUid,
   StartGetEmployeeByUid,
   StartUpDateEmployee,
   selectGetAllDepartment,
@@ -14,6 +15,26 @@ import {
 import { DepartmentType } from "@/root/types/Department.type";
 import { EmployeesType } from "@/root/types/Employee.type";
 
+const data = {
+  uid: "",
+  name: "",
+  firstSurname: "",
+  secondSurname: "",
+  cedula: 0,
+  phoneNumber: 0,
+  photo: "",
+  jobPosition: "",
+  salary: 0,
+  enabled: true,
+  idDepartment: "0",
+  password: "",
+  email: "",
+  boss: "",
+  schedule: [],
+  vacations: {},
+  attendance: {},
+}
+
 const AssignDepartmentEmployee = () => {
   const dispatch = useDispatch();
   const departmentsList = useSelector(selectGetAllDepartment);
@@ -21,25 +42,8 @@ const AssignDepartmentEmployee = () => {
 
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [employeeUpdate, setEmployeeUpdate] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "0",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-  });
+  const [employeeUpdate, setEmployeeUpdate] = useState<EmployeesType>(data);
+  const [change, setChange] = useState(false)
 
   useEffect(() => {
     dispatch(startGetAllDepartment());
@@ -64,9 +68,15 @@ const AssignDepartmentEmployee = () => {
       await dispatch(
         StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee)
       );
+      dispatch(ResetEmployeeByUid());
+      setEmployeeUpdate(data)
+      setChange(!change)
     }
   };
 
+  const handleClear = async () => {
+    dispatch(ResetEmployeeByUid());
+  };
   const handleLoadEmployee = async (uid: string) => {
     dispatch(StartGetEmployeeByUid(uid));
   };
@@ -78,7 +88,7 @@ const AssignDepartmentEmployee = () => {
           <Filters />
         </div>
         <div>
-          <ListWithoutDepartment handleLoadEmployee={handleLoadEmployee} />
+          <ListWithoutDepartment change={change} handleLoadEmployee={handleLoadEmployee} />
         </div>
       </section>
 
@@ -140,6 +150,9 @@ const AssignDepartmentEmployee = () => {
           />
         </div>
         <div>
+        <button className="bg-pink" onClick={handleClear}>
+            Clear
+          </button>
           <button className="bg-darkBlue" onClick={handleSave}>
             Save
           </button>

@@ -15,6 +15,27 @@ input:focus {
   border-bottom-color: #000000;
   border-bottom-width: 3px;
 }
+@media print {
+  .print\\:w-full {
+    width: 100% !important;
+  }
+  .print\\:max-w-full {
+    max-width: 100% !important;
+  }
+}
+
+@page {
+  counter-increment: page;
+  @bottom-right {
+      content: "Page " counter(page);
+      color:#000;
+  }
+}
+
+body {
+  counter-reset: page;
+}
+
 
 .bg-PrimaryColor {
   background-color: #dfe0dc;

@@ -101,7 +101,7 @@ const upDatEmployeeProvider = async (
   });
 
   if (!response.ok) {
-    throw new Error("Error updating employee");
+    return response
   }
 
   const data = await response.json();
@@ -118,7 +118,7 @@ const getEmployeeByUidProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting employee");
+    return null
   }
 
   const data = await response.json();
@@ -173,6 +173,7 @@ const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
   });
 
   if (!response.ok) {
+    return null
   }
 
   const data = await response.json();
@@ -196,7 +197,7 @@ const getByVariableProvider = async (
   });
 
   if (!response.ok) {
-    throw new Error("Error getting employee");
+    return null
   }
 
   const data = await response.json();
@@ -213,7 +214,7 @@ const getVacationsByUidProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting vacations");
+    return null
   }
 
   const data = await response.json();
@@ -230,7 +231,7 @@ const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting vacations");
+    return null
   }
 
   const data = await response.json();
@@ -247,7 +248,7 @@ const getAllBossesProvider = async () => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting vacations");
+    return null
   }
 
   const data = await response.json();

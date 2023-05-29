@@ -22,7 +22,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APPID,
   measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
-
+//TODO: Separate this file in each responsability that you need
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);

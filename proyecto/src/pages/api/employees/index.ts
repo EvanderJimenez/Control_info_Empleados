@@ -5,7 +5,7 @@ import { EmployeesType } from "@/root/types/Employee.type";
 
 
 const getAll = async (res: NextApiResponse) => {
-  try {
+  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const employees = await employeeProvider.getAll();
     res.status(200).json(employees);
   } catch (error) {

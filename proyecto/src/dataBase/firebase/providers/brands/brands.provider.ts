@@ -59,7 +59,7 @@ const getDocId = async (docId: string) => {
 
   if (brandsDocSnapshot.exists()) {
     return brandsDocSnapshot.data();
-  } else {
+  } else {//TODO: You should not use else or simplify the complex with reverse if
     throw new Error(`A brands with document ID was not found: ${docId}`);
   }
 };

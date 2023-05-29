@@ -1,14 +1,13 @@
-import AdminPage from "@/Layout/AdminPage";
-import MethodsDepartments from "@/root/components/creationDeparment/methodsDepartment/MethodsDepartments";
-import { ListDepartment } from "@/root/components/listDepartment/ListDeparment";
-import React from "react";
+import AdminPage from '@/Layout/AdminPage'
+import MethodsDepartments from '@/root/components/creationDeparment/methodsDepartment/MethodsDepartments'
+import React from 'react'
 
 const index = () => {
   return (
     <AdminPage>
-      <ListDepartment />
+    < MethodsDepartments />
     </AdminPage>
-  );
-};
+  )
+}
 
-export default index;
+export default index

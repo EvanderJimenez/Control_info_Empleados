@@ -5,8 +5,9 @@ import AddEmployee from "./addEmployee/AddEmployee";
 import { SearchDepartment } from "./SearchDepartment";
 import AddDocuments from "./addEmployee/addDocuments/AddDocuments";
 import Table from "./table/Table";
-import { ListDepartment } from "../listDepartment/ListDeparment";
 import { FormEmployee } from "./formEmployee/FormEmployee";
+import { ListDepartment } from "../listDepartment/ListDeparment";
+
 interface infoDepart {
   departmentsData: Department;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,9 +15,9 @@ interface infoDepart {
   handleSubmitEmployee: (event: React.FormEvent<HTMLFormElement>) => void;
   handleGetDepartment: (id: string) => void;
   newEmployee: string;
-  setPasssId: React.Dispatch<React.SetStateAction<string>>;
   newEmployeeData: string;
   setNewEmployee: React.Dispatch<React.SetStateAction<string>>;
+  handlePassId: (id: string) => void;
   setNewEmployeeData: React.Dispatch<React.SetStateAction<string>>;
   newDocuments: string;
   setNewDocuments: React.Dispatch<React.SetStateAction<string>>;
@@ -37,6 +38,7 @@ const CreationDepartment = ({
   handleSubmitDocuments,
   setNewDocuments,
   newDocuments,
+  handlePassId,
   ...props
 }: infoDepart) => {
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
@@ -46,32 +48,32 @@ const CreationDepartment = ({
   };
 
   return (
-    <div className="bg-#DDDDDD shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
-        <ListDepartment handleGetDepartment={handleGetDepartment} />
+    <div className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
+      <div className="flex justify-center w-full">
+        <section className="bg-white  shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-center my-2 xl:w-1/2 lg:w-1/2 w-full">
+          <ListDepartment
+            handleGetDepartment={handleGetDepartment}
+            handlePassId={handlePassId}
+          />
+        </section>
       </div>
 
       <FormEmployee
         departmentsData={departmentsData}
-        handleSubmit={handleSubmit}
         handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
       />
 
-      <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 bg-white p-6">
-        <div className="mt-6 max-w-md mx-auto sm:mt-0 sm:max-w-none sm:w-full sm:flex-1 sm:px-8 sm:py-4 border border-blue-500 rounded-md shadow-sm">
-          <button
-            onClick={handleToggleEmployeeForm}
-            className="bg-black hover:bg-#9DB2BF text-white font-semibold py-2 px-4 w-full rounded-md transition duration-200 ease-in-out"
-          >
-            AddEmployee
-          </button>
-        </div>
-        <form
-          className="mt-6 max-w-md mx-auto sm:mt-0 sm:max-w-none sm:w-full sm:flex-1 sm:px-8 sm:py-4 border border-blue-500 rounded-md shadow-sm"
-          onSubmit={handleUpdate}
+      <div className="flex flex-wrap p-6 justify-center space-x-4">
+        <button
+          onClick={handleToggleEmployeeForm}
+          className="bg-darkBlue hover:bg-blue-200 text-white font-semibold py-2 px-4 rounded-md transition duration-200 ease-in-out"
         >
+          AddEmployee
+        </button>
+        <form onSubmit={handleUpdate}>
           <button
-            className="bg-black hover:bg-#9DB2BF text-white font-semibold py-2 px-4 w-full rounded-md transition duration-200 ease-in-out"
+            className="bg-darkBlue hover:bg-blue-200 text-white font-semibold py-2 px-4  rounded-md transition duration-200 ease-in-out"
             type="submit"
           >
             Update

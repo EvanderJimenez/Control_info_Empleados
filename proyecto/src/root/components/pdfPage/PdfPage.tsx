@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FirstPagePDFInformation } from "@/root/interface/employee";
-import jsPDF from "jspdf";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectGetEmployeesByIdDepartment,
-  selectLogin,
-} from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StarGetEmployeesByIdDepartment } from "@/root/redux/thunks/employee-thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 import EmployeeSummaryList from "./employeeSummaryList/EmployeeSummaryList";
@@ -18,9 +14,7 @@ export default function PdfPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      StarGetEmployeesByIdDepartment(loginInformation?.idDepartment || "")
-    );
+    dispatch(StarGetEmployeesByIdDepartment(loginInformation?.idDepartment || ""));
   }, []);
 
   interface User {
@@ -29,12 +23,35 @@ export default function PdfPage() {
     email: string;
     cedula: number | string;
   }
+  interface AttendanceMap {
+    justificationInit: string;
+    justificationFin: string;
+  }
 
-  const rows = [
-    { column1: "Dato 1", column2: "Dato 2", column3: "Dato 3" },
-    { column1: "Dato 4", column2: "Dato 5", column3: "Dato 6" },
-    { column1: "Dato 7", column2: "Dato 8", column3: "Dato 9" },
-  ];
+  interface employee {
+    name: string;
+    attendance: Map<string, AttendanceMap>;
+  }
+
+  function extractInformationEmployeesJustifications(employees: EmployeesType[]): Array<{ column1: string; column2: string; column3: string; column4: string }> {
+    let result: { column1: string; column2: string; column3: string; column4: string }[] = [];
+
+    employees.forEach((employee) => {
+      Object.entries(employee.attendance).forEach(([key, value]) => {
+        result.push({
+          column1: employee.name,
+          column2: key,
+          column3: value.justificationIni,
+          column4: value.justificationFin,
+        });
+      });
+    });
+
+    return result;
+  }
+
+  const attendance = extractInformationEmployeesJustifications(listEmployees);
+
   interface row {
     column1: string;
     column2: string;
@@ -44,17 +61,20 @@ export default function PdfPage() {
     rows: row[];
   }
 
-  const columnTitles = ["Date-brand", "Check-in time", "Check-out time"];
+  const columnTitles = ["Name of employee", "Date justification", "justification for late arrival", "justification for early dismissal"];
   const [showComponent, setShowComponent] = useState("Employee");
+  let [filter, setFilter] = useState("none");
 
   const toggleComponentJustification = () => {
     setShowComponent("JustificationBody");
+    setFilter("Justifications of employees in this department");
   };
   const toggleComponentBrands = () => {
     setShowComponent("BrandBody");
   };
   const toggleComponentEmployee = () => {
     setShowComponent("EmployeeBody");
+    setFilter("employees in this department");
   };
 
   function getDataEmployee(employees: EmployeesType[]): User[] {
@@ -72,9 +92,11 @@ export default function PdfPage() {
 
   const handleBrands = () => {
     toggleComponentBrands();
+    filter = "brands of employee in department";
   };
   const handleEmployees = () => {
     toggleComponentEmployee();
+    filter = "employees in this department";
   };
   const handleJustifications = () => {
     toggleComponentJustification();
@@ -102,66 +124,28 @@ export default function PdfPage() {
 
   return (
     <>
-      <section className="space-y-4 font-light text-center flex justify-center flex-col items-center">
-        <div
-          id="Front page"
-          className="flex flex-col space-y-4 justify-center items-center"
-        >
-          <div
-            id="ButtonSection"
-            className="flex space-x-4 fle-row items-center justify-center"
-          >
-            <button
-              className="NormalButton font-semibold print:hidden"
-              onClick={handleBrands}
-            >
-              Brands
+      <section className="space-y-5 pb-14 pt-2 font-light text-center flex justify-center flex-col items-center">
+        <div id="Front page" className="flex flex-col space-y-4 justify-center items-center">
+          <div id="ButtonSection" className="flex space-x-4 fle-row items-center justify-center">
+            <button className="bg-darkBlue font-semibold print:hidden" onClick={handleJustifications}>
+              Justifications of employees
             </button>
-            <button
-              className="NormalButton font-semibold print:hidden"
-              onClick={handleEmployees}
-            >
+            <button className="bg-darkBlue font-semibold print:hidden" onClick={handleEmployees}>
               On department
             </button>
-            <button
-              className="EliminatedButton font-semibold print:hidden"
-              onClick={handleJustifications}
-            >
-              Justifications
-            </button>
-            <button
-              className="NormalButton font-semibold print:hidden"
-              onClick={CreatedPdf}
-            >
+            <button className="bg-pink font-semibold print:hidden" onClick={CreatedPdf}>
               Generated
             </button>
           </div>
-          <p className="print:hidden ">Preview of pdf</p>
-          <textarea
-            className="text-center font-bold"
-            name="Tile"
-            id="title"
-            cols={30}
-            rows={5}
-            placeholder="Title of pdf"
-          ></textarea>
-          <p>Print by: {loginInformation?.name}</p>
-          <p>Print Date: {CurrentDate.toUTCString()}</p>
+          <p className="print:hidden font-semibold ">Preview of pdf</p>
+          <textarea className="text-center font-bold" name="Tile" id="title" cols={30} rows={5} placeholder="Title of pdf"></textarea>
+          <p className="text-center">Print by: {loginInformation?.name}</p>
+          <p className="text-center">Print date: {CurrentDate.toUTCString()}</p>
+          <p className="text-center">Filter by: {filter}</p>
         </div>
-        <div
-          id="body"
-          className="flex justify-center items-center space-y-5 w-full"
-        >
-          {showComponent === "EmployeeBody" && (
-            <EmployeeSummaryList
-              users={users}
-              department={loginInformation?.name}
-            />
-          )}
-          {showComponent === "BrandBody" && (
-            <TableView columnTitles={columnTitles} rows={rows} />
-          )}
-          {showComponent === "JustificationBody" && <div> Adios</div>}
+        <div id="body" className=" print:w-full print:max-w-full flex justify-center items-center space-y-5 w-1/2">
+          {showComponent === "EmployeeBody" && <EmployeeSummaryList users={users} department={loginInformation?.name} />}
+          {showComponent === "JustificationBody" && <TableView columnTitles={columnTitles} rows={attendance} />}
         </div>
       </section>
     </>
