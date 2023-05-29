@@ -5,6 +5,7 @@ import InputLabel from "./components/inputLabel/InputLabel";
 import ComboBox from "./components/comboBox/ComboBox";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ResetEmployeeByUid,
   StartGetEmployeeByUid,
   StartUpDateEmployee,
   selectGetAllDepartment,
@@ -67,6 +68,9 @@ const AssignDepartmentEmployee = () => {
     }
   };
 
+  const handleClear = async () => {
+    dispatch(ResetEmployeeByUid());
+  };
   const handleLoadEmployee = async (uid: string) => {
     dispatch(StartGetEmployeeByUid(uid));
   };
@@ -140,6 +144,9 @@ const AssignDepartmentEmployee = () => {
           />
         </div>
         <div>
+        <button className="bg-pink" onClick={handleClear}>
+            Clear
+          </button>
           <button className="bg-darkBlue" onClick={handleSave}>
             Save
           </button>
