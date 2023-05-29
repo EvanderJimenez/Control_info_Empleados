@@ -1,8 +1,6 @@
 import { Employee } from "@/root/interface/departments";
 import { Attendance, UserData } from "@/root/interface/employee";
 import React, { useState, useEffect } from "react";
-import { SearchDepartment } from "../creationDeparment/SearchDepartment";
-import Completed from "./completed/Completed";
 import FormJustify from "./formJustify/FormJustify";
 interface asistence {
   hIni: string;

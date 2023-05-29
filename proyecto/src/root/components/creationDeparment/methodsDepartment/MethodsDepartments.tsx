@@ -143,7 +143,6 @@ function MethodsDepartments(props: RegisterProps) {
         throw new Error("Department name is not defined");
       }
 
-      console.log(departmentData.name);
       const response = await fetch(`/api/departments/${departmentData.name}`, {
         method: "PUT",
         headers: {
