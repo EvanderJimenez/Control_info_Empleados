@@ -26,8 +26,6 @@ const JustificationRequest = () => {
     useState<PendingRequestJustifications>();
     const employeeByUid = useSelector(selectGetEmployeeByUid);
 
-    const [changeState, setChangeState] = useState(false)
-
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
@@ -77,13 +75,17 @@ const JustificationRequest = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-
+      if(updatedDataEmployee.uid === undefined){
+        return
+      }
 
       dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
 
+      optionSelect = "wait";
+
       setSelectedRequest(pendingRequest)
-      setChangeState(!changeState)
-      console.log("changeState: " + changeState)
+
+     
       //dispatch(ResetEmployeeByUid())
 
     setSelectedRequest(pendingRequest);
@@ -97,7 +99,7 @@ const JustificationRequest = () => {
           <Filters />
         </div>
         <div>
-          <ListRequestJustification setChangeState={setChangeState} changeState selectedRequest={setSelectedRequest} />
+          <ListRequestJustification  option={optionSelect} selectedRequest={setSelectedRequest} />
         </div>
       </div>
       <div className="flex flex-col lg:w-1/2 md:w-1/2 sm:flex-col lg:3/4 w-full justify-center items-center m-3">
@@ -138,7 +140,7 @@ const JustificationRequest = () => {
               className="font-semibold w-full shadow-xl rounded-md outline-none"
               name="description"
               id="description"
-              placeholder="Vacation request information"
+              placeholder="Justifications request information"
               cols={7}
               rows={7}
               value={selectedRequest?.justificationIni || ""}
@@ -148,7 +150,7 @@ const JustificationRequest = () => {
               className="font-semibold w-full shadow-xl rounded-md outline-none"
               name="description"
               id="description"
-              placeholder="Vacation request information"
+              placeholder="Justifications request information"
               cols={7}
               rows={7}
               value={selectedRequest?.justificationFin || ""}
