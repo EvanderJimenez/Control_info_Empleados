@@ -1,8 +1,9 @@
 import React from "react";
-import InputEmployee from "../inputEmployee/InputEmployee";
+import InputEmployee from "./inputEmployee/InputEmployee";
 import { UserData } from "@/root/interface/employee";
+import { EmployeesType } from "@/root/types/Employee.type";
 interface EmployeesData {
-  userData: UserData;
+  userData: EmployeesType;
   upDate: (event: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -18,16 +19,6 @@ export default function RegisterFormEmployee({
       <div className="grid min-h-screen place-items-center">
         <div className="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
           <form className="mt-6" onSubmit={upDate}>
-            <div className="gap[10]">
-              <h4 className="px-2 text-xl font-bold text-navy-700 dark:text-white">
-                General Information
-              </h4>
-              <p className="mt-2 px-2 text-base text-gray-600">
-                CrHome's team of employees is comprised of highly trained
-                professionals committed to providing an exceptional experience
-              </p>
-            </div>
-
             <div className="flex justify-between gap-3">
               <span className="w-1/2">
                 <InputEmployee

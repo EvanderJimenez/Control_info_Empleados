@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import { format, parseISO, getDay } from "date-fns";
 import { Brands } from "@/root/interface/brands";
 import BrandsClock from "../BrandsClock";
@@ -176,7 +175,6 @@ export const BrandsEmployee = () => {
         console.log("The mark end hour is greater than or equal to hoursFin");
         return true;
       } else {
-        console.log("me puse aqui");
         setFinalDelay(true);
         setMarkFinal(markEnd);
       }
@@ -234,7 +232,6 @@ export const BrandsEmployee = () => {
                 body: JSON.stringify(brandData),
               }
             );
-            console.log("PASE EL METODO PUT ", brandData);
             if (response.ok) {
               const updatedBrands = await response.json();
               setBrandData((prevData) => ({
@@ -242,7 +239,6 @@ export const BrandsEmployee = () => {
                 ...updatedBrands,
               }));
               setFinish(true);
-              console.log("se termino el procese he guardado", finish);
             } else {
               throw new Error("Error updating brands");
             }

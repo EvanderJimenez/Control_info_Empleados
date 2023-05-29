@@ -1,13 +1,11 @@
 import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
 import React, { useState, useEffect } from "react";
-
-import TableShedules from "../tableSchedules/TableShedules";
 import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import axios from "axios";
 import FormEmployee from "../../registerBrands/formIdEmployee/FormEmployee";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
 import { RegisterClock } from "../registerClock/RegisterClock";
-import TableSchedules from "../tableSchedules/TableShedules";
+import TableSchedules from "../tableShedules/TableShedules";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
