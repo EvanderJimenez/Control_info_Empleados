@@ -17,7 +17,7 @@ interface infoDepart {
   newEmployee: string;
   newEmployeeData: string;
   setNewEmployee: React.Dispatch<React.SetStateAction<string>>;
-  handlePassId: (id: string) => void;
+  setPassId: React.Dispatch<React.SetStateAction<string>>;
   setNewEmployeeData: React.Dispatch<React.SetStateAction<string>>;
   newDocuments: string;
   setNewDocuments: React.Dispatch<React.SetStateAction<string>>;
@@ -38,7 +38,7 @@ const CreationDepartment = ({
   handleSubmitDocuments,
   setNewDocuments,
   newDocuments,
-  handlePassId,
+  setPassId,
   ...props
 }: infoDepart) => {
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
@@ -53,7 +53,7 @@ const CreationDepartment = ({
         <section className="bg-white  shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-center my-2 xl:w-1/2 lg:w-1/2 w-full">
           <ListDepartment
             handleGetDepartment={handleGetDepartment}
-            handlePassId={handlePassId}
+            setPassId={setPassId}
           />
         </section>
       </div>

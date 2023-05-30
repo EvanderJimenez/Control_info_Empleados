@@ -1,9 +1,22 @@
 import { Department } from "@/root/interface/departments";
 import React from "react";
-interface table {
-  departmentsData: Department;
+
+interface TableProps {
+  departmentsData: Department | undefined;
 }
-const Table = ({ departmentsData, ...props }: table) => {
+
+const Table = ({ departmentsData }: TableProps) => {
+  if (!departmentsData) {
+    return null;
+  }
+
+  if (
+    !departmentsData.employees ||
+    typeof departmentsData.employees !== "object"
+  ) {
+    return null;
+  }
+
   return (
     <div>
       <div className="overflow-x-auto sm:overflow-visible">

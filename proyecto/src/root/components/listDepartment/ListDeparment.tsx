@@ -4,22 +4,25 @@ import MethodsDepartments from "../creationDeparment/methodsDepartment/MethodsDe
 import { useDispatch } from "react-redux";
 interface lisDepartment {
   handleGetDepartment: (id: string) => void;
-  handlePassId: (id: string) => void;
+  setPassId: (id: string) => void;
 }
 export const ListDepartment = ({
   handleGetDepartment,
-  handlePassId,
+  setPassId,
   ...props
 }: lisDepartment) => {
   const [departmentData, setDepartmentData] = useState<Department[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const pageSize = 5; // Tamaño de página ajustado a 5 elementos
+  const pageSize = 5;
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     handleGetDepartments();
   }, []);
-
+  const handle = (id: string) => {
+    setPassId(id);
+    console.log(id);
+  };
   const handleGetDepartments = async () => {
     try {
       const response = await fetch("/api/departments", {
@@ -32,7 +35,6 @@ export const ListDepartment = ({
       if (response.ok) {
         const data = await response.json();
         setDepartmentData(data);
-        console.log(data);
       } else {
         throw new Error("Error acquiring information");
       }
@@ -132,7 +134,7 @@ export const ListDepartment = ({
                       <td className="px-2 sm:px-6 py-2 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
                         <button
                           className="text-indigo-600 hover:text-indigo-900 bg-blue"
-                          onClick={() => handlePassId(department.id)}
+                          onClick={() => handle(department.id)}
                         >
                           ADD
                         </button>
