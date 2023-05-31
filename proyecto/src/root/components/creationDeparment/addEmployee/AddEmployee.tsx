@@ -5,22 +5,20 @@ interface RegisterEmployeesProps {
   handleSubmitEmployee: (event: React.FormEvent<HTMLFormElement>) => void;
   newEmployee: string;
   newEmployeeData: string;
+  newEmployeeId: string;
   setNewEmployee: React.Dispatch<React.SetStateAction<string>>;
   setNewEmployeeData: React.Dispatch<React.SetStateAction<string>>;
-  handleSubmitDocuments: (event: React.FormEvent<HTMLFormElement>) => void;
-  newDocuments: string;
-  setNewDocuments: React.Dispatch<React.SetStateAction<string>>;
+  setNewEmployeeId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AddEmployee = ({
-  handleSubmitDocuments,
-  newDocuments,
-  setNewDocuments,
   handleSubmitEmployee,
   newEmployee,
   newEmployeeData,
   setNewEmployee,
   setNewEmployeeData,
+  newEmployeeId,
+  setNewEmployeeId,
 }: RegisterEmployeesProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,7 +34,7 @@ const AddEmployee = ({
             type={"text"}
             name={"newEmployee"}
             value={newEmployee}
-            id={"employee"}
+            id={"newEmployee"}
             onChange={(e: {
               target: { value: React.SetStateAction<string> };
             }) => setNewEmployee(e.target.value)}
@@ -47,27 +45,21 @@ const AddEmployee = ({
             type={"text"}
             name={"newEmployeeData"}
             value={newEmployeeData}
-            id={"employee"}
+            id={"newEmployeeData"}
             onChange={(e: {
               target: { value: React.SetStateAction<string> };
             }) => setNewEmployeeData(e.target.value)}
           />
-
-          <div className="space-y-2">
-            <label
-              htmlFor="documents"
-              className="block text-gray-700 text-sm font-medium"
-            >
-              Image:
-            </label>
-            <input
-              type="file"
-              id="documents"
-              name="documents"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Image profile for the employee"
-            />
-          </div>
+          <InputDepartment
+            label={"Id employee:"}
+            type={"text"}
+            name={"newEmployeeId"}
+            value={newEmployeeId}
+            id={"newEmployeeId"}
+            onChange={(e: {
+              target: { value: React.SetStateAction<string> };
+            }) => setNewEmployeeId(e.target.value)}
+          />
 
           <div className="flex justify-center">
             <button
@@ -75,46 +67,6 @@ const AddEmployee = ({
               type="submit"
             >
               Save Employee
-            </button>
-          </div>
-        </form>
-
-        <hr className="my-8" />
-
-        <h1 className="text-2xl md:text-3xl text-center font-bold mb-8">
-          Add Documents for Department
-        </h1>
-        <form onSubmit={handleSubmitDocuments} className="space-y-6">
-          <InputDepartment
-            label={"Document Name:"}
-            type={"text"}
-            name={"newDocuments"}
-            value={newDocuments}
-            id={"newDocuments"}
-            onChange={(e: {
-              target: { value: React.SetStateAction<string> };
-            }) => setNewDocuments(e.target.value)}
-          />
-
-          <div className="space-y-2">
-            <label
-              htmlFor="documents"
-              className="block text-gray-700 text-sm font-medium"
-            >
-              Upload Document:
-            </label>
-            <input
-              type="file"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="flex justify-center">
-            <button
-              className="mt-6 bg-black text-white px-5 py-3 rounded hover:bg-green-600"
-              type="submit"
-            >
-              Save Documents
             </button>
           </div>
         </form>

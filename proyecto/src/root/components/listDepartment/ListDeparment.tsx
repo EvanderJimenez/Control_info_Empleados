@@ -88,9 +88,6 @@ export const ListDepartment = ({
                     Boss
                   </th>
                   <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                    Id Boss
-                  </th>
-                  <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
                     Location
                   </th>
                   <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
@@ -113,9 +110,6 @@ export const ListDepartment = ({
                       </td>
                       <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
                         {department.leader}
-                      </td>
-                      <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
-                        {department.idEmployee}
                       </td>
                       <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
                         {department.location}

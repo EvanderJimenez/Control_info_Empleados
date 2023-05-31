@@ -10,3 +10,5 @@ GET http://localhost:3000/api/departments/eF23UVJvqJOwThp6pr2v HTTP/1.1
 # Get all without bosses
 GET http://localhost:3000/api/departments/by-uid HTTP/1.1
 
+Get http://localhost:3000/api/departments/by-page
+
