@@ -49,6 +49,7 @@ import {
 } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
+import { DispatchTypeUpdateFile, updateFileEmployeeReducer } from "../../reducers/employee-reducer/uploadFile/UploadFile";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -115,6 +116,42 @@ export const StartUpDateEmployee = (
     dispatch(updateEmployeeReducer(employee || null));
   };
 };
+
+export const StartUpDateFileEmployee = (
+  searchTerm: string,
+  searchUser: string
+ 
+): any => {
+  return async (dispatch: DispatchTypeUpdateFile) => {
+    const employee = await providerRedux.uploadFileProvider(
+      searchTerm,
+      searchUser
+    );
+
+    dispatch(updateFileEmployeeReducer(employee || null));
+  };
+};
+
+/* export const StartUpDateEmployee = (
+  searchUser: string,
+  searchTerm: EmployeesType
+): any => {
+  return async (dispatch: DispatchTypeUpdate) => {
+    // Sube el archivo a Firebase Storage y obtén la URL de descarga
+    const file =
+    const downloadUrl = await uploadFileToStorage(file);
+
+    // Agrega la URL de descarga al objeto searchTerm
+    searchTerm.files = {
+      downloadUrl: downloadUrl,
+      name: file.name,
+    };
+
+    // Llama a la acción updateEmployeeReducer con el objeto searchTerm actualizado
+    dispatch(updateEmployeeReducer(searchTerm));
+  };
+}; */
+
 
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeEmployeeByUid) => {

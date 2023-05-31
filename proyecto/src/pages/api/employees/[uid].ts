@@ -35,6 +35,23 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
+
+async function uploadFile(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const uid = String(req.query.uid);
+    const employeeData = req.body;
+
+    //console.log("employeedata: " + JSON.stringify(employeeData));
+    
+    await employeeProvider.uploadFile(employeeData, uid);
+
+    res.status(200).json({ uid, message: "Information updated" });
+  } catch (error) {
+    res.status(500).json({ message: (error as Error).message });
+  }
+}
+
+
 const handlers: any = {};
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
   getByUid(req, res);
@@ -42,7 +59,8 @@ handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
   deleteByUid(req, res);
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>
   updateByUid(req, res);
-
+  handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) =>
+  uploadFile(req, res);
 export default function employeesByIdController(
   req: NextApiRequest,
   res: NextApiResponse

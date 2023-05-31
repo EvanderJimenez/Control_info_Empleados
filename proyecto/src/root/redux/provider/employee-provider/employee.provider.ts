@@ -63,6 +63,7 @@ const employeeListProvider = async () => {
           schedule: listEmployee.schedule,
           vacations: listEmployee.vacations,
           attendance: listEmployee.attendance,
+          files: listEmployee.files
         })
       )
     : [];
@@ -108,6 +109,26 @@ const upDatEmployeeProvider = async (
 
   return data;
 };
+
+const uploadFileProvider = async (file: string, searchUser: string) => {
+  const response = await fetch(`/api/employees/${searchUser}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(file),
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+
+
 
 const getEmployeeByUidProvider = async (searchTerm: string) => {
   const response = await fetch(`/api/employees/${searchTerm}`, {
@@ -270,4 +291,5 @@ export const providerRedux = {
   dismissByUidProvider,
   deleteEmployeeProvider,
   getAllBossesProvider,
+  uploadFileProvider
 };

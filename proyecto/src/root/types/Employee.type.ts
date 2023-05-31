@@ -23,6 +23,13 @@ export type EmployeesType = {
   schedule: Schedule[];
   vacations: { [Key: string]: Vacations };
   attendance:{ [Key: string]: Attendance };
+  files: { [Key: string]: Files };
+
+}
+
+export type Files = {
+  name: string;
+  urlFile: string;
 }
 
 export type Vacations = {
@@ -31,3 +38,4 @@ export type Vacations = {
   description: string
   approved: string
 }
+

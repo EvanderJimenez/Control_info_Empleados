@@ -1,21 +1,43 @@
 import { Attendance } from "./../../../../root/interface/employee/employee.interface";
 import { Brands, Schedule } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
-import { collection, getDocs, DocumentData, QuerySnapshot, doc, getDoc, query, where, updateDoc, addDoc } from "firebase/firestore";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { EmployeesType, Vacations } from "@/root/types/Employee.type";
+import {
+  collection,
+  getDocs,
+  DocumentData,
+  QuerySnapshot,
+  doc,
+  getDoc,
+  query,
+  where,
+  updateDoc,
+  addDoc,
+} from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { EmployeesType, Files, Vacations } from "@/root/types/Employee.type";
 import { defaultSchedule } from "@/root/constants/schedule/schedule";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeCollection);
-  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) => doc.data());
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeCollection
+  );
+  const employees: DocumentData[] = employeeSnapshot.docs.map((doc) =>
+    doc.data()
+  );
 
   return employees;
-};    
+};
 
-const updateByUid = async (uid: string, employeeData: EmployeesType): Promise<any> => {
-  const { vacations } = employeeData;
+const updateByUid = async (
+  uid: string,
+  employeeData: EmployeesType
+): Promise<any> => {
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
   const querySnapshot = await getDocs(q);
@@ -30,10 +52,16 @@ const updateByUid = async (uid: string, employeeData: EmployeesType): Promise<an
   }
 };
 
-const create = async (employeeData: EmployeesType): Promise<{ message: string; employee?: any }> => {
+const create = async (
+  employeeData: EmployeesType
+): Promise<{ message: string; employee?: any }> => {
   const { password, email, schedule, uid, ...restData } = employeeData;
 
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
   const user = userCredential.user;
   const uuid = user.uid;
 
@@ -53,7 +81,10 @@ const create = async (employeeData: EmployeesType): Promise<{ message: string; e
     ...restData,
   };
 
-  const newDocRef = await addDoc(collection(firestore, "employee"), employeeDoc);
+  const newDocRef = await addDoc(
+    collection(firestore, "employee"),
+    employeeDoc
+  );
   const newDoc = await getDoc(newDocRef);
 
   return newDoc.exists()
@@ -69,7 +100,9 @@ const create = async (employeeData: EmployeesType): Promise<{ message: string; e
 const getByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
   if (employeeSnapshot.empty) {
     throw new Error(`User not found: ${uid}`);
@@ -81,7 +114,9 @@ const getByUid = async (uid: string) => {
 const deleteByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
   if (employeeSnapshot.size === 0) {
     return;
@@ -92,15 +127,25 @@ const deleteByUid = async (uid: string) => {
 };
 
 const login = async (email: string, password: string) => {
-  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
 
   const user = userCredential.user;
   if (!user) {
     throw new Error("No user found with that email and password");
   } else {
     const employeeCollection = collection(firestore, "employee");
-    const employeeQuery = query(employeeCollection, where("email", "==", email), where("password", "==", password));
-    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+    const employeeQuery = query(
+      employeeCollection,
+      where("email", "==", email),
+      where("password", "==", password)
+    );
+    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+      employeeQuery
+    );
     const employeeDoc = employeeSnapshot.docs[0];
 
     if (!employeeDoc) {
@@ -113,7 +158,9 @@ const login = async (email: string, password: string) => {
 const getByCedula = async (cedula: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", cedula));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
   if (employeeSnapshot.empty) {
     throw new Error(`User not found ${cedula}`);
@@ -125,7 +172,9 @@ const getByCedula = async (cedula: string) => {
 const dismissByUid = async (uid: string) => {
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
   if (employeeSnapshot.size === 0) {
     return;
@@ -134,10 +183,20 @@ const dismissByUid = async (uid: string) => {
   await updateDoc(employeeRef, { idDepartment: "" });
 };
 
-const getByVariable = async (data: string, variable: string, idDepartment: string) => {
+const getByVariable = async (
+  data: string,
+  variable: string,
+  idDepartment: string
+) => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where(variable, "==", data), where("idDepartment", "==", idDepartment));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+  const employeeQuery = query(
+    employeeCollection,
+    where(variable, "==", data),
+    where("idDepartment", "==", idDepartment)
+  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
   const employees: any[] = [];
 
@@ -167,8 +226,13 @@ const getVacationsByUid = async (uid: string) => {
 
 const getEmployeesByIdDepartment = async (idDepartment: string) => {
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where("idDepartment", "==", idDepartment));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
+  const employeeQuery = query(
+    employeeCollection,
+    where("idDepartment", "==", idDepartment)
+  );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
   const employees: any[] = [];
 
@@ -183,7 +247,10 @@ const getEmployeesByIdDepartment = async (idDepartment: string) => {
 
 const getAllUD = async () => {
   const departmentCollection = collection(firestore, "departments");
-  const departmentQuery = query(departmentCollection, where("leader", "!=", ""));
+  const departmentQuery = query(
+    departmentCollection,
+    where("leader", "!=", "")
+  );
   const departmentSnapshot = await getDocs(departmentQuery);
 
   const departmentIds: any[] = [];
@@ -202,7 +269,10 @@ const getAllBosses = async () => {
   const departmentIds = await getAllUD();
 
   const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where("uid", "in", departmentIds));
+  const employeeQuery = query(
+    employeeCollection,
+    where("uid", "in", departmentIds)
+  );
   const employeeSnapshot = await getDocs(employeeQuery);
 
   const employees: DocumentData[] = [];
@@ -215,6 +285,52 @@ const getAllBosses = async () => {
 
   return employees;
 };
+
+const storage = getStorage();
+
+const uploadFile = async (fileBase64: string, uid: string): Promise<string> => {
+  try {
+    if (typeof fileBase64 !== 'string' || !fileBase64.startsWith("data:image/")) {
+      throw new Error("Invalid file format");
+    }
+
+    console.log(fileBase64)
+    
+    const fileName = v4();
+    const fileRef = ref(storage, `employeeFiles/${uid}/${fileName}`);
+
+
+    const buffer = Buffer.from(fileBase64.split(',')[1], 'base64');
+
+    await uploadBytes(fileRef, buffer);
+
+    const downloadURL = await getDownloadURL(fileRef);
+
+    const employeeRef = doc(firestore, "employee", uid);
+    const employeeSnapshot = await getDoc(employeeRef);
+    const employeeData = employeeSnapshot.data() as EmployeesType;
+
+    
+
+    const newFile: Files = {
+      name: fileName,
+      urlFile: downloadURL,
+    };
+
+    const newDocuments = {
+      ...employeeData.files.documents,
+      [fileName]: newFile,
+    };
+
+    await updateDoc(employeeRef, { "files.documents": newDocuments });
+
+    return downloadURL;
+  } catch (error) {
+    console.error("Error al cargar el archivo:", error);
+    throw error;
+  }
+};
+
 
 export const employeeProvider = {
   getAll,
@@ -229,6 +345,7 @@ export const employeeProvider = {
   getVacationsByUid,
   getEmployeesByIdDepartment,
   getAllBosses,
+  uploadFile,
 };
 
 export default employeeProvider;

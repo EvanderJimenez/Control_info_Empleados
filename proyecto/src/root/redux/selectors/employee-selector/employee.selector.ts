@@ -1,5 +1,6 @@
 import { RootState } from "../../store";
 
+export  const  selectUploadFile =  (state:  RootState)  =>  state.uploadFile.updateFileEmployee;
 
 export  const  selectDeleteEmployee  =  (state:  RootState)  =>  state.deleteEmployeeStore.deleteEmployee;
 
@@ -23,3 +24,4 @@ export const selectGetAllBosses = (state: RootState) => state.getAllBossesStore.
 export  const  selectGetVacationsByUid  =  (state:  RootState)  =>  state.getVacationsByUidStore.getVacationsByUid;
 
 export  const  selectGetEmployeesByIdDepartment =  (state:  RootState)  =>  state.getEmployeesByIdDepartmentStore.getEmployeesByIdDepartment;
+

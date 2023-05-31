@@ -20,6 +20,7 @@ import { UpdateBrandsReducer } from "./reducers/brands-reducer/updateBrandsById/
 import { GetBrandsByIdEmployeeReducer } from "./reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
 import { LoginReducer } from "./reducers/login-reducer/loginReducer";
 import { GetEmployeeByUidReducer } from "./reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
+import { UpdateFileEmployeeReducer } from "./reducers/employee-reducer/uploadFile/UploadFile";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -35,6 +36,7 @@ export const ApplicationStore = configureStore({
     getVacationsByUidStore: VacationsReducer,
     getAllBossesStore: GetAllBossReducer,
     getEmployeesByIdDepartmentStore: GetEmployeesByIdDepartmentReducer,
+    uploadFile: UpdateFileEmployeeReducer,
 
     getAllDepartmentStore: GetAllDepartmentsReducer,
     getDepartmentByIdStore: ByIdDocReducer,
