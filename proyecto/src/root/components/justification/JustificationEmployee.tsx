@@ -3,6 +3,7 @@ import { Attendance, UserData } from "@/root/interface/employee";
 import React, { useState, useEffect } from "react";
 import FormJustify from "./formJustify/FormJustify";
 import { toast } from "react-hot-toast";
+
 interface asistence {
   hIni: string;
   hFin: string;
@@ -11,6 +12,7 @@ interface asistence {
   style?: React.CSSProperties;
   setFinish: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 export default function JustificationEmployee({
   hIni,
   hFin,
@@ -18,9 +20,9 @@ export default function JustificationEmployee({
   setFinish,
   ...props
 }: asistence) {
-  const [dateA, setDataA] = useState("");
   const [data, setData] = useState<UserData[]>([]);
   const [justify, setJustify] = useState("");
+  const [isAttendanceUpdated, setAttendanceUpdated] = useState(false);
   const [userData, setUserData] = useState<UserData>({
     uid: "",
     name: "",
@@ -40,11 +42,19 @@ export default function JustificationEmployee({
     option: "register",
     attendance: {},
   });
+
   useEffect(() => {
     if (uuid) {
       handleEmployee(uuid);
     }
   }, [uuid]);
+
+  useEffect(() => {
+    if (isAttendanceUpdated) {
+      handleUpdate();
+      setAttendanceUpdated(false);
+    }
+  }, [isAttendanceUpdated, userData]);
 
   const handleSubmitAttendanceAndUpdate = async (
     event: React.FormEvent<HTMLFormElement>
@@ -55,13 +65,6 @@ export default function JustificationEmployee({
       toast.error("Please enter values for all fields");
       return;
     }
-    const newAttendanceObject: Attendance = {
-      startTime: hIni,
-      endTime: hFin,
-      justificationIni: justify,
-      justificationFin: justify,
-      state: "waiting",
-    };
 
     const attendanceDate = props.date;
     if (hIni && justify) {
@@ -79,6 +82,7 @@ export default function JustificationEmployee({
           },
         },
       }));
+      setAttendanceUpdated(true);
     }
 
     if (hFin && justify) {
@@ -101,19 +105,15 @@ export default function JustificationEmployee({
           },
         };
       });
+      setAttendanceUpdated(true);
     }
 
     const justifyRef = justify;
-
     await new Promise((resolve) => setTimeout(resolve, 0));
-
-    await handleUpdate(event);
     setJustify(justifyRef);
   };
 
-  const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleUpdate = async () => {
     try {
       const response = await fetch(`/api/employees/${userData.uid}`, {
         method: "PUT",
