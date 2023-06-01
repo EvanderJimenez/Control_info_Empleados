@@ -22,6 +22,8 @@ export const BrandsEmployee = () => {
   const [markFinal, setMarkFinal] = useState("");
   const [finish, setFinish] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  let localHoursIni: string;
+  let localHoursFin: string;
   const [brandData, setBrandData] = useState<Brands>({
     idEmployee: "",
     cycle: {},
@@ -78,6 +80,8 @@ export const BrandsEmployee = () => {
       const { hIni, hFin } = hoursEmployee[weekday];
       setHoursFin(hFin);
       setHoursIni(hIni);
+      localHoursIni = hIni;
+      localHoursFin = hFin;
     } else {
       toast.error(`No information found for the day: ${weekday}`);
       return;
@@ -117,6 +121,8 @@ export const BrandsEmployee = () => {
   };
 
   const checkMarkHours = (markStart: string, markEnd: string): boolean => {
+    let hoursIni = localHoursIni;
+    let hoursFin = localHoursFin;
     if (!markStart && !markEnd) {
       toast.error("Both markStart and markEnd are required");
       return false;
