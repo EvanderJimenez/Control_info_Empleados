@@ -5,31 +5,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
 import toast, { Toaster } from "react-hot-toast";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
 
   const [sendRequest, setSendRequest] = useState(true);
 
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-  });
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
   const [newDateStart, setNewDateStart] = useState("");
   const [newDateEnd, setNewDateEnd] = useState("");

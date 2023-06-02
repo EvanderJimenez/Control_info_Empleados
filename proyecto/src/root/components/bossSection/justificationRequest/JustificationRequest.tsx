@@ -3,8 +3,9 @@ import Filters from "../vacationsRequestBoss/components/filters/Filters";
 import ListRequestJustification from "./components/listRequestJustification/ListRequestJustification";
 import { PendingRequestJustifications } from "@/root/interface/employee";
 import { useDispatch, useSelector } from "react-redux";
-import { StartGetEmployeeByUid, StartUpDateEmployee, selectGetEmployeeByUid } from "@/root/redux";
+import { StartGetEmployeeByUid, StartUpDateEmployee, selectGetEmployeeByUid,ResetEmployeeByUid} from "@/root/redux";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 let optionSelect = "wait";
 
@@ -24,25 +25,7 @@ const JustificationRequest = () => {
   const [selectedRequest, setSelectedRequest] = useState<PendingRequestJustifications>();
   const employeeByUid = useSelector(selectGetEmployeeByUid);
 
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-  });
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
   const handleAccept = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
@@ -72,14 +55,14 @@ const JustificationRequest = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-      if (updatedDataEmployee.uid === undefined) {
+      if (updatedDataEmployee.uid === undefined || "" || null) {
         return;
       }
 
-      dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
+      dispatch(StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee));
 
       optionSelect = "wait";
-
+      dispatch(ResetEmployeeByUid());
       setSelectedRequest(pendingRequest);
 
       setSelectedRequest(pendingRequest);

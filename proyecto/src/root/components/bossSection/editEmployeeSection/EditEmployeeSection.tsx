@@ -8,6 +8,7 @@ import { ResetByVariable, ResetEmployeeByUid, StartDismissEmployee, StartGetByVa
 import { toast } from "react-hot-toast";
 import { defaultSchedule } from "@/root/constants/schedule/schedule";
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 export default function EditEmployeeSection() {
   const employeeByUid = useSelector(selectGetEmployeeByUid);
@@ -20,25 +21,7 @@ export default function EditEmployeeSection() {
   const [clearInput, setClearInput] = useState(false);
 
   const employeesListVariable = useSelector(selectGetByVariable);
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: defaultSchedule,
-    vacations: {},
-    attendance: {},
-  });
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -53,25 +36,7 @@ export default function EditEmployeeSection() {
         setDataEmployee(employeeByUid);
       }
     } else {
-      setDataEmployee({
-        uid: "",
-        name: "",
-        firstSurname: "",
-        secondSurname: "",
-        cedula: 0,
-        phoneNumber: 0,
-        photo: "",
-        jobPosition: "",
-        salary: 0,
-        enabled: true,
-        idDepartment: "",
-        password: "",
-        email: "",
-        boss: "",
-        schedule: [],
-        vacations: {},
-        attendance: {},
-      });
+      setDataEmployee(initialDataEmployee);
     }
   }, [employeeByUid, clear]);
 
@@ -119,7 +84,7 @@ export default function EditEmployeeSection() {
                 <InputFloatLabel labelFloat="Name" id="Name" onChange={handleInputChange} name="name" type="text" value={dataEmployee.name} />
               </div>
               <div className="flex flex-col">
-                <InputFloatLabel labelFloat="Cedula" id="cedula" onChange={handleInputChange} name="cedula" type="text" value={dataEmployee.cedula.toString()} />
+                <InputFloatLabel labelFloat="Cedula" id="cedula" onChange={handleInputChange} name="cedula" type="text" value={dataEmployee.cedula} />
               </div>
               <div className="flex flex-col">
                 <InputFloatLabel labelFloat="Surname" id="firstSurname" onChange={handleInputChange} name="firstSurname" type="text" value={dataEmployee.firstSurname} />

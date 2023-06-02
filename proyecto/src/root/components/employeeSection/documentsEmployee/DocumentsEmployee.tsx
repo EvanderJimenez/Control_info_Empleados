@@ -85,7 +85,7 @@ const DocumentsEmployee: React.FC = () => {
               <span className="font-bold">File selected:</span> {selectOption.name}
             </div>
             <div>
-              {selectOption.type.startsWith("image/") ? (
+              {selectOption.type.startsWith("image") ? (
                 <img src={selectOption.urlFile} alt="Selected File" className="w-64 h-auto" />
               ) : (
                 <div className="flex items-center">
