@@ -61,10 +61,10 @@ export const BrandsEmployee = () => {
         const data = await response.json();
         setBrandData(data);
       } else {
-        toast.error("Error acquiring information");
+        
       }
     } catch (error) {
-      toast.error("Error getting brands data");
+      
     }
   };
 

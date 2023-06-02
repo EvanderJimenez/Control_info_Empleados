@@ -86,7 +86,7 @@ const TableSchedules = ({
                   </td>
                   <td>
                     <button
-                      className="text-red-500 hover:text-red-700 bg-red"
+                      className="text-red-500 hover:text-red-700 bg-darkBlue"
                       onClick={() => handleDeleteSchedule(date)}
                     >
                       Delete

@@ -1,52 +1,17 @@
 import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
-import {
-  DispatchTypeDelete,
-  deleteEmployeeReducer,
-} from "../../reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
-import {
-  DispatchTypeDismiss,
-  dismissEmployeeReducer,
-} from "../../reducers/employee-reducer/dismissEmployee/DismissEmployeeReducer";
-import {
-  DispatchTypeListEmployee,
-  listEmployeesReducer,
-} from "../../reducers/employee-reducer/listEmployees/ListEmployeeReducer";
-import {
-  DispatchTypeCreate,
-  createEmployeeReducer,
-} from "../../reducers/employee-reducer/createEmployee/CreateEmployeeReducer";
-import {
-  DispatchTypeUpdate,
-  updateEmployeeReducer,
-} from "../../reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
-import {
-  DispatchTypeEmployeeByUid,
-  getEmployeeByUidReducer,
-  resetEmployeeByUid,
-} from "../../reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
-import {
-  DispatchTypeByVariable,
-  getByVariableReducer,
-  resetByVariable,
-} from "../../reducers/employee-reducer/getByVariable/GetByVariableReducer";
-import {
-  DispatchTypeVacations,
-  getVacationsByUidReducer,
-} from "../../reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
-import {
-  DispatchTypeByIdDepart,
-  getEmployeesByIdDepartmentReducer,
-} from "../../reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
-import {
-  DispatchTypeAllBoss,
-  getAllBossReducer,
-} from "../../reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
-import {
-  DispatchTypeLogin,
-  loginReducer,
-} from "../../reducers/login-reducer/loginReducer";
+import { DispatchTypeDelete, deleteEmployeeReducer } from "../../reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
+import { DispatchTypeDismiss, dismissEmployeeReducer } from "../../reducers/employee-reducer/dismissEmployee/DismissEmployeeReducer";
+import { DispatchTypeListEmployee, listEmployeesReducer } from "../../reducers/employee-reducer/listEmployees/ListEmployeeReducer";
+import { DispatchTypeCreate, createEmployeeReducer } from "../../reducers/employee-reducer/createEmployee/CreateEmployeeReducer";
+import { DispatchTypeUpdate, updateEmployeeReducer } from "../../reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
+import { DispatchTypeEmployeeByUid, getEmployeeByUidReducer, resetEmployeeByUid } from "../../reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
+import { DispatchTypeByVariable, getByVariableReducer, resetByVariable } from "../../reducers/employee-reducer/getByVariable/GetByVariableReducer";
+import { DispatchTypeVacations, getVacationsByUidReducer } from "../../reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
+import { DispatchTypeByIdDepart, getEmployeesByIdDepartmentReducer } from "../../reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
+import { DispatchTypeAllBoss, getAllBossReducer } from "../../reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
+import { DispatchTypeLogin, loginReducer } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
 
@@ -94,23 +59,17 @@ export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
   return async (dispatch: DispatchTypeCreate) => {
     dispatch(setLoading(true));
 
-      const employee = await providerRedux.createEmployeeProvider(searchTerm);
+    const employee = await providerRedux.createEmployeeProvider(searchTerm);
 
-      dispatch(createEmployeeReducer(employee || null));
+    dispatch(createEmployeeReducer(employee || null));
 
     dispatch(setLoading(false));
   };
 };
 
-export const StartUpDateEmployee = (
-  searchUser: string,
-  searchTerm: EmployeesType
-): any => {
+export const StartUpDateEmployee = (searchUser: string, searchTerm: EmployeesType): any => {
   return async (dispatch: DispatchTypeUpdate) => {
-    const employee = await providerRedux.upDatEmployeeProvider(
-      searchUser,
-      searchTerm
-    );
+    const employee = await providerRedux.upDatEmployeeProvider(searchUser, searchTerm);
 
     dispatch(updateEmployeeReducer(employee || null));
   };
@@ -118,11 +77,9 @@ export const StartUpDateEmployee = (
 
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeEmployeeByUid) => {
-    
-      const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
+    const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
 
-      dispatch(getEmployeeByUidReducer(employee || null));
-
+    dispatch(getEmployeeByUidReducer(employee || null));
   };
 };
 
@@ -135,28 +92,22 @@ export const ResetEmployeeByUid = (): any => {
 export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchTypeLogin) => {
     dispatch(setLoading(true));
-    const response = await providerRedux.loginProvider(
-      searchTerm1,
-      searchTerm2
-    );
+    const response = await providerRedux.loginProvider(searchTerm1, searchTerm2);
 
     dispatch(loginReducer(response || null));
 
     dispatch(setLoading(false));
+    if (response !== null && response !== undefined){
+      toast.success("¡Welcome!");
+    }else{
+      toast.error("Wrong password or username");
+    }
   };
 };
 
-export const StartGetByVariable = (
-  searchTerm1: string,
-  searchTerm2: string,
-  searchTerm3: string
-): any => {
+export const StartGetByVariable = (searchTerm1: string, searchTerm2: string, searchTerm3: string): any => {
   return async (dispatch: DispatchTypeByVariable) => {
-    const response = await providerRedux.getByVariableProvider(
-      searchTerm1,
-      searchTerm2,
-      searchTerm3
-    );
+    const response = await providerRedux.getByVariableProvider(searchTerm1, searchTerm2, searchTerm3);
 
     dispatch(getByVariableReducer(response || null));
   };
@@ -180,9 +131,7 @@ export const StarGetVacationsByUid = (searchTerm: string): any => {
 
 export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeByIdDepart) => {
-    const response = await providerRedux.getEmployeesByIdDepartProvider(
-      searchTerm
-    );
+    const response = await providerRedux.getEmployeesByIdDepartProvider(searchTerm);
 
     dispatch(getEmployeesByIdDepartmentReducer(response || null));
   };

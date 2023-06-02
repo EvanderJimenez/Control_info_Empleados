@@ -37,14 +37,17 @@ const ListRequestVacations = ({ setSendRequest, data, filter }: PropsListRequest
                               <span>Affair: {name}</span>
                             </h4>
                             <p className=" text-base font-normal text-black">Description: {employeesListVacations.vacations[name].description}</p>
-                            <p className=" font-semibold">Date start: {employeesListVacations.vacations[name].dateStart}</p>
+                            <p >Date start: {employeesListVacations.vacations[name].dateStart}</p>
                             <p>Date end: {employeesListVacations.vacations[name].dateEnd}</p>
-                            <p>State: {employeesListVacations.vacations[name].approved}</p>
+                            <p className=" font-semibold text-pink" >State: {employeesListVacations.vacations[name].approved}</p>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))}
+                  ))}{" "}
+                {Object.entries(employeesListVacations.vacations).filter(([_, value]) => value.approved === filter).length === 0 && (
+                  <div className="font-semibold text-yellow ">No found vacations request by state {filter} 🤔</div>
+                )}
               </>
             }
           </>

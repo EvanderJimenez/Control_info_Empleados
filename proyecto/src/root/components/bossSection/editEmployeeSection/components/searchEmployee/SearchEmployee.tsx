@@ -30,7 +30,7 @@ const SearchEmployee = ({cedula,name,jobPosition}:PropsSearch) => {
             <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
             <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
 
-            <button onClick={handleSearch} className="bg-red flex justify-center" >
+            <button onClick={handleSearch} className="bg-darkBlue flex justify-center" >
             {" "}
             <img src="/Images/searchIcon.png" alt="" />
           </button>

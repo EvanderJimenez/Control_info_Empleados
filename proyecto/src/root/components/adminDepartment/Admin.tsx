@@ -205,7 +205,7 @@ const AdminDepartment = () => {
                       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">
                         Edit
                       </button>
-                      <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">
+                      <button className="bg-darkBlue-500 hover:bg-darkBlue-700 text-white font-bold py-1 px-2 border border-red-500 rounded">
                         Delete
                       </button>
                     </td>
