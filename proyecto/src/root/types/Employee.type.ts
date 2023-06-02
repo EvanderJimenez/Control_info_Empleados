@@ -10,11 +10,11 @@ export type EmployeesType = {
   name: string;
   firstSurname: string;
   secondSurname: string;
-  cedula: number | string;
-  phoneNumber: number;
+  cedula: string;
+  phoneNumber: string;
   photo: string;
   jobPosition: string;
-  salary: number;
+  salary: string;
   enabled: boolean;
   idDepartment: string;
   password: string;

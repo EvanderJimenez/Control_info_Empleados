@@ -21,7 +21,7 @@ const EmployeeProfile = () => {
             <InputFloatLabel id="name" labelFloat="Name" name="name" onChange={() => {}} type="text" value={UserLogin?.name || ""} />
             <InputFloatLabel id="surname" labelFloat="Surname" name="" onChange={() => {}} type="text" value={UserLogin?.firstSurname || ""} />
             <InputFloatLabel id="secondSurname" labelFloat="Second surname" name="" onChange={() => {}} type="text" value={UserLogin?.secondSurname || ""} />
-            <InputFloatLabel id="cedula" labelFloat="ID number" name="" onChange={() => {}} type="text" value={cedula} />
+            <InputFloatLabel id="cedula" labelFloat="cedula" name="" onChange={() => {}} type="text" value={cedula} />
           </div>
 
           <div className=" mt-4 w-full space-y-7 sm:w-auto">

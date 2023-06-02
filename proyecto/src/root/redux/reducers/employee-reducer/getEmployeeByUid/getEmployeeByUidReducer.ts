@@ -11,11 +11,11 @@ export const initialStateByUid: GetEmployeeByUidState = {
     name: "",
     firstSurname: "",
     secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
+    cedula: "",
+    phoneNumber: "",
     photo: "",
     jobPosition: "",
-    salary: 0,
+    salary: "",
     enabled: true,
     idDepartment: "",
     password: "",
@@ -24,6 +24,7 @@ export const initialStateByUid: GetEmployeeByUidState = {
     schedule: [],
     vacations: {},
     attendance: {},
+    files: {}
   },
 };
 
@@ -38,7 +39,7 @@ export const GetEmployeeByUidSlice = createSlice({
 
   reducers: {
     getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) => {
-      return { getEmployeeByUid: action.payload };
+      state.getEmployeeByUid = action.payload;
     },
     resetEmployeeByUid: (state) => {
       state.getEmployeeByUid = initialStateByUid.getEmployeeByUid;

@@ -1,0 +1,20 @@
+ export const initialDataEmployee = {
+    uid: "",
+    name: "",
+    firstSurname: "",
+    secondSurname: "",
+    cedula: "",
+    phoneNumber: "",
+    photo: "",
+    jobPosition: "",
+    salary: "",
+    enabled: true,
+    idDepartment: "0",
+    password: "",
+    email: "",
+    boss: "",
+    schedule: [],
+    vacations: {},
+    attendance: {},
+    files: {}
+  }

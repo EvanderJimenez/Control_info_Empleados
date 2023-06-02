@@ -8,7 +8,7 @@ GET http://localhost:3000/api/employees/4AWoI4p3auP3qMjYtXq28q0wMZm1 HTTP/1.1
 
 ###
 # Dismiss a existing employee by uid
-DELETE  http://localhost:3000/api/employees/by-uid/vPev4pXaCVfNT8L6XheBSYP2X992 HTTP/1.1
+DELETE  http://localhost:3000/api/employees/by-uid/FaXWRKDdU1OPGzqfePD2bytwI0F3 HTTP/1.1
 
 ###
 # Get all boss

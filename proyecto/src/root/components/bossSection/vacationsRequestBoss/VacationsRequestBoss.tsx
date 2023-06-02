@@ -2,10 +2,18 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import Filters from "./components/filters/Filters";
 import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import {
+  selectGetEmployeeByUid,
+  selectLogin,
+} from "@/root/redux/selectors/employee-selector/employee.selector";
 import { PendingRequest } from "@/root/interface/employee";
-import { ResetEmployeeByUid, StartGetEmployeeByUid, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import {
+  ResetEmployeeByUid,
+  StartGetEmployeeByUid,
+  StartUpDateEmployee,
+} from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 let optionSelect = "wait";
 
@@ -28,11 +36,11 @@ const VacationsRequestBoss = () => {
     name: "",
     firstSurname: "",
     secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
+    cedula: "",
+    phoneNumber: "",
     photo: "",
     jobPosition: "",
-    salary: 0,
+    salary: "",
     enabled: true,
     idDepartment: "",
     password: "",
@@ -41,21 +49,21 @@ const VacationsRequestBoss = () => {
     schedule: [],
     vacations: {},
     attendance: {},
+    files: {},
   });
 
   const handleAccept = async () => {
     dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
     optionSelect = "accept";
-   
   };
 
   const handleDenied = async () => {
-    dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
+    await dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
     optionSelect = "denied";
-   
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    //
 
     if (employeeByUid && employeeByUid.vacations && optionSelect !== "wait") {
       const vacation = employeeByUid.vacations[selectedRequest?.key || ""];
@@ -74,15 +82,20 @@ const VacationsRequestBoss = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-
-      if(updatedDataEmployee.uid === undefined){
-        return
+      console.log("uid: " + updatedDataEmployee.uid);
+      if (dataEmployee.uid === undefined || "") {
+        console.log("entro undefines");
+        return;
       }
-
-      dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
-      //dispatch(ResetEmployeeByUid())
-      optionSelect = "wait"
+      console.log(JSON.stringify(updatedDataEmployee));
+      console.log(JSON.stringify(dataEmployee.vacations));
+      dispatch(
+        StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee)
+      );
+      dispatch(ResetEmployeeByUid());
+      optionSelect = "wait";
       setSelectedRequest(pendingRequest);
+      //setDataEmployee(initialDataEmployee)
     }
   }, [employeeByUid, dispatch]);
 
@@ -93,23 +106,42 @@ const VacationsRequestBoss = () => {
           <Filters />
         </div>
         <div>
-          <ListRequestVacations option={optionSelect} selectedRequest={setSelectedRequest} />
+          <ListRequestVacations
+            option={optionSelect}
+            selectedRequest={setSelectedRequest}
+          />
         </div>
       </div>
       <div className="flex flex-col lg:w-1/2 md:w-1/2 sm:flex-col lg:3/4 w-full justify-center items-center m-3">
         <div className="flex w-full justify-center space-x-5  items-center">
-          <label className="text-center font-semibold">From: {selectedRequest?.employeeName || ""}</label>
-          <label className="text-center font-semibold ">Affair: {selectedRequest?.key || ""}</label>
+          <label className="text-center font-semibold">
+            From: {selectedRequest?.employeeName || ""}
+          </label>
+          <label className="text-center font-semibold ">
+            Affair: {selectedRequest?.key || ""}
+          </label>
         </div>
         <section className="w-full xl:w-3/4 flex flex-col justify-center items-center">
           <div className="flex flex-row space-x-3 mb-3 justify-center items-center pt-3">
             <div>
               <label>Start date: </label>
-              <input type="text" id="dateStar" className="outline-none w-auto" value={selectedRequest?.dateStart || ""} readOnly />
+              <input
+                type="text"
+                id="dateStar"
+                className="outline-none w-auto"
+                value={selectedRequest?.dateStart || ""}
+                readOnly
+              />
             </div>
             <div>
               <label>End date:</label>
-              <input type="text" className="outline-none w-auto" id="dateEnd" value={selectedRequest?.dateEnd || ""} readOnly />
+              <input
+                type="text"
+                className="outline-none w-auto"
+                id="dateEnd"
+                value={selectedRequest?.dateEnd || ""}
+                readOnly
+              />
             </div>
           </div>
 

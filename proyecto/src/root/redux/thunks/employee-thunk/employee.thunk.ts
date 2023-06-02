@@ -50,7 +50,7 @@ import {
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
 import { DispatchTypeUpdateFile, updateFileEmployeeReducer } from "../../reducers/employee-reducer/uploadFile/UploadFile";
-import { DispatchTypeGetFileURLByName, GetFileURLByNameReducer, getFileURLByNameReducer } from "../../reducers/employee-reducer/getFileURLByName/getFileURLByNameReducer";
+
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -210,7 +210,7 @@ export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
   };
 };
 
-export const StarGetFileURLByName  = (uid: string,searchTerm: string): any => {
+/* export const StarGetFileURLByName  = (uid: string,searchTerm: string): any => {
   return async (dispatch: DispatchTypeGetFileURLByName) => {
     const response = await providerRedux.getFileURLByName( uid,
       searchTerm
@@ -219,7 +219,7 @@ export const StarGetFileURLByName  = (uid: string,searchTerm: string): any => {
     dispatch(getFileURLByNameReducer(response || null));
   };
 };
-
+ */
 export const StarGetAllBosses = (): any => {
   return async (dispatch: DispatchTypeAllBoss) => {
     const response = await providerRedux.getAllBossesProvider();

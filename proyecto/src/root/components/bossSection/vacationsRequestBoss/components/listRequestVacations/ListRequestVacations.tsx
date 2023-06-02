@@ -19,7 +19,7 @@ const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) 
     dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
   }, [option]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (listEmployees) {
      
       const pendingRequestsList: PendingRequest[] = [];
@@ -53,6 +53,7 @@ const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) 
   }, [listEmployees]);
 
   const handleLoadInformation = (request: PendingRequest) => {
+    dispatch(StartGetEmployeeByUid(request.employeeUID || ""));
     selectedRequest(request);
   };
 

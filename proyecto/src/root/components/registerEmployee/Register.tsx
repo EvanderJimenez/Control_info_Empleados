@@ -9,28 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { StartCreateEmployee, StartUpDateEmployee } from "../../redux/thunks/employee-thunk/employee.thunk";
 import { RootState } from "../../redux/store";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
-
-const data = {
-  uid: "",
-  name: "",
-  firstSurname: "",
-  secondSurname: "",
-  cedula: 0,
-  phoneNumber: 0,
-  photo: "",
-  jobPosition: "",
-  salary: 0,
-  enabled: true,
-  idDepartment: "0",
-  password: "",
-  email: "",
-  boss: "",
-  schedule: [],
-  vacations: {},
-  attendance: {},
-  files: {}
-}
 
 function Register() {
   const dispatch = useDispatch();
@@ -42,9 +22,9 @@ function Register() {
   const [userData, setUserData] = useState<EmployeesType>(() => {
     if (employeeByUid) {
       setUpDate(true);
-      return data
+      return initialDataEmployee
     } else {
-      return data
+      return initialDataEmployee
     }
   });
 
@@ -57,13 +37,7 @@ function Register() {
     event.preventDefault();
 
     dispatch(StartCreateEmployee(userData));
-    setUserData(data)
-  };
-
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    dispatch(StartUpDateEmployee(userData.uid, userData));
+    setUserData(initialDataEmployee)
   };
 
   const handleScheduleChange = (newSchedule: any) => {
