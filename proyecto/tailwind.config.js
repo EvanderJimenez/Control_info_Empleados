@@ -9,9 +9,6 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontFamily: {
-      mono: ["Menlo", "Monaco", "Consolas", "monospace"],
-    },
     colors: {
       red: "#CD0404",
       blue: "#454fce",
@@ -20,7 +17,8 @@ module.exports = {
       darkBlue: "#27374D",
       lithBlue: "#9DB2BF",
       lithGray: "#DDDDDD",
-      pink: "#D14D72"
+      pink: "#D14D72",
+      yellow: "#E8AA42"
 
     },
     extend: {},

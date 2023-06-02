@@ -35,7 +35,7 @@ const TableViewEmployees: React.FC<TableProps> = ({ rows }) => {
             </td>
             <td className="border p-2">
               <div className="flex justify-center">
-                <button className="bg-red hover:bg-white hover:text-black hover:border-black text-white font-bold py-2 px-4 rounded border border-white">Generate</button>
+                <button className="bg-darkBlue hover:bg-white hover:text-black hover:border-black text-white font-bold py-2 px-4 rounded border border-white">Generate</button>
               </div>
             </td>
           </tr>

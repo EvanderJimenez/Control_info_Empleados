@@ -123,7 +123,7 @@ const RequestVacationsEmployee = () => {
           <button onClick={FilterByAccepted} className="bg-darkBlue">
             Accepted
           </button>
-          <button onClick={FilterByDenied} className="bg-red">
+          <button onClick={FilterByDenied} className="bg-darkBlue">
             Denied
           </button>
           <button onClick={FilterByWaiting} className="bg-blue">

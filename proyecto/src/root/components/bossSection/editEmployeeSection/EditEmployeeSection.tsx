@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import SearchInput from "../../ui/searchInput/SearchInput";
 import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../../listEmployee/ListEmployee";
@@ -46,21 +46,24 @@ export default function EditEmployeeSection() {
   };
 
   const handleDismissEmployee = () => {
-    console.log("Employee: "+ employeeByUid?.uid)
-    //dispatch(StartDismissEmployee(employeeByUid?.uid || ""));
+    if (employeeByUid && employeeByUid.uid) {
+      console.log("Employee: " + JSON.stringify(employeeByUid));
+      dispatch(StartDismissEmployee(employeeByUid.uid));
+      toast.error("Fired employee");
+    } else {
+      toast("⚠ No employees have been loaded ");
+    }
   };
 
   useEffect(() => {
-
-    if(!employeesListVariable){
-      toast.error("List empty")
+    if (!employeesListVariable) {
+      toast.error("List empty");
     }
-
-  }, [])
-  
+  }, []);
 
   const handleClear = async () => {
     dispatch(ResetEmployeeByUid());
+    toast.success("Clear all");
   };
 
   return (
@@ -100,10 +103,10 @@ export default function EditEmployeeSection() {
                 <InputFloatLabel labelFloat="Salary" id="salary" onChange={handleInputChange} name="salary" type="text" value={dataEmployee.salary.toString()} />
               </div>
             </div>
-            <div className=" pt-3 space-x-4 flex justify-center">
+            <div className=" pt-3 space-x-4 flex justify-between">
               <button
                 onClick={handleDismissEmployee}
-                className="bg-red   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                className="bg-darkBlue hover:border-red hover:rounded-lg focus:border-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
               >
                 Dismiss
               </button>
@@ -111,16 +114,13 @@ export default function EditEmployeeSection() {
               <button
                 type="submit"
                 onClick={() => {
-                  toast.success("Update");
+                  toast.success("saved successfully");
                 }}
-                className="bg-blue focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-56 sm:w-auto px-5 py-2.5 text-center "
+                className="bg-darkBlue focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-56 sm:w-auto px-5 py-2.5 text-center "
               >
                 Save
               </button>
-              <button
-                onClick={handleClear}
-                className="bg-pink   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
-              >
+              <button onClick={handleClear} className="bg-darkBlue   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
                 Clear
               </button>
             </div>

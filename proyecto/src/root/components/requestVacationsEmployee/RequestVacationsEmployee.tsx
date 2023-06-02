@@ -99,7 +99,7 @@ const RequestVacationsEmployee = () => {
         <h2>List Request Vacations</h2>
         <div className="flex flex-row">
           <button className="bg-darkBlue">Accepted</button>
-          <button className="bg-red">Denied</button>
+          <button className="bg-darkBlue">Denied</button>
         </div>
         <ListRequestVacations data={dataEmployee} filter="" setSendRequest={() => {}  }/>
       </div>
