@@ -30,6 +30,7 @@ export type EmployeesType = {
 export type Files = {
   name: string;
   urlFile: string;
+  type: string
 }
 
 export type Vacations = {

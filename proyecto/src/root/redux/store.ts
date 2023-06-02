@@ -21,6 +21,7 @@ import { GetBrandsByIdEmployeeReducer } from "./reducers/brands-reducer/getBrand
 import { LoginReducer } from "./reducers/login-reducer/loginReducer";
 import { GetEmployeeByUidReducer } from "./reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 import { UpdateFileEmployeeReducer } from "./reducers/employee-reducer/uploadFile/UploadFile";
+import { GetFileURLByNameReducer } from "./reducers/employee-reducer/getFileURLByName/getFileURLByNameReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -46,7 +47,8 @@ export const ApplicationStore = configureStore({
     createBrands: CreateBrandsReducer,
     getBrandsByDocId: GetBrandsByDocIdReducer,
     updateBrands: UpdateBrandsReducer,
-    GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer
+    GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer,
+    GetFileURLByNameStore: GetFileURLByNameReducer
 
 
   },

@@ -19,7 +19,13 @@ import {
 } from "firebase/auth";
 import { EmployeesType, Files, Vacations } from "@/root/types/Employee.type";
 import { defaultSchedule } from "@/root/constants/schedule/schedule";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytes,
+  uploadString,
+} from "firebase/storage";
 import { v4 } from "uuid";
 
 const getAll = async () => {
@@ -286,50 +292,81 @@ const getAllBosses = async () => {
   return employees;
 };
 
-const storage = getStorage();
+const uploadFile = async (
+  fileBase64: string,
+  uid: string,
+  nameFile: string,
+  typeFile: string
+): Promise<string> => {
+  
 
-const uploadFile = async (fileBase64: string, uid: string): Promise<string> => {
+
+
+/*   if (typeof fileBase64 !== "string" || !fileBase64.startsWith("data:image/")) {
+    throw new Error("Invalid file format");
+  } */
+
+  const storage = getStorage();
+
+  const fileRef = ref(storage, `employeeFiles/${uid}/${nameFile}`);
+
+  await uploadString(fileRef, fileBase64, "data_url");
+
+  const downloadURL = await getDownloadURL(fileRef);
+
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "==", uid));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
+
+  if (employeeSnapshot.size === 0) {
+    return "";
+  }
+
+  const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
+
+  const employeeData = employeeSnapshot.docs[0].data() as EmployeesType;
+  const filesMap = new Map<string, Files>(Object.entries(employeeData.files));
+
+  const newFile: Files = {
+    name: nameFile,
+    urlFile: downloadURL,
+    type: typeFile
+  };
+
+  filesMap.set(nameFile, newFile);
+
+  await updateDoc(employeeRef, { files: Object.fromEntries(filesMap) });
+
+  return downloadURL;
+};
+
+const getFileURLByName = async (uid: string, fileName: string): Promise<string | null> => {
   try {
-    if (typeof fileBase64 !== 'string' || !fileBase64.startsWith("data:image/")) {
-      throw new Error("Invalid file format");
-    }
-
-    console.log(fileBase64)
-    
-    const fileName = v4();
-    const fileRef = ref(storage, `employeeFiles/${uid}/${fileName}`);
-
-
-    const buffer = Buffer.from(fileBase64.split(',')[1], 'base64');
-
-    await uploadBytes(fileRef, buffer);
-
-    const downloadURL = await getDownloadURL(fileRef);
-
     const employeeRef = doc(firestore, "employee", uid);
     const employeeSnapshot = await getDoc(employeeRef);
-    const employeeData = employeeSnapshot.data() as EmployeesType;
 
-    
+    if (employeeSnapshot.exists()) {
+      const employeeData = employeeSnapshot.data() as EmployeesType;
+      const filesMap = employeeData.files || {};
 
-    const newFile: Files = {
-      name: fileName,
-      urlFile: downloadURL,
-    };
+      const file = Object.values(filesMap).find((file: Files) => file.name === fileName);
 
-    const newDocuments = {
-      ...employeeData.files.documents,
-      [fileName]: newFile,
-    };
-
-    await updateDoc(employeeRef, { "files.documents": newDocuments });
-
-    return downloadURL;
+      if (file) {
+        return file.urlFile;
+      } else {
+        throw new Error("File not found");
+      }
+    } else {
+      throw new Error("Employee document does not exist");
+    }
   } catch (error) {
-    console.error("Error al cargar el archivo:", error);
-    throw error;
+    console.error("Error retrieving file URL:", error);
+    return null;
   }
 };
+
 
 
 export const employeeProvider = {
@@ -346,6 +383,7 @@ export const employeeProvider = {
   getEmployeesByIdDepartment,
   getAllBosses,
   uploadFile,
+  getFileURLByName
 };
 
 export default employeeProvider;

@@ -110,13 +110,17 @@ const upDatEmployeeProvider = async (
   return data;
 };
 
-const uploadFileProvider = async (file: string, searchUser: string) => {
+const uploadFileProvider = async (file: string, searchUser: string,nameFile: string, typeFile: string) => {
   const response = await fetch(`/api/employees/${searchUser}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(file),
+    body: JSON.stringify({
+      file,
+      nameFile: nameFile,
+      typeFile: typeFile
+    }),
   });
 
   if (!response.ok) {
@@ -128,7 +132,25 @@ const uploadFileProvider = async (file: string, searchUser: string) => {
   return data;
 };
 
+const getFileURLByName = async (uid: string, fileName: string) => {
+  const response = await fetch(`/api/employees/${uid}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nameFile: fileName
+    }),
+  });
 
+  if (!response.ok) {
+    return null;
+  }
+
+  const data = await response.json();
+
+  return data;
+};
 
 const getEmployeeByUidProvider = async (searchTerm: string) => {
   const response = await fetch(`/api/employees/${searchTerm}`, {
@@ -280,6 +302,7 @@ const getAllBossesProvider = async () => {
 export const providerRedux = {
   getEmployeesByIdDepartProvider,
   getVacationsByUidProvider,
+  getFileURLByName,
   getByVariableProvider,
   loginProvider,
   getEmployeeByNameProvider,

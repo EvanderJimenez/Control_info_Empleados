@@ -39,11 +39,9 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
 async function uploadFile(req: NextApiRequest, res: NextApiResponse) {
   try {
     const uid = String(req.query.uid);
-    const employeeData = req.body;
-
-    //console.log("employeedata: " + JSON.stringify(employeeData));
-    
-    await employeeProvider.uploadFile(employeeData, uid);
+    const {file,nameFile,typeFile} = req.body;
+   
+    await employeeProvider.uploadFile(file, uid,nameFile, typeFile);
 
     res.status(200).json({ uid, message: "Information updated" });
   } catch (error) {

@@ -24,4 +24,4 @@ export const selectGetAllBosses = (state: RootState) => state.getAllBossesStore.
 export  const  selectGetVacationsByUid  =  (state:  RootState)  =>  state.getVacationsByUidStore.getVacationsByUid;
 
 export  const  selectGetEmployeesByIdDepartment =  (state:  RootState)  =>  state.getEmployeesByIdDepartmentStore.getEmployeesByIdDepartment;
-
+export  const  selectGetFileURLByName  =  (state:  RootState)  =>  state.GetFileURLByNameStore.getFileURLByName 

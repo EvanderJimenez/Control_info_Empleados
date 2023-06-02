@@ -50,6 +50,7 @@ import {
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
 import { DispatchTypeUpdateFile, updateFileEmployeeReducer } from "../../reducers/employee-reducer/uploadFile/UploadFile";
+import { DispatchTypeGetFileURLByName, GetFileURLByNameReducer, getFileURLByNameReducer } from "../../reducers/employee-reducer/getFileURLByName/getFileURLByNameReducer";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -119,38 +120,22 @@ export const StartUpDateEmployee = (
 
 export const StartUpDateFileEmployee = (
   searchTerm: string,
-  searchUser: string
+  searchUser: string,
+  nameFile: string,
+  typeFile: string
  
 ): any => {
   return async (dispatch: DispatchTypeUpdateFile) => {
     const employee = await providerRedux.uploadFileProvider(
       searchTerm,
-      searchUser
+      searchUser,
+      nameFile,
+      typeFile
     );
 
     dispatch(updateFileEmployeeReducer(employee || null));
   };
 };
-
-/* export const StartUpDateEmployee = (
-  searchUser: string,
-  searchTerm: EmployeesType
-): any => {
-  return async (dispatch: DispatchTypeUpdate) => {
-    // Sube el archivo a Firebase Storage y obtén la URL de descarga
-    const file =
-    const downloadUrl = await uploadFileToStorage(file);
-
-    // Agrega la URL de descarga al objeto searchTerm
-    searchTerm.files = {
-      downloadUrl: downloadUrl,
-      name: file.name,
-    };
-
-    // Llama a la acción updateEmployeeReducer con el objeto searchTerm actualizado
-    dispatch(updateEmployeeReducer(searchTerm));
-  };
-}; */
 
 
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
@@ -222,6 +207,16 @@ export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
     );
 
     dispatch(getEmployeesByIdDepartmentReducer(response || null));
+  };
+};
+
+export const StarGetFileURLByName  = (uid: string,searchTerm: string): any => {
+  return async (dispatch: DispatchTypeGetFileURLByName) => {
+    const response = await providerRedux.getFileURLByName( uid,
+      searchTerm
+    );
+
+    dispatch(getFileURLByNameReducer(response || null));
   };
 };
 
