@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Login from "../login/Login";
 import Register from "../registerEmployee/Register";
+import ListEmployee from "../listEmployee/ListEmployee";
+import { Top } from "../top/Top";
+import { Foot } from "../foot/Foot";
+import AlertOfSave from "../alerts/alertOfSave/AlertOfSave";
+import { useDispatch, useSelector } from "react-redux";
 
 export const MainForm = ({}) => {
   const [showComponent, setShowComponent] = useState(true);

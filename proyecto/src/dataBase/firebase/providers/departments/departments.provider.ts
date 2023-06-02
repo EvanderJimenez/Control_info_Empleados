@@ -11,12 +11,36 @@ import {
   where,
   updateDoc,
   addDoc,
+  orderBy,
+  limit,
+  startAfter,
 } from "firebase/firestore";
 
 const getAll = async () => {
   const departmentsCollection = collection(firestore, "departments");
   const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     departmentsCollection
+  );
+  const departments: DocumentData[] = departmentsSnapshot.docs.map((doc) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    };
+  });
+
+  return departments;
+};
+
+const getDepartmentsByPage = async (pageSize: number, page: number) => {
+  const departmentsCollection = collection(firestore, "departments");
+  const departmentsQuery = query(
+    departmentsCollection,
+    orderBy("name"),
+    limit(pageSize),
+    startAfter(pageSize * page)
+  );
+  const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    departmentsQuery
   );
   const departments: DocumentData[] = departmentsSnapshot.docs.map((doc) => {
     return {
@@ -69,7 +93,7 @@ const getByDocId = async (docId: string) => {
 
   if (departmentsDocSnapshot.exists()) {
     return departmentsDocSnapshot.data();
-  } else {//TODO: You should not use else or simplify the complex with reverse if
+  } else {
     throw new Error(`A department with document ID was not found: ${docId}`);
   }
 };
@@ -138,6 +162,7 @@ export const departmentProvider = {
   create,
   updateById,
   getDepartmentByUidEmployee,
+  getDepartmentsByPage,
 };
 
 export default departmentProvider;
