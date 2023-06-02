@@ -1,12 +1,7 @@
-export interface Documents {
-  type: string;
-  url: string;
-}
 export interface Employee {
   name: string;
   des: string;
-  imageE: string;
-  documents: { [key: string]: Documents };
+  id: string;
 }
 
 export interface Department {

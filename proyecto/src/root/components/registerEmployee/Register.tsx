@@ -28,7 +28,8 @@ const data = {
   boss: "",
   schedule: [],
   vacations: {},
-  attendance: {}
+  attendance: {},
+  files: {}
 }
 
 function Register() {
@@ -69,9 +70,6 @@ function Register() {
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 
-  const handleBrandChange = (newBrand: any) => {
-    setUserData((prevUserData) => ({ ...prevUserData, brands: newBrand }));
-  };
   return (
     <div className="flex justify-center items-center flex-col">
       <PrincipalData handleInputChange={handleInputChange} handleScheduleChange={handleScheduleChange} userData={userData} handleSubmit={handleSubmit} />

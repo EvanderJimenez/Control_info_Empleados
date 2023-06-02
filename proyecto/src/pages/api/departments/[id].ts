@@ -1,4 +1,3 @@
-
 import { departmentProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -17,7 +16,7 @@ async function getDocId(req: NextApiRequest, res: NextApiResponse) {
 async function updateId(req: NextApiRequest, res: NextApiResponse) {
   try {
     const Name = String(req.query.name);
-
+    console.log(Name);
     const {
       id,
       name,

@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Department, Documents, Employee } from "@/root/interface/departments";
+import { Department, Employee } from "@/root/interface/departments";
 import CreationDepartment from "../../creationDeparment/CreationDepartment";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGetDepartmentById, startCreateDepartment, startGetDepartmentById, startUpdateDepartment } from "@/root/redux";
+import {
+  selectGetDepartmentById,
+  startCreateDepartment,
+  startGetDepartmentById,
+  startUpdateDepartment,
+} from "@/root/redux";
 
 interface RegisterProps {
   user?: Department;
@@ -19,19 +24,18 @@ const newDtaDepart = {
   level: "",
   subDepartment: "",
   employees: {},
-}
+};
 
 function MethodsDepartments(props: RegisterProps) {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  const departId = useSelector(selectGetDepartmentById)
+  const departId = useSelector(selectGetDepartmentById);
 
   const [data, setData] = useState<Department[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [newDocuments, setNewDocuments] = useState<string>("");
-  const [newUrl, setUrl] = useState<string>("");
   const [newEmployee, setNewEmployee] = useState<string>("");
+  const [newEmployeeId, setNewEmployeeId] = useState<string>("");
+  const [passId, setPassId] = useState<string>("");
   const [newEmployeeData, setNewEmployeeData] = useState<string>("");
   const [upDate, setUpDate] = useState<boolean | null>();
   const [departmentData, setdepartmentData] = useState<Department>(() => {
@@ -53,60 +57,19 @@ function MethodsDepartments(props: RegisterProps) {
     }
   });
 
+  useEffect(() => {
+    if (passId) {
+      setdepartmentData((prevDepartmentData) => ({
+        ...prevDepartmentData,
+        subDepartment: passId,
+      }));
+    }
+  }, [passId]);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));
   };
-  const handleEditEmployee = (
-    employeeName: string,
-    updatedEmployee: Employee
-  ) => {
-    setdepartmentData((prevDepartmentData) => {
-      const updatedEmployees = { ...prevDepartmentData.employees };
-      updatedEmployees[employeeName] = updatedEmployee;
 
-      return {
-        ...prevDepartmentData,
-        employees: updatedEmployees,
-      };
-    });
-  };
-
-  const handleSubmitDocuments = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!newDocuments) {
-      toast.error("Please enter values for all fields in the document");
-      return;
-    }
-
-    const newDocumentsObject: Documents = {
-      type: newDocuments,
-      url: newUrl,
-    };
-
-    const selectedEmployee = departmentData.employees[newEmployee];
-
-    if (selectedEmployee) {
-      selectedEmployee.documents = {
-        ...selectedEmployee.documents,
-        [newDocuments]: newDocumentsObject,
-      };
-
-      setdepartmentData((prevUserData) => ({
-        ...prevUserData,
-        employees: {
-          ...prevUserData.employees,
-          [newEmployee]: selectedEmployee,
-        },
-      }));
-
-      setNewDocuments("");
-      setUrl("");
-    } else {
-      toast.error("The selected employee does not exist");
-    }
-  };
   const handleDeleteEmployee = (employeeName: string | number) => {
     setdepartmentData((prevDepartmentData) => {
       const updatedEmployees = { ...prevDepartmentData.employees };
@@ -130,25 +93,28 @@ function MethodsDepartments(props: RegisterProps) {
       return;
     }
 
-    if (!departmentData.name && !departmentData.leader && !departmentData.idEmployee) {
+    if (
+      !departmentData.name &&
+      !departmentData.leader &&
+      !departmentData.idEmployee
+    ) {
       toast.error("Department name is not defined");
-      return
+      return;
     }
 
-      dispatch(startCreateDepartment(departmentData))
-      setdepartmentData(newDtaDepart);
-
+    dispatch(startCreateDepartment(departmentData));
+    setdepartmentData(newDtaDepart);
   };
 
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-      if (!departmentData.name) {
-        toast.error("Department name is not defined");
-        return
-      }
-      dispatch(startUpdateDepartment(departmentData.name,departmentData))
-      setdepartmentData(newDtaDepart);
+    if (!departmentData.name) {
+      toast.error("Department name is not defined");
+      return;
+    }
+    dispatch(startUpdateDepartment(departmentData.name, departmentData));
+    setdepartmentData(newDtaDepart);
   };
 
   const handleSubmitEmployee = (event: React.FormEvent<HTMLFormElement>) => {
@@ -161,8 +127,7 @@ function MethodsDepartments(props: RegisterProps) {
     const newEmployeeObject: Employee = {
       name: newEmployee,
       des: newEmployeeData,
-      imageE: "",
-      documents: {},
+      id: newEmployeeId,
     };
 
     setdepartmentData((prevUserData) => ({
@@ -175,56 +140,53 @@ function MethodsDepartments(props: RegisterProps) {
 
     setNewEmployee("");
     setNewEmployeeData("");
+    setNewEmployeeId("");
   };
   const handleGetDepartment = async (id: string) => {
-
-    dispatch(startGetDepartmentById(id))
-
+    dispatch(startGetDepartmentById(id));
   };
 
   useEffect(() => {
-    if(departId){
-      setdepartmentData(departId)
+    if (departId) {
+      setdepartmentData(departId);
     }
-  
-  }, [departId])
+  }, [departId]);
 
+  const handleUpdateEmployee = (
+    employeeName: string,
+    updatedEmployee: Employee
+  ) => {
+    setdepartmentData((prevDepartmentData) => {
+      const updatedEmployees = {
+        ...prevDepartmentData.employees,
+        [employeeName]: updatedEmployee,
+      };
 
+      return {
+        ...prevDepartmentData,
+        employees: updatedEmployees,
+      };
+    });
+  };
   return (
     <div className="flex justify-center items-center flex-col">
-      {upDate ? (
-        <CreationDepartment
-          departmentsData={departmentData}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          handleSubmitEmployee={handleSubmitEmployee}
-          newEmployee={newEmployee}
-          newEmployeeData={newEmployeeData}
-          setNewEmployee={setNewEmployee}
-          setNewEmployeeData={setNewEmployeeData}
-          handleGetDepartment={handleGetDepartment}
-          handleUpdate={handleUpdate}
-          handleSubmitDocuments={handleSubmitDocuments}
-          newDocuments={newDocuments}
-          setNewDocuments={setNewDocuments}
-        />
-      ) : (
-        <CreationDepartment
-          departmentsData={departmentData}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          handleSubmitEmployee={handleSubmitEmployee}
-          newEmployee={newEmployee}
-          newEmployeeData={newEmployeeData}
-          setNewEmployee={setNewEmployee}
-          setNewEmployeeData={setNewEmployeeData}
-          handleGetDepartment={handleGetDepartment}
-          handleUpdate={handleUpdate}
-          handleSubmitDocuments={handleSubmitDocuments}
-          newDocuments={newDocuments}
-          setNewDocuments={setNewDocuments}
-        />
-      )}
+      <CreationDepartment
+        handleUpdateEmployee={handleUpdateEmployee}
+        setPassId={setPassId}
+        departmentsData={departmentData}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+        handleSubmitEmployee={handleSubmitEmployee}
+        newEmployee={newEmployee}
+        newEmployeeData={newEmployeeData}
+        setNewEmployee={setNewEmployee}
+        newEmployeeId={newEmployeeId}
+        setNewEmployeeId={setNewEmployeeId}
+        setNewEmployeeData={setNewEmployeeData}
+        handleGetDepartment={handleGetDepartment}
+        handleUpdate={handleUpdate}
+        handleDeleteEmployee={handleDeleteEmployee}
+      />
     </div>
   );
 }

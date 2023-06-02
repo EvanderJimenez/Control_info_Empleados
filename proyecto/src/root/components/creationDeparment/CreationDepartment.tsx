@@ -15,14 +15,18 @@ interface infoDepart {
   handleSubmitEmployee: (event: React.FormEvent<HTMLFormElement>) => void;
   handleGetDepartment: (id: string) => void;
   newEmployee: string;
+  newEmployeeId: string;
   newEmployeeData: string;
   setNewEmployee: React.Dispatch<React.SetStateAction<string>>;
   setPassId: React.Dispatch<React.SetStateAction<string>>;
   setNewEmployeeData: React.Dispatch<React.SetStateAction<string>>;
-  newDocuments: string;
-  setNewDocuments: React.Dispatch<React.SetStateAction<string>>;
+  setNewEmployeeId: React.Dispatch<React.SetStateAction<string>>;
   handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleSubmitDocuments: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleDeleteEmployee: (employeeName: string | number) => void;
+  handleUpdateEmployee: (
+    employeeName: string,
+    updatedEmployee: Employee
+  ) => void;
 }
 const CreationDepartment = ({
   departmentsData,
@@ -35,10 +39,9 @@ const CreationDepartment = ({
   setNewEmployeeData,
   handleGetDepartment,
   handleUpdate,
-  handleSubmitDocuments,
-  setNewDocuments,
-  newDocuments,
   setPassId,
+  handleDeleteEmployee,
+  handleUpdateEmployee,
   ...props
 }: infoDepart) => {
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
@@ -49,14 +52,12 @@ const CreationDepartment = ({
 
   return (
     <div className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full">
-      <div className="flex justify-center w-full">
-        <section className="bg-white  shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-center my-2 xl:w-1/2 lg:w-1/2 w-full">
-          <ListDepartment
-            handleGetDepartment={handleGetDepartment}
-            setPassId={setPassId}
-          />
-        </section>
-      </div>
+      <section className="bg-white  shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-center my-2   w-full">
+        <ListDepartment
+          handleGetDepartment={handleGetDepartment}
+          setPassId={setPassId}
+        />
+      </section>
 
       <FormEmployee
         departmentsData={departmentsData}
@@ -88,14 +89,17 @@ const CreationDepartment = ({
           newEmployeeData={newEmployeeData}
           setNewEmployee={setNewEmployee}
           setNewEmployeeData={setNewEmployeeData}
-          handleSubmitDocuments={handleSubmitDocuments}
-          newDocuments={newDocuments}
-          setNewDocuments={setNewDocuments}
+          setNewEmployeeId={props.setNewEmployeeId}
+          newEmployeeId={props.newEmployeeId}
         />
       )}
 
       <div className="bg-white shadow-lg rounded-lg p-4 md:p-8 flex flex-col my-4">
-        <Table departmentsData={departmentsData} />
+        <Table
+          handleUpdateEmployee={handleUpdateEmployee}
+          departmentsData={departmentsData}
+          handleDeleteEmployee={handleDeleteEmployee}
+        />
       </div>
     </div>
   );

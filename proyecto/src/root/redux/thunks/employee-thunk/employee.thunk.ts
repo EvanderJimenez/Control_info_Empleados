@@ -14,6 +14,8 @@ import { DispatchTypeAllBoss, getAllBossReducer } from "../../reducers/employee-
 import { DispatchTypeLogin, loginReducer } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
+import { DispatchTypeUpdateFile, updateFileEmployeeReducer } from "../../reducers/employee-reducer/uploadFile/UploadFile";
+import { DispatchTypeGetFileURLByName, GetFileURLByNameReducer, getFileURLByNameReducer } from "../../reducers/employee-reducer/getFileURLByName/getFileURLByNameReducer";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -75,6 +77,26 @@ export const StartUpDateEmployee = (searchUser: string, searchTerm: EmployeesTyp
   };
 };
 
+export const StartUpDateFileEmployee = (
+  searchTerm: string,
+  searchUser: string,
+  nameFile: string,
+  typeFile: string
+ 
+): any => {
+  return async (dispatch: DispatchTypeUpdateFile) => {
+    const employee = await providerRedux.uploadFileProvider(
+      searchTerm,
+      searchUser,
+      nameFile,
+      typeFile
+    );
+
+    dispatch(updateFileEmployeeReducer(employee || null));
+  };
+};
+
+
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
@@ -134,6 +156,16 @@ export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
     const response = await providerRedux.getEmployeesByIdDepartProvider(searchTerm);
 
     dispatch(getEmployeesByIdDepartmentReducer(response || null));
+  };
+};
+
+export const StarGetFileURLByName  = (uid: string,searchTerm: string): any => {
+  return async (dispatch: DispatchTypeGetFileURLByName) => {
+    const response = await providerRedux.getFileURLByName( uid,
+      searchTerm
+    );
+
+    dispatch(getFileURLByNameReducer(response || null));
   };
 };
 
