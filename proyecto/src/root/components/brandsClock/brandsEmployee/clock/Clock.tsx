@@ -1,12 +1,21 @@
+import Login from "@/root/components/login/Login";
+import { LoginEP } from "@/root/interface/employee";
 import React from "react";
 interface timeClock {
   time: string;
-  handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  loginData: LoginEP;
 }
-export default function Clock(props: timeClock) {
+
+export default function Clock({
+  handleSubmit,
+  handleInputChange,
+  loginData,
+  ...props
+}: timeClock) {
   return (
     <div>
-      {" "}
       <div className="2xl:mx-auto 2xl:container mx-4 py-16 flex flex-col items-center">
         <div className="w-full relative flex items-center justify-center">
           <img
@@ -34,15 +43,47 @@ export default function Clock(props: timeClock) {
               <br /> which can help avoid misunderstandings or disputes related
               to working time.
             </p>
-            <form action="" onSubmit={props.handleUpdate}>
-              <div className="sm:border border-white  sm:flex-row flex items-center w-full mt-12 space-y-4 sm:space-y-0">
-                <button
-                  type="submit"
-                  className=" focus:outline-none focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full  bg-blue py-4 px-6 hover:bg-opacity-75 "
-                >
-                  Add Mark
-                </button>
+            <form
+              className="bg-white  bg-opacity-25   flex items-center justify-center flex-col h-full w-full p-10"
+              onSubmit={handleSubmit}
+            >
+              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
+                  Email
+                </label>
+                <div className="mt-2.5">
+                  <input
+                    type="email"
+                    name="email"
+                    value={loginData.email}
+                    onChange={handleInputChange}
+                    id="email"
+                    placeholder="Email"
+                  />
+                </div>
               </div>
+
+              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
+                  Password
+                </label>
+                <div className="mt-2.5">
+                  <input
+                    type="password"
+                    name="password"
+                    value={loginData.password}
+                    onChange={handleInputChange}
+                    id="password"
+                    placeholder="PassWord"
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="bg-darkBlue hover:text-black text-white font-bold py-2 px-4 rounded mt-4"
+              >
+                Enter to mark
+              </button>
             </form>
           </div>
         </div>

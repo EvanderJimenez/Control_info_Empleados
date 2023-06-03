@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Clock from "./brandsEmployee/clock/Clock";
 import { SearchDepartment } from "../creationDeparment/SearchDepartment";
 import { Brands } from "@/root/interface/brands";
+import { LoginEP } from "@/root/interface/employee";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, StartLogin, selectLogin } from "@/root/redux";
 interface methodsBrands {
-  handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleUpdate: () => void;
 }
-function BrandsClock({ handleUpdate, ...props }: methodsBrands) {
+export function BrandsClock({ handleUpdate, ...props }: methodsBrands) {
   const [time, setTime] = useState("");
-
+  const loginState = useSelector(selectLogin);
+  const loading = useSelector((state: RootState) => state.loading.loading);
+  const dispatch = useDispatch();
   useEffect(() => {
     const updateClock = () => {
       const now = new Date();
@@ -30,11 +35,36 @@ function BrandsClock({ handleUpdate, ...props }: methodsBrands) {
     return () => clearInterval(interval);
   }, []);
 
+  const [data, setData] = useState<LoginEP>({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+
+    if (data.email && data.password) {
+      dispatch(StartLogin(data.email, data.password));
+    }
+  };
+  useEffect(() => {
+    if (loginState && loginState.uid) {
+    }
+  }, [loginState]);
+
   return (
     <div>
-      <Clock time={time} handleUpdate={handleUpdate} />
+      <Clock
+        time={time}
+        handleSubmit={handleLogin}
+        handleInputChange={handleInputChange}
+        loginData={data}
+      />
     </div>
   );
 }
-
-export default BrandsClock;

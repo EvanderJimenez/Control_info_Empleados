@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { format, parseISO, getDay } from "date-fns";
 import { Brands } from "@/root/interface/brands";
-import BrandsClock from "../BrandsClock";
 import { useSelector } from "react-redux";
 import { selectLogin } from "@/root/redux";
 import JustificationEmployee from "../../justification/JustificationEmployee";
 import { toast } from "react-hot-toast";
+import { BrandsClock } from "../BrandsClock";
 
 export const BrandsEmployee = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -32,49 +32,52 @@ export const BrandsEmployee = () => {
 
   useEffect(() => {
     const fetchDataAndDateOfWeekday = async () => {
-      try {
-        const response = await axios.get("http://worldtimeapi.org/api/ip");
-        const { datetime } = response.data;
-        const [date, time] = datetime.split("T");
-        setCurrentDate(date);
-        setCurrentTime(time.slice(0, 8));
+      const response = await axios.get("http://worldtimeapi.org/api/ip");
+      const { datetime } = response.data;
+      const [date, time] = datetime.split("T");
+      setCurrentDate(date);
+      setCurrentTime(time.slice(0, 8));
 
-        const parsedDate = parseISO(date);
-        const formattedDay = format(parsedDate, "EEEE");
+      const parsedDate = parseISO(date);
+      const formattedDay = format(parsedDate, "EEEE");
 
-        setFormattedDay(formattedDay);
-      } catch (error) {
-        toast.error("Error getting date and time:");
-      }
+      setFormattedDay(formattedDay);
     };
 
     fetchDataAndDateOfWeekday();
   }, [updateDateTime]);
 
-  const handleGetBrands = async (id: string) => {
-    try {
-      const response = await fetch(`/api/brands/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  useEffect(() => {
+    if (employeeLogin?.uid) {
+      handleGetBrands(employeeLogin?.uid);
+    }
+  }, [employeeLogin?.uid]);
+  useEffect(() => {
+    if (brandData.idEmployee) handleUpdate();
+  }, [brandData.idEmployee]);
 
-      if (response.ok) {
-        const data = await response.json();
-        setBrandData(data);
-      } else {
-        toast.error("Error acquiring information");
-      }
-    } catch (error) {
-      toast.error("Error getting brands data");
+  const handleGetBrands = async (id: string) => {
+    const response = await fetch(`/api/brands/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setBrandData(data);
+    } else {
+      toast.error("Error acquiring information");
     }
   };
 
   const handleUpdateCycleHours = async (cycleName: string) => {
     setUpdateDateTime(true);
     const weekday = formattedDay;
+    console.log(brandData);
     const hoursEmployee = brandData.hoursEmployee;
+    console.log(hoursEmployee);
 
     if (hoursEmployee.hasOwnProperty(weekday)) {
       const { hIni, hFin } = hoursEmployee[weekday];
@@ -170,14 +173,7 @@ export const BrandsEmployee = () => {
     return false;
   };
 
-  useEffect(() => {
-    if (employeeLogin?.uid) {
-      handleGetBrands(employeeLogin?.uid);
-    }
-  }, [employeeLogin?.uid]);
-
-  const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleUpdate = async () => {
     setIsLoading(true);
     const date = new Date(currentDate);
     const month = date.getMonth() + 1;
@@ -212,32 +208,28 @@ export const BrandsEmployee = () => {
               toast.error("The mark hours do not match the defined hours.");
             }
 
-            try {
-              const response = await fetch(
-                `/api/brands/${updatedBrandData.idEmployee}`,
-                {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(updatedBrandData),
-                }
-              );
-              if (response.ok) {
-                const updatedBrands = await response.json();
-                setBrandData((prevData) => ({
-                  ...prevData,
-                  ...updatedBrands,
-                }));
-                setFinish(true);
-                setIsLoading(false);
-
-                toast.success("Save successful");
-              } else {
-                toast.error("Save unsuccessful");
+            const response = await fetch(
+              `/api/brands/${updatedBrandData.idEmployee}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedBrandData),
               }
-            } catch (error) {
-              toast.error("Error updating brands:");
+            );
+            if (response.ok) {
+              const updatedBrands = await response.json();
+              setBrandData((prevData) => ({
+                ...prevData,
+                ...updatedBrands,
+              }));
+              setFinish(true);
+              setIsLoading(false);
+
+              toast.success("Save successful");
+            } else {
+              toast.error("Save unsuccessful");
             }
           }
         }
@@ -247,7 +239,7 @@ export const BrandsEmployee = () => {
   return (
     <div>
       <div>
-        <div style={{ position: "relative" }}>
+        <div>
           {initialLate === true && finish === true ? (
             <JustificationEmployee
               hIni={markInitial}
@@ -269,11 +261,7 @@ export const BrandsEmployee = () => {
             />
           ) : null}
         </div>
-        {finish === false ||
-        (finalDelay === false && finish) ||
-        (initialLate === true && finish) ? (
-          <BrandsClock handleUpdate={handleUpdate} />
-        ) : null}
+        {finish === false ? <BrandsClock handleUpdate={handleUpdate} /> : null}
       </div>
     </div>
   );
