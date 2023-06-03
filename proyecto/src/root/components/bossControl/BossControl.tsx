@@ -4,31 +4,14 @@ import { EmployeesType } from "@/root/types/Employee.type";
 import { useDispatch, useSelector } from "react-redux";
 import { StartUpDateEmployee, selectGetEmployeeByUid } from "@/root/redux";
 import RegisterFormEmployee from "./components/formEmployee/RegisterFormEmployee";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 const BossControl = () => {
   const dispatch = useDispatch();
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [clear, setClear] = useState(false);
 
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-  });
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
   useEffect(() => {
     if (!clear) {
@@ -36,25 +19,7 @@ const BossControl = () => {
         setDataEmployee(employeeByUid);
       }
     } else {
-      setDataEmployee({
-        uid: "",
-        name: "",
-        firstSurname: "",
-        secondSurname: "",
-        cedula: 0,
-        phoneNumber: 0,
-        photo: "",
-        jobPosition: "",
-        salary: 0,
-        enabled: true,
-        idDepartment: "",
-        password: "",
-        email: "",
-        boss: "",
-        schedule: [],
-        vacations: {},
-        attendance: {},
-      });
+      setDataEmployee(initialDataEmployee);
     }
   }, [employeeByUid, clear]);
 

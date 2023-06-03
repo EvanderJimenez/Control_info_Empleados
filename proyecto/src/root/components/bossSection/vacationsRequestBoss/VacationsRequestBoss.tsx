@@ -32,16 +32,16 @@ const VacationsRequestBoss = () => {
   const dispatch = useDispatch();
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [selectedRequest, setSelectedRequest] = useState<PendingRequest>();
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
+  const [dataEmployee, setDataEmployee] =
+    useState<EmployeesType>(initialDataEmployee);
 
   const handleAccept = async () => {
     if (selectedRequest) {
       dispatch(StartGetEmployeeByUid(selectedRequest.employeeUID));
       optionSelect = "accept";
       toast.success("Justification accepted");
-    }else{
+    } else {
       toast.error("Information not loaded");
-
     }
   };
 
@@ -51,8 +51,6 @@ const VacationsRequestBoss = () => {
   };
 
   useEffect(() => {
-    //
-
     if (employeeByUid && employeeByUid.vacations && optionSelect !== "wait") {
       const vacation = employeeByUid.vacations[selectedRequest?.key || ""];
 
@@ -70,9 +68,7 @@ const VacationsRequestBoss = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-      console.log("uid: " + updatedDataEmployee.uid);
       if (dataEmployee.uid === undefined || "") {
-        console.log("entro undefined");
         return;
       }
       console.log(JSON.stringify(updatedDataEmployee));
@@ -103,18 +99,34 @@ const VacationsRequestBoss = () => {
       <div className="flex w-full lg:w-1/2 m-3">
         <div className="flex flex-col w-full justify-center items-center">
           <div className="flex w-full justify-center space-x-5 items-center">
-            <label className="text-center font-semibold">From: {selectedRequest?.employeeName || ""}</label>
-            <label className="text-center font-semibold">Affair: {selectedRequest?.key || ""}</label>
+            <label className="text-center font-semibold">
+              From: {selectedRequest?.employeeName || ""}
+            </label>
+            <label className="text-center font-semibold">
+              Affair: {selectedRequest?.key || ""}
+            </label>
           </div>
           <section className="w-full xl:w-3/4 flex flex-col justify-center items-center">
             <div className="flex flex-row space-x-3 mb-3 justify-center items-center pt-3">
               <div className="font-semibold text-darkBlue">
                 <label>Start date: </label>
-                <input type="text" id="dateStar" className="outline-none w-auto" value={selectedRequest?.dateStart || ""} readOnly />
+                <input
+                  type="text"
+                  id="dateStar"
+                  className="outline-none w-auto"
+                  value={selectedRequest?.dateStart || ""}
+                  readOnly
+                />
               </div>
               <div className="font-semibold text-darkBlue">
                 <label>End date:</label>
-                <input type="text" className="outline-none w-auto" id="dateEnd" value={selectedRequest?.dateEnd || ""} readOnly />
+                <input
+                  type="text"
+                  className="outline-none w-auto"
+                  id="dateEnd"
+                  value={selectedRequest?.dateEnd || ""}
+                  readOnly
+                />
               </div>
             </div>
 

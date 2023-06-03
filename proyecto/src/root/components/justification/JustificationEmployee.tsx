@@ -1,10 +1,14 @@
 import { Employee } from "@/root/interface/departments";
 import { Attendance, UserData } from "@/root/interface/employee";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import FormJustify from "./formJustify/FormJustify";
 import { toast } from "react-hot-toast";
+import { EmployeesType } from "@/root/types/Employee.type";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
+import { useDispatch } from "react-redux";
+import { StartUpDateEmployee } from "@/root/redux";
 
-interface asistence {
+interface assistance {
   hIni: string;
   hFin: string;
   date: string;
@@ -19,29 +23,12 @@ export default function JustificationEmployee({
   uuid,
   setFinish,
   ...props
-}: asistence) {
+}: assistance) {
+  const dispatch = useDispatch()
   const [data, setData] = useState<UserData[]>([]);
   const [justify, setJustify] = useState("");
   const [isAttendanceUpdated, setAttendanceUpdated] = useState(false);
-  const [userData, setUserData] = useState<UserData>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    option: "register",
-    attendance: {},
-  });
+  const [userData, setUserData] = useState<EmployeesType>(initialDataEmployee);
 
   useEffect(() => {
     if (uuid) {
@@ -114,7 +101,7 @@ export default function JustificationEmployee({
   };
 
   const handleUpdate = async () => {
-    try {
+/*     try {
       const response = await fetch(`/api/employees/${userData.uid}`, {
         method: "PUT",
         headers: {
@@ -131,7 +118,8 @@ export default function JustificationEmployee({
       }
     } catch (error) {
       toast.error("Error updating user:");
-    }
+    } */
+    dispatch(StartUpDateEmployee(userData.uid, userData))
     setJustify("");
     setFinish(false);
   };

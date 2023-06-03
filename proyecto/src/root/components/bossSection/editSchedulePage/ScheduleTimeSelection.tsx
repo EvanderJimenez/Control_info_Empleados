@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 import FormSchedule from "./components/formSchedule/FormSchedule";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 interface ScheduleTimeSelectionProps {
   onScheduleChange: (schedules: Schedule[]) => void;
@@ -27,27 +28,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     { day: "Sunday", startTime: "", endTime: "" },
   ]);
 
-  const test = {
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-  };
-
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(test);
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
   const handleTimeChange = (index: number, field: "startTime" | "endTime", value: string) => {
     setSchedules((prevSchedules) => {
@@ -71,7 +52,7 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
 
     dispatch(StartUpDateEmployee(newDataEmployee?.uid || "", newDataEmployee));
 
-    setDataEmployee(test);
+    setDataEmployee(initialDataEmployee);
   };
   return (
     <div className="flex flex-wrap mt-2 justify-center">
