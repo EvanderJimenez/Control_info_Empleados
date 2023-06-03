@@ -19,6 +19,8 @@ const ComboBoxDocuments = ({
     setSelectedOption(selectedFile);
   };
 
+  console.log(items)
+
   return (
     <div className="mb-4">
       <label htmlFor="comboBox" className="block text-sm font-medium text-gray-700">

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   StarGetFileURLByName,
   StartResetUrl,
+  StartUpDateEmployee,
   StartUpDateFileEmployee,
   selectGetFileURLByName,
   selectLogin,
@@ -21,7 +22,7 @@ const DocumentsEmployee: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [nameFile, setNameFile] = useState("");
   const [selectOption, setSelectOption] = useState<Files | null>(null);
-  const [change, setChange] = useState(false)
+  const [change, setChange] = useState(false);
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
@@ -62,40 +63,55 @@ const DocumentsEmployee: React.FC = () => {
 
   const handleDownload = async () => {
     dispatch(StarGetFileURLByName(userLogin.uid, selectOption?.urlFile || ""));
-    setChange(!change)
+    setChange(!change);
   };
 
+  // ...
+
   const handleDelete = async () => {
-    if (selectOption && selectOption.urlFile) {
-      await dispatch(StartResetUrl())
+    if (selectOption) {
+      const updatedFiles = { ...userLogin.files };
+      const fileToDeleteKey = Object.keys(updatedFiles).find(
+        (key) => updatedFiles[key].name === selectOption.name
+      );
+      if (fileToDeleteKey) {
+        delete updatedFiles[fileToDeleteKey];
+        console.log(updatedFiles);
+        await dispatch(
+          StartUpDateEmployee(userLogin?.uid, {
+            ...userLogin,
+            files: updatedFiles,
+          })
+        );
+      }
     }
   };
 
   useEffect(() => {
-    console.log(fileLoad)
+    console.log(fileLoad);
     if (fileLoad && selectOption) {
       const base64Data = fileLoad.replace(/^data:.*,/, "");
       const blob = b64toBlob(base64Data);
       let newFile;
       if (selectOption.type === "pdf") {
-        console.log(newFile)
+        console.log(newFile);
         newFile = new File([blob], selectOption.name + ".pdf", {
           type: "application/pdf",
         });
         //saveAs(newFile, selectOption.name);
-        handleClearSelection()
-        dispatch(StartResetUrl())
+        handleClearSelection();
+        dispatch(StartResetUrl());
       } else if (selectOption.type === "image") {
-        console.log(fileLoad)
+        console.log(fileLoad);
         newFile = new File([blob], selectOption.name + ".png", {
           type: "image/png",
         });
         //saveAs(newFile, selectOption.name);
-        handleClearSelection()
-        dispatch(StartResetUrl())
+        handleClearSelection();
+        dispatch(StartResetUrl());
       }
     }
-  }, [fileLoad,change]);
+  }, [fileLoad, change]);
 
   function b64toBlob(base64Data: string) {
     const byteCharacters = atob(base64Data);
@@ -120,6 +136,7 @@ const DocumentsEmployee: React.FC = () => {
   };
 
   const files: Files[] = userLogin.files ? Object.values(userLogin.files) : [];
+  console.log(files);
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -168,7 +185,9 @@ const DocumentsEmployee: React.FC = () => {
             <button className="bg-darkBlue" onClick={handleDownload}>
               Download
             </button>
-            <button className="bg-black" onClick={handleDelete}>Delete</button>
+            <button className="bg-black" onClick={handleDelete}>
+              Delete
+            </button>
           </div>
         ) : file ? (
           <div className="flex flex-col p-3">
