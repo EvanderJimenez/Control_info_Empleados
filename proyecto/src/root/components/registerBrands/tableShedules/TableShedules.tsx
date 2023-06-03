@@ -1,7 +1,7 @@
-import { Brands } from "@/root/interface/brands";
+import { LaborRegistration } from "@/root/interface/brands";
 import React from "react";
 interface tableShedul {
-  brandData: Brands;
+  brandData: LaborRegistration;
   newHIni: string;
   newHFin: string;
   setNewHIni: React.Dispatch<React.SetStateAction<string>>;

@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Clock from "./brandsEmployee/clock/Clock";
-import { SearchDepartment } from "../creationDeparment/SearchDepartment";
-import { Brands } from "@/root/interface/brands";
 import { LoginEP } from "@/root/interface/employee";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StartLogin, selectLogin } from "@/root/redux";

@@ -1,4 +1,4 @@
-export interface Brands { // TODO: Improve this name, dont use plural
+export interface LaborRegistration {
   idEmployee: string;
   cycle: { [key: string]: Cycle };
   hoursEmployee: { [Key: string]: HoursEmployee };
@@ -9,18 +9,16 @@ export interface HoursEmployee {
   hFin: string;
 }
 export interface Cycle {
-  hours: { [key: string]: Hours };
+  hours: { [key: string]: HourRange };
 }
-export interface Hours { // TODO: Improve this name, like HourRange
+export interface HourRange {
   hFin: string;
   hIni: string;
 }
-export interface  Complete_brands {
-   cycle: {[key: string]: cycleDate}
+export interface Complete_brands {
+  cycle: { [key: string]: cycleDate };
 }
-export interface cycleDate{
-  hours: {[key:string]: exactlyDate }
+export interface cycleDate {
+  hours: { [key: string]: exactlyDate };
 }
-export interface exactlyDate{
-  
-}
+export interface exactlyDate {}

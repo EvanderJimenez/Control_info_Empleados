@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { format, parseISO, getDay } from "date-fns";
-import { Brands } from "@/root/interface/brands";
+import { LaborRegistration } from "@/root/interface/brands";
 import JustificationEmployee from "../../justification/JustificationEmployee";
 import { toast } from "react-hot-toast";
 import { BrandsClock } from "../BrandsClock";
+import { LoadIndicator } from "../loadIndicator/LoadIndicator";
+import { setLoading } from "@/root/redux/reducers/loading-reducer/LoadingReducer";
 interface methods {
-  brandData: Brands;
+  brandData: LaborRegistration;
   currentDate: string;
   currentTime: string;
   formattedDay: string;
   localHoursIni: string;
   localHoursFin: string;
-  setBrandData: React.Dispatch<React.SetStateAction<Brands>>;
+  setBrandData: React.Dispatch<React.SetStateAction<LaborRegistration>>;
   setHoursFin: React.Dispatch<React.SetStateAction<string>>;
   setHoursIni: React.Dispatch<React.SetStateAction<string>>;
   setUpdateDateTime: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,13 +37,17 @@ export const BrandsEmployee = ({
   const [markFinal, setMarkFinal] = useState("");
   const [finish, setFinish] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [load, setLoad] = useState(false);
   useEffect(() => {
     if (brandData?.idEmployee) handleUpdate();
   }, [brandData?.idEmployee]);
-
+  useEffect(() => {
+    if (load) {
+      window.location.reload();
+    }
+  }, [load]);
   const handleUpdate = async () => {
-    setIsLoading(true);
+    setLoading(true);
     const date = new Date(currentDate);
     const month = date.getMonth() + 1;
     let monthCycle: number;
@@ -59,6 +65,7 @@ export const BrandsEmployee = ({
 
     await handleUpdateCycleHours(nameCycle).then(
       async (updatedBrandData: any) => {
+        let value;
         if (
           formattedDay &&
           updatedBrandData.cycle &&
@@ -71,10 +78,10 @@ export const BrandsEmployee = ({
             const markEnd = existingHours.hFin;
             if (checkMarkHours(markStart, markEnd)) {
               toast.success("The hours match. Performing update...");
+              value = "true";
             } else {
               toast.error("The mark hours do not match the defined hours.");
             }
-
             const response = await fetch(
               `/api/brands/${updatedBrandData.idEmployee}`,
               {
@@ -91,10 +98,13 @@ export const BrandsEmployee = ({
                 ...prevData,
                 ...updatedBrands,
               }));
-              setFinish(true);
+
               setIsLoading(false);
 
               toast.success("Save successful");
+              if (value === "true") {
+                setLoad(true);
+              }
             } else {
               toast.error("Save unsuccessful");
             }
@@ -105,11 +115,10 @@ export const BrandsEmployee = ({
   };
 
   const handleUpdateCycleHours = async (cycleName: string) => {
+    setIsLoading(true);
     setUpdateDateTime(true);
     const weekday = formattedDay;
-    console.log(brandData);
     const hoursEmployee = brandData.hoursEmployee;
-    console.log(hoursEmployee);
 
     if (hoursEmployee.hasOwnProperty(weekday)) {
       const { hIni, hFin } = hoursEmployee[weekday];
@@ -176,6 +185,8 @@ export const BrandsEmployee = ({
           toast.success("The mark start hour is earlier than hoursIni");
           return true;
         } else {
+          setLoad(false);
+          setFinish(true);
           setInitialLate(true);
           setMarkInitial(markStart);
         }
@@ -194,6 +205,8 @@ export const BrandsEmployee = ({
         toast.success("The mark end hour is greater than or equal to hoursFin");
         return true;
       } else {
+        setLoad(false);
+        setFinish(true);
         setFinalDelay(true);
         setMarkFinal(markEnd);
       }
@@ -205,29 +218,37 @@ export const BrandsEmployee = ({
   return (
     <div>
       <div>
-        <div>
-          {initialLate === true && finish === true ? (
-            <JustificationEmployee
-              hIni={markInitial}
-              hFin={""}
-              date={currentDate}
-              uuid={brandData.idEmployee}
-              style={{ position: "absolute", top: 0, left: 0 }}
-              setFinish={setFinish}
-            />
-          ) : null}
-          {finalDelay === true && finish === true ? (
-            <JustificationEmployee
-              hIni={""}
-              hFin={markFinal}
-              date={currentDate}
-              uuid={brandData.idEmployee}
-              style={{ position: "absolute", top: 0, left: 0 }}
-              setFinish={setFinish}
-            />
-          ) : null}
-        </div>
-        {finish === false ? <BrandsClock handleUpdate={handleUpdate} /> : null}
+        {load ? (
+          <LoadIndicator />
+        ) : (
+          <div>
+            {initialLate === true && finish === true ? (
+              <JustificationEmployee
+                hIni={markInitial}
+                hFin={""}
+                date={currentDate}
+                uuid={brandData.idEmployee}
+                style={{ position: "absolute", top: 0, left: 0 }}
+                setFinish={setFinish}
+                setLoad={setLoad}
+              />
+            ) : null}
+            {finalDelay === true && finish === true ? (
+              <JustificationEmployee
+                hIni={""}
+                hFin={markFinal}
+                date={currentDate}
+                uuid={brandData.idEmployee}
+                style={{ position: "absolute", top: 0, left: 0 }}
+                setFinish={setFinish}
+                setLoad={setLoad}
+              />
+            ) : null}
+            {finish === false ? (
+              <BrandsClock handleUpdate={handleUpdate} />
+            ) : null}
+          </div>
+        )}
       </div>
     </div>
   );

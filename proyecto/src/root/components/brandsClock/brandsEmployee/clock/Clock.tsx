@@ -1,6 +1,7 @@
 import Login from "@/root/components/login/Login";
 import { LoginEP } from "@/root/interface/employee";
 import React from "react";
+import { InputClock } from "./inputClock/InputClock";
 interface timeClock {
   time: string;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -44,43 +45,21 @@ export default function Clock({
               to working time.
             </p>
             <form
-              className="bg-white  bg-opacity-25   flex items-center justify-center flex-col h-full w-full p-10"
+              className="bg-white bg-opacity-25 flex items-center justify-center flex-col h-full w-full p-10"
               onSubmit={handleSubmit}
             >
-              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
-                  Email
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    type="email"
-                    name="email"
-                    value={loginData.email}
-                    onChange={handleInputChange}
-                    id="email"
-                    placeholder="Email"
-                  />
-                </div>
-              </div>
+              <InputClock
+                handleInputChange={handleInputChange}
+                loginData={loginData}
+                labelEmail={"Email"}
+                nameEmail={"email"}
+                labelPass={"Password"}
+                namePass={"password"}
+              />
 
-              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-                <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
-                  Password
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    type="password"
-                    name="password"
-                    value={loginData.password}
-                    onChange={handleInputChange}
-                    id="password"
-                    placeholder="PassWord"
-                  />
-                </div>
-              </div>
               <button
                 type="submit"
-                className="bg-darkBlue hover:text-black text-white font-bold py-2 px-4 rounded mt-4"
+                className="bg-darkBlue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
               >
                 Enter to mark
               </button>
