@@ -12,7 +12,8 @@ export default function EmployeeCenterMenu() {
   return (
     <>
       <div className="left-0 z-50 w-full h-16 bg-lithBlue print:hidden">
-        <div className="grid h-full max-w-lg grid-cols-6 mx-auto font-medium">
+        <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
+
           <button
             onClick={() => handleButtonClick("/home/EmployeeMain/Schedule")}
             type="button"
@@ -23,16 +24,7 @@ export default function EmployeeCenterMenu() {
               Schedule
             </span>
           </button>
-          <button
-            onClick={() => handleButtonClick("/home/EmployeeMain/Brands")}
-            type="button"
-            className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
-          >
-            <img src="/Images/Timer.png" alt="" />
-            <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
-              Brands
-            </span>
-          </button>
+  
           <button
             onClick={() =>
               handleButtonClick("/home/EmployeeMain/Justification")
@@ -45,16 +37,18 @@ export default function EmployeeCenterMenu() {
               Justification
             </span>
           </button>
+
           <button
             onClick={() => handleButtonClick("/home/EmployeeMain/Vacations")}
             type="button"
             className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
           >
             <img src="/Images/WhiteCalendar.png" alt="" />
-            <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+            <span className="text-sm  group-hover:text-blue-600 dark:group-hover:text-blue-500">
               Vacations
             </span>
           </button>
+
           <button
             onClick={() => handleButtonClick("/home/EmployeeMain/Documents")}
             type="button"
@@ -65,6 +59,7 @@ export default function EmployeeCenterMenu() {
               Documents
             </span>
           </button>
+
           <button
             onClick={() => handleButtonClick("/home/EmployeeMain/Profile")}
             type="button"
@@ -87,6 +82,7 @@ export default function EmployeeCenterMenu() {
               Profile
             </span>
           </button>
+
         </div>
       </div>
     </>
