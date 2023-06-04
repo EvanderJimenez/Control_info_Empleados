@@ -36,6 +36,7 @@ function MethodsDepartments(props: RegisterProps) {
   const [newEmployee, setNewEmployee] = useState<string>("");
   const [newEmployeeId, setNewEmployeeId] = useState<string>("");
   const [passId, setPassId] = useState<string>("");
+  const [idEmployee, setIdEmployee] = useState<string>("");
   const [newEmployeeData, setNewEmployeeData] = useState<string>("");
   const [upDate, setUpDate] = useState<boolean | null>();
   const [departmentData, setdepartmentData] = useState<Department>(() => {
@@ -65,6 +66,14 @@ function MethodsDepartments(props: RegisterProps) {
       }));
     }
   }, [passId]);
+  useEffect(() => {
+    if (idEmployee) {
+      setdepartmentData((prevDepartmentData) => ({
+        ...prevDepartmentData,
+        idEmployee: idEmployee,
+      }));
+    }
+  }, [idEmployee]);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));
@@ -146,33 +155,6 @@ function MethodsDepartments(props: RegisterProps) {
     dispatch(startGetDepartmentById(id));
   };
 
-  const handleGetDepartments = async (
-    pageSize: Number,
-    currentPage: Number
-  ) => {
-    try {
-      const response = await fetch(
-        `/api/departments/by-page?pageSize=${pageSize}&currentPage=${currentPage}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        setdepartmentData(data);
-        console.log(data);
-      } else {
-        toast.error("Error acquiring information");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Error acquiring information");
-    }
-  };
   useEffect(() => {
     if (departId) {
       setdepartmentData(departId);
@@ -213,6 +195,7 @@ function MethodsDepartments(props: RegisterProps) {
         handleGetDepartment={handleGetDepartment}
         handleUpdate={handleUpdate}
         handleDeleteEmployee={handleDeleteEmployee}
+        setIdEmployee={setIdEmployee}
       />
     </div>
   );

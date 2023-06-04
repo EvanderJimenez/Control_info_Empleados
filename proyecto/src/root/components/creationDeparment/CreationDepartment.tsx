@@ -8,6 +8,8 @@ import { ListDepartment } from "../listDepartment/ListDeparment";
 import SearchInput from "../ui/searchInput/SearchInput";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { defaultSchedule } from "@/root/constants/schedule/schedule";
+import ListEmployee from "../listEmployee/ListEmployee";
+import ListEmployeeDepart from "./listEmployeeDepart/ListEmployeeDepart";
 
 interface infoDepart {
   departmentsData: Department;
@@ -24,6 +26,7 @@ interface infoDepart {
   setNewEmployeeId: React.Dispatch<React.SetStateAction<string>>;
   handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
   handleDeleteEmployee: (employeeName: string | number) => void;
+  setIdEmployee: React.Dispatch<React.SetStateAction<string>>;
   handleUpdateEmployee: (
     employeeName: string,
     updatedEmployee: Employee
@@ -43,12 +46,14 @@ const CreationDepartment = ({
   setPassId,
   handleDeleteEmployee,
   handleUpdateEmployee,
+  setIdEmployee,
   ...props
 }: infoDepart) => {
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
   const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
   const [jobPosition, setJobPosition] = useState("");
+  const [clear, setClear] = useState(false);
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
     uid: "",
     name: "",
@@ -106,6 +111,11 @@ const CreationDepartment = ({
         placeholderSeekerOne="Job Position"
         typeList="jobPosition"
         id="jobPosition"
+      />
+      <ListEmployeeDepart
+        clear={clear}
+        setClear={setClear}
+        setPassIdEmployee={setIdEmployee}
       />
       <div className="flex flex-wrap p-6 justify-center space-x-4">
         <button
