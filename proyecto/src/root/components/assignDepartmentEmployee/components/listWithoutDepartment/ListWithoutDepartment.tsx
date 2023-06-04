@@ -1,65 +1,52 @@
-import {
-  StarGetEmployeesByIdDepartment,
-  StartGetEmployeeByUid,
-} from "@/root/redux";
-import {
-  selectGetEmployeesByIdDepartment,
-  selectLogin,
-} from "@/root/redux/selectors";
+import { StarGetEmployeesByIdDepartment, StartGetEmployeeByUid } from "@/root/redux";
+import { selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface ListWithoutDepartmentProps {
   handleLoadEmployee: (uid: string) => Promise<void>;
-  change: boolean
+  change: boolean;
 }
 
-const ListWithoutDepartment = ({change,
-  handleLoadEmployee,
-}: ListWithoutDepartmentProps) => {
+const ListWithoutDepartment = ({ change, handleLoadEmployee }: ListWithoutDepartmentProps) => {
   const dispatch = useDispatch();
   const employeesListVacations = useSelector(selectLogin);
   const employeesWithoutDepart = useSelector(selectGetEmployeesByIdDepartment);
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment("0"));
-  }, [dispatch, employeesListVacations,change]);
+  }, [dispatch, employeesListVacations, change]);
 
   return (
-    <div className="container mx-auto">
+    <div className="container h-96 overflow-auto w-full space-y-4">
+     
       {employeesWithoutDepart ? (
         <div>
           {employeesWithoutDepart.length > 0 ? (
             <div>
-              <h2 className="text-2xl font-bold mb-4">
-                Employees without Department:
-              </h2>
               <ul>
                 {employeesWithoutDepart.map((employee) => (
-                  <li key={employee.uid} className="border-2 p-2">
-                    <p className="mb-1">
-                      <span className="font-semibold">Name:</span>{" "}
-                      {employee.name}
-                    </p>
-                    <p className="mb-1">
-                      <span className="font-semibold">Cedula:</span>{" "}
-                      {employee.cedula}
-                    </p>
-                    <p className="mb-1">
-                      <span className="font-semibold">Email:</span>{" "}
-                      {employee.email}
-                    </p>
-                    <p className="mb-1">
-                      <span className="font-semibold">Phone Number:</span>{" "}
-                      {employee.phoneNumber}
-                    </p>
-                    <button
-                      className="bg-blue border-r-red"
-                      onClick={() => handleLoadEmployee(employee.uid)}
-                    >
-                      Load Info
-                    </button>
-                  </li>
+                  <div className=" p-4">
+                    <li key={employee.uid} className="shadow-md bg-lithBlue bg-opacity-40  p-2">
+                      <p className="mb-1">
+                        <span className="font-semibold">Name:</span> {employee.name}
+                      </p>
+                      <p className="mb-1">
+                        <span className="font-semibold">Cedula:</span> {employee.cedula}
+                      </p>
+                      <p className="mb-1">
+                        <span className="font-semibold">Email:</span> {employee.email}
+                      </p>
+                      <p className="mb-1">
+                        <span className="font-semibold">Phone number:</span> {employee.phoneNumber}
+                      </p>
+                      <div className="w-full pt-2 flex justify-center">
+                        <button className="bg-darkBlue border-r-red" onClick={() => handleLoadEmployee(employee.uid)}>
+                          Load information
+                        </button>
+                      </div>
+                    </li>
+                  </div>
                 ))}
               </ul>
             </div>

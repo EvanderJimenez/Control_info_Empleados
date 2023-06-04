@@ -4,7 +4,7 @@ export const LoadIndicator = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-black">
       <div id="container" className="flex flex-col">
-        <div id="cubo" className="mb-4">
+        <div id="cube" className="mb-4">
           <span></span>
           <span></span>
           <span></span>
