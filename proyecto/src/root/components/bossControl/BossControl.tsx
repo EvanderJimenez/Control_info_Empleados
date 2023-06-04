@@ -35,11 +35,11 @@ const BossControl = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-200">
-      <section className="flex flex-col items-center py-4 px-4 bg-white shadow-md">
+    <div className="flex flex-wrap h-screen bg-gray-200">
+      <section className="flex flex-col md:w-1/3 items-center py-4 px-4 bg-white shadow-md">
         <ListBoss clear={clear} setClear={setClear} />
       </section>
-      <section className="flex-grow flex items-center justify-center bg-gray-100">
+      <section className="flex-grow flex md:w-2/3 items-center justify-center bg-gray-100">
         <div className="p-4 bg-white rounded shadow-lg max-w-xl m-auto">
           <RegisterFormEmployee
             handleInputChange={handleInputChange}

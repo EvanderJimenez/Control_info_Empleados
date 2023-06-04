@@ -63,7 +63,7 @@ const AssignDepartmentEmployee = () => {
 
   return (
     <div className="flex flex-wrap justify-center pb-10">
-      <section className="md:w-1/2 flex  justify-center lg:w-2/3">
+      <section className="md:w-1/2 flex  justify-center lg:w-1/2">
         <div className="flex lg:flex-col md:flex-col sm:flex-row bg-lithBlue bg-opacity-20 mt-2 justify-center ">
           <div className="flex flex-col md:flex-row mx-2 w-full">
             <InputLabel label="Name" type="text" value={employeeUpdate.name} id="name" />
@@ -88,7 +88,7 @@ const AssignDepartmentEmployee = () => {
           </div>
         </div>
       </section>
-      <section className="flex flex-col mt-2 bg-lithBlue bg-opacity-20 shadow-md items-center justify-center w-full md:w-1/2 lg:w-1/3">
+      <section className="flex flex-col mt-2 bg-lithBlue bg-opacity-20 shadow-md items-center justify-center w-full md:w-1/2 lg:w-1/2">
         <h2 className="text-md text-center font-bold mb-4 m-4 bg-yellow rounded">Employees without department:</h2>
         <ListWithoutDepartment change={change} handleLoadEmployee={handleLoadEmployee} />
       </section>
