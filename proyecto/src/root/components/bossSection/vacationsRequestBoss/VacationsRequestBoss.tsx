@@ -2,19 +2,11 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import Filters from "./components/filters/Filters";
 import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectGetEmployeeByUid,
-  selectLogin,
-} from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { PendingRequest } from "@/root/interface/employee";
-import {
-  ResetEmployeeByUid,
-  StartGetEmployeeByUid,
-  StartUpDateEmployee,
-} from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { ResetEmployeeByUid, StartGetEmployeeByUid, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { toast } from "react-hot-toast";
-import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 let optionSelect = "wait";
 
@@ -57,16 +49,20 @@ const VacationsRequestBoss = () => {
     if (selectedRequest) {
       dispatch(StartGetEmployeeByUid(selectedRequest.employeeUID));
       optionSelect = "accept";
-      toast.success("Justificación aceptada");
-    }else{
+      toast.success("Justification accepted");
+    } else {
       toast.error("Information not loaded");
-
     }
   };
 
   const handleDenied = async () => {
-    await dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
-    optionSelect = "denied";
+    if (selectedRequest) {
+      await dispatch(StartGetEmployeeByUid(selectedRequest?.employeeUID || ""));
+      optionSelect = "denied";
+      toast.success("Justification not accepted");
+    } else {
+      toast.error("Information not loaded");
+    }
   };
 
   useEffect(() => {
@@ -95,9 +91,7 @@ const VacationsRequestBoss = () => {
       }
       console.log(JSON.stringify(updatedDataEmployee));
       console.log(JSON.stringify(dataEmployee.vacations));
-      dispatch(
-        StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee)
-      );
+      dispatch(StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee));
       dispatch(ResetEmployeeByUid());
       optionSelect = "wait";
       setSelectedRequest(pendingRequest);
@@ -111,10 +105,7 @@ const VacationsRequestBoss = () => {
           <Filters />
         </div>
         <div>
-          <ListRequestVacations
-            option={optionSelect}
-            selectedRequest={setSelectedRequest}
-          />
+          <ListRequestVacations option={optionSelect} selectedRequest={setSelectedRequest} />
         </div>
       </div>
       <div className="flex w-full lg:w-1/2 m-3">
@@ -144,6 +135,7 @@ const VacationsRequestBoss = () => {
                 cols={40}
                 rows={10}
                 value={selectedRequest?.description || ""}
+                title="Information about"
                 readOnly
               ></textarea>
               <div className="flex flex-row justify-between w-full sm:flex-row">
