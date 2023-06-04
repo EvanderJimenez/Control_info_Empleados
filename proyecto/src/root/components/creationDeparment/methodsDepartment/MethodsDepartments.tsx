@@ -146,6 +146,33 @@ function MethodsDepartments(props: RegisterProps) {
     dispatch(startGetDepartmentById(id));
   };
 
+  const handleGetDepartments = async (
+    pageSize: Number,
+    currentPage: Number
+  ) => {
+    try {
+      const response = await fetch(
+        `/api/departments/by-page?pageSize=${pageSize}&currentPage=${currentPage}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setdepartmentData(data);
+        console.log(data);
+      } else {
+        toast.error("Error acquiring information");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error acquiring information");
+    }
+  };
   useEffect(() => {
     if (departId) {
       setdepartmentData(departId);

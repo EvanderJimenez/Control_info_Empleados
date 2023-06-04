@@ -1,11 +1,10 @@
-
 import { brandsProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {
   const idEmployee = String(req.query.idEmployee);
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
+  try {
     const brand = await brandsProvider.getDocByEmployeeId(idEmployee);
     if (brand === null) {
       res.status(404).json({ message: "Not found" });
@@ -15,10 +14,9 @@ async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
-  
 }
 async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
+  try {
     const uid = String(req.query.idEmployee);
 
     const { idEmployee, cycle, hoursEmployee } = req.body;

@@ -5,6 +5,9 @@ import AddEmployee from "./addEmployee/AddEmployee";
 import Table from "./table/Table";
 import { FormEmployee } from "./formEmployee/FormEmployee";
 import { ListDepartment } from "../listDepartment/ListDeparment";
+import SearchInput from "../ui/searchInput/SearchInput";
+import { EmployeesType } from "@/root/types/Employee.type";
+import { defaultSchedule } from "@/root/constants/schedule/schedule";
 
 interface infoDepart {
   departmentsData: Department;
@@ -43,7 +46,28 @@ const CreationDepartment = ({
   ...props
 }: infoDepart) => {
   const [showEmployeeForm, setShowEmployeeForm] = useState(false);
-
+  const [cedula, setCedula] = useState("");
+  const [name, setName] = useState("");
+  const [jobPosition, setJobPosition] = useState("");
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
+    uid: "",
+    name: "",
+    firstSurname: "",
+    secondSurname: "",
+    cedula: 0,
+    phoneNumber: 0,
+    photo: "",
+    jobPosition: "",
+    salary: 0,
+    enabled: true,
+    idDepartment: "",
+    password: "",
+    email: "",
+    boss: "",
+    schedule: defaultSchedule,
+    vacations: {},
+    attendance: {},
+  });
   const handleToggleEmployeeForm = () => {
     setShowEmployeeForm(!showEmployeeForm);
   };
@@ -62,7 +86,27 @@ const CreationDepartment = ({
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
       />
-
+      <SearchInput
+        labelInputSeekerOne="text"
+        valueEnd={cedula}
+        placeholderSeekerOne="Cedula"
+        typeList="cedula"
+        id="cedula"
+      />
+      <SearchInput
+        labelInputSeekerOne="text"
+        valueEnd={name}
+        placeholderSeekerOne="Name"
+        typeList="name"
+        id="name"
+      />
+      <SearchInput
+        labelInputSeekerOne="text"
+        valueEnd={jobPosition}
+        placeholderSeekerOne="Job Position"
+        typeList="jobPosition"
+        id="jobPosition"
+      />
       <div className="flex flex-wrap p-6 justify-center space-x-4">
         <button
           onClick={handleToggleEmployeeForm}
