@@ -20,7 +20,6 @@ export type EmployeesType = {
   password: string;
   email: string;
   boss: string;
-  schedule: Schedule[];
   vacations: { [Key: string]: Vacations };
   attendance:{ [Key: string]: Attendance };
   files: { [Key: string]: Files };

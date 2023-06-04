@@ -1,5 +1,3 @@
-import { Employee } from "@/root/interface/departments";
-import { Attendance, UserData } from "@/root/interface/employee";
 import React, { useState, useEffect, use } from "react";
 import FormJustify from "./formJustify/FormJustify";
 import { toast } from "react-hot-toast";
@@ -102,24 +100,6 @@ export default function JustificationEmployee({
   };
 
   const handleUpdate = async () => {
-/*     try {
-      const response = await fetch(`/api/employees/${userData.uid}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (response.ok) {
-        const updatedUser = await response.json();
-        setData(updatedUser);
-      } else {
-        throw new Error("Failed to update user");
-      }
-    } catch (error) {
-      toast.error("Error updating user:");
-    } */
     dispatch(StartUpDateEmployee(userData.uid, userData))
     
     if (justify !== "") {

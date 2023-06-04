@@ -6,6 +6,9 @@ import { toast } from "react-hot-toast";
 import { BrandsClock } from "../BrandsClock";
 import { LoadIndicator } from "../loadIndicator/LoadIndicator";
 import { setLoading } from "@/root/redux/reducers/loading-reducer/LoadingReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUpdateBrands, startUpdateBrands } from "@/root/redux";
+
 interface methods {
   brandData: LaborRegistration;
   currentDate: string;
@@ -18,6 +21,9 @@ interface methods {
   setHoursIni: React.Dispatch<React.SetStateAction<string>>;
   setUpdateDateTime: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+let value: string;
+
 export const BrandsEmployee = ({
   brandData,
   currentDate,
@@ -31,6 +37,8 @@ export const BrandsEmployee = ({
   setUpdateDateTime,
   ...props
 }: methods) => {
+  const dispatch = useDispatch();
+  const brandsUpdate = useSelector(selectUpdateBrands);
   const [initialLate, setInitialLate] = useState(false);
   const [finalDelay, setFinalDelay] = useState(false);
   const [markInitial, setMarkInitial] = useState("");
@@ -65,7 +73,6 @@ export const BrandsEmployee = ({
 
     await handleUpdateCycleHours(nameCycle).then(
       async (updatedBrandData: any) => {
-        let value;
         if (
           formattedDay &&
           updatedBrandData.cycle &&
@@ -82,37 +89,32 @@ export const BrandsEmployee = ({
             } else {
               toast.error("The mark hours do not match the defined hours.");
             }
-            const response = await fetch(
-              `/api/brands/${updatedBrandData.idEmployee}`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updatedBrandData),
-              }
+
+            await dispatch(
+              startUpdateBrands(updatedBrandData.id, updatedBrandData)
             );
-            if (response.ok) {
-              const updatedBrands = await response.json();
-              setBrandData((prevData) => ({
-                ...prevData,
-                ...updatedBrands,
-              }));
-
-              setIsLoading(false);
-
-              toast.success("Save successful");
-              if (value === "true") {
-                setLoad(true);
-              }
-            } else {
-              toast.error("Save unsuccessful");
-            }
           }
         }
       }
     );
   };
+
+  useEffect(() => {
+    if (brandsUpdate) {
+      setBrandData((prevData) => ({
+        ...prevData,
+        ...brandsUpdate,
+      }));
+
+      setIsLoading(false);
+
+      toast.success("Save successful");
+
+      if (value === "true") {
+        setLoad(true);
+      }
+    }
+  }, [brandsUpdate]);
 
   const handleUpdateCycleHours = async (cycleName: string) => {
     setIsLoading(true);
