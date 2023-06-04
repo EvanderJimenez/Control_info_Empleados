@@ -7,6 +7,8 @@ import {
   StartUpDateFileEmployee,
   selectGetFileURLByName,
   selectLogin,
+  selectUpdateEmployee,
+  selectUploadFile,
 } from "@/root/redux";
 import { Files } from "@/root/types/Employee.type";
 import ComboBoxDocuments from "./components/comboBoxDocuments/ComboBoxDocuments";
@@ -18,6 +20,8 @@ const DocumentsEmployee: React.FC = () => {
   const userLogin = useSelector(selectLogin);
   const fileLoad = useSelector(selectGetFileURLByName);
   const dispatch = useDispatch();
+  const employeeUpdate = useSelector(selectUpdateEmployee);
+  const fileUpdate = useSelector(selectUploadFile)
 
   const [file, setFile] = useState<File | null>(null);
   const [nameFile, setNameFile] = useState("");
@@ -134,8 +138,12 @@ const DocumentsEmployee: React.FC = () => {
     setSelectOption(null);
   };
 
-  const files: Files[] = userLogin.files ? Object.values(userLogin.files) : [];
-  console.log(files);
+  const files: Files[] = employeeUpdate ? employeeUpdate.files ? Object.values(employeeUpdate.files) : userLogin.files ? Object.values(userLogin.files) : [] : [];
+
+
+  //const files: Files[] = userLogin.files ? Object.values(userLogin.files) : [];
+  console.log(fileUpdate);
+  console.log(files)
 
   return (
     <div className="grid grid-cols-3 gap-4">

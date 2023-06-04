@@ -288,7 +288,7 @@ const uploadFile = async (
   uid: string,
   nameFile: string,
   typeFile: string
-): Promise<string> => {
+) => {
   /*   if (typeof fileBase64 !== "string" || !fileBase64.startsWith("data:image/")) {
     throw new Error("Invalid file format");
   } */
@@ -308,7 +308,7 @@ const uploadFile = async (
   );
 
   if (employeeSnapshot.size === 0) {
-    return "";
+    return null;
   }
 
   const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
@@ -326,8 +326,12 @@ const uploadFile = async (
 
   await updateDoc(employeeRef, { files: Object.fromEntries(filesMap) });
 
-  return downloadURL;
+  const updatedEmployeeSnapshot = await getDoc(employeeRef);
+  const updatedEmployeeData = updatedEmployeeSnapshot.data() as EmployeesType;
+
+  return updatedEmployeeData;
 };
+
 
 const getFileURLByName = async (
   uid: string,

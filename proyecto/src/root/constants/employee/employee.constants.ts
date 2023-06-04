@@ -1,4 +1,4 @@
-import { PendingRequest } from "@/root/interface/employee";
+import { PendingRequest, PendingRequestJustifications } from "@/root/interface/employee";
 
  export const initialDataEmployee = {
     uid: "",
@@ -29,4 +29,15 @@ import { PendingRequest } from "@/root/interface/employee";
     dateEnd: "",
     description: "",
     approved: "",
+  };
+
+  export const pendingRequestJustification: PendingRequestJustifications = {
+    key: "",
+    employeeName: "",
+    employeeUID: "",
+    startTime: "",
+    endTime: "",
+    justificationFin: "",
+    justificationIni: "",
+    state: "",
   };

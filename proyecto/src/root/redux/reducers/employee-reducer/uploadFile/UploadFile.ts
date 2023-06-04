@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
 interface UpdateFileEmployeeState {
-    updateFileEmployee: string | null
+    updateFileEmployee: EmployeesType | null
   }
 
   export const initialStateUpdateFile: UpdateFileEmployeeState = {
@@ -21,7 +21,7 @@ interface UpdateFileEmployeeState {
 
     reducers: {
 
-        updateFileEmployeeReducer: (state, action: PayloadAction<string>) =>{
+        updateFileEmployeeReducer: (state, action: PayloadAction<EmployeesType>) =>{
           state.updateFileEmployee = action.payload;
       },
     },
