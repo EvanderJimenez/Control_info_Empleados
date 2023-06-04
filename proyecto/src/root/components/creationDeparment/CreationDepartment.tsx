@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import Input, { InputDepartment } from "./input/InputDepartment";
 import { Department, Employee } from "@/root/interface/departments";
 import AddEmployee from "./addEmployee/AddEmployee";
-import { SearchDepartment } from "./SearchDepartment";
-import AddDocuments from "./addEmployee/addDocuments/AddDocuments";
 import Table from "./table/Table";
 import { FormEmployee } from "./formEmployee/FormEmployee";
 import { ListDepartment } from "../listDepartment/ListDeparment";

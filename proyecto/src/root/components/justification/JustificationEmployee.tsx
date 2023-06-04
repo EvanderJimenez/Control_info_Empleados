@@ -15,17 +15,18 @@ interface assistance {
   uuid: string;
   style?: React.CSSProperties;
   setFinish: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoad: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function JustificationEmployee({
   hIni,
   hFin,
   uuid,
-  setFinish,
+  setLoad,
   ...props
 }: assistance) {
   const dispatch = useDispatch()
-  const [data, setData] = useState<UserData[]>([]);
+  const [data, setData] = useState<EmployeesType[]>([]);
   const [justify, setJustify] = useState("");
   const [isAttendanceUpdated, setAttendanceUpdated] = useState(false);
   const [userData, setUserData] = useState<EmployeesType>(initialDataEmployee);
@@ -120,8 +121,11 @@ export default function JustificationEmployee({
       toast.error("Error updating user:");
     } */
     dispatch(StartUpDateEmployee(userData.uid, userData))
+    
+    if (justify !== "") {
+      setLoad(true);
+    }
     setJustify("");
-    setFinish(false);
   };
 
   const handleEmployee = async (id: string) => {

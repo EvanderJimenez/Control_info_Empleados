@@ -1,4 +1,9 @@
-import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
+import {
+  LaborRegistration,
+  Cycle,
+  HourRange,
+  HoursEmployee,
+} from "@/root/interface/brands";
 import React, { useState, useEffect } from "react";
 import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import axios from "axios";
@@ -54,7 +59,7 @@ export default function RegisterBrand() {
   };
 
   const [newHFin, setNewHFin] = useState("");
-  const [brandData, setBrandData] = useState<Brands>(data);
+  const [brandData, setBrandData] = useState<LaborRegistration>(data);
 
   const handleDayChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setNewDate(event.target.value);

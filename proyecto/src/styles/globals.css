@@ -395,3 +395,52 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+#cubo,#container{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+#container{
+  width: 20%;
+  height: 300px;
+}
+
+#cubo{
+  height: 60%;
+  transform-style: preserve-3d;
+  animation: rotate 8s linear infinite;
+
+}
+
+#cubo > span{
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  border: 2px solid white;
+  box-shadow: inset 0px 0px 15px 5px rgba(3, 102, 148, 0.2),0px
+  0px 40px  1px rgba(67, 195,255, .15);
+  border-radius: 4px;
+}
+
+#cubo> span:nth-child(1){transform: rotateY(90deg)translateZ(2em);}
+#cubo> span:nth-child(2){transform: rotateY(90deg)translateZ(-2em);}
+#cubo> span:nth-child(3){transform: rotateY(90deg)translateZ(-2em);}
+#cubo> span:nth-child(4){transform: rotateY(90deg)translateZ(2em);}
+#cubo> span:nth-child(5){transform: translateZ(-2em);}
+#cubo> span:nth-child(6){transform: translateZ(2em);}
+
+#loading{
+  height: 40%;
+}
+
+@keyframes rotate {
+0%{
+  transform: rotateY(0deg) rotateX(0deg);
+}
+50%{
+  transform: rotateY(360deg) rotateX(360deg);
+}
+0%{
+  transform: rotateY(0deg) rotateX(0deg);
+}
+}

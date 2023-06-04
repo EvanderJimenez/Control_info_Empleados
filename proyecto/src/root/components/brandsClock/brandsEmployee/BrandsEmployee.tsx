@@ -1,77 +1,121 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { format, parseISO, getDay } from "date-fns";
-import { Brands } from "@/root/interface/brands";
-import BrandsClock from "../BrandsClock";
-import { useSelector } from "react-redux";
-import { selectLogin } from "@/root/redux";
+import { LaborRegistration } from "@/root/interface/brands";
 import JustificationEmployee from "../../justification/JustificationEmployee";
 import { toast } from "react-hot-toast";
-
-export const BrandsEmployee = () => {
-  const [currentDate, setCurrentDate] = useState("");
-  const [currentTime, setCurrentTime] = useState("");
-  const [hoursIni, setHoursIni] = useState("");
-  const [formattedDay, setFormattedDay] = useState("");
-  const [hoursFin, setHoursFin] = useState("");
-  const employeeLogin = useSelector(selectLogin);
-  const [updateDateTime, setUpdateDateTime] = useState(false);
+import { BrandsClock } from "../BrandsClock";
+import { LoadIndicator } from "../loadIndicator/LoadIndicator";
+import { setLoading } from "@/root/redux/reducers/loading-reducer/LoadingReducer";
+interface methods {
+  brandData: LaborRegistration;
+  currentDate: string;
+  currentTime: string;
+  formattedDay: string;
+  localHoursIni: string;
+  localHoursFin: string;
+  setBrandData: React.Dispatch<React.SetStateAction<LaborRegistration>>;
+  setHoursFin: React.Dispatch<React.SetStateAction<string>>;
+  setHoursIni: React.Dispatch<React.SetStateAction<string>>;
+  setUpdateDateTime: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export const BrandsEmployee = ({
+  brandData,
+  currentDate,
+  formattedDay,
+  localHoursFin,
+  localHoursIni,
+  setBrandData,
+  currentTime,
+  setHoursFin,
+  setHoursIni,
+  setUpdateDateTime,
+  ...props
+}: methods) => {
   const [initialLate, setInitialLate] = useState(false);
   const [finalDelay, setFinalDelay] = useState(false);
   const [markInitial, setMarkInitial] = useState("");
   const [markFinal, setMarkFinal] = useState("");
   const [finish, setFinish] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  let localHoursIni: string;
-  let localHoursFin: string;
-  const [brandData, setBrandData] = useState<Brands>({
-    idEmployee: "",
-    cycle: {},
-    hoursEmployee: {},
-  });
-
+  const [load, setLoad] = useState(false);
   useEffect(() => {
-    const fetchDataAndDateOfWeekday = async () => {
-      try {
-        const response = await axios.get("http://worldtimeapi.org/api/ip");
-        const { datetime } = response.data;
-        const [date, time] = datetime.split("T");
-        setCurrentDate(date);
-        setCurrentTime(time.slice(0, 8));
-
-        const parsedDate = parseISO(date);
-        const formattedDay = format(parsedDate, "EEEE");
-
-        setFormattedDay(formattedDay);
-      } catch (error) {
-        toast.error("Error getting date and time:");
-      }
-    };
-
-    fetchDataAndDateOfWeekday();
-  }, [updateDateTime]);
-
-  const handleGetBrands = async (id: string) => {
-    try {
-      const response = await fetch(`/api/brands/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setBrandData(data);
-      } else {
-        
-      }
-    } catch (error) {
-      
+    if (brandData?.idEmployee) handleUpdate();
+  }, [brandData?.idEmployee]);
+  useEffect(() => {
+    if (load) {
+      window.location.reload();
     }
+  }, [load]);
+  const handleUpdate = async () => {
+    setLoading(true);
+    const date = new Date(currentDate);
+    const month = date.getMonth() + 1;
+    let monthCycle: number;
+
+    if (month >= 1 && month <= 6) {
+      monthCycle = 1;
+    } else if (month >= 7 && month <= 12) {
+      monthCycle = 2;
+    } else {
+      monthCycle = 0;
+    }
+
+    const year = new Date(currentDate).getFullYear();
+    const nameCycle = monthCycle.toString() + year.toString();
+
+    await handleUpdateCycleHours(nameCycle).then(
+      async (updatedBrandData: any) => {
+        let value;
+        if (
+          formattedDay &&
+          updatedBrandData.cycle &&
+          updatedBrandData.cycle[nameCycle]
+        ) {
+          const cycle = updatedBrandData.cycle[nameCycle];
+          const existingHours = cycle.hours[currentDate];
+          if (existingHours) {
+            const markStart = existingHours.hIni;
+            const markEnd = existingHours.hFin;
+            if (checkMarkHours(markStart, markEnd)) {
+              toast.success("The hours match. Performing update...");
+              value = "true";
+            } else {
+              toast.error("The mark hours do not match the defined hours.");
+            }
+            const response = await fetch(
+              `/api/brands/${updatedBrandData.idEmployee}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedBrandData),
+              }
+            );
+            if (response.ok) {
+              const updatedBrands = await response.json();
+              setBrandData((prevData) => ({
+                ...prevData,
+                ...updatedBrands,
+              }));
+
+              setIsLoading(false);
+
+              toast.success("Save successful");
+              if (value === "true") {
+                setLoad(true);
+              }
+            } else {
+              toast.error("Save unsuccessful");
+            }
+          }
+        }
+      }
+    );
   };
 
   const handleUpdateCycleHours = async (cycleName: string) => {
+    setIsLoading(true);
     setUpdateDateTime(true);
     const weekday = formattedDay;
     const hoursEmployee = brandData.hoursEmployee;
@@ -119,7 +163,6 @@ export const BrandsEmployee = () => {
       });
     });
   };
-
   const checkMarkHours = (markStart: string, markEnd: string): boolean => {
     let hoursIni = localHoursIni;
     let hoursFin = localHoursFin;
@@ -127,8 +170,6 @@ export const BrandsEmployee = () => {
       toast.error("Both markStart and markEnd are required");
       return false;
     }
-    console.log(markStart, markEnd);
-    console.log(hoursIni, hoursFin);
     if (!markEnd) {
       if (markStart) {
         const markStartHour = Number(markStart.split(":")[0]);
@@ -144,6 +185,8 @@ export const BrandsEmployee = () => {
           toast.success("The mark start hour is earlier than hoursIni");
           return true;
         } else {
+          setLoad(false);
+          setFinish(true);
           setInitialLate(true);
           setMarkInitial(markStart);
         }
@@ -162,6 +205,8 @@ export const BrandsEmployee = () => {
         toast.success("The mark end hour is greater than or equal to hoursFin");
         return true;
       } else {
+        setLoad(false);
+        setFinish(true);
         setFinalDelay(true);
         setMarkFinal(markEnd);
       }
@@ -170,110 +215,40 @@ export const BrandsEmployee = () => {
     return false;
   };
 
-  useEffect(() => {
-    if (employeeLogin?.uid) {
-      handleGetBrands(employeeLogin?.uid);
-    }
-  }, [employeeLogin?.uid]);
-
-  const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsLoading(true);
-    const date = new Date(currentDate);
-    const month = date.getMonth() + 1;
-    let monthCycle: number;
-
-    if (month >= 1 && month <= 6) {
-      monthCycle = 1;
-    } else if (month >= 7 && month <= 12) {
-      monthCycle = 2;
-    } else {
-      monthCycle = 0;
-    }
-
-    const year = new Date(currentDate).getFullYear();
-    const nameCycle = monthCycle.toString() + year.toString();
-
-    await handleUpdateCycleHours(nameCycle).then(
-      async (updatedBrandData: any) => {
-        if (
-          formattedDay &&
-          updatedBrandData.cycle &&
-          updatedBrandData.cycle[nameCycle]
-        ) {
-          const cycle = updatedBrandData.cycle[nameCycle];
-          const existingHours = cycle.hours[currentDate];
-          if (existingHours) {
-            const markStart = existingHours.hIni;
-            const markEnd = existingHours.hFin;
-            if (checkMarkHours(markStart, markEnd)) {
-              toast.success("The hours match. Performing update...");
-            } else {
-              toast.error("The mark hours do not match the defined hours.");
-            }
-
-            try {
-              const response = await fetch(
-                `/api/brands/${updatedBrandData.idEmployee}`,
-                {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(updatedBrandData),
-                }
-              );
-              if (response.ok) {
-                const updatedBrands = await response.json();
-                setBrandData((prevData) => ({
-                  ...prevData,
-                  ...updatedBrands,
-                }));
-                setFinish(true);
-                setIsLoading(false);
-
-                toast.success("Save successful");
-              } else {
-                toast.error("Save unsuccessful");
-              }
-            } catch (error) {
-              toast.error("Error updating brands:");
-            }
-          }
-        }
-      }
-    );
-  };
   return (
     <div>
       <div>
-        <div style={{ position: "relative" }}>
-          {initialLate === true && finish === true ? (
-            <JustificationEmployee
-              hIni={markInitial}
-              hFin={""}
-              date={currentDate}
-              uuid={brandData.idEmployee}
-              style={{ position: "absolute", top: 0, left: 0 }}
-              setFinish={setFinish}
-            />
-          ) : null}
-          {finalDelay === true && finish === true ? (
-            <JustificationEmployee
-              hIni={""}
-              hFin={markFinal}
-              date={currentDate}
-              uuid={brandData.idEmployee}
-              style={{ position: "absolute", top: 0, left: 0 }}
-              setFinish={setFinish}
-            />
-          ) : null}
-        </div>
-        {finish === false ||
-        (finalDelay === false && finish) ||
-        (initialLate === true && finish) ? (
-          <BrandsClock handleUpdate={handleUpdate} />
-        ) : null}
+        {load ? (
+          <LoadIndicator />
+        ) : (
+          <div>
+            {initialLate === true && finish === true ? (
+              <JustificationEmployee
+                hIni={markInitial}
+                hFin={""}
+                date={currentDate}
+                uuid={brandData.idEmployee}
+                style={{ position: "absolute", top: 0, left: 0 }}
+                setFinish={setFinish}
+                setLoad={setLoad}
+              />
+            ) : null}
+            {finalDelay === true && finish === true ? (
+              <JustificationEmployee
+                hIni={""}
+                hFin={markFinal}
+                date={currentDate}
+                uuid={brandData.idEmployee}
+                style={{ position: "absolute", top: 0, left: 0 }}
+                setFinish={setFinish}
+                setLoad={setLoad}
+              />
+            ) : null}
+            {finish === false ? (
+              <BrandsClock handleUpdate={handleUpdate} />
+            ) : null}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,12 +1,22 @@
+import Login from "@/root/components/login/Login";
+import { LoginEP } from "@/root/interface/employee";
 import React from "react";
+import { InputClock } from "./inputClock/InputClock";
 interface timeClock {
   time: string;
-  handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  loginData: LoginEP;
 }
-export default function Clock(props: timeClock) {
+
+export default function Clock({
+  handleSubmit,
+  handleInputChange,
+  loginData,
+  ...props
+}: timeClock) {
   return (
     <div>
-      {" "}
       <div className="2xl:mx-auto 2xl:container mx-4 py-16 flex flex-col items-center">
         <div className="w-full relative flex items-center justify-center">
           <img
@@ -34,15 +44,25 @@ export default function Clock(props: timeClock) {
               <br /> which can help avoid misunderstandings or disputes related
               to working time.
             </p>
-            <form action="" onSubmit={props.handleUpdate}>
-              <div className="sm:border border-white  sm:flex-row flex items-center w-full mt-12 space-y-4 sm:space-y-0">
-                <button
-                  type="submit"
-                  className=" focus:outline-none focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full  bg-blue py-4 px-6 hover:bg-opacity-75 "
-                >
-                  Add Mark
-                </button>
-              </div>
+            <form
+              className="bg-white bg-opacity-25 flex items-center justify-center flex-col h-full w-full p-10"
+              onSubmit={handleSubmit}
+            >
+              <InputClock
+                handleInputChange={handleInputChange}
+                loginData={loginData}
+                labelEmail={"Email"}
+                nameEmail={"email"}
+                labelPass={"Password"}
+                namePass={"password"}
+              />
+
+              <button
+                type="submit"
+                className="bg-darkBlue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              >
+                Enter to mark
+              </button>
             </form>
           </div>
         </div>
