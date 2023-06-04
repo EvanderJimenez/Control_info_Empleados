@@ -1,3 +1,5 @@
+import { PendingRequest } from "@/root/interface/employee";
+
  export const initialDataEmployee = {
     uid: "",
     name: "",
@@ -18,3 +20,13 @@
     attendance: {},
     files: {}
   }
+
+  export const pendingRequest: PendingRequest = {
+    key: "",
+    employeeName: "",
+    employeeUID: "",
+    dateStart: "",
+    dateEnd: "",
+    description: "",
+    approved: "",
+  };

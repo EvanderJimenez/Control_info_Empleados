@@ -66,7 +66,6 @@ const DocumentsEmployee: React.FC = () => {
     setChange(!change);
   };
 
-  // ...
 
   const handleDelete = async () => {
     if (selectOption) {
@@ -165,7 +164,7 @@ const DocumentsEmployee: React.FC = () => {
                   alt="Selected File"
                   className="w-64 h-auto"
                 />
-              ) : (
+              )  : (
                 <div className="flex items-center">
                   <img
                     src="/Images/pdf.png"
@@ -195,11 +194,22 @@ const DocumentsEmployee: React.FC = () => {
               <span className="font-bold">File selected:</span> {file.name}
             </div>
             <div>
-              <img
-                src={URL.createObjectURL(file)}
-                alt="Selected File"
-                className="w-64 h-auto"
-              />
+              {file.type.startsWith("image/") ? (
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt="Selected File"
+                  className="w-64 h-auto"
+                />
+              ) : (
+                <div className="flex items-center">
+                  <img
+                    src="/Images/pdf.png"
+                    alt="PDF Icon"
+                    className="w-8 h-8 mr-2"
+                  />
+                  <span>{file.name}</span>
+                </div>
+              )}
             </div>
             <label htmlFor="document">Name File: </label>
             <input

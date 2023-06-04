@@ -46,14 +46,17 @@ export const BrandsEmployee = ({
   const [finish, setFinish] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [load, setLoad] = useState(false);
+
   useEffect(() => {
     if (brandData?.idEmployee) handleUpdate();
   }, [brandData?.idEmployee]);
+
   useEffect(() => {
     if (load) {
       window.location.reload();
     }
   }, [load]);
+
   const handleUpdate = async () => {
     setLoading(true);
     const date = new Date(currentDate);
@@ -73,6 +76,7 @@ export const BrandsEmployee = ({
 
     await handleUpdateCycleHours(nameCycle).then(
       async (updatedBrandData: any) => {
+        console.log(updatedBrandData)
         if (
           formattedDay &&
           updatedBrandData.cycle &&

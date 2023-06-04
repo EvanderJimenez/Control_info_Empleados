@@ -6,12 +6,12 @@ import { selectGetByVariable, selectGetEmployeeByUid, selectGetFileURLByName } f
 import { EmployeesType, Files } from "@/root/types/Employee.type";
 import { ResetByVariable, ResetEmployeeByUid, StarGetFileURLByName, StartDismissEmployee, StartGetByVariable, StartGetEmployeeByUid, StartResetUrl, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { toast } from "react-hot-toast";
-import { defaultSchedule } from "@/root/constants/schedule/schedule";
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import ComboBox from "../../assignDepartmentEmployee/components/comboBox/ComboBox";
 import ComboBoxDocuments from "../../employeeSection/documentsEmployee/components/comboBoxDocuments/ComboBoxDocuments";
 import { saveAs } from "file-saver";
+import { b64toBlob } from "@/root/utils/base64/base64";
 
 
 export default function EditEmployeeSection() {
@@ -104,22 +104,7 @@ export default function EditEmployeeSection() {
     }
   }, [fileLoad,change]);
 
-  function b64toBlob(base64Data: string) {
-    const byteCharacters = atob(base64Data);
-    const byteArrays = [];
 
-    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-      const slice = byteCharacters.slice(offset, offset + 512);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-
-    return new Blob(byteArrays);
-  }
 
   const files: Files[] = employeeByUid?.files ? Object.values(employeeByUid.files) : [];
 
@@ -159,8 +144,6 @@ export default function EditEmployeeSection() {
               <div className="flex flex-col col-span-2">
                 <InputFloatLabel labelFloat="Salary" id="salary" onChange={handleInputChange} name="salary" type="text" value={dataEmployee.salary.toString()} />
               </div>
-
-             
             </div>
             <div className=" pt-3 space-x-4 flex justify-between">
 

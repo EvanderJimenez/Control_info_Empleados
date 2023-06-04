@@ -1,22 +1,3 @@
-export interface UserData {
-  uid: string;
-  name: string;
-  firstSurname: string;
-  secondSurname: string;
-  cedula: number;
-  phoneNumber: number;
-  photo: string;
-  jobPosition: string;
-  salary: number;
-  enabled: boolean;
-  idDepartment: string;
-  password: string;
-  email: string;
-  boss: string;
-  schedule: Schedule[];
-  option: string;
-  attendance: { [key: string]: Attendance };
-}
 
 export interface LoginEP {
   email: string;

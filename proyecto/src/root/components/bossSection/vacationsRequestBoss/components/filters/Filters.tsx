@@ -1,4 +1,4 @@
-import InputLabel from "@/root/components/registerEmployee/components/schedule/components/inputLabel/InputLabel";
+import InputLabel from "@/root/components/ui/InputLabel/InputLabel";
 import InputFloatLabel from "@/root/components/ui/InputFloatLabel/InputFloatLabel";
 import React, { useState } from "react";
 
