@@ -5,27 +5,30 @@ interface GetFileURLByNameState {
     getFileURLByName: string  ;
 }
 
-export const initialStateByUid: GetFileURLByNameState = {
+export const initialFileURLByName: GetFileURLByNameState = {
     getFileURLByName: ""
 };
 
-type EmployeeByUidAction = {
+type EmployeeFileURLByNameAction = {
   type: string;
   getFileURLByName?: GetFileURLByNameState;
 };
 
-export const GetEmployeeByUidSlice = createSlice({
+export const GetEmployeeFileURLByNameSlice = createSlice({
   name: "getFileURLByName",
-  initialState: initialStateByUid,
+  initialState: initialFileURLByName,
 
   reducers: {
     getFileURLByNameReducer: (state, action: PayloadAction<string>) => {
       return { getFileURLByName: action.payload };
     },
+    resetUrlReducer: (state) => {
+      state.getFileURLByName = initialFileURLByName.getFileURLByName;
+    },
  
   },
 });
 
-export const { getFileURLByNameReducer,   } = GetEmployeeByUidSlice.actions;
-export const GetFileURLByNameReducer = GetEmployeeByUidSlice.reducer;
-export type DispatchTypeGetFileURLByName = (args: EmployeeByUidAction) => EmployeeByUidAction;
+export const { getFileURLByNameReducer, resetUrlReducer  } = GetEmployeeFileURLByNameSlice.actions;
+export const GetFileURLByNameReducer = GetEmployeeFileURLByNameSlice.reducer;
+export type DispatchTypeGetFileURLByName = (args: EmployeeFileURLByNameAction) => EmployeeFileURLByNameAction;

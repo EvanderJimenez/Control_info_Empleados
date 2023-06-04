@@ -14,26 +14,7 @@ import {
 } from "@/root/redux";
 import { DepartmentType } from "@/root/types/Department.type";
 import { EmployeesType } from "@/root/types/Employee.type";
-
-const data = {
-  uid: "",
-  name: "",
-  firstSurname: "",
-  secondSurname: "",
-  cedula: 0,
-  phoneNumber: 0,
-  photo: "",
-  jobPosition: "",
-  salary: 0,
-  enabled: true,
-  idDepartment: "0",
-  password: "",
-  email: "",
-  boss: "",
-  schedule: [],
-  vacations: {},
-  attendance: {},
-}
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 
 const AssignDepartmentEmployee = () => {
   const dispatch = useDispatch();
@@ -42,7 +23,7 @@ const AssignDepartmentEmployee = () => {
 
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [employeeUpdate, setEmployeeUpdate] = useState<EmployeesType>(data);
+  const [employeeUpdate, setEmployeeUpdate] = useState<EmployeesType>(initialDataEmployee);
   const [change, setChange] = useState(false)
 
   useEffect(() => {
@@ -69,7 +50,7 @@ const AssignDepartmentEmployee = () => {
         StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee)
       );
       dispatch(ResetEmployeeByUid());
-      setEmployeeUpdate(data)
+      setEmployeeUpdate(initialDataEmployee)
       setChange(!change)
     }
   };

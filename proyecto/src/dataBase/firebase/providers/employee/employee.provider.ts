@@ -27,6 +27,8 @@ import {
   uploadString,
 } from "firebase/storage";
 import { v4 } from "uuid";
+import fetch from "node-fetch";
+import fs from "fs";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -186,7 +188,7 @@ const dismissByUid = async (uid: string) => {
     return;
   }
   const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
-  await updateDoc(employeeRef, { idDepartment: "" });
+  await updateDoc(employeeRef, { idDepartment: "0" });
 };
 
 const getByVariable = async (
@@ -298,11 +300,7 @@ const uploadFile = async (
   nameFile: string,
   typeFile: string
 ): Promise<string> => {
-  
-
-
-
-/*   if (typeof fileBase64 !== "string" || !fileBase64.startsWith("data:image/")) {
+  /*   if (typeof fileBase64 !== "string" || !fileBase64.startsWith("data:image/")) {
     throw new Error("Invalid file format");
   } */
 
@@ -332,7 +330,7 @@ const uploadFile = async (
   const newFile: Files = {
     name: nameFile,
     urlFile: downloadURL,
-    type: typeFile
+    type: typeFile,
   };
 
   filesMap.set(nameFile, newFile);
@@ -342,21 +340,36 @@ const uploadFile = async (
   return downloadURL;
 };
 
-const getFileURLByName = async (uid: string, fileName: string): Promise<string | null> => {
+/* const getFileURLByName = async (uid: string, fileName: string): Promise<string | null> => {
   try {
-    const employeeRef = doc(firestore, "employee", uid);
-    const employeeSnapshot = await getDoc(employeeRef);
+    console.log(uid, fileName);
+    const employeeCollection = collection(firestore, "employee");
+    const employeeQuery = query(employeeCollection, where("uid", "==", uid));
+    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
 
-    if (employeeSnapshot.exists()) {
-      const employeeData = employeeSnapshot.data() as EmployeesType;
-      const filesMap = employeeData.files || {};
+    if (employeeSnapshot.size === 0) {
+      return null;
+    }
 
-      const file = Object.values(filesMap).find((file: Files) => file.name === fileName);
+    const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
+    const employeeDoc = await getDoc(employeeRef);
 
-      if (file) {
-        return file.urlFile;
+    if (employeeDoc.exists()) {
+      const employeeData = employeeDoc.data() as EmployeesType;
+
+      if (employeeData.files) {
+        const filesMap = new Map<string, Files>(Object.entries(employeeData.files));
+        console.log(filesMap)
+        const file = filesMap.get(fileName);
+        console.log(fileName)
+        if (file) {
+          console.log(file.urlFile);
+          return file.urlFile;
+        } else {
+          throw new Error("File not found");
+        }
       } else {
-        throw new Error("File not found");
+        throw new Error("Employee files not found");
       }
     } else {
       throw new Error("Employee document does not exist");
@@ -365,9 +378,27 @@ const getFileURLByName = async (uid: string, fileName: string): Promise<string |
     console.error("Error retrieving file URL:", error);
     return null;
   }
+}; */
+
+const getFileURLByName = async (
+  uid: string,
+  fileName: string
+): Promise<string | null> => {
+  try {
+    const fileBase64 = await getFileBase64(fileName);
+    return fileBase64;
+  } catch (error) {
+    console.error("Error retrieving file:", error);
+    return null;
+  }
 };
 
-
+async function getFileBase64(url: string): Promise<string> {
+  const response = await fetch(url);
+  const fileBuffer = await response.buffer();
+  console.log(fileBuffer);
+  return fileBuffer.toString("base64");
+}
 
 export const employeeProvider = {
   getAll,
@@ -383,7 +414,7 @@ export const employeeProvider = {
   getEmployeesByIdDepartment,
   getAllBosses,
   uploadFile,
-  getFileURLByName
+  getFileURLByName,
 };
 
 export default employeeProvider;

@@ -2,15 +2,20 @@ import React, { useEffect, useId, useState } from "react";
 import SearchInput from "../../ui/searchInput/SearchInput";
 import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../../listEmployee/ListEmployee";
-import { selectGetByVariable, selectGetEmployeeByUid } from "@/root/redux/selectors/employee-selector/employee.selector";
-import { EmployeesType } from "@/root/types/Employee.type";
-import { ResetByVariable, ResetEmployeeByUid, StartDismissEmployee, StartGetByVariable, StartGetEmployeeByUid, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { selectGetByVariable, selectGetEmployeeByUid, selectGetFileURLByName } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { EmployeesType, Files } from "@/root/types/Employee.type";
+import { ResetByVariable, ResetEmployeeByUid, StarGetFileURLByName, StartDismissEmployee, StartGetByVariable, StartGetEmployeeByUid, StartResetUrl, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { toast } from "react-hot-toast";
 import { defaultSchedule } from "@/root/constants/schedule/schedule";
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
+import ComboBox from "../../assignDepartmentEmployee/components/comboBox/ComboBox";
+import ComboBoxDocuments from "../../employeeSection/documentsEmployee/components/comboBoxDocuments/ComboBoxDocuments";
+import { saveAs } from "file-saver";
+
 
 export default function EditEmployeeSection() {
+  const fileLoad = useSelector(selectGetFileURLByName);
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const dispatch = useDispatch();
 
@@ -19,9 +24,11 @@ export default function EditEmployeeSection() {
   const [name, setName] = useState("");
   const [jobPosition, setJobPosition] = useState("");
   const [clearInput, setClearInput] = useState(false);
+  const [change, setChange] = useState(false)
 
   const employeesListVariable = useSelector(selectGetByVariable);
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
+  const [selectOption, setSelectOption] = useState<Files | null>(null);
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,11 +54,17 @@ export default function EditEmployeeSection() {
 
   const handleDismissEmployee = () => {
     if (employeeByUid && employeeByUid.uid) {
+      console.log("Employee: " + JSON.stringify(employeeByUid));
       dispatch(StartDismissEmployee(employeeByUid.uid));
       toast.error("Fired employee");
     } else {
       toast("⚠ No employees have been loaded ");
     }
+  };
+
+  const handleDownload = async () => {
+    dispatch(StarGetFileURLByName(employeeByUid?.uid || '', selectOption?.urlFile || ""));
+    setChange(!change)
   };
 
   useEffect(() => {
@@ -64,6 +77,51 @@ export default function EditEmployeeSection() {
     dispatch(ResetEmployeeByUid());
     toast.success("Clear all");
   };
+
+  useEffect(() => {
+    console.log(fileLoad)
+    if (fileLoad && selectOption) {
+      const base64Data = fileLoad.replace(/^data:.*,/, "");
+      const blob = b64toBlob(base64Data);
+      let newFile;
+      if (selectOption.type === "pdf") {
+        console.log(newFile)
+        newFile = new File([blob], selectOption.name + ".pdf", {
+          type: "application/pdf",
+        });
+        saveAs(newFile, selectOption.name);
+        
+        dispatch(StartResetUrl())
+      } else if (selectOption.type === "image") {
+        console.log(fileLoad)
+        newFile = new File([blob], selectOption.name + ".png", {
+          type: "image/png",
+        });
+        saveAs(newFile, selectOption.name);
+        
+        dispatch(StartResetUrl())
+      }
+    }
+  }, [fileLoad,change]);
+
+  function b64toBlob(base64Data: string) {
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+      const slice = byteCharacters.slice(offset, offset + 512);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    return new Blob(byteArrays);
+  }
+
+  const files: Files[] = employeeByUid?.files ? Object.values(employeeByUid.files) : [];
 
   return (
     <>
@@ -101,8 +159,11 @@ export default function EditEmployeeSection() {
               <div className="flex flex-col col-span-2">
                 <InputFloatLabel labelFloat="Salary" id="salary" onChange={handleInputChange} name="salary" type="text" value={dataEmployee.salary.toString()} />
               </div>
+
+             
             </div>
             <div className=" pt-3 space-x-4 flex justify-between">
+
               <button
                 onClick={handleDismissEmployee}
                 className="bg-darkBlue hover:border-red hover:rounded-lg focus:border-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
@@ -124,6 +185,17 @@ export default function EditEmployeeSection() {
               </button>
             </div>
           </form>
+          <div className="flex flex-row ">
+              <ComboBoxDocuments label="Documents" selectedOption={selectOption} setSelectedOption={setSelectOption} items={files} />
+              {
+                selectOption ? (
+                  <div className="flex flex-row m-5">
+                  <label >Name: {selectOption.name}</label>
+                  <button className="bg-darkBlue" onClick={handleDownload}>Download File</button>
+                  </div>
+                ) : (<></>)
+              }
+              </div>
         </div>
       </div>
     </>

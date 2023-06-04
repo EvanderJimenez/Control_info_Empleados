@@ -1,7 +1,7 @@
-import { Brands } from "@/root/interface/brands";
+import { LaborRegistration } from "@/root/interface/brands";
 import React from "react";
 interface employee {
-  brandData: Brands;
+  brandData: LaborRegistration;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

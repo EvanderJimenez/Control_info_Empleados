@@ -6,6 +6,7 @@ import { selectGetEmployeeByUid, selectLogin } from "@/root/redux/selectors/empl
 import { PendingRequest } from "@/root/interface/employee";
 import { ResetEmployeeByUid, StartGetEmployeeByUid, StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import { toast } from "react-hot-toast";
 
 let optionSelect = "wait";
@@ -24,26 +25,8 @@ const VacationsRequestBoss = () => {
   const dispatch = useDispatch();
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [selectedRequest, setSelectedRequest] = useState<PendingRequest>();
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: "",
-    phoneNumber: "",
-    photo: "",
-    jobPosition: "",
-    salary: "",
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-    files: {},
-  });
+  const [dataEmployee, setDataEmployee] =
+    useState<EmployeesType>(initialDataEmployee);
 
   const handleAccept = async () => {
     if (selectedRequest) {
@@ -66,8 +49,6 @@ const VacationsRequestBoss = () => {
   };
 
   useEffect(() => {
-    //
-
     if (employeeByUid && employeeByUid.vacations && optionSelect !== "wait") {
       const vacation = employeeByUid.vacations[selectedRequest?.key || ""];
 
@@ -85,7 +66,6 @@ const VacationsRequestBoss = () => {
 
       setDataEmployee(updatedDataEmployee);
 
-      console.log("uid: " + updatedDataEmployee.uid);
       if (dataEmployee.uid === undefined || "") {
         return;
       }
@@ -118,11 +98,23 @@ const VacationsRequestBoss = () => {
             <div className="flex flex-row space-x-3 mb-3 justify-center items-center pt-3">
               <div className="font-semibold text-darkBlue">
                 <label>Start date: </label>
-                <input type="text" id="dateStar" className="outline-none w-auto" value={selectedRequest?.dateStart || ""} readOnly />
+                <input
+                  type="text"
+                  id="dateStar"
+                  className="outline-none w-auto"
+                  value={selectedRequest?.dateStart || ""}
+                  readOnly
+                />
               </div>
               <div className="font-semibold text-darkBlue">
                 <label>End date:</label>
-                <input type="text" className="outline-none w-auto" id="dateEnd" value={selectedRequest?.dateEnd || ""} readOnly />
+                <input
+                  type="text"
+                  className="outline-none w-auto"
+                  id="dateEnd"
+                  value={selectedRequest?.dateEnd || ""}
+                  readOnly
+                />
               </div>
             </div>
 

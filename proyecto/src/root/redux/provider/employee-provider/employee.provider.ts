@@ -133,14 +133,13 @@ const uploadFileProvider = async (file: string, searchUser: string,nameFile: str
 };
 
 const getFileURLByName = async (uid: string, fileName: string) => {
-  const response = await fetch(`/api/employees/${uid}`, {
+  console.log(uid, fileName);
+  const response = await fetch(`/api/employees/by-uid/${uid}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      nameFile: fileName
-    }),
+    body: JSON.stringify({fileName}),
   });
 
   if (!response.ok) {

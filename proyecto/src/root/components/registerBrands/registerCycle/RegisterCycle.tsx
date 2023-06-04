@@ -1,4 +1,4 @@
-import { Brands } from "@/root/interface/brands";
+import { LaborRegistration } from "@/root/interface/brands";
 import { tr } from "date-fns/locale";
 import React from "react";
 interface addCycle {
@@ -6,7 +6,7 @@ interface addCycle {
   value: string | number;
   label: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  brandData: Brands;
+  brandData: LaborRegistration;
 }
 export const RegisterCycle = ({ brandData, ...props }: addCycle) => {
   return (
