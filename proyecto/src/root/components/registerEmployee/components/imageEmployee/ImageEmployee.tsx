@@ -1,8 +1,9 @@
-import { UserData } from "@/root/interface/employee";
+
+import { EmployeesType } from "@/root/types/Employee.type";
 import React,{useRef, useState} from "react";
 
 interface ImageProfileProps {
-    userData: UserData;
+    userData: EmployeesType;
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 

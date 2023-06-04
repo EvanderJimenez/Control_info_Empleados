@@ -20,7 +20,8 @@ import {
   DispatchTypeByIdEmployeeBrandsBrands,
   getBrandsByIdEmployeeReducer,
 } from "../../reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
-import { Brands } from "@/root/interface/brands";
+import { Brands } from "@/root/interface/employee";
+
 
 export const startGetAllBrands = (): any => {
   return async (dispatch: DispatchTypeGetAllBrands) => {

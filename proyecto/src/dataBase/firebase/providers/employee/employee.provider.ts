@@ -1,5 +1,3 @@
-import { Attendance } from "./../../../../root/interface/employee/employee.interface";
-import { Brands, Schedule } from "@/root/interface/employee";
 import { firestore, auth } from "../../firebase";
 import {
   collection,
@@ -18,7 +16,6 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { EmployeesType, Files, Vacations } from "@/root/types/Employee.type";
-import { defaultSchedule } from "@/root/constants/schedule/schedule";
 import {
   getDownloadURL,
   getStorage,
@@ -63,7 +60,7 @@ const updateByUid = async (
 const create = async (
   employeeData: EmployeesType
 ): Promise<{ message: string; employee?: any }> => {
-  const { password, email, schedule, uid, ...restData } = employeeData;
+  const { password, email, uid, ...restData } = employeeData;
 
   const userCredential = await createUserWithEmailAndPassword(
     auth,
@@ -73,19 +70,11 @@ const create = async (
   const user = userCredential.user;
   const uuid = user.uid;
 
-  const mergedSchedule: Schedule[] = defaultSchedule.map((defaultDay) => {
-    const userDay = schedule.find((s) => s.day === defaultDay.day);
-    return {
-      ...defaultDay,
-      ...userDay,
-    };
-  });
 
   const employeeDoc = {
     password,
     email,
     uid: uuid,
-    schedule: mergedSchedule,
     ...restData,
   };
 
@@ -339,46 +328,6 @@ const uploadFile = async (
 
   return downloadURL;
 };
-
-/* const getFileURLByName = async (uid: string, fileName: string): Promise<string | null> => {
-  try {
-    console.log(uid, fileName);
-    const employeeCollection = collection(firestore, "employee");
-    const employeeQuery = query(employeeCollection, where("uid", "==", uid));
-    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(employeeQuery);
-
-    if (employeeSnapshot.size === 0) {
-      return null;
-    }
-
-    const employeeRef = doc(firestore, "employee", employeeSnapshot.docs[0].id);
-    const employeeDoc = await getDoc(employeeRef);
-
-    if (employeeDoc.exists()) {
-      const employeeData = employeeDoc.data() as EmployeesType;
-
-      if (employeeData.files) {
-        const filesMap = new Map<string, Files>(Object.entries(employeeData.files));
-        console.log(filesMap)
-        const file = filesMap.get(fileName);
-        console.log(fileName)
-        if (file) {
-          console.log(file.urlFile);
-          return file.urlFile;
-        } else {
-          throw new Error("File not found");
-        }
-      } else {
-        throw new Error("Employee files not found");
-      }
-    } else {
-      throw new Error("Employee document does not exist");
-    }
-  } catch (error) {
-    console.error("Error retrieving file URL:", error);
-    return null;
-  }
-}; */
 
 const getFileURLByName = async (
   uid: string,

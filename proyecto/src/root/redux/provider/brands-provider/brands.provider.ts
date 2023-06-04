@@ -1,4 +1,4 @@
-import { Brands } from "@/root/interface/brands";
+import { Brands } from "@/root/interface/employee";
 
 
 const createBrandsProvider = async (searchTerm: Brands) => {

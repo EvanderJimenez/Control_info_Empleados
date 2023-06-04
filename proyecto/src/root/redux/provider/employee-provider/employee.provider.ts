@@ -1,4 +1,3 @@
-import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 import Cookies from "js-cookie";
 
@@ -60,7 +59,6 @@ const employeeListProvider = async () => {
           password: listEmployee.password,
           email: listEmployee.email,
           boss: listEmployee.boss,
-          schedule: listEmployee.schedule,
           vacations: listEmployee.vacations,
           attendance: listEmployee.attendance,
           files: listEmployee.files

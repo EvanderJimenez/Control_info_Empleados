@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import { UserData } from "@/root/interface/employee";
 import InputLabel from "../inputLabel/InputLabel";
-import Schedule from "../schedule/Schedule";
-import Brands from "../brands/Brands";
-import { RootState } from "@/root/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGetEmployeeByUid, selectListOfEmployee } from "@/root/redux/selectors/employee-selector/employee.selector";
-import { EmployeesType } from "@/root/types/Employee.type";
-import { StartUpDateEmployee } from "@/root/redux/thunks/employee-thunk/employee.thunk";
 
 interface UpdateDataProps {
 

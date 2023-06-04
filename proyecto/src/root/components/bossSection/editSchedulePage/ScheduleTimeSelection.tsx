@@ -38,13 +38,6 @@ const ScheduleTimeSelection: React.FC<ScheduleTimeSelectionProps> = ({ onSchedul
     });
   };
 
-  useEffect(() => {
-    if (employeeSchedule) {
-      setSchedules(employeeSchedule.schedule);
-      setDataEmployee(employeeSchedule);
-    }
-  }, [employeeSchedule, dataEmployee]);
-
   const handleSaveSchedule = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 

@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import { Schedule, UserData } from "../../interface/employee/";
 import PrincipalData from "./components/principalData/PrincipalData";
-import UpdateData from "./components/updateData/UpdateData";
-import Brands from "./components/brands/Brands";
-import ImageEmployee from "./components/imageEmployee/ImageEmployee";
 
 import { useDispatch, useSelector } from "react-redux";
 import { StartCreateEmployee, StartUpDateEmployee } from "../../redux/thunks/employee-thunk/employee.thunk";
