@@ -19,22 +19,21 @@ const ComboBoxDocuments = ({
     setSelectedOption(selectedFile);
   };
 
-  console.log(items)
 
   return (
     <div className="mb-4">
-      <label htmlFor="comboBox" className="block text-sm font-medium text-gray-700">
+      <label htmlFor="comboBox" className="block text-sm font-medium">
         {label}
       </label>
       <select
         id="comboBox"
         value={selectedOption ? selectedOption.name : ''}
         onChange={handleChange}
-        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        className="mt-1 block w-full border-none bg-darkBlue text-white font-semibold shadow-sm  sm:text-sm"
       >
         <option value="">Select an option</option>
         {items.map((option) => (
-          <option key={option.name} value={option.name}>
+          <option key={option.name}  className = "" value={option.name}>
             {option.name}
           </option>
         ))}
