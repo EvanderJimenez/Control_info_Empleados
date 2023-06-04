@@ -52,7 +52,7 @@ const ListWithoutDepartment = ({ change, handleLoadEmployee }: ListWithoutDepart
             </div>
           ) : (
             <div>
-              <h2 className="text-2xl font-bold">Empty List</h2>
+              <h2 className="text-md font-bold text-center bg-yellow">Empty list 🤔</h2>
             </div>
           )}
         </div>

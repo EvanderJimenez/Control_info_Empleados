@@ -105,7 +105,7 @@ const RequestVacationsEmployee = () => {
               className="mt-3 shadow-lg focus:border-transparent focus:outline-none  rounded-xl"
             ></textarea>
             <button
-              className="NormalButton zoom mt-3 "
+              className="bg-darkBlue zoom mt-3 "
               type="submit"
               onClick={() => {
                 toast.success("save");
