@@ -1,9 +1,4 @@
-import {
-  LaborRegistration,
-  Cycle,
-  HourRange,
-  HoursEmployee,
-} from "@/root/interface/brands";
+import { LaborRegistration, Cycle, HourRange, HoursEmployee } from "@/root/interface/brands";
 import React, { useState, useEffect } from "react";
 import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import axios from "axios";
@@ -13,15 +8,7 @@ import { RegisterClock } from "../registerClock/RegisterClock";
 import TableSchedules from "../tableShedules/TableShedules";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ResetByVariable,
-  ResetEmployeeByUid,
-  selectGetBrandsByIdEmployee,
-  selectGetEmployeeByUid,
-  startCreateBrands,
-  startGetBrandsByIdEmployee,
-  startUpdateBrands,
-} from "@/root/redux";
+import { ResetByVariable, ResetEmployeeByUid, selectGetBrandsByIdEmployee, selectGetEmployeeByUid, startCreateBrands, startGetBrandsByIdEmployee, startUpdateBrands } from "@/root/redux";
 import SearchInput from "../../ui/searchInput/SearchInput";
 import ListEmployee from "../../listEmployee/ListEmployee";
 import ListScheduleEmployee from "./components/listSheduleEmployee/ListScheduleEmployee";
@@ -208,61 +195,26 @@ export default function RegisterBrand() {
     setBrandData(data);
   };
   return (
-    <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-start pt-10">
-      <div className="flex items-center justify-center p-4 sm:p-12">
-        <div className="bg-white p-4 sm:p-8 rounded-lg shadow-md w-full max-w-2xl">
-          <h2 className="font-semibold text-center">Filters</h2>
-          <SearchInput
-            labelInputSeekerOne="text"
-            valueEnd={cedula}
-            placeholderSeekerOne="Cedula"
-            typeList="cedula"
-            id="cedula"
-          />
-          <SearchInput
-            labelInputSeekerOne="text"
-            valueEnd={name}
-            placeholderSeekerOne="Name"
-            typeList="name"
-            id="name"
-          />
-          <SearchInput
-            labelInputSeekerOne="text"
-            valueEnd={jobPosition}
-            placeholderSeekerOne="Job Position"
-            typeList="jobPosition"
-            id="jobPosition"
-          />
-          <ListScheduleEmployee
-            dispatch={dispatch}
-            clear={clear}
-            setClear={setClear}
-          />
-          <button
-            onClick={handleClear}
-            className="bg-pink   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
-          >
-            Clear
-          </button>
-          <RegisterCycle
-            brandData={brandData}
-            label="Cycle to belongs"
-            onChange={(e) => setNewCycle(e.target.value)}
-            value={newCycle}
-            handleSubmitCycle={handleSubmitCycle}
-          />
+    <div className="flex flex-wrap justify-center items-start pt-10">
+      <div className="w-1/2 flex flex-col justify-center">
+        <h2 className="font-semibold text-center">Filters</h2>
+        <SearchInput labelInputSeekerOne="text" valueEnd={cedula} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
+        <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
+        <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
+        <ListScheduleEmployee dispatch={dispatch} clear={clear} setClear={setClear} />
+        <button onClick={handleClear} className="bg-darkBlue focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+          Clear
+        </button>
+      </div>
 
-          <form
-            action="https://formbold.com/s/FORM_ID"
-            onSubmit={handleSubmitHours}
-            className="space-y-5"
-          >
+      <div className="flex items-center w-1/2 shadow-xl justify-center p-4 sm:p-12">
+        <div className="bg-white p-4 sm:p-8 rounded-lg shadow-md w-full">
+          <RegisterCycle brandData={brandData} label="Cycle to belongs" onChange={(e) => setNewCycle(e.target.value)} value={newCycle} handleSubmitCycle={handleSubmitCycle} />
+
+          <form action="https://formbold.com/s/FORM_ID" onSubmit={handleSubmitHours} className="space-y-5">
             <div className="-mx-3 flex flex-wrap"></div>
             <div className="mb-5">
-              <label
-                htmlFor="day"
-                className="mb-3 block text-base font-medium text-gray-700"
-              >
+              <label htmlFor="day" className="mb-3 block text-base font-medium text-gray-700">
                 Day
               </label>
               <select
@@ -270,7 +222,7 @@ export default function RegisterBrand() {
                 id="day"
                 value={newDate}
                 onChange={handleDayChange}
-                className="w-full rounded-md border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                className="w-full rounded-md bg-white py-3 px-6 text-base font-medium focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -283,28 +235,12 @@ export default function RegisterBrand() {
             </div>
 
             <div className="-mx-3 flex flex-wrap space-y-4 md:space-y-0 md:space-x-4">
-              <RegisterClock
-                label={"Hora Inicio"}
-                type={"hIni"}
-                name={"hIni"}
-                value={newHIni}
-                id={"hIni"}
-                onChange={(e) => setNewHIni(e.target.value)}
-              />
-              <RegisterClock
-                label={"Hora Fin"}
-                type={"hFin"}
-                name={"hFin"}
-                value={newHFin}
-                id={"hFin"}
-                onChange={(e) => setNewHFin(e.target.value)}
-              />
+              <RegisterClock label={"Hora Inicio"} type={"hIni"} name={"hIni"} value={newHIni} id={"hIni"} onChange={(e) => setNewHIni(e.target.value)} />
+              <RegisterClock label={"Hora Fin"} type={"hFin"} name={"hFin"} value={newHFin} id={"hFin"} onChange={(e) => setNewHFin(e.target.value)} />
             </div>
 
             <div>
-              <button className="w-full bg-black hover:bg-green text-white font-bold py-3 px-4 rounded">
-                Add Schedules
-              </button>
+              <button className="w-full bg-black hover:bg-green text-white font-bold py-3 px-4 rounded">Add Schedules</button>
             </div>
           </form>
           <TableSchedules
@@ -321,10 +257,7 @@ export default function RegisterBrand() {
           />
 
           <form onSubmit={handleUpdate} className="pt-10">
-            <button
-              type="submit"
-              className="w-full bg-black hover:bg-blue-700 text-white font-bold py-3 px-4 rounded"
-            >
+            <button type="submit" className="w-full bg-black  text-white font-bold py-3 px-4 rounded">
               Save
             </button>
           </form>

@@ -10,14 +10,14 @@ interface InputFieldProps {
 const InputLabel = ({ label, type, value, id } : InputFieldProps) => {
   return (
     <div className="m-2">
-    <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+    <label htmlFor={id} className="block text-sm font-medium ">
       {label}
     </label>
     <input
       type={type}
       id={id}
       value={value}
-      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+      className="mt-1  block w-full focus:outline-none  sm:text-sm"
       readOnly
     />
   </div>

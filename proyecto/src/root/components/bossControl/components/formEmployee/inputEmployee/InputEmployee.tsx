@@ -19,7 +19,7 @@ function InputEmployee(props: InputProps) {
           onChange={props.onChange}
           className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
           id={props.name}
-          placeholder={props.label}
+         
         />
       </div>
     </div>

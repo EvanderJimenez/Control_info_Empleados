@@ -119,20 +119,7 @@ html {
   height: 100%;
 }
 
-.GridThreeColumns {
-  display: grid;
-  grid-template-columns: 25% 50% 25%;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  background: red;
-}
 
-.GridThreeColumns > div:first-child {
-  overflow-y: auto;
-  padding: 2vh;
-  max-height: 100vh;
-}
 .zoom:hover {
   transform: scale(1.01);
   transition: all 0.3s ease-in-out;
@@ -211,6 +198,9 @@ input[type="datetime-local"]:hover {
 button:active {
   animation-name: rotate;
   animation-duration: 0.1s;
+}
+title{
+  color:red;
 }
 
 @keyframes rotate {
@@ -395,7 +385,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#cubo,#container{
+#cube,#container{
 display: flex;
 justify-content: center;
 align-items: center;
@@ -405,14 +395,14 @@ align-items: center;
   height: 300px;
 }
 
-#cubo{
+#cube{
   height: 60%;
   transform-style: preserve-3d;
   animation: rotate 8s linear infinite;
 
 }
 
-#cubo > span{
+#cube > span{
   position: absolute;
   width: 4em;
   height: 4em;
@@ -422,12 +412,12 @@ align-items: center;
   border-radius: 4px;
 }
 
-#cubo> span:nth-child(1){transform: rotateY(90deg)translateZ(2em);}
-#cubo> span:nth-child(2){transform: rotateY(90deg)translateZ(-2em);}
-#cubo> span:nth-child(3){transform: rotateY(90deg)translateZ(-2em);}
-#cubo> span:nth-child(4){transform: rotateY(90deg)translateZ(2em);}
-#cubo> span:nth-child(5){transform: translateZ(-2em);}
-#cubo> span:nth-child(6){transform: translateZ(2em);}
+#cube> span:nth-child(1){transform: rotateY(90deg)translateZ(2em);}
+#cube> span:nth-child(2){transform: rotateY(90deg)translateZ(-2em);}
+#cube> span:nth-child(3){transform: rotateY(90deg)translateZ(-2em);}
+#cube> span:nth-child(4){transform: rotateY(90deg)translateZ(2em);}
+#cube> span:nth-child(5){transform: translateZ(-2em);}
+#cube> span:nth-child(6){transform: translateZ(2em);}
 
 #loading{
   height: 40%;
