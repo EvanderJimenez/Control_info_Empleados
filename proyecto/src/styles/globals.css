@@ -16,6 +16,10 @@ input:focus {
   border-bottom-width: 3px;
 }
 @media print {
+  .url-bar {
+    display: none;
+  }
+  
   .print\\:w-full {
     width: 100% !important;
   }

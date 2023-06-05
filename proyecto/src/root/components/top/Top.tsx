@@ -2,6 +2,15 @@ import React from "react";
 import Image from "next/image";
 import router from "next/router";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { logOut } from "@/root/redux/reducers/login-reducer/loginReducer";
+
+
+export function Top() {
+
+   
+const dispatch = useDispatch()
+
 
 const handleSingOff = () => {
   Cookies.remove("token");
@@ -24,7 +33,6 @@ const handleLogin = () => {
   router.push("/home/Login");
 };
 
-export function Top() {
   return (
     <>
       <nav className="print:hidden bg-darkBlue">

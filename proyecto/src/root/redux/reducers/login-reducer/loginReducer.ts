@@ -25,9 +25,12 @@ interface LoginState {
         loginReducer: (state, action: PayloadAction<EmployeesType>) =>{
         return {login: action.payload}
       },
+      logOut: (state) => {
+        return initialStateLogin;
+    },
     },
   });
 
-  export const {loginReducer} = LoginSlice.actions;
+  export const {loginReducer,logOut} = LoginSlice.actions;
   export const LoginReducer = LoginSlice.reducer;
   export type DispatchTypeLogin = (args: EmployeeAction) => EmployeeAction;

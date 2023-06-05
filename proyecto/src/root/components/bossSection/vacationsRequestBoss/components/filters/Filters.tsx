@@ -20,7 +20,7 @@ const Filters = () => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex flex-col space-y-4 space-x-4 w-1/2 justify-between  md:flex-row ">
       <InputFloatLabel
         type="text"
         value={name}
@@ -33,7 +33,8 @@ const Filters = () => {
         <img src="/Images/searchIcon.png" alt="search" />
       </button>
       <button className="bg-darkBlue flex justify-center items-center" onClick={handleClear}>
-        Clear
+        {" "}
+        <img src="/Images/eraser.png" alt="eraser" />
       </button>
     </div>
   );

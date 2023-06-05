@@ -106,7 +106,7 @@ export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
     dispatch(setLoading(true));
 
     const employee = await providerRedux.createEmployeeProvider(searchTerm);
-
+  
     dispatch(createEmployeeReducer(employee || null));
     dispatch(setLoading(false));
   };
@@ -139,7 +139,11 @@ export const StartUpDateFileEmployee = (
       nameFile,
       typeFile
     );
-
+    if(!employee.ok){
+      dispatch(starAlertError("Error updating employee",true))
+    }else{
+      dispatch(starAlertSuccess("Employee updated successfully",true))
+    }
     dispatch(updateFileEmployeeReducer(employee || null));
   };
 };

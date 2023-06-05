@@ -6,12 +6,16 @@ import { StarGetEmployeesByIdDepartment } from "@/root/redux/thunks/employee-thu
 import { EmployeesType } from "@/root/types/Employee.type";
 import EmployeeSummaryList from "./employeeSummaryList/EmployeeSummaryList";
 import TableView from "./employeeSummaryList/tableView/table/Table";
+import { getDepartmentByDocIdReducer } from "@/root/redux/reducers/department-reducer/getDepartmentByDocId/GetDepartmentByDocIdReducer";
+import { selectGetByIdDocDepartment } from "@/root/redux";
 
 export default function PdfPage() {
   const loginInformation = useSelector(selectLogin);
   const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
   const CurrentDate: Date = new Date();
   const dispatch = useDispatch();
+
+  const department = useSelector(selectGetByIdDocDepartment);
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment(loginInformation?.idDepartment || ""));
@@ -142,6 +146,7 @@ export default function PdfPage() {
           <p className="text-center">Print by: {loginInformation?.name}</p>
           <p className="text-center">Print date: {CurrentDate.toUTCString()}</p>
           <p className="text-center">Filter by: {filter}</p>
+          <p className="text-center">Department: {department?.name}</p>
         </div>
         <div id="body" className=" print:w-full print:max-w-full flex justify-center items-center space-y-5 w-1/2">
           {showComponent === "EmployeeBody" && <EmployeeSummaryList users={users} department={loginInformation?.name} />}

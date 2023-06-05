@@ -60,7 +60,7 @@ const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
                   <button
                     className="mt-4 flex justify-center w-1/2 bg-darkBlue text-white rounded "
                     onClick={() => handleLoad(item.uid)}
-                    title = "Edit schedule"
+                    title = "Edit schedule, please double click"
                   >
                     {" "}
                     <img src="/Images/pencil.png" alt="pencil" />
