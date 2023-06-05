@@ -49,7 +49,7 @@ import {
 } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
-import { getByVariableAdminReducer } from "../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
+import { getByVariableAdminReducer, resetByVariableAdmin } from "../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import {
   DispatchTypeUpdateFile,
   updateFileEmployeeReducer,
@@ -216,6 +216,12 @@ export const StartGetByVariableAdmin = (
     );
 
     dispatch(getByVariableAdminReducer(response || null));
+  };
+};
+
+export const ResetByVariableAdmin = (): any => {
+  return async (dispatch: DispatchTypeByVariable) => {
+    dispatch(resetByVariableAdmin());
   };
 };
 
