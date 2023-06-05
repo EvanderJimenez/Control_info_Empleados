@@ -1,48 +1,45 @@
 import React, { useEffect, useState } from "react";
-import Schedule from "../../registerEmployee/components/schedule/Schedule";
 import FormScheduleEmployee from "./components/FormScheduleEmployee";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { getBrandsByDocIdReducer } from "@/root/redux/reducers/brands-reducer/getBrandsByDocId/GetBrandsByDocIdReducer";
-import { startGetBrandsByIdDoc } from "@/root/redux";
+import {
+  selectGetBrandsByIdEmployee,
+  startGetBrandsByIdDoc,
+  startGetBrandsByIdEmployee,
+} from "@/root/redux";
+import { Schedule } from "@/root/interface/employee";
+
+let scheduleList: Schedule[] = [];
 
 const ReadOnlyScheduleEmployee = () => {
-  const employeeSchedule = useSelector(selectLogin);
+  const userLogin = useSelector(selectLogin);
+  const dispatch = useDispatch();
+  const brandsById = useSelector(selectGetBrandsByIdEmployee);
 
-  const handleGetBrands = async (id: string): Promise<Schedule[]> => {
-    try {
-      const response = await fetch(`/api/brands/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  useEffect(() => {
+    dispatch(startGetBrandsByIdEmployee(userLogin.uid));
+  }, []);
 
-      if (response.ok) {
-        const data: any = await response.json();
-
-
-        const hoursEmployee: Record<string, any> = data.hoursEmployee;
-
-        const scheduleList: Schedule[] = Object.entries(hoursEmployee).map(([day, schedule]: [string, Record<string, string>]) => {
-          return {
-            day,
-            startTime: schedule.hIni,
-            endTime: schedule.hFin,
-          };
-        });
-
-        return scheduleList;
-      } else {
-        throw new Error("Error acquiring information");
+  useEffect(() => {
+    console.log(brandsById);
+    if (brandsById) {
+      const hoursEmployee: Record<string, any> = brandsById.hoursEmployee;
+      if (hoursEmployee) {
+        scheduleList = Object.entries(hoursEmployee).map(
+          ([day, schedule]: [string, Record<string, string>]) => {
+            return {
+              day,
+              startTime: schedule.hIni,
+              endTime: schedule.hFin,
+            };
+          }
+        );
       }
-    } catch (error) {
-      return [];
+
+      setSchedules(scheduleList);
     }
-  };
-
-
-  const brands = handleGetBrands(employeeSchedule.uid);
+  }, [brandsById]);
 
   const [schedules, setSchedules] = useState<Schedule[]>([
     { day: "Monday", startTime: "", endTime: "" },
@@ -54,17 +51,6 @@ const ReadOnlyScheduleEmployee = () => {
     { day: "Sunday", startTime: "", endTime: "" },
   ]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (employeeSchedule?.uid) {
-        const schedules = await handleGetBrands(employeeSchedule.uid);
-        setSchedules(schedules);
-      }
-    };
-  
-    fetchData();
-  }, [employeeSchedule]);
-
   return (
     <div>
       <FormScheduleEmployee schedules={schedules} />
@@ -73,4 +59,3 @@ const ReadOnlyScheduleEmployee = () => {
 };
 
 export default ReadOnlyScheduleEmployee;
-

@@ -2,8 +2,11 @@ import { PendingRequestJustifications } from "@/root/interface/employee";
 import {
   StarGetEmployeesByIdDepartment,
   selectGetEmployeesByIdDepartment,
-  selectLogin,StartGetEmployeeByUid
+  selectLogin,
+  StartGetEmployeeByUid,
+  selectGetByVariable,
 } from "@/root/redux";
+import { EmployeesType } from "@/root/types/Employee.type";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,13 +15,16 @@ interface RequestEmployeeProps {
   option: string;
 }
 
+let listEmployees: EmployeesType[];
+
 const ListRequestJustification = ({
   option,
   selectedRequest,
 }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
-  const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
+  const variable = useSelector(selectGetByVariable);
+  const listEmployee = useSelector(selectGetEmployeesByIdDepartment);
   const [pendingRequests, setPendingRequests] = useState<
     PendingRequestJustifications[]
   >([]);
@@ -63,13 +69,19 @@ const ListRequestJustification = ({
         }
       });
       setPendingRequests(pendingRequestsList);
-    } 
+    }
   }, [listEmployees]);
 
   const handleLoadInformation = (request: PendingRequestJustifications) => {
     dispatch(StartGetEmployeeByUid(request?.employeeUID || ""));
     selectedRequest(request);
   };
+
+  if (variable.length > 0) {
+    listEmployees = variable;
+  } else if (listEmployee.length > 0) {
+    listEmployees = listEmployee;
+  }
 
   return (
     <div className="shadow-lg space-y-5 overflow-auto h-72 w-full p-4">

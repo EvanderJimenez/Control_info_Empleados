@@ -5,7 +5,7 @@ import MethodsBrands from "@/root/components/brandsClock/brandsEmployee/methodsB
 export default function index() {
   return (
     <LoginPage>
-     <MethodsBrands/>
+     <MainForm/>
     </LoginPage>
   );
 }

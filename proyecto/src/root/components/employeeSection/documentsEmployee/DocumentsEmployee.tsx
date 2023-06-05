@@ -7,17 +7,22 @@ import {
   StartUpDateFileEmployee,
   selectGetFileURLByName,
   selectLogin,
+  selectUploadFile,
 } from "@/root/redux";
 import { Files } from "@/root/types/Employee.type";
 import ComboBoxDocuments from "./components/comboBoxDocuments/ComboBoxDocuments";
 import fetch from "node-fetch";
 import fs from "fs";
 import { saveAs } from "file-saver";
+import { b64toBlob } from "@/root/utils/base64/base64";
+
+let files: Files[] = [];
 
 const DocumentsEmployee: React.FC = () => {
   const userLogin = useSelector(selectLogin);
   const fileLoad = useSelector(selectGetFileURLByName);
   const dispatch = useDispatch();
+  const fileUpdate = useSelector(selectUploadFile)
 
   const [file, setFile] = useState<File | null>(null);
   const [nameFile, setNameFile] = useState("");
@@ -28,11 +33,13 @@ const DocumentsEmployee: React.FC = () => {
     const fileList = event.target.files;
     if (fileList && fileList.length > 0) {
       const selectedFile = fileList[0];
-      if (selectedFile.type.startsWith("image/")) {
+      console.log(selectedFile.type)
+      if (selectedFile.type.startsWith("image/") || (selectedFile.type === "application/pdf")) {
+        console.log(selectedFile.type)
         setFile(selectedFile);
         setSelectOption(null);
       } else {
-        setFile(null);
+        setFile(null); 
         setSelectOption({
           name: selectedFile.name,
           urlFile: "",
@@ -58,6 +65,7 @@ const DocumentsEmployee: React.FC = () => {
         );
       };
       reader.readAsDataURL(file);
+      handleClearSelection()
     }
   };
 
@@ -66,7 +74,6 @@ const DocumentsEmployee: React.FC = () => {
     setChange(!change);
   };
 
-  // ...
 
   const handleDelete = async () => {
     if (selectOption) {
@@ -113,30 +120,24 @@ const DocumentsEmployee: React.FC = () => {
     }
   }, [fileLoad, change]);
 
-  function b64toBlob(base64Data: string) {
-    const byteCharacters = atob(base64Data);
-    const byteArrays = [];
 
-    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-      const slice = byteCharacters.slice(offset, offset + 512);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-
-    return new Blob(byteArrays);
-  }
 
   const handleClearSelection = () => {
     setFile(null);
     setSelectOption(null);
   };
 
-  const files: Files[] = userLogin.files ? Object.values(userLogin.files) : [];
-  console.log(files);
+  //const files: Files[] = fileUpdate ? fileUpdate.files ? Object.values(fileUpdate.files) : userLogin.files ? Object.values(userLogin.files) : [] : [];
+  //const files: Files[] = fileUpdate ? (fileUpdate.files ? Object.values(fileUpdate.files) : (userLogin.files ? Object.values(userLogin.files) : [])) : [];
+ 
+
+if (fileUpdate && fileUpdate.files) {
+  files = Object.values(fileUpdate.files);
+} else if (userLogin && userLogin.files) {
+  files = Object.values(userLogin.files);
+}
+
+
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -147,9 +148,6 @@ const DocumentsEmployee: React.FC = () => {
           selectedOption={selectOption}
           setSelectedOption={setSelectOption}
         />
-        <button className="bg-darkBlue" onClick={handleDownload}>
-          Load File
-        </button>
       </div>
       <div className="border-2">
         {selectOption ? (
@@ -165,7 +163,7 @@ const DocumentsEmployee: React.FC = () => {
                   alt="Selected File"
                   className="w-64 h-auto"
                 />
-              ) : (
+              )  : (
                 <div className="flex items-center">
                   <img
                     src="/Images/pdf.png"
@@ -195,11 +193,22 @@ const DocumentsEmployee: React.FC = () => {
               <span className="font-bold">File selected:</span> {file.name}
             </div>
             <div>
-              <img
-                src={URL.createObjectURL(file)}
-                alt="Selected File"
-                className="w-64 h-auto"
-              />
+              {file.type.startsWith("image/") ? (
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt="Selected File"
+                  className="w-64 h-auto"
+                />
+              ) : (
+                <div className="flex items-center">
+                  <img
+                    src="/Images/pdf.png"
+                    alt="PDF Icon"
+                    className="w-8 h-8 mr-2"
+                  />
+                  <span>{file.name}</span>
+                </div>
+              )}
             </div>
             <label htmlFor="document">Name File: </label>
             <input
@@ -212,6 +221,7 @@ const DocumentsEmployee: React.FC = () => {
           <span>No select file.</span>
         )}
       </div>
+      
       <div>
         <div className="flex flex-col">
           <div className="mb-4">
@@ -232,7 +242,7 @@ const DocumentsEmployee: React.FC = () => {
               Save file
             </button>
             <button
-              className="bg-pink text-white px-4 py-2 rounded"
+              className="bg-darkBlue text-white px-4 py-2 rounded"
               onClick={handleClearSelection}
             >
               Clear Selection
