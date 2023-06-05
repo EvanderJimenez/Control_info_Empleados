@@ -313,6 +313,9 @@ const uploadFile = async (
   nameFile: string,
   typeFile: string
 ) => {
+     if (typeof fileBase64 !== "string") {
+   return null
+  } 
 
   const storage = getStorage();
 
