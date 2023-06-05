@@ -21,6 +21,7 @@ import {
   getBrandsByIdEmployeeReducer,
 } from "../../reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
 import { Brands } from "@/root/interface/employee";
+import { LaborRegistration } from "@/root/interface/brands";
 
 
 export const startGetAllBrands = (): any => {
@@ -33,7 +34,7 @@ export const startGetAllBrands = (): any => {
 
 export const startUpdateBrands = (
   searchTerm: string,
-  searchTerm2: Brands
+  searchTerm2: LaborRegistration
 ): any => {
   return async (dispatch: DispatchTypeUpdateBrands) => {
     const response = await brandProvider.updateBrandsByIdProvider(
@@ -53,7 +54,7 @@ export const startGetBrandsByIdDoc = (searchTerm: string): any => {
   };
 };
 
-export const startCreateBrands = (searchTerm: Brands): any => {
+export const startCreateBrands = (searchTerm: LaborRegistration): any => {
   return async (dispatch: DispatchTypeCreateBrands) => {
     const response = await brandProvider.createBrandsProvider(searchTerm);
 

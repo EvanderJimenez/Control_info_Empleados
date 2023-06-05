@@ -14,7 +14,6 @@ import {
   initialDataEmployee,
   pendingRequestJustification,
 } from "@/root/constants/employee/employee.constants";
-import FormAcceptDenied from "../vacationsRequestBoss/components/formAcceptDenied/FormAcceptDenied";
 import FormAcceptDeniedJustification from "./components/formAccetpDenied/FormAcceptDeniedJustification";
 
 let optionSelect = "wait";

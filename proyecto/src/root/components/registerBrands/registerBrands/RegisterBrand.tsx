@@ -1,8 +1,6 @@
 import { LaborRegistration, Cycle, HourRange, HoursEmployee } from "@/root/interface/brands";
 import React, { useState, useEffect } from "react";
-import { SearchDepartment } from "../../creationDeparment/SearchDepartment";
 import axios from "axios";
-import FormEmployee from "../../registerBrands/formIdEmployee/FormEmployee";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
 import { RegisterClock } from "../registerClock/RegisterClock";
 import TableSchedules from "../tableShedules/TableShedules";
@@ -10,7 +8,6 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { ResetByVariable, ResetEmployeeByUid, selectGetBrandsByIdEmployee, selectGetEmployeeByUid, startCreateBrands, startGetBrandsByIdEmployee, startUpdateBrands } from "@/root/redux";
 import SearchInput from "../../ui/searchInput/SearchInput";
-import ListEmployee from "../../listEmployee/ListEmployee";
 import ListScheduleEmployee from "./components/listSheduleEmployee/ListScheduleEmployee";
 
 const data = {

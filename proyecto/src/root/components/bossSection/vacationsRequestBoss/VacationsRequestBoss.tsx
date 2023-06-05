@@ -63,8 +63,7 @@ const VacationsRequestBoss = () => {
       if (dataEmployee.uid === undefined || "") {
         return;
       }
-      console.log(JSON.stringify(updatedDataEmployee));
-      console.log(JSON.stringify(dataEmployee.vacations));
+
       dispatch(StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee));
       dispatch(ResetEmployeeByUid());
       optionSelect = "wait";

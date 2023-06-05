@@ -176,7 +176,7 @@ export default function EditEmployeeSection() {
               </button>
             </div>
           </form>
-          <div className="bg-red flex flex-row justify-center items-center">
+          <div className=" flex flex-row justify-center items-center">
             <ComboBoxDocuments label="Documents of employee" selectedOption={selectOption} setSelectedOption={setSelectOption} items={files} />
             {selectOption ? (
               <div className="flex flex-col m-5">

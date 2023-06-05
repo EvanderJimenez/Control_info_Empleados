@@ -1,16 +1,41 @@
 import InputLabel from "@/root/components/ui/InputLabel/InputLabel";
 import InputFloatLabel from "@/root/components/ui/InputFloatLabel/InputFloatLabel";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ResetByVariable, StartGetByVariable, selectLogin } from "@/root/redux";
 
 const Filters = () => {
+  const [name, setName] = useState("");
+  const dispatch = useDispatch();
+  const userLogin = useSelector(selectLogin)
 
-    const [name, setName] = useState("")
+  const handleSearch = async () =>{
+
+    dispatch(StartGetByVariable(name, "name", userLogin.idDepartment || '' ));
+    console.log(name)
+    console.log(userLogin.uid)
+
+  }
+  const handleClear = async () =>{
+    dispatch(ResetByVariable())
+    setName("")
+  }
 
   return (
-    <div className="flex flex-col md:flex-col ">
-      <InputFloatLabel type="text" value={name} onChange={(e) =>  setName(e.target.value)} id="name" labelFloat="Name" name="name"  />
-      <button className="bg-darkBlue flex justify-center items-center">
+    <div className="flex flex-col md:flex-row ">
+      <InputFloatLabel
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        id="name"
+        labelFloat="Name"
+        name="name"
+      />
+      <button className="bg-darkBlue flex justify-center items-center" onClick={handleSearch}>
         <img src="/Images/searchIcon.png" alt="search" />
+      </button>
+      <button className="bg-darkBlue flex justify-center items-center" onClick={handleClear}>
+        Clear
       </button>
     </div>
   );
