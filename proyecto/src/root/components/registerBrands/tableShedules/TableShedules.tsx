@@ -26,8 +26,8 @@ const TableSchedules = ({
   handleDeleteSchedule,
 }: tableShedul) => {
   return (
-    <div className="flex justify-center flex-wrap">
-      <table className="w-full">
+    <div className="flex justify-center  overflow-auto flex-wrap">
+      <table className="w-full sm:ml-6 md:ml-6">
         <thead>
           <tr className="bg-black text-white">
             <th className="py-2 px-4 bg-blue-700 text-gray-700">Date</th>
