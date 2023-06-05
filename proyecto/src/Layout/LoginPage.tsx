@@ -7,7 +7,7 @@ type LayoutProps = {
 };
 const LoginPage = ({ children }: LayoutProps) => {
   return (
-    <div className="bg-gray-900">
+    <div>
       <Top />
       <main>{children}</main>
       <Foot />

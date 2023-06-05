@@ -59,6 +59,7 @@ import {
   getFileURLByNameReducer,
   resetUrlReducer,
 } from "../../reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
+import { starAlertError, starAlertLoading, starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -71,7 +72,7 @@ export const StartDeletingEmployee = (employeeId: string): any => {
         dispatch(listEmployeesReducer(employeeList));
       }
     } catch (error) {
-      toast.error("Error deleting employee");
+
     } finally {
       dispatch(setLoading(false));
     }
@@ -84,8 +85,8 @@ export const StartDismissEmployee = (searchTerm: string): any => {
     const employee = await providerRedux.dismissByUidProvider(searchTerm);
 
     dispatch(dismissEmployeeReducer(employee || null));
-
     dispatch(setLoading(false));
+
   };
 };
 
@@ -107,7 +108,6 @@ export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
     const employee = await providerRedux.createEmployeeProvider(searchTerm);
 
     dispatch(createEmployeeReducer(employee || null));
-
     dispatch(setLoading(false));
   };
 };
@@ -166,7 +166,7 @@ export const StartResetUrl = (): any => {
 
 export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchTypeLogin) => {
-    dispatch(setLoading(true));
+    dispatch(starAlertLoading("Loading",true));
     const response = await providerRedux.loginProvider(
       searchTerm1,
       searchTerm2
@@ -174,12 +174,14 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
 
     dispatch(loginReducer(response || null));
 
-    dispatch(setLoading(false));
-    if (response !== null && response !== undefined) {
-      toast.success("¡Welcome!");
-    } else {
-      toast.error("Wrong password or username");
+
+    if (response) {
+      dispatch(starAlertSuccess("Welcome!", true))
+    }else{
+      dispatch(starAlertError("Password or user incorrect", true))
     }
+    dispatch(starAlertLoading("Loaded",false));
+
   };
 };
 

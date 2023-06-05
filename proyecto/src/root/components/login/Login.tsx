@@ -11,6 +11,7 @@ import cookiesUser from "@/root/utils/login/cookiesUser";
 import { RootState } from "@/root/redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 import InputWitMenu from "../ui/inputWithMenu/InputWitMenu";
+import { toast } from "react-hot-toast";
 
 
 function Login() {
@@ -41,6 +42,9 @@ function Login() {
 
     if (data.email && data.password) {
       dispatch(StartLogin(data.email, data.password));
+
+    } else {
+      dispatch(startAlertError("Please enter your credentials", true))
     }
   };
   useEffect(() => {
@@ -58,3 +62,19 @@ function Login() {
 }
 
 export default Login;
+function startErrorAlert(): any {
+  throw new Error("Function not implemented.");
+}
+
+function startAlertError(arg0: string, arg1: boolean): any {
+  throw new Error("Function not implemented.");
+}
+
+function startAlertSuccess(arg0: string, arg1: boolean): any {
+  throw new Error("Function not implemented.");
+}
+
+function startAlertLoading(arg0: string, arg1: boolean): any {
+  throw new Error("Function not implemented.");
+}
+

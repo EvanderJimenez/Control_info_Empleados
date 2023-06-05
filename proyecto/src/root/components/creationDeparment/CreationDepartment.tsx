@@ -61,12 +61,15 @@ const CreationDepartment = ({
 
   return (
     <div className="bg-gray-200 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-4">
+      <div className="w-1/2 flex justify-center">
       <button
         onClick={handleToggleDepartmentsForm}
-        className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-auto"
+        className="bg-darkBlue text-white font-bold py-2 px-4 rounded w-1/2 md:w-auto"
       >
         Show Departments
       </button>
+      </div>
+   
       {showDepartmentsForm && (
         <ListDepartment
           handleGetDepartment={handleGetDepartment}
@@ -74,7 +77,7 @@ const CreationDepartment = ({
         />
       )}
 
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+      <div className="flex flex-col justify-end md:flex-row space-y-4 md:space-y-0 md:space-x-4">
         <div className="w-full md:w-1/2 px-2">
           <FormEmployee
             departmentsData={departmentsData}
@@ -83,7 +86,7 @@ const CreationDepartment = ({
           />
         </div>
 
-        <div className="w-full md:w-1/2 px-2">
+        <div className="lg:w-1/3 flex flex-col md:w-1/2 px-2">
           <SearchEmployeeDepart
             labelInputSeekerOne="text"
             valueEnd={cedula}

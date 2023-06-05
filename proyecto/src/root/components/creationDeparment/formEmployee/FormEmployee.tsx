@@ -24,14 +24,15 @@ export const FormEmployee = ({
       <form className="mx-auto mt-16 max-w-xl sm:mt-20" onSubmit={handleSubmit}>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl py-2 px-2 pt-5 pd-5">
               Departments
             </h2>
-            <p className="mt-2 text-lg leading-8 text-gray-600">
+            <p className="mt-2 text-lg leading-8">
               Work departments are a fundamental part of any organization or
               company.
             </p>
           </div>
+
           <div className="flex justify-center mt-5 mb-6">
             <InputDepartment
               label="Name Department"
@@ -42,7 +43,9 @@ export const FormEmployee = ({
               onChange={handleInputChange}
             />
           </div>
-          <div className="flex flex-wrap -mx-3 mb-6">
+
+
+          <div className="flex flex-wrap -mx-3 mb-2">
             <InputDepartment
               label="Name Boss"
               type="leader"
@@ -51,8 +54,6 @@ export const FormEmployee = ({
               id="leader"
               onChange={handleInputChange}
             />
-          </div>
-          <div className="flex flex-wrap -mx-3 mb-2">
             <InputDepartment
               label="Size of Department"
               type="number"
@@ -62,6 +63,7 @@ export const FormEmployee = ({
               onChange={handleInputChange}
             />
           </div>
+
           <div className="flex flex-wrap -mx-3 mb-2">
             <InputDepartment
               label="Location"
@@ -80,6 +82,7 @@ export const FormEmployee = ({
               onChange={handleInputChange}
             />
           </div>
+
           <div className="flex justify-center -mx-3 mb-6">
             <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0">
               <button

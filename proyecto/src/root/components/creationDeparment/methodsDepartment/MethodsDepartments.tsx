@@ -166,6 +166,12 @@ function MethodsDepartments(props: RegisterProps) {
   }, [departId]);
   
 
+  useEffect(() => {
+    if (departId) {
+      setdepartmentData(departId);
+    }
+  }, [departId]);
+
   const handleUpdateEmployee = (
     employeeName: string,
     updatedEmployee: Employee

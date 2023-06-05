@@ -26,9 +26,11 @@ import { UpdateFileEmployeeReducer } from "./reducers/employee-reducer/uploadFil
 import { GetFileURLByNameReducer } from "./reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
 import { GetDepartmentByNameReducer } from "./reducers/department-reducer/getDepartmentByName/GetDepartmentByNameReducer";
 import { GetByPageDepartmentsReducer } from "./reducers/department-reducer/getDepartmentsByPage/GetDepartmentsByPage";
+import { AlertReducer } from "./reducers/alertHandler-reducer/AlertHandlerReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
+    alertStore: AlertReducer,
     deleteEmployeeStore: DeleteEmployeesReducer,
     dismissEmployeeStore: DismissEmployeesReducer,
     employeesListStore: ListEmployeesReducer,

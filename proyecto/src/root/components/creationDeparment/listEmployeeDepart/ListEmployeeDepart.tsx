@@ -69,7 +69,7 @@ const ListEmployeeDepart = ({
           {/* {loading && <LoadingGeneralComponent />} */}
         </div>
       ) : (
-        <h2 className="font-semibold">List Empty</h2>
+        <h2 className="font-semibold text-center bg-black text-yellow">List Empty</h2>
       )}
     </>
   );

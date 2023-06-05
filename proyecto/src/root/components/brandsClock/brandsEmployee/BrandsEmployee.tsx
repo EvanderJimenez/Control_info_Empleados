@@ -58,7 +58,8 @@ export const BrandsEmployee = ({
   }, [load]);
 
   const handleUpdate = async () => {
-    setLoading(true);
+
+
     const date = new Date(currentDate);
     const month = date.getMonth() + 1;
     let monthCycle: number;
@@ -75,7 +76,6 @@ export const BrandsEmployee = ({
     const nameCycle = monthCycle.toString() + year.toString();
     await handleUpdateCycleHours(nameCycle).then(
       async (updatedBrandData: any) => {
-        console.log(updatedBrandData)
         if (
           formattedDay &&
           updatedBrandData.cycle &&
@@ -109,9 +109,8 @@ export const BrandsEmployee = ({
         ...brandsUpdate,
       }));
 
-      setIsLoading(false);
 
-      toast.success("Save successful");
+
 
       if (value === "true") {
         setLoad(true);

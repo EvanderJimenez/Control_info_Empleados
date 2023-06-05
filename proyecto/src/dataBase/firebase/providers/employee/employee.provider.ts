@@ -86,12 +86,12 @@ const create = async (
 
   return newDoc.exists()
     ? {
-        message: "Employee created successfully",
-        employee: newDoc.data(),
-      }
+      message: "Employee created successfully",
+      employee: newDoc.data(),
+    }
     : {
-        message: "Employee creation failed",
-      };
+      message: "Employee creation failed",
+    };
 };
 
 const getByUid = async (uid: string) => {
@@ -124,6 +124,7 @@ const deleteByUid = async (uid: string) => {
 };
 
 const login = async (email: string, password: string) => {
+  
   const userCredential = await signInWithEmailAndPassword(
     auth,
     email,

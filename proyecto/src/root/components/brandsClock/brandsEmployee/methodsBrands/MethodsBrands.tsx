@@ -4,7 +4,6 @@ import { format, parseISO, getDay } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGetBrandsByIdEmployee, selectLogin, startGetBrandsByIdEmployee } from "@/root/redux";
 import { LaborRegistration } from "@/root/interface/brands";
-import { toast } from "react-hot-toast";
 import { BrandsEmployee } from "../BrandsEmployee";
 
 export default function MethodsBrands() {
@@ -28,6 +27,7 @@ export default function MethodsBrands() {
     cycle: {},
     hoursEmployee: {},
   });
+
 
   useEffect(() => {
     const fetchDataAndDateOfWeekday = async () => {
@@ -54,14 +54,14 @@ export default function MethodsBrands() {
 
   const handleGetBrands = async (id: string) => {
 
-   await  dispatch(startGetBrandsByIdEmployee(id))
+    await dispatch(startGetBrandsByIdEmployee(id))
 
 
   };
 
   useEffect(() => {
-  
-    if(brandsGetByIdEmployee){
+
+    if (brandsGetByIdEmployee) {
       setBrandData(brandsGetByIdEmployee);
     }
 
