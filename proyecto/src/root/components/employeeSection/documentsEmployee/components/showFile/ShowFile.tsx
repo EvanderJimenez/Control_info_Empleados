@@ -1,8 +1,8 @@
 import { Files } from '@/root/types/Employee.type';
 import React from 'react'
 
-interface ShowProps{
-    selectOption: Files | null;
+interface ShowProps {
+  selectOption: Files | null;
   nameFile: string;
   setNameFile: React.Dispatch<React.SetStateAction<string>>;
   file: File | null;
@@ -11,11 +11,11 @@ interface ShowProps{
 
 }
 
-const ShowFile = ({selectOption,nameFile,setNameFile,file,handleDelete,handleDownload}:ShowProps) => {
+const ShowFile = ({ selectOption, nameFile, setNameFile, file, handleDelete, handleDownload }: ShowProps) => {
   return (
     <>
-          
-          <div className="border-2">
+
+      <div className="shadow-sm  bg-lithBlue bg-opacity-50 min-h-min max-h-80 overflow-auto">
         {selectOption ? (
           <div className="flex flex-col p-3">
             <div className="mb-4">
@@ -40,18 +40,21 @@ const ShowFile = ({selectOption,nameFile,setNameFile,file,handleDelete,handleDow
                 </div>
               )}
             </div>
-            <label htmlFor="document">Name File: </label>
+            <label htmlFor="document" className='font-semibold'>Name file: </label>
             <input
               type="text"
               value={nameFile}
               onChange={(e) => setNameFile(e.target.value)}
             />
-            <button className="bg-darkBlue" onClick={handleDownload}>
-              Download
-            </button>
-            <button className="bg-black" onClick={handleDelete}>
-              Delete
-            </button>
+            <div className='flex flex-row justify-between pt-4'>
+              <button className="bg-darkBlue font-semibold" onClick={handleDownload}>
+                Download
+              </button>
+              <button className="bg-darkBlue font-semibold" onClick={handleDelete}>
+                Delete
+              </button>
+            </div>
+
           </div>
         ) : file ? (
           <div className="flex flex-col p-3">
@@ -76,11 +79,12 @@ const ShowFile = ({selectOption,nameFile,setNameFile,file,handleDelete,handleDow
                 </div>
               )}
             </div>
-            <label htmlFor="document">Name File: </label>
+            <label htmlFor="document">Name file: </label>
             <input
               type="text"
               value={nameFile}
               onChange={(e) => setNameFile(e.target.value)}
+              className='font-semibold '
             />
           </div>
         ) : (
