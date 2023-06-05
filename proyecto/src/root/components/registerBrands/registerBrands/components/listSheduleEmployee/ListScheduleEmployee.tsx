@@ -2,6 +2,7 @@ import LoadingGeneralComponent from "@/root/components/loadingGeneralComponent/L
 import {
   RootState,
   StartGetEmployeeByUid,
+  selectGetByIdDocDepartment,
   selectGetByVariable,
   selectGetDepartmentById,
   selectLogin,
@@ -23,7 +24,7 @@ const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
     (state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid
   );
   const loading = useSelector((state: RootState) => state.loading.loading);
-  const department = useSelector(selectGetDepartmentById)
+  const department = useSelector(selectGetByIdDocDepartment)
 
   const loginState = useSelector(selectLogin);
 

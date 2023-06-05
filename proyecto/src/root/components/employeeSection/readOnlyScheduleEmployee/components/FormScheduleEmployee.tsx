@@ -1,5 +1,5 @@
 import { Schedule } from "@/root/interface/employee";
-import { selectGetDepartmentById } from "@/root/redux";
+import { selectGetByIdDocDepartment, selectGetDepartmentById } from "@/root/redux";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -14,7 +14,7 @@ const handleGeneratedPdf = () => {
 };
 
 const FormScheduleEmployee = ({ schedules }: PropsFormSchedule) => {
-  const department = useSelector(selectGetDepartmentById);
+  const department = useSelector(selectGetByIdDocDepartment);
   return (
     <>
       <p className="text-center font-bold mt-2">Weekly schedule</p>

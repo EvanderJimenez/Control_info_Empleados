@@ -7,13 +7,16 @@ import { DepartmentType } from "@/root/types/Department.type";
 import { DispatchTypeCreateDepartment, createDepartmentReducer } from "../../reducers/department-reducer/createDepartment/CreateDepartmentReducer";
 import { DispatchID, getID } from "../../reducers/department-reducer/Idreducer/IDreducer";
 import { Department } from "@/root/interface/departments";
+import { DispatchTypeGetByName, getDepartmentByNameReducer, resetDepartmentByNameReducer } from "../../reducers/department-reducer/getDepartmentByName/GetDepartmentByNameReducer";
+import { DispatchTypeGetByPage, getDepartmentByPageReducer, resetDepartmentByPageReducer } from "../../reducers/department-reducer/getDepartmentsByPage/GetDepartmentsByPage";
 
 export const startGetDepartmentById = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeGetByIdEmployee) => {
     const response = await departProvider.getDepartmentByIdProvider(searchTerm);
-    dispatch(getDepartmentByDocIdReducer(response || null));
+    dispatch(getDepartmentByIdEmployeeReducer(response || null));
   };
 };
+
 export const startGetID = (ID: string): any => {
   return async (dispatch: DispatchID) => {
     dispatch(getID(ID));
@@ -49,5 +52,31 @@ export const startCreateDepartment = (searchTerm: DepartmentType): any => {
     const response = await departProvider.createDepartmentProvider(searchTerm);
 
     dispatch(createDepartmentReducer(response || null));
+  };
+};
+
+export const startGetDepartmentByPage = (searchTerm: number, searchTerm2: number): any => {
+  return async (dispatch: DispatchTypeGetByPage) => {
+    const response = await departProvider.getDepartmentsByPageProvider(searchTerm,searchTerm2);
+    dispatch(getDepartmentByPageReducer(response || null));
+  };
+};
+
+export const StartResetDepartmentByPage = (): any => {
+  return async (dispatch: DispatchTypeGetByPage) => {
+    dispatch(resetDepartmentByPageReducer());
+  };
+};
+
+export const startGetDepartmentByName = (searchTerm: string): any => {
+  return async (dispatch: DispatchTypeGetByName) => {
+    const response = await departProvider.getDepartmentByNameProvider(searchTerm);
+    dispatch(getDepartmentByNameReducer(response || null));
+  };
+};
+
+export const StartResetDepartmentByName = (): any => {
+  return async (dispatch: DispatchTypeGetByName) => {
+    dispatch(resetDepartmentByNameReducer());
   };
 };

@@ -25,9 +25,14 @@ interface GetDepartmentByIdDepartmentsState {
         getDepartmentByIdEmployeeReducer: (state, action: PayloadAction<DepartmentType>) =>{
         return {getDepartmentByIdEmployee: action.payload}
       },
+      resetDepartmentIdEmployeeReducer: (state) => {
+        state.getDepartmentByIdEmployee = initialStateDepartGetByIdEmployee.getDepartmentByIdEmployee;
+      },
+
+
     },
   });
 
-  export const {getDepartmentByIdEmployeeReducer} = getByIdEmployeeDepartmentSlice.actions;
+  export const {getDepartmentByIdEmployeeReducer,resetDepartmentIdEmployeeReducer} = getByIdEmployeeDepartmentSlice.actions;
   export const GetByIdEmployeeDepartmentsReducer = getByIdEmployeeDepartmentSlice.reducer;
   export type DispatchTypeGetByIdEmployee = (args: DepartmentActionGetByIdEmployee) => DepartmentActionGetByIdEmployee;

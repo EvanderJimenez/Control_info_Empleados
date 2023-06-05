@@ -2,6 +2,7 @@ import { Department } from "@/root/interface/departments";
 import { DepartmentType } from "@/root/types/Department.type";
 
 const getDepartmentByIdProvider = async (searchTerm: string) => {
+  console.log(searchTerm);
   const response = await fetch(`/api/departments/${searchTerm}`, {
     method: "GET",
     headers: {
@@ -10,7 +11,7 @@ const getDepartmentByIdProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error getting depart");
+    return null;
   }
 
   const data = await response.json();
@@ -92,6 +93,23 @@ const getDepartmentByDocIdProvider = async (searchTerm: string) => {
   return data;
 };
 
+const getDepartmentByNameProvider = async (searchTerm: string) => {
+  const response = await fetch(`/api/departments/by-name/${searchTerm}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+
 const createDepartmentProvider = async (searchTerm: DepartmentType) => {
   const response = await fetch("/api/departments", {
     method: "POST",
@@ -117,4 +135,5 @@ export const departProvider = {
   getDepartmentByDocIdProvider,
   createDepartmentProvider,
   getDepartmentsByPageProvider,
+  getDepartmentByNameProvider,
 };

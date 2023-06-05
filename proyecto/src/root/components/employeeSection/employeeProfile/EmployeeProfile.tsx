@@ -2,11 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
-import { selectGetDepartmentById } from "@/root/redux";
+import { selectGetByIdDocDepartment, selectGetDepartmentById } from "@/root/redux";
 
 const EmployeeProfile = () => {
   const UserLogin = useSelector(selectLogin);
-  const department = useSelector(selectGetDepartmentById);
+  const department = useSelector(selectGetByIdDocDepartment);
   return (
     <>
       <div className="bg-lithGray flex xl:h-screen flex-col  lg:flex-wrap items-center p-12 ">

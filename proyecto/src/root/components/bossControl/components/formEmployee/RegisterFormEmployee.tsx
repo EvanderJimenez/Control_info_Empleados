@@ -1,6 +1,5 @@
 import React from "react";
 import InputEmployee from "./inputEmployee/InputEmployee";
-import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { ResetEmployeeByUid } from "@/root/redux";
 import { useDispatch } from "react-redux";
