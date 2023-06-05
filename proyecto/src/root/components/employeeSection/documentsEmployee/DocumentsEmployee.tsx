@@ -95,7 +95,7 @@ const DocumentsEmployee: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log(fileLoad);
+  
     if (fileLoad && selectOption) {
       const base64Data = fileLoad.replace(/^data:.*,/, "");
       const blob = b64toBlob(base64Data);
@@ -105,7 +105,7 @@ const DocumentsEmployee: React.FC = () => {
         newFile = new File([blob], selectOption.name + ".pdf", {
           type: "application/pdf",
         });
-        //saveAs(newFile, selectOption.name);
+        saveAs(newFile, selectOption.name);
         handleClearSelection();
         dispatch(StartResetUrl());
       } else if (selectOption.type === "image") {
@@ -113,7 +113,7 @@ const DocumentsEmployee: React.FC = () => {
         newFile = new File([blob], selectOption.name + ".png", {
           type: "image/png",
         });
-        //saveAs(newFile, selectOption.name);
+        saveAs(newFile, selectOption.name);
         handleClearSelection();
         dispatch(StartResetUrl());
       }
@@ -126,11 +126,7 @@ const DocumentsEmployee: React.FC = () => {
     setFile(null);
     setSelectOption(null);
   };
-
-  //const files: Files[] = fileUpdate ? fileUpdate.files ? Object.values(fileUpdate.files) : userLogin.files ? Object.values(userLogin.files) : [] : [];
-  //const files: Files[] = fileUpdate ? (fileUpdate.files ? Object.values(fileUpdate.files) : (userLogin.files ? Object.values(userLogin.files) : [])) : [];
- 
-
+  
 if (fileUpdate && fileUpdate.files) {
   files = Object.values(fileUpdate.files);
 } else if (userLogin && userLogin.files) {
