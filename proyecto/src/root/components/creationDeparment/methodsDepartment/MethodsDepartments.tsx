@@ -33,7 +33,7 @@ function MethodsDepartments(props: RegisterProps) {
 
   const departId = useSelector(selectGetDepartmentById);
 
-  const dataDepart = useSelector(selectGetDepartmentById)
+  const dataDepart = useSelector(selectGetDepartmentById);
 
   const [data, setData] = useState<Department[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +45,7 @@ function MethodsDepartments(props: RegisterProps) {
   const [idEmployee, setIdEmployee] = useState<string>("");
   const [newEmployeeData, setNewEmployeeData] = useState<string>("");
   const [upDate, setUpDate] = useState<boolean | null>();
-  const [departmentData, subdepartmentData] = useState<Department>(() => {
+  const [departmentData, setdepartmentData] = useState<Department>(() => {
     if (props.user) {
       setUpDate(true);
       return props.user;
@@ -67,7 +67,7 @@ function MethodsDepartments(props: RegisterProps) {
 
   useEffect(() => {
     if (passId) {
-      subdepartmentData((prevDepartmentData) => ({
+      setdepartmentData((prevDepartmentData) => ({
         ...prevDepartmentData,
         subDepartment: passId,
       }));
@@ -76,7 +76,7 @@ function MethodsDepartments(props: RegisterProps) {
   }, [passId]);
   useEffect(() => {
     if (idEmployee) {
-      subdepartmentData((prevDepartmentData) => ({
+      setdepartmentData((prevDepartmentData) => ({
         ...prevDepartmentData,
         idEmployee: idEmployee,
       }));
@@ -85,7 +85,7 @@ function MethodsDepartments(props: RegisterProps) {
   }, [idEmployee]);
   useEffect(() => {
     if (nameDepart) {
-      subdepartmentData((prevDepartmentData) => ({
+      setdepartmentData((prevDepartmentData) => ({
         ...prevDepartmentData,
         namesubDepartment: nameDepart,
       }));
@@ -94,7 +94,7 @@ function MethodsDepartments(props: RegisterProps) {
   }, [nameDepart]);
   useEffect(() => {
     if (nameEmployee) {
-      subdepartmentData((prevDepartmentData) => ({
+      setdepartmentData((prevDepartmentData) => ({
         ...prevDepartmentData,
         leader: nameEmployee,
       }));
@@ -104,11 +104,11 @@ function MethodsDepartments(props: RegisterProps) {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    subdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));
+    setdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));
   };
 
   const handleDeleteEmployee = (employeeName: string | number) => {
-    subdepartmentData((prevDepartmentData) => {
+    setdepartmentData((prevDepartmentData) => {
       const updatedEmployees = { ...prevDepartmentData.employees };
       delete updatedEmployees[employeeName];
 
@@ -140,7 +140,7 @@ function MethodsDepartments(props: RegisterProps) {
     }
 
     dispatch(startCreateDepartment(departmentData));
-    subdepartmentData(newDtaDepart);
+    setdepartmentData(newDtaDepart);
   };
 
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -151,7 +151,7 @@ function MethodsDepartments(props: RegisterProps) {
       return;
     }
     dispatch(startUpdateDepartment(departmentData.name, departmentData));
-    subdepartmentData(newDtaDepart);
+    setdepartmentData(newDtaDepart);
   };
 
   const handleSubmitEmployee = (event: React.FormEvent<HTMLFormElement>) => {
@@ -167,7 +167,7 @@ function MethodsDepartments(props: RegisterProps) {
       id: newEmployeeId,
     };
 
-    subdepartmentData((prevUserData) => ({
+    setdepartmentData((prevUserData) => ({
       ...prevUserData,
       employees: {
         ...prevUserData.employees,
@@ -180,19 +180,18 @@ function MethodsDepartments(props: RegisterProps) {
     setNewEmployeeId("");
   };
   const handleGetDepartment = async (id: string) => {
-    dispatch(startGetDepartmentById(id)); 
+    dispatch(startGetDepartmentById(id));
   };
-  
+
   useEffect(() => {
     if (departId) {
       setdepartmentData(departId);
     }
   }, [departId]);
-  
 
   useEffect(() => {
     if (departId) {
-      subdepartmentData(departId);
+      setdepartmentData(departId);
     }
   }, [departId]);
 
@@ -200,7 +199,7 @@ function MethodsDepartments(props: RegisterProps) {
     employeeName: string,
     updatedEmployee: Employee
   ) => {
-    subdepartmentData((prevDepartmentData) => {
+    setdepartmentData((prevDepartmentData) => {
       const updatedEmployees = {
         ...prevDepartmentData.employees,
         [employeeName]: updatedEmployee,

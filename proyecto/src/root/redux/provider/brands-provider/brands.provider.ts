@@ -1,9 +1,7 @@
 import { LaborRegistration } from "@/root/interface/brands";
 import { Brands } from "@/root/interface/employee";
 
-
 const createBrandsProvider = async (searchTerm: LaborRegistration) => {
-
   const response = await fetch("/api/brands", {
     method: "POST",
     headers: {
@@ -47,7 +45,7 @@ const getBrandsByDocIdProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    return null
+    return null;
   }
 
   const data = await response.json();
@@ -85,7 +83,7 @@ const getBrandsDocByEmployeeIdProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-   null
+    null;
   }
 
   const data = await response.json();

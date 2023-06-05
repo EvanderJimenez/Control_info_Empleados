@@ -1,4 +1,3 @@
-
 import { brandProvider } from "../../provider/brands-provider/brands.provider";
 import {
   DispatchTypeGetAllBrands,
@@ -22,7 +21,6 @@ import {
 } from "../../reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
 import { Brands } from "@/root/interface/employee";
 import { LaborRegistration } from "@/root/interface/brands";
-
 
 export const startGetAllBrands = (): any => {
   return async (dispatch: DispatchTypeGetAllBrands) => {
@@ -64,7 +62,9 @@ export const startCreateBrands = (searchTerm: LaborRegistration): any => {
 
 export const startGetBrandsByIdEmployee = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeByIdEmployeeBrandsBrands) => {
-    const response = await brandProvider.getBrandsDocByEmployeeIdProvider(searchTerm);
+    const response = await brandProvider.getBrandsDocByEmployeeIdProvider(
+      searchTerm
+    );
 
     dispatch(getBrandsByIdEmployeeReducer(response || null));
   };

@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { format, parseISO, getDay } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGetBrandsByIdEmployee, selectLogin, startGetBrandsByIdEmployee } from "@/root/redux";
+import {
+  selectGetBrandsByIdEmployee,
+  selectLogin,
+  startGetBrandsByIdEmployee,
+} from "@/root/redux";
 import { LaborRegistration } from "@/root/interface/brands";
 import { BrandsEmployee } from "../BrandsEmployee";
 
 export default function MethodsBrands() {
-
-
-  const dispatch = useDispatch()
-  const brandsGetByIdEmployee = useSelector(selectGetBrandsByIdEmployee)
+  const dispatch = useDispatch();
+  const brandsGetByIdEmployee = useSelector(selectGetBrandsByIdEmployee);
 
   const [formattedDay, setFormattedDay] = useState("");
   const [currentDate, setCurrentDate] = useState("");
@@ -28,7 +30,6 @@ export default function MethodsBrands() {
     hoursEmployee: {},
   });
 
-
   useEffect(() => {
     const fetchDataAndDateOfWeekday = async () => {
       const response = await axios.get("http://worldtimeapi.org/api/ip");
@@ -36,10 +37,8 @@ export default function MethodsBrands() {
       const [date, time] = datetime.split("T");
       setCurrentDate(date);
       setCurrentTime(time.slice(0, 8));
-
       const parsedDate = parseISO(date);
       const formattedDay = format(parsedDate, "EEEE");
-
       setFormattedDay(formattedDay);
     };
 
@@ -47,25 +46,29 @@ export default function MethodsBrands() {
   }, [updateDateTime]);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setUpdateDateTime((prevValue) => !prevValue);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  useEffect(() => {
     if (employeeLogin?.uid) {
       handleGetBrands(employeeLogin?.uid);
     }
   }, [employeeLogin?.uid]);
 
   const handleGetBrands = async (id: string) => {
-
-    await dispatch(startGetBrandsByIdEmployee(id))
-
-
+    await dispatch(startGetBrandsByIdEmployee(id));
   };
 
   useEffect(() => {
-
     if (brandsGetByIdEmployee) {
       setBrandData(brandsGetByIdEmployee);
     }
-
-  }, [brandsGetByIdEmployee])
+  }, [brandsGetByIdEmployee]);
 
   return (
     <div>

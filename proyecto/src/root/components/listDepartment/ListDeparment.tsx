@@ -46,10 +46,8 @@ export const ListDepartment = ({
 
   useEffect(() => {
     if (departByName.length > 0) {
-      console.log(departByName);
       setDepartmentData(departByName);
     } else if (departByPage.length > 0) {
-      console.log(departByPage);
       setDepartmentData(departByPage);
     }
   }, [departByName, departByPage]);

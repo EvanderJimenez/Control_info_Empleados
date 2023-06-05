@@ -58,8 +58,6 @@ export const BrandsEmployee = ({
   }, [load]);
 
   const handleUpdate = async () => {
-
-
     const date = new Date(currentDate);
     const month = date.getMonth() + 1;
     let monthCycle: number;
@@ -76,27 +74,30 @@ export const BrandsEmployee = ({
     const nameCycle = monthCycle.toString() + year.toString();
     await handleUpdateCycleHours(nameCycle).then(
       async (updatedBrandData: any) => {
-        if (
-          formattedDay &&
-          updatedBrandData.cycle &&
-          updatedBrandData.cycle[nameCycle]
-        ) {
-          const cycle = updatedBrandData.cycle[nameCycle];
-          const existingHours = cycle.hours[currentDate];
-          if (existingHours) {
-            const markStart = existingHours.hIni;
-            const markEnd = existingHours.hFin;
-            if (checkMarkHours(markStart, markEnd)) {
-              toast.success("The hours match. Performing update...");
-              value = "true";
-            } else {
-              toast.error("The mark hours do not match the defined hours.");
-            }
+        if (updatedBrandData) {
+          if (updatedBrandData.cycle && updatedBrandData.cycle[nameCycle]) {
+            const cycle = updatedBrandData.cycle[nameCycle];
+            const existingHours = cycle.hours[currentDate];
+            if (existingHours) {
+              const markStart = existingHours.hIni;
+              const markEnd = existingHours.hFin;
+              if (checkMarkHours(markStart, markEnd)) {
+                toast.success("The hours match. Performing update...");
+                value = "true";
+              } else {
+                toast.error("The mark hours do not match the defined hours.");
+              }
 
-            await dispatch(
-              startUpdateBrands(updatedBrandData.id, updatedBrandData)
-            );
+              await dispatch(
+                startUpdateBrands(updatedBrandData.id, updatedBrandData)
+              );
+            }
           }
+        } else {
+          toast.error(
+            "There is no schedule for today or You don't have a work cycle."
+          );
+          setLoad(true);
         }
       }
     );
@@ -109,9 +110,6 @@ export const BrandsEmployee = ({
         ...brandsUpdate,
       }));
 
-
-
-
       if (value === "true") {
         setLoad(true);
       }
@@ -120,7 +118,7 @@ export const BrandsEmployee = ({
 
   const handleUpdateCycleHours = async (cycleName: string) => {
     setIsLoading(true);
-    setUpdateDateTime(true);
+
     const weekday = formattedDay;
     const hoursEmployee = brandData.hoursEmployee;
 
