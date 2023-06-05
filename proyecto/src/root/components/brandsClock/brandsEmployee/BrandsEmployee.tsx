@@ -20,7 +20,7 @@ interface methods {
   setHoursFin: React.Dispatch<React.SetStateAction<string>>;
   setHoursIni: React.Dispatch<React.SetStateAction<string>>;
   setUpdateDateTime: React.Dispatch<React.SetStateAction<boolean>>;
-}
+} 
 
 let value: string;
 
