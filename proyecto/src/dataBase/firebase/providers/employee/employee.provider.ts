@@ -87,12 +87,12 @@ const create = async (
 
   return newDoc.exists()
     ? {
-      message: "Employee created successfully",
-      employee: newDoc.data(),
-    }
+        message: "Employee created successfully",
+        employee: newDoc.data(),
+      }
     : {
-      message: "Employee creation failed",
-    };
+        message: "Employee creation failed",
+      };
 };
 
 const getByUid = async (uid: string) => {
@@ -125,7 +125,6 @@ const deleteByUid = async (uid: string) => {
 };
 
 const login = async (email: string, password: string) => {
-
   const userCredential = await signInWithEmailAndPassword(
     auth,
     email,
@@ -155,20 +154,17 @@ const login = async (email: string, password: string) => {
 };
 
 const getByCedula = async (cedula: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where("uid", "==", cedula));
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
 
-    const employeeCollection = collection(firestore, "employee");
-    const employeeQuery = query(employeeCollection, where("uid", "==", cedula));
-    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-      employeeQuery
-    );
-
-    if (employeeSnapshot.empty) {
-      throw new Error(`User not found ${cedula}`);
-    } else {
-      return employeeSnapshot.docs[0].data();
-    }
-  
-
+  if (employeeSnapshot.empty) {
+    throw new Error(`User not found ${cedula}`);
+  } else {
+    return employeeSnapshot.docs[0].data();
+  }
 };
 
 const dismissByUid = async (uid: string) => {
@@ -212,7 +208,6 @@ const getByVariable = async (
 };
 
 const getByVariableAdmin = async (data: string, variable: string) => {
-
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where(variable, "==", data));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
@@ -313,9 +308,9 @@ const uploadFile = async (
   nameFile: string,
   typeFile: string
 ) => {
-     if (typeof fileBase64 !== "string") {
-   return null
-  } 
+  if (typeof fileBase64 !== "string") {
+    return null;
+  }
 
   const storage = getStorage();
 
