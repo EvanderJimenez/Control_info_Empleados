@@ -176,7 +176,7 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
 
 
     if (response) {
-      dispatch(starAlertSuccess("Welcome, " + searchTerm1, true))
+      dispatch(starAlertSuccess("Welcome!", true))
     }else{
       dispatch(starAlertError("Password or user incorrect", true))
     }
