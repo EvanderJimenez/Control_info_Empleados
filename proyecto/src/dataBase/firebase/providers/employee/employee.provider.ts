@@ -15,9 +15,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { EmployeesType, Vacations } from "@/root/types/Employee.type";
-import { defaultSchedule } from "@/root/constants/schedule/schedule";
-import { EmployeesType, Files, Vacations } from "@/root/types/Employee.type";
 import {
   getDownloadURL,
   getStorage,
@@ -28,6 +25,7 @@ import {
 import { v4 } from "uuid";
 import fetch from "node-fetch";
 import fs from "fs";
+import { EmployeesType, Files } from "@/root/types/Employee.type";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -63,7 +61,6 @@ const updateByUid = async (
 const create = async (
   employeeData: EmployeesType
 ): Promise<{ message: string; employee?: any }> => {
-  const { password, email, schedule, uid, ...restData } = employeeData;
   const { password, email, uid, ...restData } = employeeData;
 
   const userCredential = await createUserWithEmailAndPassword(

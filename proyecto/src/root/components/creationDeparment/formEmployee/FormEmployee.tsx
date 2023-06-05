@@ -45,10 +45,8 @@ export const FormEmployee = ({
               id="leader"
               onChange={handleInputChange}
             />
-            <p>{departmentsData.idEmployee}</p>
           </div>
           <div className="flex flex-wrap -mx-3 mb-2">
-            <p>{departmentsData.subDepartment}</p>
             <InputDepartment
               label="Size of Department"
               type="number"

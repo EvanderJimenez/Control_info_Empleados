@@ -64,6 +64,7 @@ function MethodsDepartments(props: RegisterProps) {
         ...prevDepartmentData,
         subDepartment: passId,
       }));
+      toast.success("Correctly added department.");
     }
   }, [passId]);
   useEffect(() => {
@@ -72,6 +73,7 @@ function MethodsDepartments(props: RegisterProps) {
         ...prevDepartmentData,
         idEmployee: idEmployee,
       }));
+      toast.success("Correctly added employee.");
     }
   }, [idEmployee]);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,12 +156,6 @@ function MethodsDepartments(props: RegisterProps) {
   const handleGetDepartment = async (id: string) => {
     dispatch(startGetDepartmentById(id));
   };
-
-  useEffect(() => {
-    if (departId) {
-      setdepartmentData(departId);
-    }
-  }, [departId]);
 
   const handleUpdateEmployee = (
     employeeName: string,

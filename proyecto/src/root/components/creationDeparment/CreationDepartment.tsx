@@ -1,14 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import Input, { InputDepartment } from "./input/InputDepartment";
 import { Department, Employee } from "@/root/interface/departments";
 import AddEmployee from "./addEmployee/AddEmployee";
 import Table from "./table/Table";
 import { FormEmployee } from "./formEmployee/FormEmployee";
 import { ListDepartment } from "../listDepartment/ListDeparment";
-import SearchInput from "../ui/searchInput/SearchInput";
-import { EmployeesType } from "@/root/types/Employee.type";
-import { defaultSchedule } from "@/root/constants/schedule/schedule";
-import ListEmployee from "../listEmployee/ListEmployee";
 import ListEmployeeDepart from "./listEmployeeDepart/ListEmployeeDepart";
 import SearchEmployeeDepart from "./SearchEmployeeDepart/SearchEmployeeDepart";
 
@@ -56,25 +51,7 @@ const CreationDepartment = ({
   const [jobPosition, setJobPosition] = useState("");
   const [clear, setClear] = useState(false);
   const [showDepartmentsForm, setShowDepartmentsForm] = useState(false);
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: defaultSchedule,
-    vacations: {},
-    attendance: {},
-  });
+
   const handleToggleEmployeeForm = () => {
     setShowEmployeeForm(!showEmployeeForm);
   };
