@@ -26,6 +26,7 @@ import { v4 } from "uuid";
 import fetch from "node-fetch";
 import fs from "fs";
 import { EmployeesType, Files } from "@/root/types/Employee.type";
+import { isNumber } from "util";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -124,7 +125,7 @@ const deleteByUid = async (uid: string) => {
 };
 
 const login = async (email: string, password: string) => {
-  
+
   const userCredential = await signInWithEmailAndPassword(
     auth,
     email,
@@ -154,17 +155,20 @@ const login = async (email: string, password: string) => {
 };
 
 const getByCedula = async (cedula: string) => {
-  const employeeCollection = collection(firestore, "employee");
-  const employeeQuery = query(employeeCollection, where("uid", "==", cedula));
-  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
-    employeeQuery
-  );
 
-  if (employeeSnapshot.empty) {
-    throw new Error(`User not found ${cedula}`);
-  } else {
-    return employeeSnapshot.docs[0].data();
-  }
+    const employeeCollection = collection(firestore, "employee");
+    const employeeQuery = query(employeeCollection, where("uid", "==", cedula));
+    const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+      employeeQuery
+    );
+
+    if (employeeSnapshot.empty) {
+      throw new Error(`User not found ${cedula}`);
+    } else {
+      return employeeSnapshot.docs[0].data();
+    }
+  
+
 };
 
 const dismissByUid = async (uid: string) => {
@@ -208,6 +212,7 @@ const getByVariable = async (
 };
 
 const getByVariableAdmin = async (data: string, variable: string) => {
+
   const employeeCollection = collection(firestore, "employee");
   const employeeQuery = query(employeeCollection, where(variable, "==", data));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(

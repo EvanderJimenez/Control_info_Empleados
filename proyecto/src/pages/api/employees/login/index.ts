@@ -16,7 +16,6 @@ const getByEmailPassword = async (req: NextApiRequest, res: NextApiResponse) => 
       res.status(500).json({ message: (error as Error).message });
     }
   }
-
 };
 
 const handlers: any = {};

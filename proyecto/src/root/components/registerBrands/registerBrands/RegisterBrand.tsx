@@ -192,26 +192,17 @@ export default function RegisterBrand() {
     setBrandData(data);
   };
   return (
-    <div className="flex flex-wrap justify-center items-start pt-10">
-      <div className="w-1/2 flex flex-col justify-center">
-        <h2 className="font-semibold text-center">Filters</h2>
-        <SearchInput labelInputSeekerOne="text" valueEnd={cedula} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
-        <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
-        <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
-        <ListScheduleEmployee dispatch={dispatch} clear={clear} setClear={setClear} />
-        <button onClick={handleClear} className="bg-darkBlue focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-          Clear
-        </button>
-      </div>
-
-      <div className="flex items-center w-1/2 shadow-xl justify-center p-4 sm:p-12">
-        <div className="bg-white p-4 sm:p-8 rounded-lg shadow-md w-full">
+    <div className="flex flex-wrap justify-center items-start pb-10">
+      <div className="w-full sm:w-2/3 flex mt-5 flex-col">
+      <div className="bg-white sm:p-8 shadow-md w-full">
+        <h2 className="text-lg font-bold text-center">Edit employee section</h2>
+        <p className="text-center pb-4 font-semibold">This section is for editing schedules, please select the employee whose schedule you want to edit</p>
           <RegisterCycle brandData={brandData} label="Cycle to belongs" onChange={(e) => setNewCycle(e.target.value)} value={newCycle} handleSubmitCycle={handleSubmitCycle} />
 
-          <form action="https://formbold.com/s/FORM_ID" onSubmit={handleSubmitHours} className="space-y-5">
+          <form action="https://formbold.com/s/FORM_ID" onSubmit={handleSubmitHours} className="md:flex-col lg:flex-row sm:flex-col  pb-2 justify-center">
             <div className="-mx-3 flex flex-wrap"></div>
-            <div className="mb-5">
-              <label htmlFor="day" className="mb-3 block text-base font-medium text-gray-700">
+            <div className="flex flex-col justify-center">
+              <label htmlFor="day" className="font-semibold text-center">
                 Day
               </label>
               <select
@@ -219,7 +210,7 @@ export default function RegisterBrand() {
                 id="day"
                 value={newDate}
                 onChange={handleDayChange}
-                className="w-full rounded-md bg-white py-3 px-6 text-base font-medium focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                className="w-full rounded-md bg-lithBlue bg-opacity-50 py-3 px-6 text-base font-medium focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -231,13 +222,13 @@ export default function RegisterBrand() {
               </select>
             </div>
 
-            <div className="-mx-3 flex flex-wrap space-y-4 md:space-y-0 md:space-x-4">
-              <RegisterClock label={"Hora Inicio"} type={"hIni"} name={"hIni"} value={newHIni} id={"hIni"} onChange={(e) => setNewHIni(e.target.value)} />
-              <RegisterClock label={"Hora Fin"} type={"hFin"} name={"hFin"} value={newHFin} id={"hFin"} onChange={(e) => setNewHFin(e.target.value)} />
+            <div className="flex flex-wrap">
+              <RegisterClock label={"Star time"} type={"hIni"} name={"hIni"} value={newHIni} id={"hIni"} onChange={(e) => setNewHIni(e.target.value)} />
+              <RegisterClock label={"End time"} type={"hFin"} name={"hFin"} value={newHFin} id={"hFin"} onChange={(e) => setNewHFin(e.target.value)} />
             </div>
 
-            <div>
-              <button className="w-full bg-black hover:bg-green text-white font-bold py-3 px-4 rounded">Add Schedules</button>
+            <div className="flex justify-start">
+              <button className="md:w-1/4 sm:w-full bg-darkBlue hover:bg-green text-white font-bold ">Add schedules</button>
             </div>
           </form>
           <TableSchedules
@@ -254,12 +245,31 @@ export default function RegisterBrand() {
           />
 
           <form onSubmit={handleUpdate} className="pt-10">
-            <button type="submit" className="w-full bg-black  text-white font-bold py-3 px-4 rounded">
-              Save
+            <button type="submit" className="md:w-1/4 flex justify-center sm:w-full bg-darkBlue hover:bg-green text-white font-bold " title = "Save all">
+              {" "}
+              <img src="/Images/save.png" alt="" />
             </button>
           </form>
         </div>
       </div>
+
+      <div className="w-full sm:w-1/3  justify-center  p-4 sm:p-12">
+      <h1 className="text-center font-semibold">Filter employee</h1>
+        <section className="flex w-full flex-row justify-end">
+          <button onClick={handleClear} className="bg-darkBlue">
+            {" "}
+            <img src="/Images/eraser.png" alt="eraser" title="clean all" />
+          </button>
+        </section>
+
+        <SearchInput labelInputSeekerOne="text" valueEnd={cedula} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
+        <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
+        <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
+        <ListScheduleEmployee dispatch={dispatch} clear={clear} setClear={setClear} />
+
+        
+      </div>
     </div>
   );
+
 }
