@@ -32,9 +32,6 @@ const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) 
   }, [option]);
 
   useEffect(() => {
-    console.log(listEmployee)
-    console.log(variable)
-    console.log(listEmployees);
     if (listEmployees) {
      
       const pendingRequestsList: PendingRequest[] = [];

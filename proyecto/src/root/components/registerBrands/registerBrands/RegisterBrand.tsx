@@ -246,7 +246,7 @@ export default function RegisterBrand() {
 
           <form onSubmit={handleUpdate} className="pt-10">
             <button type="submit" className="md:w-1/4 flex justify-center sm:w-full bg-darkBlue hover:bg-green text-white font-bold " title = "Save all">
-              {" "}
+              {" "} 
               <img src="/Images/save.png" alt="" />
             </button>
           </form>

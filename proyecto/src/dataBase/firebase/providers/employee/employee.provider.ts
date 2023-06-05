@@ -392,7 +392,6 @@ const getFileURLByName = async (
 async function getFileBase64(url: string): Promise<string> {
   const response = await fetch(url);
   const fileBuffer = await response.buffer();
-  console.log(fileBuffer);
   return fileBuffer.toString("base64");
 }
 

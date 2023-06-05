@@ -32,7 +32,7 @@ const getAll = async () => {
 };
 
 const getDepartmentsByPage = async (pageSize: number, page: number) => {
-  console.log(pageSize, page);
+  
   const departmentsCollection = collection(firestore, "departments");
   const limitPage = pageSize * page;
   const departmentsQuery = query(

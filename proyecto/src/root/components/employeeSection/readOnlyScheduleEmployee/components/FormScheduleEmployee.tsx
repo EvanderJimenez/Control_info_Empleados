@@ -1,5 +1,5 @@
 import { Schedule } from "@/root/interface/employee";
-import { selectGetByIdDocDepartment, selectGetDepartmentById } from "@/root/redux";
+import { selectGetByIdDocDepartment } from "@/root/redux";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -64,10 +64,11 @@ const FormScheduleEmployee = ({ schedules }: PropsFormSchedule) => {
               </tr>
             ))}
             {Array.isArray(schedules) && schedules.length === 0 && (
-              <div className="font-semibold text-yellow ">
-                {" "}
-                You do not have a registered schedule 🤔
-              </div>
+              <tr>
+                <td colSpan={3} className="font-semibold text-yellow">
+                  You do not have a registered schedule 🤔
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

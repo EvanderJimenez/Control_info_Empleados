@@ -49,7 +49,7 @@ import {
 } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
-import { getByVariableAdminReducer } from "../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
+import { getByVariableAdminReducer, resetByVariableAdmin } from "../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import {
   DispatchTypeUpdateFile,
   updateFileEmployeeReducer,
@@ -106,7 +106,7 @@ export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
     dispatch(setLoading(true));
 
     const employee = await providerRedux.createEmployeeProvider(searchTerm);
-
+  
     dispatch(createEmployeeReducer(employee || null));
     dispatch(setLoading(false));
   };
@@ -139,7 +139,11 @@ export const StartUpDateFileEmployee = (
       nameFile,
       typeFile
     );
-
+    if(!employee.ok){
+      dispatch(starAlertError("Error updating employee",true))
+    }else{
+      dispatch(starAlertSuccess("Employee updated successfully",true))
+    }
     dispatch(updateFileEmployeeReducer(employee || null));
   };
 };
@@ -212,6 +216,12 @@ export const StartGetByVariableAdmin = (
     );
 
     dispatch(getByVariableAdminReducer(response || null));
+  };
+};
+
+export const ResetByVariableAdmin = (): any => {
+  return async (dispatch: DispatchTypeByVariable) => {
+    dispatch(resetByVariableAdmin());
   };
 };
 

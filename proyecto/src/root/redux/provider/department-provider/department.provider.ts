@@ -2,7 +2,6 @@ import { Department } from "@/root/interface/departments";
 import { DepartmentType } from "@/root/types/Department.type";
 
 const getDepartmentByIdProvider = async (searchTerm: string) => {
-  console.log(searchTerm);
   const response = await fetch(`/api/departments/${searchTerm}`, {
     method: "GET",
     headers: {
