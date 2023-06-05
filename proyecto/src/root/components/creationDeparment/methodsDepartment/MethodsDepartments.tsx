@@ -178,7 +178,7 @@ function MethodsDepartments(props: RegisterProps) {
     });
   };
   return (
-    <div className="flex justify-center items-center flex-col">
+    <div>
       <CreationDepartment
         handleUpdateEmployee={handleUpdateEmployee}
         setPassId={setPassId}
@@ -195,7 +195,7 @@ function MethodsDepartments(props: RegisterProps) {
         handleGetDepartment={handleGetDepartment}
         handleUpdate={handleUpdate}
         handleDeleteEmployee={handleDeleteEmployee}
-        setIdEmployee={setIdEmployee}
+        setPassIdEmployee={setIdEmployee}
       />
     </div>
   );

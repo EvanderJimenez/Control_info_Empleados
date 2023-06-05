@@ -34,6 +34,25 @@ const getAllDepartmentProvider = async () => {
 
   return data;
 };
+const getDepartmentsByPageProvider = async (pageSize: number, page: number) => {
+  const response = await fetch(
+    `/api/departments/by-page?pageSize=${pageSize}&currentPage=${page}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Error getting employee");
+  }
+
+  const data = await response.json();
+
+  return data;
+};
 
 const updateDepartmentByIdProvider = async (
   searchTerm1: string,
@@ -97,4 +116,5 @@ export const departProvider = {
   updateDepartmentByIdProvider,
   getDepartmentByDocIdProvider,
   createDepartmentProvider,
+  getDepartmentsByPageProvider,
 };

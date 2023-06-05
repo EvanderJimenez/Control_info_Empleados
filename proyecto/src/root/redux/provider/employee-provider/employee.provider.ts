@@ -101,7 +101,7 @@ const upDatEmployeeProvider = async (
   });
 
   if (!response.ok) {
-    return response
+    return response;
   }
 
   const data = await response.json();
@@ -118,7 +118,7 @@ const getEmployeeByUidProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    return null
+    return null;
   }
 
   const data = await response.json();
@@ -144,22 +144,20 @@ const getEmployeeByCedulaProvider = async (searchTerm: string) => {
 };
 
 const getEmployeeByNameProvider = async (searchTerm: string) => {
+  const response = await fetch(`/api/employees/by-name/${searchTerm}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-    const response = await fetch(`/api/employees/by-name/${searchTerm}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  if (!response.ok) {
+    throw new Error("Error getting employee");
+  }
 
-    if (!response.ok) {
-      throw new Error("Error getting employee");
-    }
+  const data = await response.json();
 
-    const data = await response.json();
-
-    return data;
-
+  return data;
 };
 
 const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
@@ -173,7 +171,7 @@ const loginProvider = async (searchTerm1: string, searchTerm2: string) => {
   });
 
   if (!response.ok) {
-    return null
+    return null;
   }
 
   const data = await response.json();
@@ -197,7 +195,28 @@ const getByVariableProvider = async (
   });
 
   if (!response.ok) {
-    return null
+    return null;
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+const getByVariableProviderAdmin = async (
+  searchTerm1: string,
+  searchTerm2: string
+) => {
+  const response = await fetch("/api/employees/by-variable", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      data: searchTerm1,
+      variable: searchTerm2,
+    }),
+  });
+
+  if (!response.ok) {
+    return null;
   }
 
   const data = await response.json();
@@ -214,7 +233,7 @@ const getVacationsByUidProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    return null
+    return null;
   }
 
   const data = await response.json();
@@ -231,7 +250,7 @@ const getEmployeesByIdDepartProvider = async (searchTerm: string) => {
   });
 
   if (!response.ok) {
-    return null
+    return null;
   }
 
   const data = await response.json();
@@ -248,7 +267,7 @@ const getAllBossesProvider = async () => {
   });
 
   if (!response.ok) {
-    return null
+    return null;
   }
 
   const data = await response.json();
@@ -270,4 +289,5 @@ export const providerRedux = {
   dismissByUidProvider,
   deleteEmployeeProvider,
   getAllBossesProvider,
+  getByVariableProviderAdmin,
 };

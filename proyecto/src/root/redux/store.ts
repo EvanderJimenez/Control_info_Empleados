@@ -6,10 +6,10 @@ import { DismissEmployeesReducer } from "./reducers/employee-reducer/dismissEmpl
 import { CreateEmployeeReducer } from "./reducers/employee-reducer/createEmployee/CreateEmployeeReducer";
 import { ListEmployeesReducer } from "./reducers/employee-reducer/listEmployees/ListEmployeeReducer";
 import { UpdateEmployeeReducer } from "./reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
-import { GetByVariableReducer } from './reducers/employee-reducer/getByVariable/GetByVariableReducer';
-import { GetEmployeesByIdDepartmentReducer } from './reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer';
-import { GetAllBossReducer } from './reducers/employee-reducer/getAllBosses/GetAllBossesReducer';
-import { DeleteEmployeesReducer } from './reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer';
+import { GetByVariableReducer } from "./reducers/employee-reducer/getByVariable/GetByVariableReducer";
+import { GetEmployeesByIdDepartmentReducer } from "./reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
+import { GetAllBossReducer } from "./reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
+import { DeleteEmployeesReducer } from "./reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
 import { GetAllDepartmentsReducer } from "./reducers/department-reducer/getAllDepartments/GetAllDepartmentsReducer";
 import { GetByIdEmployeeDepartmentsReducer } from "./reducers/department-reducer/getDepartmentById/GetDepartmentByIdEmployee";
 import { ByIdDocReducer } from "./reducers/department-reducer/getDepartmentByDocId/GetDepartmentByDocIdReducer";
@@ -19,7 +19,9 @@ import { GetBrandsByDocIdReducer } from "./reducers/brands-reducer/getBrandsByDo
 import { UpdateBrandsReducer } from "./reducers/brands-reducer/updateBrandsById/UpdateBrandsByIdReducer";
 import { GetBrandsByIdEmployeeReducer } from "./reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
 import { LoginReducer } from "./reducers/login-reducer/loginReducer";
+
 import { GetEmployeeByUidReducer } from "./reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
+import { GetByVariableAdminReducer } from "./reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -32,6 +34,7 @@ export const ApplicationStore = configureStore({
     getEmployeeByUidStore: GetEmployeeByUidReducer,
     loginStore: LoginReducer,
     getByVariableStore: GetByVariableReducer,
+    getByVariableAdminStore: GetByVariableAdminReducer,
     getVacationsByUidStore: VacationsReducer,
     getAllBossesStore: GetAllBossReducer,
     getEmployeesByIdDepartmentStore: GetEmployeesByIdDepartmentReducer,
@@ -44,9 +47,8 @@ export const ApplicationStore = configureStore({
     createBrands: CreateBrandsReducer,
     getBrandsByDocId: GetBrandsByDocIdReducer,
     updateBrands: UpdateBrandsReducer,
-    GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer
-
-
+    GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer,
+    GetByIdDepartmentsPage: GetByIdEmployeeDepartmentsReducer,
   },
 });
 

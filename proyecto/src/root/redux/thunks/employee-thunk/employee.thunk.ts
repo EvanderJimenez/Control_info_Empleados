@@ -49,6 +49,7 @@ import {
 } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
+import { getByVariableAdminReducer } from "../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -94,9 +95,9 @@ export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
   return async (dispatch: DispatchTypeCreate) => {
     dispatch(setLoading(true));
 
-      const employee = await providerRedux.createEmployeeProvider(searchTerm);
+    const employee = await providerRedux.createEmployeeProvider(searchTerm);
 
-      dispatch(createEmployeeReducer(employee || null));
+    dispatch(createEmployeeReducer(employee || null));
 
     dispatch(setLoading(false));
   };
@@ -118,11 +119,9 @@ export const StartUpDateEmployee = (
 
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeEmployeeByUid) => {
-    
-      const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
+    const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
 
-      dispatch(getEmployeeByUidReducer(employee || null));
-
+    dispatch(getEmployeeByUidReducer(employee || null));
   };
 };
 
@@ -159,6 +158,20 @@ export const StartGetByVariable = (
     );
 
     dispatch(getByVariableReducer(response || null));
+  };
+};
+
+export const StartGetByVariableAdmin = (
+  searchTerm1: string,
+  searchTerm2: string
+): any => {
+  return async (dispatch: DispatchTypeByVariable) => {
+    const response = await providerRedux.getByVariableProviderAdmin(
+      searchTerm1,
+      searchTerm2
+    );
+
+    dispatch(getByVariableAdminReducer(response || null));
   };
 };
 

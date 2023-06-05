@@ -92,47 +92,56 @@ export const ListDepartment = ({
   const currentDepartments = filteredDepartments.slice(startIndex, endIndex);
 
   return (
-    <div className="bg-white shadow-md rounded px-2 sm:px-8 pt-6 pb-8 mb-4 flex flex-col">
-      <div className="bg-white shadow overflow-hidden rounded-lg p-2 sm:p-4">
-        <div className="flex mb-4">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleInputChange}
-            className="border border-gray-300 rounded-md px-2 py-1 sm:py-2 sm:text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder="Search department..."
-          />
-          <button
-            className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={handleGetDepart}
-          >
-            Load more departments
-          </button>
-          <SearchDepartment handleGet={handleDepartment} />
-        </div>
+    <div className="bg-white shadow overflow-hidden rounded-lg p-2 sm:p-4">
+      <div className="flex mb-4">
+        <div className="flex flex-col md:flex-row mb-4">
+          <div className="w-full md:w-1/2 md:pr-2 mb-2 md:mb-0">
+            <div className="flex">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md px-2 py-1 sm:py-2 sm:text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Search department..."
+              />
+              <button
+                className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={handleGetDepart}
+              >
+                Load more departments
+              </button>
+            </div>
+          </div>
 
+          <div className="w-full md:w-1/2 md:pl-2">
+            <SearchDepartment handleGet={handleDepartment} />
+          </div>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
         <TableList
           handle={handle}
           handleGetDepartment={handleGetDepartment}
           currentDepartments={currentDepartments}
         />
-        <div className="flex justify-between mt-4">
-          <button
-            className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={handlePreviousPage}
-            disabled={currentPage === 0}
-          >
-            Previous
-          </button>
+      </div>
+      <div className="flex justify-between mt-4">
+        <button
+          className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={handlePreviousPage}
+          disabled={currentPage === 0}
+        >
+          Previous
+        </button>
 
-          <button
-            className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onClick={handleNextPage}
-            disabled={endIndex >= filteredDepartments.length}
-          >
-            Next
-          </button>
-        </div>
+        <button
+          className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={handleNextPage}
+          disabled={endIndex >= filteredDepartments.length}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
