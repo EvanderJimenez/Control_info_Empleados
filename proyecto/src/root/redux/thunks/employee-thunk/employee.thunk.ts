@@ -59,6 +59,7 @@ import {
   getFileURLByNameReducer,
   resetUrlReducer,
 } from "../../reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
+import { starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -173,6 +174,10 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
     );
 
     dispatch(loginReducer(response || null));
+ 
+      dispatch(starAlertSuccess("Yes, we can do",true))
+
+ 
 
     dispatch(setLoading(false));
 

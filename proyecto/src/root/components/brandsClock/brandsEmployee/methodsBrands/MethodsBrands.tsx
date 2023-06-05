@@ -28,6 +28,7 @@ export default function MethodsBrands() {
     hoursEmployee: {},
   });
 
+
   useEffect(() => {
     const fetchDataAndDateOfWeekday = async () => {
       const response = await axios.get("http://worldtimeapi.org/api/ip");
@@ -53,14 +54,14 @@ export default function MethodsBrands() {
 
   const handleGetBrands = async (id: string) => {
 
-   await  dispatch(startGetBrandsByIdEmployee(id))
+    await dispatch(startGetBrandsByIdEmployee(id))
 
 
   };
 
   useEffect(() => {
-  
-    if(brandsGetByIdEmployee){
+
+    if (brandsGetByIdEmployee) {
       setBrandData(brandsGetByIdEmployee);
     }
 

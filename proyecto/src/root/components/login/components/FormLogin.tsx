@@ -7,9 +7,14 @@ interface FormLoginProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   loginData: LoginEP;
 }
+ 
 
 
 const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProps) => {
+  function dispatch(arg0: any): React.MouseEventHandler<HTMLButtonElement> | undefined {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div>
       <form className="bg-lithBlue  flex items-center justify-center flex-col h-full w-full p-10" onSubmit={handleSubmit}>
@@ -47,3 +52,7 @@ const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProp
 };
 
 export default FormLogin;
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}
+

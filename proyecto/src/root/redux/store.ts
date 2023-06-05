@@ -24,9 +24,11 @@ import { GetEmployeeByUidReducer } from "./reducers/employee-reducer/getEmployee
 import { GetByVariableAdminReducer } from "./reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import { UpdateFileEmployeeReducer } from "./reducers/employee-reducer/uploadFile/UploadFile";
 import { GetFileURLByNameReducer } from "./reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
+import { AlertReducer } from "./reducers/alertHandler-reducer/AlertHandlerReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
+    alertStore: AlertReducer,
     deleteEmployeeStore: DeleteEmployeesReducer,
     dismissEmployeeStore: DismissEmployeesReducer,
     employeesListStore: ListEmployeesReducer,
