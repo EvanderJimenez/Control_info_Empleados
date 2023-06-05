@@ -16,7 +16,7 @@ const getAll = async (res: NextApiResponse) => {
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const employeeData : EmployeesType = req.body;
-
+  
     const newEmployee = await employeeProvider.create(employeeData);
 
     res.status(201).json(newEmployee);

@@ -44,7 +44,7 @@ const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
               .map((item) => (
                 <div
                   key={item.uid}
-                  className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4"
+                  className=" shadow-xl bg-lithBlue bg-opacity-30 flex flex-col zoom  m-2 p-4"
                 >
                   <p className="font-bold">Name: {item.name}</p>
                   <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
@@ -57,10 +57,12 @@ const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
                   </p>
 
                   <button
-                    className="mt-4 px-4 py-2 bg-black text-white rounded "
+                    className="mt-4 flex justify-center w-1/2 bg-darkBlue text-white rounded "
                     onClick={() => handleLoad(item.uid)}
+                    title = "Edit schedule"
                   >
-                    Load Information
+                    {" "}
+                    <img src="/Images/pencil.png" alt="pencil" />
                   </button>
                 </div>
               ))}

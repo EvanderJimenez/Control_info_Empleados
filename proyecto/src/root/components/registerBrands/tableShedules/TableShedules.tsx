@@ -26,13 +26,13 @@ const TableSchedules = ({
   handleDeleteSchedule,
 }: tableShedul) => {
   return (
-    <div className="p-10 pt-10 flex flex-wrap">
+    <div className="flex justify-center flex-wrap">
       <table className="w-full">
         <thead>
-          <tr className="bg-[#696969]">
+          <tr className="bg-black text-white">
             <th className="py-2 px-4 bg-blue-700 text-gray-700">Date</th>
-            <th className="py-2 px-4 bg-blue-700 text-gray-700">Start Time</th>
-            <th className="py-2 px-4 bg-blue-700 text-gray-700">End Time</th>
+            <th className="py-2 px-4 bg-blue-700 text-gray-700">Start time</th>
+            <th className="py-2 px-4 bg-blue-700 text-gray-700">End time</th>
             <th className="py-2 px-4 bg-blue-700 text-gray-700">Edit</th>
             <th className="py-2 px-4 bg-blue-700 text-gray-700">Delete</th>
           </tr>
@@ -77,7 +77,7 @@ const TableSchedules = ({
                       </button>
                     ) : (
                       <button
-                        className="text-blue-500 hover:text-blue-700 mr-2 bg-blue"
+                        className="mr-2 bg-blue"
                         onClick={() => handleEditClick(index)}
                       >
                         Edit
@@ -86,7 +86,7 @@ const TableSchedules = ({
                   </td>
                   <td>
                     <button
-                      className="text-red-500 hover:text-red-700 bg-darkBlue"
+                      className="bg-darkBlue"
                       onClick={() => handleDeleteSchedule(date)}
                     >
                       Delete

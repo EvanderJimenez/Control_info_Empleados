@@ -13,16 +13,11 @@ export const RegisterCycle = ({ brandData, ...props }: addCycle) => {
     <div className="w-full flex justify-center items-center">
       <div className="px-3 sm:w-1/2">
         <div className="mb-5">
-          <form onSubmit={props.handleSubmitCycle} className="space-y-4">
-            <label
-              htmlFor="newCycle"
-              className="mb-3 block text-base font-medium text-[#07074D]"
-            ></label>
-
+          <form onSubmit={props.handleSubmitCycle} className="w-full space-x-2 flex-row flex">
             <table className="border-collapse w-full">
               <thead>
                 <tr>
-                  <th className="border p-2">Cycle registration </th>
+                  <th className="bg-black text-white  h-10">Cycle registration </th>
                 </tr>
               </thead>
               <tbody>
@@ -30,14 +25,15 @@ export const RegisterCycle = ({ brandData, ...props }: addCycle) => {
                   Object.entries(brandData.cycle).map(
                     ([date, hours], index) => (
                       <tr key={index}>
-                        <td className="border p-2"> Cycle : {date}</td>
+                        <td className="bg-lithBlue p-2"> Cycle : {date}</td>
                       </tr>
                     )
                   )}
               </tbody>
             </table>
-            <button className="bg-black hover:shadow-form rounded-md bg-[#165488] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-              Add New Cycle
+            <button className="bg-darkBlue w-auto h-10">
+              {" "}
+              <img src="/Images/plusIcon.png" alt="add" title="add cycle" />
             </button>
           </form>
         </div>
