@@ -1,7 +1,8 @@
+import { LaborRegistration } from "@/root/interface/brands";
 import { Brands } from "@/root/interface/employee";
 
 
-const createBrandsProvider = async (searchTerm: Brands) => {
+const createBrandsProvider = async (searchTerm: LaborRegistration) => {
 
   const response = await fetch("/api/brands", {
     method: "POST",
@@ -56,7 +57,7 @@ const getBrandsByDocIdProvider = async (searchTerm: string) => {
 
 const updateBrandsByIdProvider = async (
   searchTerm1: string,
-  searchTerm2: Brands
+  searchTerm2: LaborRegistration
 ) => {
   const response = await fetch(`/api/brands/${searchTerm1}`, {
     method: "PUT",

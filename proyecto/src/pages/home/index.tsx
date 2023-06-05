@@ -1,11 +1,11 @@
 import LoginPage from "@/Layout/LoginPage";
-import { ListDepartment } from "@/root/components/listDepartment/ListDeparment";
-import MainForm from "@/root/components/mainForm/MainForm";
+import MethodsBrands from "@/root/components/brandsClock/brandsEmployee/methodsBrands/MethodsBrands";
+
 
 export defasectiont function index() {
   return (
     <LoginPage>
-      <MainForm />
+      <MethodsBrands />
     </LoginPage>
   );
 }

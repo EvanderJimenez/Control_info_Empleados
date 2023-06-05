@@ -1,6 +1,8 @@
 import { Department } from "@/root/interface/departments";
 import React from "react";
 import InputDepartment from "../input/InputDepartment";
+import { useSelector } from "react-redux";
+import { selectGetDepartmentById } from "@/root/redux";
 
 interface infoDepart {
   departmentsData: Department;
@@ -15,6 +17,8 @@ export const FormEmployee = ({
   departmentsData,
   ...props
 }: infoDepart) => {
+  const dataDepart = useSelector(selectGetDepartmentById);
+
   return (
     <div className="mx-auto mt-16 max-w-xl sm:mt-20">
       <form

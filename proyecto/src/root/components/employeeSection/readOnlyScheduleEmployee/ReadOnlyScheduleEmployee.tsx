@@ -24,15 +24,14 @@ const ReadOnlyScheduleEmployee = () => {
   useEffect(() => {
     console.log(brandsById);
     if (brandsById) {
-      
       const hoursEmployee: Record<string, any> = brandsById.hoursEmployee;
-      if(hoursEmployee){
+      if (hoursEmployee) {
         scheduleList = Object.entries(hoursEmployee).map(
           ([day, schedule]: [string, Record<string, string>]) => {
             return {
               day,
               startTime: schedule.hIni,
-              endTime: schedule.hFin, 
+              endTime: schedule.hFin,
             };
           }
         );

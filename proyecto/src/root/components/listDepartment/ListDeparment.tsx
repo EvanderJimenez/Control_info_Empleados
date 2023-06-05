@@ -3,11 +3,21 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { TableList } from "./tableList/TableList";
 import { SearchDepartment } from "../creationDeparment/SearchDepartment";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  StartResetDepartmentByName,
+  StartResetDepartmentByPage,
+  selectGetByNameDepartment,
+  selectGetByPageDepartment,
+  startGetDepartmentByName,
+  startGetDepartmentByPage,
+} from "@/root/redux";
 interface lisDepartment {
   handleGetDepartment: (id: string) => void;
   setPassId: (id: string) => void;
   setNameDepart: (name: string) => void;
 }
+
 export const ListDepartment = ({
   handleGetDepartment,
   setPassId,
@@ -20,42 +30,35 @@ export const ListDepartment = ({
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleGetDepartments = async () => {
-    const response = await fetch(
-      `/api/departments/by-page?pageSize=${pageSize}&currentPage=${page}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+  const departByPage = useSelector(selectGetByPageDepartment);
+  const departByName = useSelector(selectGetByNameDepartment);
+  const dispatch = useDispatch();
 
-    if (response.ok) {
-      const data = await response.json();
-      setDepartmentData(data);
-      if (data.length < pageSize * page) {
-        setPage(0);
-      }
-    } else {
-      toast.error("Error acquiring information");
-    }
+  const handleGetDepartments = async () => {
+    dispatch(startGetDepartmentByPage(pageSize, page));
+    dispatch(StartResetDepartmentByName());
   };
   const handleDepartment = async (name: string) => {
-    const response = await fetch(`/api/departments/by-name/${name}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    dispatch(startGetDepartmentByName(name));
 
-    if (response.ok) {
-      const data = await response.json();
-      setDepartmentData(data);
-    } else {
-      toast.error("Error acquiring information");
-    }
+    dispatch(StartResetDepartmentByPage());
   };
+
+  useEffect(() => {
+    if (departByName.length > 0) {
+      console.log(departByName);
+      setDepartmentData(departByName);
+    } else if (departByPage.length > 0) {
+      console.log(departByPage);
+      setDepartmentData(departByPage);
+    }
+  }, [departByName, departByPage]);
+
+  useEffect(() => {
+    if (departByPage) {
+    }
+  }, [departByPage]);
+
   const handle = (id: string, name: string) => {
     setPassId(id);
     setNameDepart(name);
@@ -96,25 +99,23 @@ export const ListDepartment = ({
   const currentDepartments = filteredDepartments.slice(startIndex, endIndex);
 
   return (
-    <div className="bg-white shadow overflow-hidden rounded-lg p-2 sm:p-4">
-      <div className="flex mb-4">
+    <div className="bg-white shadow overflow-hidden flex flex-col rounded-lg p-2 sm:p-4">
+      <div className="flex mb-4 justify-center">
         <div className="flex flex-col md:flex-row mb-4">
-          <div className="w-full md:w-1/2 md:pr-2 mb-2 md:mb-0">
-            <div className="flex">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleInputChange}
-                className="border border-gray-300 rounded-md px-2 py-1 sm:py-2 sm:text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Search department..."
-              />
-              <button
-                className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={handleGetDepart}
-              >
-                Load more departments
-              </button>
-            </div>
+          <div className="w-full flex flex-col space-y-2 md:w-1/2 md:pr-2 mb-2 md:mb-0">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleInputChange}
+              className="border rounded-md px-2 py-1 sm:py-2 sm:text-sm focus:outline-none"
+              placeholder="Search department..."
+            />
+            <button
+              className="flex justify-center text-center px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-darkBlue focus:outline-none focus:ring-2 focus:ring-offset-2 "
+              onClick={handleGetDepart}
+            >
+              more departments
+            </button>
           </div>
 
           <div className="w-full md:w-1/2 md:pl-2">

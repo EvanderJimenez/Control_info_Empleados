@@ -4,6 +4,7 @@ import { StartListOfEmployee, StartGetEmployeeByUid } from "../../redux/thunks/e
 import { RootState } from "../../redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 import { selectLogin, selectGetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetByIdDocDepartment, selectGetDepartmentById } from "@/root/redux";
 
 interface ListClear {
   clear: boolean;
@@ -14,6 +15,7 @@ const ListEmployee = ({ clear, setClear }: ListClear) => {
   const dispatch = useDispatch();
 
   const employeesListVariable = useSelector(selectGetByVariable);
+  const department = useSelector(selectGetByIdDocDepartment)
 
   const getEmployeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
   const loading = useSelector((state: RootState) => state.loading.loading);
@@ -40,7 +42,7 @@ const ListEmployee = ({ clear, setClear }: ListClear) => {
                   <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
                   <p className="mt-2 font-semibold">Email: {item.email}</p>
                   <p className="mt-2 font-semibold">Job Position: {item.jobPosition}</p>
-                  <p className="mt-2 font-semibold">Phone number: {item.phoneNumber}</p>
+                  <p className="mt-2 font-semibold">Department: {department?.name || ''}</p>
 
                   <button className="mt-4 px-4 py-2 bg-black text-white rounded " onClick={() => handleLoad(item.uid)}>
                     Load Information

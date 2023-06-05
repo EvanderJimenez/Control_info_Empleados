@@ -25,9 +25,11 @@ function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartSta
     } else if (resDepart.idEmployee === loginState.uid) {
       cookieValue = JSON.stringify({ logged: true, type: "boss",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/BossMain");
-    } else {
+    } else if(resDepart.idEmployee !== loginState.uid) {
       cookieValue = JSON.stringify({ logged: true, type: "employee",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/EmployeeMain");
+    }else{
+      toast.error("User not Found")
     }
 
     setCookie("logged", cookieValue, { path: "/", expires: expirationDate });

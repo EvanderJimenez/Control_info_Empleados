@@ -14,8 +14,8 @@ import {
   initialDataEmployee,
   pendingRequestJustification,
 } from "@/root/constants/employee/employee.constants";
-import FormAcceptDenied from "../vacationsRequestBoss/components/formAcceptDenied/FormAcceptDenied";
 import FormAcceptDeniedJustification from "./components/formAccetpDenied/FormAcceptDeniedJustification";
+import { resetByVariable } from "@/root/redux/reducers/employee-reducer/getByVariable/GetByVariableReducer";
 
 let optionSelect = "wait";
 
@@ -63,7 +63,7 @@ const JustificationRequest = () => {
       dispatch(
         StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee)
       );
-
+      dispatch(resetByVariable())
       optionSelect = "wait";
       dispatch(ResetEmployeeByUid());
       setSelectedRequest(pendingRequestJustification);

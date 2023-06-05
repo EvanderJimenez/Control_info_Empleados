@@ -2,15 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
+import { selectGetByIdDocDepartment, selectGetDepartmentById } from "@/root/redux";
 
 const EmployeeProfile = () => {
   const UserLogin = useSelector(selectLogin);
-
+  const department = useSelector(selectGetByIdDocDepartment);
   return (
     <>
       <div className="bg-lithGray flex xl:h-screen flex-col  lg:flex-wrap items-center p-12 ">
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           <img src="/Images/profileIcon.gif" width={100} height={100} alt="Picture of the author" />
+          <span className="font-serif"> Department: {department?.name || ''}</span>
         </div>
 
         <div className="flex items-center justify-center space-x-10">

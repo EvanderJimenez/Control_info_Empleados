@@ -21,8 +21,8 @@ const ComboBoxDocuments = ({
 
 
   return (
-    <div className="mb-4">
-      <label htmlFor="comboBox" className="block text-sm font-medium">
+    <div className="mb-4 w-full pl-4 pr-4">
+      <label htmlFor="comboBox" className=" text-center block text-sm font-medium">
         {label}
       </label>
       <select

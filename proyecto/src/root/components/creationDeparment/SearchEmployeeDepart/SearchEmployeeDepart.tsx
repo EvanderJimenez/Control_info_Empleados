@@ -7,8 +7,7 @@ import { selectLogin } from "@/root/redux";
 export default function SearchEmployeeDepart(props: SearchComponentInterface) {
   const [Value, setValue] = useState("");
 
-  const dispatch = useDispatch();
-  const employeeLogin = useSelector(selectLogin);
+  const dispatch = useDispatch()
 
   const handleSearch = async () => {
     dispatch(StartGetByVariableAdmin(Value, props.typeList || ""));

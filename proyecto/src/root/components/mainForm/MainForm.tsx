@@ -20,16 +20,16 @@ export const MainForm = ({}) => {
         <div className="absolute inset-0 flex justify-center items-center">
           <div className="text-black text-center">
             <div className="flex-col w-full h-screen p-1 flex justify-center items-center">
-              <a className=" font-semibold cursor-pointer text-white bg-darkBlue" onClick={toggleComponent}>
+              <button className=" font-semibold cursor-pointer text-white bg-darkBlue" onClick={toggleComponent}>
                 {showComponent ? "Don't have an account?, register" : "Do you have an account?, log in"}
-              </a>
+              </button>
               <div className="flex items-center justify-center flex-col h-screen w-full p-2">
                 <div>{showComponent ? <Login /> : <Register />}</div>
               </div>
             </div>
           </div>
         </div>
-        <img className="h-screen w-screen object-cover" src="./Images/loginBackground.jpg" alt="Primary image" />
+        <img className="h-screen w-screen object-cover" src="/Images/loginBackground.jpg" alt="Primary image" />
       </div>
     </>
   );

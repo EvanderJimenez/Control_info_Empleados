@@ -1,6 +1,7 @@
 import { PendingRequest } from "@/root/interface/employee";
-import { selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { selectGetByVariable, selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { StarGetEmployeesByIdDepartment, StartGetEmployeeByUid } from "@/root/redux/thunks/employee-thunk/employee.thunk";
+import { EmployeesType } from "@/root/types/Employee.type";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,17 +10,31 @@ interface RequestEmployeeProps {
   option: string
 }
 
+
+let listEmployees : EmployeesType[]
+
 const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
-  const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
+  const variable = useSelector(selectGetByVariable);
+  const listEmployee = useSelector(selectGetEmployeesByIdDepartment);
   const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
+
+
+  if(variable && variable.length > 0){
+    listEmployees = variable
+  }else if(listEmployee && listEmployee.length > 0){
+    listEmployees = listEmployee
+  }
 
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
   }, [option]);
 
   useEffect(() => {
+    console.log(listEmployee)
+    console.log(variable)
+    console.log(listEmployees);
     if (listEmployees) {
      
       const pendingRequestsList: PendingRequest[] = [];

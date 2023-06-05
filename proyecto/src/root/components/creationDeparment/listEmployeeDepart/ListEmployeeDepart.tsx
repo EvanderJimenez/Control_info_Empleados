@@ -32,6 +32,8 @@ const ListEmployeeDepart = ({
     setIdNameEmployee(name);
   };
 
+  console.log(employeesListVariable);
+
   return (
     <>
       {employeesListVariable.length > 0 ? (
@@ -59,10 +61,12 @@ const ListEmployeeDepart = ({
                   </button>
                 </div>
               ))}
-          {loading && <LoadingGeneralComponent />}
+          {/* {loading && <LoadingGeneralComponent />} */}
         </div>
       ) : (
-        <h2 className="font-semibold">List Empty</h2>
+        <h2 className="font-semibold text-center bg-black text-yellow">
+          List Empty
+        </h2>
       )}
     </>
   );

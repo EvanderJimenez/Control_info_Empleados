@@ -26,6 +26,7 @@ import { v4 } from "uuid";
 import fetch from "node-fetch";
 import fs from "fs";
 import { EmployeesType, Files } from "@/root/types/Employee.type";
+import { isNumber } from "util";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -307,9 +308,9 @@ const uploadFile = async (
   nameFile: string,
   typeFile: string
 ) => {
-  /*   if (typeof fileBase64 !== "string" || !fileBase64.startsWith("data:image/")) {
-    throw new Error("Invalid file format");
-  } */
+  if (typeof fileBase64 !== "string") {
+    return null;
+  }
 
   const storage = getStorage();
 

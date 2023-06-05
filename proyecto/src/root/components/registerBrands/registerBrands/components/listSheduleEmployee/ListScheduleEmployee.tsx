@@ -2,7 +2,9 @@ import LoadingGeneralComponent from "@/root/components/loadingGeneralComponent/L
 import {
   RootState,
   StartGetEmployeeByUid,
+  selectGetByIdDocDepartment,
   selectGetByVariable,
+  selectGetDepartmentById,
   selectLogin,
 } from "@/root/redux";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -16,13 +18,13 @@ interface ListClear {
 }
 
 const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
-
   const employeesListVariable = useSelector(selectGetByVariable);
 
   const getEmployeeByUid = useSelector(
     (state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid
   );
   const loading = useSelector((state: RootState) => state.loading.loading);
+  const department = useSelector(selectGetByIdDocDepartment)
 
   const loginState = useSelector(selectLogin);
 
@@ -34,39 +36,48 @@ const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
   };
 
   return (
-<>
-{
-  employeesListVariable.length > 0 ?  (    <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
-  {Array.isArray(employeesListVariable) &&
-    employeesListVariable
-      .filter((item) => item.enabled && item.uid !== loginState.uid)
-      .map((item) => (
-        <div
-          key={item.uid}
-          className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4"
-        >
-          <p className="font-bold">Name: {item.name}</p>
-          <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
-          <p className="mt-2 font-semibold">Email: {item.email}</p>
-          <p className="mt-2 font-semibold">
-            Job Position: {item.jobPosition}
-          </p>
-          <p className="mt-2 font-semibold">
-            Department: {item.idDepartment}
-          </p>
+    <>
+      {employeesListVariable.length > 0 ? (
+        <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
+          {Array.isArray(employeesListVariable) &&
+            employeesListVariable
+              .filter((item) => item.enabled && item.uid !== loginState.uid)
+              .map((item) => (
+                <div
+                  key={item.uid}
+                  className=" shadow-xl bg-lithBlue bg-opacity-30 flex flex-col zoom  m-2 p-4"
+                >
+                  <p className="font-bold">Name: {item.name}</p>
+                  <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
+                  <p className="mt-2 font-semibold">Email: {item.email}</p>
+                  <p className="mt-2 font-semibold">
+                    Job Position: {item.jobPosition}
+                  </p>
+                  <p className="mt-2 font-semibold">
+                    Department: {department?.name || ''}
+                  </p>
 
-          <button
-            className="mt-4 px-4 py-2 bg-black text-white rounded "
-            onClick={() => handleLoad(item.uid)}
-          >
-            Load Information
-          </button>
+                  <button
+                    className="mt-4 flex justify-center w-1/2 bg-darkBlue text-white rounded "
+                    onClick={() => handleLoad(item.uid)}
+                    title = "Edit schedule"
+                  >
+                    {" "}
+                    <img src="/Images/pencil.png" alt="pencil" />
+                  </button>
+                </div>
+              ))}
+          {loading && <LoadingGeneralComponent />}
         </div>
-      ))}
-  {loading && <LoadingGeneralComponent />}
-</div>) : (<h2>List Empty</h2>)
-}
-</>
+      ) : (
+        <div className="bg-darkBlue w-auto justify-center items-center">
+          {" "}
+          <h2 className=" w-auto font-semibold text-center text-yellow p-2 ">
+            List empty
+          </h2>
+        </div>
+      )}
+    </>
   );
 };
 
