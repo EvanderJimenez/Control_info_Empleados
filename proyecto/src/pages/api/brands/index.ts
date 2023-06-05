@@ -2,7 +2,6 @@ import { brandsProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
 import { NextApiRequest, NextApiResponse } from "next";
 
-
 const getAll = async (res: NextApiResponse) => {
   try {
     const departments = await brandsProvider.getAllBrands();

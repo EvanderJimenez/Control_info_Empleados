@@ -6,8 +6,7 @@ interface getDepartment {
 export const SearchDepartment = ({ handleGet, ...props }: getDepartment) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const searchValue = event.currentTarget["voice-search"].value;
-    handleGet(searchValue);
+    handleGet("deportes");
   };
 
   return (
