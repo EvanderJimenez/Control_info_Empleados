@@ -1,11 +1,13 @@
+import { LoginEP } from "@/root/interface/employee";
 import React from "react";
-import { LoginEP } from "../../../interface/employee/";//TODO:You should use relative paths with @
+
 
 interface FormLoginProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   loginData: LoginEP;
 }
+
 
 const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProps) => {
   return (

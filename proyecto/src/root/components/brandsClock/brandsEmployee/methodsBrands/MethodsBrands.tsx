@@ -4,7 +4,6 @@ import { format, parseISO, getDay } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGetBrandsByIdEmployee, selectLogin, startGetBrandsByIdEmployee } from "@/root/redux";
 import { LaborRegistration } from "@/root/interface/brands";
-import { toast } from "react-hot-toast";
 import { BrandsEmployee } from "../BrandsEmployee";
 
 export default function MethodsBrands() {

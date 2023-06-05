@@ -31,7 +31,7 @@ export const InputClock = ({
             onChange={handleInputChange}
             id={nameEmail}
             placeholder={labelEmail}
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            className="appearance-none block w-full  text-grey-darker shadow-xl rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-lithBlue bg-opacity-40 font-semibold"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ export const InputClock = ({
             onChange={handleInputChange}
             id={namePass}
             placeholder={labelPass}
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            className="appearance-none block w-full  text-grey-darker shadow-lg rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-lithBlue bg-opacity-40 font-semibold"
           />
         </div>
       </div>

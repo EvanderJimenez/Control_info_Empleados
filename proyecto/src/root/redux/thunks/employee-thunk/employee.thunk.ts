@@ -70,7 +70,7 @@ export const StartDeletingEmployee = (employeeId: string): any => {
         dispatch(listEmployeesReducer(employeeList));
       }
     } catch (error) {
-      toast.error("Error deleting employee");
+
     } finally {
       dispatch(setLoading(false));
     }
@@ -174,11 +174,7 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
     dispatch(loginReducer(response || null));
 
     dispatch(setLoading(false));
-    if (response !== null && response !== undefined) {
-      toast.success("¡Welcome!");
-    } else {
-      toast.error("Wrong password or username");
-    }
+
   };
 };
 
