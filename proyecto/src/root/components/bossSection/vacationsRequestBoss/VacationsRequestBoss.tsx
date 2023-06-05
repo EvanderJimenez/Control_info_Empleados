@@ -12,6 +12,7 @@ import {
 } from "@/root/constants/employee/employee.constants";
 import { toast } from "react-hot-toast";
 import FormAcceptDenied from "./components/formAcceptDenied/FormAcceptDenied";
+import { resetByVariable } from "@/root/redux/reducers/employee-reducer/getByVariable/GetByVariableReducer";
 
 let optionSelect = "wait";
 
@@ -66,6 +67,7 @@ const VacationsRequestBoss = () => {
 
       dispatch(StartUpDateEmployee(updatedDataEmployee.uid, updatedDataEmployee));
       dispatch(ResetEmployeeByUid());
+      dispatch(resetByVariable())
       optionSelect = "wait";
       setSelectedRequest(pendingRequest);
     }
