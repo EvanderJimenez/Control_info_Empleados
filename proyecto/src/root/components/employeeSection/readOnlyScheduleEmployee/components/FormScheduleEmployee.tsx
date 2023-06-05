@@ -13,14 +13,14 @@ const handleGeneratedPdf = () => {
   window.print();
 };
 
-
-
 const FormScheduleEmployee = ({ schedules }: PropsFormSchedule) => {
-  const department = useSelector(selectGetDepartmentById)
+  const department = useSelector(selectGetDepartmentById);
   return (
     <>
       <p className="text-center font-bold mt-2">Weekly schedule</p>
-      <p className="text-center font-bold mt-2">Department: {department?.name || ''}</p>
+      <p className="text-center font-bold mt-2">
+        Department: {department?.name || ""}
+      </p>
       <form className="relative overflow-x-auto p-5 pb-14">
         <table className="w-full text-sm text-left GrayTable">
           <thead className="text-xs text-white bg-black uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

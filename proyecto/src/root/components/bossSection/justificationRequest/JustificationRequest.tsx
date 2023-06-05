@@ -66,7 +66,7 @@ const JustificationRequest = () => {
       optionSelect = "wait";
       dispatch(ResetEmployeeByUid());
       setSelectedRequest(pendingRequestJustification);
-
+      
       setSelectedRequest(pendingRequestJustification);
     }
   }, [employeeByUid, dispatch]);
