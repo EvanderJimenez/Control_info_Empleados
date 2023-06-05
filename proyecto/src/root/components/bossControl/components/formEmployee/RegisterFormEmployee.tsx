@@ -44,9 +44,7 @@ export default function RegisterFormEmployee({ userData, handleInputChange, upDa
               <InputEmployee label={"Phone number"} type={"phoneNumber"} name={"phoneNumber"} value={userData.phoneNumber} id={"phoneNumber"} onChange={handleInputChange} />
               <InputEmployee label={"Job Position"} type={"jobPosition"} name={"jobPosition"} value={userData.jobPosition} id={"jobPosition"} onChange={handleInputChange} />
             </div>
-        
 
-            <InputEmployee label={"Boss for whom he works"} type={"boss"} name={"boss"} value={userData.boss} id={"boss"} onChange={handleInputChange} />
             <div className="w-full">
               <div className="flex justify-between">
                 <button type="submit" className=" py-3 mt-6 font-medium tracking-widest text-white uppercase bg-darkBlue shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">

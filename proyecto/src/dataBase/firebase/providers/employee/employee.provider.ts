@@ -308,9 +308,9 @@ const uploadFile = async (
   nameFile: string,
   typeFile: string
 ) => {
-  /*   if (typeof fileBase64 !== "string" || !fileBase64.startsWith("data:image/")) {
-    throw new Error("Invalid file format");
-  } */
+     if (typeof fileBase64 !== "string") {
+   return null
+  } 
 
   const storage = getStorage();
 
