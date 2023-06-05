@@ -133,34 +133,37 @@ const DocumentsEmployee: React.FC = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      <div>
+    <div className="flex flex-wrap justify-center">
+      <div className="w-full md:w-1/3 flex justify-center shadow-lg">
         <ComboBoxDocuments
           items={files}
-          label="Documents"
+          label="Choose the document to view"
           selectedOption={selectOption}
           setSelectedOption={setSelectOption}
         />
       </div>
-      <>
-        <ShowFile
-          file={file}
-          nameFile={nameFile}
-          selectOption={selectOption}
-          setNameFile={setNameFile}
-          handleDelete={handleDelete}
-          handleDownload={handleDownload}
-        />
-      </>
-      <div>
-        <SelectFile
-          handleClearSelection={handleClearSelection}
-          handleFileUpload={handleFileUpload}
-          handleSave={handleSave}
-        />
+      <div className="lg:w-full pb-10  xl:w-1/2  flex justify-center h-full ml-2 mr-2 shadow-lg  md:w-2/3">
+        <div className="flex h-full  flex-col">
+          <div className="mb-4">
+            <SelectFile
+              handleClearSelection={handleClearSelection}
+              handleFileUpload={handleFileUpload}
+              handleSave={handleSave}
+            />
+          </div>
+          <ShowFile
+            file={file}
+            nameFile={nameFile}
+            selectOption={selectOption}
+            setNameFile={setNameFile}
+            handleDelete={handleDelete}
+            handleDownload={handleDownload}
+          />
+        </div>
       </div>
     </div>
   );
+
 };
 
 export default DocumentsEmployee;

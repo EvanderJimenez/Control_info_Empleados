@@ -21,7 +21,6 @@ const handleAbout = () => {
 };
 const handleLogin = () => {
   Cookies.remove("token");
-  
   router.push("/home/Login");
 };
 
