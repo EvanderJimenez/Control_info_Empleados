@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Filters from "../bossSection/vacationsRequestBoss/components/filters/Filters";
 import ListWithoutDepartment from "./components/listWithoutDepartment/ListWithoutDepartment";
 import InputLabel from "./components/inputLabel/InputLabel";
 import ComboBox from "./components/comboBox/ComboBox";
 import { useDispatch, useSelector } from "react-redux";
-import { ResetEmployeeByUid, StartGetEmployeeByUid, StartUpDateEmployee, selectGetAllDepartment, selectGetEmployeeByUid, startGetAllDepartment } from "@/root/redux";
+import { ResetByVariableAdmin, ResetEmployeeByUid, StartGetEmployeeByUid, StartUpDateEmployee, selectGetAllDepartment, selectGetEmployeeByUid, startGetAllDepartment } from "@/root/redux";
 import { DepartmentType } from "@/root/types/Department.type";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import { toast } from "react-hot-toast";
+import Filters from "../bossSection/vacationsRequestBoss/components/filters/Filters";
+import FilterList from "./components/filter/FilterList";
 
 const AssignDepartmentEmployee = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const AssignDepartmentEmployee = () => {
 
   const handleClear = async () => {
     dispatch(ResetEmployeeByUid());
+    dispatch(ResetByVariableAdmin())
     toast.success("All clear")
   };
   const handleLoadEmployee = async (uid: string) => {
@@ -90,6 +92,7 @@ const AssignDepartmentEmployee = () => {
       </section>
       <section className="flex flex-col mt-2 bg-lithBlue bg-opacity-20 shadow-md items-center justify-center w-full md:w-1/2 lg:w-1/2">
         <h2 className="text-md text-center font-bold mb-4 m-4 bg-yellow rounded">Employees without department:</h2>
+        <FilterList />
         <ListWithoutDepartment change={change} handleLoadEmployee={handleLoadEmployee} />
       </section>
     </div>

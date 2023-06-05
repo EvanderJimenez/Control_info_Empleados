@@ -25,15 +25,12 @@ export const getByVariableAdminSlice = createSlice({
     ) => {
       return { getByVariableAdmin: action.payload };
     },
-    resetByVariable: (state) => {
+    resetByVariableAdmin: (state) => {
       state.getByVariableAdmin = [];
     },
   },
 });
 
-export const { getByVariableAdminReducer, resetByVariable } =
-  getByVariableAdminSlice.actions;
+export const { getByVariableAdminReducer, resetByVariableAdmin } =getByVariableAdminSlice.actions;
 export const GetByVariableAdminReducer = getByVariableAdminSlice.reducer;
-export type DispatchTypeByVariable = (
-  args: EmployeeByVariableAdminAction
-) => EmployeeByVariableAdminAction;
+export type DispatchTypeByVariable = (args: EmployeeByVariableAdminAction) => EmployeeByVariableAdminAction;
