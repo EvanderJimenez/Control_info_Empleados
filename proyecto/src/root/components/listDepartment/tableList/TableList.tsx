@@ -12,15 +12,15 @@ export const TableList = ({
   currentDepartments,
 }: TableListProps) => {
   return (
-    <div className="overflow-x-auto">
-      <div className="inline-block min-w-full overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-[#B3B6B7]">
+    <div className="overflow-auto flex justify-center">
+      <div className="inline-block w-auto overflow-hidden">
+        <table className="min-w-full divide-y">
+          <thead className="bg-black text-white">
             <tr>
               <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
                 Department
               </th>
-              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium  uppercase tracking-wider">
                 Boss
               </th>
               <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
@@ -39,7 +39,7 @@ export const TableList = ({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {currentDepartments.map((department: Department, index: number) => (
-              <tr key={index}>
+              <tr key={index} className="even:bg-white odd:bg-lithBlue">
                 <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
                   {department.name}
                 </td>

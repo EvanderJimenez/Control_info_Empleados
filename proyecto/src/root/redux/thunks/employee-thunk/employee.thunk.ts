@@ -59,7 +59,7 @@ import {
   getFileURLByNameReducer,
   resetUrlReducer,
 } from "../../reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
-import { starAlertError, starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
+import { starAlertError, starAlertLoading, starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -166,7 +166,7 @@ export const StartResetUrl = (): any => {
 
 export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchTypeLogin) => {
-    dispatch(setLoading(true));
+    dispatch(starAlertLoading("Loading",true));
     const response = await providerRedux.loginProvider(
       searchTerm1,
       searchTerm2
@@ -180,9 +180,7 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
     }else{
       dispatch(starAlertError("Password or user incorrect", true))
     }
-
-
-    dispatch(setLoading(false));
+    dispatch(starAlertLoading("Loaded",false));
 
   };
 };

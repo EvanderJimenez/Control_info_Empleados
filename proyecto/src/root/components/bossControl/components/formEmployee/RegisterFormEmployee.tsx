@@ -45,7 +45,7 @@ export default function RegisterFormEmployee({ userData, handleInputChange, upDa
               <InputEmployee label={"Phone number"} type={"phoneNumber"} name={"phoneNumber"} value={userData.phoneNumber} id={"phoneNumber"} onChange={handleInputChange} />
               <InputEmployee label={"Job Position"} type={"jobPosition"} name={"jobPosition"} value={userData.jobPosition} id={"jobPosition"} onChange={handleInputChange} />
             </div>
-            <InputEmployee label={"Departments to belongs"} type={"idDepartment"} name={"idDepartment"} value={userData.idDepartment} id={"idDepartment"} onChange={handleInputChange} />
+        
 
             <InputEmployee label={"Boss for whom he works"} type={"boss"} name={"boss"} value={userData.boss} id={"boss"} onChange={handleInputChange} />
             <div className="w-full">
