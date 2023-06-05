@@ -64,6 +64,31 @@ const create = async (
 ): Promise<{ message: string; employee?: any }> => {
   const { password, email, uid, ...restData } = employeeData;
 
+  const emailQuery = query(
+    collection(firestore, "employee"),
+    where("email", "==", email)
+  );
+  const cedulaQuery = query(
+    collection(firestore, "employee"),
+    where("cedula", "==", restData.cedula)
+  );
+  const [emailDocs, cedulaDocs] = await Promise.all([
+    getDocs(emailQuery),
+    getDocs(cedulaQuery),
+  ]);
+
+  if (!emailDocs.empty) {
+    return {
+      message: "Email already exists",
+    };
+  }
+
+  if (!cedulaDocs.empty) {
+    return {
+      message: "Cedula already exists",
+    };
+  }
+
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     email,
