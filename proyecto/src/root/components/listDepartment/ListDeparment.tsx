@@ -60,7 +60,6 @@ export const ListDepartment = ({
   const handle = (id: string, name: string) => {
     setPassId(id);
     setNameDepart(name);
-    console.log(name);
   };
 
   useEffect(() => {

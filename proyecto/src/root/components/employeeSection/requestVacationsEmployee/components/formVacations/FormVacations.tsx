@@ -73,9 +73,6 @@ const FormVacations = ({
           <button
             className="NormalButton zoom mt-3 "
             type="submit"
-            onClick={() => {
-              toast.success("save");
-            }}
           >
             Send request
           </button>

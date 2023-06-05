@@ -13,7 +13,7 @@ export default function ReadRequestJustification() {
   const [showBy, setShowBy] = useState("waiting");
 
   const FilterByAccepted = () => {
-    setShowBy("accepted");
+    setShowBy("accept");
     if(UserLogin.attendance && Object.entries(UserLogin.attendance).filter(([_, value]) => value.state === "accepted").length === 0){
      toast.error("No information was found on justifications filtering them by accepted")
     }

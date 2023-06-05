@@ -33,12 +33,12 @@ const DocumentsEmployee: React.FC = () => {
     const fileList = event.target.files;
     if (fileList && fileList.length > 0) {
       const selectedFile = fileList[0];
-      console.log(selectedFile.type);
+
       if (
         selectedFile.type.startsWith("image/") ||
         selectedFile.type === "application/pdf"
       ) {
-        console.log(selectedFile.type);
+
         setFile(selectedFile);
         setSelectOption(null);
       } else {
@@ -57,7 +57,6 @@ const DocumentsEmployee: React.FC = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result?.toString() || "";
-        console.log(base64String);
         const fileType = file.type.startsWith("image/") ? "image" : "pdf";
         dispatch(
           StartUpDateFileEmployee(
@@ -86,7 +85,6 @@ const DocumentsEmployee: React.FC = () => {
       );
       if (fileToDeleteKey) {
         delete updatedFiles[fileToDeleteKey];
-        console.log(updatedFiles);
         await dispatch(
           StartUpDateEmployee(userLogin?.uid, {
             ...userLogin,

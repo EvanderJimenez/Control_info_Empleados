@@ -25,7 +25,6 @@ async function getVacationsByUid(req: NextApiRequest, res: NextApiResponse) {
 async function getFileURLByName(req: NextApiRequest, res: NextApiResponse) {
   const uid = String(req.query.uid);
   const fileName = String(req.body.fileName);
-  console.log(fileName)
   try {
     const employee = await employeeProvider.getFileURLByName(uid,fileName);
     res.status(200).json(employee);

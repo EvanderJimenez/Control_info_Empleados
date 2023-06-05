@@ -32,8 +32,6 @@ const ListEmployeeDepart = ({
     setIdNameEmployee(name);
   };
 
-  console.log(employeesListVariable);
-
   return (
     <>
       {employeesListVariable.length > 0 ? (

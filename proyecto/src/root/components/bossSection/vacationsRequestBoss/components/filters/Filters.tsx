@@ -12,8 +12,6 @@ const Filters = () => {
   const handleSearch = async () =>{
 
     dispatch(StartGetByVariable(name, "name", userLogin.idDepartment || '' ));
-    console.log(name)
-    console.log(userLogin.uid)
 
   }
   const handleClear = async () =>{

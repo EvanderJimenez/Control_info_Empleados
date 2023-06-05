@@ -22,7 +22,6 @@ const ReadOnlyScheduleEmployee = () => {
   }, []);
 
   useEffect(() => {
-    console.log(brandsById);
     if (brandsById) {
       const hoursEmployee: Record<string, any> = brandsById.hoursEmployee;
       if (hoursEmployee) {

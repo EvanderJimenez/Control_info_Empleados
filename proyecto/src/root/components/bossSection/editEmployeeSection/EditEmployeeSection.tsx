@@ -2,7 +2,11 @@ import React, { useEffect, useId, useState } from "react";
 import SearchInput from "../../ui/searchInput/SearchInput";
 import { useDispatch, useSelector } from "react-redux";
 import ListEmployee from "../../listEmployee/ListEmployee";
-import { selectGetByVariable, selectGetEmployeeByUid, selectGetFileURLByName } from "@/root/redux/selectors/employee-selector/employee.selector";
+import {
+  selectGetByVariable,
+  selectGetEmployeeByUid,
+  selectGetFileURLByName,
+} from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType, Files } from "@/root/types/Employee.type";
 import {
   ResetByVariable,
@@ -36,15 +40,24 @@ export default function EditEmployeeSection() {
   const [change, setChange] = useState(false);
 
   const employeesListVariable = useSelector(selectGetByVariable);
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
+  const [dataEmployee, setDataEmployee] =
+    useState<EmployeesType>(initialDataEmployee);
   const [selectOption, setSelectOption] = useState<Files | null>(null);
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    if(dataEmployee.uid){
+      console.log(dataEmployee.uid)
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
     setClear(true);
     dispatch(ResetEmployeeByUid());
     dispatch(ResetByVariable());
+    toast.success("saved successfully");
+    }else {
+      toast("⚠ No employees have been loaded ");
+    }
+
   };
   useEffect(() => {
     if (!clear) {
@@ -63,7 +76,6 @@ export default function EditEmployeeSection() {
 
   const handleDismissEmployee = () => {
     if (employeeByUid && employeeByUid.uid) {
-      console.log("Employee: " + JSON.stringify(employeeByUid));
       dispatch(StartDismissEmployee(employeeByUid.uid));
       toast.error("Fired employee");
     } else {
@@ -72,7 +84,12 @@ export default function EditEmployeeSection() {
   };
 
   const handleDownload = async () => {
-    dispatch(StarGetFileURLByName(employeeByUid?.uid || "", selectOption?.urlFile || ""));
+    dispatch(
+      StarGetFileURLByName(
+        employeeByUid?.uid || "",
+        selectOption?.urlFile || ""
+      )
+    );
     setChange(!change);
   };
 
@@ -83,18 +100,20 @@ export default function EditEmployeeSection() {
   }, []);
 
   const handleClear = async () => {
-    dispatch(ResetEmployeeByUid());
-    toast.success("Clear all");
+    if(dataEmployee.uid){
+      dispatch(ResetEmployeeByUid());
+      toast.success("Clear all");
+    }else {
+      toast("⚠ No employees have been loaded ");
+    }
   };
 
   useEffect(() => {
-    console.log(fileLoad);
     if (fileLoad && selectOption) {
       const base64Data = fileLoad.replace(/^data:.*,/, "");
       const blob = b64toBlob(base64Data);
       let newFile;
       if (selectOption.type === "pdf") {
-        console.log(newFile);
         newFile = new File([blob], selectOption.name + ".pdf", {
           type: "application/pdf",
         });
@@ -102,7 +121,6 @@ export default function EditEmployeeSection() {
 
         dispatch(StartResetUrl());
       } else if (selectOption.type === "image") {
-        console.log(fileLoad);
         newFile = new File([blob], selectOption.name + ".png", {
           type: "image/png",
         });
@@ -113,9 +131,9 @@ export default function EditEmployeeSection() {
     }
   }, [fileLoad, change]);
 
-
-
-  const files: Files[] = employeeByUid?.files ? Object.values(employeeByUid.files) : [];
+  const files: Files[] = employeeByUid?.files
+    ? Object.values(employeeByUid.files)
+    : [];
 
   return (
     <>
@@ -123,35 +141,105 @@ export default function EditEmployeeSection() {
         <div className=" md:w-1/2  lg:flex-grow xl:flex-grow w-auto px-2">
           <div className="flex flex-col mb-3">
             <h2 className="font-semibold text-center">Filters</h2>
-            <SearchInput labelInputSeekerOne="text" valueEnd={cedula} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
-            <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
-            <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
+            <SearchInput
+              labelInputSeekerOne="text"
+              valueEnd={cedula}
+              placeholderSeekerOne="Cedula"
+              typeList="cedula"
+              id="cedula"
+            />
+            <SearchInput
+              labelInputSeekerOne="text"
+              valueEnd={name}
+              placeholderSeekerOne="Name"
+              typeList="name"
+              id="name"
+            />
+            <SearchInput
+              labelInputSeekerOne="text"
+              valueEnd={jobPosition}
+              placeholderSeekerOne="Job Position"
+              typeList="jobPosition"
+              id="jobPosition"
+            />
             <ListEmployee clear={clear} setClear={setClear} />
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:flex-grow xl:flex-grow px-2 py-2 pb-14">
-          <form onSubmit={handleUpdate} className="bg-lithBlue bg-opacity-50 shadow-lg p-2">
+          <form
+            onSubmit={handleUpdate}
+            className="bg-lithBlue bg-opacity-50 shadow-lg p-2"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex flex-col">
-                <InputFloatLabel labelFloat="Name" id="Name" onChange={handleInputChange} name="name" type="text" value={dataEmployee.name} />
+                <InputFloatLabel
+                  labelFloat="Name"
+                  id="Name"
+                  onChange={handleInputChange}
+                  name="name"
+                  type="text"
+                  value={dataEmployee.name}
+                />
               </div>
               <div className="flex flex-col">
-                <InputFloatLabel labelFloat="Cedula" id="cedula" onChange={handleInputChange} name="cedula" type="text" value={dataEmployee.cedula} />
+                <InputFloatLabel
+                  labelFloat="Cedula"
+                  id="cedula"
+                  onChange={handleInputChange}
+                  name="cedula"
+                  type="text"
+                  value={dataEmployee.cedula}
+                />
               </div>
               <div className="flex flex-col">
-                <InputFloatLabel labelFloat="Surname" id="firstSurname" onChange={handleInputChange} name="firstSurname" type="text" value={dataEmployee.firstSurname} />
+                <InputFloatLabel
+                  labelFloat="Surname"
+                  id="firstSurname"
+                  onChange={handleInputChange}
+                  name="firstSurname"
+                  type="text"
+                  value={dataEmployee.firstSurname}
+                />
               </div>
               <div className="flex flex-col">
-                <InputFloatLabel labelFloat="Second surname" id="SecondSurname" onChange={handleInputChange} name="secondSurname" type="text" value={dataEmployee.secondSurname} />
+                <InputFloatLabel
+                  labelFloat="Second surname"
+                  id="SecondSurname"
+                  onChange={handleInputChange}
+                  name="secondSurname"
+                  type="text"
+                  value={dataEmployee.secondSurname}
+                />
               </div>
               <div className="flex flex-col">
-                <InputFloatLabel labelFloat="Job position" id="JobPosition" onChange={handleInputChange} name="jobPosition" type="text" value={dataEmployee.jobPosition} />
+                <InputFloatLabel
+                  labelFloat="Job position"
+                  id="JobPosition"
+                  onChange={handleInputChange}
+                  name="jobPosition"
+                  type="text"
+                  value={dataEmployee.jobPosition}
+                />
               </div>
               <div className="flex flex-col">
-                <InputFloatLabel labelFloat="Phone Number" id="PhoneNumber" onChange={handleInputChange} name="phoneNumber" type="number" value={dataEmployee.phoneNumber.toString()} />
+                <InputFloatLabel
+                  labelFloat="Phone Number"
+                  id="PhoneNumber"
+                  onChange={handleInputChange}
+                  name="phoneNumber"
+                  type="number"
+                  value={dataEmployee.phoneNumber.toString()}
+                />
               </div>
               <div className="flex flex-col col-span-2">
-                <InputFloatLabel labelFloat="Salary" id="salary" onChange={handleInputChange} name="salary" type="text" value={dataEmployee.salary.toString()} />
+                <InputFloatLabel
+                  labelFloat="Salary"
+                  id="salary"
+                  onChange={handleInputChange}
+                  name="salary"
+                  type="text"
+                  value={dataEmployee.salary.toString()}
+                />
               </div>
             </div>
             <div className=" pt-3 space-x-4 flex justify-between">
@@ -164,24 +252,34 @@ export default function EditEmployeeSection() {
 
               <button
                 type="submit"
-                onClick={() => {
-                  toast.success("saved successfully");
-                }}
                 className="bg-darkBlue focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-56 sm:w-auto px-5 py-2.5 text-center "
               >
                 Save
               </button>
-              <button onClick={handleClear} className="bg-darkBlue   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+              <button
+                onClick={handleClear}
+                className="bg-darkBlue   focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+              >
                 Clear
               </button>
             </div>
           </form>
           <div className=" flex flex-row justify-center items-center">
-            <ComboBoxDocuments label="Documents of employee" selectedOption={selectOption} setSelectedOption={setSelectOption} items={files} />
+            <ComboBoxDocuments
+              label="Documents of employee"
+              selectedOption={selectOption}
+              setSelectedOption={setSelectOption}
+              items={files}
+            />
             {selectOption ? (
               <div className="flex flex-col m-5">
-                <label className="font-semibold">Name: {selectOption.name}</label>
-                <button className="bg-darkBlue font-semibold" onClick={handleDownload}>
+                <label className="font-semibold">
+                  Name: {selectOption.name}
+                </label>
+                <button
+                  className="bg-darkBlue font-semibold"
+                  onClick={handleDownload}
+                >
                   Download file 📃
                 </button>
               </div>

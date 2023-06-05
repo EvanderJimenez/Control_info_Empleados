@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ListRequestVacations from "./components/listRequestVacations/ListRequestVacations";
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import FormVacations from "./components/formVacations/FormVacations";
+import toast from "react-hot-toast";
 
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
@@ -54,6 +55,7 @@ const RequestVacationsEmployee = () => {
     setNewDescription("");
     setNewName("");
     setSendRequest(!sendRequest);
+    toast.success("save");
   };
 
   useEffect(() => {
