@@ -49,6 +49,7 @@ import {
 } from "../../reducers/login-reducer/loginReducer";
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
+import { getByVariableAdminReducer } from "../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import {
   DispatchTypeUpdateFile,
   updateFileEmployeeReducer,
@@ -191,6 +192,20 @@ export const StartGetByVariable = (
     );
 
     dispatch(getByVariableReducer(response || null));
+  };
+};
+
+export const StartGetByVariableAdmin = (
+  searchTerm1: string,
+  searchTerm2: string
+): any => {
+  return async (dispatch: DispatchTypeByVariable) => {
+    const response = await providerRedux.getByVariableProviderAdmin(
+      searchTerm1,
+      searchTerm2
+    );
+
+    dispatch(getByVariableAdminReducer(response || null));
   };
 };
 

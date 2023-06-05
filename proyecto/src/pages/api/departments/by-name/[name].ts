@@ -1,23 +1,19 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { departmentProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const getDepartmentPage = async (req: NextApiRequest, res: NextApiResponse) => {
+async function getName(req: NextApiRequest, res: NextApiResponse) {
+  const name = String(req.query.name);
   try {
-    const pageSize = Number(req.query.pageSize);
-    const currentPage = Number(req.query.currentPage);
-    const departments = await departmentProvider.getDepartmentsByPage(
-      pageSize,
-      currentPage
-    );
-    res.status(200).json(departments);
+    const employee = await departmentProvider.getName(name);
+    res.status(200).json(employee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
   }
-};
+}
 const handlers: any = {};
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
-  getDepartmentPage(req, res);
+  getName(req, res);
 
 export default function departmentsByIdController(
   req: NextApiRequest,

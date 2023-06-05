@@ -12,3 +12,4 @@ GET http://localhost:3000/api/departments/by-uid HTTP/1.1
 
 Get http://localhost:3000/api/departments/by-page
 
+https://localhost:3000/api/departments/by-name

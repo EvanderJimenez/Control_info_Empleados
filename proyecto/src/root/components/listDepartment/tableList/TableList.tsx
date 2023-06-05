@@ -1,0 +1,78 @@
+import React from "react";
+import { Department } from "@/root/interface/departments";
+interface TableListProps {
+  handle: (id: string) => void;
+  handleGetDepartment: (id: string) => void;
+  currentDepartments: Department[];
+}
+
+export const TableList = ({
+  handle,
+  handleGetDepartment,
+  currentDepartments,
+}: TableListProps) => {
+  return (
+    <div className="overflow-x-auto">
+      <div className="inline-block min-w-full overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-[#B3B6B7]">
+            <tr>
+              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                Department
+              </th>
+              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                Boss
+              </th>
+              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                Location
+              </th>
+              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                Size
+              </th>
+              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+              <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
+                Pass Id Department
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {currentDepartments.map((department: Department, index: number) => (
+              <tr key={index}>
+                <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
+                  {department.name}
+                </td>
+                <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
+                  {department.leader}
+                </td>
+                <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
+                  {department.location}
+                </td>
+                <td className="px-2 sm:px-6 py-2 whitespace-nowrap">
+                  {department.size}
+                </td>
+                <td className="px-2 sm:px-6 py-2 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
+                  <button
+                    className="text-indigo-600 hover:text-indigo-900 bg-blue"
+                    onClick={() => handleGetDepartment(department.id)}
+                  >
+                    EDIT
+                  </button>
+                </td>
+                <td className="px-2 sm:px-6 py-2 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
+                  <button
+                    className="text-indigo-600 hover:text-indigo-900 bg-blue"
+                    onClick={() => handle(department.id)}
+                  >
+                    ADD
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};

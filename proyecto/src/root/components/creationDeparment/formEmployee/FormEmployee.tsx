@@ -18,7 +18,7 @@ export const FormEmployee = ({
       <form className="mx-auto mt-16 max-w-xl sm:mt-20" onSubmit={handleSubmit}>
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5 ">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
               Departments
             </h2>
             <p className="mt-2 text-lg leading-8 text-gray-600">
@@ -45,24 +45,8 @@ export const FormEmployee = ({
               id="leader"
               onChange={handleInputChange}
             />
-            <InputDepartment
-              label="Identification Boss"
-              type="idEmployee"
-              name="idEmployee"
-              value={departmentsData.idEmployee}
-              id="idEmployee"
-              onChange={handleInputChange}
-            />
           </div>
           <div className="flex flex-wrap -mx-3 mb-2">
-            <InputDepartment
-              label="Department Belongs..."
-              type="subDepartment"
-              name="subDepartment"
-              value={departmentsData.subDepartment}
-              id="subDepartment"
-              onChange={handleInputChange}
-            />
             <InputDepartment
               label="Size of Department"
               type="number"
@@ -74,7 +58,7 @@ export const FormEmployee = ({
           </div>
           <div className="flex flex-wrap -mx-3 mb-2">
             <InputDepartment
-              label=" Location "
+              label="Location"
               type="location"
               name="location"
               value={departmentsData.location}
@@ -82,7 +66,7 @@ export const FormEmployee = ({
               onChange={handleInputChange}
             />
             <InputDepartment
-              label="Area  Belongs"
+              label="Area Belongs"
               type="level"
               name="level"
               value={departmentsData.level}
@@ -91,10 +75,10 @@ export const FormEmployee = ({
             />
           </div>
           <div className="flex justify-center -mx-3 mb-6">
-            <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0 ">
+            <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0">
               <button
                 type="submit"
-                className="bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded "
+                className="bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded"
               >
                 Save department
               </button>

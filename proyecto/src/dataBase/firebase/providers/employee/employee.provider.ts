@@ -15,7 +15,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { EmployeesType, Files, Vacations } from "@/root/types/Employee.type";
 import {
   getDownloadURL,
   getStorage,
@@ -26,6 +25,7 @@ import {
 import { v4 } from "uuid";
 import fetch from "node-fetch";
 import fs from "fs";
+import { EmployeesType, Files } from "@/root/types/Employee.type";
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -43,6 +43,7 @@ const updateByUid = async (
   uid: string,
   employeeData: EmployeesType
 ): Promise<any> => {
+  const { vacations } = employeeData;
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
   const querySnapshot = await getDocs(q);
@@ -69,7 +70,6 @@ const create = async (
   );
   const user = userCredential.user;
   const uuid = user.uid;
-
 
   const employeeDoc = {
     password,
@@ -192,6 +192,24 @@ const getByVariable = async (
     where(variable, "==", data),
     where("idDepartment", "==", idDepartment)
   );
+  const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
+    employeeQuery
+  );
+
+  const employees: any[] = [];
+
+  if (!employeeSnapshot.empty) {
+    employeeSnapshot.forEach((doc) => {
+      employees.push(doc.data());
+    });
+  }
+
+  return employees;
+};
+
+const getByVariableAdmin = async (data: string, variable: string) => {
+  const employeeCollection = collection(firestore, "employee");
+  const employeeQuery = query(employeeCollection, where(variable, "==", data));
   const employeeSnapshot: QuerySnapshot<DocumentData> = await getDocs(
     employeeQuery
   );
@@ -333,7 +351,6 @@ const uploadFile = async (
   return updatedEmployeeData;
 };
 
-
 const getFileURLByName = async (
   uid: string,
   fileName: string
@@ -367,6 +384,7 @@ export const employeeProvider = {
   getVacationsByUid,
   getEmployeesByIdDepartment,
   getAllBosses,
+  getByVariableAdmin,
   uploadFile,
   getFileURLByName,
 };

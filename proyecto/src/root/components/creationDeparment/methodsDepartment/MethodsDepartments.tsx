@@ -36,6 +36,7 @@ function MethodsDepartments(props: RegisterProps) {
   const [newEmployee, setNewEmployee] = useState<string>("");
   const [newEmployeeId, setNewEmployeeId] = useState<string>("");
   const [passId, setPassId] = useState<string>("");
+  const [idEmployee, setIdEmployee] = useState<string>("");
   const [newEmployeeData, setNewEmployeeData] = useState<string>("");
   const [upDate, setUpDate] = useState<boolean | null>();
   const [departmentData, setdepartmentData] = useState<Department>(() => {
@@ -63,8 +64,18 @@ function MethodsDepartments(props: RegisterProps) {
         ...prevDepartmentData,
         subDepartment: passId,
       }));
+      toast.success("Correctly added department.");
     }
   }, [passId]);
+  useEffect(() => {
+    if (idEmployee) {
+      setdepartmentData((prevDepartmentData) => ({
+        ...prevDepartmentData,
+        idEmployee: idEmployee,
+      }));
+      toast.success("Correctly added employee.");
+    }
+  }, [idEmployee]);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));
@@ -146,12 +157,6 @@ function MethodsDepartments(props: RegisterProps) {
     dispatch(startGetDepartmentById(id));
   };
 
-  useEffect(() => {
-    if (departId) {
-      setdepartmentData(departId);
-    }
-  }, [departId]);
-
   const handleUpdateEmployee = (
     employeeName: string,
     updatedEmployee: Employee
@@ -169,7 +174,7 @@ function MethodsDepartments(props: RegisterProps) {
     });
   };
   return (
-    <div className="flex justify-center items-center flex-col">
+    <div>
       <CreationDepartment
         handleUpdateEmployee={handleUpdateEmployee}
         setPassId={setPassId}
@@ -186,6 +191,7 @@ function MethodsDepartments(props: RegisterProps) {
         handleGetDepartment={handleGetDepartment}
         handleUpdate={handleUpdate}
         handleDeleteEmployee={handleDeleteEmployee}
+        setPassIdEmployee={setIdEmployee}
       />
     </div>
   );

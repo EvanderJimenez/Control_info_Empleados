@@ -33,10 +33,11 @@ const getAll = async () => {
 
 const getDepartmentsByPage = async (pageSize: number, page: number) => {
   const departmentsCollection = collection(firestore, "departments");
+  const limitPage = pageSize * page;
   const departmentsQuery = query(
     departmentsCollection,
     orderBy("name"),
-    limit(pageSize),
+    limit(limitPage),
     startAfter(pageSize * page)
   );
   const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
@@ -95,6 +96,26 @@ const getByDocId = async (docId: string) => {
     return departmentsDocSnapshot.data();
   } else {
     throw new Error(`A department with document ID was not found: ${docId}`);
+  }
+};
+
+const getName = async (name: string) => {
+  const departmentsQuery = query(
+    collection(firestore, "departments"),
+    where("name", "==", name)
+  );
+
+  const querySnapshot = await getDocs(departmentsQuery);
+
+  if (!querySnapshot.empty) {
+    const departments = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      const id = doc.id;
+      return { id, ...data };
+    });
+    return departments;
+  } else {
+    throw new Error(`No department found with name: ${name}`);
   }
 };
 
@@ -163,6 +184,7 @@ export const departmentProvider = {
   updateById,
   getDepartmentByUidEmployee,
   getDepartmentsByPage,
+  getName,
 };
 
 export default departmentProvider;
