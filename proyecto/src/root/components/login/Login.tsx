@@ -42,9 +42,9 @@ function Login() {
 
     if (data.email && data.password) {
       dispatch(StartLogin(data.email, data.password));
-      
-    }else{
-      
+
+    } else {
+      dispatch(startAlertError("Please enter your credentials", true))
     }
   };
   useEffect(() => {
@@ -62,3 +62,19 @@ function Login() {
 }
 
 export default Login;
+function startErrorAlert(): any {
+  throw new Error("Function not implemented.");
+}
+
+function startAlertError(arg0: string, arg1: boolean): any {
+  throw new Error("Function not implemented.");
+}
+
+function startAlertSuccess(arg0: string, arg1: boolean): any {
+  throw new Error("Function not implemented.");
+}
+
+function startAlertLoading(arg0: string, arg1: boolean): any {
+  throw new Error("Function not implemented.");
+}
+

@@ -59,7 +59,7 @@ import {
   getFileURLByNameReducer,
   resetUrlReducer,
 } from "../../reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
-import { starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
+import { starAlertError, starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -85,8 +85,8 @@ export const StartDismissEmployee = (searchTerm: string): any => {
     const employee = await providerRedux.dismissByUidProvider(searchTerm);
 
     dispatch(dismissEmployeeReducer(employee || null));
-
     dispatch(setLoading(false));
+
   };
 };
 
@@ -108,7 +108,6 @@ export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
     const employee = await providerRedux.createEmployeeProvider(searchTerm);
 
     dispatch(createEmployeeReducer(employee || null));
-
     dispatch(setLoading(false));
   };
 };
@@ -174,10 +173,14 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
     );
 
     dispatch(loginReducer(response || null));
- 
-      dispatch(starAlertSuccess("Yes, we can do",true))
 
- 
+
+    if (response) {
+      dispatch(starAlertSuccess("Welcome, " + searchTerm1, true))
+    }else{
+      dispatch(starAlertError("Password or user incorrect", true))
+    }
+
 
     dispatch(setLoading(false));
 

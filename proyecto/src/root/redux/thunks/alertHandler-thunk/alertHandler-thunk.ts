@@ -1,5 +1,5 @@
 import { AlertType } from "@/root/types/AlertHandler.type";
-import { DispatchTypeAlert, successAlert } from "../../reducers/alertHandler-reducer/AlertHandlerReducer";
+import { DispatchTypeAlert, errorAlert, loadingAlert, successAlert } from "../../reducers/alertHandler-reducer/AlertHandlerReducer";
 
 
 
@@ -21,7 +21,7 @@ export const starAlertError = (textForAlert: string, unfolded: boolean): any => 
             textForAlert: textForAlert,
             unfolded: unfolded
         };
-        dispatch(successAlert(errorType));
+        dispatch(errorAlert(errorType));
     };
 };
 
@@ -32,6 +32,6 @@ export const starAlertLoading= (textForAlert: string, unfolded: boolean): any =>
             textForAlert: textForAlert,
             unfolded: unfolded
         };
-        dispatch(successAlert(loadingType));
+        dispatch(loadingAlert(loadingType));
     };
 };

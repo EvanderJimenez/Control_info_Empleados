@@ -7,14 +7,16 @@ import { isEmail } from "@/root/utils/predicates/Predicates";
 const getByEmailPassword = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password } = req.body;
 
-
-  try {
-    const employee = await employeeProvider.login(email, password);
-    const token = jwt.signToken(email, password);
-    res.status(200).json({ employee, token });
-  } catch (error) {
-    res.status(500).json({ message: (error as Error).message });
+  if (isEmail(email)) {
+    try {
+      const employee = await employeeProvider.login(email, password);
+      const token = jwt.signToken(email, password);
+      res.status(200).json({ employee, token });
+    } catch (error) {
+      res.status(500).json({ message: (error as Error).message });
+    }
   }
+
 };
 
 const handlers: any = {};
