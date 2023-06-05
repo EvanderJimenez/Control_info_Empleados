@@ -24,6 +24,14 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
       employees,
     } = req.body;
 
+    const departmentExists = await departmentProvider.checkIfNameExists(name);
+
+    if (departmentExists) {
+      return res
+        .status(400)
+        .json({ message: "Department name already exists" });
+    }
+
     const newDepartment = await departmentProvider.create(
       name,
       size,

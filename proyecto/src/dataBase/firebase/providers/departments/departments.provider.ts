@@ -52,7 +52,6 @@ const getDepartmentsByPage = async (pageSize: number, page: number) => {
 
   return departments;
 };
-
 async function create(
   name: string,
   size: number,
@@ -63,6 +62,14 @@ async function create(
   subDepartment: string,
   employees: Employee
 ): Promise<{ message: string; departments?: any }> {
+  const nameExists = await checkIfNameExists(name);
+
+  if (nameExists) {
+    return {
+      message: "The department name already exists in another collection",
+    };
+  }
+
   const newDocRef = await addDoc(collection(firestore, "departments"), {
     name,
     size,
@@ -78,14 +85,22 @@ async function create(
 
   if (newDoc.exists()) {
     return {
-      message: "Successfully created department",
+      message: "Department created successfully",
       departments: newDoc.data(),
     };
   } else {
     return {
-      message: "Failed to create department",
+      message: "Failed to create the department",
     };
   }
+}
+
+async function checkIfNameExists(name: string): Promise<boolean> {
+  const querySnapshot = await getDocs(collection(firestore, "departments"));
+  const matchingDocs = querySnapshot.docs.filter(
+    (doc) => doc.data().name === name
+  );
+  return matchingDocs.length > 0;
 }
 
 const getByDocId = async (docId: string) => {
@@ -185,6 +200,7 @@ export const departmentProvider = {
   getDepartmentByUidEmployee,
   getDepartmentsByPage,
   getName,
+  checkIfNameExists,
 };
 
 export default departmentProvider;
