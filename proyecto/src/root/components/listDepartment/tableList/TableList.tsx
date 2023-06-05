@@ -1,7 +1,7 @@
 import React from "react";
 import { Department } from "@/root/interface/departments";
 interface TableListProps {
-  handle: (id: string) => void;
+  handle: (id: string, name: string) => void;
   handleGetDepartment: (id: string) => void;
   currentDepartments: Department[];
 }
@@ -63,7 +63,7 @@ export const TableList = ({
                 <td className="px-2 sm:px-6 py-2 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
                   <button
                     className="text-indigo-600 hover:text-indigo-900 bg-blue"
-                    onClick={() => handle(department.id)}
+                    onClick={() => handle(department.id, department.name)}
                   >
                     ADD
                   </button>

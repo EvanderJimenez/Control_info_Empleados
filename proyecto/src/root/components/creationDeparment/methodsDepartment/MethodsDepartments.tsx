@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Department, Employee } from "@/root/interface/departments";
-import CreationDepartment from "../../creationDeparment/CreationDepartment";
+
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +8,8 @@ import {
   startGetDepartmentById,
   startUpdateDepartment,
 } from "@/root/redux";
+import TabsDepartments from "../tabsDepartments/TabsDepartments";
+import { Department, Employee } from "@/root/interface/departments";
 
 interface RegisterProps {
   user?: Department;
@@ -22,6 +23,7 @@ const newDtaDepart = {
   idEmployee: "",
   leader: "",
   level: "",
+  namesubDepartment: "",
   subDepartment: "",
   employees: {},
 };
@@ -36,10 +38,12 @@ function MethodsDepartments(props: RegisterProps) {
   const [newEmployee, setNewEmployee] = useState<string>("");
   const [newEmployeeId, setNewEmployeeId] = useState<string>("");
   const [passId, setPassId] = useState<string>("");
+  const [nameEmployee, setIdNameEmployee] = useState<string>("");
+  const [nameDepart, setNameDepart] = useState<string>("");
   const [idEmployee, setIdEmployee] = useState<string>("");
   const [newEmployeeData, setNewEmployeeData] = useState<string>("");
   const [upDate, setUpDate] = useState<boolean | null>();
-  const [departmentData, setdepartmentData] = useState<Department>(() => {
+  const [departmentData, subdepartmentData] = useState<Department>(() => {
     if (props.user) {
       setUpDate(true);
       return props.user;
@@ -52,6 +56,7 @@ function MethodsDepartments(props: RegisterProps) {
         idEmployee: "",
         leader: "",
         level: "",
+        namesubDepartment: "",
         subDepartment: "",
         employees: {},
       };
@@ -60,7 +65,7 @@ function MethodsDepartments(props: RegisterProps) {
 
   useEffect(() => {
     if (passId) {
-      setdepartmentData((prevDepartmentData) => ({
+      subdepartmentData((prevDepartmentData) => ({
         ...prevDepartmentData,
         subDepartment: passId,
       }));
@@ -69,20 +74,39 @@ function MethodsDepartments(props: RegisterProps) {
   }, [passId]);
   useEffect(() => {
     if (idEmployee) {
-      setdepartmentData((prevDepartmentData) => ({
+      subdepartmentData((prevDepartmentData) => ({
         ...prevDepartmentData,
         idEmployee: idEmployee,
       }));
       toast.success("Correctly added employee.");
     }
   }, [idEmployee]);
+  useEffect(() => {
+    if (nameDepart) {
+      subdepartmentData((prevDepartmentData) => ({
+        ...prevDepartmentData,
+        namesubDepartment: nameDepart,
+      }));
+      toast.success("Correctly added employee.");
+    }
+  }, [nameDepart]);
+  useEffect(() => {
+    if (nameEmployee) {
+      subdepartmentData((prevDepartmentData) => ({
+        ...prevDepartmentData,
+        leader: nameEmployee,
+      }));
+      toast.success("Correctly added employee.");
+    }
+  }, [nameEmployee]);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));
+    subdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));
   };
 
   const handleDeleteEmployee = (employeeName: string | number) => {
-    setdepartmentData((prevDepartmentData) => {
+    subdepartmentData((prevDepartmentData) => {
       const updatedEmployees = { ...prevDepartmentData.employees };
       delete updatedEmployees[employeeName];
 
@@ -114,7 +138,7 @@ function MethodsDepartments(props: RegisterProps) {
     }
 
     dispatch(startCreateDepartment(departmentData));
-    setdepartmentData(newDtaDepart);
+    subdepartmentData(newDtaDepart);
   };
 
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -125,7 +149,7 @@ function MethodsDepartments(props: RegisterProps) {
       return;
     }
     dispatch(startUpdateDepartment(departmentData.name, departmentData));
-    setdepartmentData(newDtaDepart);
+    subdepartmentData(newDtaDepart);
   };
 
   const handleSubmitEmployee = (event: React.FormEvent<HTMLFormElement>) => {
@@ -141,7 +165,7 @@ function MethodsDepartments(props: RegisterProps) {
       id: newEmployeeId,
     };
 
-    setdepartmentData((prevUserData) => ({
+    subdepartmentData((prevUserData) => ({
       ...prevUserData,
       employees: {
         ...prevUserData.employees,
@@ -159,7 +183,7 @@ function MethodsDepartments(props: RegisterProps) {
 
   useEffect(() => {
     if (departId) {
-      setdepartmentData(departId);
+      subdepartmentData(departId);
     }
   }, [departId]);
 
@@ -167,7 +191,7 @@ function MethodsDepartments(props: RegisterProps) {
     employeeName: string,
     updatedEmployee: Employee
   ) => {
-    setdepartmentData((prevDepartmentData) => {
+    subdepartmentData((prevDepartmentData) => {
       const updatedEmployees = {
         ...prevDepartmentData.employees,
         [employeeName]: updatedEmployee,
@@ -181,7 +205,7 @@ function MethodsDepartments(props: RegisterProps) {
   };
   return (
     <div>
-      <CreationDepartment
+      <TabsDepartments
         handleUpdateEmployee={handleUpdateEmployee}
         setPassId={setPassId}
         departmentsData={departmentData}
@@ -198,6 +222,8 @@ function MethodsDepartments(props: RegisterProps) {
         handleUpdate={handleUpdate}
         handleDeleteEmployee={handleDeleteEmployee}
         setPassIdEmployee={setIdEmployee}
+        setIdNameEmployee={setIdNameEmployee}
+        setNameDepart={setNameDepart}
       />
     </div>
   );

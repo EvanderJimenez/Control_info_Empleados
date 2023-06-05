@@ -6,10 +6,12 @@ import { SearchDepartment } from "../creationDeparment/SearchDepartment";
 interface lisDepartment {
   handleGetDepartment: (id: string) => void;
   setPassId: (id: string) => void;
+  setNameDepart: (name: string) => void;
 }
 export const ListDepartment = ({
   handleGetDepartment,
   setPassId,
+  setNameDepart,
   ...props
 }: lisDepartment) => {
   const [departmentData, setDepartmentData] = useState<Department[]>([]);
@@ -54,8 +56,10 @@ export const ListDepartment = ({
       toast.error("Error acquiring information");
     }
   };
-  const handle = (id: string) => {
+  const handle = (id: string, name: string) => {
     setPassId(id);
+    setNameDepart(name);
+    console.log(name);
   };
 
   useEffect(() => {

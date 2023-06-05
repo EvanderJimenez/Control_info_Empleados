@@ -105,11 +105,7 @@ const CreationDepartment = ({
             typeList="jobPosition"
             id="jobPosition"
           />
-          <ListEmployeeDepart
-            clear={clear}
-            setClear={setClear}
-            setPassIdEmployee={setPassIdEmployee}
-          />
+          <ListEmployeeDepart setPassIdEmployee={setPassIdEmployee} />
         </div>
       </div>
 

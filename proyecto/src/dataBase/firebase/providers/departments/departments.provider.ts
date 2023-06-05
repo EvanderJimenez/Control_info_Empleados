@@ -60,6 +60,7 @@ async function create(
   leader: string,
   level: string,
   subDepartment: string,
+  namesubDepartment: string,
   employees: Employee
 ): Promise<{ message: string; departments?: any }> {
   const nameExists = await checkIfNameExists(name);
@@ -78,6 +79,7 @@ async function create(
     leader,
     level,
     subDepartment,
+    namesubDepartment,
     employees,
   });
 
@@ -142,6 +144,7 @@ const updateById = async (
   idEmployee: string,
   leader: string,
   level: string,
+  namesubDepartment: string,
   subDepartment: string,
   employees: Employee
 ) => {
@@ -161,6 +164,7 @@ const updateById = async (
       idEmployee,
       leader,
       level,
+      namesubDepartment,
       subDepartment,
       employees,
     });

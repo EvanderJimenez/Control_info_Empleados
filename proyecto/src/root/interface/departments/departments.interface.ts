@@ -13,5 +13,6 @@ export interface Department {
   leader: string;
   level: string;
   subDepartment: string;
+  namesubDepartment: string;
   employees: { [key: string]: Employee };
 }

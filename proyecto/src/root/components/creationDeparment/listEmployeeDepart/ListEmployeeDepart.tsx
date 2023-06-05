@@ -10,15 +10,13 @@ import {
 import { RootState } from "@/root/redux";
 
 interface ListClear {
-  clear: boolean;
-  setClear: React.Dispatch<React.SetStateAction<boolean>>;
   setPassIdEmployee: (id: string) => void;
+  setIdNameEmployee: (name: string) => void;
 }
 
 const ListEmployeeDepart = ({
-  clear,
-  setClear,
   setPassIdEmployee,
+  setIdNameEmployee,
   ...props
 }: ListClear) => {
   const dispatch = useDispatch();
@@ -29,9 +27,9 @@ const ListEmployeeDepart = ({
   const loading = useSelector(selectLogin);
 
   const loginState = useSelector(selectLogin);
-  const handleLoad = (uid: string) => {
+  const handleLoad = (uid: string, name: string) => {
     setPassIdEmployee(uid);
-    console.log(uid);
+    setIdNameEmployee(name);
   };
 
   return (
@@ -52,15 +50,12 @@ const ListEmployeeDepart = ({
                   <p className="mt-2 font-semibold">
                     Job Position: {item.jobPosition}
                   </p>
-                  <p className="mt-2 font-semibold">
-                    Department: {item.idDepartment}
-                  </p>
 
                   <button
                     className="mt-4 px-4 py-2 bg-black text-white rounded"
-                    onClick={() => handleLoad(item.uid)}
+                    onClick={() => handleLoad(item.uid, item.name)}
                   >
-                    Load Information
+                    Pass Id Employee
                   </button>
                 </div>
               ))}

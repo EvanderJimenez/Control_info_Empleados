@@ -25,6 +25,7 @@ async function updateId(req: NextApiRequest, res: NextApiResponse) {
       idEmployee,
       leader,
       level,
+      namesubDepartment,
       subDepartment,
       employees,
     } = req.body;
@@ -37,6 +38,7 @@ async function updateId(req: NextApiRequest, res: NextApiResponse) {
       idEmployee,
       leader,
       level,
+      namesubDepartment,
       subDepartment,
       employees
     );
