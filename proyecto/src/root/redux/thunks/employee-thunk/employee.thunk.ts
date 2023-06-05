@@ -50,6 +50,15 @@ import {
 import { providerRedux } from "../../provider";
 import { toast } from "react-hot-toast";
 import { getByVariableAdminReducer } from "../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
+import {
+  DispatchTypeUpdateFile,
+  updateFileEmployeeReducer,
+} from "../../reducers/employee-reducer/uploadFile/UploadFile";
+import {
+  DispatchTypeGetFileURLByName,
+  getFileURLByNameReducer,
+  resetUrlReducer,
+} from "../../reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
 
 export const StartDeletingEmployee = (employeeId: string): any => {
   return async (dispatch: DispatchTypeDelete) => {
@@ -117,6 +126,24 @@ export const StartUpDateEmployee = (
   };
 };
 
+export const StartUpDateFileEmployee = (
+  searchTerm: string,
+  searchUser: string,
+  nameFile: string,
+  typeFile: string
+): any => {
+  return async (dispatch: DispatchTypeUpdateFile) => {
+    const employee = await providerRedux.uploadFileProvider(
+      searchTerm,
+      searchUser,
+      nameFile,
+      typeFile
+    );
+
+    dispatch(updateFileEmployeeReducer(employee || null));
+  };
+};
+
 export const StartGetEmployeeByUid = (searchTerm: string): any => {
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
@@ -131,6 +158,12 @@ export const ResetEmployeeByUid = (): any => {
   };
 };
 
+export const StartResetUrl = (): any => {
+  return async (dispatch: DispatchTypeGetFileURLByName) => {
+    dispatch(resetUrlReducer());
+  };
+};
+
 export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
   return async (dispatch: DispatchTypeLogin) => {
     dispatch(setLoading(true));
@@ -142,6 +175,11 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
     dispatch(loginReducer(response || null));
 
     dispatch(setLoading(false));
+    if (response !== null && response !== undefined) {
+      toast.success("¡Welcome!");
+    } else {
+      toast.error("Wrong password or username");
+    }
   };
 };
 
@@ -198,6 +236,14 @@ export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
     );
 
     dispatch(getEmployeesByIdDepartmentReducer(response || null));
+  };
+};
+
+export const StarGetFileURLByName = (uid: string, searchTerm: string): any => {
+  return async (dispatch: DispatchTypeGetFileURLByName) => {
+    const response = await providerRedux.getFileURLByName(uid, searchTerm);
+
+    dispatch(getFileURLByNameReducer(response || null));
   };
 };
 

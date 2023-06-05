@@ -1,5 +1,6 @@
 import React from "react";
 import Schedule from "../../../registerEmployee/components/schedule/Schedule";
+import { toast } from "react-hot-toast";
 
 type Field = "startTime" | "endTime";
 
@@ -7,11 +8,15 @@ interface PropsFormSchedule {
   schedules: Schedule[];
 }
 
+
 const handleGeneratedPdf = () => {
   window.print();
 };
 
+
+
 const FormScheduleEmployee = ({ schedules }: PropsFormSchedule) => {
+
   return (
     <>
       <p className="text-center font-bold mt-2">Weekly schedule</p>
@@ -43,7 +48,9 @@ const FormScheduleEmployee = ({ schedules }: PropsFormSchedule) => {
                   <input className="border-y-2 focus:outline-none border-blue bg-transparent text-sm zoom block" type="time" value={schedule.endTime} readOnly />
                 </td>
               </tr>
-            ))}
+            ))}{(Array.isArray(schedules) && schedules.length === 0)  && (
+              <div className="font-semibold text-yellow "> You do not have a registered schedule 🤔</div>
+            )}
           </tbody>
         </table>
         <div className="flex print:hidden justify-center mt-2">

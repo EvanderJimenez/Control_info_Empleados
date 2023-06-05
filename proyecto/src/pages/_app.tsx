@@ -19,6 +19,17 @@ const toastConfig = {
       secondary: "green",
     },
   },
+  alert: {
+    duration: 2000,
+    style: {
+      background: "##E8AA42",
+      color: "white",
+    },
+    iconTheme: {
+      primary: "white",
+      secondary: "yellow",
+    },
+  },
 
   error: {
     duration: 2000,
@@ -48,10 +59,6 @@ const toastConfig = {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={ApplicationStore}>
-      <Head>
-        <title>CR Home</title>
-        <link rel="icon" href="/principal.ico" />
-      </Head>
       <Component {...pageProps} />
       <Toaster position="top-center" toastOptions={toastConfig} />
     </Provider>

@@ -2,6 +2,8 @@ import { RootState } from "../../store";
 
 export const selectDeleteEmployee = (state: RootState) =>
   state.deleteEmployeeStore.deleteEmployee;
+export const selectUploadFile = (state: RootState) =>
+  state.uploadFile.updateFileEmployee;
 
 export const selectDismissEmployee = (state: RootState) =>
   state.dismissEmployeeStore.dismissEmployee;
@@ -34,3 +36,7 @@ export const selectGetEmployeesByIdDepartment = (state: RootState) =>
 
 export const selectGetByVariableAdmin = (state: RootState) =>
   state.getByVariableAdminStore.getByVariableAdmin;
+export const selectGetEmployeesByIdDepartment = (state: RootState) =>
+  state.getEmployeesByIdDepartmentStore.getEmployeesByIdDepartment;
+export const selectGetFileURLByName = (state: RootState) =>
+  state.GetFileURLByNameStore.getFileURLByName;

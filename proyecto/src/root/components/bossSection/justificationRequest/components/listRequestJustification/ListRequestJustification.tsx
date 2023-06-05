@@ -2,7 +2,7 @@ import { PendingRequestJustifications } from "@/root/interface/employee";
 import {
   StarGetEmployeesByIdDepartment,
   selectGetEmployeesByIdDepartment,
-  selectLogin,
+  selectLogin,StartGetEmployeeByUid
 } from "@/root/redux";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -63,10 +63,11 @@ const ListRequestJustification = ({
         }
       });
       setPendingRequests(pendingRequestsList);
-    }
+    } 
   }, [listEmployees]);
 
   const handleLoadInformation = (request: PendingRequestJustifications) => {
+    dispatch(StartGetEmployeeByUid(request?.employeeUID || ""));
     selectedRequest(request);
   };
 

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { format, parseISO, getDay } from "date-fns";
-import { useSelector } from "react-redux";
-import { selectLogin } from "@/root/redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGetBrandsByIdEmployee, selectLogin, startGetBrandsByIdEmployee } from "@/root/redux";
 import { LaborRegistration } from "@/root/interface/brands";
 import { toast } from "react-hot-toast";
 import { BrandsEmployee } from "../BrandsEmployee";
 
 export default function MethodsBrands() {
+
+
+  const dispatch = useDispatch()
+  const brandsGetByIdEmployee = useSelector(selectGetBrandsByIdEmployee)
+
   const [formattedDay, setFormattedDay] = useState("");
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
@@ -48,20 +53,19 @@ export default function MethodsBrands() {
   }, [employeeLogin?.uid]);
 
   const handleGetBrands = async (id: string) => {
-    const response = await fetch(`/api/brands/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
 
-    if (response.ok) {
-      const data = await response.json();
-      setBrandData(data);
-    } else {
-      toast.error("Error acquiring information");
-    }
+   await  dispatch(startGetBrandsByIdEmployee(id))
+
+
   };
+
+  useEffect(() => {
+  
+    if(brandsGetByIdEmployee){
+      setBrandData(brandsGetByIdEmployee);
+    }
+
+  }, [brandsGetByIdEmployee])
 
   return (
     <div>

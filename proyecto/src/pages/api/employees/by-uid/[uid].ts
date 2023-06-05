@@ -22,10 +22,12 @@ async function getVacationsByUid(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-async function getVacationsByUid2(req: NextApiRequest, res: NextApiResponse) {
+async function getFileURLByName(req: NextApiRequest, res: NextApiResponse) {
   const uid = String(req.query.uid);
+  const fileName = String(req.body.fileName);
+  console.log(fileName)
   try {
-    const employee = await employeeProvider.getByCedula(uid);
+    const employee = await employeeProvider.getFileURLByName(uid,fileName);
     res.status(200).json(employee);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
@@ -38,6 +40,9 @@ handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
 dismissByUid(req, res);
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
 getVacationsByUid(req, res);
+handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) =>
+getFileURLByName(req, res);
+
 
 export default function employeesByNameController(
   req: NextApiRequest,

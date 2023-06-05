@@ -1,5 +1,4 @@
 import React from "react";
-import { UserData } from "@/root/interface/employee";
 import InputLabel from "../inputLabel/InputLabel";
 import Schedule from "../schedule/Schedule";
 import { EmployeesType } from "@/root/types/Employee.type";
@@ -11,10 +10,9 @@ interface RegisterProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleScheduleChange: (newSchedule: any) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  user?: UserData;
 }
 
-const PrincipalData = ({ userData, handleInputChange, handleScheduleChange, handleSubmit, user }: RegisterProps) => {
+const PrincipalData = ({ userData, handleInputChange, handleScheduleChange, handleSubmit }: RegisterProps) => {
   return (
     <div>
         <p className="font-semibold text-lithGray">Register</p>

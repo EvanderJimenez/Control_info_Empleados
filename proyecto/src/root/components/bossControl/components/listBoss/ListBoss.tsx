@@ -26,13 +26,14 @@ const ListBoss = ({ clear, setClear }: ListClear) => {
   };
 
   return (
-    <div className="bg-gray-100 overflow-auto h-52 p-4">
+    <div className="shadow-xl w-full  overflow-auto h-52 p-4">
       {listBoss?.map((request: EmployeesType, index: number) => (
-        <div key={index} className="mb-4 p-2 border  shadow-md rounded">
-          <h3 className="text-lg font-semibold mb-2">
+        <div key={index} className="mb-4 p-2 bg-lithBlue bg-opacity-60  shadow-md rounded">
+          <h3 className="text-xl font-semibold mb-2">
             Employee: {request.name}
           </h3>
-          <p className="text-gray-600">Email: {request.email}</p>
+          <p className="font-semibold">Email: {request.email}</p>
+          <p className="font-semibold">Cedula: {request.cedula}</p>
           <button
             className="bg-darkBlue"
             onClick={() => handleLoadInformation(request.uid)}

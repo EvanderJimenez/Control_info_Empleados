@@ -1,13 +1,15 @@
 
-import { Brands } from "@/root/interface/brands";
+
+import { LaborRegistration } from "@/root/interface/brands";
+import { Brands } from "@/root/interface/employee";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface BrandsByIdEmployeeState {
-  getBrandsByIdEmployee: Brands;
+  getBrandsByIdEmployee: LaborRegistration;
 }
 
 export const initialStateByIdEmployeeBrandSlice: BrandsByIdEmployeeState = {
-  getBrandsByIdEmployee: {} as Brands,
+  getBrandsByIdEmployee: {} as LaborRegistration,
 };
 
 type BrandsCByIdEmployeeAction = {
@@ -20,7 +22,7 @@ export const GetBrandsByIdEmployeeBrandsSlice = createSlice({
   initialState: initialStateByIdEmployeeBrandSlice,
 
   reducers: {
-    getBrandsByIdEmployeeReducer: (state, action: PayloadAction<Brands>) => {
+    getBrandsByIdEmployeeReducer: (state, action: PayloadAction<LaborRegistration>) => {
       return { getBrandsByIdEmployee: action.payload };
     },
   },

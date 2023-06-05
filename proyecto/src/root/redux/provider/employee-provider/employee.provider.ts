@@ -1,4 +1,3 @@
-import { UserData } from "@/root/interface/employee";
 import { EmployeesType } from "@/root/types/Employee.type";
 import Cookies from "js-cookie";
 
@@ -60,9 +59,9 @@ const employeeListProvider = async () => {
           password: listEmployee.password,
           email: listEmployee.email,
           boss: listEmployee.boss,
-          schedule: listEmployee.schedule,
           vacations: listEmployee.vacations,
           attendance: listEmployee.attendance,
+          files: listEmployee.files,
         })
       )
     : [];
@@ -102,6 +101,52 @@ const upDatEmployeeProvider = async (
 
   if (!response.ok) {
     return response;
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+
+const uploadFileProvider = async (
+  file: string,
+  searchUser: string,
+  nameFile: string,
+  typeFile: string
+) => {
+  const response = await fetch(`/api/employees/${searchUser}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      file,
+      nameFile: nameFile,
+      typeFile: typeFile,
+    }),
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const data = await response.json();
+
+  return data;
+};
+
+const getFileURLByName = async (uid: string, fileName: string) => {
+  console.log(uid, fileName);
+  const response = await fetch(`/api/employees/by-uid/${uid}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ fileName }),
+  });
+
+  if (!response.ok) {
+    return null;
   }
 
   const data = await response.json();
@@ -278,6 +323,7 @@ const getAllBossesProvider = async () => {
 export const providerRedux = {
   getEmployeesByIdDepartProvider,
   getVacationsByUidProvider,
+  getFileURLByName,
   getByVariableProvider,
   loginProvider,
   getEmployeeByNameProvider,
@@ -290,4 +336,5 @@ export const providerRedux = {
   deleteEmployeeProvider,
   getAllBossesProvider,
   getByVariableProviderAdmin,
+  uploadFileProvider,
 };

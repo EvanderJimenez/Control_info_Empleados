@@ -10,19 +10,26 @@ export type EmployeesType = {
   name: string;
   firstSurname: string;
   secondSurname: string;
-  cedula: number | string;
-  phoneNumber: number;
+  cedula: string;
+  phoneNumber: string;
   photo: string;
   jobPosition: string;
-  salary: number;
+  salary: string;
   enabled: boolean;
   idDepartment: string;
   password: string;
   email: string;
   boss: string;
-  schedule: Schedule[];
   vacations: { [Key: string]: Vacations };
   attendance:{ [Key: string]: Attendance };
+  files: { [Key: string]: Files };
+
+}
+
+export type Files = {
+  name: string;
+  urlFile: string;
+  type: string
 }
 
 export type Vacations = {
@@ -31,3 +38,4 @@ export type Vacations = {
   description: string
   approved: string
 }
+

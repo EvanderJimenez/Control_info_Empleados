@@ -1,14 +1,10 @@
 import React from "react";
-import InputForm from "../../brands/InputForm";
 import { useSelector } from "react-redux";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
 
 const EmployeeProfile = () => {
   const UserLogin = useSelector(selectLogin);
-  const cedula: string = UserLogin?.cedula.toString() || "";
-  const phoneNumberString: string = UserLogin?.phoneNumber.toString() || "";
-  const salary: string = UserLogin?.salary.toString() || "";
 
   return (
     <>
@@ -22,14 +18,14 @@ const EmployeeProfile = () => {
             <InputFloatLabel id="name" labelFloat="Name" name="name" onChange={() => {}} type="text" value={UserLogin?.name || ""} />
             <InputFloatLabel id="surname" labelFloat="Surname" name="" onChange={() => {}} type="text" value={UserLogin?.firstSurname || ""} />
             <InputFloatLabel id="secondSurname" labelFloat="Second surname" name="" onChange={() => {}} type="text" value={UserLogin?.secondSurname || ""} />
-            <InputFloatLabel id="cedula" labelFloat="ID number" name="" onChange={() => {}} type="text" value={cedula} />
+            <InputFloatLabel id="cedula" labelFloat="cedula" name="" onChange={() => {}} type="text" value={UserLogin.cedula || ''} />
           </div>
 
           <div className=" mt-4 w-full space-y-7 sm:w-auto">
           <InputFloatLabel id="email" labelFloat="Email" name="" onChange={() => {}} type="text" value={UserLogin?.email || ""} />
-          <InputFloatLabel id="phoneNumber" labelFloat="Phone Number" name="" onChange={() => {}} type="text" value={phoneNumberString} />
+          <InputFloatLabel id="phoneNumber" labelFloat="Phone Number" name="" onChange={() => {}} type="text" value={UserLogin.phoneNumber || ''} />
           <InputFloatLabel id="JonPosition" labelFloat="Job position" name="" onChange={() => {}} type="text" value={UserLogin?.jobPosition || ""} />
-          <InputFloatLabel id="Salary" labelFloat="Salary" name="" onChange={() => {}} type="text" value={salary} />
+          <InputFloatLabel id="Salary" labelFloat="Salary" name="" onChange={() => {}} type="text" value={UserLogin.salary || ''} />
           </div>
         </div>
       </div>

@@ -4,31 +4,15 @@ import { EmployeesType } from "@/root/types/Employee.type";
 import { useDispatch, useSelector } from "react-redux";
 import { StartUpDateEmployee, selectGetEmployeeByUid } from "@/root/redux";
 import RegisterFormEmployee from "./components/formEmployee/RegisterFormEmployee";
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
+import toast from "react-hot-toast";
 
 const BossControl = () => {
   const dispatch = useDispatch();
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [clear, setClear] = useState(false);
 
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>({
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: 0,
-    phoneNumber: 0,
-    photo: "",
-    jobPosition: "",
-    salary: 0,
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    schedule: [],
-    vacations: {},
-    attendance: {},
-  });
+  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
   useEffect(() => {
     if (!clear) {
@@ -36,25 +20,7 @@ const BossControl = () => {
         setDataEmployee(employeeByUid);
       }
     } else {
-      setDataEmployee({
-        uid: "",
-        name: "",
-        firstSurname: "",
-        secondSurname: "",
-        cedula: 0,
-        phoneNumber: 0,
-        photo: "",
-        jobPosition: "",
-        salary: 0,
-        enabled: true,
-        idDepartment: "",
-        password: "",
-        email: "",
-        boss: "",
-        schedule: [],
-        vacations: {},
-        attendance: {},
-      });
+      setDataEmployee(initialDataEmployee);
     }
   }, [employeeByUid, clear]);
 
@@ -70,18 +36,14 @@ const BossControl = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-200">
-      <section className="flex flex-col items-center py-4 px-4 bg-white shadow-md">
-        <ListBoss clear={clear} setClear={setClear} />
-      </section>
-      <section className="flex-grow flex items-center justify-center bg-gray-100">
-        <div className="p-4 bg-white rounded shadow-lg max-w-xl m-auto">
-          <RegisterFormEmployee
-            handleInputChange={handleInputChange}
-            userData={dataEmployee}
-            upDate={handleUpdate}
-          />
+    <div className="flex flex-wrap pb-8 h-screen ">
+      <section className="flex flex-col md:w-2/3 items-center py-4 px-4 bg-white">
+        <div className="p-4  rounded flex justify-end shadow-lg w-full m-auto">
+          <RegisterFormEmployee handleInputChange={handleInputChange} userData={dataEmployee} upDate={handleUpdate} />
         </div>
+      </section>
+      <section className="flex-grow flex md:w-1/3 pt-10 justify-center">
+        <ListBoss clear={clear} setClear={setClear} />
       </section>
     </div>
   );
