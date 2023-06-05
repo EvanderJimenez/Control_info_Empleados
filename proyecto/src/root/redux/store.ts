@@ -24,6 +24,8 @@ import { GetEmployeeByUidReducer } from "./reducers/employee-reducer/getEmployee
 import { GetByVariableAdminReducer } from "./reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import { UpdateFileEmployeeReducer } from "./reducers/employee-reducer/uploadFile/UploadFile";
 import { GetFileURLByNameReducer } from "./reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
+import { GetDepartmentByNameReducer } from "./reducers/department-reducer/getDepartmentByName/GetDepartmentByNameReducer";
+import { GetByPageDepartmentsReducer } from "./reducers/department-reducer/getDepartmentsByPage/GetDepartmentsByPage";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -43,15 +45,16 @@ export const ApplicationStore = configureStore({
     uploadFile: UpdateFileEmployeeReducer,
 
     getAllDepartmentStore: GetAllDepartmentsReducer,
-    getDepartmentByIdStore: ByIdDocReducer,
+    getDepartmentByIdStore: GetByIdEmployeeDepartmentsReducer,
     getDepartmentByIdDocStore: ByIdDocReducer,
+    getDepartmentByPage:GetByPageDepartmentsReducer,
+    getDepartmentByName:GetDepartmentByNameReducer,
 
     getAllBrans: GetAllBrandsReducer,
     createBrands: CreateBrandsReducer,
     getBrandsByDocId: GetBrandsByDocIdReducer,
     updateBrands: UpdateBrandsReducer,
     GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer,
-    GetByIdDepartmentsPage: GetByIdEmployeeDepartmentsReducer,
     GetFileURLByNameStore: GetFileURLByNameReducer,
   },
 });

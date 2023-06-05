@@ -29,10 +29,12 @@ const ListEmployeeDepart = ({
   const loading = useSelector(selectLogin);
 
   const loginState = useSelector(selectLogin);
-  const handleLoad = (uid: string) => {
+  const handleLoad = (uid: string) => { 
     setPassIdEmployee(uid);
     console.log(uid);
   };
+
+  console.log(employeesListVariable)
 
   return (
     <>
@@ -64,7 +66,7 @@ const ListEmployeeDepart = ({
                   </button>
                 </div>
               ))}
-          {loading && <LoadingGeneralComponent />}
+          {/* {loading && <LoadingGeneralComponent />} */}
         </div>
       ) : (
         <h2 className="font-semibold">List Empty</h2>

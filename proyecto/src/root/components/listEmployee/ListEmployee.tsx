@@ -4,7 +4,7 @@ import { StartListOfEmployee, StartGetEmployeeByUid } from "../../redux/thunks/e
 import { RootState } from "../../redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
 import { selectLogin, selectGetByVariable } from "@/root/redux/selectors/employee-selector/employee.selector";
-import { selectGetDepartmentById } from "@/root/redux";
+import { selectGetByIdDocDepartment, selectGetDepartmentById } from "@/root/redux";
 
 interface ListClear {
   clear: boolean;
@@ -15,7 +15,7 @@ const ListEmployee = ({ clear, setClear }: ListClear) => {
   const dispatch = useDispatch();
 
   const employeesListVariable = useSelector(selectGetByVariable);
-  const department = useSelector(selectGetDepartmentById)
+  const department = useSelector(selectGetByIdDocDepartment)
 
   const getEmployeeByUid = useSelector((state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid);
   const loading = useSelector((state: RootState) => state.loading.loading);

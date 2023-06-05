@@ -77,9 +77,9 @@ const ListRequestJustification = ({
     selectedRequest(request);
   };
 
-  if (variable.length > 0) {
+  if (variable && variable.length > 0) {
     listEmployees = variable;
-  } else if (listEmployee.length > 0) {
+  } else if (listEmployee && listEmployee.length > 0) {
     listEmployees = listEmployee;
   }
 

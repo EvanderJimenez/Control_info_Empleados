@@ -31,6 +31,8 @@ function MethodsDepartments(props: RegisterProps) {
 
   const departId = useSelector(selectGetDepartmentById);
 
+  const dataDepart = useSelector(selectGetDepartmentById)
+
   const [data, setData] = useState<Department[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [newEmployee, setNewEmployee] = useState<string>("");
@@ -154,8 +156,15 @@ function MethodsDepartments(props: RegisterProps) {
     setNewEmployeeId("");
   };
   const handleGetDepartment = async (id: string) => {
-    dispatch(startGetDepartmentById(id));
+    dispatch(startGetDepartmentById(id)); 
   };
+  
+  useEffect(() => {
+    if (departId) {
+      setdepartmentData(departId);
+    }
+  }, [departId]);
+  
 
   const handleUpdateEmployee = (
     employeeName: string,

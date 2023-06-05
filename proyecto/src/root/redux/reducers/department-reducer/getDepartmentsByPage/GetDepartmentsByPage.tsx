@@ -1,50 +1,40 @@
 import { DepartmentType } from "@/root/types/Department.type";
 import { PayloadAction, createSlice, Dispatch } from "@reduxjs/toolkit";
 
-interface GetDepartmentByIdDepartmentsState {
-  getDepartmentByIdEmployee: DepartmentType;
+interface GetDepartmentByPagesState {
+  getDepartmentByPage: DepartmentType[];
 }
 
-export const initialStateDepartGetByIdEmployee: GetDepartmentByIdDepartmentsState =
+export const initialStateDepartGetByPage: GetDepartmentByPagesState =
   {
-    getDepartmentByIdEmployee: {} as DepartmentType,
+    getDepartmentByPage: [],
   };
 
-type DepartmentActionGetByIdEmployee = {
+type DepartmentActionGetByPage = {
   type: string;
-  getDepartmentByIdEmployee?: DepartmentType;
+  getDepartmentByPage?: DepartmentType;
   pageSize?: number;
   page?: number;
 };
 
-export const getByIdEmployeeDepartmentSlice = createSlice({
-  name: "getDepartmentByIdEmployee",
-  initialState: initialStateDepartGetByIdEmployee,
+export const getByPageDepartmentSlice = createSlice({
+  name: "getDepartmentByPage",
+  initialState: initialStateDepartGetByPage,
 
   reducers: {
-    getDepartmentByIdEmployeeReducer: (
-      state,
-      action: PayloadAction<DepartmentActionGetByIdEmployee>
-    ) => {
-      const { pageSize, page } = action.payload;
-      return {
-        ...state,
-        getDepartmentByIdEmployee: {
-          ...state.getDepartmentByIdEmployee,
-        },
-        pageSize,
-        page,
-      };
-    },
+
+    getDepartmentByPageReducer: (state, action: PayloadAction<DepartmentType[]>) =>{
+    return {getDepartmentByPage: action.payload}
   },
+  resetDepartmentByPageReducer: (state) => {
+    state.getDepartmentByPage = initialStateDepartGetByPage.getDepartmentByPage;
+  },
+
+},
 });
 
-export const { getDepartmentByIdEmployeeReducer } =
-  getByIdEmployeeDepartmentSlice.actions;
+export const { getDepartmentByPageReducer , resetDepartmentByPageReducer} = getByPageDepartmentSlice.actions;
 
-export const GetByIdEmployeeDepartmentsReducer =
-  getByIdEmployeeDepartmentSlice.reducer;
+export const GetByPageDepartmentsReducer = getByPageDepartmentSlice.reducer;
 
-export type DispatchTypeGetByIdEmployee = (
-  args: DepartmentActionGetByIdEmployee
-) => DepartmentActionGetByIdEmployee;
+export type DispatchTypeGetByPage = (args: DepartmentActionGetByPage) => DepartmentActionGetByPage;
