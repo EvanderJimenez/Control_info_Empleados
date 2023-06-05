@@ -76,7 +76,6 @@ export const BrandsEmployee = ({
     const nameCycle = monthCycle.toString() + year.toString();
     await handleUpdateCycleHours(nameCycle).then(
       async (updatedBrandData: any) => {
-        console.log(updatedBrandData)
         if (
           formattedDay &&
           updatedBrandData.cycle &&

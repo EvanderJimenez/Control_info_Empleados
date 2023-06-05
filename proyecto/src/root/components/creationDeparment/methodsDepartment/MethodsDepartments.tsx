@@ -157,6 +157,12 @@ function MethodsDepartments(props: RegisterProps) {
     dispatch(startGetDepartmentById(id));
   };
 
+  useEffect(() => {
+    if (departId) {
+      setdepartmentData(departId);
+    }
+  }, [departId]);
+
   const handleUpdateEmployee = (
     employeeName: string,
     updatedEmployee: Employee
