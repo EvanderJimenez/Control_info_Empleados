@@ -8,7 +8,6 @@ import { DepartmentType } from "@/root/types/Department.type";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import { toast } from "react-hot-toast";
-import Filters from "../bossSection/vacationsRequestBoss/components/filters/Filters";
 import FilterList from "./components/filter/FilterList";
 
 const AssignDepartmentEmployee = () => {

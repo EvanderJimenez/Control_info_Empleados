@@ -21,7 +21,6 @@ export const initialStateByUid: GetEmployeeByUidState = {
     password: "",
     email: "",
     boss: "",
-    schedule: [],
     vacations: {},
     attendance: {},
     files: {}

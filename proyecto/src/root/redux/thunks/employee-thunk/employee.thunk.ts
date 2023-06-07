@@ -37,7 +37,9 @@ import {
 } from "../../reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
 import {
   DispatchTypeByIdDepart,
+  getEmployeesByIdDepartmentJustificationsReducer,
   getEmployeesByIdDepartmentReducer,
+  resetEmployeesByIdDepartmentReducer,
 } from "../../reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
 import {
   DispatchTypeAllBoss,
@@ -248,6 +250,23 @@ export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
     );
 
     dispatch(getEmployeesByIdDepartmentReducer(response || null));
+  };
+};
+
+
+export const StarGetEmployeesByIdDepartmentJustifications = (searchTerm: string): any => {
+  return async (dispatch: DispatchTypeByIdDepart) => {
+    const response = await providerRedux.getEmployeesByIdDepartProvider(
+      searchTerm
+    );
+
+    dispatch(getEmployeesByIdDepartmentJustificationsReducer(response || null));
+  };
+};
+
+export const StartResetEmployeesByIdDepartment = (): any => {
+  return async (dispatch: DispatchTypeByIdDepart) => {
+    dispatch(resetEmployeesByIdDepartmentReducer());
   };
 };
 

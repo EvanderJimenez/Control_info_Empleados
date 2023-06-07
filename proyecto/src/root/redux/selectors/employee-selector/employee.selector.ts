@@ -33,7 +33,12 @@ export const selectGetVacationsByUid = (state: RootState) =>
 
 export const selectGetByVariableAdmin = (state: RootState) =>
   state.getByVariableAdminStore.getByVariableAdmin;
+
 export const selectGetEmployeesByIdDepartment = (state: RootState) =>
   state.getEmployeesByIdDepartmentStore.getEmployeesByIdDepartment;
+
+  export const selectGetEmployeesByIdDepartmentJustifications = (state: RootState) =>
+  state.getEmployeesByIdDepartmentJustificationsStore.getEmployeesByIdDepartmentJustifications;
+
 export const selectGetFileURLByName = (state: RootState) =>
   state.GetFileURLByNameStore.getFileURLByName;

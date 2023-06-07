@@ -44,6 +44,7 @@ export const ApplicationStore = configureStore({
     getVacationsByUidStore: VacationsReducer,
     getAllBossesStore: GetAllBossReducer,
     getEmployeesByIdDepartmentStore: GetEmployeesByIdDepartmentReducer,
+    getEmployeesByIdDepartmentJustificationsStore: GetEmployeesByIdDepartmentReducer,
     uploadFile: UpdateFileEmployeeReducer,
 
     getAllDepartmentStore: GetAllDepartmentsReducer,

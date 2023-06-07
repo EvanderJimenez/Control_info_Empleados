@@ -43,9 +43,6 @@ const ListWithoutDepartment = ({
     dispatch(StarGetEmployeesByIdDepartment("0"));
   }, [dispatch, employeesListVacations, change]);
 
-  console.log(listEmployees)
-  console.log(variable)
-
   return (
     <div className="container h-96 overflow-auto w-full space-y-4">
       {listEmployees ? (
