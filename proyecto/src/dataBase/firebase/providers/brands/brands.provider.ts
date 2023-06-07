@@ -1,5 +1,5 @@
 import { firestore } from "../../firebase";
-import { Brands, Cycle, Hours, HoursEmployee } from "@/root/interface/brands";
+import { Cycle, HoursEmployee } from "@/root/interface/brands";
 import {
   collection,
   getDocs,
@@ -59,9 +59,8 @@ const getDocId = async (docId: string) => {
 
   if (brandsDocSnapshot.exists()) {
     return brandsDocSnapshot.data();
-  } else {//TODO: You should not use else or simplify the complex with reverse if
-    throw new Error(`A brands with document ID was not found: ${docId}`);
   }
+  return brandsDocSnapshot.data();
 };
 const getDocByEmployeeId = async (idEmployee: string) => {
   const brandsCollection = collection(firestore, "brands");
@@ -74,7 +73,7 @@ const getDocByEmployeeId = async (idEmployee: string) => {
   );
 
   if (brandsSnapshot.empty) {
-    return null
+    return null;
   } else {
     return brandsSnapshot.docs[0].data();
   }
@@ -82,7 +81,7 @@ const getDocByEmployeeId = async (idEmployee: string) => {
 
 const updateById = async (
   idEmployee: string,
-  cycle: Hours,
+  cycle: Cycle,
   hoursEmployee: HoursEmployee
 ) => {
   const brandsRef = collection(firestore, "brands");
