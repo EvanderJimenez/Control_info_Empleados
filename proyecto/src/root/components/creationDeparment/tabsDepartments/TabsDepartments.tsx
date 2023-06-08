@@ -111,19 +111,7 @@ export default function TabsDepartments({
               Edit Employees
             </button>
           </div>
-          <div role="presentation">
-            <button
-              className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
-                activeTab === "FormEmployee" ? "active" : ""
-              }`}
-              id="FormEmployee-tab"
-              type="button"
-              role="tab"
-              onClick={() => setActiveTab("FormEmployee")}
-            >
-              Form Employee
-            </button>
-          </div>
+        
         </section>
         {activeTab === "FormDepartment" && (
           <FormEmployee
@@ -182,17 +170,7 @@ export default function TabsDepartments({
             handleDeleteEmployee={handleDeleteEmployee}
           />
         )}
-        {activeTab === "FormEmployee" && (
-          <AddEmployee
-            handleSubmitEmployee={handleSubmitEmployee}
-            newEmployee={newEmployee}
-            newEmployeeData={newEmployeeData}
-            setNewEmployee={setNewEmployee}
-            setNewEmployeeData={setNewEmployeeData}
-            setNewEmployeeId={props.setNewEmployeeId}
-            newEmployeeId={props.newEmployeeId}
-          />
-        )}
+        
       </div>
     </div>
   );
