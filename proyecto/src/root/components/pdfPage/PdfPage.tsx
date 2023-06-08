@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FirstPagePDFInformation } from "@/root/interface/employee";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
-import { StarGetEmployeesByIdDepartment } from "@/root/redux/thunks/employee-thunk";
+import { selectGetEmployeesByIdDepartment, selectGetEmployeesByIdDepartmentJustifications, selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
+import { StarGetEmployeesByIdDepartment, StarGetEmployeesByIdDepartmentJustifications } from "@/root/redux/thunks/employee-thunk";
 import { EmployeesType } from "@/root/types/Employee.type";
 import EmployeeSummaryList from "./employeeSummaryList/EmployeeSummaryList";
 import TableView from "./employeeSummaryList/tableView/table/Table";
@@ -11,14 +11,14 @@ import { selectGetByIdDocDepartment } from "@/root/redux";
 
 export default function PdfPage() {
   const loginInformation = useSelector(selectLogin);
-  const listEmployees = useSelector(selectGetEmployeesByIdDepartment);
+  const listEmployees = useSelector(selectGetEmployeesByIdDepartmentJustifications);
   const CurrentDate: Date = new Date();
   const dispatch = useDispatch();
 
   const department = useSelector(selectGetByIdDocDepartment);
 
   useEffect(() => {
-    dispatch(StarGetEmployeesByIdDepartment(loginInformation?.idDepartment || ""));
+    dispatch(StarGetEmployeesByIdDepartmentJustifications(loginInformation?.idDepartment || ""));
   }, []);
 
   interface User {

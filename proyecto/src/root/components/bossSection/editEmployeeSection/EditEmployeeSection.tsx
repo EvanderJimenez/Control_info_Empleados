@@ -15,6 +15,7 @@ import {
   StartDismissEmployee,
   StartGetByVariable,
   StartGetEmployeeByUid,
+  StartResetEmployeesByIdDepartment,
   StartResetUrl,
   StartUpDateEmployee,
 } from "@/root/redux/thunks/employee-thunk/employee.thunk";
@@ -22,10 +23,10 @@ import { toast } from "react-hot-toast";
 
 import InputFloatLabel from "../../ui/InputFloatLabel/InputFloatLabel";
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
-import ComboBox from "../../assignDepartmentEmployee/components/comboBox/ComboBox";
 import ComboBoxDocuments from "../../employeeSection/documentsEmployee/components/comboBoxDocuments/ComboBoxDocuments";
 import { saveAs } from "file-saver";
 import { b64toBlob } from "@/root/utils/base64/base64";
+import ListAllEmployees from "./components/listAllEmployees/ListAllEmployees";
 
 export default function EditEmployeeSection() {
   const fileLoad = useSelector(selectGetFileURLByName);
@@ -38,6 +39,7 @@ export default function EditEmployeeSection() {
   const [jobPosition, setJobPosition] = useState("");
   const [clearInput, setClearInput] = useState(false);
   const [change, setChange] = useState(false);
+  const [listEmployees, setListEmployees] = useState<EmployeesType[]>([]);
 
   const employeesListVariable = useSelector(selectGetByVariable);
   const [dataEmployee, setDataEmployee] =
@@ -102,9 +104,13 @@ export default function EditEmployeeSection() {
   const handleClear = async () => {
     if(dataEmployee.uid){
       dispatch(ResetEmployeeByUid());
+      dispatch(StartResetEmployeesByIdDepartment())
+      setListEmployees([])
       toast.success("Clear all");
     }else {
-      toast("⚠ No employees have been loaded ");
+      setListEmployees([])
+      dispatch(ResetEmployeeByUid());
+      dispatch(StartResetEmployeesByIdDepartment())
     }
   };
 
@@ -134,6 +140,8 @@ export default function EditEmployeeSection() {
   const files: Files[] = employeeByUid?.files
     ? Object.values(employeeByUid.files)
     : [];
+    
+    const countEmployees = listEmployees.length
 
   return (
     <>
@@ -162,7 +170,9 @@ export default function EditEmployeeSection() {
               typeList="jobPosition"
               id="jobPosition"
             />
-            <ListEmployee clear={clear} setClear={setClear} />
+            <ListAllEmployees />
+            <p>Employees: {countEmployees}</p>
+            <ListEmployee clear={clear} setClear={setClear} listEmployees={listEmployees} setListEmployees={setListEmployees} />
           </div>
         </div>
         <div className="w-full md:w-1/2 lg:flex-grow xl:flex-grow px-2 py-2 pb-14">

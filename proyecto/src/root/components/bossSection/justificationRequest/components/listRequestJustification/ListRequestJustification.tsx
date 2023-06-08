@@ -1,10 +1,10 @@
 import { PendingRequestJustifications } from "@/root/interface/employee";
 import {
-  StarGetEmployeesByIdDepartment,
-  selectGetEmployeesByIdDepartment,
   selectLogin,
   StartGetEmployeeByUid,
   selectGetByVariable,
+  StarGetEmployeesByIdDepartmentJustifications,
+  selectGetEmployeesByIdDepartmentJustifications,
 } from "@/root/redux";
 import { EmployeesType } from "@/root/types/Employee.type";
 import React, { useEffect, useLayoutEffect, useState } from "react";
@@ -24,13 +24,13 @@ const ListRequestJustification = ({
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
   const variable = useSelector(selectGetByVariable);
-  const listEmployee = useSelector(selectGetEmployeesByIdDepartment);
+  const listEmployee = useSelector(selectGetEmployeesByIdDepartmentJustifications);
   const [pendingRequests, setPendingRequests] = useState<
     PendingRequestJustifications[]
   >([]);
 
   useEffect(() => {
-    dispatch(StarGetEmployeesByIdDepartment(loginState?.idDepartment || ""));
+    dispatch(StarGetEmployeesByIdDepartmentJustifications(loginState?.idDepartment || ""));
   }, [option]);
 
   useEffect(() => {
