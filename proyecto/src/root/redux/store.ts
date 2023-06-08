@@ -53,7 +53,7 @@ export const ApplicationStore = configureStore({
     getDepartmentByPage:GetByPageDepartmentsReducer,
     getDepartmentByName:GetDepartmentByNameReducer,
 
-    getAllBrans: GetAllBrandsReducer,
+    getAllBrans: GetAllBrandsReducer, //TODO: use the same  subfix Store for all, and get consistency
     createBrands: CreateBrandsReducer,
     getBrandsByDocId: GetBrandsByDocIdReducer,
     updateBrands: UpdateBrandsReducer,

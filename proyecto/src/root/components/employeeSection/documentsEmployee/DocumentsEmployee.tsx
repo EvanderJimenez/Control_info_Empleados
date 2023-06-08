@@ -17,7 +17,7 @@ import ShowFile from "./components/showFile/ShowFile";
 import SelectFile from "./components/selectFile/SelectFile";
 
 let files: Files[] = [];
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new Hook
 const DocumentsEmployee: React.FC = () => {
   const userLogin = useSelector(selectLogin);
   const fileLoad = useSelector(selectGetFileURLByName);

@@ -7,7 +7,7 @@ import ListRequestVacations from "./components/listRequestVacations/ListRequestV
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import FormVacations from "./components/formVacations/FormVacations";
 import toast from "react-hot-toast";
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
 const RequestVacationsEmployee = () => {
   const employeeVacations = useSelector(selectLogin);
 

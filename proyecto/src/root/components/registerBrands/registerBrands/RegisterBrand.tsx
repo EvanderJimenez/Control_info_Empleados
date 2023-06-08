@@ -127,7 +127,7 @@ export default function RegisterBrand() {
     setNewHIni("");
     setNewHFin("");
   };
-
+//TODO: This code has a nested innecesary complexity, consider split in a new useHook
   const handleDeleteSchedule = (date: string) => {
     if (brandData.hoursEmployee[date]) {
       const updatedHoursEmployee = { ...brandData.hoursEmployee };
@@ -198,7 +198,7 @@ export default function RegisterBrand() {
         <h2 className="text-lg font-bold text-center">Edit employee section</h2>
         <p className="text-center pb-4 font-semibold">This section is for editing schedules, please select the employee whose schedule you want to edit</p>
           <RegisterCycle brandData={brandData} label="Cycle to belongs" onChange={(e) => setNewCycle(e.target.value)} value={newCycle} handleSubmitCycle={handleSubmitCycle} />
-
+          {/* //TODO: This code has a nested innecesary complexity, consider split in a new component */}
           <form action="https://formbold.com/s/FORM_ID" onSubmit={handleSubmitHours} className="md:flex-col lg:flex-row sm:flex-col  pb-2 justify-center">
             <div className="-mx-3 flex flex-wrap"></div>
             <div className="flex flex-col justify-center">
@@ -231,6 +231,7 @@ export default function RegisterBrand() {
               <button className="md:w-1/4 sm:w-full bg-darkBlue hover:bg-green text-white font-bold ">Add schedules</button>
             </div>
           </form>
+          {/* //TODO: This code has a nested innecesary complexity, consider split in a new component */}
           <TableSchedules
             brandData={brandData}
             setNewHIni={setNewHIni}

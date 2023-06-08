@@ -17,7 +17,7 @@ interface lisDepartment {
   setPassId: (id: string) => void;
   setNameDepart: (name: string) => void;
 }
-
+//TODO: Check the name of this file and the component
 export const ListDepartment = ({
   handleGetDepartment,
   setPassId,
@@ -43,7 +43,7 @@ export const ListDepartment = ({
 
     dispatch(StartResetDepartmentByPage());
   };
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   useEffect(() => {
     if (departByName.length > 0) {
       setDepartmentData(departByName);

@@ -41,6 +41,7 @@ export default function ReadRequestJustification() {
               <>
                 {
                   <>
+                   {/* //TODO: This code has a nested innecesary complexity, consider split in a new component */}
                     {Object.entries(UserLogin.attendance)
                       .filter(([_, value]) => value.state === showBy)
                       .map(([name, vacation]) => (

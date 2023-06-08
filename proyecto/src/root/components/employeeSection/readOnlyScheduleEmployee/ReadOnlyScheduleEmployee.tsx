@@ -39,7 +39,7 @@ const ReadOnlyScheduleEmployee = () => {
       setSchedules(scheduleList);
     }
   }, [brandsById]);
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new file
   const [schedules, setSchedules] = useState<Schedule[]>([
     { day: "Monday", startTime: "", endTime: "" },
     { day: "Tuesday", startTime: "", endTime: "" },

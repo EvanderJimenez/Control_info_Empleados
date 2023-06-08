@@ -15,7 +15,7 @@ interface assistance {
   setFinish: React.Dispatch<React.SetStateAction<boolean>>;
   setLoad: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new Hook
 export default function JustificationEmployee({
   hIni,
   hFin,
