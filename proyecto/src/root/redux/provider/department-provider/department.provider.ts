@@ -67,7 +67,7 @@ const updateDepartmentByIdProvider = async (
   });
 
   if (!response.ok) {
-    throw new Error("Error updating depart");
+   return null
   }
 
   const data = await response.json();

@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface GetEmployeeByUidState {
   getEmployeeByUid: EmployeesType | null;
+  
 }
 
 export const initialStateByUid: GetEmployeeByUidState = {
@@ -40,6 +41,7 @@ export const GetEmployeeByUidSlice = createSlice({
     getEmployeeByUidReducer: (state, action: PayloadAction<EmployeesType>) => {
       state.getEmployeeByUid = action.payload;
     },
+    
     resetEmployeeByUid: (state) => {
       state.getEmployeeByUid = initialStateByUid.getEmployeeByUid;
     },

@@ -56,7 +56,7 @@ export default function TabsDepartments({
   const [jobPosition, setJobPosition] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen h-auto w-auto">
+    <div className="flex flex-col ">
       <div className="w-full h-full">
         <section className="flex flex-wrap -mb-px mb-4" role="tablist">
           <div className="mr-2" role="presentation">
