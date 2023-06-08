@@ -50,15 +50,28 @@ export default function TabsDepartments({
   setNameDepart,
   ...props
 }: methods) {
-  const [activeTab, setActiveTab] = useState("Profile");
+  const [activeTab, setActiveTab] = useState("ListDepartment");
   const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
   const [jobPosition, setJobPosition] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen h-auto w-auto">
+    <div className="flex flex-col min-h-screen h-auto w-auto">
       <div className="w-full h-full">
-        <section className="flex flex-wrap -mb-px mb-4" role="tablist">
+        <section className="flex flex-wrap" role="tablist">
+        <div className="mr-2" role="presentation">
+            <button
+              className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
+                activeTab === "ListDepartment" ? "active" : ""
+              }`}
+              id="ListDepartment-tab"
+              type="button"
+              role="tab"
+              onClick={() => setActiveTab("ListDepartment")}
+            >
+              List Department
+            </button>
+          </div>
           <div className="mr-2" role="presentation">
             <button
               className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
@@ -87,19 +100,6 @@ export default function TabsDepartments({
           </div>
           <div className="mr-2" role="presentation">
             <button
-              className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
-                activeTab === "ListDepartment" ? "active" : ""
-              }`}
-              id="ListDepartment-tab"
-              type="button"
-              role="tab"
-              onClick={() => setActiveTab("ListDepartment")}
-            >
-              List Department
-            </button>
-          </div>
-          <div className="mr-2" role="presentation">
-            <button
               className={` bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
                 activeTab === "EditEmployee" ? "active" : ""
               }`}
@@ -108,10 +108,9 @@ export default function TabsDepartments({
               role="tab"
               onClick={() => setActiveTab("EditEmployee")}
             >
-              Edit Employees
+              Employees department
             </button>
           </div>
-        
         </section>
         {activeTab === "FormDepartment" && (
           <FormEmployee
@@ -145,10 +144,10 @@ export default function TabsDepartments({
                 typeList="jobPosition"
                 id="jobPosition"
               />
-              <ListEmployeeDepart
+{/*               <ListEmployeeDepart
                 setPassIdEmployee={setPassIdEmployee}
                 setIdNameEmployee={setIdNameEmployee}
-              />
+              /> */}
             </div>
           </>
         )}
@@ -170,7 +169,6 @@ export default function TabsDepartments({
             handleDeleteEmployee={handleDeleteEmployee}
           />
         )}
-        
       </div>
     </div>
   );
