@@ -70,9 +70,9 @@ const ListScheduleEmployee = ({ dispatch, clear, setClear }: ListClear) => {
           {loading && <LoadingGeneralComponent />}
         </div>
       ) : (
-        <div className="bg-darkBlue w-auto justify-center items-center">
+        <div className="bg-darkBlue w-auto h-32 flex justify-center items-center">
           {" "}
-          <h2 className=" w-auto font-semibold text-center text-yellow p-2 ">
+          <h2 className=" w-auto font-semibold text-center h-full text-yellow p-2 ">
             List empty
           </h2>
         </div>
