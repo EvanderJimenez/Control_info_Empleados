@@ -8,6 +8,7 @@ import { DepartmentType } from "@/root/types/Department.type";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  StartUpDateEmployee,
   selectGetAllDepartment,
   selectGetEmployeeByUid,
   startCreateDepartment,
@@ -38,6 +39,8 @@ const CreateDepartment = () => {
     //dispatch(resetByVariableAdmin);
     //dispatch(resetEmployeeByUid);
     //setDepartmentNew(initialDepartmet);
+
+   
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -52,6 +55,10 @@ const CreateDepartment = () => {
       };
       console.log(JSON.stringify(newData));
       dispatch(startCreateDepartment(newData));
+
+      const updateEmployee : EmployeesType = {...employeeUid, idDepartment: newData.id,jobPosition: "boss"}
+
+      dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee))
     }
   };
 

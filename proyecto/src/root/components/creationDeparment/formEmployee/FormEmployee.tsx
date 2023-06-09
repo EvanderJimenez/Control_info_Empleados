@@ -31,7 +31,6 @@ export const FormEmployee = ({
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
-  const [jobPosition, setJobPosition] = useState("");
   const employeeUid = useSelector(selectGetEmployeeByUid)
   const [departmentNew, setDepartmentNew] = useState<DepartmentType>(initialDepartmet);
 
@@ -42,17 +41,20 @@ export const FormEmployee = ({
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(JSON.stringify(dataDepart))
+    console.log(JSON.stringify(departmentNew))
     console.log(JSON.stringify(employeeUid))
-    if(dataDepart &&  employeeUid && employeeUid.uid !== ""){
-      const upDateDepart: DepartmentType = {...dataDepart, leader: employeeUid.name, idEmployee:employeeUid.uid}
-      //dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart))
+    if(departmentNew &&  employeeUid && employeeUid.uid !== ""){
+      const upDateDepart: Department = {...departmentNew, leader: employeeUid.name, idEmployee:employeeUid.uid}
+      dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart))
 
-      const updateEmployee : EmployeesType = {...employeeUid, idDepartment: upDateDepart.id,jobPosition: "boss"}
+      const idDepartment : string = dataDepart.id
+      console.log(idDepartment)
+
+      const updateEmployee : EmployeesType = {...employeeUid, idDepartment: idDepartment,jobPosition: "boss"}
 
       //dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee))
       console.log(JSON.stringify(updateEmployee))
-      console.log(JSON.stringify(upDateDepart)) 
+      //console.log(JSON.stringify(upDateDepart))
     }else{
       toast.error("select a department to update");
     }
@@ -96,7 +98,7 @@ export const FormEmployee = ({
             label="Size of Department"
             type="number"
             name="size"
-            value={departmentsData.size}
+            value={departmentNew.size}
             id="size"
             onChange={handleInputChange}
           />
