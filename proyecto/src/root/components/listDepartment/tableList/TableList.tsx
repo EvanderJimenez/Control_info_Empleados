@@ -1,16 +1,33 @@
 import React from "react";
 import { Department } from "@/root/interface/departments";
+import { useDispatch } from "react-redux";
+import { startGetDepartmentById } from "@/root/redux";
 interface TableListProps {
   handle: (id: string, name: string) => void;
   handleGetDepartment: (id: string) => void;
   currentDepartments: Department[];
+  option: string;
+  setOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const TableList = ({
   handle,
-  handleGetDepartment,
   currentDepartments,
+  setOption
 }: TableListProps) => {
+
+  const dispatch = useDispatch()
+  
+  const handleListEmployees = async (id: string) => {
+    dispatch(startGetDepartmentById(id));
+    setOption("EditEmployee")
+  }
+
+  const handleGetDepartment = async (id: string) => {
+    dispatch(startGetDepartmentById(id));
+    setOption("FormDepartment")
+  };
+
   return (
     <div className="overflow-auto flex justify-center">
       <div className="inline-block w-auto overflow-hidden">
@@ -33,7 +50,7 @@ export const TableList = ({
                 Actions
               </th>
               <th className="px-2 sm:px-6 py-3 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Pass Id Department
+                See employees
               </th>
             </tr>
           </thead>
@@ -63,9 +80,9 @@ export const TableList = ({
                 <td className="px-2 sm:px-6 py-2 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
                   <button
                     className="text-indigo-600 hover:text-indigo-900 bg-blue"
-                    onClick={() => handle(department.id, department.name)}
+                    onClick={() => handleListEmployees(department.id)}
                   >
-                    ADD
+                   See
                   </button>
                 </td>
               </tr>
