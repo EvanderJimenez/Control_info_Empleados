@@ -145,6 +145,7 @@ export default function EditEmployeeSection() {
 
   return (
     <>
+    <h1 className="text-center font-bold text-darkBlue pb-5 text-lg">Employee editing section</h1>
       <div className="flex flex-wrap justify-center bg-white">
         <div className=" md:w-1/2  lg:flex-grow xl:flex-grow w-auto px-2">
           <div className="flex flex-col mb-3">
@@ -171,7 +172,8 @@ export default function EditEmployeeSection() {
               id="jobPosition"
             />
             <ListAllEmployees />
-            <p>Employees: {countEmployees}</p>
+            <div className="flex justify-center text-darkBlue font-semibold"><p>charged employees: {countEmployees}</p></div>
+            
             <ListEmployee clear={clear} setClear={setClear} listEmployees={listEmployees} setListEmployees={setListEmployees} />
           </div>
         </div>
