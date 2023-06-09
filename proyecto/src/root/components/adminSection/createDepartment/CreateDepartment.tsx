@@ -15,6 +15,7 @@ import {
 import { resetByVariableAdmin } from "@/root/redux/reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import { initialDepartmet } from "@/root/constants/department/department.constants";
 import { resetEmployeeByUid } from "@/root/redux/reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
+import { Department } from "@/root/interface/departments";
 
 const CreateDepartment = () => {
   const dispatch = useDispatch();
@@ -25,24 +26,32 @@ const CreateDepartment = () => {
   const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
 
-  const [departmentNew, setDepartmentNew] = useState<DepartmentType>(initialDepartmet);
+  const [departmentNew, setDepartmentNew] =
+    useState<DepartmentType>(initialDepartmet);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDepartmentNew((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleClear = async () =>{
-    dispatch(resetByVariableAdmin)
-    dispatch(resetEmployeeByUid)
-    setDepartmentNew(initialDepartmet)
-    
-  }
+  const handleClear = async () => {
+    //dispatch(resetByVariableAdmin);
+    //dispatch(resetEmployeeByUid);
+    //setDepartmentNew(initialDepartmet);
+  };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(JSON.stringify(departmentNew));
-    if (departmentNew) {
-      //dispatch(startCreateDepartment(departmentNew));
+
+    if (departmentNew && employeeUid && employeeUid?.uid !== "") {
+      console.log(employeeUid);
+      console.log(JSON.stringify(departmentNew));
+      const newData: Department = {
+        ...departmentNew,
+        idEmployee: employeeUid.uid,  
+        leader: employeeUid.name,
+      };
+      console.log(JSON.stringify(newData));
+      dispatch(startCreateDepartment(newData));
     }
   };
 
@@ -157,7 +166,10 @@ const CreateDepartment = () => {
           </>
         </div>
         <div className="flex justify-center -mx-3 mb-5">
-          <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0" onClick={handleClear}>
+          <div
+            className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0"
+            onClick={handleClear}
+          >
             <button className="bg-black m-3">Clear</button>
             <button
               type="submit"
