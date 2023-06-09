@@ -44,8 +44,8 @@ export const FormEmployee = ({
     event.preventDefault();
     console.log(JSON.stringify(dataDepart))
     console.log(JSON.stringify(employeeUid))
-    if(dataDepart &&  employeeUid){
-      const upDateDepart: DepartmentType = {...dataDepart, leader: employeeUid?.name || '', idEmployee:employeeUid?.uid || ''}
+    if(dataDepart &&  employeeUid && employeeUid.uid !== ""){
+      const upDateDepart: DepartmentType = {...dataDepart, leader: employeeUid.name, idEmployee:employeeUid.uid}
       //dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart))
 
       const updateEmployee : EmployeesType = {...employeeUid, idDepartment: upDateDepart.id,jobPosition: "boss"}
@@ -57,12 +57,6 @@ export const FormEmployee = ({
       toast.error("select a department to update");
     }
   };
-
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    setUpdate(checked);
-  };
-
   useEffect(() => {
     if (dataDepart) {
       setDepartmentNew(dataDepart)
@@ -173,10 +167,8 @@ export const FormEmployee = ({
         </div>
         <div className="flex justify-center -mx-3 mb-5">
           <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0">
-            <button className="bg-black m-3">Clear</button>
             <button
-              type="submit"
-              className={`bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded ${
+              type="submit" className={`bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded ${
                 update ? "bg-green-500 hover:bg-green-700" : ""
               }`}
             >
