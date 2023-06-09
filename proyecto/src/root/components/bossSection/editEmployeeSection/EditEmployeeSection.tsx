@@ -145,7 +145,8 @@ export default function EditEmployeeSection() {
 
   return (
     <>
-    <h1 className="text-center font-bold text-darkBlue pb-5 text-lg">Employee editing section</h1>
+    <h1 className="text-center font-bold text-darkBlue  text-lg">Employee editing section</h1>
+    <p className="text-center font-semibold pb-5">search and load the information of the employee to edit</p>
       <div className="flex flex-wrap justify-center bg-white">
         <div className=" md:w-1/2  lg:flex-grow xl:flex-grow w-auto px-2">
           <div className="flex flex-col mb-3">
