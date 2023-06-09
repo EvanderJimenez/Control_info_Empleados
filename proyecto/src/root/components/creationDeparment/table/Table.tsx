@@ -1,34 +1,14 @@
 import { Department, Employee } from "@/root/interface/departments";
-import React, { useState } from "react";
+import React from "react";
 
 interface TableProps {
   departmentsData: Department | undefined;
   handleDeleteEmployee: (employeeName: string | number) => void;
-  handleUpdateEmployee: (
-    employeeName: string,
-    updatedEmployee: Employee
-  ) => void;
 }
 
 const Table = ({
   departmentsData,
-  handleDeleteEmployee,
-  handleUpdateEmployee,
 }: TableProps) => {
-  const [editingEmployee, setEditingEmployee] = useState<string>("");
-
-  const handleEditEmployee = (employeeName: string) => {
-    setEditingEmployee(employeeName);
-  };
-
-  const handleSaveEmployee = (
-    employeeName: string,
-    updatedEmployee: Employee
-  ) => {
-    setEditingEmployee("");
-    handleUpdateEmployee(employeeName, updatedEmployee);
-  };
-
   if (!departmentsData) {
     return null;
   }
@@ -39,6 +19,7 @@ const Table = ({
   ) {
     return null;
   }
+
   return (
     <div>
       <div className="overflow-x-auto sm:overflow-visible">
@@ -54,12 +35,6 @@ const Table = ({
               <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
                 Id Employee
               </th>
-              <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Edit
-              </th>
-              <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Delete
-              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -69,63 +44,10 @@ const Table = ({
                   {key}
                 </td>
                 <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm">
-                  {editingEmployee === key ? (
-                    <input
-                      type="textArea"
-                      value={value.des}
-                      onChange={(e) =>
-                        handleUpdateEmployee(key, {
-                          ...value,
-                          des: e.target.value,
-                        })
-                      }
-                    />
-                  ) : (
-                    <p>{value.des}</p>
-                  )}
+                  <p>{value.des}</p>
                 </td>
                 <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm">
-                  {editingEmployee === key ? (
-                    <input
-                      type="text"
-                      value={value.id}
-                      onChange={(e) =>
-                        handleUpdateEmployee(key, {
-                          ...value,
-                          id: e.target.value,
-                        })
-                      }
-                    />
-                  ) : (
-                    <p>{value.id}</p>
-                  )}
-                </td>
-                <td className="px-2 sm:px-6 py-4 whitespace-nowrap flex justify-start text-right text-sm font-medium">
-                  {editingEmployee === key ? (
-                    <button
-                      className="bg-black"
-                      onClick={() =>
-                        handleSaveEmployee(key, departmentsData.employees[key])
-                      }
-                    >
-                      Save
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-black"
-                      onClick={() => handleEditEmployee(key)}
-                    >
-                      Edit
-                    </button>
-                  )}
-                </td>
-                <td>
-                  <button
-                    className="bg-black"
-                    onClick={() => handleDeleteEmployee(key)}
-                  >
-                    Delete
-                  </button>
+                  <p>{value.id}</p>
                 </td>
               </tr>
             ))}

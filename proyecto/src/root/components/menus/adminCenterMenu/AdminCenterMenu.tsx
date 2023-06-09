@@ -12,7 +12,7 @@ export default function AdminCenterMenu() {
   return (
     <>
       <div className=" print:hidden left-0 z-50 w-full h-20 bg-lithBlue ">
-        <div className="grid h-full max-w-lg grid-cols-3 mx-auto font-medium">
+        <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
           <button
             onClick={() => handleButtonClick("/home/AdminMain/Employees")}
             type="button"
@@ -30,7 +30,17 @@ export default function AdminCenterMenu() {
           >
             <img src="/Images/Timer.png" alt="" />
             <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
-              Control Departments
+            Edit Departments
+            </span>
+          </button>
+          <button
+          onClick={() => handleButtonClick("/home/AdminMain/CreateDepartment")}
+            type="button"
+            className="inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x hover:bg-gray-50 dark:hover:bg-gray-800 group dark:border-gray-600"
+          >
+            <img src="/Images/Timer.png" alt="" />
+            <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">
+            Create Departments
             </span>
           </button>
           <button

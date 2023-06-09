@@ -33,7 +33,7 @@ const ListEmployeeDepart = () => {
         <div className="grid grid-cols-1 p-4 gap-4 p-2vh max-h-screen overflow-y-auto h-190 shadow-xl bg-opacity-10">
           {Array.isArray(employeesListVariable) &&
             employeesListVariable
-              .filter((item) => item.enabled && item.uid !== loginState.uid)
+              .filter((item) => item.enabled && item.uid !== loginState.uid && item.jobPosition !== "boss")
               .map((item) => (
                 <div
                   key={item.uid}

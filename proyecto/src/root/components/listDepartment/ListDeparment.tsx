@@ -16,12 +16,16 @@ interface lisDepartment {
   handleGetDepartment: (id: string) => void;
   setPassId: (id: string) => void;
   setNameDepart: (name: string) => void;
+  option: string;
+  setOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ListDepartment = ({
   handleGetDepartment,
   setPassId,
   setNameDepart,
+  option,
+  setOption,
   ...props
 }: lisDepartment) => {
   const [departmentData, setDepartmentData] = useState<Department[]>([]);
@@ -126,6 +130,8 @@ export const ListDepartment = ({
           handle={handle}
           handleGetDepartment={handleGetDepartment}
           currentDepartments={currentDepartments}
+          option={option}
+          setOption={setOption}
         />
       </div>
       <div className="flex justify-between mt-4">

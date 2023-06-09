@@ -1,38 +1,30 @@
 import React, { useEffect, useState } from "react";
-import InputDepartment from "../input/InputDepartment";
-import { useDispatch, useSelector } from "react-redux";
-import { StartUpDateEmployee, selectGetAllDepartment, selectGetDepartmentById, selectGetEmployeeByUid, startUpdateDepartment } from "@/root/redux";
-import ComboVoxSubDepartments from "../comboVoxSubDepartments/ComboVoxSubDepartments";
-import { DepartmentType } from "@/root/types/Department.type";
-import SearchEmployeeDepart from "../SearchEmployeeDepart/SearchEmployeeDepart";
-import ListEmployeeDepart from "../listEmployeeDepart/ListEmployeeDepart";
+import ListEmployeeDepart from "../../creationDeparment/listEmployeeDepart/ListEmployeeDepart";
+import SearchEmployeeDepart from "../../creationDeparment/SearchEmployeeDepart/SearchEmployeeDepart";
+import ComboVoxSubDepartments from "../../creationDeparment/comboVoxSubDepartments/ComboVoxSubDepartments";
+import InputDepartment from "../../creationDeparment/input/InputDepartment";
 import toast from "react-hot-toast";
+import { DepartmentType } from "@/root/types/Department.type";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectGetAllDepartment,
+  selectGetEmployeeByUid,
+  startCreateDepartment,
+} from "@/root/redux";
+import { resetByVariableAdmin } from "@/root/redux/reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import { initialDepartmet } from "@/root/constants/department/department.constants";
-import { Department } from "@/root/interface/departments";
+import { resetEmployeeByUid } from "@/root/redux/reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 
-interface infoDepart {
-  departmentsData: Department;
-  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleUpdate: (event: React.FormEvent<HTMLFormElement>) => void;
-}
-
-export const FormEmployee = ({
-  
-  departmentsData,
-  ...props
-}: infoDepart) => {
+const CreateDepartment = () => {
   const dispatch = useDispatch();
-  const dataDepart = useSelector(selectGetDepartmentById);
-  const [update, setUpdate] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  const employeeUid = useSelector(selectGetEmployeeByUid);
   const departmentsList = useSelector(selectGetAllDepartment);
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
+  const [selectedOption, setSelectedOption] = useState("");
   const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
-  const [jobPosition, setJobPosition] = useState("");
-  const employeeUid = useSelector(selectGetEmployeeByUid)
+
   const [departmentNew, setDepartmentNew] = useState<DepartmentType>(initialDepartmet);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,34 +32,20 @@ export const FormEmployee = ({
     setDepartmentNew((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleClear = async () =>{
+    dispatch(resetByVariableAdmin)
+    dispatch(resetEmployeeByUid)
+    setDepartmentNew(initialDepartmet)
+    
+  }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(JSON.stringify(dataDepart))
-    console.log(JSON.stringify(employeeUid))
-    if(dataDepart &&  employeeUid){
-      const upDateDepart: DepartmentType = {...dataDepart, leader: employeeUid?.name || '', idEmployee:employeeUid?.uid || ''}
-      //dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart))
-
-      const updateEmployee : EmployeesType = {...employeeUid, idDepartment: upDateDepart.id,jobPosition: "boss"}
-
-      //dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee))
-      console.log(JSON.stringify(updateEmployee))
-      console.log(JSON.stringify(upDateDepart)) 
-    }else{
-      toast.error("select a department to update");
+    console.log(JSON.stringify(departmentNew));
+    if (departmentNew) {
+      //dispatch(startCreateDepartment(departmentNew));
     }
   };
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    setUpdate(checked);
-  };
-
-  useEffect(() => {
-    if (dataDepart) {
-      setDepartmentNew(dataDepart)
-    }
-  }, [dataDepart]);
   useEffect(() => {
     if (departmentsList) {
       setDepartments(departmentsList);
@@ -78,12 +56,15 @@ export const FormEmployee = ({
     <div className="mx-auto max-w-xl sm:mt-20 min-h-screen  ">
       <form
         className="bg-white shadow-md rounded  flex flex-col mb-8 "
-        onSubmit={handleUpdate}
+        onSubmit={handleSubmit}
       >
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
-            Departments
+          <h2 className="mt-2 text-lg leading-8 text-gray-600">
+            Create New Department
           </h2>
+          <h3 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
+            Departments
+          </h3>
           <p className="mt-2 text-lg leading-8 text-gray-600">
             Work departments are a fundamental part of any organization or
             company.
@@ -102,7 +83,7 @@ export const FormEmployee = ({
             label="Size of Department"
             type="number"
             name="size"
-            value={departmentsData.size}
+            value={departmentNew.size}
             id="size"
             onChange={handleInputChange}
           />
@@ -134,15 +115,19 @@ export const FormEmployee = ({
           />
         </div>
         <div className="flex flex-wrap -mx-3 mb-6 justify-center">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-          >
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
             Boss
           </label>
           <input
             type="text"
             name="boss"
-            value={employeeUid?.name + " " + employeeUid?.firstSurname + " " + employeeUid?.secondSurname || ''}
+            value={
+              employeeUid?.name +
+                " " +
+                employeeUid?.firstSurname +
+                " " +
+                employeeUid?.secondSurname || ""
+            }
             id="boss"
             placeholder="Boss"
             readOnly
@@ -172,15 +157,13 @@ export const FormEmployee = ({
           </>
         </div>
         <div className="flex justify-center -mx-3 mb-5">
-          <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0">
+          <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0" onClick={handleClear}>
             <button className="bg-black m-3">Clear</button>
             <button
               type="submit"
-              className={`bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded ${
-                update ? "bg-green-500 hover:bg-green-700" : ""
-              }`}
+              className="bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded"
             >
-              Update
+              Create New
             </button>
           </div>
         </div>
@@ -188,3 +171,5 @@ export const FormEmployee = ({
     </div>
   );
 };
+
+export default CreateDepartment;
