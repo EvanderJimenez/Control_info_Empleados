@@ -23,7 +23,6 @@ export default function SearchEmployeeDepart(props: SearchComponentInterface) {
               id={props.id}
               className="block font-semibold p-2.5 w-full border-b focus:outline-none z-20 text-black text-sm rounded-l-sm rounded-r-sm focus:ring-darkBlue focus:border-darkBlue"
               placeholder={props.placeholderSeekerOne}
-              required
               onChange={(e) => setValue(e.target.value)}
             />
             <button

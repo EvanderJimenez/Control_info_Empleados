@@ -17,7 +17,7 @@ export const RegisterCycle = ({ brandData, ...props }: addCycle) => {
             <table className="border-collapse w-full">
               <thead>
                 <tr>
-                  <th className="bg-black text-white  h-10">Cycle registration </th>
+                  <th className="bg-black text-white h-10">Cycle registration </th>
                 </tr>
               </thead>
               <tbody>

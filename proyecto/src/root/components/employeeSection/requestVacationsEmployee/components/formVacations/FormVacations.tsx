@@ -26,9 +26,10 @@ const FormVacations = ({
 }: FormVacations) => {
   return (
     <>
-      <form className="m-5" onSubmit={handleVacationRequestSend}>
-        <div className=" flex flex-col  md:w-full sm:w-full">
-          <h2 className="text-lg sm:text-xl font-medium text-center mb-2">
+
+      <form className="ml-6 mb-2" onSubmit={handleVacationRequestSend}>
+        <div className="flex flex-col  md:w-full sm:w-full">
+          <h2 className="text-lg sm:text-xl  text-darkBlue font-medium text-center mb-2">
             Vacation request
           </h2>
           <div className="items-center">
@@ -70,12 +71,13 @@ const FormVacations = ({
             onChange={(e) => setNewDescription(e.target.value)}
             className="mt-3 shadow-lg focus:border-transparent focus:outline-none  rounded-xl"
           ></textarea>
-          <button
-            className="NormalButton zoom mt-3 "
+          <div className="flex justify-center w-full"><button
+            className=" bg-darkBlue zoom w-auto mt-3 "
             type="submit"
           >
             Send request
-          </button>
+          </button></div>
+          
         </div>
       </form>
     </>

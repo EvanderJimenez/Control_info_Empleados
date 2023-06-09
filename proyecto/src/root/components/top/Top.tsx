@@ -8,30 +8,31 @@ import { logOut } from "@/root/redux/reducers/login-reducer/loginReducer";
 
 export function Top() {
 
-   
-const dispatch = useDispatch()
+
+  const dispatch = useDispatch()
 
 
-const handleSingOff = () => {
-  Cookies.remove("token");
-  router.push("/");
-};
-const handleHelp = () => {
-  Cookies.remove("token");
-  router.push("/home/Help");
-};
-const handleContact = () => {
-  Cookies.remove("token");
-  router.push("/home/Contact");
-};
-const handleAbout = () => {
-  Cookies.remove("token");
-  router.push("/home/AboutUs");
-};
-const handleLogin = () => {
-  Cookies.remove("token");
-  router.push("/home/Login");
-};
+  const handleSingOff = () => {
+    Cookies.remove("token");
+    router.push("/");
+  };
+  const handleHelp = () => {
+    Cookies.remove("token");
+    router.push("/home/Help");
+  };
+  const handleContact = () => {
+    Cookies.remove("token");
+    router.push("/home/Contact");
+  };
+  const handleAbout = () => {
+    Cookies.remove("token");
+    router.push("/home/AboutUs");
+  };
+  const handleLogin = () => {
+    Cookies.remove("token");
+
+    router.push("/home/Login");
+  };
 
   return (
     <>
@@ -41,7 +42,6 @@ const handleLogin = () => {
             <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
             <span className="title-font">CrHome</span>
           </div>
-          <button className="text-sm font-semibold" onClick={handleLogin}>Go login</button>
           <div className="flex  font-semibold items-center text-sm text-lithGray">(506) 8988-4062</div>
 
         </div>
@@ -61,14 +61,12 @@ const handleLogin = () => {
                 </button>
               </li>
               <li>
-                <button className=" dark:text-white  print:hidden" onClick={handleHelp}>
-                  Help
-                </button>
-              </li>
-              <li>
                 <button className=" dark:text-white  print:hidden" onClick={handleSingOff}>
                   Brands
                 </button>
+              </li>
+              <li>
+                <button className=" dark:text-white  print:hidden" onClick={handleLogin}>Login</button>
               </li>
             </ul>
           </div>

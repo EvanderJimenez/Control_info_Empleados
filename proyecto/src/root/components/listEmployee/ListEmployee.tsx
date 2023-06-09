@@ -91,9 +91,9 @@ const ListEmployee = ({
           {loading && <LoadingGeneralComponent />}
         </div>
       ) : (
-        <div className="bg-darkBlue w-auto justify-center items-center">
+        <div className="bg-darkBlue w-auto h-full  justify-center items-center">
           {" "}
-          <h2 className=" w-auto font-semibold text-center text-yellow ">
+          <h2 className=" w-auto h-32 font-semibold text-center text-yellow ">
             List empty
           </h2>
         </div>

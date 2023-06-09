@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = `/home`;
     url.search = `p=${requestedPage}`;
-    return NextResponse.redirect(url);
+    return NextResponse.rewrite(url);
   }
 
   try {
@@ -21,6 +21,7 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = `/home`;
     url.search = `p=${requestedPage}`;
+    
     return NextResponse.redirect(url);
   }
 }
