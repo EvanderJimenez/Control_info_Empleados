@@ -109,11 +109,11 @@ const CreateDepartment = () => {
           <div className="flex flex-wrap mb-4 items-center justify-between">
             <div>
               <label className="block text-md font-semibold mb-4">
-                Boss selected
+                Sub department
               </label>
               <input
                 type="text"
-                name="boss"
+                name="subDepartment"
                 value={
                   employeeUid?.name +
                   " " +
@@ -121,8 +121,7 @@ const CreateDepartment = () => {
                   " " +
                   employeeUid?.secondSurname || ""
                 }
-                id="boss"
-                placeholder="Boss"
+                id="subDepartment"
                 readOnly
                 className="w-full focus:outline-none"
               />
@@ -133,30 +132,6 @@ const CreateDepartment = () => {
               selectedOption={selectedOption}
               setSelectedOption={setSelectedOption}
             />
-
-
-            <>
-              <div className="w-full h-full">
-                <span className="text-center justify-center flex text-darkBlue font-bold">Select Boss</span>
-                <SearchEmployeeDepart
-                  labelInputSeekerOne="text"
-                  valueEnd={cedula}
-                  placeholderSeekerOne="Cedula"
-                  typeList="cedula"
-                  id="cedula"
-                />
-                <SearchEmployeeDepart
-                  labelInputSeekerOne="text"
-                  valueEnd={name}
-                  placeholderSeekerOne="Name"
-                  typeList="name"
-                  id="name"
-                />
-              </div>
-            </>
-            <>
-              <ListEmployeeDepart />
-            </>
           </div>
           <div className="flex justify-center  mb-5">
             <div
