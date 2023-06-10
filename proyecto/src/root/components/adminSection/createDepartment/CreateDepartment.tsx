@@ -12,6 +12,7 @@ import {
   selectGetAllDepartment,
   selectGetEmployeeByUid,
   startCreateDepartment,
+  startGetAllDepartment,
 } from "@/root/redux";
 import { resetByVariableAdmin } from "@/root/redux/reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer";
 import { initialDepartmet } from "@/root/constants/department/department.constants";
@@ -24,8 +25,8 @@ const CreateDepartment = () => {
   const departmentsList = useSelector(selectGetAllDepartment);
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
+  const [isSubDepartment, setIsSubDepartment] = useState(false);
 
   const [departmentNew, setDepartmentNew] =
     useState<DepartmentType>(initialDepartmet);
@@ -35,24 +36,47 @@ const CreateDepartment = () => {
     setDepartmentNew((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleClear = async () => {
-    dispatch(resetByVariableAdmin);
-    dispatch(resetEmployeeByUid);
+  const handleClear = () => {
     setDepartmentNew(initialDepartmet);
+    setIsSubDepartment(false)
+    setSelectedOption("");
+    setName("");
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (departmentNew) {
-      dispatch(startCreateDepartment(departmentNew));
+    if (departmentNew && departmentNew.name.length > 0) {
+      const newData: Department = {
+        ...departmentNew,
+        namesubDepartment: selectedOption,
+        subDepartment: name,
+      };
+
+      console.log(JSON.stringify(newData));
+      dispatch(startCreateDepartment(newData));
+     handleClear()
     }
   };
 
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsSubDepartment(event.target.checked);
+    if (!event.target.checked) {
+      setSelectedOption("");
+      setName("");
+    }
+  };
   useEffect(() => {
+    if (departmentsList.length === 0) {
+      dispatch(startGetAllDepartment());
+      console.log(departmentsList);
+    }
+    console.log(departmentsList);
+  }, []);
+  -useEffect(() => {
     if (departmentsList) {
       setDepartments(departmentsList);
     }
-  }, [dispatch]);
+  }, [departmentsList]);
 
   return (
     <>
@@ -61,12 +85,10 @@ const CreateDepartment = () => {
       </h2>
 
       <div className="bg-lithGray mx-auto max-w-xl sm:mt-20 min-h-screen pb-5">
-
         <form
           className="bg-white shadow-md rounded  flex flex-col space-y-2 mb-8 "
           onSubmit={handleSubmit}
         >
-
           <div className="flex justify-center">
             <InputDepartment
               label="Name Department"
@@ -103,46 +125,48 @@ const CreateDepartment = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="p-3 justify-center">
-
-          </div>
-          <div className="flex flex-wrap pb-4 items-center justify-between">
-            <div>
-              <label className="block text-md font-semibold mb-4">
-                Sub department
-              </label>
+          <div className="p-3 justify-center"></div>
+          <div className="p-3 flex justify-center">
+            <label className="block text-md font-semibold mb-4">
+              Is Sub department?
               <input
-                type="text"
-                name="subDepartment"
-                value={
-                  employeeUid?.name +
-                  " " +
-                  employeeUid?.firstSurname +
-                  " " +
-                  employeeUid?.secondSurname || ""
-                }
-                id="subDepartment"
-                readOnly
-                className="w-full focus:outline-none"
+                type="checkbox"
+                checked={isSubDepartment}
+                onChange={handleCheckboxChange}
+                className="ml-2"
+              />
+            </label>
+          </div>
+          {isSubDepartment && (
+            <div className="flex flex-wrap pb-4 items-center justify-between">
+              <div>
+                <label className="block text-md font-semibold mb-4">
+                  Sub department
+                </label>
+                <input
+                  type="text"
+                  name="subDepartment"
+                  value={name}
+                  id="subDepartment"
+                  readOnly
+                  className="w-full focus:outline-none"
+                />
+              </div>
+              <ComboVoxSubDepartments
+                items={departments}
+                label="Select sub department"
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
+                setName={setName}
               />
             </div>
-            <ComboVoxSubDepartments
-              items={departments}
-              label="Select sub department"
-              selectedOption={selectedOption}
-              setSelectedOption={setSelectedOption}
-            />
-          </div>
+          )}
           <div className="flex justify-center  mb-5">
-            <div
-              className="w-full flex justify-between md:w-1/2 px-3 mb-6 md:mb-0"
-              onClick={handleClear}
-            >
-              <button className="bg-darkBlue ">Clear</button>
-              <button
-                type="submit"
-                className="bg-darkBlue "
-              >
+            <div className="w-full flex justify-between md:w-1/2 px-3 mb-6 md:mb-0">
+              <button onClick={handleClear} className="bg-darkBlue ">
+                Clear
+              </button>
+              <button type="submit" className="bg-darkBlue ">
                 Create new
               </button>
             </div>

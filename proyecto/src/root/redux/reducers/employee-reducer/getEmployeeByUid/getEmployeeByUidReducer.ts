@@ -1,3 +1,4 @@
+import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -7,25 +8,7 @@ interface GetEmployeeByUidState {
 }
 
 export const initialStateByUid: GetEmployeeByUidState = {
-  getEmployeeByUid: {
-    uid: "",
-    name: "",
-    firstSurname: "",
-    secondSurname: "",
-    cedula: "",
-    phoneNumber: "",
-    photo: "",
-    jobPosition: "",
-    salary: "",
-    enabled: true,
-    idDepartment: "",
-    password: "",
-    email: "",
-    boss: "",
-    vacations: {},
-    attendance: {},
-    files: {}
-  },
+  getEmployeeByUid: initialDataEmployee
 };
 
 type EmployeeByUidAction = {

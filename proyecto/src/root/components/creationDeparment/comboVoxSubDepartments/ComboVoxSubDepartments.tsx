@@ -6,12 +6,20 @@ interface ComboBoxProps {
     items: DepartmentType[];
     selectedOption: string;
     setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+    setName: React.Dispatch<React.SetStateAction<string>>;
   }
 
-const ComboVoxSubDepartments = ({ label, items,selectedOption,setSelectedOption }:ComboBoxProps) => {
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedOption(event.target.value);
-      };
+const ComboVoxSubDepartments = ({ label, items,selectedOption,setSelectedOption,setName }:ComboBoxProps) => {
+
+const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  setSelectedOption(event.target.value);
+  const selectedDepartment = items.find((option) => option.id === event.target.value);
+  if (selectedDepartment) {
+    setName(selectedDepartment.name);
+  } else {
+    setName("");
+  }
+};
     
       return (
         <div className="mb-2 font-semibold">
@@ -26,7 +34,7 @@ const ComboVoxSubDepartments = ({ label, items,selectedOption,setSelectedOption 
           >
             <option value="">Select an option</option>
             {items.map((option) => (
-              <option key={option.id} value={option.id}>
+              <option key={option.name} value={option.id}>
                 {option.name}
               </option>
             ))}
