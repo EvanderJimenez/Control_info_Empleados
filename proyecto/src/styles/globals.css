@@ -28,16 +28,17 @@ input:focus {
   }
 }
 
-@page {
-  counter-increment: page;
-  @bottom-right {
-    content: "Page " counter(page);
-    color: #000;
-  }
+.pagination a::before {
+  content: attr(data-page) ". ";
+}
+
+.pagination a:first-child::before {
+  content: "1. ";
 }
 
 body {
   counter-reset: page;
+
 }
 
 .bg-PrimaryColor {
