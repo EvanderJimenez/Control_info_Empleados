@@ -124,6 +124,11 @@ export default function RegisterBrand() {
       return;
     }
 
+    if (newHFin < newHIni) {
+      toast.error("End time cannot be earlier than start time");
+      return;
+    }
+
     const newHoursEmployee: HoursEmployee = {
       hIni: newHIni,
       hFin: newHFin,
@@ -154,6 +159,10 @@ export default function RegisterBrand() {
   const handleSaveClick = (index: number) => {
     const updatedHoursEmployee = { ...brandData.hoursEmployee };
     const date = Object.keys(updatedHoursEmployee)[index];
+    if (newHFin < newHIni) {
+      toast.error("End time cannot be earlier than start time");
+      return;
+    }
     updatedHoursEmployee[date] = {
       hIni: newHIni,
       hFin: newHFin,
@@ -288,28 +297,9 @@ export default function RegisterBrand() {
                 </select>
               </div>
 
-              <div className="flex flex-wrap">
-                <RegisterClock
-                  label={"Star time"}
-                  type={"hIni"}
-                  name={"hIni"}
-                  value={newHIni}
-                  id={"hIni"}
-                  onChange={(e) => setNewHIni(e.target.value)}
-                />
-                <RegisterClock
-                  label={"End time"}
-                  type={"hFin"}
-                  name={"hFin"}
-                  value={newHFin}
-                  id={"hFin"}
-                  onChange={(e) => setNewHFin(e.target.value)}
-                />
-              </div>
-
               <div className="flex justify-center">
                 <button className="md:w-1/4 sm:w-full bg-darkBlue hover:bg-green text-white font-bold ">
-                  Add schedules
+                  Add day
                 </button>
               </div>
             </form>
