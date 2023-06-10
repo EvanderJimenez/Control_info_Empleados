@@ -44,7 +44,7 @@ const FormVacations = ({
           </div>
 
           <div className="w-auto flex justify-between lx:flex-row space-x-2 mt-5 items-center">
-            <label htmlFor="dateStar">Start date:</label>
+            <label className = "font-semibold" htmlFor="dateStar">Start date:</label>
             <input
               className="bg-white"
               type="datetime-local"
@@ -52,7 +52,7 @@ const FormVacations = ({
               value={newDateStart}
               onChange={(e) => setNewDateStart(e.target.value)}
             />
-            <label htmlFor="dateEnd">Final date:</label>
+            <label className = "font-semibold"  htmlFor="dateEnd">Final date:</label>
             <input
               type="datetime-local"
               id="dateEnd"
@@ -69,7 +69,7 @@ const FormVacations = ({
             rows={10}
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
-            className="mt-3 shadow-lg focus:border-transparent focus:outline-none  rounded-xl"
+            className="mt-3 shadow-lg focus:outline-none font-semibold"
           ></textarea>
           <div className="flex justify-center w-full"><button
             className=" bg-darkBlue zoom w-auto mt-3 "
