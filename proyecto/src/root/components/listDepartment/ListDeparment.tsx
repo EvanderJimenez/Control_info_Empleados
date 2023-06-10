@@ -79,7 +79,11 @@ export const ListDepartment = ({
     }
   };
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    if (endIndex < filteredDepartments.length) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else {
+      handleGetDepart();
+    }
   };
 
   const handlePreviousPage = () => {
@@ -98,10 +102,23 @@ export const ListDepartment = ({
   const startIndex = currentPage * pageSize;
   const endIndex = startIndex + pageSize;
   const currentDepartments = filteredDepartments.slice(startIndex, endIndex);
-
   return (
     <div className="bg-white shadow overflow-hidden flex flex-col rounded-lg p-2 sm:p-4">
+      <div className="mx-auto max-w-2xl text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
+          Departments
+        </h2>
+        <p className="mt-2 text-lg leading-8 text-gray-600">
+          Available departments of the company
+        </p>
+      </div>
       <div className="flex mb-4 justify-center">
+        <div className="w-full md:w-1/2 md:pl-2">
+          <SearchDepartment handleGet={handleDepartment} />
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
         <div className="flex flex-col md:flex-row mb-4">
           <div className="w-full flex flex-col space-y-2 md:w-1/2 md:pr-2 mb-2 md:mb-0">
             <input
@@ -111,21 +128,8 @@ export const ListDepartment = ({
               className="border rounded-md px-2 py-1 sm:py-2 sm:text-sm focus:outline-none"
               placeholder="Search department..."
             />
-            <button
-              className="flex justify-center text-center px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-darkBlue focus:outline-none focus:ring-2 focus:ring-offset-2 "
-              onClick={handleGetDepart}
-            >
-              more departments
-            </button>
-          </div>
-
-          <div className="w-full md:w-1/2 md:pl-2">
-            <SearchDepartment handleGet={handleDepartment} />
           </div>
         </div>
-      </div>
-
-      <div className="overflow-x-auto">
         <TableList
           handle={handle}
           handleGetDepartment={handleGetDepartment}
@@ -146,7 +150,6 @@ export const ListDepartment = ({
         <button
           className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={handleNextPage}
-          disabled={endIndex >= filteredDepartments.length}
         >
           Next
         </button>

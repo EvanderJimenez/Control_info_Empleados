@@ -32,13 +32,12 @@ const getAll = async () => {
 };
 
 const getDepartmentsByPage = async (pageSize: number, page: number) => {
-  
   const departmentsCollection = collection(firestore, "departments");
   const limitPage = pageSize * page;
   const departmentsQuery = query(
     departmentsCollection,
     orderBy("name"),
-    limit(limitPage), 
+    limit(limitPage),
     startAfter(pageSize * page)
   );
   const departmentsSnapshot: QuerySnapshot<DocumentData> = await getDocs(
@@ -72,7 +71,8 @@ async function create(
     };
   }
 
-  const newDocRef = await addDoc(collection(firestore, "departments"), {
+  const docData = {
+    id: "",
     name,
     size,
     location,
@@ -82,20 +82,20 @@ async function create(
     subDepartment,
     namesubDepartment,
     employees,
-  });
+  };
 
-  const newDoc = await getDoc(newDocRef);
+  const newDocRef = await addDoc(collection(firestore, "departments"), docData);
 
-  if (newDoc.exists()) {
-    return {
-      message: "Department created successfully",
-      departments: newDoc.data(),
-    };
-  } else {
-    return {
-      message: "Failed to create the department",
-    };
-  }
+  const docId = newDocRef.id;
+  docData.id = docId;
+
+  const updatedDocRef = doc(newDocRef.firestore, `departments/${docId}`);
+  await updateDoc(updatedDocRef, { id: docId });
+
+  return {
+    message: "Department created successfully",
+    departments: docData,
+  };
 }
 
 async function checkIfNameExists(name: string): Promise<boolean> {

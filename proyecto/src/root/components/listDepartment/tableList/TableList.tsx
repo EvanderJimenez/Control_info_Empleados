@@ -13,19 +13,20 @@ interface TableListProps {
 export const TableList = ({
   handle,
   currentDepartments,
-  setOption
+  setOption,
 }: TableListProps) => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-  
   const handleListEmployees = async (id: string) => {
+    console.log(id);
     dispatch(startGetDepartmentById(id));
-    setOption("EditEmployee")
-  }
+    setOption("EditEmployee");
+  };
 
   const handleGetDepartment = async (id: string) => {
+    console.log(id);
     dispatch(startGetDepartmentById(id));
-    setOption("FormDepartment")
+    setOption("FormDepartment");
   };
 
   return (
@@ -82,7 +83,7 @@ export const TableList = ({
                     className="text-indigo-600 hover:text-indigo-900 bg-blue"
                     onClick={() => handleListEmployees(department.id)}
                   >
-                   See
+                    See
                   </button>
                 </td>
               </tr>
