@@ -51,12 +51,15 @@ const ListEmployeeDepart = () => {
                   </button>
                 </div>
               ))}
-          {/* {loading && <LoadingGeneralComponent />} */}
+          {}
         </div>
       ) : (
-        <h2 className="font-semibold text-center bg-black text-yellow">
-          List Empty
-        </h2>
+        <div className="bg-darkBlue bg-opacity-60 h-32 justify-center flex items-center w-full">
+          <h2 className="font-semibold text-center  text-yellow">
+            List empty
+          </h2>
+        </div>
+
       )}
     </>
   );
