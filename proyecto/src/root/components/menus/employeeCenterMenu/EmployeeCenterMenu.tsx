@@ -14,7 +14,7 @@ export default function EmployeeCenterMenu() {
 
   return (
     <>
-      <div className="left-0 z-50 w-full h-16 bg-lithBlue print:hidden">
+      <div className="left-0 z-50 w-full h-16 bg-darkBlue bg-opacity-70 print:hidden">
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
 
           <button
@@ -22,7 +22,7 @@ export default function EmployeeCenterMenu() {
             type="button"
             className={
               router.pathname === "/home/EmployeeMain/Schedule"
-                ? "inline-flex flex-col items-center justify-center px-5  bg-darkBlue"
+                ? "inline-flex flex-col items-center justify-center px-5  bg-lithBlue"
                 : "inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x   group"
             }
           >
@@ -38,7 +38,7 @@ export default function EmployeeCenterMenu() {
             type="button"
             className={
               router.pathname === "/home/EmployeeMain/Justification"
-                ? "inline-flex flex-col items-center justify-center px-5  bg-darkBlue"
+                ? "inline-flex flex-col items-center justify-center px-5  bg-lithBlue"
                 : "inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x   group"
             }
           >
@@ -53,7 +53,7 @@ export default function EmployeeCenterMenu() {
             type="button"
             className={
               router.pathname === "/home/EmployeeMain/Vacations"
-                ? "inline-flex flex-col items-center justify-center px-5  bg-darkBlue"
+                ? "inline-flex flex-col items-center justify-center px-5  bg-lithBlue"
                 : "inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x   group"
             }
           >
@@ -68,7 +68,7 @@ export default function EmployeeCenterMenu() {
             type="button"
             className={
               router.pathname === "/home/EmployeeMain/Documents"
-                ? "inline-flex flex-col items-center justify-center px-5  bg-darkBlue"
+                ? "inline-flex flex-col items-center justify-center px-5  bg-lithBlue"
                 : "inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x   group"
             }
           >
@@ -83,7 +83,7 @@ export default function EmployeeCenterMenu() {
             type="button"
             className={
               router.pathname === "/home/EmployeeMain/Profile"
-                ? "inline-flex flex-col items-center justify-center px-5  bg-darkBlue"
+                ? "inline-flex flex-col items-center justify-center px-5  bg-lithBlue"
                 : "inline-flex flex-col items-center justify-center px-5 border-gray-200 border-x   group"
             }
           >

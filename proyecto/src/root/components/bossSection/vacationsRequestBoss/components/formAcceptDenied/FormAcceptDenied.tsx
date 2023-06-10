@@ -48,12 +48,13 @@ const FormAcceptDenied = ({ selectedRequest, setSelectedRequest, handleAccept, h
             readOnly
           ></textarea>
           <div className="flex flex-row justify-between w-full sm:flex-row">
+          <button onClick={handleDenied} className="bg-darkBlue">
+              Denied
+            </button>
             <button className="bg-darkBlue" onClick={handleAccept}>
               Accepted
             </button>
-            <button onClick={handleDenied} className="bg-darkBlue">
-              Denied
-            </button>
+          
           </div>
         </div>
       </section>

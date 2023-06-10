@@ -194,7 +194,7 @@ export default function RegisterBrand() {
 
   return (
     <>
-      <h2 className="text-lg font-bold text-center">Edit employee section</h2>
+      <h2 className="text-lg font-bold text-center text-darkBlue">Edit employee section</h2>
       <p className="text-center pb-4 font-semibold">This section is for editing schedules, please select the employee whose schedule you want to edit</p>
       <div className="flex flex-wrap justify-center items-start pb-10">
         <div className="w-full sm:w-1/3  justify-center  p-4 sm:p-12">

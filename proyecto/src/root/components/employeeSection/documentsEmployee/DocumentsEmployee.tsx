@@ -131,6 +131,8 @@ const DocumentsEmployee: React.FC = () => {
   }
 
   return (
+    <>
+    <h1 className="text-center text-darkBlue font-bold  pb-5 text-lg">File download and upload section</h1>
     <div className="flex flex-wrap justify-center">
       <div className="w-full md:w-1/3 flex justify-center shadow-lg">
         <ComboBoxDocuments
@@ -160,6 +162,7 @@ const DocumentsEmployee: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 
 };

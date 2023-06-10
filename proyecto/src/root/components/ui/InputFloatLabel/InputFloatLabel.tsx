@@ -5,8 +5,8 @@ import React from "react";
 
 export default function InputFloatLabel(props:InputInterface) {
   return (
-    <div className="w-full">
-      <label htmlFor={props.id} className="relative block overflow-hidden border-b  pt-3 focus-within:border-blue-600">
+    <div className="w-full flex-1">
+      <label htmlFor={props.id} className="relative block overflow-hidden border-b  pt-3">
         <input
           type={props.type}
           id={props.id}

@@ -44,7 +44,7 @@ const ListWithoutDepartment = ({
   }, [dispatch, employeesListVacations, change]);
 
   return (
-    <div className="container h-96 overflow-auto w-full space-y-4">
+    <div className="container h-96 overflow-auto w-auto space-y-2 m-2 shadow-xl">
       {listEmployees ? (
         <div>
           {listEmployees.length > 0 ? (
@@ -52,23 +52,28 @@ const ListWithoutDepartment = ({
               <ul>
                 {listEmployees.map((employee) => (
                   <div className=" p-4" key={employee.uid}>
-                    <li className="shadow-md bg-lithBlue bg-opacity-40  p-2">
-                      <p className="mb-1">
-                        <span className="font-semibold">Name:</span>{" "}
-                        {employee.name}
+                    <li className="shadow-md bg-lithBlue bg-opacity-40 space-y-2 p-2">
+                      <p className="mb-1 flex justify-center font-semibold">
+                        <span className="font-bold text-darkBlue"> {employee.name}</span>{" "}
+
                       </p>
-                      <p className="mb-1">
-                        <span className="font-semibold">Cedula:</span>{" "}
+                      <p className="mb-1 flex justify-center space-x-2" title="cedula of employee">
+                        <img src="/Images/idCard.png" alt="card" />
+                        <span className="font-semibold"></span>{" "}
                         {employee.cedula}
                       </p>
-                      <p className="mb-1">
-                        <span className="font-semibold">Email:</span>{" "}
+                      <p className="mb-1 flex justify-center items-center space-x-2" title="email of employee">
+                        <img src="/Images/emailBlackIcon.png" alt="email" />
+                        <span className="font-semibold">
+                        </span>{" "}
                         {employee.email}
                       </p>
-                      <p className="mb-1">
-                        <span className="font-semibold">Phone number:</span>{" "}
+                      <div className="flex justify-center space-x-2" title="Phone of employee">
+                        <img src="/Images/phone.png" alt="phone" />
+                        <span className="font-semibold"></span>{" "}
                         {employee.phoneNumber}
-                      </p>
+                      </div>
+
                       <div className="w-full pt-2 flex justify-center">
                         <button
                           className="bg-darkBlue border-r-red"
