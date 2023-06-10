@@ -22,7 +22,6 @@ export const InputDepartment = ({ onChange, ...props }: InputProps) => {
         value={props.value}
         onChange={onChange}
         id={props.name}
-       
         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-indigo-500"
       />
     </div>

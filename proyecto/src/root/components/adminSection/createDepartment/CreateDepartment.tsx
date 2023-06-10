@@ -133,8 +133,6 @@ const CreateDepartment = () => {
               selectedOption={selectedOption}
               setSelectedOption={setSelectedOption}
             />
-
-
             <>
               <div className="w-full h-full">
                 <span className="text-center justify-center flex text-darkBlue font-bold">Select Boss</span>
