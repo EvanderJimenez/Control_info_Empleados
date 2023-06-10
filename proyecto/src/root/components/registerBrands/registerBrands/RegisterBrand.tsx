@@ -1,4 +1,9 @@
-import { LaborRegistration, Cycle, HourRange, HoursEmployee } from "@/root/interface/brands";
+import {
+  LaborRegistration,
+  Cycle,
+  HourRange,
+  HoursEmployee,
+} from "@/root/interface/brands";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { RegisterCycle } from "../registerCycle/RegisterCycle";
@@ -6,7 +11,15 @@ import { RegisterClock } from "../registerClock/RegisterClock";
 import TableSchedules from "../tableShedules/TableShedules";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { ResetByVariable, ResetEmployeeByUid, selectGetBrandsByIdEmployee, selectGetEmployeeByUid, startCreateBrands, startGetBrandsByIdEmployee, startUpdateBrands } from "@/root/redux";
+import {
+  ResetByVariable,
+  ResetEmployeeByUid,
+  selectGetBrandsByIdEmployee,
+  selectGetEmployeeByUid,
+  startCreateBrands,
+  startGetBrandsByIdEmployee,
+  startUpdateBrands,
+} from "@/root/redux";
 import SearchInput from "../../ui/searchInput/SearchInput";
 import ListScheduleEmployee from "./components/listSheduleEmployee/ListScheduleEmployee";
 
@@ -80,7 +93,7 @@ export default function RegisterBrand() {
     }
 
     const year = new Date(currentDate).getFullYear();
-    const nameCycle = monthCycle.toString() + year.toString();
+    const nameCycle = year.toString() + monthCycle.toString();
 
     if (brandData.cycle && brandData.cycle[nameCycle]) {
       toast.error("Cycle already exists");
@@ -194,8 +207,13 @@ export default function RegisterBrand() {
 
   return (
     <>
-      <h2 className="text-lg font-bold text-center text-darkBlue">Edit employee section</h2>
-      <p className="text-center pb-4 font-semibold">This section is for editing schedules, please select the employee whose schedule you want to edit</p>
+      <h2 className="text-lg font-bold text-center text-darkBlue">
+        Edit employee section
+      </h2>
+      <p className="text-center pb-4 font-semibold">
+        This section is for editing schedules, please select the employee whose
+        schedule you want to edit
+      </p>
       <div className="flex flex-wrap justify-center items-start pb-10">
         <div className="w-full sm:w-1/3  justify-center  p-4 sm:p-12">
           <h1 className="text-center font-semibold">Filter employee</h1>
@@ -206,16 +224,48 @@ export default function RegisterBrand() {
             </button>
           </section>
 
-          <SearchInput labelInputSeekerOne="text" valueEnd={cedula} placeholderSeekerOne="Cedula" typeList="cedula" id="cedula" />
-          <SearchInput labelInputSeekerOne="text" valueEnd={name} placeholderSeekerOne="Name" typeList="name" id="name" />
-          <SearchInput labelInputSeekerOne="text" valueEnd={jobPosition} placeholderSeekerOne="Job Position" typeList="jobPosition" id="jobPosition" />
-          <ListScheduleEmployee dispatch={dispatch} clear={clear} setClear={setClear} />
+          <SearchInput
+            labelInputSeekerOne="text"
+            valueEnd={cedula}
+            placeholderSeekerOne="Cedula"
+            typeList="cedula"
+            id="cedula"
+          />
+          <SearchInput
+            labelInputSeekerOne="text"
+            valueEnd={name}
+            placeholderSeekerOne="Name"
+            typeList="name"
+            id="name"
+          />
+          <SearchInput
+            labelInputSeekerOne="text"
+            valueEnd={jobPosition}
+            placeholderSeekerOne="Job Position"
+            typeList="jobPosition"
+            id="jobPosition"
+          />
+          <ListScheduleEmployee
+            dispatch={dispatch}
+            clear={clear}
+            setClear={setClear}
+          />
         </div>
 
         <div className="w-full sm:w-2/3 flex mt-5 flex-col">
           <div className="bg-white sm:p-8 shadow-md w-full">
-            <RegisterCycle brandData={brandData} label="Cycle to belongs" onChange={(e) => setNewCycle(e.target.value)} value={newCycle} handleSubmitCycle={handleSubmitCycle} />
-            <form action="https://formbold.com/s/FORM_ID" onSubmit={handleSubmitHours} className="md:flex-col lg:flex-row sm:flex-col  pb-2 justify-center">
+            <RegisterCycle
+              brandData={brandData}
+              label="Cycle to belongs"
+              onChange={(e) => setNewCycle(e.target.value)}
+              value={newCycle}
+              handleSubmitCycle={handleSubmitCycle}
+            />
+            <form
+              action="https://formbold.com/s/FORM_ID"
+              onSubmit={handleSubmitHours}
+              className="md:flex-col lg:flex-row sm:flex-col  pb-2 justify-center"
+            >
               <div className="-mx-3 flex flex-wrap"></div>
               <div className="flex flex-col justify-center">
                 <label htmlFor="day" className="font-semibold text-center">
@@ -239,12 +289,28 @@ export default function RegisterBrand() {
               </div>
 
               <div className="flex flex-wrap">
-                <RegisterClock label={"Star time"} type={"hIni"} name={"hIni"} value={newHIni} id={"hIni"} onChange={(e) => setNewHIni(e.target.value)} />
-                <RegisterClock label={"End time"} type={"hFin"} name={"hFin"} value={newHFin} id={"hFin"} onChange={(e) => setNewHFin(e.target.value)} />
+                <RegisterClock
+                  label={"Star time"}
+                  type={"hIni"}
+                  name={"hIni"}
+                  value={newHIni}
+                  id={"hIni"}
+                  onChange={(e) => setNewHIni(e.target.value)}
+                />
+                <RegisterClock
+                  label={"End time"}
+                  type={"hFin"}
+                  name={"hFin"}
+                  value={newHFin}
+                  id={"hFin"}
+                  onChange={(e) => setNewHFin(e.target.value)}
+                />
               </div>
 
               <div className="flex justify-center">
-                <button className="md:w-1/4 sm:w-full bg-darkBlue hover:bg-green text-white font-bold ">Add schedules</button>
+                <button className="md:w-1/4 sm:w-full bg-darkBlue hover:bg-green text-white font-bold ">
+                  Add schedules
+                </button>
               </div>
             </form>
             <TableSchedules
@@ -262,16 +328,19 @@ export default function RegisterBrand() {
 
             <form onSubmit={handleUpdate} className="pt-10">
               <div className="flex justify-center">
-                <button type="submit" className="md:w-1/4 flex justify-center sm:w-full bg-darkBlue hover:bg-green text-white font-bold " title="Save all">
-                {" "}
-                <img src="/Images/save.png" alt="" />
-              </button></div>
-
+                <button
+                  type="submit"
+                  className="md:w-1/4 flex justify-center sm:w-full bg-darkBlue hover:bg-green text-white font-bold "
+                  title="Save all"
+                >
+                  {" "}
+                  <img src="/Images/save.png" alt="" />
+                </button>
+              </div>
             </form>
           </div>
         </div>
       </div>
     </>
   );
-
 }
