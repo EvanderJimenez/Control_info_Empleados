@@ -14,7 +14,7 @@ const ComboVoxSubDepartments = ({ label, items,selectedOption,setSelectedOption 
       };
     
       return (
-        <div className="mb-4 font-semibold">
+        <div className="mb-2 font-semibold">
           <label htmlFor="comboBox" className="block text-sm font-medium ">
             {label}
           </label>

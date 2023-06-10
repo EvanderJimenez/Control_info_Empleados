@@ -78,22 +78,24 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   }, [dispatch]);
 
   return (
+    <>
+    <div className="mx-auto  text-center">
+    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
+      Departments
+    </h2>
+    <p className="mt-2 text-lg leading-8 text-gray-600">
+      Work departments are a fundamental part of any organization or
+      company.
+    </p>
+  </div>
     <div className="flex flex-wrap ">
-      <div className="mx-auto  text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
-          Departments
-        </h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
-          Work departments are a fundamental part of any organization or
-          company.
-        </p>
-      </div>
-      <div className="w-full md:w-1/2 px-3 mb-6">
+
+      <div className="md:w-1/2 px-3 mb-6">
         <form
           className="bg-white shadow-md rounded  flex flex-col mb-8 "
           onSubmit={handleUpdate}
         >
-          <div className="p-3 justify-center">
+          <div className=" justify-center">
             <ComboVoxSubDepartments
               items={departments}
               label="Select sub Department"
@@ -102,7 +104,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
             />
           </div>
 
-          <div className="flex justify-center mt-5 mb-6">
+          <div className="flex justify-center items-center">
             <InputDepartment
               label="Name Department"
               type="name"
@@ -120,7 +122,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="flex flex-wrap -mx-3 mb-2">
+          <div className="flex flex-wrap ">
             <InputDepartment
               label="Location"
               type="location"
@@ -137,25 +139,26 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
               id="level"
               onChange={handleInputChange}
             />
-          </div>
-
-          <div className="flex justify-center -mx-3 mb-5">
-            <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0">
-              <button
-                type="submit"
-                className={`bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded ${
-                  update ? "" : ""
-                }`}
-              >
-                Update
-              </button>
+            <div className="flex justify-center mb-5">
+              <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0">
+                <button
+                  type="submit"
+                  className={`bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded ${update ? "" : ""
+                    }`}
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </div>
+
+
+
         </form>
       </div>
 
       <div className="w-full md:w-1/2 px-3 mb-6 ">
-        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+        <label className="block  text-md font-bold mb-2">
           Boss
         </label>
         <input
@@ -163,10 +166,10 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
           name="boss"
           value={
             employeeUid?.name +
-              " " +
-              employeeUid?.firstSurname +
-              " " +
-              employeeUid?.secondSurname || ""
+            " " +
+            employeeUid?.firstSurname +
+            " " +
+            employeeUid?.secondSurname || ""
           }
           id="boss"
           placeholder="Boss"
@@ -196,5 +199,6 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
         <></>
       </div>
     </div>
+    </>
   );
 };
