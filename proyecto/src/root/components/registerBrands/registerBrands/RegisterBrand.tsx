@@ -223,7 +223,7 @@ export default function RegisterBrand() {
         This section is for editing schedules, please select the employee whose
         schedule you want to edit
       </p>
-      <div className="flex flex-wrap justify-center items-start pb-10">
+      <div className="flex flex-wrap space-y-4 justify-center items-start pb-10">
         <div className="w-full sm:w-1/3  justify-center  p-4 sm:p-12">
           <h1 className="text-center font-semibold">Filter employee</h1>
           <section className="flex w-full flex-row justify-end">
@@ -298,7 +298,7 @@ export default function RegisterBrand() {
               </div>
 
               <div className="flex justify-center">
-                <button className="md:w-1/4 sm:w-full bg-darkBlue hover:bg-green text-white font-bold ">
+                <button className="md:w-1/4 sm:w-full bg-darkBlue text-white font-bold ">
                   Add day
                 </button>
               </div>
@@ -320,7 +320,7 @@ export default function RegisterBrand() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="md:w-1/4 flex justify-center sm:w-full bg-darkBlue hover:bg-green text-white font-bold "
+                  className="md:w-1/4 flex justify-center sm:w-full bg-darkBlue text-white font-bold "
                   title="Save all"
                 >
                   {" "}

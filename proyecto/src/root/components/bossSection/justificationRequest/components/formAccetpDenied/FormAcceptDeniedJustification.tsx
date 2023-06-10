@@ -31,8 +31,8 @@ const FormAcceptDeniedJustification = ({
     <>
 
       <select value={selectedSection} className = "bg-darkBlue text-white font-semibold" onChange={handleSelectionChange}>
-        <option value="section1">Justification of end time</option>
-        <option value="section2">Justification of start time</option>
+        <option value="section1">Justification of start time</option>
+        <option value="section2">Justification of end time</option>
       </select>
 
       {selectedSection === 'section1' && (
@@ -62,7 +62,7 @@ const FormAcceptDeniedJustification = ({
       )}
 
       {selectedSection === 'section2' && (
-        <div className="w-full md:w-1/2">
+        <div className="w-full justify-center flex flex-col md:w-1/2">
           <div className="flex flex-col md:flex-row space-x-0 md:space-x-4 mb-3">
             <label>End time:</label>
             <input
@@ -87,6 +87,7 @@ const FormAcceptDeniedJustification = ({
         </div>
 
       )}
+      <div className="flex justify-between space-x-4 w-1/2">
       <button
         className="bg-darkBlue text-white rounded py-2 px-4 w-full md:w-auto"
         onClick={handleAccept}
@@ -99,6 +100,8 @@ const FormAcceptDeniedJustification = ({
       >
         Denied
       </button>
+      </div>
+      
     </>
   );
 };

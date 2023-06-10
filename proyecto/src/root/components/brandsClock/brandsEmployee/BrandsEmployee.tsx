@@ -82,10 +82,10 @@ export const BrandsEmployee = ({
               const markStart = existingHours.hIni;
               const markEnd = existingHours.hFin;
               if (checkMarkHours(markStart, markEnd)) {
-              
+                toast.success("The hours match. Performing update");
                 value = "true";
               } else {
-              
+                toast.error("The mark hours do not match the defined hours.");
               }
 
               await dispatch(
@@ -94,7 +94,9 @@ export const BrandsEmployee = ({
             }
           }
         } else {
-          
+          toast.error(
+            "There is no schedule for today or You don't have a work cycle."
+          );
           setLoad(true);
         }
       }
@@ -127,7 +129,7 @@ export const BrandsEmployee = ({
       localHoursIni = hIni;
       localHoursFin = hFin;
     } else {
-      
+      toast.error(`No information found for the day: ${weekday}`);
       return;
     }
 
@@ -167,7 +169,7 @@ export const BrandsEmployee = ({
     let hoursIni = localHoursIni;
     let hoursFin = localHoursFin;
     if (!markStart && !markEnd) {
-    
+      toast.error("Both markStart and markEnd are required");
       return false;
     }
     if (!markEnd) {
@@ -182,7 +184,7 @@ export const BrandsEmployee = ({
           markStartHour < hoursIniHour ||
           (markStartHour === hoursIniHour && markStartMinute < hoursIniMinute)
         ) {
-          
+          toast.success("The mark start hour is earlier than hoursIni");
           return true;
         } else {
           setLoad(false);
@@ -202,7 +204,7 @@ export const BrandsEmployee = ({
         markEndHour > hoursFinHour ||
         (markEndHour === hoursFinHour && markEndMinute >= hoursFinMinute)
       ) {
-        
+        toast.success("The mark end hour is greater than or equal to hoursFin");
         return true;
       } else {
         setLoad(false);
