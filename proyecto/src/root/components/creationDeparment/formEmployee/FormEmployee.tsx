@@ -132,7 +132,15 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
                 id="level"
                 onChange={handleInputChange}
               />
-              
+              <InputDepartment
+                label="Sub department"
+                type="level"
+                name="level"
+                value={departmentNew.level}
+                id="level"
+                onChange={handleInputChange}
+              />
+
               <div className="flex justify-center w-full">
                 <div className="flex justify-center flex-col mb-5">
                   <ComboVoxSubDepartments
