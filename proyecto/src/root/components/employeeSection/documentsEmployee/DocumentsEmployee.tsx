@@ -16,6 +16,8 @@ import { b64toBlob } from "@/root/utils/base64/base64";
 import ShowFile from "./components/showFile/ShowFile";
 import SelectFile from "./components/selectFile/SelectFile";
 import { starAlertSuccess } from "@/root/redux/thunks/alertHandler-thunk/alertHandler-thunk";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 let files: Files[] = [];
 
@@ -79,23 +81,41 @@ const DocumentsEmployee: React.FC = () => {
   };
 
   const handleDelete = async () => {
+    console.log(selectOption)
     if (selectOption) {
       const updatedFiles = { ...userLogin.files };
       const fileToDeleteKey = Object.keys(updatedFiles).find(
         (key) => updatedFiles[key].name === selectOption.name
       );
       if (fileToDeleteKey) {
-        delete updatedFiles[fileToDeleteKey];
-        await dispatch(
-          StartUpDateEmployee(userLogin?.uid, {
-            ...userLogin,
-            files: updatedFiles,
-          })
-        );
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You are about to delete a file',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete',
+          cancelButtonText: 'Cancel',
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+/*             delete updatedFiles[fileToDeleteKey];
+            await dispatch(
+              StartUpDateEmployee(userLogin?.uid, {
+                ...userLogin,
+                files: updatedFiles,
+              })
+            );  */
+            dispatch(starAlertSuccess("File deleted correctly", true));
+            setSelectOption(null);
+          }
+        });
+      } else {
+        toast('⚠ No file found with the selected name');
       }
-      dispatch(starAlertSuccess("File delete correctly", true))
+    } else {
+      toast('⚠ No file selected');
     }
   };
+  
 
   useEffect(() => {
     if (fileLoad && selectOption) {
