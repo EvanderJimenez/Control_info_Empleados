@@ -21,6 +21,7 @@ import {
 } from "../../reducers/brands-reducer/getBrandsDocByEmployeeId/GetBrandsDocByEmployeeIdReducer";
 import { Brands } from "@/root/interface/employee";
 import { LaborRegistration } from "@/root/interface/brands";
+import { starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
 
 export const startGetAllBrands = (): any => {
   return async (dispatch: DispatchTypeGetAllBrands) => {
@@ -39,6 +40,12 @@ export const startUpdateBrands = (
       searchTerm,
       searchTerm2
     );
+
+    if (response) {
+      dispatch(starAlertSuccess("mark done correctly", true))
+    } else {
+      dispatch(startAlertError('There was an error updating the marks, check your schedule and credentials',true))
+    }
 
     dispatch(updateBrandsReducer(response || null));
   };
@@ -69,3 +76,7 @@ export const startGetBrandsByIdEmployee = (searchTerm: string): any => {
     dispatch(getBrandsByIdEmployeeReducer(response || null));
   };
 };
+function startAlertError(arg0: string, arg1: boolean): { type: string; UpdateBrands?: UpdateBrandsState | undefined; } {
+  throw new Error("Function not implemented.");
+}
+
