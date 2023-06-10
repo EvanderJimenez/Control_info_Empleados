@@ -2,7 +2,9 @@ import {
   StarGetAllBosses,
   StartGetEmployeeByUid,
   selectGetAllBosses,
+  selectLoadDataBoss,
 } from "@/root/redux";
+import { StartLoadDataBoss } from "@/root/redux/thunks/loadData.thunk.ts/loadData";
 import { EmployeesType } from "@/root/types/Employee.type";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +18,18 @@ const ListBoss = ({ clear, setClear }: ListClear) => {
   const dispatch = useDispatch();
   const listBoss = useSelector(selectGetAllBosses);
 
-  useEffect(() => {
-    dispatch(StarGetAllBosses());
-  }, []);
+  const loadDataBoss = useSelector(selectLoadDataBoss)
 
+  useEffect(() => {
+   
+    if(listBoss.length === 0 || loadDataBoss ) {
+      dispatch(StarGetAllBosses());
+      console.log(listBoss)
+      dispatch(StartLoadDataBoss(false));
+    }
+    console.log(listBoss)
+  }, [clear]);
+ 
   const handleLoadInformation = async (uid: string) => {
     dispatch(StartGetEmployeeByUid(uid));
     setClear(false);

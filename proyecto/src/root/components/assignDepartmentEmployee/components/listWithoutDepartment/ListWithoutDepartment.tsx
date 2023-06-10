@@ -29,7 +29,7 @@ const ListWithoutDepartment = ({
   const [listEmployees, setListEmployees] = useState<EmployeesType[]>([]);
 
   useEffect(() => {
-    if (variable.length > 0) {
+    if (variable.length > 0) {  
       const filteredArray = variable.filter(
         (employee) => employee.idDepartment === "0"
       );
@@ -39,9 +39,13 @@ const ListWithoutDepartment = ({
     }
   }, [variable, employeesWithoutDepart]);
 
-  useEffect(() => {
-    dispatch(StarGetEmployeesByIdDepartment("0"));
-  }, [dispatch, employeesListVacations, change]);
+  useEffect(() => {  
+    if(employeesWithoutDepart.length === 0 || change) {
+      dispatch(StarGetEmployeesByIdDepartment("0"));
+      console.log(employeesWithoutDepart)
+    }
+    console.log(employeesWithoutDepart)
+  }, [dispatch, change]);
 
   return (
     <div className="container h-96 overflow-auto w-auto space-y-2 m-2 shadow-xl">

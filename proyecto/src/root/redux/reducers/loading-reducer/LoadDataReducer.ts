@@ -2,9 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface LoadDataState {
   loadData: boolean;
+  loadDataBoss: boolean;
 }
 export const initialStateLoadData: LoadDataState = {
     loadData: false,
+    loadDataBoss: false
 };
 
 type LoadDataAction = {
@@ -18,11 +20,14 @@ export const LoadDataSlice = createSlice({
 
   reducers: {
     loadDataReducer: (state, action: PayloadAction<boolean>) => {
-      return { loadData: action.payload };
+      return {...state, loadData: action.payload };
+    },
+    loadDataBossReducer: (state, action: PayloadAction<boolean>) => {
+      return {...state, loadDataBoss: action.payload };
     },
   },
 });
 
-export const { loadDataReducer } = LoadDataSlice.actions;
+export const { loadDataReducer,loadDataBossReducer } = LoadDataSlice.actions;
 export const LoadDataReducer = LoadDataSlice.reducer;
 export type DispatchTypeLoadData = (args: LoadDataAction) => LoadDataAction;

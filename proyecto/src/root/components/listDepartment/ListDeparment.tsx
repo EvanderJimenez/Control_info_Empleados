@@ -38,12 +38,17 @@ export const ListDepartment = ({
 
   const departByPage = useSelector(selectGetByPageDepartment);
   const departByName = useSelector(selectGetByNameDepartment);
-  const isDataLoaded = useSelector(selectLoadData)
+  const isDataLoaded = useSelector(selectLoadData);
   const dispatch = useDispatch();
-
 
   const handleGetDepartments = async () => {
     dispatch(startGetDepartmentByPage(pageSize, page));
+
+    await dispatch(startGetDepartmentByPage(pageSize, page));
+    let sum = page * pageSize;
+    if (departByPage.length < sum - 5) {
+      setPage(0);
+    }
     dispatch(StartResetDepartmentByName());
   };
   const handleDepartment = async (name: string) => {
@@ -52,17 +57,16 @@ export const ListDepartment = ({
     dispatch(StartResetDepartmentByPage());
   };
 
-  useEffect(() => { 
-    
-    if ( departByName && departByName.length > 0) {
+  useEffect(() => {
+    if (departByName && departByName.length > 0) {
       setDepartmentData(departByName);
-      dispatch(StartLoadData(true))
+      dispatch(StartLoadData(true));
     } else if (departByPage && departByPage.length > 0) {
-      console.log("SetData 1")
+      console.log("SetData 1");
       setDepartmentData(departByPage);
-      dispatch(StartLoadData(true))
+      dispatch(StartLoadData(true));
     }
-  }, [departByName, departByPage]); 
+  }, [departByName, departByPage]);
 
   const handle = (id: string, name: string) => {
     setPassId(id);
@@ -70,22 +74,17 @@ export const ListDepartment = ({
   };
 
   useEffect(() => {
-   
     if (page !== 0 && !isDataLoaded) {
-      console.log("SetData 2")
+      console.log("SetData 2");
       handleGetDepartments();
-      dispatch(StartLoadData(true)) 
-      
+      dispatch(StartLoadData(true));
     }
-/*     else{
-      toast.error("No more information"); 
-    } */
   }, [page]);
 
   const handleGetDepart = () => {
     if (page !== 0) {
       setPage(page + 1);
-      dispatch(StartLoadData(false))
+      dispatch(StartLoadData(false));
     }
   };
   const handleNextPage = () => {
@@ -115,9 +114,7 @@ export const ListDepartment = ({
   return (
     <div className=" shadow flex pb-12 flex-col ">
       <div className="text-center">
-        <h2 className="text-xl text-darkBlue font-bold ">
-          Departments
-        </h2>
+        <h2 className="text-xl text-darkBlue font-bold ">Departments</h2>
         <p className="mt-2 text-lg font-semibold">
           Available departments of the company
         </p>
@@ -129,7 +126,6 @@ export const ListDepartment = ({
       </div>
 
       <div className="overflow-x-auto">
-
         <TableList
           handle={handle}
           handleGetDepartment={handleGetDepartment}
@@ -139,24 +135,23 @@ export const ListDepartment = ({
         />
       </div>
       <div className="flex w-full justify-center">
-     <section className="flex w-1/2 justify-between mt-4">
-        <button
-          className="bg-darkBlue font-semibold"
-          onClick={handlePreviousPage}
-          disabled={currentPage === 0}
-        >
-          Previous
-        </button>
+        <section className="flex w-1/2 justify-between mt-4">
+          <button
+            className="bg-darkBlue font-semibold"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 0}
+          >
+            Previous
+          </button>
 
-        <button
-          className="bg-darkBlue font-semibold"
-          onClick={handleNextPage}
-        >
-          Next
-        </button>
-      </section>
+          <button
+            className="bg-darkBlue font-semibold"
+            onClick={handleNextPage}
+          >
+            Next
+          </button>
+        </section>
       </div>
- 
     </div>
   );
 };
