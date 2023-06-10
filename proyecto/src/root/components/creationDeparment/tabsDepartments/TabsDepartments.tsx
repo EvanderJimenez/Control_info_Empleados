@@ -60,7 +60,7 @@ export default function TabsDepartments({
     <div className="flex  flex-col min-h-screen h-auto w-auto">
       <div className="w-full h-full">
         <section role="tablist">
-          <div className="mr-2" role="presentation">
+          <div className="mr-2 flex justify-center" role="presentation">
             <button
               className={`bg-darkBlue  py-4 px-4 text-sm font-medium text-center ${
                 activeTab === "ListDepartment" ? "active" : ""

@@ -27,6 +27,7 @@ import { GetDepartmentByNameReducer } from "./reducers/department-reducer/getDep
 import { GetByPageDepartmentsReducer } from "./reducers/department-reducer/getDepartmentsByPage/GetDepartmentsByPage";
 import { AlertReducer } from "./reducers/alertHandler-reducer/AlertHandlerReducer";
 import { GetEmployeesByIdDepartmentReducerReducer } from "./reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
+import { LoadDataReducer } from "./reducers/loading-reducer/LoadDataReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -59,6 +60,8 @@ export const ApplicationStore = configureStore({
     updateBrands: UpdateBrandsReducer,
     GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer,
     GetFileURLByNameStore: GetFileURLByNameReducer,
+
+    LoadDataStore: LoadDataReducer
   },
 });
 

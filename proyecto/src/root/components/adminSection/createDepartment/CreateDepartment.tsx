@@ -36,25 +36,15 @@ const CreateDepartment = () => {
   };
 
   const handleClear = async () => {
-
+    dispatch(resetByVariableAdmin);
+    dispatch(resetEmployeeByUid);
+    setDepartmentNew(initialDepartmet);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (departmentNew && employeeUid && employeeUid?.uid !== "") {
-      console.log(employeeUid);
-      console.log(JSON.stringify(departmentNew));
-      const newData: Department = {
-        ...departmentNew,
-        idEmployee: employeeUid.uid,
-        leader: employeeUid.name,
-      };
-      console.log(JSON.stringify(newData));
-      dispatch(startCreateDepartment(newData));
-
-      const updateEmployee: EmployeesType = { ...employeeUid, idDepartment: newData.id, jobPosition: "boss" }
-
-      dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee))
+    if (departmentNew) {
+      dispatch(startCreateDepartment(departmentNew));
     }
   };
 
