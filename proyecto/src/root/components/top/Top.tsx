@@ -56,7 +56,7 @@ export function Top() {
             <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
             <span className="title-font">CrHome</span>
           </div>
-          <div className="text-white font-bold text-md print:hidden"> {selector.name}</div>
+         
           <div className="flex  font-semibold items-center text-sm text-lithGray">(506) 8988-4062</div>
 
         </div>
