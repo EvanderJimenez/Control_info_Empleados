@@ -5,12 +5,14 @@ import ListEmployee from "../../listEmployee/ListEmployee";
 import {
   selectGetByVariable,
   selectGetEmployeeByUid,
+  selectGetEmployeeByUid2,
   selectGetFileURLByName,
 } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType, Files } from "@/root/types/Employee.type";
 import {
   ResetByVariable,
   ResetEmployeeByUid,
+  ResetEmployeeByUid2,
   StarGetFileURLByName,
   StartDismissEmployee,
   StartGetByVariable,
@@ -27,10 +29,11 @@ import ComboBoxDocuments from "../../employeeSection/documentsEmployee/component
 import { saveAs } from "file-saver";
 import { b64toBlob } from "@/root/utils/base64/base64";
 import ListAllEmployees from "./components/listAllEmployees/ListAllEmployees";
+import Swal from 'sweetalert2';
 
 export default function EditEmployeeSection() {
   const fileLoad = useSelector(selectGetFileURLByName);
-  const employeeByUid = useSelector(selectGetEmployeeByUid);
+  const employeeByUid2 = useSelector(selectGetEmployeeByUid2);
   const dispatch = useDispatch();
 
   const [clear, setClear] = useState(false);
@@ -53,8 +56,7 @@ export default function EditEmployeeSection() {
       console.log(dataEmployee.uid)
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
     setClear(true);
-    dispatch(ResetEmployeeByUid());
-    dispatch(ResetByVariable());
+handleClear()
     toast.success("saved successfully");
     }else {
       toast("⚠ No employees have been loaded ");
@@ -63,13 +65,13 @@ export default function EditEmployeeSection() {
   };
   useEffect(() => {
     if (!clear) {
-      if (employeeByUid) {
-        setDataEmployee(employeeByUid);
+      if (employeeByUid2) {
+        setDataEmployee(employeeByUid2);
       }
     } else {
       setDataEmployee(initialDataEmployee);
     }
-  }, [employeeByUid, clear]);
+  }, [employeeByUid2, clear]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -77,18 +79,31 @@ export default function EditEmployeeSection() {
   };
 
   const handleDismissEmployee = () => {
-    if (employeeByUid && employeeByUid.uid) {
-      dispatch(StartDismissEmployee(employeeByUid.uid));
-      toast.error("Fired employee");
+    if (employeeByUid2 && employeeByUid2.uid) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to dismiss an employee',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, dismiss',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          //dispatch(StartDismissEmployee(employeeByUid2.uid));
+          console.log("enter dismiss")
+          toast.error('Fired employee');
+        }
+      });
     } else {
-      toast("⚠ No employees have been loaded ");
+      toast('⚠ No employees have been loaded');
     }
   };
+  
 
   const handleDownload = async () => {
     dispatch(
       StarGetFileURLByName(
-        employeeByUid?.uid || "",
+        employeeByUid2?.uid || "",
         selectOption?.urlFile || ""
       )
     );
@@ -102,16 +117,20 @@ export default function EditEmployeeSection() {
   }, []);
 
   const handleClear = async () => {
+    if (!Swal.isVisible()) {
+    console.log("object")
     if(dataEmployee.uid){
-      dispatch(ResetEmployeeByUid());
+      dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
       setListEmployees([])
+      dispatch(ResetByVariable());
       toast.success("Clear all");
     }else {
       setListEmployees([])
-      dispatch(ResetEmployeeByUid());
+      dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
     }
+  }
   };
 
   useEffect(() => {
@@ -137,14 +156,16 @@ export default function EditEmployeeSection() {
     }
   }, [fileLoad, change]);
 
-  const files: Files[] = employeeByUid?.files
-    ? Object.values(employeeByUid.files)
+  const files: Files[] = employeeByUid2?.files
+    ? Object.values(employeeByUid2.files)
     : [];
     
     const countEmployees = listEmployees.length
 
   return (
     <>
+    <h1 className="text-center font-bold text-darkBlue  text-lg">Employee editing section</h1>
+    <p className="text-center font-semibold pb-5">search and load the information of the employee to edit</p>
       <div className="flex flex-wrap justify-center bg-white">
         <div className=" md:w-1/2  lg:flex-grow xl:flex-grow w-auto px-2">
           <div className="flex flex-col mb-3">
@@ -171,7 +192,8 @@ export default function EditEmployeeSection() {
               id="jobPosition"
             />
             <ListAllEmployees />
-            <p>Employees: {countEmployees}</p>
+            <div className="flex justify-center text-darkBlue font-semibold"><p>charged employees: {countEmployees}</p></div>
+            
             <ListEmployee clear={clear} setClear={setClear} listEmployees={listEmployees} setListEmployees={setListEmployees} />
           </div>
         </div>

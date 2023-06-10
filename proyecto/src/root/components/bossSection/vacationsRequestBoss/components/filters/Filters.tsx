@@ -2,25 +2,25 @@ import InputLabel from "@/root/components/ui/InputLabel/InputLabel";
 import InputFloatLabel from "@/root/components/ui/InputFloatLabel/InputFloatLabel";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ResetByVariable, StartGetByVariable, selectLogin } from "@/root/redux";
+import { ResetByVariable, ResetByVariable2, StartGetByVariable, StartGetByVariable2, selectLogin } from "@/root/redux";
 
-const Filters = () => {
+const   Filters = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const userLogin = useSelector(selectLogin)
 
   const handleSearch = async () =>{
 
-    dispatch(StartGetByVariable(name, "name", userLogin.idDepartment || '' ));
+    dispatch(StartGetByVariable2(name, "name", userLogin.idDepartment || '' ));
 
   }
   const handleClear = async () =>{
-    dispatch(ResetByVariable())
+    dispatch(ResetByVariable2())
     setName("")
   }
 
   return (
-    <div className="flex flex-col space-y-4 space-x-4 w-1/2 justify-between  md:flex-row ">
+    <div className="flex flex-col space-y-4 space-x-4 w-full justify-between  md:flex-row ">
       <InputFloatLabel
         type="text"
         value={name}

@@ -74,7 +74,7 @@ export const {
   getEmployeesByIdDepartmentJustificationsReducer,
   getEmployeesByIdDepartmentPdfReducer,
 } = GetEmployeesByIdDepartmentSlice.actions;
-export const GetEmployeesByIdDepartmentReducer =
+export const GetEmployeesByIdDepartmentReducerReducer =
   GetEmployeesByIdDepartmentSlice.reducer;
 export type DispatchTypeByIdDepart = (
   args: EmployeeByIdDepartmentAction

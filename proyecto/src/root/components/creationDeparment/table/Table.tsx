@@ -1,34 +1,14 @@
 import { Department, Employee } from "@/root/interface/departments";
-import React, { useState } from "react";
+import React from "react";
 
 interface TableProps {
   departmentsData: Department | undefined;
   handleDeleteEmployee: (employeeName: string | number) => void;
-  handleUpdateEmployee: (
-    employeeName: string,
-    updatedEmployee: Employee
-  ) => void;
 }
 
 const Table = ({
   departmentsData,
-  handleDeleteEmployee,
-  handleUpdateEmployee,
 }: TableProps) => {
-  const [editingEmployee, setEditingEmployee] = useState<string>("");
-
-  const handleEditEmployee = (employeeName: string) => {
-    setEditingEmployee(employeeName);
-  };
-
-  const handleSaveEmployee = (
-    employeeName: string,
-    updatedEmployee: Employee
-  ) => {
-    setEditingEmployee("");
-    handleUpdateEmployee(employeeName, updatedEmployee);
-  };
-
   if (!departmentsData) {
     return null;
   }
@@ -39,100 +19,52 @@ const Table = ({
   ) {
     return null;
   }
+
+
   return (
-    <div>
-      <div className="overflow-x-auto sm:overflow-visible">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr className="bg-black text-white">
-              <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Name
-              </th>
-              <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Personal Information
-              </th>
-              <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Id Employee
-              </th>
-              <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Edit
-              </th>
-              <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider">
-                Delete
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {Object.entries(departmentsData.employees).map(([key, value]) => (
-              <tr key={key} className="odd:bg-white even:bg-lithBlue">
-                <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  {key}
-                </td>
-                <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm">
-                  {editingEmployee === key ? (
-                    <input
-                      type="textArea"
-                      value={value.des}
-                      onChange={(e) =>
-                        handleUpdateEmployee(key, {
-                          ...value,
-                          des: e.target.value,
-                        })
-                      }
-                    />
-                  ) : (
-                    <p>{value.des}</p>
-                  )}
-                </td>
-                <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm">
-                  {editingEmployee === key ? (
-                    <input
-                      type="text"
-                      value={value.id}
-                      onChange={(e) =>
-                        handleUpdateEmployee(key, {
-                          ...value,
-                          id: e.target.value,
-                        })
-                      }
-                    />
-                  ) : (
-                    <p>{value.id}</p>
-                  )}
-                </td>
-                <td className="px-2 sm:px-6 py-4 whitespace-nowrap flex justify-start text-right text-sm font-medium">
-                  {editingEmployee === key ? (
-                    <button
-                      className="bg-black"
-                      onClick={() =>
-                        handleSaveEmployee(key, departmentsData.employees[key])
-                      }
-                    >
-                      Save
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-black"
-                      onClick={() => handleEditEmployee(key)}
-                    >
-                      Edit
-                    </button>
-                  )}
-                </td>
-                <td>
-                  <button
-                    className="bg-black"
-                    onClick={() => handleDeleteEmployee(key)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <>
+      <h1 className="text-center text-darkBlue font-bold text-lg">Employees in the department</h1>
+      <div className="w-full flex justify-center">
+        <div className="overflow-x-auto sm:overflow-visible pt-4">
+          {Object.keys(departmentsData.employees).length > 0 ? (
+            <table className="min-w-full">
+              <thead className="">
+                <tr className="bg-black text-white">
+                  <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium">
+                    Name
+                  </th>
+                  <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium ">
+                    Email
+                  </th>
+                  <th className="px-2 sm:px-6 py-3 text-left text-xs sm:text-sm font-medium">
+                    Id Employee
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {Object.entries(departmentsData.employees).map(([key, value]) => (
+                  <tr key={key} className="odd:bg-white even:bg-lithBlue">
+                    <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      {key}
+                    </td>
+                    <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm">
+                      <p>{value.des}</p>
+                    </td>
+                    <td className="px-2 sm:px-6 py-4 whitespace-nowrap text-sm">
+                      <p>{value.id}</p>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <>
+              <p className="text-center w-60 h-60 flex justify-center items-center bg-opacity-70 bg-darkBlue text-yellow font-semibold">Not found employees fot this department 🤔</p>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

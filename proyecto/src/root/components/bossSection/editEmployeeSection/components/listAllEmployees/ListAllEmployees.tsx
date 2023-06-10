@@ -7,12 +7,13 @@ const ListAllEmployees = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector(selectLogin)
   const lisTEmployees = useSelector(selectGetEmployeesByIdDepartment) 
-  
-  console.log(lisTEmployees)
-
-  console.log(userLogin.uid)
   const handleSearch = async () => {
+
+    if(lisTEmployees.length === 0) {
     dispatch(StarGetEmployeesByIdDepartment(userLogin?.idDepartment || ''))
+    console.log(lisTEmployees)
+    }
+    console.log(lisTEmployees)
   };
 
   return (

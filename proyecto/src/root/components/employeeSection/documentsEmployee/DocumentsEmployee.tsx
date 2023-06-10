@@ -15,6 +15,9 @@ import { saveAs } from "file-saver";
 import { b64toBlob } from "@/root/utils/base64/base64";
 import ShowFile from "./components/showFile/ShowFile";
 import SelectFile from "./components/selectFile/SelectFile";
+import { starAlertSuccess } from "@/root/redux/thunks/alertHandler-thunk/alertHandler-thunk";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 let files: Files[] = [];
  //TODO: This code has a nested innecesary complexity, consider split in a new Hook
@@ -78,22 +81,41 @@ const DocumentsEmployee: React.FC = () => {
   };
 
   const handleDelete = async () => {
+    console.log(selectOption)
     if (selectOption) {
       const updatedFiles = { ...userLogin.files };
       const fileToDeleteKey = Object.keys(updatedFiles).find(
         (key) => updatedFiles[key].name === selectOption.name
       );
       if (fileToDeleteKey) {
-        delete updatedFiles[fileToDeleteKey];
-        await dispatch(
-          StartUpDateEmployee(userLogin?.uid, {
-            ...userLogin,
-            files: updatedFiles,
-          })
-        );
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You are about to delete a file',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete',
+          cancelButtonText: 'Cancel',
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+/*             delete updatedFiles[fileToDeleteKey];
+            await dispatch(
+              StartUpDateEmployee(userLogin?.uid, {
+                ...userLogin,
+                files: updatedFiles,
+              })
+            );  */
+            dispatch(starAlertSuccess("File deleted correctly", true));
+            setSelectOption(null);
+          }
+        });
+      } else {
+        toast('⚠ No file found with the selected name');
       }
+    } else {
+      toast('⚠ No file selected');
     }
   };
+  
 
   useEffect(() => {
     if (fileLoad && selectOption) {
@@ -131,6 +153,8 @@ const DocumentsEmployee: React.FC = () => {
   }
 
   return (
+    <>
+    <h1 className="text-center text-darkBlue font-bold  pb-5 text-lg">File download and upload section</h1>
     <div className="flex flex-wrap justify-center">
       <div className="w-full md:w-1/3 flex justify-center shadow-lg">
         <ComboBoxDocuments
@@ -160,6 +184,7 @@ const DocumentsEmployee: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 
 };

@@ -34,7 +34,7 @@ export default function ReadRequestJustification() {
   return (
     <>
       <div className="h-screen pb-10">
-        <p className="text-center font-bold ">Information on justifications for non-compliance with schedule</p>
+        <p className="text-center font-bold text-lg text-darkBlue">Information on justifications for non-compliance with schedule</p>
         <section className="flex flex-col  gap-4 pt-10 w-auto scroll overflow-y-auto h-64  ">
           <div className="flex flex-col justify-center items-center">
             {UserLogin?.attendance ? (

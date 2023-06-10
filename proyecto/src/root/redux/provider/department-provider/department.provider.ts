@@ -46,7 +46,7 @@ const getDepartmentsByPageProvider = async (pageSize: number, page: number) => {
   );
 
   if (!response.ok) {
-    throw new Error("Error getting employee");
+    return null
   }
 
   const data = await response.json();
@@ -67,7 +67,7 @@ const updateDepartmentByIdProvider = async (
   });
 
   if (!response.ok) {
-    throw new Error("Error updating depart");
+   return null
   }
 
   const data = await response.json();
@@ -119,7 +119,7 @@ const createDepartmentProvider = async (searchTerm: DepartmentType) => {
   });
 
   if (!response.ok) {
-    throw new Error("Error creating depart");
+   null
   }
 
   const data = await response.json();

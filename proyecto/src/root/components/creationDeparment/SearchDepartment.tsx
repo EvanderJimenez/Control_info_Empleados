@@ -4,16 +4,20 @@ interface getDepartment {
   handleGet: (id: string) => void;
 }
 export const SearchDepartment = ({ handleGet, ...props }: getDepartment) => {
+  const [searchValue, setSearchValue] = useState("");
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleGet("deportes");
+    handleGet(searchValue);
+  };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
   };
 
   return (
     <div>
       <form className="flex items-center" onSubmit={handleSubmit}>
         <label htmlFor="voice-search" className="sr-only">
-          Search
+          Search name department
         </label>
         <div className="relative w-full">
           <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -35,8 +39,10 @@ export const SearchDepartment = ({ handleGet, ...props }: getDepartment) => {
           <input
             type="text"
             id="voice-search"
-            className="bg-gray-50  border-gray-300 text-black text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-darkBlue dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search "
+            className="bg-gray-50 border-gray-300 text-black text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-darkBlue dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Search"
+            value={searchValue}
+            onChange={handleInputChange}
           />
           <button
             type="button"

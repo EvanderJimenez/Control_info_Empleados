@@ -20,10 +20,20 @@ export const selectUpdateEmployee = (state: RootState) =>
 export const selectGetEmployeeByUid = (state: RootState) =>
   state.getEmployeeByUidStore.getEmployeeByUid;
 
+  export const selectGetEmployeeByUid2 = (state: RootState) =>
+  state.getEmployeeByUidStore.getEmployeeByUid2;
+
+  export const selectGetEmployeeByUid3 = (state: RootState) =>
+  state.getEmployeeByUidStore.getEmployeeByUid3;
+
 export const selectLogin = (state: RootState) => state.loginStore.login;
 
 export const selectGetByVariable = (state: RootState) =>
   state.getByVariableStore.getByVariable;
+
+  export const selectGetByVariable2 = (state: RootState) =>
+  state.getByVariable2Store.getByVariable2;
+
 
 export const selectGetAllBosses = (state: RootState) =>
   state.getAllBossesStore.getAllBosses;

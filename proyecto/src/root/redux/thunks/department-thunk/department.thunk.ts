@@ -1,7 +1,7 @@
 import { DispatchTypeGetByIdEmployee, getDepartmentByIdEmployeeReducer } from "../../reducers/department-reducer/getDepartmentById/GetDepartmentByIdEmployee";
 import { departProvider } from "../../provider";
 import { DispatchTypeGetAllDepartments, getAllDepartmentsReducer } from "../../reducers/department-reducer/getAllDepartments/GetAllDepartmentsReducer";
-import { DispatchTypeByIDoc, getDepartmentByDocIdReducer } from "../../reducers/department-reducer/getDepartmentByDocId/GetDepartmentByDocIdReducer";
+import { DispatchTypeByIDoc, getDepartmentByDocIdReducer, resetDepartmentByDocIdReducer } from "../../reducers/department-reducer/getDepartmentByDocId/GetDepartmentByDocIdReducer";
 import { DispatchTypeUpdateDepartment, updateDepartmentByIdReducer } from "../../reducers/department-reducer/updateDepartmentById/UpdateDepartmentByIdReducer";
 import { DepartmentType } from "@/root/types/Department.type";
 import { DispatchTypeCreateDepartment, createDepartmentReducer } from "../../reducers/department-reducer/createDepartment/CreateDepartmentReducer";
@@ -36,6 +36,12 @@ export const startGetDepartByIdDoc = (searchTerm: string): any => {
     const response = await departProvider.getDepartmentByDocIdProvider(searchTerm);
 
     dispatch(getDepartmentByDocIdReducer(response || null));
+  };
+};
+
+export const StartResetDepartByIdDoc = (): any => {
+  return async (dispatch: DispatchTypeByIDoc) => {
+    dispatch(resetDepartmentByDocIdReducer());
   };
 };
 

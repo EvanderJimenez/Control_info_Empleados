@@ -73,6 +73,9 @@ const JustificationRequest = () => {
   }, [employeeByUid, dispatch]);
 
   return (
+    <>
+    <h1 className="text-center font-bold text-darkBlue pb-5 text-lg">Employee justifications section</h1>
+
     <div className="flex flex-col lg:flex-row overflow-hidden pb-14">
       <div className="w-full lg:w-1/4 p-3">
         <div className="flex flex-col mb-3 items-center">
@@ -85,13 +88,13 @@ const JustificationRequest = () => {
           />
         </div>
       </div>
-      <div className="w-full lg:w-3/4 p-3">
-        <div className="flex flex-col lg:flex-row justify-around items-center mb-3">
+      <div className="w-full flex justify-center flex-col items-center space-y-4 lg:w-3/4 p-3">
+        <div className="flex flex-row lg:flex-row justify-between w-1/2 items-center mb-3">
           <label className="font-semibold text-center">
             From: {selectedRequest?.employeeName || ""}
           </label>
           <label className="font-semibold text-center">
-            Date: {selectedRequest?.key || ""}
+          📅 {selectedRequest?.key || ""}
           </label>
         </div>
         <FormAcceptDeniedJustification
@@ -102,6 +105,7 @@ const JustificationRequest = () => {
         />
       </div>
     </div>
+    </>
   );
 };
 

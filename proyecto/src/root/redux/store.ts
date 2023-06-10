@@ -7,7 +7,6 @@ import { CreateEmployeeReducer } from "./reducers/employee-reducer/createEmploye
 import { ListEmployeesReducer } from "./reducers/employee-reducer/listEmployees/ListEmployeeReducer";
 import { UpdateEmployeeReducer } from "./reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
 import { GetByVariableReducer } from "./reducers/employee-reducer/getByVariable/GetByVariableReducer";
-import { GetEmployeesByIdDepartmentReducer } from "./reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
 import { GetAllBossReducer } from "./reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
 import { DeleteEmployeesReducer } from "./reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
 import { GetAllDepartmentsReducer } from "./reducers/department-reducer/getAllDepartments/GetAllDepartmentsReducer";
@@ -27,6 +26,8 @@ import { GetFileURLByNameReducer } from "./reducers/employee-reducer/getFileURLB
 import { GetDepartmentByNameReducer } from "./reducers/department-reducer/getDepartmentByName/GetDepartmentByNameReducer";
 import { GetByPageDepartmentsReducer } from "./reducers/department-reducer/getDepartmentsByPage/GetDepartmentsByPage";
 import { AlertReducer } from "./reducers/alertHandler-reducer/AlertHandlerReducer";
+import { GetEmployeesByIdDepartmentReducerReducer } from "./reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
+import { LoadDataReducer } from "./reducers/loading-reducer/LoadDataReducer";
 
 export const ApplicationStore = configureStore({
   reducer: {
@@ -37,14 +38,19 @@ export const ApplicationStore = configureStore({
     createEmployeeStore: CreateEmployeeReducer,
     updateEmployeeStore: UpdateEmployeeReducer,
     loading: LoadReducer,
+
     getEmployeeByUidStore: GetEmployeeByUidReducer,
+    getEmployeeByUid2Store: GetEmployeeByUidReducer,
+    getEmployeeByUid3Store: GetEmployeeByUidReducer,
+
     loginStore: LoginReducer,
     getByVariableStore: GetByVariableReducer,
+    getByVariable2Store: GetByVariableReducer,
     getByVariableAdminStore: GetByVariableAdminReducer,
     getVacationsByUidStore: VacationsReducer,
     getAllBossesStore: GetAllBossReducer,
-    getEmployeesByIdDepartmentStore: GetEmployeesByIdDepartmentReducer,
-    getEmployeesByIdDepartmentJustificationsStore: GetEmployeesByIdDepartmentReducer,
+    getEmployeesByIdDepartmentStore: GetEmployeesByIdDepartmentReducerReducer,
+    getEmployeesByIdDepartmentJustificationsStore: GetEmployeesByIdDepartmentReducerReducer,
     uploadFile: UpdateFileEmployeeReducer,
 
     getAllDepartmentStore: GetAllDepartmentsReducer,
@@ -59,6 +65,9 @@ export const ApplicationStore = configureStore({
     updateBrands: UpdateBrandsReducer,
     GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer,
     GetFileURLByNameStore: GetFileURLByNameReducer,
+
+    LoadDataStore: LoadDataReducer,
+    LoadDataBossStore: LoadDataReducer
   },
 });
 

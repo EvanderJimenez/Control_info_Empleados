@@ -20,7 +20,7 @@ interface methods {
   setHoursFin: React.Dispatch<React.SetStateAction<string>>;
   setHoursIni: React.Dispatch<React.SetStateAction<string>>;
   setUpdateDateTime: React.Dispatch<React.SetStateAction<boolean>>;
-} 
+}
 
 let value: string;
 
@@ -71,7 +71,7 @@ export const BrandsEmployee = ({
     }
 
     const year = new Date(currentDate).getFullYear();
-    const nameCycle = monthCycle.toString() + year.toString();
+    const nameCycle = year.toString() + monthCycle.toString();
     await handleUpdateCycleHours(nameCycle).then(
       async (updatedBrandData: any) => {
         if (updatedBrandData) {
@@ -82,7 +82,7 @@ export const BrandsEmployee = ({
               const markStart = existingHours.hIni;
               const markEnd = existingHours.hFin;
               if (checkMarkHours(markStart, markEnd)) {
-                toast.success("The hours match. Performing update...");
+                toast.success("The hours match. Performing update");
                 value = "true";
               } else {
                 toast.error("The mark hours do not match the defined hours.");

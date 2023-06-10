@@ -50,44 +50,19 @@ export default function TabsDepartments({
   setNameDepart,
   ...props
 }: methods) {
-  const [activeTab, setActiveTab] = useState("Profile");
+  const [activeTab, setActiveTab] = useState("ListDepartment");
   const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
   const [jobPosition, setJobPosition] = useState("");
+  const [option, setOption] = useState("FormDepartment");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen h-auto w-auto">
+    <div className="flex  flex-col min-h-screen h-auto w-auto">
       <div className="w-full h-full">
-        <section className="flex flex-wrap -mb-px mb-4" role="tablist">
-          <div className="mr-2" role="presentation">
+        <section role="tablist">
+          <div className="mr-2 flex justify-center" role="presentation">
             <button
-              className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
-                activeTab === "FormDepartment" ? "active" : ""
-              }`}
-              id="FormDepartment-tab"
-              type="button"
-              role="tab"
-              onClick={() => setActiveTab("FormDepartment")}
-            >
-              Form Department
-            </button>
-          </div>
-          <div className="mr-2" role="presentation">
-            <button
-              className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
-                activeTab === "ListEmployee" ? "active" : ""
-              }`}
-              id="ListEmployee-tab"
-              type="button"
-              role="tab"
-              onClick={() => setActiveTab("ListEmployee")}
-            >
-              List Employee
-            </button>
-          </div>
-          <div className="mr-2" role="presentation">
-            <button
-              className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
+              className={`bg-darkBlue  py-4 px-4 text-sm font-medium text-center ${
                 activeTab === "ListDepartment" ? "active" : ""
               }`}
               id="ListDepartment-tab"
@@ -95,33 +70,7 @@ export default function TabsDepartments({
               role="tab"
               onClick={() => setActiveTab("ListDepartment")}
             >
-              List Department
-            </button>
-          </div>
-          <div className="mr-2" role="presentation">
-            <button
-              className={` bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
-                activeTab === "EditEmployee" ? "active" : ""
-              }`}
-              id="EditEmployee-tab"
-              type="button"
-              role="tab"
-              onClick={() => setActiveTab("EditEmployee")}
-            >
-              Edit Employees
-            </button>
-          </div>
-          <div role="presentation">
-            <button
-              className={`bg-blue inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 ${
-                activeTab === "FormEmployee" ? "active" : ""
-              }`}
-              id="FormEmployee-tab"
-              type="button"
-              role="tab"
-              onClick={() => setActiveTab("FormEmployee")}
-            >
-              Form Employee
+              List department
             </button>
           </div>
         </section>
@@ -133,64 +82,23 @@ export default function TabsDepartments({
             handleUpdate={handleUpdate}
           />
         )}
-        {activeTab === "ListEmployee" && (
-          <>
-            <div className="w-full h-full">
-              <SearchEmployeeDepart
-                labelInputSeekerOne="text"
-                valueEnd={cedula}
-                placeholderSeekerOne="Cedula"
-                typeList="cedula"
-                id="cedula"
-              />
-              <SearchEmployeeDepart
-                labelInputSeekerOne="text"
-                valueEnd={name}
-                placeholderSeekerOne="Name"
-                typeList="name"
-                id="name"
-              />
-              <SearchEmployeeDepart
-                labelInputSeekerOne="text"
-                valueEnd={jobPosition}
-                placeholderSeekerOne="Job Position"
-                typeList="jobPosition"
-                id="jobPosition"
-              />
-              <ListEmployeeDepart
-                setPassIdEmployee={setPassIdEmployee}
-                setIdNameEmployee={setIdNameEmployee}
-              />
-            </div>
-          </>
-        )}
         {activeTab === "ListDepartment" && (
           <>
-            <div className="w-full h-full">
+            <div>
               <ListDepartment
                 handleGetDepartment={handleGetDepartment}
                 setPassId={setPassId}
                 setNameDepart={setNameDepart}
+                option={activeTab}
+                setOption={setActiveTab}
               />
             </div>
           </>
         )}
         {activeTab === "EditEmployee" && (
           <Table
-            handleUpdateEmployee={handleUpdateEmployee}
             departmentsData={departmentsData}
             handleDeleteEmployee={handleDeleteEmployee}
-          />
-        )}
-        {activeTab === "FormEmployee" && (
-          <AddEmployee
-            handleSubmitEmployee={handleSubmitEmployee}
-            newEmployee={newEmployee}
-            newEmployeeData={newEmployeeData}
-            setNewEmployee={setNewEmployee}
-            setNewEmployeeData={setNewEmployeeData}
-            setNewEmployeeId={props.setNewEmployeeId}
-            newEmployeeId={props.newEmployeeId}
           />
         )}
       </div>
