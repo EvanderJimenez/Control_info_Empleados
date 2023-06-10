@@ -212,7 +212,7 @@ function MethodsDepartments(props: RegisterProps) {
     });
   };
   return (
-    <div>
+    <div className="pt-2">
       <TabsDepartments
         handleUpdateEmployee={handleUpdateEmployee}
         setPassId={setPassId}
