@@ -106,7 +106,7 @@ const CreateDepartment = () => {
           <div className="p-3 justify-center">
 
           </div>
-          <div className="flex flex-wrap mb-4 items-center justify-between">
+          <div className="flex flex-wrap pb-4 items-center justify-between">
             <div>
               <label className="block text-md font-semibold mb-4">
                 Sub department

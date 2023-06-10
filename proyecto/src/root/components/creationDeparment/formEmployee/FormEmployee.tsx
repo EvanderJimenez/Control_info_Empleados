@@ -116,31 +116,35 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
               />
             </div>
             <div className="flex flex-wrap ">
-              <InputDepartment
-                label="Location"
-                type="location"
-                name="location"
-                value={departmentNew.location}
-                id="location"
-                onChange={handleInputChange}
-              />
-              <InputDepartment
-                label="Area Belongs"
-                type="level"
-                name="level"
-                value={departmentNew.level}
-                id="level"
-                onChange={handleInputChange}
-              />
-              <InputDepartment
-                label="Sub department"
-                type="level"
-                name="level"
-                value={departmentNew.level}
-                id="level"
-                onChange={handleInputChange}
-              />
+              <div className="flex flex-row w-full">
+                <InputDepartment
+                  label="Location"
+                  type="location"
+                  name="location"
+                  value={departmentNew.location}
+                  id="location"
+                  onChange={handleInputChange}
+                />
+                <InputDepartment
+                  label="Area Belongs"
+                  type="level"
+                  name="level"
+                  value={departmentNew.level}
+                  id="level"
+                  onChange={handleInputChange}
+                />
+              </div>
 
+              <div className="flex flex-col w-full" >
+                <InputDepartment
+                  label="Sub department"
+                  type="level"
+                  name="level"
+                  value={departmentNew.level}
+                  id="level"
+                  onChange={handleInputChange}
+                />
+              </div>
               <div className="flex justify-center w-full">
                 <div className="flex justify-center flex-col mb-5">
                   <ComboVoxSubDepartments
@@ -168,7 +172,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
           </form>
         </div>
 
-        <div className="w-full md:w-1/2 px-3 mb-6 ">
+        <div className="w-full md:w-1/2 px-3  mb-6 ">
           <label className="block  text-md font-bold mb-2">
             Boss
           </label>
@@ -185,11 +189,11 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
             id="boss"
             placeholder="Boss"
             readOnly
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-indigo-500"
+            className=" block w-full rounded py-3 px-4 leading-tight mb-2 focus:outline-none focus:bg-white"
           />
           <>
             <div className="w-full h-full items-center justify-center">
-              <span>Select Boss</span>
+              <span className="text-darkBlue font-bold text-center text-md"> <p>Select Boss</p></span>
               <SearchEmployeeDepart
                 labelInputSeekerOne="text"
                 valueEnd={cedula}
