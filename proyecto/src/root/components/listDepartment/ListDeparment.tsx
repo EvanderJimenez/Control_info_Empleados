@@ -113,12 +113,12 @@ export const ListDepartment = ({
   const endIndex = startIndex + pageSize;
   const currentDepartments = filteredDepartments.slice(startIndex, endIndex);
   return (
-    <div className="bg-white shadow overflow-hidden flex flex-col rounded-lg p-2 sm:p-4">
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
+    <div className=" shadow flex pb-12 flex-col ">
+      <div className="text-center">
+        <h2 className="text-xl text-darkBlue font-bold ">
           Departments
         </h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
+        <p className="mt-2 text-lg font-semibold">
           Available departments of the company
         </p>
       </div>
@@ -129,17 +129,7 @@ export const ListDepartment = ({
       </div>
 
       <div className="overflow-x-auto">
-        <div className="flex flex-col md:flex-row mb-4">
-          <div className="w-full flex flex-col space-y-2 md:w-1/2 md:pr-2 mb-2 md:mb-0">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleInputChange}
-              className="border rounded-md px-2 py-1 sm:py-2 sm:text-sm focus:outline-none"
-              placeholder="Search department..."
-            />
-          </div>
-        </div>
+
         <TableList
           handle={handle}
           handleGetDepartment={handleGetDepartment}
@@ -148,9 +138,10 @@ export const ListDepartment = ({
           setOption={setOption}
         />
       </div>
-      <div className="flex justify-between mt-4">
+      <div className="flex w-full justify-center">
+     <section className="flex w-1/2 justify-between mt-4">
         <button
-          className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="bg-darkBlue font-semibold"
           onClick={handlePreviousPage}
           disabled={currentPage === 0}
         >
@@ -158,12 +149,14 @@ export const ListDepartment = ({
         </button>
 
         <button
-          className="inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 border border-transparent text-xs sm:text-sm font-medium rounded-md shadow-sm text-white bg-black hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="bg-darkBlue font-semibold"
           onClick={handleNextPage}
         >
           Next
         </button>
+      </section>
       </div>
+ 
     </div>
   );
 };

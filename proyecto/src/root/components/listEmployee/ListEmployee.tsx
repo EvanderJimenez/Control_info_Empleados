@@ -78,8 +78,6 @@ const ListEmployee = ({
                     <div className="flex justify-center items-center space-x-2">
                       <img src="/Images/emailBlackIcon.png" alt="emailOfEmployee" />
                       <p className="mt-2 font-semibold"> {item.email}</p>
-
-                      <p>{item.jobPosition}</p>
                     </div>
                     <div className="flex justify-center">
                       <button

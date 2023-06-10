@@ -79,7 +79,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
 
   return (
     <div className="flex flex-wrap ">
-      <div className="mx-auto max-w-2xl text-center">
+      <div className="mx-auto  text-center">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl py-2 px-2 pt-5 pd-5">
           Departments
         </h2>
@@ -144,7 +144,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
               <button
                 type="submit"
                 className={`bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded ${
-                  update ? "bg-green-500 hover:bg-green-700" : ""
+                  update ? "" : ""
                 }`}
               >
                 Update
