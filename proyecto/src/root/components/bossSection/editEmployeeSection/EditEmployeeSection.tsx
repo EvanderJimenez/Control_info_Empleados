@@ -53,7 +53,7 @@ export default function EditEmployeeSection() {
     event.preventDefault();
     
     if(dataEmployee.uid){
-      console.log(dataEmployee.uid)
+     
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
     setClear(true);
 handleClear()

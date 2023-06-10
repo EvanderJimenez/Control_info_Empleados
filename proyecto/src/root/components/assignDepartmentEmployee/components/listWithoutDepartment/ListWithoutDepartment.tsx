@@ -42,9 +42,9 @@ const ListWithoutDepartment = ({
   useEffect(() => {  
     if(employeesWithoutDepart.length === 0 || change) {
       dispatch(StarGetEmployeesByIdDepartment("0"));
-      console.log(employeesWithoutDepart)
+   
     }
-    console.log(employeesWithoutDepart)
+ 
   }, [dispatch, change]);
 
   return (
