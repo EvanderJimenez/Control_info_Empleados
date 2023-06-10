@@ -55,8 +55,7 @@ export default function EditEmployeeSection() {
       console.log(dataEmployee.uid)
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
     setClear(true);
-    dispatch(ResetEmployeeByUid2());
-    dispatch(ResetByVariable());
+handleClear()
     toast.success("saved successfully");
     }else {
       toast("⚠ No employees have been loaded ");
@@ -108,6 +107,7 @@ export default function EditEmployeeSection() {
       dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
       setListEmployees([])
+      dispatch(ResetByVariable());
       toast.success("Clear all");
     }else {
       setListEmployees([])

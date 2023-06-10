@@ -45,6 +45,7 @@ export const ApplicationStore = configureStore({
 
     loginStore: LoginReducer,
     getByVariableStore: GetByVariableReducer,
+    getByVariable2Store: GetByVariableReducer,
     getByVariableAdminStore: GetByVariableAdminReducer,
     getVacationsByUidStore: VacationsReducer,
     getAllBossesStore: GetAllBossReducer,
