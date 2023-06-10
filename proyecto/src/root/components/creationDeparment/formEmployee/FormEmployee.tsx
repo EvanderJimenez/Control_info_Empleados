@@ -9,6 +9,7 @@ import {
   selectGetDepartmentById,
   selectGetEmployeeByUid,
   selectGetEmployeeByUid2,
+  startGetAllDepartment,
   startUpdateDepartment,
 } from "@/root/redux";
 import ComboVoxSubDepartments from "../comboVoxSubDepartments/ComboVoxSubDepartments";
@@ -94,6 +95,15 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   };
 
   useEffect(() => {
+    
+    if(departmentsList.length === 0){
+      dispatch(startGetAllDepartment());
+      console.log(departmentsList)
+    }
+    console.log(departmentsList)
+  }, []);
+
+  useEffect(() => {
     if(dataEmployeeUid2 && dataEmployeeUid2.uid.length > 0) {
       console.log(dataEmployeeUid2)
       const newEmployee2 : EmployeesType = {...dataEmployeeUid2, jobPosition:"employee" }
@@ -121,7 +131,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
     if (departmentsList) {
       setDepartments(departmentsList);
     }
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
   
