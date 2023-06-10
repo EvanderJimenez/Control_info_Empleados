@@ -4,10 +4,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface GetByVariableState {
     getByVariable: EmployeesType []
+    getByVariable2: EmployeesType []
   }
 
   export const initialStateByVariable: GetByVariableState = {
-    getByVariable:[]
+    getByVariable:[],
+    getByVariable2:[]
 
 };
 
@@ -23,14 +25,20 @@ interface GetByVariableState {
     reducers: {
 
         getByVariableReducer: (state, action: PayloadAction<EmployeesType[]>) =>{
-        return {getByVariable: action.payload}
+        return {...state,getByVariable: action.payload}
       },
       resetByVariable: (state) => {
         state.getByVariable = [];
       },
+      getByVariable2Reducer: (state, action: PayloadAction<EmployeesType[]>) =>{
+        return {...state, getByVariable2: action.payload}
+      },
+      resetByVariable2: (state) => {
+        state.getByVariable2 = [];
+      },
     },
   });
 
-  export const {getByVariableReducer,resetByVariable } = GetByVariableSlice.actions;
+  export const {getByVariableReducer,resetByVariable,getByVariable2Reducer,resetByVariable2 } = GetByVariableSlice.actions;
   export const GetByVariableReducer = GetByVariableSlice.reducer;
   export type DispatchTypeByVariable = (args: EmployeeByVariableAction) => EmployeeByVariableAction;

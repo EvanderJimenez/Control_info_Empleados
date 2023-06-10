@@ -2,7 +2,7 @@ import InputLabel from "@/root/components/ui/InputLabel/InputLabel";
 import InputFloatLabel from "@/root/components/ui/InputFloatLabel/InputFloatLabel";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ResetByVariable, StartGetByVariable, selectLogin } from "@/root/redux";
+import { ResetByVariable, ResetByVariable2, StartGetByVariable, StartGetByVariable2, selectLogin } from "@/root/redux";
 
 const   Filters = () => {
   const [name, setName] = useState("");
@@ -11,11 +11,11 @@ const   Filters = () => {
 
   const handleSearch = async () =>{
 
-    dispatch(StartGetByVariable(name, "name", userLogin.idDepartment || '' ));
+    dispatch(StartGetByVariable2(name, "name", userLogin.idDepartment || '' ));
 
   }
   const handleClear = async () =>{
-    dispatch(ResetByVariable())
+    dispatch(ResetByVariable2())
     setName("")
   }
 

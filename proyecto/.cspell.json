@@ -9,6 +9,7 @@
         "AUTHDOMAIN",
         "MEASUREMENTID",
         "MESSAGINGSENDERID",
+        "namesub",
         "PROJECTID",
         "reduxjs",
         "STORAGEBUCKET"

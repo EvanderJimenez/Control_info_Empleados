@@ -23,13 +23,19 @@ import {
 } from "../../reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
 import {
   DispatchTypeEmployeeByUid,
+  getEmployeeByUid2Reducer,
+  getEmployeeByUid3Reducer,
   getEmployeeByUidReducer,
   resetEmployeeByUid,
+  resetEmployeeByUid2,
+  resetEmployeeByUid3,
 } from "../../reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 import {
   DispatchTypeByVariable,
+  getByVariable2Reducer,
   getByVariableReducer,
   resetByVariable,
+  resetByVariable2,
 } from "../../reducers/employee-reducer/getByVariable/GetByVariableReducer";
 import {
   DispatchTypeVacations,
@@ -164,6 +170,35 @@ export const ResetEmployeeByUid = (): any => {
   };
 };
 
+export const StartGetEmployeeByUid2 = (searchTerm: string): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
+
+    dispatch(getEmployeeByUid2Reducer(employee || null));
+  };
+};
+
+export const ResetEmployeeByUid3 = (): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    dispatch(resetEmployeeByUid3());
+  };
+};
+
+export const StartGetEmployeeByUid3 = (searchTerm: string): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
+
+    dispatch(getEmployeeByUid3Reducer(employee || null));
+  };
+};
+
+export const ResetEmployeeByUid2 = (): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    dispatch(resetEmployeeByUid2());
+  };
+};
+
+
 export const StartResetUrl = (): any => {
   return async (dispatch: DispatchTypeGetFileURLByName) => {
     dispatch(resetUrlReducer());
@@ -207,6 +242,22 @@ export const StartGetByVariable = (
   };
 };
 
+export const StartGetByVariable2 = (
+  searchTerm1: string,
+  searchTerm2: string,
+  searchTerm3: string
+): any => {
+  return async (dispatch: DispatchTypeByVariable) => {
+    const response = await providerRedux.getByVariableProvider(
+      searchTerm1,
+      searchTerm2,
+      searchTerm3
+    );
+
+    dispatch(getByVariable2Reducer(response || null));
+  };
+};
+
 export const StartGetByVariableAdmin = (
   searchTerm1: string,
   searchTerm2: string
@@ -230,6 +281,12 @@ export const ResetByVariableAdmin = (): any => {
 export const ResetByVariable = (): any => {
   return async (dispatch: DispatchTypeByVariable) => {
     dispatch(resetByVariable());
+  };
+};
+
+export const ResetByVariable2 = (): any => {
+  return async (dispatch: DispatchTypeByVariable) => {
+    dispatch(resetByVariable2());
   };
 };
 

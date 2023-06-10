@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   StartListOfEmployee,
   StartGetEmployeeByUid,
+  StartGetEmployeeByUid2,
 } from "../../redux/thunks/employee-thunk/employee.thunk";
 import { RootState } from "../../redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
@@ -34,17 +35,13 @@ const ListEmployee = ({
 
   const listAllEmployees = useSelector(selectGetEmployeesByIdDepartment);
   const employeesListVariable = useSelector(selectGetByVariable);
-  const department = useSelector(selectGetByIdDocDepartment);
 
-  const getEmployeeByUid = useSelector(
-    (state: RootState) => state.getEmployeeByUidStore.getEmployeeByUid
-  );
   const loading = useSelector((state: RootState) => state.loading.loading);
 
   const loginState = useSelector(selectLogin);
 
   const handleLoad = (uid: string) => {
-    dispatch(StartGetEmployeeByUid(uid));
+    dispatch(StartGetEmployeeByUid2(uid));
     setClear(false);
   };
 

@@ -25,6 +25,24 @@ const TableSchedules = ({
   handleEditClick,
   handleDeleteSchedule,
 }: tableShedul) => {
+  const validateFormat = (inputValue: string) => {
+    const regex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+    return regex.test(inputValue);
+  };
+
+  const handleNewHIniChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (validateFormat(inputValue)) {
+      setNewHIni(inputValue);
+    }
+  };
+
+  const handleNewHFinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (validateFormat(inputValue)) {
+      setNewHFin(inputValue);
+    }
+  };
   return (
     <div className="flex justify-center  overflow-auto flex-wrap">
       <table className="w-full sm:ml-6 md:ml-6">
@@ -46,9 +64,9 @@ const TableSchedules = ({
                   <td className="py-2 px-4 border-b">
                     {isEditing && editingIndex === index ? (
                       <input
-                        type="text"
+                        type="time"
                         value={newHIni}
-                        onChange={(e) => setNewHIni(e.target.value)}
+                        onChange={handleNewHIniChange}
                         className="w-full py-1 px-2 border rounded-md bg-white text-gray-700"
                       />
                     ) : (
@@ -58,10 +76,11 @@ const TableSchedules = ({
                   <td className="py-2 px-4 border-b">
                     {isEditing && editingIndex === index ? (
                       <input
-                        type="text"
+                        type="time"
                         value={newHFin}
-                        onChange={(e) => setNewHFin(e.target.value)}
+                        onChange={handleNewHFinChange}
                         className="w-full py-1 px-2 border rounded-md bg-white text-gray-700"
+                        pattern="[0-9]{2}:[0-9]{2}"
                       />
                     ) : (
                       hours.hFin

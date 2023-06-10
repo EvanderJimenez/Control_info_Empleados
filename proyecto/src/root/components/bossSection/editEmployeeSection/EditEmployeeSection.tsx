@@ -5,12 +5,14 @@ import ListEmployee from "../../listEmployee/ListEmployee";
 import {
   selectGetByVariable,
   selectGetEmployeeByUid,
+  selectGetEmployeeByUid2,
   selectGetFileURLByName,
 } from "@/root/redux/selectors/employee-selector/employee.selector";
 import { EmployeesType, Files } from "@/root/types/Employee.type";
 import {
   ResetByVariable,
   ResetEmployeeByUid,
+  ResetEmployeeByUid2,
   StarGetFileURLByName,
   StartDismissEmployee,
   StartGetByVariable,
@@ -30,7 +32,7 @@ import ListAllEmployees from "./components/listAllEmployees/ListAllEmployees";
 
 export default function EditEmployeeSection() {
   const fileLoad = useSelector(selectGetFileURLByName);
-  const employeeByUid = useSelector(selectGetEmployeeByUid);
+  const employeeByUid2 = useSelector(selectGetEmployeeByUid2);
   const dispatch = useDispatch();
 
   const [clear, setClear] = useState(false);
@@ -53,8 +55,7 @@ export default function EditEmployeeSection() {
       console.log(dataEmployee.uid)
     dispatch(StartUpDateEmployee(dataEmployee.uid || "", dataEmployee));
     setClear(true);
-    dispatch(ResetEmployeeByUid());
-    dispatch(ResetByVariable());
+handleClear()
     toast.success("saved successfully");
     }else {
       toast("⚠ No employees have been loaded ");
@@ -63,13 +64,13 @@ export default function EditEmployeeSection() {
   };
   useEffect(() => {
     if (!clear) {
-      if (employeeByUid) {
-        setDataEmployee(employeeByUid);
+      if (employeeByUid2) {
+        setDataEmployee(employeeByUid2);
       }
     } else {
       setDataEmployee(initialDataEmployee);
     }
-  }, [employeeByUid, clear]);
+  }, [employeeByUid2, clear]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -77,8 +78,8 @@ export default function EditEmployeeSection() {
   };
 
   const handleDismissEmployee = () => {
-    if (employeeByUid && employeeByUid.uid) {
-      dispatch(StartDismissEmployee(employeeByUid.uid));
+    if (employeeByUid2 && employeeByUid2.uid) {
+      dispatch(StartDismissEmployee(employeeByUid2.uid));
       toast.error("Fired employee");
     } else {
       toast("⚠ No employees have been loaded ");
@@ -88,7 +89,7 @@ export default function EditEmployeeSection() {
   const handleDownload = async () => {
     dispatch(
       StarGetFileURLByName(
-        employeeByUid?.uid || "",
+        employeeByUid2?.uid || "",
         selectOption?.urlFile || ""
       )
     );
@@ -103,13 +104,14 @@ export default function EditEmployeeSection() {
 
   const handleClear = async () => {
     if(dataEmployee.uid){
-      dispatch(ResetEmployeeByUid());
+      dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
       setListEmployees([])
+      dispatch(ResetByVariable());
       toast.success("Clear all");
     }else {
       setListEmployees([])
-      dispatch(ResetEmployeeByUid());
+      dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
     }
   };
@@ -137,8 +139,8 @@ export default function EditEmployeeSection() {
     }
   }, [fileLoad, change]);
 
-  const files: Files[] = employeeByUid?.files
-    ? Object.values(employeeByUid.files)
+  const files: Files[] = employeeByUid2?.files
+    ? Object.values(employeeByUid2.files)
     : [];
     
     const countEmployees = listEmployees.length
