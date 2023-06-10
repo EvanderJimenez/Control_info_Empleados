@@ -77,11 +77,11 @@ const VacationsRequestBoss = () => {
     <>
       <h1 className="text-center text-darkBlue pb-5  text-lg font-bold">Approval or denial of vacation requests</h1>
       <div className="flex flex-col lg:flex-row overflow-hidden pb-14">
-        <div className="w-full lg:w-1/2">
-          <div className="flex flex-col mb-3 justify-center items-center">
+        <div className="w-full shadow-2xl lg:w-1/2">
+          <div className="flex flex-col mb-3 ml-4 justify-center items-center">
             <Filters />
           </div>
-          <div>
+          <div className="flex justify-center">
             <ListRequestVacations option={optionSelect} selectedRequest={setSelectedRequest} />
           </div>
         </div>
