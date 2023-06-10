@@ -23,8 +23,12 @@ import {
 } from "../../reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
 import {
   DispatchTypeEmployeeByUid,
+  getEmployeeByUid2Reducer,
+  getEmployeeByUid3Reducer,
   getEmployeeByUidReducer,
   resetEmployeeByUid,
+  resetEmployeeByUid2,
+  resetEmployeeByUid3,
 } from "../../reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 import {
   DispatchTypeByVariable,
@@ -163,6 +167,35 @@ export const ResetEmployeeByUid = (): any => {
     dispatch(resetEmployeeByUid());
   };
 };
+
+export const StartGetEmployeeByUid2 = (searchTerm: string): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
+
+    dispatch(getEmployeeByUid2Reducer(employee || null));
+  };
+};
+
+export const ResetEmployeeByUid3 = (): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    dispatch(resetEmployeeByUid3());
+  };
+};
+
+export const StartGetEmployeeByUid3 = (searchTerm: string): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
+
+    dispatch(getEmployeeByUid3Reducer(employee || null));
+  };
+};
+
+export const ResetEmployeeByUid2 = (): any => {
+  return async (dispatch: DispatchTypeEmployeeByUid) => {
+    dispatch(resetEmployeeByUid2());
+  };
+};
+
 
 export const StartResetUrl = (): any => {
   return async (dispatch: DispatchTypeGetFileURLByName) => {

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import InputDepartment from "../input/InputDepartment";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ResetEmployeeByUid2,
+  StartGetEmployeeByUid2,
   StartUpDateEmployee,
   selectGetAllDepartment,
   selectGetDepartmentById,
   selectGetEmployeeByUid,
+  selectGetEmployeeByUid2,
   startUpdateDepartment,
 } from "@/root/redux";
 import ComboVoxSubDepartments from "../comboVoxSubDepartments/ComboVoxSubDepartments";
@@ -17,6 +20,7 @@ import { EmployeesType } from "@/root/types/Employee.type";
 import { initialDepartmet } from "@/root/constants/department/department.constants";
 import { Department } from "@/root/interface/departments";
 import { updateDepartmentByIdReducer } from "@/root/redux/reducers/department-reducer/updateDepartmentById/UpdateDepartmentByIdReducer";
+import { resetEmployeeByUid } from "@/root/redux/reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 
 interface infoDepart {
   departmentsData: Department;
@@ -28,6 +32,7 @@ interface infoDepart {
 export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   const dispatch = useDispatch();
   const dataDepart = useSelector(selectGetDepartmentById);
+  const dataEmployeeUid2 = useSelector(selectGetEmployeeByUid2)
 
   const [update, setUpdate] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -35,6 +40,9 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   const [departments, setDepartments] = useState<DepartmentType[]>([]);
   const [cedula, setCedula] = useState("");
   const [name, setName] = useState("");
+  const [nameSubDepartment, setNameSubDepartment] = useState("");
+  const [leader, setLeader] = useState("");
+  const [idLeader, setIdLeader] = useState("");
   const employeeUid = useSelector(selectGetEmployeeByUid);
   const [departmentNew, setDepartmentNew] =
     useState<DepartmentType>(initialDepartmet);
@@ -44,38 +52,88 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
     setDepartmentNew((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleClear = async () => {
+    setDepartmentNew(initialDepartmet)
+    setLeader("")
+    setNameSubDepartment("")
+    await dispatch(resetEmployeeByUid())
+    await dispatch(ResetEmployeeByUid2())
+  }
+
+  const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (departmentNew && employeeUid) {
+    if (departmentNew && departmentNew.name.length > 0 && employeeUid) {
       const idDepartment = dataDepart.id;
       const upDateDepart: Department = {
         ...departmentNew,
-        leader: employeeUid.name,
-        idEmployee: employeeUid.uid,
+        leader: leader,
+        idEmployee: idLeader,
+        namesubDepartment: nameSubDepartment,
+        subDepartment:selectedOption
       };
-      dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart));
+      console.log(upDateDepart)
+      await dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart));
 
-      const updateEmployee: EmployeesType = {
-        ...employeeUid,
-        idDepartment: idDepartment,
-        jobPosition: "boss",
-      };
-
-      dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee));
+      if(departmentNew.idEmployee){
+        console.log("enter333")
+        await dispatch(StartGetEmployeeByUid2(departmentNew.idEmployee))
+      }
+      if(employeeUid && employeeUid.uid.length > 0){
+        const updateEmployee: EmployeesType = {
+          ...employeeUid,
+          idDepartment: idDepartment,
+          jobPosition: "boss",
+        };
+        console.log(updateEmployee)
+       await dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee));
+      }
+      handleClear()
     } else {
       toast.error("select a department to update");
     }
   };
+
+  useEffect(() => {
+    if(dataEmployeeUid2 && dataEmployeeUid2.uid.length > 0) {
+      console.log(dataEmployeeUid2)
+      const newEmployee2 : EmployeesType = {...dataEmployeeUid2, jobPosition:"employee" }
+      console.log(newEmployee2)
+      dispatch(StartUpDateEmployee(newEmployee2.uid, newEmployee2))
+    }
+  }, [dataEmployeeUid2])
+
   useEffect(() => {
     if (dataDepart) {
       setDepartmentNew(dataDepart);
+      if(dataDepart.subDepartment){
+        setSelectedOption(dataDepart.subDepartment)
+      }
+      if(dataDepart.namesubDepartment){
+        setNameSubDepartment(dataDepart.namesubDepartment)
+      }
+      if(dataDepart.leader){
+        setLeader(dataDepart.leader)
+      }
     }
   }, [dataDepart]);
+
   useEffect(() => {
     if (departmentsList) {
       setDepartments(departmentsList);
     }
   }, [dispatch]);
+
+  useEffect(() => {
+  
+    if(employeeUid && employeeUid.name.length > 0){
+      setLeader(employeeUid.name)
+      setIdLeader(employeeUid.uid)
+    }else if(dataDepart && dataDepart.leader !== ""){
+      setLeader(dataDepart.leader)
+      setIdLeader(dataDepart.subDepartment)
+    }
+
+  }, [dataDepart,employeeUid])
 
   return (
     <>
@@ -89,20 +147,17 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
         </p>
       </div>
       <div className="flex flex-wrap ">
-
         <div className="md:w-1/2 px-3 mb-6">
           <form
             className="bg-white shadow-md rounded  flex flex-col mb-8 "
             onSubmit={handleUpdate}
           >
-
-
             <div className="flex justify-center items-center">
               <InputDepartment
                 label="Name Department"
                 type="name"
                 name="name"
-                value={departmentNew.name}
+                value={departmentNew.name || ''}
                 id="name"
                 onChange={handleInputChange}
               />
@@ -110,7 +165,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
                 label="Size of Department"
                 type="number"
                 name="size"
-                value={departmentNew.size}
+                value={departmentNew.size || ''}
                 id="size"
                 onChange={handleInputChange}
               />
@@ -121,7 +176,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
                   label="Location"
                   type="location"
                   name="location"
-                  value={departmentNew.location}
+                  value={departmentNew.location || ''}
                   id="location"
                   onChange={handleInputChange}
                 />
@@ -129,20 +184,23 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
                   label="Area Belongs"
                   type="level"
                   name="level"
-                  value={departmentNew.level}
+                  value={departmentNew.level || ''}
                   id="level"
                   onChange={handleInputChange}
                 />
               </div>
 
-              <div className="flex flex-col w-full" >
-                <InputDepartment
-                  label="Sub department"
-                  type="level"
-                  name="level"
-                  value={departmentNew.level}
-                  id="level"
-                  onChange={handleInputChange}
+              <div className="flex flex-col w-full">
+                <label className="block text-md font-semibold mb-4">
+                  Sub department
+                </label>
+                <input
+                  type="text"
+                  name="subDepartment"
+                  value={nameSubDepartment || ''}
+                  id="subDepartment"
+                  readOnly
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-indigo-500"
                 />
               </div>
               <div className="flex justify-center w-full">
@@ -152,40 +210,30 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
                     label="Select sub department"
                     selectedOption={selectedOption}
                     setSelectedOption={setSelectedOption}
+                    setName={setNameSubDepartment}
                   />
                   <div className="w-full flex justify-center md:full px-3 mb-6 md:mb-0">
                     <button
                       type="submit"
-                      className={`bg-darkBlue  text-white font-semibold py-2 px-4 rounded ${update ? "" : ""
-                        }`}
+                      className={`bg-darkBlue  text-white font-semibold py-2 px-4 rounded ${
+                        update ? "" : ""
+                      }`}
                     >
                       Update
                     </button>
                   </div>
                 </div>
               </div>
-
             </div>
-
-
-
           </form>
         </div>
 
         <div className="w-full md:w-1/2 px-3  mb-6 ">
-          <label className="block  text-md font-bold mb-2">
-            Boss
-          </label>
+          <label className="block  text-md font-bold mb-2">Boss</label>
           <input
             type="text"
             name="boss"
-            value={
-              employeeUid?.name +
-              " " +
-              employeeUid?.firstSurname +
-              " " +
-              employeeUid?.secondSurname || ""
-            }
+            value={leader}
             id="boss"
             placeholder="Boss"
             readOnly
@@ -193,7 +241,10 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
           />
           <>
             <div className="w-full h-full items-center justify-center">
-              <span className="text-darkBlue font-bold text-center text-md"> <p>Select Boss</p></span>
+              <span className="text-darkBlue font-bold text-center text-md">
+                {" "}
+                <p>Select Boss</p>
+              </span>
               <SearchEmployeeDepart
                 labelInputSeekerOne="text"
                 valueEnd={cedula}
