@@ -9,10 +9,11 @@ const EmployeeProfile = () => {
   const department = useSelector(selectGetByIdDocDepartment);
   return (
     <>
-      <div className="bg-lithGray flex xl:h-screen flex-col  lg:flex-wrap items-center p-12 ">
+    <h1 className="text-center text-darkBlue text-lg font-bold">Profile of employee</h1>
+      <div className="bg-lithGray flex xl:h-screen flex-col  lg:flex-wrap items-center pb-12 p-5 ">
         <div className="flex flex-col items-center justify-center">
           <img src="/Images/profileIcon.gif" width={100} height={100} alt="Picture of the author" />
-          <span className="font-serif"> Department: {department?.name || ''}</span>
+          <span className="font-semibold"> Department: {department?.name || ''}</span>
         </div>
 
         <div className="flex items-center justify-center space-x-10">

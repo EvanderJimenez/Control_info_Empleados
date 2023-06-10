@@ -17,7 +17,7 @@ const FormScheduleEmployee = ({ schedules }: PropsFormSchedule) => {
   const department = useSelector(selectGetByIdDocDepartment);
   return (
     <>
-      <p className="text-center font-bold mt-2">Weekly schedule</p>
+      <p className="text-center font-bold text-lg text-darkBlue mt-2">Weekly schedule</p>
       <p className="text-center font-bold mt-2">
         Department: {department?.name || ""}
       </p>

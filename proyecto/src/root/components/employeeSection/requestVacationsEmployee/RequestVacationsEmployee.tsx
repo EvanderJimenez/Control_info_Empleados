@@ -82,42 +82,48 @@ const RequestVacationsEmployee = () => {
   const [showBy, setShowBy] = useState("waiting");
 
   return (
-    <div className="bg-lithGray flex xl:h-screen xl:flex-col flex-col lg:flex-row lg:flex-wrap mt-10">
-      <div className="lg:w-1/2 items-center">
-        <FormVacations
-          handleVacationRequestSend={handleVacationRequestSend}
-          newDateEnd={newDateEnd}
-          newDateStart={newDateStart}
-          newDescription={newDescription}
-          newName={newName}
-          setNewDateEnd={setNewDateEnd}
-          setNewDateStart={setNewDateStart}
-          setNewDescription={setNewDescription}
-          setNewName={setNewName}
-        />
-      </div>
-      <div className="lg:w-1/2 justify-center flex flex-col overflow-auto h-96">
-        <h2 className="text-lg sm:text-xl font-medium text-center mb-8">
-          List request vacations
-        </h2>
-        <ListRequestVacations
-          data={dataEmployee}
-          setSendRequest={setSendRequest}
-          filter={showBy}
-        />
-        <div className="flex flex-row justify-center space-x-4 mb-10 m-2">
-          <button onClick={FilterByAccepted} className="bg-darkBlue">
-            Accepted
-          </button>
-          <button onClick={FilterByDenied} className="bg-darkBlue">
-            Denied
-          </button>
-          <button onClick={FilterByWaiting} className="bg-blue">
-            Waiting
-          </button>
+
+    <>
+      <div><h1 className="text-center text-darkBlue font-bold text-lg">Section on vacation requests</h1></div>
+      <div className="bg-lithGray flex xl:h-screen pb-5 xl:flex-col flex-col lg:flex-row lg:flex-wrap mt-10">
+        <div className="lg:w-1/2 items-center">
+          <FormVacations
+            handleVacationRequestSend={handleVacationRequestSend}
+            newDateEnd={newDateEnd}
+            newDateStart={newDateStart}
+            newDescription={newDescription}
+            newName={newName}
+            setNewDateEnd={setNewDateEnd}
+            setNewDateStart={setNewDateStart}
+            setNewDescription={setNewDescription}
+            setNewName={setNewName}
+          />
+        </div>
+        <div className="lg:w-1/2 justify-center flex flex-col overflow-auto h-96">
+          <h2 className="text-lg sm:text-xl font-medium text-center mb-8">
+            {showBy == "denied" && <div className="text-darkBlue">Vacation requests denied</div>}
+            {showBy == "accept" && <div className="text-darkBlue">Vacation requests accepted</div>}
+            {showBy == "waiting" && <div className="text-darkBlue">Vacation requests on hold</div>}
+          </h2>
+          <ListRequestVacations
+            data={dataEmployee}
+            setSendRequest={setSendRequest}
+            filter={showBy}
+          />
+          <div className="flex flex-row justify-center space-x-4 mb-10 m-2">
+            <button onClick={FilterByAccepted} className="bg-darkBlue">
+              Accepted
+            </button>
+            <button onClick={FilterByDenied} className="bg-darkBlue">
+              Denied
+            </button>
+            <button onClick={FilterByWaiting} className="bg-darkBlue">
+              Waiting
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

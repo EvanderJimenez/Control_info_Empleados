@@ -30,7 +30,7 @@ export const InputClock = ({
             value={loginData.email}
             onChange={handleInputChange}
             id={nameEmail}
-            placeholder={labelEmail}
+            placeholder={""}
             className="appearance-none block w-full  text-grey-darker shadow-xl rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-lithBlue bg-opacity-40 font-semibold"
           />
         </div>
@@ -46,7 +46,7 @@ export const InputClock = ({
             value={loginData.password}
             onChange={handleInputChange}
             id={namePass}
-            placeholder={labelPass}
+            placeholder={""}
             className="appearance-none block w-full  text-grey-darker shadow-lg rounded py-3 px-4 mb-3 leading-tight focus:outline-none  bg-lithBlue bg-opacity-40 font-semibold"
           />
         </div>

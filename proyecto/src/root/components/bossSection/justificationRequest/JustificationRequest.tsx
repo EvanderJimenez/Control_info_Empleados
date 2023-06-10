@@ -73,6 +73,9 @@ const JustificationRequest = () => {
   }, [employeeByUid, dispatch]);
 
   return (
+    <>
+    <h1 className="text-center font-bold text-darkBlue pb-5 text-lg">Employee vacation section</h1>
+
     <div className="flex flex-col lg:flex-row overflow-hidden pb-14">
       <div className="w-full lg:w-1/4 p-3">
         <div className="flex flex-col mb-3 items-center">
@@ -102,6 +105,7 @@ const JustificationRequest = () => {
         />
       </div>
     </div>
+    </>
   );
 };
 

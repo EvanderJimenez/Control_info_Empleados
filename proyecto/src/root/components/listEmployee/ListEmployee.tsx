@@ -61,39 +61,46 @@ const ListEmployee = ({
   return (
     <>
       {listEmployees.length > 0 ? (
-        <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 ">
+        <div className="grid grid-cols-1 p-4 gap-4  p-2vh max-h-screen scroll overflow-y-auto h-80 shadow-xl bg-opacity-10 pb-10 ">
           {Array.isArray(listEmployees) &&
             listEmployees
               .filter((item) => item.enabled && item.uid !== loginState.uid)
               .map((item) => (
-                <div
-                  key={item.uid}
-                  className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col zoom  m-2 rounded-md p-4"
-                >
-                  <p className="font-bold">Name: {item.name}</p>
-                  <p className="mt-2 font-semibold">Cedula: {item.cedula}</p>
-                  <p className="mt-2 font-semibold">Email: {item.email}</p>
-                  <p className="mt-2 font-semibold">
-                    Job Position: {item.jobPosition}
-                  </p>
-                  <p className="mt-2 font-semibold">
-                    Department: {department?.name || ""}
-                  </p>
-
-                  <button
-                    className="mt-4 px-4 py-2 bg-black text-white rounded "
-                    onClick={() => handleLoad(item.uid)}
+                <div className="flex justify-center">
+                  <div
+                    key={item.uid}
+                    className=" shadow-xl bg-lithBlue bg-opacity-40 flex flex-col items-center justify-center m-2 w-72 p-2"
                   >
-                    Load Information
-                  </button>
+                    <p className="font-bold">{item.name}</p>
+                    <div>
+                      <p className="mt-2 font-semibold flex justify-center">Cedula: {item.cedula}</p>
+                    </div>
+                    <div className="flex justify-center items-center space-x-2">
+                      <img src="/Images/emailBlackIcon.png" alt="emailOfEmployee" />
+                      <p className="mt-2 font-semibold"> {item.email}</p>
+
+                      <p>{item.jobPosition}</p>
+                    </div>
+                    <div className="flex justify-center">
+                      <button
+                        className="mt-4 px-4 py-2 bg-darkBlue  border-yellow border-2 hover:border-red justify-center flex w-36  "
+                        onClick={() => handleLoad(item.uid)}
+                      >
+                        {" "} <img src="/Images/pencil.png" alt="pencil" />
+                      </button>
+                    </div>
+
+                  </div>
                 </div>
+
+
               ))}
           {loading && <LoadingGeneralComponent />}
         </div>
       ) : (
-        <div className="bg-darkBlue w-auto justify-center items-center">
+        <div className="bg-darkBlue w-auto h-32 flex justify-center items-center">
           {" "}
-          <h2 className=" w-auto font-semibold text-center text-yellow ">
+          <h2 className=" w-auto  font-semibold text-center text-yellow ">
             List empty
           </h2>
         </div>

@@ -26,23 +26,39 @@ const ListBoss = ({ clear, setClear }: ListClear) => {
   };
 
   return (
-    <div className="shadow-xl w-full  overflow-auto h-52 p-4">
+    <>
+    
+    <div className="shadow-xl w-auto  overflow-auto h-72 p-4">
       {listBoss?.map((request: EmployeesType, index: number) => (
-        <div key={index} className="mb-4 p-2 bg-lithBlue bg-opacity-60  shadow-md rounded">
-          <h3 className="text-xl font-semibold mb-2">
-            Employee: {request.name}
+        <div key={index} className="mb-4 p-2 bg-lithBlue bg-opacity-60 space-y-2  w-auto shadow-md rounded">
+          <h3 className="text-xl font-semibold text-darkBlue flex justify-center mb-2">
+            {request.name}
           </h3>
-          <p className="font-semibold">Email: {request.email}</p>
-          <p className="font-semibold">Cedula: {request.cedula}</p>
-          <button
-            className="bg-darkBlue"
-            onClick={() => handleLoadInformation(request.uid)}
-          >
-            Load Information
-          </button>
+          <div className="flex flex-row justify-center space-x-2" title="email of employee">
+            <img src="/Images/emailBlackIcon.png" alt="" />
+            <p className="font-semibold"> {request.email}</p>
+          </div>
+          <div className="flex flex-row justify-center space-x-2" title="cedula of employee">
+            <img src="/Images/idCard.png" alt="cedula" />
+            <p className="font-semibold">{request.cedula}</p>
+
+          </div>
+
+          <div className="flex justify-center">
+            <button
+              className="bg-darkBlue"
+              onClick={() => handleLoadInformation(request.uid)}
+              title="load information for edit"
+            >
+              
+              Load Information
+            </button>
+          </div>
+
         </div>
       ))}
     </div>
+    </>
   );
 };
 

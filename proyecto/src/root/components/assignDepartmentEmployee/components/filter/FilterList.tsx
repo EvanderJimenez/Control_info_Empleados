@@ -16,7 +16,7 @@ const FilterList = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex  justify-center w-auto space-x-4 flex-row ">
       <InputFloatLabel
         type="text"
         value={name}
@@ -26,7 +26,7 @@ const FilterList = () => {
         name="name"
       />
       <button
-        className="bg-darkBlue flex justify-center items-center"
+        className="bg-darkBlue flex w-auto h-auto justify-center items-center"
         onClick={handleSearch}
       >
         <img src="/Images/searchIcon.png" alt="search" />
