@@ -42,7 +42,12 @@ const AssignDepartmentEmployee = () => {
   const [change, setChange] = useState(false);
 
   useEffect(() => {
-    dispatch(startGetAllDepartment());
+    
+    if(departmentsList.length === 0){
+      dispatch(startGetAllDepartment());
+      console.log(departmentsList)
+    }
+    console.log(departmentsList)
   }, []);
 
   useEffect(() => {

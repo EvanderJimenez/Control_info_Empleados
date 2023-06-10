@@ -61,7 +61,8 @@ export const ApplicationStore = configureStore({
     GetBrandsByIdEmployee: GetBrandsByIdEmployeeReducer,
     GetFileURLByNameStore: GetFileURLByNameReducer,
 
-    LoadDataStore: LoadDataReducer
+    LoadDataStore: LoadDataReducer,
+    LoadDataBossStore: LoadDataReducer
   },
 });
 

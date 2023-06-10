@@ -6,11 +6,14 @@ import { StartUpDateEmployee, selectGetEmployeeByUid } from "@/root/redux";
 import RegisterFormEmployee from "./components/formEmployee/RegisterFormEmployee";
 import { initialDataEmployee } from "@/root/constants/employee/employee.constants";
 import toast from "react-hot-toast";
+import { StartLoadDataBoss } from "@/root/redux/thunks/loadData.thunk.ts/loadData";
 
 const BossControl = () => {
   const dispatch = useDispatch();
   const employeeByUid = useSelector(selectGetEmployeeByUid);
   const [clear, setClear] = useState(false);
+  const [load, setLoad] = useState(false);
+
 
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
@@ -31,8 +34,13 @@ const BossControl = () => {
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if(employeeByUid && employeeByUid.uid.length > 0) {
     dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
+    dispatch(StartLoadDataBoss(true))
     setClear(true);
+    }else{
+      toast.error("No employee selected")
+    }
   };
 
   return (
