@@ -43,6 +43,7 @@
     "redux-persist": "^6.0.0",
     "redux-persist-transform-encrypt": "^5.0.0",
     "redux-thunk": "^2.4.2",
+    "sweetalert2": "^11.7.12",
     "typescript": "5.0.4",
     "uuid": "^9.0.0"
   },

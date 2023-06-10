@@ -29,6 +29,7 @@ import ComboBoxDocuments from "../../employeeSection/documentsEmployee/component
 import { saveAs } from "file-saver";
 import { b64toBlob } from "@/root/utils/base64/base64";
 import ListAllEmployees from "./components/listAllEmployees/ListAllEmployees";
+import Swal from 'sweetalert2';
 
 export default function EditEmployeeSection() {
   const fileLoad = useSelector(selectGetFileURLByName);
@@ -79,12 +80,25 @@ handleClear()
 
   const handleDismissEmployee = () => {
     if (employeeByUid2 && employeeByUid2.uid) {
-      dispatch(StartDismissEmployee(employeeByUid2.uid));
-      toast.error("Fired employee");
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to dismiss an employee',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, dismiss',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          //dispatch(StartDismissEmployee(employeeByUid2.uid));
+          console.log("enter dismiss")
+          toast.error('Fired employee');
+        }
+      });
     } else {
-      toast("⚠ No employees have been loaded ");
+      toast('⚠ No employees have been loaded');
     }
   };
+  
 
   const handleDownload = async () => {
     dispatch(
@@ -103,6 +117,8 @@ handleClear()
   }, []);
 
   const handleClear = async () => {
+    if (!Swal.isVisible()) {
+    console.log("object")
     if(dataEmployee.uid){
       dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
@@ -114,6 +130,7 @@ handleClear()
       dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
     }
+  }
   };
 
   useEffect(() => {
