@@ -128,11 +128,13 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   }, [dataDepart]);
 
   useEffect(() => {
+    console.log(departmentsList)
     if (departmentsList) {
+      console.log(departmentsList)
       setDepartments(departmentsList);
     }
-  }, []);
-
+  }, [departmentsList]);
+ 
   useEffect(() => {
   
     if(employeeUid && employeeUid.name.length > 0){
@@ -140,7 +142,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
       setIdLeader(employeeUid.uid)
     }else if(dataDepart && dataDepart.leader !== ""){
       setLeader(dataDepart.leader)
-      setIdLeader(dataDepart.subDepartment)
+      setIdLeader(dataDepart.subDepartment) 
     }
 
   }, [dataDepart,employeeUid])
