@@ -9,9 +9,11 @@ import {
   StartResetDepartmentByPage,
   selectGetByNameDepartment,
   selectGetByPageDepartment,
+  selectLoadData,
   startGetDepartmentByName,
   startGetDepartmentByPage,
 } from "@/root/redux";
+import { StartLoadData } from "@/root/redux/thunks/loadData.thunk.ts/loadData";
 interface lisDepartment {
   handleGetDepartment: (id: string) => void;
   setPassId: (id: string) => void;
@@ -36,7 +38,9 @@ export const ListDepartment = ({
 
   const departByPage = useSelector(selectGetByPageDepartment);
   const departByName = useSelector(selectGetByNameDepartment);
+  const isDataLoaded = useSelector(selectLoadData)
   const dispatch = useDispatch();
+
 
   const handleGetDepartments = async () => {
     dispatch(startGetDepartmentByPage(pageSize, page));
@@ -48,18 +52,17 @@ export const ListDepartment = ({
     dispatch(StartResetDepartmentByPage());
   };
 
-  useEffect(() => {
-    if (departByName.length > 0) {
+  useEffect(() => { 
+    
+    if ( departByName && departByName.length > 0) {
       setDepartmentData(departByName);
-    } else if (departByPage.length > 0) {
+      dispatch(StartLoadData(true))
+    } else if (departByPage && departByPage.length > 0) {
+      console.log("SetData 1")
       setDepartmentData(departByPage);
+      dispatch(StartLoadData(true))
     }
-  }, [departByName, departByPage]);
-
-  useEffect(() => {
-    if (departByPage) {
-    }
-  }, [departByPage]);
+  }, [departByName, departByPage]); 
 
   const handle = (id: string, name: string) => {
     setPassId(id);
@@ -67,15 +70,22 @@ export const ListDepartment = ({
   };
 
   useEffect(() => {
-    if (page !== 0) {
+   
+    if (page !== 0 && !isDataLoaded) {
+      console.log("SetData 2")
       handleGetDepartments();
-    } else {
-      toast.error("No more information");
+      dispatch(StartLoadData(true)) 
+      
     }
+/*     else{
+      toast.error("No more information"); 
+    } */
   }, [page]);
+
   const handleGetDepart = () => {
     if (page !== 0) {
       setPage(page + 1);
+      dispatch(StartLoadData(false))
     }
   };
   const handleNextPage = () => {

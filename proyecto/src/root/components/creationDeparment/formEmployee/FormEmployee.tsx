@@ -46,7 +46,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (departmentNew && employeeUid && employeeUid.uid !== "") {
+    if (departmentNew && employeeUid) {
       const idDepartment = dataDepart.id;
       const upDateDepart: Department = {
         ...departmentNew,

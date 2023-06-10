@@ -1,7 +1,7 @@
 import React from "react";
 import { Department } from "@/root/interface/departments";
-import { useDispatch } from "react-redux";
-import { startGetDepartmentById } from "@/root/redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGetDepartmentById, startGetDepartmentById } from "@/root/redux";
 interface TableListProps {
   handle: (id: string, name: string) => void;
   handleGetDepartment: (id: string) => void;
@@ -16,6 +16,7 @@ export const TableList = ({
   setOption,
 }: TableListProps) => {
   const dispatch = useDispatch();
+  const listDepartment = useSelector(selectGetDepartmentById)
 
   const handleListEmployees = async (id: string) => {
     console.log(id);

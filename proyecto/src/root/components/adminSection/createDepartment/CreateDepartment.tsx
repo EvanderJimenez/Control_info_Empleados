@@ -36,29 +36,15 @@ const CreateDepartment = () => {
   };
 
   const handleClear = async () => {
-    //dispatch(resetByVariableAdmin);
-    //dispatch(resetEmployeeByUid);
-    //setDepartmentNew(initialDepartmet);
-
-   
+    dispatch(resetByVariableAdmin);
+    dispatch(resetEmployeeByUid);
+    setDepartmentNew(initialDepartmet);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (departmentNew && employeeUid && employeeUid?.uid !== "") {
-      console.log(employeeUid);
-      console.log(JSON.stringify(departmentNew));
-      const newData: Department = {
-        ...departmentNew,
-        idEmployee: employeeUid.uid,  
-        leader: employeeUid.name,
-      };
-      console.log(JSON.stringify(newData));
-      dispatch(startCreateDepartment(newData));
-
-      const updateEmployee : EmployeesType = {...employeeUid, idDepartment: newData.id,jobPosition: "boss"}
-
-      dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee))
+    if (departmentNew) {
+      dispatch(startCreateDepartment(departmentNew));
     }
   };
 
@@ -130,54 +116,11 @@ const CreateDepartment = () => {
             setSelectedOption={setSelectedOption}
           />
         </div>
-        <div className="flex flex-wrap -mx-3 mb-6 justify-center">
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-            Boss
-          </label>
-          <input
-            type="text"
-            name="boss"
-            value={
-              employeeUid?.name +
-                " " +
-                employeeUid?.firstSurname +
-                " " +
-                employeeUid?.secondSurname || ""
-            }
-            id="boss"
-            placeholder="Boss"
-            readOnly
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-indigo-500"
-          />
-          <>
-            <div className="w-full h-full items-center justify-center">
-              <span>Select Boss</span>
-              <SearchEmployeeDepart
-                labelInputSeekerOne="text"
-                valueEnd={cedula}
-                placeholderSeekerOne="Cedula"
-                typeList="cedula"
-                id="cedula"
-              />
-              <SearchEmployeeDepart
-                labelInputSeekerOne="text"
-                valueEnd={name}
-                placeholderSeekerOne="Name"
-                typeList="name"
-                id="name"
-              />
-            </div>
-          </>
-          <>
-            <ListEmployeeDepart />
-          </>
-        </div>
         <div className="flex justify-center -mx-3 mb-5">
-          <div
-            className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0"
-            onClick={handleClear}
-          >
-            <button className="bg-black m-3">Clear</button>
+          <div className="w-full flex justify-center md:w-1/2 px-3 mb-6 md:mb-0">
+            <button onClick={handleClear} className="bg-black m-3">
+              Clear
+            </button>
             <button
               type="submit"
               className="bg-darkBlue hover:bg-blue-200 text-white font-bold py-2 px-4 rounded"
