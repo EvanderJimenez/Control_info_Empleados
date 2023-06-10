@@ -17,9 +17,10 @@ module.exports = {
       darkBlue: "#27374D",
       lithBlue: "#9DB2BF",
       lithGray: "#DDDDDD",
-      pink: "#D14D72",
-      yellow: "#E8AA42"
-
+      pink: "#ffd9e3",
+      yellow: "#E8AA42",
+      lithPink: "#d8a789",
+      green: "#33C500"
     },
     extend: {},
   },

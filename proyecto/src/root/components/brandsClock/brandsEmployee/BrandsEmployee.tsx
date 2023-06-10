@@ -82,7 +82,7 @@ export const BrandsEmployee = ({
               const markStart = existingHours.hIni;
               const markEnd = existingHours.hFin;
               if (checkMarkHours(markStart, markEnd)) {
-                toast.success("The hours match. Performing update...");
+                toast.success("The hours match. Performing update");
                 value = "true";
               } else {
                 toast.error("The mark hours do not match the defined hours.");

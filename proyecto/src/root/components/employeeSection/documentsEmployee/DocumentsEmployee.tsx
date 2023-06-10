@@ -15,6 +15,7 @@ import { saveAs } from "file-saver";
 import { b64toBlob } from "@/root/utils/base64/base64";
 import ShowFile from "./components/showFile/ShowFile";
 import SelectFile from "./components/selectFile/SelectFile";
+import { starAlertSuccess } from "@/root/redux/thunks/alertHandler-thunk/alertHandler-thunk";
 
 let files: Files[] = [];
 
@@ -92,6 +93,7 @@ const DocumentsEmployee: React.FC = () => {
           })
         );
       }
+      dispatch(starAlertSuccess("File delete correctly", true))
     }
   };
 

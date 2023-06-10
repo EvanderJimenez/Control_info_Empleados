@@ -128,7 +128,7 @@ export default function PdfPage() {
 
   return (
     <>
-      <section className="space-y-5 pb-14 pt-2 font-light text-center flex justify-center flex-col items-center">
+      <section className="space-y-5 pagination pb-14 pt-2 font-light text-center flex justify-center flex-col items-center">
         <div id="Front page" className="flex flex-col space-y-4 justify-center items-center">
           <div id="ButtonSection" className="flex space-x-4 fle-row items-center justify-center">
             <button className="bg-darkBlue font-semibold print:hidden" onClick={handleJustifications}>
@@ -137,7 +137,7 @@ export default function PdfPage() {
             <button className="bg-darkBlue font-semibold print:hidden" onClick={handleEmployees}>
               On department
             </button>
-            <button className="bg-pink font-semibold print:hidden" onClick={CreatedPdf}>
+            <button className="bg-darkBlue font-semibold print:hidden" onClick={CreatedPdf}>
               Generated
             </button>
           </div>
