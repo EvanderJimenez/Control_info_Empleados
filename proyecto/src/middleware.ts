@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   if (!tokenCookie) {
     const requestedPage = request.nextUrl.pathname;
     const url = request.nextUrl.clone();
-    url.pathname = `/home`;
+    url.pathname = `/home/Login`;
     url.search = `p=${requestedPage}`;
     return NextResponse.rewrite(url);
   }
@@ -19,13 +19,13 @@ export async function middleware(request: NextRequest) {
   } catch (error) {
     const requestedPage = request.nextUrl.pathname;
     const url = request.nextUrl.clone();
-    url.pathname = `/home`;
+    url.pathname = `/home/Login`;
     url.search = `p=${requestedPage}`;
-    
+
     return NextResponse.redirect(url);
   }
 }
 
 export const config = {
-  matcher: ["/home/Login/EmployeeMain", "/home/Login/AdminMain", "/home/Login/BossMain", "/home/BossMain", "/home/AdminMain", "/home/EmployeeMain"], 
+  matcher: ["/home/Login/EmployeeMain", "/home/Login/AdminMain", "/home/Login/BossMain", "/home/BossMain", "/home/AdminMain", "/home/EmployeeMain"],
 };

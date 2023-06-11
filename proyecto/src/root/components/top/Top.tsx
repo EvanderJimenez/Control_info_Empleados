@@ -1,24 +1,24 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Image from "next/image";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "@/root/redux/reducers/login-reducer/loginReducer";
+import { selectLogin } from "@/root/redux";
 
 
 export function Top() {
 
 
   const dispatch = useDispatch()
+  const selector = useSelector(selectLogin)
+
+  const router = useRouter();
 
 
   const handleSingOff = () => {
     Cookies.remove("token");
     router.push("/");
-  };
-  const handleHelp = () => {
-    Cookies.remove("token");
-    router.push("/home/Help");
   };
   const handleContact = () => {
     Cookies.remove("token");
@@ -30,9 +30,23 @@ export function Top() {
   };
   const handleLogin = () => {
     Cookies.remove("token");
-
     router.push("/home/Login");
   };
+
+  const TextButton = (): string => {
+    let text: string = "";
+
+    if (router.pathname === "/home") {
+      text = "Log in"
+    } else if (router.pathname === "/home/Login") {
+      text = ""
+    } else {
+      text = "Log out"
+    }
+
+    return text;
+  }
+  let text = TextButton();
 
   return (
     <>
@@ -42,6 +56,7 @@ export function Top() {
             <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
             <span className="title-font">CrHome</span>
           </div>
+         
           <div className="flex  font-semibold items-center text-sm text-lithGray">(506) 8988-4062</div>
 
         </div>
@@ -66,7 +81,7 @@ export function Top() {
                 </button>
               </li>
               <li>
-                <button className=" dark:text-white  print:hidden" onClick={handleLogin}>Login</button>
+                <button className=" dark:text-white  print:hidden" onClick={handleLogin}>{text}</button>
               </li>
             </ul>
           </div>
