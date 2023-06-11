@@ -85,7 +85,7 @@ const RequestVacationsEmployee = () => {
 
     <>
       <div><h1 className="text-center text-darkBlue font-bold text-lg">Section on vacation requests</h1></div>
-      <div className="bg-lithGray flex xl:h-screen pb-5 xl:flex-col flex-col lg:flex-row lg:flex-wrap mt-10">
+      <div className="bg-white flex xl:h-screen pb-5 xl:flex-col flex-col lg:flex-row lg:flex-wrap mt-10">
         <div className="lg:w-1/2 items-center">
           <FormVacations
             handleVacationRequestSend={handleVacationRequestSend}
