@@ -62,7 +62,6 @@ export const ListDepartment = ({
       setDepartmentData(departByName);
       dispatch(StartLoadData(true));
     } else if (departByPage && departByPage.length > 0) {
-      console.log("SetData 1");
       setDepartmentData(departByPage);
       dispatch(StartLoadData(true));
     }
@@ -75,7 +74,6 @@ export const ListDepartment = ({
 
   useEffect(() => {
     if (page !== 0 && !isDataLoaded) {
-      console.log("SetData 2");
       handleGetDepartments();
       dispatch(StartLoadData(true));
     }

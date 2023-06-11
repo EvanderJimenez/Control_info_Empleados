@@ -70,7 +70,7 @@ const CreateDepartment = () => {
       dispatch(startGetAllDepartment());
     
     }
-    console.log(departmentsList);
+   
   }, []);
   -useEffect(() => {
     if (departmentsList) {

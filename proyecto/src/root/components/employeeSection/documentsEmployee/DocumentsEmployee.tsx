@@ -81,7 +81,6 @@ const DocumentsEmployee: React.FC = () => {
   };
 
   const handleDelete = async () => {
-    console.log(selectOption)
     if (selectOption) {
       const updatedFiles = { ...userLogin.files };
       const fileToDeleteKey = Object.keys(updatedFiles).find(

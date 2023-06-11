@@ -24,10 +24,10 @@ const ListBoss = ({ clear, setClear }: ListClear) => {
    
     if(listBoss.length === 0 || loadDataBoss ) {
       dispatch(StarGetAllBosses());
-      console.log(listBoss)
+   
       dispatch(StartLoadDataBoss(false));
     }
-    console.log(listBoss)
+
   }, [clear]);
  
   const handleLoadInformation = async (uid: string) => {
