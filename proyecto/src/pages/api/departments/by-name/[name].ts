@@ -11,7 +11,7 @@ async function getName(req: NextApiRequest, res: NextApiResponse) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
   getName(req, res);
 

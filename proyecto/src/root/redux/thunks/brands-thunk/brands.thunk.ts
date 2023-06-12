@@ -22,7 +22,7 @@ import {
 import { Brands } from "@/root/interface/employee";
 import { LaborRegistration } from "@/root/interface/brands";
 
-export const startGetAllBrands = (): any => {
+export const startGetAllBrands = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetAllBrands) => {
     const response = await brandProvider.getAllBrandsProvider();
 
@@ -33,7 +33,7 @@ export const startGetAllBrands = (): any => {
 export const startUpdateBrands = (
   searchTerm: string,
   searchTerm2: LaborRegistration
-): any => {
+): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeUpdateBrands) => {
     const response = await brandProvider.updateBrandsByIdProvider(
       searchTerm,
@@ -44,7 +44,7 @@ export const startUpdateBrands = (
   };
 };
 
-export const startGetBrandsByIdDoc = (searchTerm: string): any => {
+export const startGetBrandsByIdDoc = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByIdDocBrands) => {
     const response = await brandProvider.getBrandsByDocIdProvider(searchTerm);
 
@@ -52,7 +52,7 @@ export const startGetBrandsByIdDoc = (searchTerm: string): any => {
   };
 };
 
-export const startCreateBrands = (searchTerm: LaborRegistration): any => {
+export const startCreateBrands = (searchTerm: LaborRegistration): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeCreateBrands) => {
     const response = await brandProvider.createBrandsProvider(searchTerm);
 
@@ -60,7 +60,7 @@ export const startCreateBrands = (searchTerm: LaborRegistration): any => {
   };
 };
 
-export const startGetBrandsByIdEmployee = (searchTerm: string): any => {
+export const startGetBrandsByIdEmployee = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByIdEmployeeBrandsBrands) => {
     const response = await brandProvider.getBrandsDocByEmployeeIdProvider(
       searchTerm

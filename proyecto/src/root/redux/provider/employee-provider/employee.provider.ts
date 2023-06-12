@@ -44,7 +44,7 @@ const employeeListProvider = async () => {
 
   const listEmployees: EmployeesType[] = Array.isArray(data)
     ? data.map(
-        (listEmployee: any): EmployeesType => ({
+        (listEmployee: any): EmployeesType => ({//TODO: Type all variables that you use
           uid: listEmployee.uid,
           name: listEmployee.name,
           firstSurname: listEmployee.firstSurname,

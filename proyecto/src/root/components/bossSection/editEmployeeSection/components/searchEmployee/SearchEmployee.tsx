@@ -17,7 +17,7 @@ const SearchEmployee = ({cedula,name,jobPosition}:PropsSearch) => {
   const handleSearch = async() => {
 
     
-
+// TODO: Remove this dead code
    // dispatch(StartGetByVariable(valueEnd,typeList));
 
   }

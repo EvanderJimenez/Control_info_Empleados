@@ -34,7 +34,7 @@ const getByVariableAdmin = async (
   }
 };
 
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) =>
   getByVariable(req, res);
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>

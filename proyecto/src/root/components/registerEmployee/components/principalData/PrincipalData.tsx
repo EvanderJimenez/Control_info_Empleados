@@ -8,7 +8,7 @@ import InputFloatLabel from "@/root/components/ui/InputFloatLabel/InputFloatLabe
 interface RegisterProps {
   userData: EmployeesType;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleScheduleChange: (newSchedule: any) => void;
+  handleScheduleChange: (newSchedule: any) => void;//TODO: Type all variables that you use
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 

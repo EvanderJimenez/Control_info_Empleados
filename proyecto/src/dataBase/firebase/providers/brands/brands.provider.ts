@@ -32,7 +32,7 @@ async function createBrands(
   idEmployee: string,
   cycle: Cycle,
   hoursEmployee: HoursEmployee
-): Promise<{ message: string; brands?: any }> {
+): Promise<{ message: string; brands?: any }> { //TODO: Type all variables that you use
   const newDocRef = await addDoc(collection(firestore, "brands"), {
     idEmployee,
     cycle,
@@ -46,7 +46,7 @@ async function createBrands(
       message: "Successfully created brands",
       brands: newDoc.data(),
     };
-  } else {
+  } else {//TODO: remove the else statement because is not necesary
     return {
       message: "Failed to create brands",
     };
@@ -74,11 +74,11 @@ const getDocByEmployeeId = async (idEmployee: string) => {
 
   if (brandsSnapshot.empty) {
     return null;
-  } else {
+  } else {//TODO: remove the else statement because is not necesary
     return brandsSnapshot.docs[0].data();
   }
 };
-
+//TODO:Check this, "Brand" is a name of the product or image, "in and out marks" are concepts related to this concept
 const updateById = async (
   idEmployee: string,
   cycle: Cycle,

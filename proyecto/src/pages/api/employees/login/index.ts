@@ -18,7 +18,7 @@ const getByEmailPassword = async (req: NextApiRequest, res: NextApiResponse) => 
   }
 };
 
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) => getByEmailPassword(req, res);
 
 export default function employeeByEmailPasswordController(req: NextApiRequest, res: NextApiResponse) {

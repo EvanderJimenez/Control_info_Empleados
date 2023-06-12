@@ -29,7 +29,7 @@ export default function MethodsBrands() {
     cycle: {},
     hoursEmployee: {},
   });
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   useEffect(() => {
     const fetchDataAndDateOfWeekday = async () => {
       const response = await axios.get("http://worldtimeapi.org/api/ip");

@@ -56,13 +56,13 @@ export const BrandsEmployee = ({
       window.location.reload();
     }
   }, [load]);
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   const handleUpdate = async () => {
     const date = new Date(currentDate);
     const month = date.getMonth() + 1;
     let monthCycle: number;
 
-    if (month >= 1 && month <= 6) {
+    if (month >= 1 && month <= 6) { // TODO: Don't use magic numbers
       monthCycle = 1;
     } else if (month >= 7 && month <= 12) {
       monthCycle = 2;
@@ -73,8 +73,8 @@ export const BrandsEmployee = ({
     const year = new Date(currentDate).getFullYear();
     const nameCycle = year.toString() + monthCycle.toString();
     await handleUpdateCycleHours(nameCycle).then(
-      async (updatedBrandData: any) => {
-        if (updatedBrandData) {
+      async (updatedBrandData: any) => {//TODO: Type all variables that you use
+        if (updatedBrandData) {//TODO: improve this statement to get simplicity
           if (updatedBrandData.cycle && updatedBrandData.cycle[nameCycle]) {
             const cycle = updatedBrandData.cycle[nameCycle];
             const existingHours = cycle.hours[currentDate];
@@ -173,7 +173,7 @@ export const BrandsEmployee = ({
       return false;
     }
     if (!markEnd) {
-      if (markStart) {
+      if (markStart) {//TODO: improve this statement to get simplicity
         const markStartHour = Number(markStart.split(":")[0]);
         const markStartMinute = Number(markStart.split(":")[1]);
 

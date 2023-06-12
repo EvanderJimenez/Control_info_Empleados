@@ -48,7 +48,7 @@ export default function EditEmployeeSection() {
   const [dataEmployee, setDataEmployee] =
     useState<EmployeesType>(initialDataEmployee);
   const [selectOption, setSelectOption] = useState<Files | null>(null);
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new hook 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
@@ -64,7 +64,7 @@ handleClear()
 
   };
   useEffect(() => {
-    if (!clear) {
+    if (!clear) {//TODO: improve this statement to get simplicity
       if (employeeByUid2) {
         setDataEmployee(employeeByUid2);
       }
@@ -90,11 +90,11 @@ handleClear()
       }).then((result) => {
         if (result.isConfirmed) {
           //dispatch(StartDismissEmployee(employeeByUid2.uid));
-          console.log("enter dismiss")
+          console.log("enter dismiss")//TODO: Remove all logs
           toast.error('Fired employee');
         }
       });
-    } else {
+    } else {//TODO: improve this statement to get simplicity
       toast('⚠ No employees have been loaded');
     }
   };
@@ -118,7 +118,7 @@ handleClear()
 
   const handleClear = async () => {
     if (!Swal.isVisible()) {
-    console.log("object")
+    console.log("object")//TODO: Remove all logs
     if(dataEmployee.uid){
       dispatch(ResetEmployeeByUid2());
       dispatch(StartResetEmployeesByIdDepartment())
@@ -197,6 +197,7 @@ handleClear()
             <ListEmployee clear={clear} setClear={setClear} listEmployees={listEmployees} setListEmployees={setListEmployees} />
           </div>
         </div>
+        {/* //TODO: This code has a nested innecesary complexity, consider split in a new component */}
         <div className="w-full md:w-1/2 lg:flex-grow xl:flex-grow px-2 py-2 pb-14">
           <form
             onSubmit={handleUpdate}

@@ -36,7 +36,7 @@ export function addTimeToDates(dates: Date[], startTime: string, endTime: string
 }
 
 export function compareDates(startDate: Date, endDate: Date): string {
-  if (startDate > endDate) {
+  if (startDate > endDate) {//TODO: improve this statement to get simplicity with a ternary
     return "Error the start date is greater than the end date";
   } else {
     return "";

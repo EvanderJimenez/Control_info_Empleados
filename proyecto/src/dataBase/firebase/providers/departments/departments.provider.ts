@@ -62,7 +62,7 @@ async function create(
   subDepartment: string,
   namesubDepartment: string,
   employees: Employee
-): Promise<{ message: string; departments?: any }> {
+): Promise<{ message: string; departments?: any }> {//TODO: Type all variables that you use
   const nameExists = await checkIfNameExists(name);
 
   if (nameExists) {
@@ -112,7 +112,7 @@ const getByDocId = async (docId: string) => {
 
   if (departmentsDocSnapshot.exists()) {
     return departmentsDocSnapshot.data();
-  } else {
+  } else {//TODO: remove the else statement because is not necesary
     throw new Error(`A department with document ID was not found: ${docId}`);
   }
 };
@@ -132,7 +132,7 @@ const getName = async (name: string) => {
       return { id, ...data };
     });
     return departments;
-  } else {
+  } else {//TODO: remove the else statement because is not necesary
     throw new Error(`No department found with name: ${name}`);
   }
 };
@@ -186,7 +186,7 @@ const getDepartmentByUidEmployee = async () => {
     departQuery
   );
 
-  const departs: any[] = [];
+  const departs: any[] = [];//TODO: Type all variables that you use
 
   if (!departSnapshot.empty) {
     departSnapshot.forEach((doc) => {

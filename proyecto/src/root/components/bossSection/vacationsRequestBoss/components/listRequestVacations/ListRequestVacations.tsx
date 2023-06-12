@@ -6,7 +6,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface RequestEmployeeProps {
-  selectedRequest: any;
+  selectedRequest: any;//TODO: Type all variables that you use
   option: string
 }
 

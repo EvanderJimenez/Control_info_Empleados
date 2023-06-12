@@ -101,7 +101,7 @@ function MethodsDepartments(props: RegisterProps) {
       toast.success("Correctly added employee.");
     }
   }, [nameEmployee]);
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setdepartmentData((prevUserData) => ({ ...prevUserData, [name]: value }));

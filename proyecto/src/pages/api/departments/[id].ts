@@ -47,7 +47,7 @@ async function updateId(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
   getDocId(req, res);
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>

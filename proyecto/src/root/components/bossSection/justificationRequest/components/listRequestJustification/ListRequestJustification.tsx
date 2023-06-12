@@ -11,7 +11,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface RequestEmployeeProps {
-  selectedRequest: any;
+  selectedRequest: any;//TODO: Type all variables that you use
   option: string;
 }
 
@@ -32,7 +32,7 @@ const ListRequestJustification = ({
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartmentJustifications(loginState?.idDepartment || ""));
   }, [option]);
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   useEffect(() => {
     if (listEmployees) {
       const pendingRequestsList: PendingRequestJustifications[] = [];

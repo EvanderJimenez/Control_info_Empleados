@@ -34,7 +34,7 @@ const FormAcceptDeniedJustification = ({
         <option value="section1">Justification of start time</option>
         <option value="section2">Justification of end time</option>
       </select>
-
+      {/* //TODO: This code has a nested innecesary complexity, consider split in a new component */}
       {selectedSection === 'section1' && (
         <div className="w-full md:w-1/2 mb-4 md:mb-0">
           <div className="flex flex-col md:flex-row space-x-0 md:space-x-4 mb-3">
@@ -60,7 +60,7 @@ const FormAcceptDeniedJustification = ({
 
         </div>
       )}
-
+{/* //TODO: This code has a nested innecesary complexity, consider split in a new component */}
       {selectedSection === 'section2' && (
         <div className="w-full justify-center flex flex-col md:w-1/2">
           <div className="flex flex-col md:flex-row space-x-0 md:space-x-4 mb-3">

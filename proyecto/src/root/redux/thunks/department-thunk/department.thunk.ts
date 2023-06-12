@@ -17,13 +17,13 @@ export const startGetDepartmentById = (searchTerm: string): any => {
   };
 };
 
-export const startGetID = (ID: string): any => {
+export const startGetID = (ID: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchID) => {
     dispatch(getID(ID));
   };
 };
 
-export const startGetAllDepartment = (): any => {
+export const startGetAllDepartment = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetAllDepartments) => {
     const response = await departProvider.getAllDepartmentProvider();
 
@@ -31,7 +31,7 @@ export const startGetAllDepartment = (): any => {
   };
 };
 
-export const startGetDepartByIdDoc = (searchTerm: string): any => {
+export const startGetDepartByIdDoc = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByIDoc) => {
     const response = await departProvider.getDepartmentByDocIdProvider(searchTerm);
 
@@ -39,13 +39,13 @@ export const startGetDepartByIdDoc = (searchTerm: string): any => {
   };
 };
 
-export const StartResetDepartByIdDoc = (): any => {
+export const StartResetDepartByIdDoc = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByIDoc) => {
     dispatch(resetDepartmentByDocIdReducer());
   };
 };
 
-export const startUpdateDepartment = (searchTerm: string, searchTerm2: Department): any => {
+export const startUpdateDepartment = (searchTerm: string, searchTerm2: Department): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeUpdateDepartment) => {
     const response = await departProvider.updateDepartmentByIdProvider(searchTerm, searchTerm2);
 
@@ -53,7 +53,7 @@ export const startUpdateDepartment = (searchTerm: string, searchTerm2: Departmen
   };
 };
 
-export const startCreateDepartment = (searchTerm: DepartmentType): any => {
+export const startCreateDepartment = (searchTerm: DepartmentType): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeCreateDepartment) => {
     const response = await departProvider.createDepartmentProvider(searchTerm);
 
@@ -61,27 +61,27 @@ export const startCreateDepartment = (searchTerm: DepartmentType): any => {
   };
 };
 
-export const startGetDepartmentByPage = (searchTerm: number, searchTerm2: number): any => {
+export const startGetDepartmentByPage = (searchTerm: number, searchTerm2: number): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetByPage) => {
     const response = await departProvider.getDepartmentsByPageProvider(searchTerm,searchTerm2);
     dispatch(getDepartmentByPageReducer(response || null));
   };
 };
 
-export const StartResetDepartmentByPage = (): any => {
+export const StartResetDepartmentByPage = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetByPage) => {
     dispatch(resetDepartmentByPageReducer());
   };
 };
 
-export const startGetDepartmentByName = (searchTerm: string): any => {
+export const startGetDepartmentByName = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetByName) => {
     const response = await departProvider.getDepartmentByNameProvider(searchTerm);
     dispatch(getDepartmentByNameReducer(response || null));
   };
 };
 
-export const StartResetDepartmentByName = (): any => {
+export const StartResetDepartmentByName = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetByName) => {
     dispatch(resetDepartmentByNameReducer());
   };

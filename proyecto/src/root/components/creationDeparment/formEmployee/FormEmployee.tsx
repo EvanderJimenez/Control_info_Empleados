@@ -47,7 +47,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   const employeeUid = useSelector(selectGetEmployeeByUid);
   const [departmentNew, setDepartmentNew] =
     useState<DepartmentType>(initialDepartmet);
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDepartmentNew((prevData) => ({ ...prevData, [name]: value }));

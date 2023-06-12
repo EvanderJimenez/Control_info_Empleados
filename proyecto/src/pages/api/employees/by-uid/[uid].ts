@@ -34,7 +34,7 @@ async function getFileURLByName(req: NextApiRequest, res: NextApiResponse) {
 }
 
 
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
 dismissByUid(req, res);
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>

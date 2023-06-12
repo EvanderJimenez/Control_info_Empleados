@@ -40,7 +40,7 @@ const DocumentsEmployee: React.FC = () => {
       if (
         selectedFile.type.startsWith("image/") ||
         selectedFile.type === "application/pdf"
-      ) {
+      ) {//TODO: improve this statement to get simplicity
 
         setFile(selectedFile);
         setSelectOption(null);
@@ -128,7 +128,7 @@ const DocumentsEmployee: React.FC = () => {
         saveAs(newFile, selectOption.name);
         handleClearSelection();
         dispatch(StartResetUrl());
-      } else if (selectOption.type === "image") {
+      } else if (selectOption.type === "image") {//TODO: improve this statement to get simplicity
         newFile = new File([blob], selectOption.name + ".png", {
           type: "image/png",
         });
