@@ -20,7 +20,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 let files: Files[] = [];
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new Hook
 const DocumentsEmployee: React.FC = () => {
   const userLogin = useSelector(selectLogin);
   const fileLoad = useSelector(selectGetFileURLByName);
@@ -81,7 +81,6 @@ const DocumentsEmployee: React.FC = () => {
   };
 
   const handleDelete = async () => {
-    console.log(selectOption)
     if (selectOption) {
       const updatedFiles = { ...userLogin.files };
       const fileToDeleteKey = Object.keys(updatedFiles).find(

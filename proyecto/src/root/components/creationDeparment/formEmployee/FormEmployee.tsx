@@ -72,11 +72,10 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
         namesubDepartment: nameSubDepartment,
         subDepartment:selectedOption
       };
-      console.log(upDateDepart)
+  
       await dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart));
 
       if(departmentNew.idEmployee){
-        console.log("enter333")
         await dispatch(StartGetEmployeeByUid2(departmentNew.idEmployee))
       }
       if(employeeUid && employeeUid.uid.length > 0){
@@ -85,7 +84,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
           idDepartment: idDepartment,
           jobPosition: "boss",
         };
-        console.log(updateEmployee)
+
        await dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee));
       }
       handleClear()
@@ -98,16 +97,14 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
     
     if(departmentsList.length === 0){
       dispatch(startGetAllDepartment());
-      console.log(departmentsList)
+
     }
-    console.log(departmentsList)
   }, []);
 
   useEffect(() => {
     if(dataEmployeeUid2 && dataEmployeeUid2.uid.length > 0) {
-      console.log(dataEmployeeUid2)
+ 
       const newEmployee2 : EmployeesType = {...dataEmployeeUid2, jobPosition:"employee" }
-      console.log(newEmployee2)
       dispatch(StartUpDateEmployee(newEmployee2.uid, newEmployee2))
     }
   }, [dataEmployeeUid2])
@@ -128,9 +125,7 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   }, [dataDepart]);
 
   useEffect(() => {
-    console.log(departmentsList)
     if (departmentsList) {
-      console.log(departmentsList)
       setDepartments(departmentsList);
     }
   }, [departmentsList]);

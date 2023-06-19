@@ -145,7 +145,7 @@ export default function RegisterBrand() {
     setNewHIni("");
     setNewHFin("");
   };
-
+//TODO: This code has a nested innecesary complexity, consider split in a new useHook
   const handleDeleteSchedule = (date: string) => {
     if (brandData.hoursEmployee[date]) {
       const updatedHoursEmployee = { ...brandData.hoursEmployee };

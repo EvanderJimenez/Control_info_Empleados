@@ -47,10 +47,8 @@ const ListEmployee = ({
 
   useEffect(() => {
     if (employeesListVariable.length > 0) {
-      console.log("count 1");
       setListEmployees(employeesListVariable);
     } else if (listAllEmployees.length > 0) {
-      console.log("count 2");
       setListEmployees(listAllEmployees);
     }
   }, [employeesListVariable, listAllEmployees]);

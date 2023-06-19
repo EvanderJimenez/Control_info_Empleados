@@ -45,9 +45,9 @@ const AssignDepartmentEmployee = () => {
     
     if(departmentsList.length === 0){
       dispatch(startGetAllDepartment());
-      console.log(departmentsList)
+
     }
-    console.log(departmentsList)
+  
   }, []);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const AssignDepartmentEmployee = () => {
 
   const handleSave = async () => {
     if (employeeSelect && selectedOption) {
-      console.log(department);
+      
       const updatedDataEmployee: EmployeesType = {
         ...employeeSelect,
         idDepartment: selectedOption,
@@ -97,7 +97,7 @@ const AssignDepartmentEmployee = () => {
           [newEmployeeObject.name]: newEmployeeObject,
         },
       };
-      console.log(JSON.stringify(updatedDepartment.employees));
+   
       dispatch(startUpdateDepartment(selectedOption, updatedDepartment));
       dispatch(StartResetDepartByIdDoc());
     }

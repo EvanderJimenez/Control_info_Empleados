@@ -4,7 +4,7 @@ const InputWithMenu = () => {
   const [searchText, setSearchText] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const menuRef = useRef<HTMLUListElement>(null);
-  
+  //TODO: Refine this logic with a simple foreach or map
   const searchOptions = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6', 'Option 7', 'Option 8', 'Option 9', 'Option 10'];
 
   useEffect(() => {

@@ -21,7 +21,7 @@ interface lisDepartment {
   option: string;
   setOption: React.Dispatch<React.SetStateAction<string>>;
 }
-
+//TODO: Check the name of this file and the component
 export const ListDepartment = ({
   handleGetDepartment,
   setPassId,
@@ -56,13 +56,12 @@ export const ListDepartment = ({
 
     dispatch(StartResetDepartmentByPage());
   };
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   useEffect(() => {
     if (departByName && departByName.length > 0) {
       setDepartmentData(departByName);
       dispatch(StartLoadData(true));
     } else if (departByPage && departByPage.length > 0) {
-      console.log("SetData 1");
       setDepartmentData(departByPage);
       dispatch(StartLoadData(true));
     }
@@ -75,7 +74,6 @@ export const ListDepartment = ({
 
   useEffect(() => {
     if (page !== 0 && !isDataLoaded) {
-      console.log("SetData 2");
       handleGetDepartments();
       dispatch(StartLoadData(true));
     }

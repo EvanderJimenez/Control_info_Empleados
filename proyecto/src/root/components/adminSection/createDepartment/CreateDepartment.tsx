@@ -52,7 +52,7 @@ const CreateDepartment = () => {
         subDepartment: name,
       };
 
-      console.log(JSON.stringify(newData));
+   
       dispatch(startCreateDepartment(newData));
      handleClear()
     }
@@ -68,9 +68,9 @@ const CreateDepartment = () => {
   useEffect(() => {
     if (departmentsList.length === 0) {
       dispatch(startGetAllDepartment());
-      console.log(departmentsList);
+    
     }
-    console.log(departmentsList);
+   
   }, []);
   -useEffect(() => {
     if (departmentsList) {

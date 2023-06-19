@@ -19,13 +19,13 @@ function cookiesUser(loginState: LoginState | undefined, resDepart: ResDepartSta
     const expirationDate = new Date(Date.now() + 86400 * 1000);
     let cookieValue = '';
 
-    if (loginState.jobPosition === "Admin") {
+    if (loginState.jobPosition === "Admin") {//TODO: Refine this logic with a simple literal object
       cookieValue = JSON.stringify({ logged: true, type: "admin",user: loginState.name, department: loginState.idDepartment , uid: loginState.uid });
       router.push("/home/AdminMain");
-    } else if (resDepart.idEmployee === loginState.uid) {
+    } else if (resDepart.idEmployee === loginState.uid) {//TODO: Refine this logic with a simple literal object
       cookieValue = JSON.stringify({ logged: true, type: "boss",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/BossMain");
-    } else if(resDepart.idEmployee !== loginState.uid) {
+    } else if(resDepart.idEmployee !== loginState.uid) {//TODO: Refine this logic with a simple literal object
       cookieValue = JSON.stringify({ logged: true, type: "employee",user: loginState.name, department: loginState.idDepartment, uid: loginState.uid });
       router.push("/home/EmployeeMain");
     }else{

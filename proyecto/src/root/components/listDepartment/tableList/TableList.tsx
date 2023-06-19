@@ -19,13 +19,11 @@ export const TableList = ({
   const listDepartment = useSelector(selectGetDepartmentById)
 
   const handleListEmployees = async (id: string) => {
-    console.log(id);
     dispatch(startGetDepartmentById(id));
     setOption("EditEmployee");
   };
 
   const handleGetDepartment = async (id: string) => {
-    console.log(id);
     dispatch(startGetDepartmentById(id));
     setOption("FormDepartment");
   };
