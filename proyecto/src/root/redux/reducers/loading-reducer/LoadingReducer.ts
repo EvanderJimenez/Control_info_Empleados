@@ -26,6 +26,6 @@ export const LoadSlice = createSlice({
 export const { setLoading } = LoadSlice.actions;
 export const LoadReducer = LoadSlice.reducer;
 export type DispatchTypeLoading = (args: LoadAction) => LoadAction;
-function useToasts(): { success: any } {
+function useToasts(): { success: any } {//TODO: Remove all dead code
   throw new Error("Function not implemented.");
 }

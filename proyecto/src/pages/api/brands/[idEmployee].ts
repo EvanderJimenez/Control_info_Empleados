@@ -8,7 +8,7 @@ async function getDocByEmployeeId(req: NextApiRequest, res: NextApiResponse) {
     const brand = await brandsProvider.getDocByEmployeeId(idEmployee);
     if (brand === null) {
       res.status(404).json({ message: "Not found" });
-    } else {
+    } else {//TODO: remove the else statement because is not necesary
       res.status(200).json(brand);
     }
   } catch (error) {
@@ -27,7 +27,7 @@ async function updateByUid(req: NextApiRequest, res: NextApiResponse) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
   getDocByEmployeeId(req, res);
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>

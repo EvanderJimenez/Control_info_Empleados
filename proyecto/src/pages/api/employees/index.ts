@@ -26,7 +26,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
 handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) => create(req, res);
 

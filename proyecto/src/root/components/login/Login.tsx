@@ -37,7 +37,7 @@ function Login() {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: any) => {//TODO: Type all variables that you use
     e.preventDefault();
 
     if (data.email && data.password) {
@@ -62,19 +62,19 @@ function Login() {
 }
 
 export default Login;
-function startErrorAlert(): any {
+function startErrorAlert(): any {//TODO: Remove all dead code
   throw new Error("Function not implemented.");
 }
 
-function startAlertError(arg0: string, arg1: boolean): any {
+function startAlertError(arg0: string, arg1: boolean): any {//TODO: Remove all dead code
   throw new Error("Function not implemented.");
 }
 
-function startAlertSuccess(arg0: string, arg1: boolean): any {
+function startAlertSuccess(arg0: string, arg1: boolean): any {//TODO: Remove all dead code
   throw new Error("Function not implemented.");
 }
 
-function startAlertLoading(arg0: string, arg1: boolean): any {
+function startAlertLoading(arg0: string, arg1: boolean): any {//TODO: Remove all dead code
   throw new Error("Function not implemented.");
 }
 

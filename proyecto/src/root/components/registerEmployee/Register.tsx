@@ -16,7 +16,7 @@ function Register() {
   const [upDate, setUpDate] = useState<boolean | null>();
 
   const [userData, setUserData] = useState<EmployeesType>(() => {
-    if (employeeByUid) {
+    if (employeeByUid) {//TODO: improve this statement to get simplicity
       setUpDate(true);
       return initialDataEmployee
     } else {
@@ -36,7 +36,7 @@ function Register() {
     setUserData(initialDataEmployee)
   };
 
-  const handleScheduleChange = (newSchedule: any) => {
+  const handleScheduleChange = (newSchedule: any) => {//TODO: Type all variables that you use
     setUserData((prevUserData) => ({ ...prevUserData, schedule: newSchedule }));
   };
 

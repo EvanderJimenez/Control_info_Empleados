@@ -18,11 +18,11 @@ const BossControl = () => {
   const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
 
   useEffect(() => {
-    if (!clear) {
+    if (!clear) {//TODO: improve this statement to get simplicity
       if (employeeByUid) {
         setDataEmployee(employeeByUid);
       }
-    } else {
+    } else {//TODO: remove the else statement because is not necesary, and use return
       setDataEmployee(initialDataEmployee);
     }
   }, [employeeByUid, clear]);
@@ -38,7 +38,7 @@ const BossControl = () => {
     dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
     dispatch(StartLoadDataBoss(true))
     setClear(true);
-    }else{
+    }else{//TODO: remove the else statement because is not necesary, and use return
       toast.error("No employee selected")
     }
   };

@@ -3,6 +3,7 @@ import SearchInput from "../ui/searchInput/SearchInput";
 import TableViewEmployees from "../ui/tableViewEmployees/TableViewEmployees";
 import ParameterBar from "../parameterBar/ParameterBar";
 
+//TODO: Remove this static information
 const rows = [
     { name: 'Evander Jiménez', cedula: 208170802, email: 'alexevander2001@gmail.com', late:0 },
     { name: 'Dario Mora', cedula: 109090090, email: 'DarkVar2k@gmail.com', late:20 },

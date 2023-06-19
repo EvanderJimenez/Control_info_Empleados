@@ -14,7 +14,7 @@ async function getEmployeesByIdDepartment(req: NextApiRequest, res: NextApiRespo
   }
 }
 
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
 getEmployeesByIdDepartment(req, res);
 

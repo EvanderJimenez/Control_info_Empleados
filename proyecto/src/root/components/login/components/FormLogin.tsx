@@ -11,7 +11,7 @@ interface FormLoginProps {
 
 
 const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProps) => {
-  function dispatch(arg0: any): React.MouseEventHandler<HTMLButtonElement> | undefined {
+  function dispatch(arg0: any): React.MouseEventHandler<HTMLButtonElement> | undefined {//TODO: Type all variables that you use
     throw new Error("Function not implemented.");
   }
 
@@ -52,7 +52,7 @@ const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProp
 };
 
 export default FormLogin;
-function dispatch(arg0: any) {
+function dispatch(arg0: any) {//TODO: Remove all dead code
   throw new Error("Function not implemented.");
 }
 

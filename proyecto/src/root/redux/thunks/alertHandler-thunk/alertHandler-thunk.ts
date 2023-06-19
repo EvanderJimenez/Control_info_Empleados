@@ -3,7 +3,7 @@ import { DispatchTypeAlert, errorAlert, loadingAlert, successAlert } from "../..
 
 
 
-export const starAlertSuccess = (textForAlert: string, unfolded: boolean): any => {
+export const starAlertSuccess = (textForAlert: string, unfolded: boolean): any => {//TODO: Type all variables that you use
     return async (dispatch: DispatchTypeAlert) => {
 
         const alertType: AlertType = {
@@ -14,7 +14,7 @@ export const starAlertSuccess = (textForAlert: string, unfolded: boolean): any =
     };
 };
 
-export const starAlertError = (textForAlert: string, unfolded: boolean): any => {
+export const starAlertError = (textForAlert: string, unfolded: boolean): any => {//TODO: Type all variables that you use
     return async (dispatch: DispatchTypeAlert) => {
 
         const errorType: AlertType = {
@@ -25,7 +25,7 @@ export const starAlertError = (textForAlert: string, unfolded: boolean): any => 
     };
 };
 
-export const starAlertLoading= (textForAlert: string, unfolded: boolean): any => {
+export const starAlertLoading= (textForAlert: string, unfolded: boolean): any => {//TODO: Type all variables that you use
     return async (dispatch: DispatchTypeAlert) => {
 
         const loadingType: AlertType = {

@@ -13,7 +13,7 @@ interface PropsListRequest {
   setSendRequest: React.Dispatch<React.SetStateAction<boolean>>;
   filter: string;
 }
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
 const ListRequestVacations = ({
   setSendRequest,
   data,

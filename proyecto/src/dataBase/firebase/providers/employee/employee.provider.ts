@@ -39,11 +39,11 @@ const getAll = async () => {
 
   return employees;
 };
-
+//TODO: Separate this file in multiple parts
 const updateByUid = async (
   uid: string,
   employeeData: EmployeesType
-): Promise<any> => {
+): Promise<any> => {//TODO: Type all variables that you use
   const { vacations } = employeeData;
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
@@ -61,7 +61,7 @@ const updateByUid = async (
 
 const create = async (
   employeeData: EmployeesType
-): Promise<{ message: string; employee?: any }> => {
+): Promise<{ message: string; employee?: any }> => {//TODO: Type all variables that you use
   const { password, email, uid, ...restData } = employeeData;
 
   const emailQuery = query(
@@ -129,7 +129,7 @@ const getByUid = async (uid: string) => {
 
   if (employeeSnapshot.empty) {
     throw new Error(`User not found: ${uid}`);
-  } else {
+  } else {//TODO: remove the else statement because is not necesary
     return employeeSnapshot.docs[0].data();
   }
 };
@@ -159,7 +159,7 @@ const login = async (email: string, password: string) => {
   const user = userCredential.user;
   if (!user) {
     throw new Error("No user found with that email and password");
-  } else {
+  } else {//TODO: remove the else statement because is not necesary
     const employeeCollection = collection(firestore, "employee");
     const employeeQuery = query(
       employeeCollection,
@@ -187,7 +187,7 @@ const getByCedula = async (cedula: string) => {
 
   if (employeeSnapshot.empty) {
     throw new Error(`User not found ${cedula}`);
-  } else {
+  } else {//TODO: remove the else statement because is not necesary
     return employeeSnapshot.docs[0].data();
   }
 };
@@ -221,7 +221,7 @@ const getByVariable = async (
     employeeQuery
   );
 
-  const employees: any[] = [];
+  const employees: any[] = [];//TODO: Type all variables that you use
 
   if (!employeeSnapshot.empty) {
     employeeSnapshot.forEach((doc) => {
@@ -239,7 +239,7 @@ const getByVariableAdmin = async (data: string, variable: string) => {
     employeeQuery
   );
 
-  const employees: any[] = [];
+  const employees: any[] = [];//TODO: Type all variables that you use
 
   if (!employeeSnapshot.empty) {
     employeeSnapshot.forEach((doc) => {
@@ -275,7 +275,7 @@ const getEmployeesByIdDepartment = async (idDepartment: string) => {
     employeeQuery
   );
 
-  const employees: any[] = [];
+  const employees: any[] = [];//TODO: Type all variables that you use
 
   if (!employeeSnapshot.empty) {
     employeeSnapshot.forEach((doc) => {
@@ -294,7 +294,7 @@ const getAllUD = async () => {
   );
   const departmentSnapshot = await getDocs(departmentQuery);
 
-  const departmentIds: any[] = [];
+  const departmentIds: any[] = [];//TODO: Type all variables that you use
 
   if (!departmentSnapshot.empty) {
     departmentSnapshot.forEach((doc) => {

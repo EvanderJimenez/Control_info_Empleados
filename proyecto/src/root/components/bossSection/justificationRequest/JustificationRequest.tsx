@@ -18,7 +18,7 @@ import FormAcceptDeniedJustification from "./components/formAccetpDenied/FormAcc
 import { resetByVariable } from "@/root/redux/reducers/employee-reducer/getByVariable/GetByVariableReducer";
 
 let optionSelect = "wait";
-
+ //TODO: This code has a nested innecesary complexity, consider split in a new useHook
 const JustificationRequest = () => {
   const dispatch = useDispatch();
   const [selectedRequest, setSelectedRequest] =

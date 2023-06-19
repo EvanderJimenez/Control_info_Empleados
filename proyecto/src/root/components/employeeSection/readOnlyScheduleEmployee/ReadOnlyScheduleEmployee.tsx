@@ -23,7 +23,7 @@ const ReadOnlyScheduleEmployee = () => {
 
   useEffect(() => {
     if (brandsById) {
-      const hoursEmployee: Record<string, any> = brandsById.hoursEmployee;
+      const hoursEmployee: Record<string, any> = brandsById.hoursEmployee;//TODO: Type all variables that you use
       if (hoursEmployee) {
         scheduleList = Object.entries(hoursEmployee).map(
           ([day, schedule]: [string, Record<string, string>]) => {

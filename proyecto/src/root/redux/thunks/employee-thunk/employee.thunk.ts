@@ -69,7 +69,7 @@ import {
 } from "../../reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
 import { starAlertError, starAlertLoading, starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
 
-export const StartDeletingEmployee = (employeeId: string): any => {
+export const StartDeletingEmployee = (employeeId: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeDelete) => {
     dispatch(setLoading(true));
     try {
@@ -87,7 +87,7 @@ export const StartDeletingEmployee = (employeeId: string): any => {
   };
 };
 
-export const StartDismissEmployee = (searchTerm: string): any => {
+export const StartDismissEmployee = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeDismiss) => {
     dispatch(setLoading(true));
     const employee = await providerRedux.dismissByUidProvider(searchTerm);
@@ -98,7 +98,7 @@ export const StartDismissEmployee = (searchTerm: string): any => {
   };
 };
 
-export const StartListOfEmployee = (): any => {
+export const StartListOfEmployee = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeListEmployee) => {
     const employeeList = await providerRedux.employeeListProvider();
     dispatch(setLoading(true));
@@ -109,7 +109,7 @@ export const StartListOfEmployee = (): any => {
   };
 };
 
-export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
+export const StartCreateEmployee = (searchTerm: EmployeesType): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeCreate) => {
     dispatch(setLoading(true));
 
@@ -123,7 +123,7 @@ export const StartCreateEmployee = (searchTerm: EmployeesType): any => {
 export const StartUpDateEmployee = (
   searchUser: string,
   searchTerm: EmployeesType
-): any => {
+): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeUpdate) => {
     const employee = await providerRedux.upDatEmployeeProvider(
       searchUser,
@@ -139,7 +139,7 @@ export const StartUpDateFileEmployee = (
   searchUser: string,
   nameFile: string,
   typeFile: string
-): any => {
+): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeUpdateFile) => {
     const employee = await providerRedux.uploadFileProvider(
       searchTerm,
@@ -157,7 +157,7 @@ export const StartUpDateFileEmployee = (
   };
 };
 
-export const StartGetEmployeeByUid = (searchTerm: string): any => {
+export const StartGetEmployeeByUid = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
 
@@ -165,13 +165,13 @@ export const StartGetEmployeeByUid = (searchTerm: string): any => {
   };
 };
 
-export const ResetEmployeeByUid = (): any => {
+export const ResetEmployeeByUid = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     dispatch(resetEmployeeByUid());
   };
 };
 
-export const StartGetEmployeeByUid2 = (searchTerm: string): any => {
+export const StartGetEmployeeByUid2 = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
 
@@ -179,13 +179,13 @@ export const StartGetEmployeeByUid2 = (searchTerm: string): any => {
   };
 };
 
-export const ResetEmployeeByUid3 = (): any => {
+export const ResetEmployeeByUid3 = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     dispatch(resetEmployeeByUid3());
   };
 };
 
-export const StartGetEmployeeByUid3 = (searchTerm: string): any => {
+export const StartGetEmployeeByUid3 = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     const employee = await providerRedux.getEmployeeByUidProvider(searchTerm);
 
@@ -193,20 +193,20 @@ export const StartGetEmployeeByUid3 = (searchTerm: string): any => {
   };
 };
 
-export const ResetEmployeeByUid2 = (): any => {
+export const ResetEmployeeByUid2 = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeEmployeeByUid) => {
     dispatch(resetEmployeeByUid2());
   };
 };
 
 
-export const StartResetUrl = (): any => {
+export const StartResetUrl = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetFileURLByName) => {
     dispatch(resetUrlReducer());
   };
 };
 
-export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {
+export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeLogin) => {
     dispatch(starAlertLoading("Loading", true));
     const response = await providerRedux.loginProvider(
@@ -231,7 +231,7 @@ export const StartGetByVariable = (
   searchTerm1: string,
   searchTerm2: string,
   searchTerm3: string
-): any => {
+): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByVariable) => {
     const response = await providerRedux.getByVariableProvider(
       searchTerm1,
@@ -247,7 +247,7 @@ export const StartGetByVariable2 = (
   searchTerm1: string,
   searchTerm2: string,
   searchTerm3: string
-): any => {
+): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByVariable) => {
     const response = await providerRedux.getByVariableProvider(
       searchTerm1,
@@ -262,7 +262,7 @@ export const StartGetByVariable2 = (
 export const StartGetByVariableAdmin = (
   searchTerm1: string,
   searchTerm2: string
-): any => {
+): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByVariable) => {
     const response = await providerRedux.getByVariableProviderAdmin(
       searchTerm1,
@@ -273,25 +273,25 @@ export const StartGetByVariableAdmin = (
   };
 };
 
-export const ResetByVariableAdmin = (): any => {
+export const ResetByVariableAdmin = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByVariable) => {
     dispatch(resetByVariableAdmin());
   };
 };
 
-export const ResetByVariable = (): any => {
+export const ResetByVariable = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByVariable) => {
     dispatch(resetByVariable());
   };
 };
 
-export const ResetByVariable2 = (): any => {
+export const ResetByVariable2 = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByVariable) => {
     dispatch(resetByVariable2());
   };
 };
 
-export const StarGetVacationsByUid = (searchTerm: string): any => {
+export const StarGetVacationsByUid = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeVacations) => {
     const response = await providerRedux.getVacationsByUidProvider(searchTerm);
 
@@ -301,7 +301,7 @@ export const StarGetVacationsByUid = (searchTerm: string): any => {
   };
 };
 
-export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
+export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByIdDepart) => {
     const response = await providerRedux.getEmployeesByIdDepartProvider(
       searchTerm
@@ -312,7 +312,7 @@ export const StarGetEmployeesByIdDepartment = (searchTerm: string): any => {
 };
 
 
-export const StarGetEmployeesByIdDepartmentJustifications = (searchTerm: string): any => {
+export const StarGetEmployeesByIdDepartmentJustifications = (searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByIdDepart) => {
     const response = await providerRedux.getEmployeesByIdDepartProvider(
       searchTerm
@@ -322,13 +322,13 @@ export const StarGetEmployeesByIdDepartmentJustifications = (searchTerm: string)
   };
 };
 
-export const StartResetEmployeesByIdDepartment = (): any => {
+export const StartResetEmployeesByIdDepartment = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeByIdDepart) => {
     dispatch(resetEmployeesByIdDepartmentReducer());
   };
 };
 
-export const StarGetFileURLByName = (uid: string, searchTerm: string): any => {
+export const StarGetFileURLByName = (uid: string, searchTerm: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeGetFileURLByName) => {
     const response = await providerRedux.getFileURLByName(uid, searchTerm);
 
@@ -336,7 +336,7 @@ export const StarGetFileURLByName = (uid: string, searchTerm: string): any => {
   };
 };
 
-export const StarGetAllBosses = (): any => {
+export const StarGetAllBosses = (): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeAllBoss) => {
     const response = await providerRedux.getAllBossesProvider();
 

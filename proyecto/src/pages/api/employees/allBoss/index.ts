@@ -13,7 +13,7 @@ const getAll = async (res: NextApiResponse) => {
   }
 };
 
-const handlers: any = {};
+const handlers: any = {};//TODO: Type all variables that you use
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
 
 export default async function employeesController(
