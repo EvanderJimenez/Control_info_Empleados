@@ -76,6 +76,7 @@ const updateDepartmentByIdProvider = async (
 };
 
 const getDepartmentByDocIdProvider = async (searchTerm: string) => {
+  console.log(searchTerm);
   const response = await fetch(`/api/departments/${searchTerm}`, {
     method: "GET",
     headers: {

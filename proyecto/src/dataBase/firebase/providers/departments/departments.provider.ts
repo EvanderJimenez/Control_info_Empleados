@@ -1,5 +1,6 @@
 import { firestore } from "../../firebase";
 import { Employee } from "@/root/interface/departments";
+import { DepartmentType } from "@/root/types/Department.type";
 import {
   collection,
   getDocs,
@@ -61,8 +62,8 @@ async function create(
   level: string,
   subDepartment: string,
   namesubDepartment: string,
-  employees: Employee
-): Promise<{ message: string; departments?: any }> {//TODO: Type all variables that you use
+  employees: { [key: string]: Employee }
+): Promise<{ message: string; departments?: DepartmentType }> {//TODO: Type all variables that you use
   const nameExists = await checkIfNameExists(name);
 
   if (nameExists) {
@@ -112,8 +113,6 @@ const getByDocId = async (docId: string) => {
 
   if (departmentsDocSnapshot.exists()) {
     return departmentsDocSnapshot.data();
-  } else {//TODO: remove the else statement because is not necesary
-    throw new Error(`A department with document ID was not found: ${docId}`);
   }
 };
 
@@ -132,8 +131,6 @@ const getName = async (name: string) => {
       return { id, ...data };
     });
     return departments;
-  } else {//TODO: remove the else statement because is not necesary
-    throw new Error(`No department found with name: ${name}`);
   }
 };
 

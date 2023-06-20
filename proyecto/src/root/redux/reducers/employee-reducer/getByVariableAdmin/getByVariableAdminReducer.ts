@@ -33,4 +33,4 @@ export const getByVariableAdminSlice = createSlice({
 
 export const { getByVariableAdminReducer, resetByVariableAdmin } =getByVariableAdminSlice.actions;
 export const GetByVariableAdminReducer = getByVariableAdminSlice.reducer;
-export type DispatchTypeByVariable = (args: EmployeeByVariableAdminAction) => EmployeeByVariableAdminAction;
+export type DispatchTypeByVariableAdmin = (args: EmployeeByVariableAdminAction) => EmployeeByVariableAdminAction;

@@ -1,5 +1,4 @@
 import { StarGetEmployeesByIdDepartment, selectGetEmployeesByIdDepartment, selectLogin } from "@/root/redux";
-import { getEmployeesByIdDepartmentReducer } from "@/root/redux/reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 

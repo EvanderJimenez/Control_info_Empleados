@@ -1,3 +1,4 @@
+import { DispatchTypeByVariableAdmin } from './../../reducers/employee-reducer/getByVariableAdmin/getByVariableAdminReducer';
 import { EmployeesType } from "@/root/types/Employee.type";
 import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 
@@ -31,22 +32,9 @@ import {
   resetEmployeeByUid3,
 } from "../../reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
 import {
-  DispatchTypeByVariable,
-  getByVariable2Reducer,
-  getByVariableReducer,
-  resetByVariable,
-  resetByVariable2,
-} from "../../reducers/employee-reducer/getByVariable/GetByVariableReducer";
-import {
   DispatchTypeVacations,
   getVacationsByUidReducer,
 } from "../../reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
-import {
-  DispatchTypeByIdDepart,
-  getEmployeesByIdDepartmentJustificationsReducer,
-  getEmployeesByIdDepartmentReducer,
-  resetEmployeesByIdDepartmentReducer,
-} from "../../reducers/employee-reducer/getEmployeesByIdDepartment/GetEmployeesByIdDepartmentReducer";
 import {
   DispatchTypeAllBoss,
   getAllBossReducer,
@@ -68,6 +56,8 @@ import {
   resetUrlReducer,
 } from "../../reducers/employee-reducer/getFileURLByName/GetFileURLByNameReducer";
 import { starAlertError, starAlertLoading, starAlertSuccess } from "../alertHandler-thunk/alertHandler-thunk";
+import { DispatchTypeByIdDepart, getEmployeesByIdDepartmentJustificationsReducer, getEmployeesByIdDepartmentReducer, resetEmployeesByIdDepartmentReducer } from "../../reducers/employee-reducer/getEmployeesByIdDepartment/getEmployeesByIdDepartmentReducer";
+import { DispatchTypeByVariable, getByVariable2Reducer, getByVariableReducer, resetByVariable, resetByVariable2 } from "../../reducers/employee-reducer/getByVariable/getByVariableReducer";
 
 export const StartDeletingEmployee = (employeeId: string): any => {//TODO: Type all variables that you use
   return async (dispatch: DispatchTypeDelete) => {
@@ -263,7 +253,7 @@ export const StartGetByVariableAdmin = (
   searchTerm1: string,
   searchTerm2: string
 ): any => {//TODO: Type all variables that you use
-  return async (dispatch: DispatchTypeByVariable) => {
+  return async (dispatch: DispatchTypeByVariableAdmin) => {
     const response = await providerRedux.getByVariableProviderAdmin(
       searchTerm1,
       searchTerm2
@@ -274,7 +264,7 @@ export const StartGetByVariableAdmin = (
 };
 
 export const ResetByVariableAdmin = (): any => {//TODO: Type all variables that you use
-  return async (dispatch: DispatchTypeByVariable) => {
+  return async (dispatch: DispatchTypeByVariableAdmin) => {
     dispatch(resetByVariableAdmin());
   };
 };
