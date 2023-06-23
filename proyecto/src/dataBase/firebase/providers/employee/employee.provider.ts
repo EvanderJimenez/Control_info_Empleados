@@ -19,14 +19,14 @@ import {
   getDownloadURL,
   getStorage,
   ref,
-  uploadBytes,
   uploadString,
 } from "firebase/storage";
-import { v4 } from "uuid";
+
 import fetch from "node-fetch";
-import fs from "fs";
+
 import { EmployeesType, Files } from "@/root/types/Employee.type";
-import { isNumber } from "util";
+import { DepartmentType } from "@/root/types/Department.type";
+
 
 const getAll = async () => {
   const employeeCollection = collection(firestore, "employee");
@@ -43,8 +43,7 @@ const getAll = async () => {
 const updateByUid = async (
   uid: string,
   employeeData: EmployeesType
-): Promise<any> => {//TODO: Type all variables that you use
-  const { vacations } = employeeData;
+): Promise<EmployeesType | undefined> => {
   const employeesRef = collection(firestore, "employee");
   const q = query(employeesRef, where("uid", "==", uid));
   const querySnapshot = await getDocs(q);
@@ -54,14 +53,17 @@ const updateByUid = async (
     await updateDoc(employeeDoc, employeeData);
 
     const snapshotEmployeeUpdate = await getDoc(employeeDoc);
-    const employeeUpdate = snapshotEmployeeUpdate.data();
+    const employeeUpdate = snapshotEmployeeUpdate.data() as EmployeesType;
     return employeeUpdate;
   }
+
+  return undefined;
 };
+
 
 const create = async (
   employeeData: EmployeesType
-): Promise<{ message: string; employee?: any }> => {//TODO: Type all variables that you use
+): Promise<{ message: string; employee?: EmployeesType }> => {//TODO: Type all variables that you use
   const { password, email, uid, ...restData } = employeeData;
 
   const emailQuery = query(
@@ -113,7 +115,7 @@ const create = async (
   return newDoc.exists()
     ? {
         message: "Employee created successfully",
-        employee: newDoc.data(),
+        employee: newDoc.data() as EmployeesType,
       }
     : {
         message: "Employee creation failed",
@@ -127,9 +129,7 @@ const getByUid = async (uid: string) => {
     employeeQuery
   );
 
-  if (employeeSnapshot.empty) {
-    throw new Error(`User not found: ${uid}`);
-  } else {//TODO: remove the else statement because is not necesary
+  if (!employeeSnapshot.empty) {
     return employeeSnapshot.docs[0].data();
   }
 };
@@ -157,9 +157,7 @@ const login = async (email: string, password: string) => {
   );
 
   const user = userCredential.user;
-  if (!user) {
-    throw new Error("No user found with that email and password");
-  } else {//TODO: remove the else statement because is not necesary
+  if (user) {
     const employeeCollection = collection(firestore, "employee");
     const employeeQuery = query(
       employeeCollection,
@@ -175,7 +173,7 @@ const login = async (email: string, password: string) => {
       throw new Error("No employee found with that email and password");
     }
     return employeeDoc.data();
-  }
+  } 
 };
 
 const getByCedula = async (cedula: string) => {
@@ -186,8 +184,6 @@ const getByCedula = async (cedula: string) => {
   );
 
   if (employeeSnapshot.empty) {
-    throw new Error(`User not found ${cedula}`);
-  } else {//TODO: remove the else statement because is not necesary
     return employeeSnapshot.docs[0].data();
   }
 };
@@ -221,11 +217,11 @@ const getByVariable = async (
     employeeQuery
   );
 
-  const employees: any[] = [];//TODO: Type all variables that you use
+  const employees: EmployeesType[] = [];//TODO: Type all variables that you use
 
   if (!employeeSnapshot.empty) {
     employeeSnapshot.forEach((doc) => {
-      employees.push(doc.data());
+      employees.push(doc.data() as EmployeesType);
     });
   }
 
@@ -239,11 +235,11 @@ const getByVariableAdmin = async (data: string, variable: string) => {
     employeeQuery
   );
 
-  const employees: any[] = [];//TODO: Type all variables that you use
+  const employees: EmployeesType[] = [];//TODO: Type all variables that you use
 
   if (!employeeSnapshot.empty) {
     employeeSnapshot.forEach((doc) => {
-      employees.push(doc.data());
+      employees.push(doc.data() as EmployeesType);
     });
   }
 
@@ -275,11 +271,11 @@ const getEmployeesByIdDepartment = async (idDepartment: string) => {
     employeeQuery
   );
 
-  const employees: any[] = [];//TODO: Type all variables that you use
+  const employees: EmployeesType[] = [];//TODO: Type all variables that you use
 
   if (!employeeSnapshot.empty) {
     employeeSnapshot.forEach((doc) => {
-      employees.push(doc.data());
+      employees.push(doc.data() as EmployeesType);
     });
   }
 
@@ -294,7 +290,7 @@ const getAllUD = async () => {
   );
   const departmentSnapshot = await getDocs(departmentQuery);
 
-  const departmentIds: any[] = [];//TODO: Type all variables that you use
+  const departmentIds: DepartmentType[] = [];//TODO: Type all variables that you use
 
   if (!departmentSnapshot.empty) {
     departmentSnapshot.forEach((doc) => {

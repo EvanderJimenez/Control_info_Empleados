@@ -1,5 +1,4 @@
 import { Attendance } from './../interface/employee/employee.interface';
-import { Brands, Schedule } from "../interface/employee";
 
 export type DeleteEmployeeType = {
   id: string;

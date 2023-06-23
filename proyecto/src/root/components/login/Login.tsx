@@ -27,7 +27,6 @@ function Login() {
   });
 
   useEffect(() => {
-    console.log(loginState.idDepartment)
     if (loginState?.idDepartment !== undefined ) {
       dispatch(startGetDepartByIdDoc(loginState.idDepartment));
     }

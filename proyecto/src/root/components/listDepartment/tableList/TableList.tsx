@@ -82,7 +82,7 @@ export const TableList = ({
                     className="bg-darkBlue"
                     onClick={() => handleListEmployees(department.id)}
                   >
-                    See
+                    View
                   </button>
                 </td>
               </tr>
