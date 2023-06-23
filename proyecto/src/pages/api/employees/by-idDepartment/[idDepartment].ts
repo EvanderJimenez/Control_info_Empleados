@@ -1,6 +1,7 @@
 
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -14,7 +15,7 @@ async function getEmployeesByIdDepartment(req: NextApiRequest, res: NextApiRespo
   }
 }
 
-const handlers: any = {};//TODO: Type all variables that you use
+const handlers:  { [key: string]: HandlerFunction } = {};//TODO: Type all variables that you use
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
 getEmployeesByIdDepartment(req, res);
 

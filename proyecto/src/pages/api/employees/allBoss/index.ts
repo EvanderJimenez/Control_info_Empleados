@@ -3,6 +3,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 
 const getAll = async (res: NextApiResponse) => {
   try {
@@ -13,7 +14,7 @@ const getAll = async (res: NextApiResponse) => {
   }
 };
 
-const handlers: any = {};//TODO: Type all variables that you use
+const handlers:  { [key: string]: HandlerFunction } = {};//TODO: Type all variables that you use
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
 
 export default async function employeesController(

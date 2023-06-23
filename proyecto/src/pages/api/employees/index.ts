@@ -2,15 +2,14 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
 import { EmployeesType } from "@/root/types/Employee.type";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 
 
 const getAll = async (res: NextApiResponse) => {
-  try {//TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
+  //TODO: use only try catch in special cases and in the controllers or interfaces, because it is redundant and not clean code
     const employees = await employeeProvider.getAll();
     res.status(200).json(employees);
-  } catch (error) {
-    res.status(500).json({ message: (error as Error).message });
-  }
+
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -26,7 +25,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 
-const handlers: any = {};//TODO: Type all variables that you use
+const handlers:  { [key: string]: HandlerFunction } = {};//TODO: Type all variables that you use
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
 handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) => create(req, res);
 

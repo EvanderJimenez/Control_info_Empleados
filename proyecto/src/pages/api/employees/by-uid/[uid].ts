@@ -1,5 +1,6 @@
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -34,7 +35,7 @@ async function getFileURLByName(req: NextApiRequest, res: NextApiResponse) {
 }
 
 
-const handlers: any = {};//TODO: Type all variables that you use
+const handlers:  { [key: string]: HandlerFunction } = {};//TODO: Type all variables that you use
 handlers["DELETE"] = (req: NextApiRequest, res: NextApiResponse) =>
 dismissByUid(req, res);
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>

@@ -1,5 +1,6 @@
 import { departmentProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getAll = async (res: NextApiResponse) => {
@@ -50,7 +51,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const handlers: any = {};//TODO: Type all variables that you use
+const handlers:  { [key: string]: HandlerFunction } = {};//TODO: Type all variables that you use
 handlers["GET"] = (_req: NextApiRequest, res: NextApiResponse) => getAll(res);
 handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) =>
   create(req, res);

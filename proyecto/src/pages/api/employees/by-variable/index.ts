@@ -1,6 +1,6 @@
 import { employeeProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
-import { id } from "date-fns/locale";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const getByVariable = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -34,7 +34,7 @@ const getByVariableAdmin = async (
   }
 };
 
-const handlers: any = {};//TODO: Type all variables that you use
+const handlers:  { [key: string]: HandlerFunction } = {};//TODO: Type all variables that you use
 handlers["POST"] = (req: NextApiRequest, res: NextApiResponse) =>
   getByVariable(req, res);
 handlers["PUT"] = (req: NextApiRequest, res: NextApiResponse) =>

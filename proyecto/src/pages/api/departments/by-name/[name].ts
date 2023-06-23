@@ -1,5 +1,6 @@
 import { departmentProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function getName(req: NextApiRequest, res: NextApiResponse) {
@@ -11,7 +12,7 @@ async function getName(req: NextApiRequest, res: NextApiResponse) {
     res.status(500).json({ message: (error as Error).message });
   }
 }
-const handlers: any = {};//TODO: Type all variables that you use
+const handlers:  { [key: string]: HandlerFunction } = {};//TODO: Type all variables that you use
 handlers["GET"] = (req: NextApiRequest, res: NextApiResponse) =>
   getName(req, res);
 

@@ -82,9 +82,9 @@ const AssignDepartmentEmployee = () => {
       setChange(!change);
       if (employeeUpdate.name.length === 0) {
         toast.error("There is no employee loaded");
-      } else {//TODO: remove the else statement because is not necesary and use return;
+        return
+      }//TODO: remove the else statement because is not necesary and use return;
         toast.success("Save success");
-      }
     }
   };
 
