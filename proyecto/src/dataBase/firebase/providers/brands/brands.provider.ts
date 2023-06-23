@@ -1,5 +1,6 @@
 import { firestore } from "../../firebase";
 import { Cycle, HoursEmployee } from "@/root/interface/brands";
+import { Brands } from "@/root/interface/employee";
 import {
   collection,
   getDocs,
@@ -32,7 +33,7 @@ async function createBrands(
   idEmployee: string,
   cycle: Cycle,
   hoursEmployee: HoursEmployee
-): Promise<{ message: string; brands?: any }> { //TODO: Type all variables that you use
+): Promise<{ message: string; brands?: Brands } | undefined> { //TODO: Type all variables that you use
   const newDocRef = await addDoc(collection(firestore, "brands"), {
     idEmployee,
     cycle,
@@ -44,11 +45,7 @@ async function createBrands(
   if (newDoc.exists()) {
     return {
       message: "Successfully created brands",
-      brands: newDoc.data(),
-    };
-  } else {//TODO: remove the else statement because is not necesary
-    return {
-      message: "Failed to create brands",
+      brands: newDoc.data() as Brands,
     };
   }
 }
@@ -72,9 +69,7 @@ const getDocByEmployeeId = async (idEmployee: string) => {
     queryBrands
   );
 
-  if (brandsSnapshot.empty) {
-    return null;
-  } else {//TODO: remove the else statement because is not necesary
+  if (!brandsSnapshot.empty) {
     return brandsSnapshot.docs[0].data();
   }
 };
