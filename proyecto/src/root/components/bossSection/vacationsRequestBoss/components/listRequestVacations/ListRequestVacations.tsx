@@ -6,14 +6,14 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface RequestEmployeeProps {
-  selectedRequest: any;//TODO: Type all variables that you use
+  setSelectedRequest: React.Dispatch<React.SetStateAction<PendingRequest | undefined>>;//TODO: Type all variables that you use
   option: string
 }
 
 
 let listEmployees : EmployeesType[]
 
-const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) => {
+const ListRequestVacations = ({option, setSelectedRequest }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
   const variable = useSelector(selectGetByVariable2);
@@ -66,7 +66,7 @@ const ListRequestVacations = ({option, selectedRequest }: RequestEmployeeProps) 
 
   const handleLoadInformation = (request: PendingRequest) => {
     dispatch(StartGetEmployeeByUid(request.employeeUID || ""));
-    selectedRequest(request);
+    setSelectedRequest(request);
   };
 
   return (

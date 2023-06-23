@@ -43,7 +43,7 @@ export function BrandsClock({ handleUpdate, ...props }: methodsBrands) {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleLogin = async (e: any) => {//TODO: Type all variables that you use
+  const handleLogin = async (e:React.FormEvent<HTMLFormElement>) => {//TODO: Type all variables that you use
     e.preventDefault();
 
     if (data.email && data.password) {
