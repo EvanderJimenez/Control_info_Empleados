@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { ListDepartment } from "../../listDepartment/ListDeparment";
-import AddEmployee from "../addEmployee/AddEmployee";
 import { FormEmployee } from "../formEmployee/FormEmployee";
 import Table from "../table/Table";
 import { Department, Employee } from "@/root/interface/departments";
-import SearchEmployeeDepart from "../SearchEmployeeDepart/SearchEmployeeDepart";
-import ListEmployeeDepart from "../listEmployeeDepart/ListEmployeeDepart";
+
 
 interface methods {
   departmentsData: Department;

@@ -11,7 +11,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface RequestEmployeeProps {
-  selectedRequest: any;//TODO: Type all variables that you use
+   setSelectedRequest: React.Dispatch<React.SetStateAction<PendingRequestJustifications | undefined>>;//TODO: Type all variables that you use
   option: string;
 }
 
@@ -19,7 +19,7 @@ let listEmployees: EmployeesType[];
 
 const ListRequestJustification = ({
   option,
-  selectedRequest,
+  setSelectedRequest,
 }: RequestEmployeeProps) => {
   const dispatch = useDispatch();
   const loginState = useSelector(selectLogin);
@@ -32,7 +32,7 @@ const ListRequestJustification = ({
   useEffect(() => {
     dispatch(StarGetEmployeesByIdDepartmentJustifications(loginState?.idDepartment || ""));
   }, [option]);
- //TODO: This code has a nested innecesary complexity, consider split in a new useHook
+ //TODO: This code has a nested unnecessary complexity, consider split in a new useHook
   useEffect(() => {
     if (listEmployees) {
       const pendingRequestsList: PendingRequestJustifications[] = [];
@@ -74,7 +74,7 @@ const ListRequestJustification = ({
 
   const handleLoadInformation = (request: PendingRequestJustifications) => {
     dispatch(StartGetEmployeeByUid(request?.employeeUID || ""));
-    selectedRequest(request);
+    setSelectedRequest(request);
   };
 
   if (variable && variable.length > 0) {

@@ -10,9 +10,7 @@ const ListAllEmployees = () => {
 
     if(lisTEmployees.length === 0) {
     dispatch(StarGetEmployeesByIdDepartment(userLogin?.idDepartment || ''))
-    console.log(lisTEmployees) //TODO: Remove all logs
     }
-    console.log(lisTEmployees) //TODO: Remove all logs
   };
 
   return (

@@ -15,10 +15,10 @@ import {
   pendingRequestJustification,
 } from "@/root/constants/employee/employee.constants";
 import FormAcceptDeniedJustification from "./components/formAccetpDenied/FormAcceptDeniedJustification";
-import { resetByVariable } from "@/root/redux/reducers/employee-reducer/getByVariable/GetByVariableReducer";
+import { resetByVariable } from "@/root/redux/reducers/employee-reducer/getByVariable/getByVariableReducer";
 
 let optionSelect = "wait";
- //TODO: This code has a nested innecesary complexity, consider split in a new useHook
+ //TODO: This code has a nested unnecessary complexity, consider split in a new useHook
 const JustificationRequest = () => {
   const dispatch = useDispatch();
   const [selectedRequest, setSelectedRequest] =
@@ -84,7 +84,7 @@ const JustificationRequest = () => {
         <div>
           <ListRequestJustification
             option={optionSelect}
-            selectedRequest={setSelectedRequest}
+            setSelectedRequest={setSelectedRequest}
           />
         </div>
       </div>
