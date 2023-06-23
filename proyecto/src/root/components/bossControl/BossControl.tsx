@@ -14,17 +14,15 @@ const BossControl = () => {
   const [clear, setClear] = useState(false);
   const [load, setLoad] = useState(false);
 
-
-  const [dataEmployee, setDataEmployee] = useState<EmployeesType>(initialDataEmployee);
+  const [dataEmployee, setDataEmployee] =
+    useState<EmployeesType>(initialDataEmployee);
 
   useEffect(() => {
-    if (!clear) {//TODO: improve this statement to get simplicity
-      if (employeeByUid) {
-        setDataEmployee(employeeByUid);
-      }
-    } else {//TODO: remove the else statement because is not necesary, and use return
-      setDataEmployee(initialDataEmployee);
-    }
+    //TODO: improve this statement to get simplicity
+    //TODO: remove the else statement because is not necessary, and use return
+
+    !clear && employeeByUid && setDataEmployee(employeeByUid);
+    clear && setDataEmployee(initialDataEmployee);
   }, [employeeByUid, clear]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,22 +32,28 @@ const BossControl = () => {
 
   const handleUpdate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(employeeByUid && employeeByUid.uid.length > 0) {
-    dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
-    dispatch(StartLoadDataBoss(true))
-    setClear(true);
-    }else{//TODO: remove the else statement because is not necesary, and use return
-      toast.error("No employee selected")
-    }
+    if (employeeByUid && employeeByUid.uid.length > 0) {
+      dispatch(StartUpDateEmployee(dataEmployee.uid, dataEmployee));
+      dispatch(StartLoadDataBoss(true));
+      setClear(true);
+      return;
+    } //TODO: remove the else statement because is not necessary, and use return
+    toast.error("No employee selected");
   };
 
   return (
     <>
-      <h1 className="text-center font-bold text-darkBlue text-lg pb-5">Edit boss section</h1>
+      <h1 className="text-center font-bold text-darkBlue text-lg pb-5">
+        Edit boss section
+      </h1>
       <div className="flex flex-wrap pb-8 h-screen ">
         <section className="flex flex-col md:w-2/3 items-center py-4 px-4 bg-white">
           <div className="p-4  rounded flex justify-end shadow-lg w-full m-auto">
-            <RegisterFormEmployee handleInputChange={handleInputChange} userData={dataEmployee} upDate={handleUpdate} />
+            <RegisterFormEmployee
+              handleInputChange={handleInputChange}
+              userData={dataEmployee}
+              upDate={handleUpdate}
+            />
           </div>
         </section>
         <section className="flex-grow flex md:w-1/3 pt-10 justify-center">

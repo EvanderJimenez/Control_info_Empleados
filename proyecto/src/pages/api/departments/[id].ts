@@ -1,5 +1,6 @@
 import { departmentProvider } from "@/dataBase";
 import { notAllowedResponse } from "@/root/api";
+import { HandlerFunction } from "@/root/types/HandlerFunction.type";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function getDocId(req: NextApiRequest, res: NextApiResponse) {
