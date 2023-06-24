@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import InputDepartment from "../input/InputDepartment";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ResetEmployeeByUid2,
@@ -12,7 +11,6 @@ import {
   startGetAllDepartment,
   startUpdateDepartment,
 } from "@/root/redux";
-import ComboVoxSubDepartments from "../comboVoxSubDepartments/ComboVoxSubDepartments";
 import { DepartmentType } from "@/root/types/Department.type";
 import SearchEmployeeDepart from "../SearchEmployeeDepart/SearchEmployeeDepart";
 import ListEmployeeDepart from "../listEmployeeDepart/ListEmployeeDepart";
@@ -20,8 +18,8 @@ import toast from "react-hot-toast";
 import { EmployeesType } from "@/root/types/Employee.type";
 import { initialDepartmet } from "@/root/constants/department/department.constants";
 import { Department } from "@/root/interface/departments";
-import { updateDepartmentByIdReducer } from "@/root/redux/reducers/department-reducer/updateDepartmentById/UpdateDepartmentByIdReducer";
 import { resetEmployeeByUid } from "@/root/redux/reducers/employee-reducer/getEmployeeByUid/getEmployeeByUidReducer";
+import FormDepartment from "../formDepartment/FormDepartment";
 
 interface infoDepart {
   departmentsData: Department;
@@ -33,7 +31,7 @@ interface infoDepart {
 export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   const dispatch = useDispatch();
   const dataDepart = useSelector(selectGetDepartmentById);
-  const dataEmployeeUid2 = useSelector(selectGetEmployeeByUid2)
+  const dataEmployeeUid2 = useSelector(selectGetEmployeeByUid2);
 
   const [update, setUpdate] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -47,19 +45,19 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
   const employeeUid = useSelector(selectGetEmployeeByUid);
   const [departmentNew, setDepartmentNew] =
     useState<DepartmentType>(initialDepartmet);
- //TODO: This code has a nested innecesary complexity, consider split in a new useHook
+  //TODO: This code has a nested innecesary complexity, consider split in a new useHook
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setDepartmentNew((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleClear = async () => {
-    setDepartmentNew(initialDepartmet)
-    setLeader("")
-    setNameSubDepartment("")
-    await dispatch(resetEmployeeByUid())
-    await dispatch(ResetEmployeeByUid2())
-  }
+    setDepartmentNew(initialDepartmet);
+    setLeader("");
+    setNameSubDepartment("");
+    await dispatch(resetEmployeeByUid());
+    await dispatch(ResetEmployeeByUid2());
+  };
 
   const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,56 +68,58 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
         leader: leader,
         idEmployee: idLeader,
         namesubDepartment: nameSubDepartment,
-        subDepartment:selectedOption
+        subDepartment: selectedOption,
       };
-  
+
       await dispatch(startUpdateDepartment(upDateDepart.id, upDateDepart));
 
-      if(departmentNew.idEmployee){
-        await dispatch(StartGetEmployeeByUid2(departmentNew.idEmployee))
+      if (departmentNew.idEmployee) {
+        await dispatch(StartGetEmployeeByUid2(departmentNew.idEmployee));
       }
-      if(employeeUid && employeeUid.uid.length > 0){
+      if (employeeUid && employeeUid.uid.length > 0) {
         const updateEmployee: EmployeesType = {
           ...employeeUid,
           idDepartment: idDepartment,
           jobPosition: "boss",
         };
 
-       await dispatch(StartUpDateEmployee(updateEmployee?.uid, updateEmployee));
+        await dispatch(
+          StartUpDateEmployee(updateEmployee?.uid, updateEmployee)
+        );
       }
-      handleClear()
-    } else {
-      toast.error("select a department to update");
+      handleClear();
+      return;
     }
+    toast.error("select a department to update");
   };
 
   useEffect(() => {
-    
-    if(departmentsList.length === 0){
+    if (departmentsList.length === 0) {
       dispatch(startGetAllDepartment());
-
     }
   }, []);
 
   useEffect(() => {
-    if(dataEmployeeUid2 && dataEmployeeUid2.uid.length > 0) {
- 
-      const newEmployee2 : EmployeesType = {...dataEmployeeUid2, jobPosition:"employee" }
-      dispatch(StartUpDateEmployee(newEmployee2.uid, newEmployee2))
+    if (dataEmployeeUid2 && dataEmployeeUid2.uid.length > 0) {
+      const newEmployee2: EmployeesType = {
+        ...dataEmployeeUid2,
+        jobPosition: "employee",
+      };
+      dispatch(StartUpDateEmployee(newEmployee2.uid, newEmployee2));
     }
-  }, [dataEmployeeUid2])
+  }, [dataEmployeeUid2]);
 
   useEffect(() => {
     if (dataDepart) {
       setDepartmentNew(dataDepart);
-      if(dataDepart.subDepartment){
-        setSelectedOption(dataDepart.subDepartment)
+      if (dataDepart.subDepartment) {
+        setSelectedOption(dataDepart.subDepartment);
       }
-      if(dataDepart.namesubDepartment){
-        setNameSubDepartment(dataDepart.namesubDepartment)
+      if (dataDepart.namesubDepartment) {
+        setNameSubDepartment(dataDepart.namesubDepartment);
       }
-      if(dataDepart.leader){
-        setLeader(dataDepart.leader)
+      if (dataDepart.leader) {
+        setLeader(dataDepart.leader);
       }
     }
   }, [dataDepart]);
@@ -129,18 +129,16 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
       setDepartments(departmentsList);
     }
   }, [departmentsList]);
- 
-  useEffect(() => {
-  
-    if(employeeUid && employeeUid.name.length > 0){
-      setLeader(employeeUid.name)
-      setIdLeader(employeeUid.uid)
-    }else if(dataDepart && dataDepart.leader !== ""){
-      setLeader(dataDepart.leader)
-      setIdLeader(dataDepart.subDepartment) 
-    }
 
-  }, [dataDepart,employeeUid])
+  useEffect(() => {
+    if (employeeUid && employeeUid.name.length > 0) {
+      setLeader(employeeUid.name);
+      setIdLeader(employeeUid.uid);
+    } else if (dataDepart && dataDepart.leader !== "") {
+      setLeader(dataDepart.leader);
+      setIdLeader(dataDepart.subDepartment);
+    }
+  }, [dataDepart, employeeUid]);
 
   return (
     <>
@@ -154,86 +152,22 @@ export const FormEmployee = ({ departmentsData, ...props }: infoDepart) => {
         </p>
       </div>
       <div className="flex flex-wrap ">
-        <div className="md:w-1/2 px-3 mb-6">
-          <form
-            className="bg-white shadow-md rounded  flex flex-col mb-8 "
-            onSubmit={handleUpdate}
-          >
-            <div className="flex justify-center items-center">
-              <InputDepartment
-                label="Name Department"
-                type="name"
-                name="name"
-                value={departmentNew.name || ''}
-                id="name"
-                onChange={handleInputChange}
-              />
-              <InputDepartment
-                label="Size of Department"
-                type="number"
-                name="size"
-                value={departmentNew.size || ''}
-                id="size"
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="flex flex-wrap ">
-              <div className="flex flex-row w-full">
-                <InputDepartment
-                  label="Location"
-                  type="location"
-                  name="location"
-                  value={departmentNew.location || ''}
-                  id="location"
-                  onChange={handleInputChange}
-                />
-                <InputDepartment
-                  label="Area Belongs"
-                  type="level"
-                  name="level"
-                  value={departmentNew.level || ''}
-                  id="level"
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="flex flex-col w-full">
-                <label className="block text-md font-semibold mb-4">
-                  Sub department
-                </label>
-                <input
-                  type="text"
-                  name="subDepartment"
-                  value={nameSubDepartment || ''}
-                  id="subDepartment"
-                  readOnly
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-indigo-500"
-                />
-              </div>
-              <div className="flex justify-center w-full">
-                <div className="flex justify-center flex-col mb-5">
-                  <ComboVoxSubDepartments
-                    items={departments}
-                    label="Select sub department"
-                    selectedOption={selectedOption}
-                    setSelectedOption={setSelectedOption}
-                    setName={setNameSubDepartment}
-                  />
-                  <div className="w-full flex justify-center md:full px-3 mb-6 md:mb-0">
-                    <button
-                      type="submit"
-                      className={`bg-darkBlue  text-white font-semibold py-2 px-4 rounded ${
-                        update ? "" : ""
-                      }`}
-                    >
-                      Update
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
+        <>
+          <FormDepartment
+            departmentNew={departmentNew}
+            departments={departments}
+            handleInputChange={handleInputChange}
+            handleUpdate={handleUpdate}
+            nameSubDepartment={nameSubDepartment}
+            selectedOption={selectedOption}
+            setDepartmentNew={setDepartmentNew}
+            setDepartments={setDepartments}
+            setNameSubDepartment={setNameSubDepartment}
+            setSelectedOption={setSelectedOption}
+            setUpdate={setUpdate}
+            update={update}
+          />
+        </>
 
         <div className="w-full md:w-1/2 px-3  mb-6 ">
           <label className="block  text-md font-bold mb-2">Boss</label>
