@@ -20,7 +20,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 let files: Files[] = [];
- //TODO: This code has a nested innecesary complexity, consider split in a new Hook
+ //TODO: This code has a nested unnecessary complexity, consider split in a new Hook
 const DocumentsEmployee: React.FC = () => {
   const userLogin = useSelector(selectLogin);
   const fileLoad = useSelector(selectGetFileURLByName);
@@ -96,13 +96,13 @@ const DocumentsEmployee: React.FC = () => {
           cancelButtonText: 'Cancel',
         }).then(async (result) => {
           if (result.isConfirmed) {
-/*             delete updatedFiles[fileToDeleteKey];
+             delete updatedFiles[fileToDeleteKey];
             await dispatch(
               StartUpDateEmployee(userLogin?.uid, {
                 ...userLogin,
                 files: updatedFiles,
               })
-            );  */
+            );
             dispatch(starAlertSuccess("File deleted correctly", true));
             setSelectOption(null);
           }
@@ -116,7 +116,7 @@ const DocumentsEmployee: React.FC = () => {
   };
   
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (fileLoad && selectOption) {
       const base64Data = fileLoad.replace(/^data:.*,/, "");
       const blob = b64toBlob(base64Data);
@@ -137,7 +137,30 @@ const DocumentsEmployee: React.FC = () => {
         dispatch(StartResetUrl());
       }
     }
+  }, [fileLoad, change]); */
+
+  useEffect(() => {
+    if (fileLoad && selectOption) {
+      const base64Data = fileLoad.replace(/^data:.*,/, "");
+      const blob = b64toBlob(base64Data);
+      let newFile;
+      if (selectOption.type === "pdf") {
+        newFile = new File([blob], selectOption.name + ".pdf", {
+          type: "application/pdf",
+        });
+      } else if (selectOption.type === "image") {
+        newFile = new File([blob], selectOption.name + ".png", {
+          type: "image/png",
+        });
+      }
+      if (newFile) {
+        saveAs(newFile, selectOption.name);
+        handleClearSelection();
+        dispatch(StartResetUrl());
+      }
+    }
   }, [fileLoad, change]);
+  
 
   const handleClearSelection = () => {
     setFile(null);
