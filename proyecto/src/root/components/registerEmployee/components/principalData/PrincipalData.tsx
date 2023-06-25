@@ -1,6 +1,6 @@
 import React from "react";
 import InputLabel from "../inputLabel/InputLabel";
-import Schedule from "../schedule/Schedule";
+
 import { EmployeesType } from "@/root/types/Employee.type";
 import toast from "react-hot-toast";
 import InputFloatLabel from "@/root/components/ui/InputFloatLabel/InputFloatLabel";

@@ -1,6 +1,6 @@
 import React from "react";
 import BossPage from "@/Layout/BossPage";
-import { MainBodyBoss } from "@/root/components/mainBodyBoss/MainBodyBoss";
+
 import InformationPage from "@/root/components/informationPage/InformationPage";
 //TODO: you should use kebab-case in the name of the routes
 export default function index() {

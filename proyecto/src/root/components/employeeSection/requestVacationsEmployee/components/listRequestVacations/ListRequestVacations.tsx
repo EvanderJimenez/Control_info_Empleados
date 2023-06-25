@@ -1,5 +1,4 @@
 import {
-  selectGetVacationsByUid,
   selectLogin,
   selectUpdateEmployee,
 } from "@/root/redux/selectors/employee-selector/employee.selector";
@@ -13,12 +12,8 @@ interface PropsListRequest {
   setSendRequest: React.Dispatch<React.SetStateAction<boolean>>;
   filter: string;
 }
- //TODO: This code has a nested innecesary complexity, consider split in a new useHook
-const ListRequestVacations = ({
-  setSendRequest,
-  data,
-  filter,
-}: PropsListRequest) => {
+//TODO: This code has a nested innecesary complexity, consider split in a new useHook
+const ListRequestVacations = ({ data, filter }: PropsListRequest) => {
   const employeesListVacations = useSelector(selectLogin);
   const employeeUpdate = useSelector(selectUpdateEmployee);
   const vacations = employeeUpdate
@@ -41,40 +36,45 @@ const ListRequestVacations = ({
         {vacations ? (
           <>
             {Object.entries(vacations)
-              .filter(([_, value]) => value.approved === filter)
-              .map(([name, vacation]) => (
-                <div className="flex items-center" key={name}>
-                  <div className="flex w-full">
-                    <div className="relative  bg-white flex flex-row items-center m-1 transition duration-300 ease-in-out delay-150 transform shadow-2xl   md:w-80 md:-ml-16 md:hover:-translate-x-16 md:hover:-translate-y-8">
-                      <div className="m-8 space-y-4">
-                        <h4 className="text-lg text-center font-semibold ">
-                          <div className="flex justify-center">
-                            <span>{name}</span>
-                          </div>
-                        </h4>
-                        <section className="flex justify-center">
-                          <p className="text-base text-center font-normal  text-black" title="description of request">
-                            {vacations[name].description}
-                            
-                          </p>
-                        </section>
-                        <div className="flex justify-between space-x-6">
-                          <div>
-                            <p className="text-sm" title="date start">{vacations[name].dateStart.slice(0, vacations[name].dateStart.indexOf("T") + 1).replace("T", "📅")}</p>
-                          </div>
-                          <div>
-                            <p className="text-sm" title="date end"> {vacations[name].dateEnd.slice(0, vacations[name].dateEnd.indexOf("T") + 1).replace("T", "📅")}</p>
+              .filter(([_, value]) => (value as Vacations).approved === filter)
+              .map(([name, vacation]) => {
+                const typedVacation = vacation as Vacations;
+                return (
+                  <div className="flex items-center" key={name}>
+                    <div className="flex w-full">
+                      <div className="relative bg-white flex flex-row items-center m-1 transition duration-300 ease-in-out delay-150 transform shadow-2xl md:w-80 md:-ml-16 md:hover:-translate-x-16 md:hover:-translate-y-8">
+                        <div className="m-8 space-y-4">
+                          <h4 className="text-lg text-center font-semibold">
+                            <div className="flex justify-center">
+                              <span>{name}</span>
+                            </div>
+                          </h4>
+                          <section className="flex justify-center">
+                            <p className="text-base text-center font-normal text-black" title="description of request">
+                              {typedVacation.description}
+                            </p>
+                          </section>
+                          <div className="flex justify-between space-x-6">
+                            <div>
+                              <p className="text-sm" title="date start">
+                                {typedVacation.dateStart.slice(0, typedVacation.dateStart.indexOf("T") + 1).replace("T", "📅")}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-sm" title="date end">
+                                {typedVacation.dateEnd.slice(0, typedVacation.dateEnd.indexOf("T") + 1).replace("T", "📅")}
+                              </p>
+                            </div>
                           </div>
                         </div>
-
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            {Object.entries(vacations).filter(
-              ([_, value]) => value.approved === filter
-            ).length === 0 && (
+                );
+              })}
+            {Object.entries(vacations)
+              .filter(([_, value]) => (value as Vacations).approved === filter)
+              .length === 0 && (
                 <div className="font-semibold text-yellow">
                   No found vacations request by state {filter} 🤔
                 </div>
