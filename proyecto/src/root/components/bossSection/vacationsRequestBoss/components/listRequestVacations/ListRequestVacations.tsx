@@ -70,7 +70,7 @@ const ListRequestVacations = ({option, setSelectedRequest }: RequestEmployeeProp
   };
 
   return (
-    <div className="shadow-lg overflow-auto h-72 w-1/2 p-4">
+    <div className="shadow-lg overflow-auto space-y-4 h-72 w-1/2 p-4">
       {pendingRequests.length > 0 ? (
         pendingRequests.map((request: PendingRequest, index: number) => (
           <div key={index} className="p-2 shadow-lg justify-center flex-col space-y-4 flex bg-lithBlue bg-opacity-40">

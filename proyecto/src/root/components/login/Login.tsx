@@ -10,6 +10,10 @@ import { startGetDepartByIdDoc } from "@/root/redux/thunks/department-thunk/depa
 import cookiesUser from "@/root/utils/login/cookiesUser";
 import { RootState } from "@/root/redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
+import InputWitMenu from "../ui/inputWithMenu/InputWitMenu";
+import { toast } from "react-hot-toast";
+import Cookies from "js-cookie";
+import { starAlertError, starAlertSuccess } from "@/root/redux/thunks/alertHandler-thunk/alertHandler-thunk";
 
 
 
@@ -43,7 +47,7 @@ function Login() {
       dispatch(StartLogin(data.email, data.password));
 
     } else {
-      dispatch(startAlertError("Please enter your credentials", true))
+      dispatch(starAlertError("Please enter your credentials", true))
     }
   };
   useEffect(() => {
@@ -61,19 +65,3 @@ function Login() {
 }
 
 export default Login;
-function startErrorAlert(): any {//TODO: Remove all dead code
-  throw new Error("Function not implemented.");
-}
-
-function startAlertError(arg0: string, arg1: boolean): any {//TODO: Remove all dead code
-  throw new Error("Function not implemented.");
-}
-
-function startAlertSuccess(arg0: string, arg1: boolean): any {//TODO: Remove all dead code
-  throw new Error("Function not implemented.");
-}
-
-function startAlertLoading(arg0: string, arg1: boolean): any {//TODO: Remove all dead code
-  throw new Error("Function not implemented.");
-}
-

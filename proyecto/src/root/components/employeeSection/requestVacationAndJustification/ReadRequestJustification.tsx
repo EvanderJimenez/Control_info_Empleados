@@ -52,7 +52,7 @@ export default function ReadRequestJustification() {
                                 <h4 className=" text-xl font-semibold text-neutral">
                                   <span>Day: {name}</span>
                                 </h4>
-                                <p className=" text-base font-semibold text-pink">state: {UserLogin.attendance[name].state}</p>
+                                <p className=" text-base font-semibold text-darkBlue">state: {UserLogin.attendance[name].state}</p>
                                 <p className="font-semibold">Start time: {UserLogin.attendance[name].startTime}</p>
                                 <p className="font-semibold">End Time: {UserLogin.attendance[name].endTime}</p>
                                 <p className="font-semibold">Justification start: {UserLogin.attendance[name].justificationIni}</p>

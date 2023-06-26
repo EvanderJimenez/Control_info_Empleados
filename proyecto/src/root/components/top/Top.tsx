@@ -13,10 +13,6 @@ export function Top() {
 
   const router = useRouter();
 
-  const handleSingOff = () => {
-    Cookies.remove("token");
-    router.push("/");
-  };
   const handleContact = () => {
     Cookies.remove("token");
     router.push("/home/Contact");
@@ -30,19 +26,6 @@ export function Top() {
     window.location.assign("/home");
   };
 
-  const TextButton = (): string => {
-    let text: string = "";
-
-    if (router.pathname === "/home") {
-    } else if (router.pathname === "/home/Login") {
-      text = "";
-    } else {
-      text = "Log out";
-    }
-
-    return text;
-  };
-  let text = TextButton();
 
   return (
     <>
@@ -84,12 +67,7 @@ export function Top() {
                 </button>
               </li>
               <li>
-                <button
-                  className=" dark:text-white hover:bg-none print:hidden"
-                  onClick={handleLogin}
-                >
-                  {text}
-                </button>
+                <button className=" dark:text-white hover:bg-transparent print:hidden" onClick={handleLogin}>Log in</button>
               </li>
             </ul>
           </div>

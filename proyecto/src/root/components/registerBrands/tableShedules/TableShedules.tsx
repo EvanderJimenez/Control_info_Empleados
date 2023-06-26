@@ -62,54 +62,73 @@ const TableSchedules = ({
                 <tr key={date}>
                   <td className="py-2 px-4 border-b">{date}</td>
                   <td className="py-2 px-4 border-b">
+                  <div className="flex justify-center">
                     {isEditing && editingIndex === index ? (
-                      <input
-                        type="time"
-                        value={newHIni}
-                        onChange={handleNewHIniChange}
-                        className="w-full py-1 px-2 border rounded-md bg-white text-gray-700"
-                      />
+
+                        <input
+                          type="time"
+                          value={newHIni}
+                          onChange={handleNewHIniChange}
+                          className="w-full py-1 px-2 border rounded-md bg-white text-gray-700"
+                        />
                     ) : (
                       hours.hIni
                     )}
+                     </div>
                   </td>
                   <td className="py-2 px-4 border-b">
-                    {isEditing && editingIndex === index ? (
-                      <input
-                        type="time"
-                        value={newHFin}
-                        onChange={handleNewHFinChange}
-                        className="w-full py-1 px-2 border rounded-md bg-white text-gray-700"
-                        pattern="[0-9]{2}:[0-9]{2}"
-                      />
-                    ) : (
-                      hours.hFin
-                    )}
+                    <div className="flex items-center justify-center">
+                      {isEditing && editingIndex === index ? (
+
+                        <input
+                          type="time"
+                          value={newHFin}
+                          onChange={handleNewHFinChange}
+                          className="w-full py-1 px-2 border rounded-md bg-white text-gray-700"
+                          pattern="[0-9]{2}:[0-9]{2}"
+                        />
+
+
+                      ) : (
+                        hours.hFin
+                      )}
+                    </div>
                   </td>
                   <td className="py-2 px-4 border-b">
-                    {isEditing && editingIndex === index ? (
-                      <button
-                        className="text-blue-500 hover:text-blue-700 mr-2 bg-blue"
-                        onClick={() => handleSaveClick(index)}
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <button
-                        className="mr-2 bg-blue"
-                        onClick={() => handleEditClick(index)}
-                      >
-                        Edit
-                      </button>
-                    )}
+                    <div className="flex  items-center justify-center">
+                      {isEditing && editingIndex === index ? (
+
+                        <button
+                          className="text-blue-500 hover:text-blue-700 mr-2 bg-blue"
+                          onClick={() => handleSaveClick(index)}
+                        >
+                          Save
+                        </button>
+
+
+                      ) : (
+                        <div className="flex  items-center justify-center">
+                          <button
+                            className="mr-2 bg-blue"
+                            onClick={() => handleEditClick(index)}
+                          >
+                            Edit
+                          </button>
+                        </div>
+
+                      )}
+                    </div>
                   </td>
                   <td>
-                    <button
-                      className="bg-darkBlue"
-                      onClick={() => handleDeleteSchedule(date)}
-                    >
-                      Delete
-                    </button>
+                    <div className="flex  items-center justify-center">
+
+                      <button
+                        className="bg-darkBlue"
+                        onClick={() => handleDeleteSchedule(date)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               )

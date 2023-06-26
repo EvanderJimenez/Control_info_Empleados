@@ -52,7 +52,5 @@ const FormLogin = ({ handleSubmit, handleInputChange, loginData }: FormLoginProp
 };
 
 export default FormLogin;
-function dispatch(arg0: any) {//TODO: Remove all dead code
-  throw new Error("Function not implemented.");
-}
+
 

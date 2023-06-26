@@ -62,6 +62,7 @@ export const TableList = ({
                 </td>
                 <td className="px-2 sm:px-6 py-2">
                   {department.leader}
+                  {department.leader.length === 0 && <div>----</div>}
                 </td>
                 <td className="px-2 sm:px-6 py-2">
                   {department.location}
