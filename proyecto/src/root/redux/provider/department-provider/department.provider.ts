@@ -93,7 +93,6 @@ const getDepartmentByDocIdProvider = async (searchTerm: string) => {
   }
 
   if (!response.ok || !data.hasOwnProperty("name")) {
-    console.log(await response.json());
     return null;
   }
 

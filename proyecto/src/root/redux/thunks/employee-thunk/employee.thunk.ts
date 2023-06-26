@@ -205,8 +205,6 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {//
     );
 
     dispatch(loginReducer(response || null));
-
-    console.log(response.idDepartment);
    
     if (response.idDepartment === '0') {
       dispatch(starAlertError("You can't enter because you don't have an apartment!", true))
