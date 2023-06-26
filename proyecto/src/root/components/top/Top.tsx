@@ -30,14 +30,14 @@ export function Top() {
   };
   const handleLogin = () => {
     Cookies.remove("token");
-    router.push("/home/Login");
+    router.push("/home");
   };
 
   const TextButton = (): string => {
     let text: string = "";
 
     if (router.pathname === "/home") {
-      text = "Log in"
+
     } else if (router.pathname === "/home/Login") {
       text = ""
     } else {
@@ -56,9 +56,7 @@ export function Top() {
             <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
             <span className="title-font">CrHome</span>
           </div>
-         
           <div className="flex  font-semibold items-center text-sm text-lithGray">(506) 8988-4062</div>
-
         </div>
       </nav>
       <nav className="bg-darkBlue dark:bg-gray-700 print:hidden">
@@ -76,12 +74,7 @@ export function Top() {
                 </button>
               </li>
               <li>
-                <button className=" dark:text-white  print:hidden" onClick={handleSingOff}>
-                  Brands
-                </button>
-              </li>
-              <li>
-                <button className=" dark:text-white  print:hidden" onClick={handleLogin}>{text}</button>
+                <button className=" dark:text-white hover:bg-none print:hidden" onClick={handleLogin}>{text}</button>
               </li>
             </ul>
           </div>

@@ -1,14 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { LoadReducer } from "./reducers/loading-reducer/LoadingReducer";
-import { VacationsReducer } from "./reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
-import { DismissEmployeesReducer } from "./reducers/employee-reducer/dismissEmployee/DismissEmployeeReducer";
-import { CreateEmployeeReducer } from "./reducers/employee-reducer/createEmployee/CreateEmployeeReducer";
-import { ListEmployeesReducer } from "./reducers/employee-reducer/listEmployees/ListEmployeeReducer";
-import { UpdateEmployeeReducer } from "./reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
+import { DismissEmployeesReducer } from "./reducers/employee-reducer/dismissEmployee/dismissEmployeeReducer";
+import { CreateEmployeeReducer } from "./reducers/employee-reducer/createEmployee/createEmployeeReducer";
+import { ListEmployeesReducer } from "./reducers/employee-reducer/listEmployees/listEmployeeReducer";
+import { UpdateEmployeeReducer } from "./reducers/employee-reducer/updateEmployee/updateEmployeeReducer";
 
-import { GetAllBossReducer } from "./reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
-import { DeleteEmployeesReducer } from "./reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
+import { GetAllBossReducer } from "./reducers/employee-reducer/getAllBosses/getAllBossesReducer";
+import { DeleteEmployeesReducer } from "./reducers/employee-reducer/deleteEmployee/deleteEmployeeReducer";
 import { GetAllDepartmentsReducer } from "./reducers/department-reducer/getAllDepartments/GetAllDepartmentsReducer";
 import { GetByIdEmployeeDepartmentsReducer } from "./reducers/department-reducer/getDepartmentById/GetDepartmentByIdEmployee";
 import { ByIdDocReducer } from "./reducers/department-reducer/getDepartmentByDocId/GetDepartmentByDocIdReducer";
@@ -30,6 +29,7 @@ import { AlertReducer } from "./reducers/alertHandler-reducer/AlertHandlerReduce
 import { LoadDataReducer } from "./reducers/loading-reducer/LoadDataReducer";
 import { GetByVariableReducer } from "./reducers/employee-reducer/getByVariable/getByVariableReducer";
 import { GetEmployeesByIdDepartmentReducerReducer } from "./reducers/employee-reducer/getEmployeesByIdDepartment/getEmployeesByIdDepartmentReducer";
+import { VacationsReducer } from "./reducers/employee-reducer/getVacationsByUid/getVacationsByUidReducers";
 
 export const ApplicationStore = configureStore({
   reducer: {

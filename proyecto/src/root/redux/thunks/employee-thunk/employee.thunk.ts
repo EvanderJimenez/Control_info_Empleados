@@ -5,23 +5,23 @@ import { setLoading } from "../../reducers/loading-reducer/LoadingReducer";
 import {
   DispatchTypeDelete,
   deleteEmployeeReducer,
-} from "../../reducers/employee-reducer/deleteEmployee/DeleteEmployeeReducer";
+} from "../../reducers/employee-reducer/deleteEmployee/deleteEmployeeReducer";
 import {
   DispatchTypeDismiss,
   dismissEmployeeReducer,
-} from "../../reducers/employee-reducer/dismissEmployee/DismissEmployeeReducer";
+} from "../../reducers/employee-reducer/dismissEmployee/dismissEmployeeReducer";
 import {
   DispatchTypeListEmployee,
   listEmployeesReducer,
-} from "../../reducers/employee-reducer/listEmployees/ListEmployeeReducer";
+} from "../../reducers/employee-reducer/listEmployees/listEmployeeReducer";
 import {
   DispatchTypeCreate,
   createEmployeeReducer,
-} from "../../reducers/employee-reducer/createEmployee/CreateEmployeeReducer";
+} from "../../reducers/employee-reducer/createEmployee/createEmployeeReducer";
 import {
   DispatchTypeUpdate,
   updateEmployeeReducer,
-} from "../../reducers/employee-reducer/updateEmployee/UpdateEmployeeReducer";
+} from "../../reducers/employee-reducer/updateEmployee/updateEmployeeReducer";
 import {
   DispatchTypeEmployeeByUid,
   getEmployeeByUid2Reducer,
@@ -34,11 +34,11 @@ import {
 import {
   DispatchTypeVacations,
   getVacationsByUidReducer,
-} from "../../reducers/employee-reducer/getVacationsByUid/GetVacationsByUidReducers";
+} from "../../reducers/employee-reducer/getVacationsByUid/getVacationsByUidReducers";
 import {
   DispatchTypeAllBoss,
   getAllBossReducer,
-} from "../../reducers/employee-reducer/getAllBosses/GetAllBossesReducer";
+} from "../../reducers/employee-reducer/getAllBosses/getAllBossesReducer";
 import {
   DispatchTypeLogin,
   loginReducer,
