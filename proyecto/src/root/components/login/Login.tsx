@@ -10,14 +10,11 @@ import { startGetDepartByIdDoc } from "@/root/redux/thunks/department-thunk/depa
 import cookiesUser from "@/root/utils/login/cookiesUser";
 import { RootState } from "@/root/redux/store";
 import LoadingGeneralComponent from "../loadingGeneralComponent/LoadingGeneralComponent";
-<<<<<<< HEAD
 import InputWitMenu from "../ui/inputWithMenu/InputWitMenu";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { starAlertError, starAlertSuccess } from "@/root/redux/thunks/alertHandler-thunk/alertHandler-thunk";
-=======
 
->>>>>>> 16a63db05ba899d495da953c92ddeb17ee966f7f
 
 
 function Login() {
