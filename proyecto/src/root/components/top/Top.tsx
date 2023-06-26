@@ -30,7 +30,7 @@ export function Top() {
   };
   const handleLogin = () => {
     Cookies.remove("token");
-    router.replace("/home");
+    router.replace("/");
     router.reload();
   };
 
