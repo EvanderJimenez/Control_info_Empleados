@@ -27,5 +27,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/home/BossMain", "/home/AdminMain", "/home/EmployeeMain"],
+  matcher: ["/home/BossMain/:path*", "/home/AdminMain/:path*", "/home/EmployeeMain/:path*"],
 };

@@ -186,7 +186,6 @@ export default function RegisterBrand() {
   useEffect(() => {
    
     if (brandsIdEmployee) {
-      console.log(JSON.stringify(brandsIdEmployee))
       setBrandData(brandsIdEmployee);
     }
   }, [dispatch, brandsIdEmployee]);

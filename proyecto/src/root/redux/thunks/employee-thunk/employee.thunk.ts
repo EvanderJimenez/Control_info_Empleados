@@ -205,11 +205,13 @@ export const StartLogin = (searchTerm1: string, searchTerm2: string): any => {//
     );
 
     dispatch(loginReducer(response || null));
-
-
-    if (response) {
+   
+    if (response.idDepartment === '0') {
+      dispatch(starAlertError("You can't enter because you don't have an apartment!", true))
+    } else if(response.idDepartment !== '0') {
       dispatch(starAlertSuccess("Welcome!", true))
-    } else {
+    }
+    else{
       dispatch(starAlertError("Password or user incorrect", true))
     }
     dispatch(starAlertLoading("Loaded", false));
