@@ -19,7 +19,7 @@ export const MainForm = ({}) => {
       <div className="relative">
         <div className="absolute inset-0 flex justify-center items-center">
           <div className="text-black text-center">
-            <div className="flex-col w-full h-screen p-1 flex justify-center items-center">
+            <div className="flex-col pt-12 w-full h-screen p-1 flex justify-center items-center">
               <button className=" font-semibold cursor-pointer text-white bg-darkBlue" onClick={toggleComponent}>
                 {showComponent ? "Don't have an account?, register" : "Do you have an account?, log in"}
               </button>

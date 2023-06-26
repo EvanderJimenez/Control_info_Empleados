@@ -56,7 +56,7 @@ function Login() {
 
   return (
     <>
-      <div className="flex justify-center">{loading ? <LoadingGeneralComponent /> : <div className="font-medium text-white">Welcome!</div>}</div>
+      <div className="flex justify-center">{loading ? <LoadingGeneralComponent /> : <div className="font-bold text-white text-xl">Welcome!</div>}</div>
       <FormLogin handleSubmit={handleLogin} handleInputChange={handleInputChange} loginData={data} />
     </>
   );
