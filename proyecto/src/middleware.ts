@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   if (!tokenCookie) {
     const requestedPage = request.nextUrl.pathname;
     const url = request.nextUrl.clone();
-    url.pathname = `/home`;
+    url.pathname = "/";
     url.search = `p=${requestedPage}`;
     return NextResponse.redirect(url);
   }
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
   } catch (error) {
     const requestedPage = request.nextUrl.pathname;
     const url = request.nextUrl.clone();
-    url.pathname = `/home`;
+    url.pathname = "/";
     url.search = `p=${requestedPage}`;
     return NextResponse.redirect(url);
   }

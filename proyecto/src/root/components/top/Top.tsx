@@ -25,8 +25,7 @@ export function Top() {
   };
   const handleLogin = () => {
     Cookies.remove("token");
-    router.replace("/");
-    router.reload();
+    window.location.assign("/home");
   };
 
 
