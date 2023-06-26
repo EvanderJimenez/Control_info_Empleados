@@ -184,7 +184,9 @@ export default function RegisterBrand() {
   }, [dispatch, clear]);
 
   useEffect(() => {
+   
     if (brandsIdEmployee) {
+      console.log(JSON.stringify(brandsIdEmployee))
       setBrandData(brandsIdEmployee);
     }
   }, [dispatch, brandsIdEmployee]);
@@ -262,6 +264,7 @@ export default function RegisterBrand() {
         </div>
 
         <div className="w-full sm:w-2/3 flex mt-5 flex-col">
+          <label className="">Employee: {employeeUid?.name || ""}</label>
           <div className="bg-white sm:p-8 shadow-md w-full">
             <RegisterCycle
               brandData={brandData}

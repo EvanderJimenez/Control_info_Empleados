@@ -36,12 +36,10 @@ const DocumentsEmployee: React.FC = () => {
     const fileList = event.target.files;
     if (fileList && fileList.length > 0) {
       const selectedFile = fileList[0];
-
-      if (
-        selectedFile.type.startsWith("image/") ||
-        selectedFile.type === "application/pdf"
-      ) {//TODO: improve this statement to get simplicity
-
+      const isImage = selectedFile.type.startsWith("image/");
+      const isPDF = selectedFile.type === "application/pdf";
+  
+      if (isImage || isPDF) {
         setFile(selectedFile);
         setSelectOption(null);
       } else {
@@ -54,6 +52,7 @@ const DocumentsEmployee: React.FC = () => {
       }
     }
   };
+  
 
   const handleSave = async () => {
     if (file) {

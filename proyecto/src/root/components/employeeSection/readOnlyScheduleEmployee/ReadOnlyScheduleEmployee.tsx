@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import FormScheduleEmployee from "./components/FormScheduleEmployee";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogin } from "@/root/redux/selectors/employee-selector/employee.selector";
-import { getBrandsByDocIdReducer } from "@/root/redux/reducers/brands-reducer/getBrandsByDocId/GetBrandsByDocIdReducer";
 import {
   selectGetBrandsByIdEmployee,
-  startGetBrandsByIdDoc,
   startGetBrandsByIdEmployee,
 } from "@/root/redux";
 import { Schedule } from "@/root/interface/employee";
+
+interface HoursEmployee {
+  hIni: string;
+  hFin: string;
+}
+
 
 let scheduleList: Schedule[] = [];
 
@@ -23,10 +27,10 @@ const ReadOnlyScheduleEmployee = () => {
 
   useEffect(() => {
     if (brandsById) {
-      const hoursEmployee: Record<string, any> = brandsById.hoursEmployee;//TODO: Type all variables that you use
+      const hoursEmployee: Record<string, HoursEmployee> = brandsById.hoursEmployee;//TODO: Type all variables that you use
       if (hoursEmployee) {
         scheduleList = Object.entries(hoursEmployee).map(
-          ([day, schedule]: [string, Record<string, string>]) => {
+          ([day, schedule]: [string, HoursEmployee]) => {
             return {
               day,
               startTime: schedule.hIni,
