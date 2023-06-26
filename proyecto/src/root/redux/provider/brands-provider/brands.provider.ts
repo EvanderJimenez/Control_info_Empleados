@@ -81,11 +81,11 @@ const getBrandsDocByEmployeeIdProvider = async (searchTerm: string) => {
       "Content-Type": "application/json",
     },
   });
-
-  if (!response.ok) {
-    null;
+  console.log(JSON.stringify(response))
+  if (!response.ok || Object.keys(response).length === 0) {
+    return null;
   }
-
+  console.log(JSON.stringify(response))
   const data = await response.json();
 
   return data;

@@ -46,7 +46,7 @@ const getDepartmentsByPageProvider = async (pageSize: number, page: number) => {
   );
 
   if (!response.ok) {
-    return null
+    return null;
   }
 
   const data = await response.json();
@@ -67,7 +67,7 @@ const updateDepartmentByIdProvider = async (
   });
 
   if (!response.ok) {
-   return null
+    return null;
   }
 
   const data = await response.json();
@@ -83,11 +83,19 @@ const getDepartmentByDocIdProvider = async (searchTerm: string) => {
     },
   });
 
-  if (!response.ok) {
+  const responseData = await response.text();
+
+  let data;
+  try {
+    data = JSON.parse(responseData);
+  } catch (error) {
     return null;
   }
 
-  const data = await response.json();
+  if (!response.ok || !data.hasOwnProperty("name")) {
+    console.log(await response.json());
+    return null;
+  }
 
   return data;
 };
@@ -119,7 +127,7 @@ const createDepartmentProvider = async (searchTerm: DepartmentType) => {
   });
 
   if (!response.ok) {
-   null
+    null;
   }
 
   const data = await response.json();
