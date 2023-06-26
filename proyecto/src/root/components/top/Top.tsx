@@ -5,16 +5,13 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "@/root/redux/reducers/login-reducer/loginReducer";
 import { selectLogin } from "@/root/redux";
-
+import Link from "next/link";
 
 export function Top() {
-
-
-  const dispatch = useDispatch()
-  const selector = useSelector(selectLogin)
+  const dispatch = useDispatch();
+  const selector = useSelector(selectLogin);
 
   const router = useRouter();
-
 
   const handleSingOff = () => {
     Cookies.remove("token");
@@ -30,23 +27,21 @@ export function Top() {
   };
   const handleLogin = () => {
     Cookies.remove("token");
-    router.replace("/");
-    router.reload();
+    window.location.assign("/home");
   };
 
   const TextButton = (): string => {
     let text: string = "";
 
     if (router.pathname === "/home") {
-
     } else if (router.pathname === "/home/Login") {
-      text = ""
+      text = "";
     } else {
-      text = "Log out"
+      text = "Log out";
     }
 
     return text;
-  }
+  };
   let text = TextButton();
 
   return (
@@ -54,10 +49,18 @@ export function Top() {
       <nav className="print:hidden bg-darkBlue">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 print:hidden">
           <div className="flex items-center print:hidden">
-            <img src="/Images/WelcomeLogo.png" className="h-8 mr-3" alt="Logo" />
+            <img
+              src="/Images/WelcomeLogo.png"
+              className="h-8 mr-3"
+              alt="Logo"
+            />
             <span className="title-font">CrHome</span>
           </div>
-          <div className="flex  font-semibold items-center text-sm text-lithGray">(506) 8988-4062</div>
+          <Link href="https://wa.me/50689884062" target="_blank">
+            <div className="flex  font-semibold items-center text-sm text-lithGray">
+              (506) 8988-4062
+            </div>
+          </Link>
         </div>
       </nav>
       <nav className="bg-darkBlue dark:bg-gray-700 print:hidden">
@@ -65,17 +68,28 @@ export function Top() {
           <div className="flex items-center">
             <ul className="flex flex-row font-medium mt-0 mr-6 space-x-4 text-sm print:hidden">
               <li>
-                <button className=" dark:text-white  print:hidden" onClick={handleAbout}>
+                <button
+                  className=" dark:text-white  print:hidden"
+                  onClick={handleAbout}
+                >
                   About us
                 </button>
               </li>
               <li>
-                <button className=" dark:text-white  print:hidden" onClick={handleContact}>
+                <button
+                  className=" dark:text-white  print:hidden"
+                  onClick={handleContact}
+                >
                   Contact
                 </button>
               </li>
               <li>
-                <button className=" dark:text-white hover:bg-none print:hidden" onClick={handleLogin}>{text}</button>
+                <button
+                  className=" dark:text-white hover:bg-none print:hidden"
+                  onClick={handleLogin}
+                >
+                  {text}
+                </button>
               </li>
             </ul>
           </div>
