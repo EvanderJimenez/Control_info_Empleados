@@ -15,11 +15,6 @@ export function Top() {
 
   const router = useRouter();
 
-
-  const handleSingOff = () => {
-    Cookies.remove("token");
-    router.push("/");
-  };
   const handleContact = () => {
     Cookies.remove("token");
     router.push("/home/Contact");
@@ -31,6 +26,7 @@ export function Top() {
   const handleLogin = () => {
     Cookies.remove("token");
     router.replace("/");
+    router.reload();
   };
 
 

@@ -263,8 +263,8 @@ export default function RegisterBrand() {
         </div>
 
         <div className="w-full sm:w-2/3 flex mt-5 flex-col">
-          <label className="">Employee: {employeeUid?.name || ""}</label>
-          <div className="bg-white sm:p-8 shadow-md w-full">
+          <label className="flex justify-center font-semibold">editing to  {employeeUid?.name || ""}</label>
+          <div className="bg-white sm:p-8 space-y-2 shadow-md w-full">
             <RegisterCycle
               brandData={brandData}
               label="Cycle to belongs"
@@ -299,7 +299,7 @@ export default function RegisterBrand() {
                 </select>
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex pt-2 justify-center">
                 <button className="md:w-1/4 sm:w-full bg-darkBlue text-white font-bold ">
                   Add day
                 </button>
